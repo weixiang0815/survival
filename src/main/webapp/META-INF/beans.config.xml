@@ -10,7 +10,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="tw.henry" />
+	<context:component-scan base-package="tw.survival" />
 	<mvc:annotation-driven />
 	<tx:annotation-driven/>
 	
@@ -20,7 +20,7 @@
 	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="packagesToScan" value="tw.henry"></property>
+		<property name="packagesToScan" value="tw.survival"></property>
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>

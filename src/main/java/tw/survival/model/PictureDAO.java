@@ -1,4 +1,4 @@
-package tw.suvival.model;
+package tw.survival.model;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

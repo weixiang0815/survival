@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

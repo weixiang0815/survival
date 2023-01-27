@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 import java.io.IOException;
 import java.io.InputStream;

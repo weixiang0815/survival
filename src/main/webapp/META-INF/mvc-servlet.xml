@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<context:annotation-config />
-	<context:component-scan base-package="tw.henry" />
+	<context:component-scan base-package="tw.survival" />
 	<mvc:annotation-driven />
 	
 	<mvc:resources location="/WEB-INF/resources/images/"
@@ -49,6 +49,6 @@
 	</bean>
 
 	<bean id="helloController" name="/hello.controller"
-		class="tw.henry.controller.HelloController"></bean>
+		class="tw.survival.controller.HelloController"></bean>
 
 </beans>

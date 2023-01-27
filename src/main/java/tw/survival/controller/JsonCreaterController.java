@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import tw.suvival.model.House;
+import tw.survival.model.House;
 
 @Controller
 public class JsonCreaterController {

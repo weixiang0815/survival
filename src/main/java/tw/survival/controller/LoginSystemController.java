@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 import java.util.HashMap;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import tw.suvival.model.Account;
-import tw.suvival.model.AccountService;
+import tw.survival.model.Account;
+import tw.survival.model.AccountService;
 
 @Controller
 public class LoginSystemController {

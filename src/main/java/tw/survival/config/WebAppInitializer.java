@@ -1,4 +1,4 @@
-package tw.suvival.config;
+package tw.survival.config;
 
 import javax.servlet.Filter;
 

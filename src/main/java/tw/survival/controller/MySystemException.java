@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 public class MySystemException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

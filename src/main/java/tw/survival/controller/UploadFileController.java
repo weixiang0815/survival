@@ -1,4 +1,4 @@
-package tw.suvival.controller;
+package tw.survival.controller;
 
 import java.io.File;
 import java.io.IOException;
@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import tw.suvival.model.Picture;
-import tw.suvival.model.PictureService;
+import tw.survival.model.Picture;
+import tw.survival.model.PictureService;
 
 @Controller
 public class UploadFileController {
