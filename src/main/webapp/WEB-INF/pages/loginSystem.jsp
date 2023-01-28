@@ -12,12 +12,12 @@
 		<table>
 			<tr>
 				<td>使用者名稱：</td>
-				<td><input type="text" name="username" /></td>
+				<td><input type="text" name="account" /></td>
 				<td>${errors.user}</td>
 			</tr>
 			<tr>
 				<td>密碼：</td>
-				<td><input type="password" name="userpwd" /></td>
+				<td><input type="password" name="password" /></td>
 				<td>${errors.pwd}</td>
 			</tr>
 			<tr>

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h3>成功</h3>
-帳號：${user}<br>
-密碼：${pwd}
+帳號：${account}<br>
+密碼：${password}
 </body>
 </html>

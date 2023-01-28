@@ -21,7 +21,7 @@ public class UserController {
 	}
 
 	@Autowired
-	private UserService uService = new UserService(); 
+	private UserService uService;
 	
 	@PostMapping("/addUser")
 	public String submit(
