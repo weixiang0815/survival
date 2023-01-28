@@ -17,6 +17,9 @@ public class UserDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	public UserDAO() {
+	}
+	
 	/**
 	 * 新增一名使用者資料
 	 * 

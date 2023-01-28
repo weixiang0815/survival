@@ -14,6 +14,9 @@ public class UserService {
 	@Autowired
 	private UserDAO uDAO;
 
+	public UserService() {
+	}
+	
 	/**
 	 * 新增一名使用者資料
 	 * 

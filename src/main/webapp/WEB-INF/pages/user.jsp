@@ -24,7 +24,7 @@
 			</tr>
 			<tr>
 				<td>性別：</td>
-				<td><label>男:</label><input type="radio" name="Sex" value="M" /><label>女:</label><input type="radio" name="Sex" value="F" /></td>
+				<td><label>男:</label><input type="radio" name="sex" value="M" /><label>女:</label><input type="radio" name="sex" value="F" /></td>
 			</tr>
 			<tr>
 				<td>地址：</td>
