@@ -32,7 +32,7 @@ public class UserBean {
 	private String nickname;
 
 	@Column(name = "sex")
-	private char sex;
+	private String sex;
 
 	@Column(name = "address")
 	private String address;
@@ -41,7 +41,7 @@ public class UserBean {
 	private String email;
 
 	@Column(name = "age")
-	private int age;
+	private String age;
 
 	@Column(name = "thumbnail")
 	private byte[] thumbnail;
@@ -49,18 +49,16 @@ public class UserBean {
 	public UserBean() {
 	}
 
-	public UserBean(String name, String account, String password, String nickname, char sex, String address,
-			String email, int age, byte[] thumbnail) {
+	public UserBean(String name, String account, String password, String sex, String address,
+			String email, String age) {
 		super();
 		this.name = name;
 		this.account = account;
 		this.password = password;
-		this.nickname = nickname;
 		this.sex = sex;
 		this.address = address;
 		this.email = email;
 		this.age = age;
-		this.thumbnail = thumbnail;
 	}
 
 	public Integer getId() {
@@ -103,11 +101,11 @@ public class UserBean {
 		this.nickname = nickname;
 	}
 
-	public char getSex() {
+	public String getSex() {
 		return sex;
 	}
 
-	public void setSex(char sex) {
+	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
@@ -127,11 +125,11 @@ public class UserBean {
 		this.email = email;
 	}
 
-	public int getAge() {
+	public String getAge() {
 		return age;
 	}
 
-	public void setAge(int age) {
+	public void setAge(String age) {
 		this.age = age;
 	}
 
