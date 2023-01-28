@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 // 相當於 mvc-servlet.xml 的 Java 程式組態
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "tw.survival" })
+@ComponentScan(basePackages = { "tw.survival.*" })
 public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
@@ -66,7 +66,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 	@Bean
 	public Jaxb2Marshaller jaxb2Marchaller() {
 		Jaxb2Marshaller jaxb2 = new Jaxb2Marshaller();
-		jaxb2.setPackagesToScan("tw.survival");
+		jaxb2.setPackagesToScan("tw.survival.*");
 		return jaxb2;
 	}
 

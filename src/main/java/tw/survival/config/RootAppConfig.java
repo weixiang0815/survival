@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
-@ComponentScan(basePackages = { "tw.survival" })
+@ComponentScan(basePackages = { "tw.survival.*" })
 @EnableWebMvc
 @EnableTransactionManagement
 public class RootAppConfig {
@@ -36,7 +36,7 @@ public class RootAppConfig {
 	public LocalSessionFactoryBean sessionFactory() throws IllegalArgumentException, NamingException {
 		LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
 		factoryBean.setDataSource(dataSource());
-		factoryBean.setPackagesToScan("tw.survival");
+		factoryBean.setPackagesToScan("tw.survival.*");
 		factoryBean.setHibernateProperties(additionalProperties());
 		return factoryBean;
 	}
