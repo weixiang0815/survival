@@ -13,41 +13,33 @@
 			<tr>
 				<td>使用者名稱：</td>
 				<td><input type="text" name="name" /></td>
-				<td>${errors.user}</td>
 			</tr>
 			<tr>
 				<td>帳號：</td>
 				<td><input type="text" name="account" /></td>
-				<td>${errors.account}</td>
 			</tr>
 			<tr>
 				<td>密碼：</td>
 				<td><input type="password" name="password" /></td>
-				<td>${errors.password}</td>
 			</tr>
 			<tr>
 				<td>性別：</td>
 				<td><label>男:</label><input type="radio" name="Sex" value="M" /><label>女:</label><input type="radio" name="Sex" value="F" /></td>
-				<td>${errors.Sex}</td>
 			</tr>
 			<tr>
 				<td>地址：</td>
 				<td><input type="text" name="address" /></td>
-				<td>${errors.address}</td>
 			</tr>
 			<tr>
 				<td>Email：</td>
 				<td><input type="text" name="email" /></td>
-				<td>${errors.email}</td>
 			</tr>
 			<tr>
 				<td>年齡：</td>
 				<td><input type="text" name="age" /></td>
-				<td>${errors.age}</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="登入" /></td>
-				<td>${errors.msg}</td>
 			</tr>
 		</table>
 	</form>
