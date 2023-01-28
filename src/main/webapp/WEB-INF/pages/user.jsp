@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,33 +8,48 @@
 </head>
 <body>
 	<h3>新增使用者</h3>
-	<form:form action="addUser" method="post" modelAttribute="user">
+	<form action="addUser" method="post">
 		<table>
 			<tr>
-				<td><form:label path="name">使用者名稱</form:label></td>
-				<td><form:input path="name" /></td>
+				<td>使用者名稱：</td>
+				<td><input type="text" name="name" /></td>
+				<td>${errors.user}</td>
+			</tr>
 			<tr>
-				<td><form:label path="account">帳號</form:label></td>
-				<td><form:input path="account" /></td>
+				<td>帳號：</td>
+				<td><input type="text" name="account" /></td>
+				<td>${errors.account}</td>
+			</tr>
 			<tr>
-				<td><form:label path="password">密碼</form:label></td>
-				<td><form:input path="password" /></td>
+				<td>密碼：</td>
+				<td><input type="password" name="password" /></td>
+				<td>${errors.password}</td>
+			</tr>
 			<tr>
-				<td><form:label path="sex">性別</form:label></td>
-				<td><form:input path="sex" /></td>
+				<td>性別：</td>
+				<td><label>男:</label><input type="radio" name="Sex" value="M" /><label>女:</label><input type="radio" name="Sex" value="F" /></td>
+				<td>${errors.Sex}</td>
+			</tr>
 			<tr>
-				<td><form:label path="address">地址</form:label></td>
-				<td><form:input path="address" /></td>
+				<td>地址：</td>
+				<td><input type="text" name="address" /></td>
+				<td>${errors.address}</td>
+			</tr>
 			<tr>
-				<td><form:label path="email">Email</form:label></td>
-				<td><form:input path="email" /></td>
+				<td>Email：</td>
+				<td><input type="text" name="email" /></td>
+				<td>${errors.email}</td>
+			</tr>
 			<tr>
-				<td><form:label path="age">年齡</form:label></td>
-				<td><form:input path="age" /></td>
+				<td>年齡：</td>
+				<td><input type="text" name="age" /></td>
+				<td>${errors.age}</td>
+			</tr>
 			<tr>
-				<td colspan="2"><form:button value="send">送出</form:button></td>
+				<td><input type="submit" value="登入" /></td>
+				<td>${errors.msg}</td>
 			</tr>
 		</table>
-	</form:form>
+	</form>
 </body>
 </html>
