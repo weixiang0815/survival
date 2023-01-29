@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class UserService {
 
 	public UserService() {
 	}
-	
+
 	/**
 	 * 新增一名使用者資料
 	 * 
@@ -71,8 +73,37 @@ public class UserService {
 	}
 
 	/**
-	 * delete 相關方法
+	 * 透過 UserBean 刪除一筆使用者資料
+	 * 
+	 * @param user 欲刪除資料的 UserBean
+	 * 
+	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
+	public boolean deleteUserByBean(UserBean user) {
+		return uDAO.deleteUserByBean(user);
+	}
+
+	/**
+	 * 透過 id 刪除一筆使用者資料
+	 * 
+	 * @param id 欲刪除資料的使用者 id
+	 * 
+	 * @return 刪除成功回傳 true，否則回傳 false
+	 */
+	public boolean deleteUserById(int id) {
+		return uDAO.deleteUserById(id);
+	}
+
+	/**
+	 * 透過 account 刪除一筆使用者資料
+	 * 
+	 * @param account 欲刪除資料的使用者 account
+	 * 
+	 * @return 刪除成功回傳 true，否則回傳 false
+	 */
+	public boolean deleteUserByAccount(String account) {
+		return uDAO.deleteUserByAccount(account);
+	}
 
 	/**
 	 * update 相關方法

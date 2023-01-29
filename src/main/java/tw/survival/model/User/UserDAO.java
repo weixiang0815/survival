@@ -19,7 +19,7 @@ public class UserDAO {
 
 	public UserDAO() {
 	}
-	
+
 	/**
 	 * 新增一名使用者資料
 	 * 
@@ -69,7 +69,7 @@ public class UserDAO {
 
 		return query.uniqueResult();
 	}
-	
+
 	/**
 	 * 查詢所有使用者資料
 	 * 
@@ -105,82 +105,73 @@ public class UserDAO {
 	}
 
 	/**
-	 * 檢查登入是否成功
+	 * 透過 UserBean 刪除一筆使用者資料
 	 * 
-	 * @param user 欲檢查刪除的 UserBean
+	 * @param user 欲刪除資料的 UserBean
 	 * 
-	 * @return 登入成功回傳 true，否則回傳 false
+	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
-	public boolean deleteUser(UserBean user) {
+	public boolean deleteUserByBean(UserBean user) {
 		Session session = sessionFactory.openSession();
 
-		
 		if (user != null) {
 			session.delete(user);
-		    System.out.println("is delete.");
-		    
-		    return true;
+			System.out.println("User deleted.");
+
+			return true;
 		}
 
 		return false;
 	}
-	
+
 	/**
-	 * 檢查登入是否成功
+	 * 透過 id 刪除一筆使用者資料
 	 * 
-	 * @param  id  欲刪除的user ID
+	 * @param id 欲刪除資料的使用者 id
 	 * 
-	 * @return 登入成功回傳 true，否則回傳 false
+	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
 	public boolean deleteUserById(int id) {
 		Session session = sessionFactory.openSession();
 
-		
-		Query<UserBean> query = session.createQuery("delete UserBean where id = :id",UserBean.class);
+		String hqlstr = "delete UserBean where id = :id";
+		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
 		query.setParameter("id", id);
-		 
+
 		int result = query.executeUpdate();
-		 
+
 		if (result > 0) {
-		    System.out.println("Expensive products was removed");
-		    return true;
+			System.out.println("User deleted.");
+			return true;
 		}
 
 		return false;
 	}
-	
-	
+
 	/**
-	 * 檢查登入是否成功
+	 * 透過 account 刪除一筆使用者資料
 	 * 
-	 * @param  account  欲刪除的user ID
+	 * @param account 欲刪除資料的使用者 account
 	 * 
-	 * @return 登入成功回傳 true，否則回傳 false
+	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
 	public boolean deleteUserByAccount(String account) {
 		Session session = sessionFactory.openSession();
 
-		
-		Query<UserBean> query = session.createQuery("delete UserBean where account = :account",UserBean.class);
+		String hqlstr = "delete UserBean where account = :account";
+		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
 		query.setParameter("account", account);
-		 
+
 		int result = query.executeUpdate();
-		 
+
 		if (result > 0) {
-		    System.out.println("Expensive products was removed");
-		    return true;
+			System.out.println("User deleted.");
+			return true;
 		}
 
 		return false;
 	}
-//	Query query = session.createQuery("delete Product where price > :maxPrice");
-//	query.setParameter("maxPrice", new Float(1000f));
-//	 
-//	int result = query.executeUpdate();
-//	 
-//	if (result > 0) {
-//	    System.out.println("Expensive products was removed");
-//	}
+
 	/**
 	 * update 相關方法
 	 */

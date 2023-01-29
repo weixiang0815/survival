@@ -15,32 +15,41 @@ import tw.survival.model.User.UserService;
 @Controller
 public class UserController {
 
+	@Autowired
+	private UserService uService;
+
 	@GetMapping("/usersmain.controller")
 	public String showForm(Model model) {
 		return "user";
 	}
 
-	@Autowired
-	private UserService uService;
-	
+	@GetMapping("/searchmain.controller")
+	public String search(Model model) {
+		return "search";
+	}
+
 	@PostMapping("/addUser")
-	public String submit(
-			@RequestParam("name") String name,
-			@RequestParam("account") String account,
-			@RequestParam("password") String password,
-			@RequestParam("sex") String sex,
-			@RequestParam("address") String address,
-			@RequestParam("email") String email,
-			@RequestParam("age") String age,
-			 ModelMap model) {
-		
+	public String submit(@RequestParam("name") String name, @RequestParam("account") String account,
+			@RequestParam("password") String password, @RequestParam("sex") String sex,
+			@RequestParam("address") String address, @RequestParam("email") String email,
+			@RequestParam("age") String age, ModelMap model) {
+
 		System.out.println(sex);
-		UserBean user=new UserBean(name,account,password,sex,address,email,age);
-		
-		
+		UserBean user = new UserBean(name, account, password, sex, address, email, age);
+
 		// 此處測試 UserService 能否註冊
 		uService.addUser(user);
 		return "userResult";
 	}
-	
+
+	@PostMapping("/getOneUser")
+	public String searchOneUser() {
+		return "";
+	}
+
+	@PostMapping("/getUsers")
+	public String searchUsers() {
+		return "";
+	}
+
 }
