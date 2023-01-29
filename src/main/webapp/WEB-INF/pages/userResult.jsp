@@ -8,6 +8,6 @@
 </head>
 <body>
 <h2>註冊成功</h2>
-<input type ="button" onclick="javascript:location.href='http://localhost:8080/Survival/usersmain.controller'" value="回到登入首頁"></input>
+<a href="usersmain.controller"><button>返回登入畫面</button></a>
 </body>
 </html>
