@@ -19,6 +19,8 @@ import="java.util.*, tw.survival.model.User.UserBean"
 				<tr><td><label>使用者電子信箱：</label>${user.email}
 				<tr><td><label>使用者年齡：</label>${user.age}
 		</table>
+		<a href="deleteUserById?id=${user.id}"><button>刪除此資料</button></a>
+		<a href="updateUserById?id=${user.id}"><button>編輯此資料</button></a>
 		<a href="searchmain.controller"><button>回到搜尋頁</button></a>
 </body>
 </html>

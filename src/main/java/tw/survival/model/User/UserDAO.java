@@ -131,21 +131,11 @@ public class UserDAO {
 	 * 
 	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
-	public boolean deleteUserById(int id) {
+	public String deleteUserById(int id) {
 		Session session = sessionFactory.openSession();
-
 		String hqlstr = "delete UserBean where id = :id";
-		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
-		query.setParameter("id", id);
-
-		int result = query.executeUpdate();
-
-		if (result > 0) {
-			System.out.println("User deleted.");
-			return true;
-		}
-
-		return false;
+		int result = session.createQuery(hqlstr).setParameter("id", id).executeUpdate();
+		return result > 0 ? "刪除成功🤪🤪🤪" : "刪除失敗😥😥😥";
 	}
 
 	/**
@@ -171,7 +161,7 @@ public class UserDAO {
 
 		return false;
 	}
-	
+
 	/**
 	 * 更新一筆使用者資料
 	 * 

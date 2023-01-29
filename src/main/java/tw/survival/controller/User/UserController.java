@@ -44,6 +44,12 @@ public class UserController {
 		uService.addUser(user);
 		return "userResult";
 	}
+	
+	@GetMapping("/deleteUserById")
+	public String deleteUserById(@RequestParam("id") Integer id, Model m) {
+		m.addAttribute("msg", uService.deleteUserById(id));
+		return "deleteResult";
+	}
 
 	@PostMapping("/getOneUserById")
 	public String searchOneUserById(@RequestParam("id") Integer id, Model m) {

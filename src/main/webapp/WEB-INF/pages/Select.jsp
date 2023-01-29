@@ -11,20 +11,19 @@
 	<form action="getOneUserById" method="post">
 		<table>
 			<tr>
-				<td>請輸入欲查詢使用者編號</td>
+				<td>請輸入欲查詢使用者編號：</td>
 				<td><input type="text" name="id" /></td>
 				<td>${errors.idNotFound}</td>
+				<td><input type="submit" value="查詢" /></td>
 			</tr>
 		</table>
 	</form>
 	<form action="getOneUserByAccount" method="post">
 		<table>
 			<tr>
-				<td>請輸入欲查詢使用者帳號</td>
+				<td>請輸入欲查詢使用者帳號：</td>
 				<td><input type="text" name="account" /></td>
 				<td>${errors.accountNotFound}</td>
-			</tr>
-			<tr>
 				<td><input type="submit" value="查詢" /></td>
 				<td>${errors.mustNotEmpty}</td>
 			</tr>
@@ -34,9 +33,7 @@
 	<form action="getUsers" method="post">
 		<table>
 			<tr>
-				<td>請輸入查詢全部使用者帳號</td>
-			</tr>
-			<tr>
+				<td>查詢全部使用者帳號</td>
 				<td><input type="submit" value="查詢全部" /></td>
 			</tr>
 		</table>

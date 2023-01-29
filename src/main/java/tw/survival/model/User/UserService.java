@@ -88,7 +88,7 @@ public class UserService {
 	 * 
 	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
-	public boolean deleteUserById(int id) {
+	public String deleteUserById(int id) {
 		return uDAO.deleteUserById(id);
 	}
 
