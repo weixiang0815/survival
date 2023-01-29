@@ -105,9 +105,82 @@ public class UserDAO {
 	}
 
 	/**
-	 * delete 相關方法
+	 * 檢查登入是否成功
+	 * 
+	 * @param user 欲檢查刪除的 UserBean
+	 * 
+	 * @return 登入成功回傳 true，否則回傳 false
 	 */
+	public boolean deleteUser(UserBean user) {
+		Session session = sessionFactory.openSession();
 
+		
+		if (user != null) {
+			session.delete(user);
+		    System.out.println("is delete.");
+		    
+		    return true;
+		}
+
+		return false;
+	}
+	
+	/**
+	 * 檢查登入是否成功
+	 * 
+	 * @param  id  欲刪除的user ID
+	 * 
+	 * @return 登入成功回傳 true，否則回傳 false
+	 */
+	public boolean deleteUserById(int id) {
+		Session session = sessionFactory.openSession();
+
+		
+		Query<UserBean> query = session.createQuery("delete UserBean where id = :id",UserBean.class);
+		query.setParameter("id", id);
+		 
+		int result = query.executeUpdate();
+		 
+		if (result > 0) {
+		    System.out.println("Expensive products was removed");
+		    return true;
+		}
+
+		return false;
+	}
+	
+	
+	/**
+	 * 檢查登入是否成功
+	 * 
+	 * @param  account  欲刪除的user ID
+	 * 
+	 * @return 登入成功回傳 true，否則回傳 false
+	 */
+	public boolean deleteUserByAccount(String account) {
+		Session session = sessionFactory.openSession();
+
+		
+		Query<UserBean> query = session.createQuery("delete UserBean where account = :account",UserBean.class);
+		query.setParameter("account", account);
+		 
+		int result = query.executeUpdate();
+		 
+		if (result > 0) {
+		    System.out.println("Expensive products was removed");
+		    return true;
+		}
+
+		return false;
+	}
+//	Query query = session.createQuery("delete Product where price > :maxPrice");
+//	query.setParameter("maxPrice", new Float(1000f));
+//	 
+//	int result = query.executeUpdate();
+//	 
+//	if (result > 0) {
+//	    System.out.println("Expensive products was removed");
+//	}
 	/**
 	 * update 相關方法
 	 */
