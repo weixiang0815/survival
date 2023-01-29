@@ -8,21 +8,25 @@
 </head>
 <body>
 	<h3>查詢</h3>
-	<form action="getOneUser" method="post">
+	<form action="getOneUserById" method="post">
 		<table>
 			<tr>
 				<td>請輸入欲查詢使用者編號</td>
 				<td><input type="text" name="id" /></td>
-				<td>${errors.msg}</td>
+				<td>${errors.idNotFound}</td>
 			</tr>
+		</table>
+	</form>
+	<form action="getOneUserByAccount" method="post">
+		<table>
 			<tr>
 				<td>請輸入欲查詢使用者帳號</td>
 				<td><input type="text" name="account" /></td>
-				<td>${errors.msg}</td>
+				<td>${errors.accountNotFound}</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="查詢" /></td>
-				<td>${errors.msg}</td>
+				<td>${errors.mustNotEmpty}</td>
 			</tr>
 		</table>
 	</form>
@@ -34,7 +38,6 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="查詢全部" /></td>
-				<td>${errors.msg}</td>
 			</tr>
 		</table>
 	</form>
