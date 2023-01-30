@@ -28,7 +28,7 @@ public class UserDAO {
 	 * @return 回傳傳入的 UserBean
 	 */
 	public UserBean addUser(UserBean user) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		if (user != null) {
 			session.save(user);
 		}
@@ -44,7 +44,7 @@ public class UserDAO {
 	 * @return 回傳查到的 UserBean
 	 */
 	public UserBean getOneUserById(Integer id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		String hqlstr = "from UserBean where id = :id";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
@@ -61,7 +61,7 @@ public class UserDAO {
 	 * @return 回傳查到的 UserBean
 	 */
 	public UserBean getOneUserByAccount(String account) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		String hqlstr = "from UserBean where account = :account";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
@@ -76,7 +76,7 @@ public class UserDAO {
 	 * @return 回傳裝著所有 UserBean 的列表
 	 */
 	public List<UserBean> getAllUsers() {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		String hqlstr = "from UserBean";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
@@ -92,7 +92,7 @@ public class UserDAO {
 	 * @return 登入成功回傳 true，否則回傳 false
 	 */
 	public boolean checkLogin(UserBean user) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		String hqlstr = "from UserBean where account = :account and password = :password";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
@@ -112,7 +112,7 @@ public class UserDAO {
 	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
 	public boolean deleteUserByBean(UserBean user) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		if (user != null) {
 			session.delete(user);
@@ -132,7 +132,7 @@ public class UserDAO {
 	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
 	public String deleteUserById(int id) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 		String hqlstr = "delete UserBean where id = :id";
 		int result = session.createQuery(hqlstr).setParameter("id", id).executeUpdate();
 		return result > 0 ? "刪除成功🤪🤪🤪" : "刪除失敗😥😥😥";
@@ -146,7 +146,7 @@ public class UserDAO {
 	 * @return 刪除成功回傳 true，否則回傳 false
 	 */
 	public boolean deleteUserByAccount(String account) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		String hqlstr = "delete UserBean where account = :account";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
@@ -170,7 +170,7 @@ public class UserDAO {
 	 * @return 更新成功回傳 true，否則回傳 false
 	 */
 	public boolean updateUser(UserBean user) {
-		Session session = sessionFactory.openSession();
+		Session session = sessionFactory.getCurrentSession();
 
 		return false;
 	}
