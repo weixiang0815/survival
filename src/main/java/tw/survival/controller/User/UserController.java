@@ -56,15 +56,9 @@ public class UserController {
 	public String searchOneUserById(@RequestParam("id") Integer id, Model m) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-		UserBean user = null;
-		if (id != null) {
-			user = uService.getOneUserById(id);
-			if (user == null) {
-				errors.put("idNotFound", "查無此 id");
-				return "select";
-			}
-		} else {
-			errors.put("mustNotEmpty", "id 與帳號不得皆為空白");
+		UserBean user = uService.getOneUserById(id);
+		if (user == null) {
+			errors.put("idNotFound", "查無此 id");
 			return "select";
 		}
 		m.addAttribute("user", user);
@@ -75,15 +69,13 @@ public class UserController {
 	public String searchOneUserByAccount(@RequestParam("account") String account, Model m) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-		UserBean user = null;
-		if (account != null) {
-			user = uService.getOneUserByAccount(account);
-			if (user == null) {
-				errors.put("accountNotFound", "查無此帳號");
-				return "select";
-			}
-		} else {
+		if (account == null) {
 			errors.put("mustNotEmpty", "id 與帳號不得皆為空白");
+			return "select";
+		}
+		UserBean user = uService.getOneUserByAccount(account);
+		if (user == null) {
+			errors.put("accountNotFound", "查無此帳號");
 			return "select";
 		}
 		m.addAttribute("user", user);
@@ -124,9 +116,16 @@ public class UserController {
 		return "loginSystem";
 	}
 	
+	@GetMapping("/updateUserById")
+	public String updateSearch(@RequestParam("id") Integer id,Model m) {
+		UserBean user = uService.getOneUserById(id);
+		m.addAttribute("user", user);
+		return "UpdateUser1";
+	}
+	
 	@Transactional
-	@GetMapping("/updateUser")
-	public String update(@RequestParam("name") String name, @RequestParam("account") String account,
+	@PostMapping("/updateUser")
+	public String update(@RequestParam("id") Integer id,@RequestParam("name") String name, @RequestParam("account") String account,
 			@RequestParam("password") String password, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
 			@RequestParam("age") String age, Model m) {
@@ -164,6 +163,7 @@ public class UserController {
 		
 		
 		UserBean user = new UserBean(name, account, password, sex, address, email, age);
+		user.setId(id);
 		uService.updateUser(user);
 		return "updateResult";
 	}

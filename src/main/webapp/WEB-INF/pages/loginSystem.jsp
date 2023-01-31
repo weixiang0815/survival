@@ -13,12 +13,12 @@
 			<tr>
 				<td>使用者名稱：</td>
 				<td><input type="text" name="account" /></td>
-				<td>${errors.user}</td>
+				<td>${errors.account}</td>
 			</tr>
 			<tr>
 				<td>密碼：</td>
 				<td><input type="password" name="password" /></td>
-				<td>${errors.pwd}</td>
+				<td>${errors.password}</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="登入" /></td>

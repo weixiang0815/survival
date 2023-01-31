@@ -2,6 +2,7 @@ package tw.survival.model.User;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.transaction.Transactional;
 
 import org.hibernate.Session;
@@ -79,8 +80,8 @@ public class UserDAO {
 
 		String hqlstr = "from UserBean";
 		Query<UserBean> query = session.createQuery(hqlstr, UserBean.class);
-
-		return query.getResultList();
+		List<UserBean> resultList = query.getResultList();
+		return resultList;
 	}
 
 	/**
@@ -170,24 +171,14 @@ public class UserDAO {
 	 */
 	public boolean updateUser(UserBean user) {
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "Update UserBean set name=:name,account=:account,password=:password,sex=:sex,address=:address,email=:email,age=:age where id=:id";
-		int result = session.createQuery(hqlstr, UserBean.class)
-				.setParameter("id", user.getId())
-				.setParameter("name", user.getName())
-				.setParameter("account", user.getAccount())
-				.setParameter("password", user.getPassword())
-				.setParameter("sex", user.getSex())
-				.setParameter("address", user.getAddress())
-				.setParameter("email", user.getEmail())
-				.setParameter("age", user.getAge())
-				.executeUpdate();
-
-		if(result > 0) {
-			System.out.println("User update.");
+		try {
+			session.update(user);
+			System.out.println("更新成功");
 			return true;
-		}	
-		
-		return false;
+		} catch (NoResultException e) {
+			System.out.println("更新失敗");
+			return false;
+		}
 	}
 
 }
