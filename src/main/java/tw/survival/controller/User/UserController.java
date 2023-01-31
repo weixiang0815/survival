@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -121,6 +122,50 @@ public class UserController {
 		}
 		errors.put("msg", "請輸入正確的使用者名稱及密碼");
 		return "loginSystem";
+	}
+	
+	@Transactional
+	@GetMapping("/updateUser")
+	public String update(@RequestParam("name") String name, @RequestParam("account") String account,
+			@RequestParam("password") String password, @RequestParam("sex") String sex,
+			@RequestParam("address") String address, @RequestParam("email") String email,
+			@RequestParam("age") String age, Model m) {
+		
+		HashMap<String, String> errors = new HashMap<String, String>();
+		m.addAttribute("errors", errors);
+		
+		if (name == null || name.length() == 0) {
+			errors.put("name", "使用者名稱不得為空白");
+		}
+		if (account == null || account.length() == 0) {
+			errors.put("account", "帳號不得為空白");
+		}
+		
+		if (password == null || password.length() == 0) {
+			errors.put("password", "密碼不得為空白");
+		}
+		if (sex == null || sex.length() == 0) {
+			errors.put("sex", "性別不得為空白");
+		}
+		if (address == null || address.length() == 0) {
+			errors.put("address", "住址不得為空白");
+		}
+		if (email == null || email.length() == 0) {
+			errors.put("email", "信箱不得為空白");
+		}
+		if (age == null || age.length() == 0) {
+			errors.put("age", "年齡不得為空白");
+		}
+		
+		
+		if (errors != null && !errors.isEmpty()) {
+			return "UpdateUser";
+		}
+		
+		
+		UserBean user = new UserBean(name, account, password, sex, address, email, age);
+		uService.updateUser(user);
+		return "updateResult";
 	}
 
 }

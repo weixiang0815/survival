@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -104,7 +105,13 @@ public class UserService {
 	}
 
 	/**
-	 * update 相關方法
+	 * 更新一筆使用者資料
+	 * 
+	 * @param user 傳入欲更新資料的使用者 UserBean
+	 * 
+	 * @return 更新成功回傳 true，否則回傳 false
 	 */
-
+	public boolean updateUser(UserBean user) {
+		return uDAO.updateUser(user);
+	}
 }

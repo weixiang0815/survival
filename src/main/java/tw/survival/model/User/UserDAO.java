@@ -32,7 +32,6 @@ public class UserDAO {
 		if (user != null) {
 			session.save(user);
 		}
-		session.close();
 		return user;
 	}
 
@@ -171,7 +170,23 @@ public class UserDAO {
 	 */
 	public boolean updateUser(UserBean user) {
 		Session session = sessionFactory.getCurrentSession();
+		String hqlstr = "Update UserBean set name=:name,account=:account,password=:password,sex=:sex,address=:address,email=:email,age=:age where id=:id";
+		int result = session.createQuery(hqlstr, UserBean.class)
+				.setParameter("id", user.getId())
+				.setParameter("name", user.getName())
+				.setParameter("account", user.getAccount())
+				.setParameter("password", user.getPassword())
+				.setParameter("sex", user.getSex())
+				.setParameter("address", user.getAddress())
+				.setParameter("email", user.getEmail())
+				.setParameter("age", user.getAge())
+				.executeUpdate();
 
+		if(result > 0) {
+			System.out.println("User update.");
+			return true;
+		}	
+		
 		return false;
 	}
 
