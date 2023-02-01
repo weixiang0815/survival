@@ -23,17 +23,17 @@ public class UserController {
 
 	@GetMapping("/usersmain.controller")
 	public String showForm(Model model) {
-		return "user";
+		return "User/user";
 	}
 
 	@GetMapping("/searchmain.controller")
 	public String search(Model model) {
-		return "select";
+		return "User/select";
 	}
 
 	@GetMapping("loginsystemmain.controller")
 	public String processMainAction() {
-		return "loginSystem";
+		return "User/loginSystem";
 	}
 
 	@PostMapping("/addUser")
@@ -43,13 +43,13 @@ public class UserController {
 			@RequestParam("age") String age) {
 		UserBean user = new UserBean(name, account, password, sex, address, email, age);
 		uService.addUser(user);
-		return "userResult";
+		return "User/userResult";
 	}
 	
 	@GetMapping("/deleteUserById")
 	public String deleteUserById(@RequestParam("id") Integer id, Model m) {
 		m.addAttribute("msg", uService.deleteUserById(id));
-		return "deleteResult";
+		return "User/deleteResult";
 	}
 
 	@PostMapping("/getOneUserById")
@@ -59,10 +59,10 @@ public class UserController {
 		UserBean user = uService.getOneUserById(id);
 		if (user == null) {
 			errors.put("idNotFound", "查無此 id");
-			return "select";
+			return "User/select";
 		}
 		m.addAttribute("user", user);
-		return "selectOne";
+		return "User/selectOne";
 	}
 	
 	@PostMapping("/getOneUserByAccount")
@@ -71,22 +71,22 @@ public class UserController {
 		m.addAttribute("errors", errors);
 		if (account == null) {
 			errors.put("mustNotEmpty", "id 與帳號不得皆為空白");
-			return "select";
+			return "User/select";
 		}
 		UserBean user = uService.getOneUserByAccount(account);
 		if (user == null) {
 			errors.put("accountNotFound", "查無此帳號");
-			return "select";
+			return "User/select";
 		}
 		m.addAttribute("user", user);
-		return "selectOne";
+		return "User/selectOne";
 	}
 
 	@PostMapping("/getUsers")
 	public String searchUsers(Model m) {
 		List<UserBean> users = uService.getAllUsers();
 		m.addAttribute("users", users);
-		return "selectAllResult";
+		return "User/selectAllResult";
 	}
 
 	@PostMapping("/checkLogin.controller")
@@ -101,7 +101,7 @@ public class UserController {
 			errors.put("password", "密碼不得為空白");
 		}
 		if (errors != null && !errors.isEmpty()) {
-			return "loginSystem";
+			return "User/loginSystem";
 		}
 		UserBean user = new UserBean();
 		user.setAccount(account);
@@ -110,17 +110,17 @@ public class UserController {
 		if (checkUser) {
 			m.addAttribute("account", account);
 			m.addAttribute("password", password);
-			return "loginSuccess";
+			return "User/loginSuccess";
 		}
 		errors.put("msg", "請輸入正確的使用者名稱及密碼");
-		return "loginSystem";
+		return "User/loginSystem";
 	}
 	
 	@GetMapping("/updateUserById")
 	public String updateSearch(@RequestParam("id") Integer id,Model m) {
 		UserBean user = uService.getOneUserById(id);
 		m.addAttribute("user", user);
-		return "UpdateUser1";
+		return "User/UpdateUser1";
 	}
 	
 	@Transactional
@@ -158,14 +158,14 @@ public class UserController {
 		
 		
 		if (errors != null && !errors.isEmpty()) {
-			return "UpdateUser";
+			return "User/UpdateUser";
 		}
 		
 		
 		UserBean user = new UserBean(name, account, password, sex, address, email, age);
 		user.setId(id);
 		uService.updateUser(user);
-		return "updateResult";
+		return "User/updateResult";
 	}
 
 }
