@@ -23,8 +23,13 @@
 				<td><input type="password" name="password" /></td>
 			</tr>
 			<tr>
+				<td>暱稱：</td>
+				<td><input type="text" name="nickname" /></td>
+			</tr>
+			<tr>
 				<td>性別：</td>
-				<td><label>男:</label><input type="radio" name="sex" value="M" /><label>女:</label><input type="radio" name="sex" value="F" /></td>
+				<td><label>男:</label><input type="radio" name="sex" value="M" /><label>女:</label><input
+					type="radio" name="sex" value="F" /></td>
 			</tr>
 			<tr>
 				<td>地址：</td>
@@ -37,6 +42,10 @@
 			<tr>
 				<td>年齡：</td>
 				<td><input type="text" name="age" /></td>
+			</tr>
+			<tr>
+				<td>圖片:</td>
+				<td><input type="file" name="thumbnail" value="上傳圖片" />
 			</tr>
 			<tr>
 				<td><input type="submit" value="註冊" /></td>
