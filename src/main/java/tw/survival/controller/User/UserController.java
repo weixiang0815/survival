@@ -28,7 +28,7 @@ public class UserController {
 
 	@GetMapping("/searchmain.controller")
 	public String search(Model model) {
-		return "User/select";
+		return "User/Select";
 	}
 
 	@GetMapping("loginsystemmain.controller")
@@ -59,7 +59,7 @@ public class UserController {
 		UserBean user = uService.getOneUserById(id);
 		if (user == null) {
 			errors.put("idNotFound", "查無此 id");
-			return "User/select";
+			return "User/Select";
 		}
 		m.addAttribute("user", user);
 		return "User/selectOne";
@@ -71,12 +71,12 @@ public class UserController {
 		m.addAttribute("errors", errors);
 		if (account == null) {
 			errors.put("mustNotEmpty", "id 與帳號不得皆為空白");
-			return "User/select";
+			return "User/Select";
 		}
 		UserBean user = uService.getOneUserByAccount(account);
 		if (user == null) {
 			errors.put("accountNotFound", "查無此帳號");
-			return "User/select";
+			return "User/Select";
 		}
 		m.addAttribute("user", user);
 		return "User/selectOne";
@@ -86,7 +86,7 @@ public class UserController {
 	public String searchUsers(Model m) {
 		List<UserBean> users = uService.getAllUsers();
 		m.addAttribute("users", users);
-		return "User/selectAllResult";
+		return "User/SelectAllResult";
 	}
 
 	@PostMapping("/checkLogin.controller")
