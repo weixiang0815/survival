@@ -28,7 +28,7 @@ public class UserController {
 
 	@GetMapping("/searchmain.controller")
 	public String search(Model model) {
-		return "User/select";
+		return "User/Select";
 	}
 
 	@GetMapping("loginsystemmain.controller")
