@@ -114,4 +114,15 @@ public class UserService {
 	public boolean updateUser(UserBean user) {
 		return uDAO.updateUser(user);
 	}
-}
+	
+	/**
+	 * 新增一張圖片
+	 * 
+	 * @param userBean 傳入使用者圖片 UserBean
+	 * 
+	 * @return 不是空值就新增一張圖片
+	 */
+	public UserBean insert (UserBean u) {
+		return uDAO.insert(u);
+	}
+} 

@@ -43,8 +43,13 @@
 				<td><input type="text" name="age" value="${user.age}"/></td>
 			</tr>
 			<tr>
+				<td>圖片:</td>
+				<td><input type="file" name="thumbnail" value="${user.thumbnail}"/>
+			</tr>
+			<tr>
 				<td><input type="submit" value="修改" /></td>
 			</tr>
+			
 		</table>
 	</form>
 </body>
