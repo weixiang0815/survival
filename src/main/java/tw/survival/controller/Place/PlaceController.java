@@ -17,12 +17,12 @@ public class PlaceController {
 
 	@Autowired
 	private PlaceService pService;
-	
+
 	@GetMapping("/placemain.controller")
 	public String showForm(Model model) {
 		return "Place/place";
 	}
-	
+
 //	public String submit(@RequestParam("place_name") String place_name,
 //			@RequestParam("place_address") String place_address,
 //			@RequestParam("place_capacity") String place_capacity,

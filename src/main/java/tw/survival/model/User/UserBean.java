@@ -1,18 +1,13 @@
 package tw.survival.model.User;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
-
-import tw.survival.model.Employee.EmployeeBean;
 
 @Entity
 @Table(name = "Users")
@@ -50,15 +45,16 @@ public class UserBean {
 
 	@Column(name = "thumbnail")
 	private byte[] thumbnail;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="EmployeeBean")
-    public EmployeeBean empbean;
+
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "EmployeeBean")
+//	public EmployeeBean empbean;
+
 	public UserBean() {
 	}
 
-	public UserBean(String name, String account, String password, String sex, String address,
-			String email, String age, byte[] thumbnail) {
-		super();
+	public UserBean(String name, String account, String password, String sex, String address, String email, String age,
+			byte[] thumbnail) {
 		this.name = name;
 		this.account = account;
 		this.password = password;
@@ -66,7 +62,7 @@ public class UserBean {
 		this.address = address;
 		this.email = email;
 		this.age = age;
-		this.thumbnail=thumbnail;
+		this.thumbnail = thumbnail;
 	}
 
 	public Integer getId() {

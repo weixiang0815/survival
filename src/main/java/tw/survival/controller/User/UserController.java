@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,8 +24,8 @@ public class UserController {
 
 	@Autowired
 	private UserService uService;
-	
-	@GetMapping("/")
+
+	@GetMapping("/user")
 	public String main() {
 		return "User/index";
 	}
@@ -57,8 +56,7 @@ public class UserController {
 			@RequestParam("password") String password,
 			@RequestParam(name = "nickname", required = false) String nickname, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
-			@RequestParam("age") String age,
-			@RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
+			@RequestParam("age") String age, @RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
 		UserBean user = new UserBean();
 		user.setName(name);
 		user.setAccount(account);
@@ -68,9 +66,9 @@ public class UserController {
 		user.setAddress(address);
 		user.setEmail(email);
 		user.setAge(age);
-		if(thumbnail != null) {
+		if (thumbnail != null) {
 			user.setThumbnail(thumbnail.getBytes());
-				
+
 		}
 		uService.addUser(user);
 		return "User/userResult";
@@ -197,17 +195,16 @@ public class UserController {
 		UserBean user = new UserBean(name, account, password, sex, address, email, age, thumbnail.getBytes());
 		user.setNickname(nickname);
 		user.setId(id);
-		
 
 		uService.updateUser(user);
 		return "User/updateResult";
 	}
 
 	@Transactional
-	@GetMapping(value="/showImg", produces = "image/png")
+	@GetMapping(value = "/showImg", produces = "image/png")
 	@ResponseBody
 	public byte[] showImg(@RequestParam("id") Integer id, Model m) {
-		
+
 		UserBean user = uService.getOneUserById(id);
 		byte[] thumbnail = user.getThumbnail();
 		return thumbnail;

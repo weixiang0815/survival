@@ -15,27 +15,30 @@ import tw.survival.model.Employee.EmployeeService;
 
 @Controller
 public class EmployeeController {
+
 	@Autowired
-	public EmployeeService empService; 
+	public EmployeeService empService;
+
 	@GetMapping("/employeesmain.controller")
 	public String showemp(Model m) {
-		return"Employee/Employee";
+		return "Employee/Employee";
 	}
-	
+
 	@PostMapping("/addEmployee")
-	public String addEmployee(@RequestParam("id")Integer id,@RequestParam("title") String title,@RequestParam("Salary") Integer Salary,
-			@RequestParam("hired_date") Date hired_date,@RequestParam("fk_workplace_id") Integer fk_workplace_id
-			,@RequestParam("fk_supervisor_id") Integer fk_supervisor_id,Model model)
-	{
-	EmployeeBean bean =new EmployeeBean();
-	empService.addEmployee(bean);
-	return"Employee/addemployees ";
+	public String addEmployee(@RequestParam("id") Integer id, @RequestParam("title") String title,
+			@RequestParam("Salary") Integer Salary, @RequestParam("hired_date") Date hired_date,
+			@RequestParam("fk_workplace_id") Integer fk_workplace_id,
+			@RequestParam("fk_supervisor_id") Integer fk_supervisor_id, Model model) {
+		EmployeeBean bean = new EmployeeBean();
+		empService.addEmployee(bean);
+		return "Employee/addemployees ";
 	}
+
 	@PostMapping("/getEmplouee.controller")
 	public String serchEmployee(Model m) {
-		List<EmployeeBean> employee=empService.getAllemp();
-		m.addAttribute("employee",employee);
+		List<EmployeeBean> employee = empService.getAllemp();
+		m.addAttribute("employee", employee);
 		return "Employee/empallResult";
 	}
-	
+
 }

@@ -16,10 +16,10 @@ public class CompetitionController {
 	public String main() {
 		return "Competition/index";
 	}
-	
+
 	@GetMapping("/competition/add")
 	public String newCompetition() {
 		return "Competition/newCompetition";
 	}
-	
+
 }
