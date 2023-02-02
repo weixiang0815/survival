@@ -13,7 +13,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="${contextRoot}/user">我們要叫什麼名字？</a>
+			<a class="navbar-brand" href="${contextRoot}/">SpringMVC作業</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav"
 				aria-controls="navbarNav" aria-expanded="false"
@@ -23,7 +23,7 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
-						aria-current="page" href="${contextRoot}/user">首頁</a></li>
+						aria-current="page" href="${contextRoot}/">首頁</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/usersmain.controller">新增使用者</a></li>
 					<li class="nav-item"><a class="nav-link"

@@ -46,10 +46,6 @@ public class UserBean {
 	@Column(name = "thumbnail")
 	private byte[] thumbnail;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "EmployeeBean")
-//	public EmployeeBean empbean;
-
 	public UserBean() {
 	}
 

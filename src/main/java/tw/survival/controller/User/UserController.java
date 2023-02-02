@@ -1,6 +1,5 @@
 package tw.survival.controller.User;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +55,11 @@ public class UserController {
 			@RequestParam("password") String password,
 			@RequestParam(name = "nickname", required = false) String nickname, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
-			@RequestParam("age") String age, @RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
+			@RequestParam("age") String age, @RequestParam("thumbnail") MultipartFile thumbnail, Model m) throws IOException {
+		if (uService.getOneUserByAccount(account) != null) {
+			m.addAttribute("error", "此帳號已存在");
+			return "User/user";
+		}
 		UserBean user = new UserBean();
 		user.setName(name);
 		user.setAccount(account);
@@ -68,9 +71,9 @@ public class UserController {
 		user.setAge(age);
 		if (thumbnail != null) {
 			user.setThumbnail(thumbnail.getBytes());
-
 		}
 		uService.addUser(user);
+		m.addAttribute("id", uService.getOneUserByAccount(account).getId());
 		return "User/userResult";
 	}
 
@@ -90,6 +93,7 @@ public class UserController {
 			return "User/Select";
 		}
 		m.addAttribute("user", user);
+		m.addAttribute("id", user.getId());
 		return "User/selectOne";
 	}
 
@@ -107,6 +111,7 @@ public class UserController {
 			return "User/Select";
 		}
 		m.addAttribute("user", user);
+		m.addAttribute("account", user.getAccount());
 		return "User/selectOne";
 	}
 
@@ -136,42 +141,13 @@ public class UserController {
 		user.setPassword(password);
 		boolean checkUser = uService.checkLogin(user);
 		if (checkUser) {
-			m.addAttribute("account", account);
-			m.addAttribute("password", password);
+			user = uService.getOneUserByAccount(account);
+			m.addAttribute("loginsuccess", user.getName() + " 歡迎回來～～～");
+			m.addAttribute("id", user.getId());
 			return "User/loginSuccess";
 		}
 		errors.put("msg", "請輸入正確的使用者名稱及密碼");
 		return "User/loginSystem";
-	}
-
-	// 透過 id 拿圖片（不知道能不能成功）
-	@GetMapping("/getUserPhoto")
-	@ResponseBody
-	public byte[] getPhoto(@RequestParam("id") Integer id) {
-		return uService.getOneUserById(id).getThumbnail();
-	}
-
-	// 新增圖片
-	@PostMapping("/upload.controller")
-	@ResponseBody
-	public String processAction(@RequestParam("myFiles") MultipartFile mf) throws IllegalStateException, IOException {
-		String fileName = mf.getOriginalFilename();
-		System.out.println("fileName:" + fileName);
-
-		String saveFileDir = "c:/temp/upload/";
-		File saveFilePath = new File(saveFileDir, fileName);
-
-		byte[] b = mf.getBytes();
-		mf.transferTo(saveFilePath);
-
-		if (fileName != null && fileName.length() != 0) {
-			saveImage(b);
-		}
-
-		return "saveFilePath:" + saveFilePath;
-	}
-
-	private void saveImage(byte[] b) {
 	}
 
 	@GetMapping("/updateUserById")
@@ -181,7 +157,6 @@ public class UserController {
 		return "User/UpdateUser1";
 	}
 
-	// 應該要能上傳圖片
 	@Transactional
 	@PostMapping("/updateUser")
 	public String update(@RequestParam("id") Integer id, @RequestParam("name") String name,
@@ -190,13 +165,26 @@ public class UserController {
 			@RequestParam("address") String address, @RequestParam("email") String email,
 			@RequestParam("age") String age, Model m,
 			@RequestParam(name = "thumbnail", required = false) MultipartFile thumbnail) throws IOException {
-		HashMap<String, String> errors = new HashMap<String, String>();
-		m.addAttribute("errors", errors);
-		UserBean user = new UserBean(name, account, password, sex, address, email, age, thumbnail.getBytes());
-		user.setNickname(nickname);
-		user.setId(id);
-
-		uService.updateUser(user);
+		HashMap<String, String> msg = new HashMap<String, String>();
+		m.addAttribute("msg", msg);
+		try {
+			UserBean user = uService.getOneUserById(id);
+			user.setName(name);
+			user.setAccount(account);
+			user.setPassword(password);
+			user.setNickname(nickname);
+			user.setSex(sex);
+			user.setAddress(address);
+			user.setEmail(email);
+			user.setAge(age);
+			if (thumbnail != null) {
+				user.setThumbnail(thumbnail.getBytes());
+			}
+			uService.updateUser(user);
+			msg.put("success", "修改成功🎉🎉🎉");
+		} catch (Exception e) {
+			msg.put("fail", "修改失敗😥😥😥");
+		}
 		return "User/updateResult";
 	}
 
@@ -204,9 +192,7 @@ public class UserController {
 	@GetMapping(value = "/showImg", produces = "image/png")
 	@ResponseBody
 	public byte[] showImg(@RequestParam("id") Integer id, Model m) {
-
-		UserBean user = uService.getOneUserById(id);
-		byte[] thumbnail = user.getThumbnail();
-		return thumbnail;
+		return uService.getOneUserById(id).getThumbnail();
 	}
+
 }

@@ -9,10 +9,12 @@
 <title>登入成功</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
-<h3>成功</h3>
-帳號：${account}<br>
-密碼：${password}
-<jsp:include page="../Layout/footer.jsp"/>
+	<jsp:include page="../Layout/navbar_user.jsp" />
+	<div class="container">
+		<h3>${loginsuccess}</h3>
+		<a href="updateUserById?id=${id}"><button class="btn btn-info">使用者資訊</button></a>
+		<a href="/"><button class="btn btn-primary">返回首頁</button></a>
+	</div>
+	<jsp:include page="../Layout/footer.jsp" />
 </body>
 </html>

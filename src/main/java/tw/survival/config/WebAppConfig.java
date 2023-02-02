@@ -45,7 +45,7 @@ public class WebAppConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addRedirectViewController("/", "membersmain.controller");
+		registry.addRedirectViewController("/", "user");
 		registry.addViewController("/wonderful.action");
 	}
 

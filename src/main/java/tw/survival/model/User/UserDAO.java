@@ -174,10 +174,8 @@ public class UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		try {
 			session.update(user);
-			System.out.println("更新成功");
 			return true;
 		} catch (NoResultException e) {
-			System.out.println("更新失敗");
 			return false;
 		}
 	}

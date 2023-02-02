@@ -9,9 +9,16 @@
 <title>修改成功</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
-<h3>修改成功</h3>
-<a href="searchmain.controller"><button>回到搜尋頁</button></a>
-<jsp:include page="../Layout/footer.jsp"/>
+	<jsp:include page="../Layout/navbar_user.jsp" />
+	<c:choose>
+		<c:when test="${msg.success != null}">
+			<h3 style="color: green;">${msg.success}</h3>
+		</c:when>
+		<c:otherwise>
+			<h3 style="color: red;">${msg.fail}</h3>
+		</c:otherwise>
+	</c:choose>
+	<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
+	<jsp:include page="../Layout/footer.jsp" />
 </body>
 </html>
