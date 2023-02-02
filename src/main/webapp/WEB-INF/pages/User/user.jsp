@@ -39,6 +39,10 @@
 				<td><input type="text" name="age" /></td>
 			</tr>
 			<tr>
+			<td>照片:</td>
+			<td><input type="image" name="image"></td>
+			</tr>
+			<tr>
 				<td><input type="submit" value="註冊" /></td>
 			</tr>
 		</table>

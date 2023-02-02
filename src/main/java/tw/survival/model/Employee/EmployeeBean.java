@@ -2,19 +2,17 @@ package tw.survival.model.Employee;
 
 import java.sql.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import tw.survival.model.User.UserBean;
+import tw.survival.model.User.UserDAO;
 
 @Entity
 @Table(name = "Employee")
@@ -35,9 +33,15 @@ public class EmployeeBean{
 	private Integer fk_workplace_id;
 	@Column(name="fk_supervisor_id")
 	private Integer fk_supervisor_id;
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_UserBean_id")
-	private UserBean user;
+	@OneToOne(mappedBy = "fk_User_id")
+	public UserDAO udao;
+	
+	public UserDAO getUdao() {
+		return udao;
+	}
+	public void setUdao(UserDAO udao) {
+		this.udao = udao;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -74,11 +78,5 @@ public class EmployeeBean{
 	public void setFk_supervisor_id(Integer fk_supervisor_id) {
 		this.fk_supervisor_id = fk_supervisor_id;
 	}
-	public UserBean getUser() {
-		return user;
-	}
-	public void setUser(UserBean user) {
-		this.user = user;
-	}
-	
+	public  EmployeeBean() {}
 }
