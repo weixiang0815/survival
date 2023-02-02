@@ -9,7 +9,8 @@
 <title>搜尋活動</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar.jsp"/>
+<jsp:include page="../Layout/navbar_competition.jsp"/>
 <h1>搜尋活動</h1>
+<jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>
