@@ -1,13 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-import="java.util.*, tw.survival.model.User.UserBean" 
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
+<html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
 <title>查詢結果</title>
 </head>
 <body>
+<jsp:include page="../Layout/navbar_user.jsp"/>
 	<h3>查詢結果</h3>
 		<table>
 				<tr><td><label>使用者ID：</label>${user.id}
@@ -22,5 +24,6 @@ import="java.util.*, tw.survival.model.User.UserBean"
 		<a href="deleteUserById?id=${user.id}"><button>刪除此資料</button></a>
 		<a href="updateUserById?id=${user.id}"><button>編輯此資料</button></a>
 		<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+<jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

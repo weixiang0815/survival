@@ -20,6 +20,11 @@ public class UserController {
 
 	@Autowired
 	private UserService uService;
+	
+	@GetMapping("/")
+	public String main() {
+		return "User/index";
+	}
 
 	@GetMapping("/usersmain.controller")
 	public String showForm(Model model) {
@@ -31,7 +36,7 @@ public class UserController {
 		return "User/Select";
 	}
 
-	@GetMapping("loginsystemmain.controller")
+	@GetMapping("/loginsystemmain.controller")
 	public String processMainAction() {
 		return "User/loginSystem";
 	}

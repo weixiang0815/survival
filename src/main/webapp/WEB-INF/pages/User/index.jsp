@@ -6,12 +6,11 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>修改成功</title>
+<title>會員系統首頁</title>
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
-<h3>修改成功</h3>
-<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+<h1>會員系統首頁</h1>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

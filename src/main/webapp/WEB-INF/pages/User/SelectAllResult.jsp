@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	import="java.util.*, tw.survival.model.User.UserBean"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html>
+<html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
 <title>查詢全部結果</title>
 </head>
 <body>
+<jsp:include page="../Layout/navbar_user.jsp"/>
 	<h3>查詢全部結果</h3>
 	<table>
 		<c:forEach items="${users}" var="user">
@@ -24,5 +25,6 @@
 		</c:forEach>
 	</table>
 	<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+<jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>
