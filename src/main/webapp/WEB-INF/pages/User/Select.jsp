@@ -15,7 +15,6 @@
 				<td><input type="text" name="id" /></td>
 				<td>${errors.idNotFound}</td>
 				<td><input type="submit" value="查詢" /></td>
-				<td>${errors.mustNotEmpty}</td>
 			</tr>
 		</table>
 	</form>
