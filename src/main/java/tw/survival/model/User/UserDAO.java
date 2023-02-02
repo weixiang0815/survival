@@ -32,6 +32,7 @@ public class UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		if (user != null) {
 			session.save(user);
+			System.out.println("length:"+user.getThumbnail().length);
 		}
 		return user;
 	}

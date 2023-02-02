@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class UserController {
 
 	@GetMapping("/searchmain.controller")
 	public String search(Model model) {
-		return "User/select";
+		return "User/Select";
 	}
 
 	@GetMapping("loginsystemmain.controller")
@@ -52,9 +53,29 @@ public class UserController {
 			@RequestParam(name = "nickname", required = false) String nickname, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
 			@RequestParam("age") String age,
-			@RequestParam(name = "thumbnail", required = false) MultipartFile thumbnail) throws IOException {
-		UserBean user = new UserBean(name, account, password, sex, address, email, age, thumbnail.getBytes());
+			@RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
+		UserBean user = new UserBean();
+		user.setName(name);
+		System.out.println(name);
+		user.setAccount(account);
+		System.out.println(account);
+		user.setPassword(password);
+		System.out.println(password);
 		user.setNickname(nickname);
+		System.out.println(nickname);
+		user.setSex(sex);
+		System.out.println(sex);
+		user.setAddress(address);
+		System.out.println(address);
+		user.setEmail(email);
+		System.out.println(email);
+		user.setAge(age);
+		System.out.println(age);
+		if(thumbnail != null) {
+			user.setThumbnail(thumbnail.getBytes());
+				
+		}
+		System.out.println(thumbnail.getBytes().length);
 		uService.addUser(user);
 		return "User/userResult";
 	}
@@ -72,7 +93,7 @@ public class UserController {
 		UserBean user = uService.getOneUserById(id);
 		if (user == null) {
 			errors.put("idNotFound", "查無此 id");
-			return "User/select";
+			return "User/Select";
 		}
 		m.addAttribute("user", user);
 		return "User/selectOne";
@@ -84,12 +105,12 @@ public class UserController {
 		m.addAttribute("errors", errors);
 		if (account == null) {
 			errors.put("mustNotEmpty", "id 與帳號不得皆為空白");
-			return "User/select";
+			return "User/Select";
 		}
 		UserBean user = uService.getOneUserByAccount(account);
 		if (user == null) {
 			errors.put("accountNotFound", "查無此帳號");
-			return "User/select";
+			return "User/Select";
 		}
 		m.addAttribute("user", user);
 		return "User/selectOne";
@@ -99,7 +120,7 @@ public class UserController {
 	public String searchUsers(Model m) {
 		List<UserBean> users = uService.getAllUsers();
 		m.addAttribute("users", users);
-		return "User/selectAllResult";
+		return "User/SelectAllResult";
 	}
 
 	@PostMapping("/checkLogin.controller")
@@ -157,9 +178,6 @@ public class UserController {
 	}
 
 	private void saveImage(byte[] b) {
-
-//		UserBean userBean = new UserBean(id,b);
-//		uService.insert(userBean);
 	}
 
 	@GetMapping("/updateUserById")
@@ -183,8 +201,19 @@ public class UserController {
 		UserBean user = new UserBean(name, account, password, sex, address, email, age, thumbnail.getBytes());
 		user.setNickname(nickname);
 		user.setId(id);
+		
+
 		uService.updateUser(user);
 		return "User/updateResult";
 	}
 
+	@Transactional
+	@GetMapping(value="/showImg", produces = "image/png")
+	@ResponseBody
+	public byte[] showImg(@RequestParam("id") Integer id, Model m) {
+		
+		UserBean user = uService.getOneUserById(id);
+		byte[] thumbnail = user.getThumbnail();
+		return thumbnail;
+	}
 }

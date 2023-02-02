@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h3>新增使用者</h3>
-	<form action="addUser" method="post">
+	<form action="addUser" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<td>使用者名稱：</td>
@@ -45,7 +45,7 @@
 			</tr>
 			<tr>
 				<td>圖片:</td>
-				<td><input type="file" name="thumbnail" value="上傳圖片" />
+				<td><input type="file" name="thumbnail" />
 			</tr>
 			<tr>
 				<td><input type="submit" value="註冊" /></td>

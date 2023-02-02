@@ -164,7 +164,7 @@ public class UserBean {
 		builder.append(", age=");
 		builder.append(age);
 		builder.append(", thumbnail=");
-		builder.append(thumbnail);
+		builder.append(thumbnail.length);
 		builder.append("]");
 		return builder.toString();
 	}

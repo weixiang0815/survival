@@ -21,6 +21,8 @@
 				<td><label>使用者地址：</label>${user.address}
 				<td><label>使用者電子信箱：</label>${user.email}
 				<td><label>使用者年齡：</label>${user.age}
+				<td><label>使用者圖片：</label><img src="/Survival/showImg?id=${user.id}" width="70px"/>
+			</tr>
 		</c:forEach>
 	</table>
 	<a href="searchmain.controller"><button>回到搜尋頁</button></a>
