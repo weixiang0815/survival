@@ -1,7 +1,10 @@
 package tw.survival.controller.User;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.User.UserBean;
 import tw.survival.model.User.UserService;
@@ -41,16 +46,45 @@ public class UserController {
 		return "User/loginSystem";
 	}
 
+	@GetMapping("/uploadmain.controller") // 新增圖
+	public String processAction() {
+		return "User/uploadFile";
+	}
+
+	// 應該要能上傳圖片
 	@PostMapping("/addUser")
 	public String submit(@RequestParam("name") String name, @RequestParam("account") String account,
-			@RequestParam("password") String password, @RequestParam("sex") String sex,
+			@RequestParam("password") String password,
+			@RequestParam(name = "nickname", required = false) String nickname, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
-			@RequestParam("age") String age) {
-		UserBean user = new UserBean(name, account, password, sex, address, email, age);
+			@RequestParam("age") String age,
+			@RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
+		UserBean user = new UserBean();
+		user.setName(name);
+		System.out.println(name);
+		user.setAccount(account);
+		System.out.println(account);
+		user.setPassword(password);
+		System.out.println(password);
+		user.setNickname(nickname);
+		System.out.println(nickname);
+		user.setSex(sex);
+		System.out.println(sex);
+		user.setAddress(address);
+		System.out.println(address);
+		user.setEmail(email);
+		System.out.println(email);
+		user.setAge(age);
+		System.out.println(age);
+		if(thumbnail != null) {
+			user.setThumbnail(thumbnail.getBytes());
+				
+		}
+		System.out.println(thumbnail.getBytes().length);
 		uService.addUser(user);
 		return "User/userResult";
 	}
-	
+
 	@GetMapping("/deleteUserById")
 	public String deleteUserById(@RequestParam("id") Integer id, Model m) {
 		m.addAttribute("msg", uService.deleteUserById(id));
@@ -58,7 +92,7 @@ public class UserController {
 	}
 
 	@PostMapping("/getOneUserById")
-	public String searchOneUserById(@RequestParam("id") Integer id, Model m) {
+	public String searchOneUserById(@RequestParam(name = "id", required = false) Integer id, Model m) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		UserBean user = uService.getOneUserById(id);
@@ -69,9 +103,9 @@ public class UserController {
 		m.addAttribute("user", user);
 		return "User/selectOne";
 	}
-	
+
 	@PostMapping("/getOneUserByAccount")
-	public String searchOneUserByAccount(@RequestParam("account") String account, Model m) {
+	public String searchOneUserByAccount(@RequestParam(name = "account", required = false) String account, Model m) {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
 		if (account == null) {
@@ -120,57 +154,71 @@ public class UserController {
 		errors.put("msg", "請輸入正確的使用者名稱及密碼");
 		return "User/loginSystem";
 	}
-	
+
+	// 透過 id 拿圖片（不知道能不能成功）
+	@GetMapping("/getUserPhoto")
+	@ResponseBody
+	public byte[] getPhoto(@RequestParam("id") Integer id) {
+		return uService.getOneUserById(id).getThumbnail();
+	}
+
+	// 新增圖片
+	@PostMapping("/upload.controller")
+	@ResponseBody
+	public String processAction(@RequestParam("myFiles") MultipartFile mf) throws IllegalStateException, IOException {
+		String fileName = mf.getOriginalFilename();
+		System.out.println("fileName:" + fileName);
+
+		String saveFileDir = "c:/temp/upload/";
+		File saveFilePath = new File(saveFileDir, fileName);
+
+		byte[] b = mf.getBytes();
+		mf.transferTo(saveFilePath);
+
+		if (fileName != null && fileName.length() != 0) {
+			saveImage(b);
+		}
+
+		return "saveFilePath:" + saveFilePath;
+	}
+
+	private void saveImage(byte[] b) {
+	}
+
 	@GetMapping("/updateUserById")
-	public String updateSearch(@RequestParam("id") Integer id,Model m) {
+	public String updateSearch(@RequestParam("id") Integer id, Model m) {
 		UserBean user = uService.getOneUserById(id);
 		m.addAttribute("user", user);
 		return "User/UpdateUser1";
 	}
-	
+
+	// 應該要能上傳圖片
 	@Transactional
 	@PostMapping("/updateUser")
-	public String update(@RequestParam("id") Integer id,@RequestParam("name") String name, @RequestParam("account") String account,
-			@RequestParam("password") String password, @RequestParam("sex") String sex,
+	public String update(@RequestParam("id") Integer id, @RequestParam("name") String name,
+			@RequestParam("account") String account, @RequestParam("password") String password,
+			@RequestParam(name = "nickname", required = false) String nickname, @RequestParam("sex") String sex,
 			@RequestParam("address") String address, @RequestParam("email") String email,
-			@RequestParam("age") String age, Model m) {
-		
+			@RequestParam("age") String age, Model m,
+			@RequestParam(name = "thumbnail", required = false) MultipartFile thumbnail) throws IOException {
 		HashMap<String, String> errors = new HashMap<String, String>();
 		m.addAttribute("errors", errors);
-		
-		if (name == null || name.length() == 0) {
-			errors.put("name", "使用者名稱不得為空白");
-		}
-		if (account == null || account.length() == 0) {
-			errors.put("account", "帳號不得為空白");
-		}
-		
-		if (password == null || password.length() == 0) {
-			errors.put("password", "密碼不得為空白");
-		}
-		if (sex == null || sex.length() == 0) {
-			errors.put("sex", "性別不得為空白");
-		}
-		if (address == null || address.length() == 0) {
-			errors.put("address", "住址不得為空白");
-		}
-		if (email == null || email.length() == 0) {
-			errors.put("email", "信箱不得為空白");
-		}
-		if (age == null || age.length() == 0) {
-			errors.put("age", "年齡不得為空白");
-		}
-		
-		
-		if (errors != null && !errors.isEmpty()) {
-			return "User/UpdateUser";
-		}
-		
-		
-		UserBean user = new UserBean(name, account, password, sex, address, email, age);
+		UserBean user = new UserBean(name, account, password, sex, address, email, age, thumbnail.getBytes());
+		user.setNickname(nickname);
 		user.setId(id);
+		
+
 		uService.updateUser(user);
 		return "User/updateResult";
 	}
 
+	@Transactional
+	@GetMapping(value="/showImg", produces = "image/png")
+	@ResponseBody
+	public byte[] showImg(@RequestParam("id") Integer id, Model m) {
+		
+		UserBean user = uService.getOneUserById(id);
+		byte[] thumbnail = user.getThumbnail();
+		return thumbnail;
+	}
 }

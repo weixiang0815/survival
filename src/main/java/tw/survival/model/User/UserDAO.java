@@ -32,6 +32,7 @@ public class UserDAO {
 		Session session = sessionFactory.getCurrentSession();
 		if (user != null) {
 			session.save(user);
+			System.out.println("length:"+user.getThumbnail().length);
 		}
 		return user;
 	}
@@ -180,5 +181,24 @@ public class UserDAO {
 			return false;
 		}
 	}
+
+	public UserBean insert(UserBean u) {
+		/**
+		 * 新增圖片
+		 * 
+		 * @param thumbnail 欲新增的 UserBean
+		 * 
+		 * @return 回傳傳入的 UserBean
+		 */
+		
+		Session session = sessionFactory.getCurrentSession();
+		if (u != null) {
+			session.save(u);
+		}
+		session.close();
+		return u;
+	}
+
+	
 
 }

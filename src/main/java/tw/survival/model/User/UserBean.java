@@ -50,7 +50,7 @@ public class UserBean {
 	}
 
 	public UserBean(String name, String account, String password, String sex, String address,
-			String email, String age) {
+			String email, String age, byte[] thumbnail) {
 		super();
 		this.name = name;
 		this.account = account;
@@ -59,6 +59,7 @@ public class UserBean {
 		this.address = address;
 		this.email = email;
 		this.age = age;
+		this.thumbnail=thumbnail;
 	}
 
 	public Integer getId() {
@@ -162,6 +163,8 @@ public class UserBean {
 		builder.append(email);
 		builder.append(", age=");
 		builder.append(age);
+		builder.append(", thumbnail=");
+		builder.append(thumbnail.length);
 		builder.append("]");
 		return builder.toString();
 	}

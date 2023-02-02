@@ -7,6 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>查詢全部結果</title>
+<style type="text/css">
+img {
+max-width: 100%;
+}
+</style>
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
@@ -14,7 +19,7 @@
 	<h3>查詢全部結果</h3>
 	<table class="table table-hover">
 		<tr>
-			<th>ID</th>
+			<th>大頭貼</th>
 			<th>名稱</th>
 			<th>帳號</th>
 			<th>密碼</th>
@@ -27,7 +32,7 @@
 		</tr>
 		<c:forEach items="${users}" var="user">
 			<tr>
-				<td>${user.id}</td>
+				<td style="width: 100px;"><img alt="查無圖片" src="/Survival/showImg?id=${user.id}"/></td>
 				<td>${user.name}</td>
 				<td>${user.account}</td>
 				<td>${user.password}</td>
