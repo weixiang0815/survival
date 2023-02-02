@@ -10,21 +10,49 @@
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
+	<div class="container">
 	<h3>查詢全部結果</h3>
-	<table>
+	<table class="table table-hover">
+		<tr>
+			<th>ID</th>
+			<th>名稱</th>
+			<th>帳號</th>
+			<th>密碼</th>
+			<th>暱稱</th>
+			<th>性別</th>
+			<th>地址</th>
+			<th>Email</th>
+			<th>年齡</th>
+			<th colspan="2"></th>
+		</tr>
 		<c:forEach items="${users}" var="user">
 			<tr>
-				<td><label>使用者ID：</label>${user.id}
-				<td><label>使用者名稱：</label>${user.name}
-				<td><label>使用者帳號：</label>${user.account}
-				<td><label>使用者密碼：</label>${user.password}
-				<td><label>使用者性別：</label>${user.sex}
-				<td><label>使用者地址：</label>${user.address}
-				<td><label>使用者電子信箱：</label>${user.email}
-				<td><label>使用者年齡：</label>${user.age}
+				<td>${user.id}</td>
+				<td>${user.name}</td>
+				<td>${user.account}</td>
+				<td>${user.password}</td>
+				<td>
+				<c:choose>
+				<c:when test="${user.nickname == null}">無</c:when>
+				<c:otherwise>${user.nickname}</c:otherwise>
+				</c:choose>
+				</td>
+				<td>
+				<c:choose>
+				<c:when test="${user.sex == \"M\"}">男</c:when>
+				<c:otherwise>女</c:otherwise>
+				</c:choose>
+				</td>
+				<td>${user.address}</td>
+				<td>${user.email}</td>
+				<td>${user.age}</td>
+		<td><a href="updateUserById?id=${user.id}"><button class="btn btn-info">編輯</button></a>
+		<td><a href="deleteUserById?id=${user.id}"><button class="btn btn-danger">刪除</button></a>
+		</tr>
 		</c:forEach>
 	</table>
-	<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+	<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
+	</div>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

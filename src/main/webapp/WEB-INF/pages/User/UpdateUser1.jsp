@@ -31,7 +31,18 @@
 			</tr>
 			<tr>
 				<td>性別：</td>
-				<td><label>男:</label><input type="radio" name="sex" value="M" /><label>女:</label><input type="radio" name="sex" value="F" /></td>
+				<td>
+				<c:choose>
+				<c:when test="${user.sex == \"M\"}">
+				<label>男:</label><input type="radio" name="sex" value="M" checked="checked"/>
+				<label>女:</label><input type="radio" name="sex" value="F"/>
+				</c:when>
+				<c:otherwise>
+				<label>男:</label><input type="radio" name="sex" value="M"/>
+				<label>女:</label><input type="radio" name="sex" value="F" checked="checked"/>
+				</c:otherwise>
+				</c:choose>
+				</td>
 			</tr>
 			<tr>
 				<td>地址：</td>
