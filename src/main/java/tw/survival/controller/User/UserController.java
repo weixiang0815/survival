@@ -61,26 +61,17 @@ public class UserController {
 			@RequestParam("thumbnail") MultipartFile thumbnail) throws IOException {
 		UserBean user = new UserBean();
 		user.setName(name);
-		System.out.println(name);
 		user.setAccount(account);
-		System.out.println(account);
 		user.setPassword(password);
-		System.out.println(password);
 		user.setNickname(nickname);
-		System.out.println(nickname);
 		user.setSex(sex);
-		System.out.println(sex);
 		user.setAddress(address);
-		System.out.println(address);
 		user.setEmail(email);
-		System.out.println(email);
 		user.setAge(age);
-		System.out.println(age);
 		if(thumbnail != null) {
 			user.setThumbnail(thumbnail.getBytes());
 				
 		}
-		System.out.println(thumbnail.getBytes().length);
 		uService.addUser(user);
 		return "User/userResult";
 	}
