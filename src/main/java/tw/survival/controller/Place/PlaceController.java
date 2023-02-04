@@ -20,7 +20,7 @@ public class PlaceController {
 	
 	@GetMapping("/placemain.controller")
 	public String showForm(Model model) {
-		return "Place/place";
+		return "Place/addPlace";
 	}
 	
 //	public String submit(@RequestParam("place_name") String place_name,

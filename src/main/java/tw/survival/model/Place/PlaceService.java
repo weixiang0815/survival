@@ -36,11 +36,7 @@ public class PlaceService {
 	public List<PlaceBean>getAllPlace(){
 		return pDAO.getAllPlace();
 	}
-	
-	
-	public boolean deletePlaceByBean(PlaceBean place) {
-		return pDAO.deletePlaceByBean(place);
-	}
+
 	
 	public String deletePlaceById(Integer id) {
 		return pDAO.deletePlaceById(id);

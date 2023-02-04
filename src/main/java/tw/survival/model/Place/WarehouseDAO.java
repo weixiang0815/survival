@@ -13,79 +13,70 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
-public class PlaceDAO {
+public class WarehouseDAO {
 
 	@Autowired
 	private SessionFactory sessionFactory;
-
-	public PlaceDAO() {
+	
+	public WarehouseDAO() {
 	}
 
-	public PlaceBean addPlace(PlaceBean place) {
+	
+	
+	public WarehouseBean addWarehouse(WarehouseBean warehouse) {
 		Session session = sessionFactory.getCurrentSession();
-		if (place != null) {
-			session.save(place);
+		
+		if(warehouse != null) {
+			session.save(warehouse);
 		}
-		return place;
+		return warehouse;
 	}
-
-	public PlaceBean getOnePlaceById(Integer id) {
-
+	
+	
+	public WarehouseBean getOneWarehouseById(Integer id) {
 		Session session = sessionFactory.getCurrentSession();
-
-		String hqlstr = "from PlaceBean where id = :id";
-
-		Query<PlaceBean> query = session.createQuery(hqlstr, PlaceBean.class);
-
+		
+		String hqlstr = "from WarehouseBean where id = :id";
+		
+		Query<WarehouseBean> query = session.createQuery(hqlstr,WarehouseBean.class);
 		query.setParameter("id", id);
-
+		
 		return query.uniqueResult();
+		
 	}
-
-	public PlaceBean getOnePlaceByName(String place_name) {
-
+	
+	public List<WarehouseBean> getAllWarehouse(){
 		Session session = sessionFactory.getCurrentSession();
+		
+		String hqlstr = "from WarehouseBean";
 
-		String hqlstr = "from PlaceBean where place_name = :place_name";
-
-		Query<PlaceBean> query = session.createQuery(hqlstr, PlaceBean.class);
-
-		query.setParameter("place_name", place_name);
-
-		return query.uniqueResult();
-	}
-
-	public List<PlaceBean> getAllPlace() {
-
-		Session session = sessionFactory.getCurrentSession();
-
-		String hqlstr = "from PlaceBean";
-
-		Query<PlaceBean> query = session.createQuery(hqlstr, PlaceBean.class);
-
-		List<PlaceBean> resultList = query.getResultList();
-
+		Query<WarehouseBean> query = session.createQuery(hqlstr, WarehouseBean.class);
+	
+		List<WarehouseBean> resultList = query.getResultList();
+		
 		return resultList;
 	}
-
-	public String deletePlaceById(Integer id) {
+	
+	
+	public String deleteWarehouseById(Integer id){
 		Session session = sessionFactory.getCurrentSession();
-		String hqlstr = "delete PlaceBean where id = :id";
+		String hqlstr = "delete WarehouseBean where id = :id";
 		int result = session.createQuery(hqlstr).setParameter("id", id).executeUpdate();
 		return result > 0 ? "刪除成功🤪🤪🤪" : "刪除失敗😥😥😥";
-
+		
 	}
-
-	public boolean updatePlace(PlaceBean place) {
+	
+	public boolean updateWarehouse(WarehouseBean warehouse) {
 		Session session = sessionFactory.getCurrentSession();
 		try {
-			session.update(place);
+			session.update(warehouse);
 			System.out.println("更新成功");
 			return true;
 		} catch (NoResultException e) {
 			System.out.println("更新失敗");
 			return false;
 		}
-
 	}
+	
+	
 }
