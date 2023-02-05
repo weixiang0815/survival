@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.User.UserBean;
-import tw.survival.model.User.UserService;
+import tw.survival.service.User.UserService;
 
 @Controller
 public class UserController {

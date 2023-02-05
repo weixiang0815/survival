@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Employee.EmployeeBean;
-import tw.survival.model.Employee.EmployeeService;
+import tw.survival.service.Employee.EmployeeService;
 
 @Controller
 public class EmployeeController {
