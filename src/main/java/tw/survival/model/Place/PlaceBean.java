@@ -1,13 +1,17 @@
 package tw.survival.model.Place;
 
-import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -17,42 +21,39 @@ import org.springframework.stereotype.Component;
 @Component
 public class PlaceBean {
 
-	
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="place_name")
+
+	@Column(name = "place_name")
 	private String place_name;
-	
-	@Column(name="place_address")
+
+	@Column(name = "place_address")
 	private String place_address;
-	
-	@Column(name="place_photo")
+
+	@Column(name = "place_photo")
 	private byte[] place_photo;
-	
-	@Column(name="place_fee")
+
+	@Column(name = "place_fee")
 	private String place_fee;
-	
-	@Column(name="place_capacity")
+
+	@Column(name = "place_capacity")
 	private String place_capacity;
-	
+
 //	@OneToMany()
 //	private Manager manager;
-	
-	public PlaceBean() {
-	}
 
-	public PlaceBean(String place_name, String place_address, byte[] place_photo, String place_fee,
-			String place_capacity) {
-		super();
-		this.place_name = place_name;
-		this.place_address = place_address;
-		this.place_photo = place_photo;
-		this.place_fee = place_fee;
-		this.place_capacity = place_capacity;
+	@OneToOne(mappedBy = "WarehouseBean")
+	private WarehouseBean warehouse; //倉庫
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<PlaceOrderBean> placeOrder = new LinkedHashSet<>(); // 場地訂單
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
+
+	public PlaceBean() {
 	}
 
 	public Integer getId() {
@@ -103,25 +104,28 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PlaceBean [id=");
-		builder.append(id);
-		builder.append(", place_name=");
-		builder.append(place_name);
-		builder.append(", place_address=");
-		builder.append(place_address);
-		builder.append(", place_photo=");
-		builder.append(Arrays.toString(place_photo));
-		builder.append(", place_fee=");
-		builder.append(place_fee);
-		builder.append(", place_capacity=");
-		builder.append(place_capacity);
-		builder.append("]");
-		return builder.toString();
+	public WarehouseBean getWarehouse() {
+		return warehouse;
 	}
-	
-	
-	
+
+	public void setWarehouse(WarehouseBean warehouse) {
+		this.warehouse = warehouse;
+	}
+
+	public Set<PlaceOrderBean> getPlaceOrder() {
+		return placeOrder;
+	}
+
+	public void setPlaceOrder(Set<PlaceOrderBean> placeOrder) {
+		this.placeOrder = placeOrder;
+	}
+
+	public Set<ScheduleBean> getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Set<ScheduleBean> schedule) {
+		this.schedule = schedule;
+	}
+
 }
