@@ -1,4 +1,4 @@
-package tw.survival.model.User;
+package tw.survival.service.User;
 
 import java.util.List;
 
@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import tw.survival.model.User.UserBean;
+import tw.survival.model.User.UserDAO;
 
 @Service
 @Transactional

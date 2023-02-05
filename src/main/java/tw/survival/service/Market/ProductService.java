@@ -1,4 +1,4 @@
-package tw.survival.model.Market;
+package tw.survival.service.Market;
 
 import java.util.List;
 

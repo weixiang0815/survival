@@ -1,10 +1,13 @@
-package tw.survival.model.Competition;
+package tw.survival.service.Competition;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import tw.survival.model.Competition.SignUpBean;
+import tw.survival.model.Competition.SignUpDAO;
 
 @Service
 @Transactional
