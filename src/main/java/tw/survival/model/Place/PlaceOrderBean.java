@@ -18,6 +18,8 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import tw.survival.model.Employee.EmployeeBean;
+
 @Entity
 @Table(name = "PlaceOrder")
 @Component
@@ -36,20 +38,26 @@ public class PlaceOrderBean {
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;;
 
-	@Temporal(TemporalType.TIMESTAMP) // 訂單日期
-	@Column(name = "order_date")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	private Date order_date;
-
-	@Temporal(TemporalType.TIMESTAMP) // 使用日期
-	@Column(name = "use_date")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	private Date use_date;
+	 
 
 	@Column(name = "use_timespan")
 	private String use_timespan; //使用時段
-
-//	private Integer fk_player_id;
+	
+	@Column(name="fk_player_id")
+	@Transient
+	private Integer playerId;
+	
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name="fk_player_id")
+//	private PlayerBean player;
+	
+	@Column(name="fk_employee_id")
+	@Transient
+	private Integer employeeId;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="fk_player_id")
+	private EmployeeBean employee;
 
 	@Column(name = "order_status")
 	private String order_status;
@@ -65,22 +73,7 @@ public class PlaceOrderBean {
 		this.id = id;
 	}
 
-	public Date getOrder_date() {
-		return order_date;
-	}
-
-	public void setOrder_date(Date order_date) {
-		this.order_date = order_date;
-	}
-
-	public Date getUse_date() {
-		return use_date;
-	}
-
-	public void setUse_date(Date use_date) {
-		this.use_date = use_date;
-	}
-
+	
 	public String getUse_timespan() {
 		return use_timespan;
 	}
@@ -113,4 +106,29 @@ public class PlaceOrderBean {
 		this.place = place;
 	}
 
+	public Integer getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(Integer playerId) {
+		this.playerId = playerId;
+	}
+
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	public EmployeeBean getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(EmployeeBean employee) {
+		this.employee = employee;
+	}
+
+	
 }

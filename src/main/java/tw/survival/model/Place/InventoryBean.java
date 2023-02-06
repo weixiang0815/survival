@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import tw.survival.model.Market.ProductBean;
+
 @Entity
 @Table(name = "Inventory")
 @Component
@@ -23,27 +25,31 @@ public class InventoryBean {
 	@Column(name="id")
 	private Integer id;
 	
-	@Column(name="inventory_name")
-	private String inventory_name;
+	
 	
 	@Column(name="inventory_sellamount")
 	private String inventory_sellamount; //販賣庫存
 	
-	@Column(name="inventory_address", unique = true)
-	private String inventory_address;
-	
+
 	@Column(name="inventory_rentamount")
 	private String inventory_rentamount; //租借庫存
 	
 	@Column(name = "fk_warehouse_id")
 	@Transient
-	private Integer warehouseid;
+	private Integer warehouseId;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_warehouse_id")
 	private WarehouseBean warehouse;
 	
-//	private fk_product_id;
+	@Column(name = "fk_product_id")
+	@Transient
+	private Integer productId;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="fk_product_id")
+	private ProductBean product;
+	
 	
 	
 	public InventoryBean() {
@@ -57,13 +63,6 @@ public class InventoryBean {
 		this.id = id;
 	}
 
-	public String getInventory_name() {
-		return inventory_name;
-	}
-
-	public void setInventory_name(String inventory_name) {
-		this.inventory_name = inventory_name;
-	}
 
 	public String getInventory_sellamount() {
 		return inventory_sellamount;
@@ -73,20 +72,13 @@ public class InventoryBean {
 		this.inventory_sellamount = inventory_amount;
 	}
 
-	public String getInventory_address() {
-		return inventory_address;
+
+	public Integer getWarehouseId() {
+		return warehouseId;
 	}
 
-	public void setInventory_address(String inventory_address) {
-		this.inventory_address = inventory_address;
-	}
-
-	public Integer getWarehouseid() {
-		return warehouseid;
-	}
-
-	public void setWarehouseid(Integer warehouseid) {
-		this.warehouseid = warehouseid;
+	public void setWarehouseId(Integer warehouseId) {
+		this.warehouseId = warehouseId;
 	}
 
 	public WarehouseBean getWarehouse() {
@@ -103,6 +95,22 @@ public class InventoryBean {
 
 	public void setInventory_rentamount(String inventory_rentamount) {
 		this.inventory_rentamount = inventory_rentamount;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public ProductBean getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductBean product) {
+		this.product = product;
 	}
 
 	
