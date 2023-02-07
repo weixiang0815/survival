@@ -15,18 +15,71 @@ public class CrewPermission {
 	@Column(name = "id")	
 	private Integer id;
 	
-	@Column(name = "id")	
-	private String join_crew_competition;
+	@Column(name = "join_crew_competition")	
+	private Character join_crew_competition;
 	
-	@Column(name = "id")
-	private String kickout;
+	@Column(name = "kickout")
+	private Character kickout;
 	
-	@Column(name = "id")
-	private String modify_member_permission ;
+	@Column(name = "modify_member_permission")
+	private Character modify_member_permission ;
 	
-	@Column(name = "id")
-	private String on_behalf_of_crew;
+	@Column(name = "on_behalf_of_crew")
+	private Character on_behalf_of_crew;
 	
-	@Column(name = "id")
-	private String disband;
+	@Column(name = "disband")
+	private Character disband;
+	
+	public CrewPermission() {
+		
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Character getJoin_crew_competition() {
+		return join_crew_competition;
+	}
+
+	public void setJoin_crew_competition(Character join_crew_competition) {
+		this.join_crew_competition = join_crew_competition;
+	}
+
+	public Character getKickout() {
+		return kickout;
+	}
+
+	public void setKickout(Character kickout) {
+		this.kickout = kickout;
+	}
+
+	public Character getModify_member_permission() {
+		return modify_member_permission;
+	}
+
+	public void setModify_member_permission(Character modify_member_permission) {
+		this.modify_member_permission = modify_member_permission;
+	}
+
+	public Character getOn_behalf_of_crew() {
+		return on_behalf_of_crew;
+	}
+
+	public void setOn_behalf_of_crew(Character on_behalf_of_crew) {
+		this.on_behalf_of_crew = on_behalf_of_crew;
+	}
+
+	public Character getDisband() {
+		return disband;
+	}
+
+	public void setDisband(Character disband) {
+		this.disband = disband;
+	}
+	
 }

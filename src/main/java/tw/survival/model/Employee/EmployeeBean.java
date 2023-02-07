@@ -2,10 +2,9 @@ package tw.survival.model.Employee;
 
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,9 +13,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.survival.model.Place.PlaceBean;
 
 
 @Entity
@@ -54,7 +55,145 @@ private Integer id;
 	private Date hire_date;
 	@Column(name="status")
 	private String status;
-	@JoinColumn(name="fk_boss_id")
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "Employee",cascade = CascadeType.ALL)
-	private Set<EmployeeBean> employee=new LinkedHashSet<EmployeeBean>();
+	
+	@JoinColumn(name="fk_workplace_id")
+	@ManyToOne(fetch=FetchType.EAGER)
+	private PlaceBean place;
+	
+	@JoinColumn(name="fk_permission")
+	@ManyToOne(fetch=FetchType.EAGER)
+	private EmployeePermission employeePermission;
+	
+	public  EmployeeBean() {
+		
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getRegion() {
+		return region;
+	}
+
+	public void setRegion(String region) {
+		this.region = region;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Integer salary) {
+		this.salary = salary;
+	}
+
+	public byte[] getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(byte[] thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getHire_date() {
+		return hire_date;
+	}
+
+	public void setHire_date(Date hire_date) {
+		this.hire_date = hire_date;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public PlaceBean getPlace() {
+		return place;
+	}
+
+	public void setPlace(PlaceBean place) {
+		this.place = place;
+	}
+
+	public EmployeePermission getEmployeePermission() {
+		return employeePermission;
+	}
+
+	public void setEmployeePermission(EmployeePermission employeePermission) {
+		this.employeePermission = employeePermission;
+	}
+	
 }
