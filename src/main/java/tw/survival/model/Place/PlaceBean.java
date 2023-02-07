@@ -42,7 +42,7 @@ public class PlaceBean {
 	private byte[] place_photo;
 
 	@Column(name = "place_fee")
-	private String place_fee;
+	private Integer place_fee;
 
 	@Column(name = "place_capacity")
 	private Integer place_capacity;
@@ -103,11 +103,11 @@ public class PlaceBean {
 		this.place_photo = place_photo;
 	}
 
-	public String getPlace_fee() {
+	public Integer getPlace_fee() {
 		return place_fee;
 	}
 
-	public void setPlace_fee(String place_fee) {
+	public void setPlace_fee(Integer place_fee) {
 		this.place_fee = place_fee;
 	}
 
