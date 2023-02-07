@@ -1,52 +1,49 @@
 package tw.survival.model.Competition;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
+import tw.survival.model.Place.PlaceBean;
 
 @Entity
-@Table(name = "competition")
-@Component
+@Table(name = "Competition")
 public class CompetitionBean {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
 	@Column(name = "name_mandarin")
-	private String name_mandarin;
+	private String mandarinName;
 
 	@Column(name = "name_english")
-	private String name_english;
+	private String englishName;
 
-	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date，這行不用寫
-	@Column(name = "held_datetime")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	private Date held_datetime;
+	@Column(name = "start_date")
+	private Date startDate;
 
-	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date，這行不用寫
+	@Column(name = "start_timespan")
+	private String startTimespan;
+
+	@Column(name = "end_date")
+	private Date endDate;
+
+	@Column(name = "end_timespan")
+	private String endTimespan;
+
 	@Column(name = "announced_datetime")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	private Date announced_datetime;
+	private Date announcedDatetime;
 
-//	private Integer fk_site_id;
+	private Integer placeId;
+
+	private PlaceBean place;
 
 	@Column(name = "content")
 	private String content;
@@ -60,26 +57,15 @@ public class CompetitionBean {
 	@Column(name = "fee")
 	private Integer fee;
 
-//	private Integer fk_prize_id;
-
 	@Column(name = "single_or_crew")
-	private Character single_or_crew;
+	private Character singleOrCrew;
 
 	@Column(name = "capacity")
 	private Integer capacity;
 
-	@Column(name = "participation")
-	private Integer participation;
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
-	private Set<SignUpBean> signUps = new LinkedHashSet<>();
-
-	@PrePersist
-	public void onCreate() {
-		if (announced_datetime == null) {
-			announced_datetime = new Date();
-		}
-	}
+//	private Integer postId;
+//	
+//	private PostBean post;
 
 	public CompetitionBean() {
 	}
@@ -92,36 +78,76 @@ public class CompetitionBean {
 		this.id = id;
 	}
 
-	public String getName_mandarin() {
-		return name_mandarin;
+	public String getMandarinName() {
+		return mandarinName;
 	}
 
-	public void setName_mandarin(String name_mandarin) {
-		this.name_mandarin = name_mandarin;
+	public void setMandarinName(String mandarinName) {
+		this.mandarinName = mandarinName;
 	}
 
-	public String getName_english() {
-		return name_english;
+	public String getEnglishName() {
+		return englishName;
 	}
 
-	public void setName_english(String name_english) {
-		this.name_english = name_english;
+	public void setEnglishName(String englishName) {
+		this.englishName = englishName;
 	}
 
-	public Date getHeld_datetime() {
-		return held_datetime;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setHeld_datetime(Date held_datetime) {
-		this.held_datetime = held_datetime;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getAnnounced_datetime() {
-		return announced_datetime;
+	public String getStartTimespan() {
+		return startTimespan;
 	}
 
-	public void setAnnounced_datetime(Date announced_datetime) {
-		this.announced_datetime = announced_datetime;
+	public void setStartTimespan(String startTimespan) {
+		this.startTimespan = startTimespan;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getEndTimespan() {
+		return endTimespan;
+	}
+
+	public void setEndTimespan(String endTimespan) {
+		this.endTimespan = endTimespan;
+	}
+
+	public Date getAnnouncedDatetime() {
+		return announcedDatetime;
+	}
+
+	public void setAnnouncedDatetime(Date announcedDatetime) {
+		this.announcedDatetime = announcedDatetime;
+	}
+
+	public Integer getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(Integer placeId) {
+		this.placeId = placeId;
+	}
+
+	public PlaceBean getPlace() {
+		return place;
+	}
+
+	public void setPlace(PlaceBean place) {
+		this.place = place;
 	}
 
 	public String getContent() {
@@ -156,12 +182,12 @@ public class CompetitionBean {
 		this.fee = fee;
 	}
 
-	public Character getSingle_or_crew() {
-		return single_or_crew;
+	public Character getSingleOrCrew() {
+		return singleOrCrew;
 	}
 
-	public void setSingle_or_crew(Character single_or_crew) {
-		this.single_or_crew = single_or_crew;
+	public void setSingleOrCrew(Character singleOrCrew) {
+		this.singleOrCrew = singleOrCrew;
 	}
 
 	public Integer getCapacity() {
@@ -170,22 +196,6 @@ public class CompetitionBean {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
-	}
-
-	public Integer getParticipation() {
-		return participation;
-	}
-
-	public void setParticipation(Integer participation) {
-		this.participation = participation;
-	}
-
-	public Set<SignUpBean> getSignUps() {
-		return signUps;
-	}
-
-	public void setSignUps(Set<SignUpBean> signUps) {
-		this.signUps = signUps;
 	}
 
 }

@@ -5,12 +5,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tw.survival.model.Competition.CompetitionRepository;
+import tw.survival.model.Competition.CompetitionPrizeRepository;
 
 @Service
 @Transactional
-public class CompetitionService {
+public class CompetitionPrizeService {
 
 	@Autowired
-	private CompetitionRepository cDao;
+	private CompetitionPrizeRepository cpDao;
 }
