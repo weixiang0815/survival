@@ -4,10 +4,14 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import tw.survival.model.User.UserBean;
 
@@ -20,16 +24,26 @@ public class SignUpBean {
 	@Column(name = "id")
 	private Integer id;
 
+	@Column(name = "fk_competition_id")
+	@Transient
 	private Integer competitionId;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 
+	@Column(name = "fk_player_id")
+	@Transient
 	private Integer playerId;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_player_id")
 	private UserBean player;
 
+	@Column(name = "signup_date")
 	private Date signUpDate;
 
+	@Column(name = "status")
 	private String status;
 
 	public SignUpBean() {
