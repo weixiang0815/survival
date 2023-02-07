@@ -1,15 +1,27 @@
 package tw.survival.model.Competition;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import tw.survival.model.Forum.PostBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.model.User.UserBean;
 
 @Entity
 @Table(name = "Competition")
@@ -41,8 +53,12 @@ public class CompetitionBean {
 	@Column(name = "announced_datetime")
 	private Date announcedDatetime;
 
+	@Column(name = "fk_place_id")
+	@Transient
 	private Integer placeId;
 
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
 
 	@Column(name = "content")
@@ -63,9 +79,27 @@ public class CompetitionBean {
 	@Column(name = "capacity")
 	private Integer capacity;
 
-//	private Integer postId;
-//	
-//	private PostBean post;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_post_id")
+	private PostBean post;
+
+	@OneToOne(mappedBy = "competitionId")
+	private CompetitionPrizeBean competitionPrizes;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
+	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Participation", inverseJoinColumns = {
+			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
+	private Set<UserBean> participantPlayers = new LinkedHashSet<UserBean>();
+
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable(name = "Participation", inverseJoinColumns = {
+//			@JoinColumn(name = "fk_crew_id", referencedColumnName = "id") }, joinColumns = {
+//					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
+//	private Set<UserBean> participantCrews = new LinkedHashSet<UserBean>();
 
 	public CompetitionBean() {
 	}
@@ -196,6 +230,38 @@ public class CompetitionBean {
 
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
+	}
+
+	public PostBean getPost() {
+		return post;
+	}
+
+	public void setPost(PostBean post) {
+		this.post = post;
+	}
+
+	public CompetitionPrizeBean getCompetitionPrizes() {
+		return competitionPrizes;
+	}
+
+	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
+		this.competitionPrizes = competitionPrizes;
+	}
+
+	public Set<SignUpBean> getSignUps() {
+		return signUps;
+	}
+
+	public void setSignUps(Set<SignUpBean> signUps) {
+		this.signUps = signUps;
+	}
+
+	public Set<UserBean> getParticipantPlayers() {
+		return participantPlayers;
+	}
+
+	public void setParticipantPlayers(Set<UserBean> participantPlayers) {
+		this.participantPlayers = participantPlayers;
 	}
 
 }
