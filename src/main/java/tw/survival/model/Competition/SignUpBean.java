@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
-import tw.survival.model.User.UserBean;
+import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "SignUp")
@@ -39,7 +39,7 @@ public class SignUpBean {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
-	private UserBean player;
+	private PlayerBean player;
 
 	public SignUpBean() {
 	}
@@ -76,11 +76,11 @@ public class SignUpBean {
 		this.playerId = playerId;
 	}
 
-	public UserBean getPlayer() {
+	public PlayerBean getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(UserBean player) {
+	public void setPlayer(PlayerBean player) {
 		this.player = player;
 	}
 
