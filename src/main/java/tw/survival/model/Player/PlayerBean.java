@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,7 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+
 import javax.persistence.Table;
 
 import tw.survival.model.Crew.Crew;
@@ -75,10 +75,13 @@ public class PlayerBean {
 	@JoinColumn(name="fk_crew_id")
 	private Crew crew;
 	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="fk_player_permission")
-	private List<CrewPermission> cPmission=new ArrayList<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_crew_permission")
+	private List<CrewPermission> cPermission=new ArrayList<>();
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_player_permission")
+	private List<playerPermission> pPermission=new ArrayList<>();
 	 public PlayerBean() {
 		 
 	 }
@@ -211,12 +214,20 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-	public List<CrewPermission> getcPmission() {
-		return cPmission;
+	public List<CrewPermission> getcPermission() {
+		return cPermission;
 	}
 
-	public void setcPmission(List<CrewPermission> cPmission) {
-		this.cPmission = cPmission;
+	public void setcPermission(List<CrewPermission> cPermission) {
+		this.cPermission = cPermission;
+	}
+
+	public List<playerPermission> getpPermission() {
+		return pPermission;
+	}
+
+	public void setpPermission(List<playerPermission> pPermission) {
+		this.pPermission = pPermission;
 	}
 	 
 }
