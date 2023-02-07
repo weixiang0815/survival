@@ -1,6 +1,7 @@
 package tw.survival.service.Place;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -8,44 +9,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Place.PlaceBean;
-import tw.survival.model.Place.PlaceDAO;
+import tw.survival.model.Place.PlaceRepository;
 
 @Service
 @Transactional
 public class PlaceService {
 
 	@Autowired
-	private PlaceDAO pDAO;
+	private PlaceRepository pDAO;
 	
 	public PlaceService() {
 		
 	}
 	
 	
-	public PlaceBean addPlace(PlaceBean place) {
-		return pDAO.addPlace(place);
+	public PlaceBean insertPlace(PlaceBean place) {
+		return pDAO.save(place);
 	}
 	
 	
 	public PlaceBean getOnePlaceById(Integer id) {
-		return pDAO.getOnePlaceById(id);
+		Optional<PlaceBean> optional = pDAO.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 	
-	
-	public PlaceBean getOnePlaceByName(String place_name) {
-		return pDAO.getOnePlaceByName(place_name);
-	}
 	
 	public List<PlaceBean>getAllPlace(){
-		return pDAO.getAllPlace();
+		return pDAO.findAll();
 	}
 
 	
-	public String deletePlaceById(Integer id) {
-		return pDAO.deletePlaceById(id);
+	public void deletePlaceById(Integer id) {
+		 pDAO.deleteById(id);
 	}
 	
-	public boolean updatePlace(PlaceBean place) {
-		return pDAO.updatePlace(place);
+	public PlaceBean updatePlace(PlaceBean place) {
+		return pDAO.save(place);
 	}
 }
