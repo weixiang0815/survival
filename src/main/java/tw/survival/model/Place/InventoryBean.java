@@ -28,11 +28,11 @@ public class InventoryBean {
 	
 	
 	@Column(name="inventory_sellamount")
-	private String inventory_sellamount; //販賣庫存
+	private Integer inventory_sellamount; //販賣庫存
 	
 
 	@Column(name="inventory_rentamount")
-	private String inventory_rentamount; //租借庫存
+	private Integer inventory_rentamount; //租借庫存
 	
 	@Column(name = "fk_warehouse_id")
 	@Transient
@@ -64,11 +64,11 @@ public class InventoryBean {
 	}
 
 
-	public String getInventory_sellamount() {
+	public Integer getInventory_sellamount() {
 		return inventory_sellamount;
 	}
 
-	public void setInventory_sellamount(String inventory_amount) {
+	public void setInventory_sellamount(Integer inventory_amount) {
 		this.inventory_sellamount = inventory_amount;
 	}
 
@@ -89,11 +89,11 @@ public class InventoryBean {
 		this.warehouse = warehouse;
 	}
 
-	public String getInventory_rentamount() {
+	public Integer getInventory_rentamount() {
 		return inventory_rentamount;
 	}
 
-	public void setInventory_rentamount(String inventory_rentamount) {
+	public void setInventory_rentamount(Integer inventory_rentamount) {
 		this.inventory_rentamount = inventory_rentamount;
 	}
 
