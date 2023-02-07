@@ -1,24 +1,13 @@
 package tw.survival.model.Competition;
 
-import java.util.Date;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 import tw.survival.model.User.UserBean;
 
 @Entity
-@Table(name = "SignUp")
-public class SignUpBean {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+@Table(name = "Participation")
+public class ParticipationBean {
 
 	private Integer competitionId;
 
@@ -28,19 +17,12 @@ public class SignUpBean {
 
 	private UserBean player;
 
-	private Date signUpDate;
+//	private Integer crewId;
+//	
+//	private CrewBean crew;
 
-	private String status;
-
-	public SignUpBean() {
-	}
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+	public ParticipationBean() {
+		super();
 	}
 
 	public Integer getCompetitionId() {
@@ -73,22 +55,6 @@ public class SignUpBean {
 
 	public void setPlayer(UserBean player) {
 		this.player = player;
-	}
-
-	public Date getSignUpDate() {
-		return signUpDate;
-	}
-
-	public void setSignUpDate(Date signUpDate) {
-		this.signUpDate = signUpDate;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 }
