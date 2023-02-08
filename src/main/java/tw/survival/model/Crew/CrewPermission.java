@@ -1,11 +1,19 @@
 package tw.survival.model.Crew;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "crewPermission")
@@ -29,6 +37,9 @@ public class CrewPermission {
 	
 	@Column(name = "disband")
 	private String disband;
+	
+	@OneToMany(fetch=FetchType.LAZY,mappedBy = "crewPermission",cascade = CascadeType.ALL)
+	private Set<PlayerBean> players=new LinkedHashSet<PlayerBean>();
 	
 	public CrewPermission() {
 		
@@ -81,6 +92,13 @@ public class CrewPermission {
 	public void setDisband(String disband) {
 		this.disband = disband;
 	}
-	
+
+	public Set<PlayerBean> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<PlayerBean> players) {
+		this.players = players;
+	}
 	
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,8 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
@@ -37,13 +37,11 @@ public class PlayerBean {
 	@Column(name = "password")
 	private String password;
 
-	
-	@Column(name="identity_number")
+	@Column(name = "identity_number")
 	private String identity_number;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
 
 	@Column(name = "age")
 	private Integer age;
@@ -73,33 +71,27 @@ public class PlayerBean {
 	@Column(name = "cellphone")
 	private String phone;
 
-	
-	@Column(name="banned")
+	@Column(name = "banned")
 	private String banned;
-	
-	@Column(name="banned_reason")
+
+	@Column(name = "banned_reason")
 	private String banned_reason;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_id")
 	private CrewBean crew;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_crew_permission")
-	private List<CrewPermission> cPermission=new ArrayList<>();
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_player_permission")
-	private List<playerPermission> pPermission=new ArrayList<>();
-	 public PlayerBean() {
-		 
-	 }
-	
 
-	// @OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "fk_player_permission")
-	// private List<CrewPermission> cPmission = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_crew_permission")
+	private CrewPermission crewPermission;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_player_permission")
+	private playerPermission playerPermission;
+
+	public PlayerBean() {
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -229,23 +221,6 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-
-	public List<CrewPermission> getcPermission() {
-		return cPermission;
-	}
-
-	public void setcPermission(List<CrewPermission> cPermission) {
-		this.cPermission = cPermission;
-	}
-
-	public List<playerPermission> getpPermission() {
-		return pPermission;
-	}
-
-	public void setpPermission(List<playerPermission> pPermission) {
-		this.pPermission = pPermission;
-	}
-
 	public String getIdentity_number() {
 		return identity_number;
 	}
@@ -261,14 +236,21 @@ public class PlayerBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	 
-	// public List<CrewPermission> getcPmission() {
-	// 	return cPmission;
-	// }
 
-	// public void setcPmission(List<CrewPermission> cPmission) {
-	// 	this.cPmission = cPmission;
-	// }
+	public CrewPermission getcPermission() {
+		return crewPermission;
+	}
 
+	public void setcPermission(CrewPermission cPermission) {
+		this.crewPermission = cPermission;
+	}
+
+	public playerPermission getpPermission() {
+		return playerPermission;
+	}
+
+	public void setpPermission(playerPermission pPermission) {
+		this.playerPermission = pPermission;
+	}
 
 }

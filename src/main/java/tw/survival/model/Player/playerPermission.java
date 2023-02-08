@@ -33,8 +33,8 @@ public class playerPermission {
 	@Column(name = "join_crew")
 	private Character join_crew;
 	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "PlayerBean",cascade = CascadeType.ALL)
-	private Set<PlayerBean> playbean=new LinkedHashSet<PlayerBean>();
+	@OneToMany(fetch=FetchType.LAZY,mappedBy = "playerPermission",cascade = CascadeType.ALL)
+	private Set<PlayerBean> players=new LinkedHashSet<PlayerBean>();
 	public playerPermission() {
 		
 	}
@@ -77,6 +77,14 @@ public class playerPermission {
 
 	public void setJoin_crew(Character join_crew) {
 		this.join_crew = join_crew;
+	}
+
+	public Set<PlayerBean> getPlayers() {
+		return players;
+	}
+
+	public void setPlayers(Set<PlayerBean> players) {
+		this.players = players;
 	}
 	
 	
