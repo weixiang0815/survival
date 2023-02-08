@@ -19,6 +19,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Market.ProductBean;
 
@@ -50,13 +52,9 @@ public class PlaceBean {
 	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	// private Set<EmployeeBean> employee = new LinkedHashSet<>();
 	
-
-	@Column(name = "fk_product_id")
-	@Transient
-	private Integer productId;
-	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_warehouse_id")
+	@JoinColumn(name="fk_product_id")
 	private ProductBean product;
 
 	@OneToOne(mappedBy = "place")
@@ -127,13 +125,6 @@ public class PlaceBean {
 	// 	this.employee = employee;
 	// }
 
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
 
 	public ProductBean getProduct() {
 		return product;

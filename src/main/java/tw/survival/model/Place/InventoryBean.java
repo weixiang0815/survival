@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -25,27 +27,19 @@ public class InventoryBean {
 	@Column(name="id")
 	private Integer id;
 	
-	
-	
 	@Column(name="inventory_sellamount")
 	private Integer inventory_sellamount; //販賣庫存
 	
 
 	@Column(name="inventory_rentamount")
 	private Integer inventory_rentamount; //租借庫存
-	
-	@Column(name = "fk_warehouse_id")
-	@Transient
-	private Integer warehouseId;
-	
+
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_warehouse_id")
 	private WarehouseBean warehouse;
 	
-	@Column(name = "fk_product_id")
-	@Transient
-	private Integer productId;
-	
+	@JsonBackReference
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="fk_product_id")
 	private ProductBean product;
@@ -73,13 +67,6 @@ public class InventoryBean {
 	}
 
 
-	public Integer getWarehouseId() {
-		return warehouseId;
-	}
-
-	public void setWarehouseId(Integer warehouseId) {
-		this.warehouseId = warehouseId;
-	}
 
 	public WarehouseBean getWarehouse() {
 		return warehouse;
@@ -97,13 +84,6 @@ public class InventoryBean {
 		this.inventory_rentamount = inventory_rentamount;
 	}
 
-	public Integer getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Integer productId) {
-		this.productId = productId;
-	}
 
 	public ProductBean getProduct() {
 		return product;

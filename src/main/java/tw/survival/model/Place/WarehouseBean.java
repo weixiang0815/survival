@@ -17,6 +17,9 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "Warehouse")
 @Component
@@ -35,6 +38,7 @@ public class WarehouseBean {
 	@JoinColumn(name="fk_place_id")
 	private PlaceBean place;
 	
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>(); 
 	

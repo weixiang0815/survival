@@ -54,12 +54,13 @@ public class ProductBean {
 	@Column(name = "price")
 	private Integer price;
 	
-	@JsonManagedReference
+	//地點
+//	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private PlaceBean place;
 	
 	//庫存數量
-	@JsonManagedReference
+//	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
 	
