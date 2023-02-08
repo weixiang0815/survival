@@ -121,14 +121,6 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-//	public Set<EmployeeBean> getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(Set<EmployeeBean> employee) {
-//		this.employee = employee;
-//	}
-
 	public ProductBean getProduct() {
 		return product;
 	}

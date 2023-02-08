@@ -35,7 +35,6 @@ public class WarehouseBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
-
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
