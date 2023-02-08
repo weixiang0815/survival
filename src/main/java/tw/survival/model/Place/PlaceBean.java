@@ -11,18 +11,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -41,6 +40,7 @@ public class PlaceBean {
 	@Column(name = "place_address")
 	private String place_address;
 
+	@Lob
 	@Column(name = "place_photo")
 	private byte[] place_photo;
 
