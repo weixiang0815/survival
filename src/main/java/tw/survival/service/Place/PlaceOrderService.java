@@ -1,6 +1,7 @@
 package tw.survival.service.Place;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -8,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Place.PlaceOrderBean;
-import tw.survival.model.Place.PlaceOrderDAO;
+import tw.survival.model.Place.PlaceOrderRepository;
 
 @Service
 @Transactional
 public class PlaceOrderService {
 
 	@Autowired
-	private PlaceOrderDAO plodrDAO;
+	private PlaceOrderRepository plodrDAO;
 	
 	
 	public PlaceOrderService() {
@@ -23,28 +24,29 @@ public class PlaceOrderService {
 	}
 
 	
-	public PlaceOrderBean addPlaceOrder(PlaceOrderBean placeOrder) {
-		return plodrDAO.addPlaceOrder(placeOrder);
+	public PlaceOrderBean insertPlaceOrder(PlaceOrderBean placeOrder) {
+		return plodrDAO.save(placeOrder);
 	}
 	
 	public PlaceOrderBean getOnePlaceOrderById(Integer id) {
-		return plodrDAO.getOnePlaceOrderById(id);
+		Optional<PlaceOrderBean> optional = plodrDAO.findById(id);
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
 	}
 	
 	public List<PlaceOrderBean> getAllPlaceOrder(){
-		return plodrDAO.getAllPlaceOrder();
+		return plodrDAO.findAll();
 	}
 	
-	public String deletePlaceOrderById(Integer id) {
-		return plodrDAO.deletePlaceOrderById(id);
+	public void deletePlaceOrderById(Integer id) {
+		 plodrDAO.deleteById(id);
 	}
 	
-	public boolean deletePlaceOrderByBean(PlaceOrderBean placeOrder) {
-		return plodrDAO.deletePlaceOrderByBean(placeOrder);
-	}
 	
-	public boolean updatePlaceOrder(PlaceOrderBean placeOrder) {
-		return plodrDAO.updatePlaceOrder(placeOrder);
+	public PlaceOrderBean updatePlaceOrder(PlaceOrderBean placeOrder) {
+		return plodrDAO.save(placeOrder);
 	}
 	
 	

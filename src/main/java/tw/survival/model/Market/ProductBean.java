@@ -1,7 +1,5 @@
 package tw.survival.model.Market;
 
-import java.util.Arrays;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,74 +22,107 @@ public class ProductBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	//商品圖片
 	@Column(name = "img")
 	private byte[] img;
 	
+	//商品名稱
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "context")
+	//商品敘述
+	@Column(name = "context")  
 	private String context;
 
-	@Column(name = "local")
-	private String local;
-
-	@OneToOne(cascade =CascadeType.ALL)
-	@JoinColumn(name = "fk_product_class_id")
-	private Integer fk_product_class_id;
+	//商品分類(搜尋用)
+	@Column(name = "class")
+	private String product_class;
+	
+	//租賃價格
+	@Column(name="rent_fee")
+	private Integer rent_fee;
+	
+	//買賣價格
+	@Column(name="price")
+	private Integer price;
+	
+	
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "fk_product_class_id")
+//	private ProductClassBean productClassBean;
 
 	public ProductBean() {
 
 	}
 
+
 	public Integer getId() {
 		return id;
 	}
+
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
+
 	public byte[] getImg() {
 		return img;
 	}
+
 
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
 
+
 	public String getName() {
 		return name;
 	}
+
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
+
 	public String getContext() {
 		return context;
 	}
+
 
 	public void setContext(String context) {
 		this.context = context;
 	}
 
-	public String getLocal() {
-		return local;
+
+	public String getProduct_class() {
+		return product_class;
 	}
 
-	public void setLocal(String local) {
-		this.local = local;
+
+	public void setProduct_class(String product_class) {
+		this.product_class = product_class;
 	}
 
-	public Integer getFk_product_class_id() {
-		return fk_product_class_id;
+
+	public Integer getRent_fee() {
+		return rent_fee;
 	}
 
-	public void setFk_product_class_id(Integer fk_product_class_id) {
-		this.fk_product_class_id = fk_product_class_id;
+
+	public void setRent_fee(Integer rent_fee) {
+		this.rent_fee = rent_fee;
 	}
 
-	
+
+	public Integer getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
 }
-

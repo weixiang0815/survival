@@ -1,5 +1,7 @@
 package tw.survival.model.Competition;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,20 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
-import org.springframework.stereotype.Component;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "SignUp")
-@Component
 public class SignUpBean {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private Integer id;
 
 	@Column(name = "fk_competition_id")
@@ -40,6 +45,15 @@ public class SignUpBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	@Column(name = "signup_date")
+	private Date signUpDate;
+
+	@Column(name = "status")
+	private String status;
 
 	public SignUpBean() {
 	}
@@ -82,6 +96,22 @@ public class SignUpBean {
 
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
+	}
+
+	public Date getSignUpDate() {
+		return signUpDate;
+	}
+
+	public void setSignUpDate(Date signUpDate) {
+		this.signUpDate = signUpDate;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }

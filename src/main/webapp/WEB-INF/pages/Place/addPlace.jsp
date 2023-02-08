@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>AddPlace</h1>
+<div class="container">
 <form action="addPlace" method="post">
 		<table>
 			<tr>
@@ -26,9 +27,8 @@
 				<td>費用/小時：</td>
 				<td><input type="text" name="place_fee" /></td>
 			</tr>
-			
+						
 			<tr>
-				
 				<td>場地圖片:</td>
 				<td><input type="file" name="place_photo" value="上傳圖片" />
 			</tr>
@@ -38,5 +38,6 @@
 			</tr>
 		</table>
 	</form>
+</div>	
 </body>
 </html>

@@ -16,19 +16,19 @@ public class CrewPermission {
 	private Integer id;
 	
 	@Column(name = "join_crew_competition")	
-	private Character join_crew_competition;
+	private String join_crew_competition;
 	
 	@Column(name = "kickout")
-	private Character kickout;
+	private String kickout;
 	
 	@Column(name = "modify_member_permission")
-	private Character modify_member_permission ;
+	private String modify_member_permission ;
 	
 	@Column(name = "on_behalf_of_crew")
-	private Character on_behalf_of_crew;
+	private String on_behalf_of_crew;
 	
 	@Column(name = "disband")
-	private Character disband;
+	private String disband;
 	
 	public CrewPermission() {
 		
@@ -42,44 +42,45 @@ public class CrewPermission {
 		this.id = id;
 	}
 
-	public Character getJoin_crew_competition() {
+	public String getJoin_crew_competition() {
 		return join_crew_competition;
 	}
 
-	public void setJoin_crew_competition(Character join_crew_competition) {
+	public void setJoin_crew_competition(String join_crew_competition) {
 		this.join_crew_competition = join_crew_competition;
 	}
 
-	public Character getKickout() {
+	public String getKickout() {
 		return kickout;
 	}
 
-	public void setKickout(Character kickout) {
+	public void setKickout(String kickout) {
 		this.kickout = kickout;
 	}
 
-	public Character getModify_member_permission() {
+	public String getModify_member_permission() {
 		return modify_member_permission;
 	}
 
-	public void setModify_member_permission(Character modify_member_permission) {
+	public void setModify_member_permission(String modify_member_permission) {
 		this.modify_member_permission = modify_member_permission;
 	}
 
-	public Character getOn_behalf_of_crew() {
+	public String getOn_behalf_of_crew() {
 		return on_behalf_of_crew;
 	}
 
-	public void setOn_behalf_of_crew(Character on_behalf_of_crew) {
+	public void setOn_behalf_of_crew(String on_behalf_of_crew) {
 		this.on_behalf_of_crew = on_behalf_of_crew;
 	}
 
-	public Character getDisband() {
+	public String getDisband() {
 		return disband;
 	}
 
-	public void setDisband(Character disband) {
+	public void setDisband(String disband) {
 		this.disband = disband;
 	}
+	
 	
 }

@@ -41,7 +41,7 @@ public class ScheduleBean {
 
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date，這行不用寫
 	@Column(name = "schedule_datetime")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date schedule_datetime;
 
 	@Column(name = "fk_place_id")
