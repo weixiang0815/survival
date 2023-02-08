@@ -25,7 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import tw.survival.model.Forum.PostBean;
+import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.User.UserBean;
 
@@ -102,7 +102,7 @@ public class CompetitionBean {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_post_id")
-	private PostBean post;
+	private PostsBean post;
 
 	@OneToOne(mappedBy = "competitionId")
 	private CompetitionPrizeBean competitionPrizes;
@@ -253,11 +253,11 @@ public class CompetitionBean {
 		this.capacity = capacity;
 	}
 
-	public PostBean getPost() {
+	public PostsBean getPost() {
 		return post;
 	}
 
-	public void setPost(PostBean post) {
+	public void setPost(PostsBean post) {
 		this.post = post;
 	}
 
