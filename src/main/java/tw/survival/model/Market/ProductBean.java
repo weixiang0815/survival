@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -53,11 +55,6 @@ public class ProductBean {
 	// 買賣價格
 	@Column(name = "price")
 	private Integer price;
-	
-	//地點
-//	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
-	private PlaceBean place;
 	
 	//庫存數量
 //	@JsonManagedReference
@@ -132,14 +129,6 @@ public class ProductBean {
 
 	public void setInventory(Set<InventoryBean> inventory) {
 		this.inventory = inventory;
-	}
-
-	public PlaceBean getPlace() {
-		return place;
-	}
-
-	public void setPlace(PlaceBean place) {
-		this.place = place;
 	}
 
 }
