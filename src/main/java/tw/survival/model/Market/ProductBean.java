@@ -10,17 +10,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import tw.survival.model.Place.InventoryBean;
-import tw.survival.model.Place.PlaceBean;
 
 @Entity
 @Table(name = "product")
@@ -55,16 +50,13 @@ public class ProductBean {
 	// 買賣價格
 	@Column(name = "price")
 	private Integer price;
-	
-	//庫存數量
+
+	// 庫存數量
 //	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
-	
-	
 
 	public ProductBean() {
-
 	}
 
 	public Integer getId() {
