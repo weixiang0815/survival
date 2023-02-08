@@ -13,10 +13,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import tw.survival.model.Competition.CompetitionBean;
 
@@ -44,24 +46,16 @@ public class ScheduleBean {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date schedule_datetime;
 
-	@Column(name = "fk_place_id")
-	@Transient
-	private Integer placeId;
-
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;;
-
-	@Column(name = "fk_competition_id")
-	@Transient
-	private Integer competitionId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 
 	public ScheduleBean() {
-
 	}
 
 	public Integer getId() {
@@ -80,11 +74,11 @@ public class ScheduleBean {
 		this.schedule_name = schedule_name;
 	}
 
-	public String schedule_timespan() {
+	public String getSchedule_timespan() {
 		return schedule_timespan;
 	}
 
-	public void schedule_timespan(String schedule_timespan) {
+	public void setSchedule_timespan(String schedule_timespan) {
 		this.schedule_timespan = schedule_timespan;
 	}
 
@@ -104,28 +98,12 @@ public class ScheduleBean {
 		this.schedule_datetime = schedule_datetime;
 	}
 
-	public Integer getPlaceId() {
-		return placeId;
-	}
-
-	public void setPlaceId(Integer placeId) {
-		this.placeId = placeId;
-	}
-
 	public PlaceBean getPlace() {
 		return place;
 	}
 
 	public void setPlace(PlaceBean place) {
 		this.place = place;
-	}
-
-	public Integer getCompetitionId() {
-		return competitionId;
-	}
-
-	public void setCompetitionId(Integer competitionId) {
-		this.competitionId = competitionId;
 	}
 
 	public CompetitionBean getCompetition() {
