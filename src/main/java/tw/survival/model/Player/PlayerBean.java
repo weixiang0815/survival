@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,8 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
@@ -36,6 +36,12 @@ public class PlayerBean {
 
 	@Column(name = "password")
 	private String password;
+
+	@Column(name = "identity_number")
+	private String identity_number;
+
+	@Column(name = "email")
+	private String email;
 
 	@Column(name = "age")
 	private Integer age;
@@ -75,9 +81,13 @@ public class PlayerBean {
 	@JoinColumn(name = "fk_crew_id")
 	private CrewBean crew;
 
-	// @OneToOne(cascade = CascadeType.ALL)
-	// @JoinColumn(name = "fk_player_permission")
-	// private List<CrewPermission> cPmission = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_crew_permission")
+	private CrewPermission crewPermission;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_player_permission")
+	private playerPermission playerPermission;
 
 	public PlayerBean() {
 
@@ -211,12 +221,36 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-	// public List<CrewPermission> getcPmission() {
-	// 	return cPmission;
-	// }
+	public String getIdentity_number() {
+		return identity_number;
+	}
 
-	// public void setcPmission(List<CrewPermission> cPmission) {
-	// 	this.cPmission = cPmission;
-	// }
+	public void setIdentity_number(String identity_number) {
+		this.identity_number = identity_number;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public CrewPermission getcPermission() {
+		return crewPermission;
+	}
+
+	public void setcPermission(CrewPermission cPermission) {
+		this.crewPermission = cPermission;
+	}
+
+	public playerPermission getpPermission() {
+		return playerPermission;
+	}
+
+	public void setpPermission(playerPermission pPermission) {
+		this.playerPermission = pPermission;
+	}
 
 }

@@ -15,27 +15,12 @@ public class PlayerController {
 
 	@GetMapping("/user")
 	public String main() {
-		return "User/index";
+		return "Player/index";
 	}
 
-	@GetMapping("/usersmain.controller")
-	public String showForm(Model model) {
-		return "User/user";
+	@GetMapping("/player/add")
+	public String addPlayer() {
+		
+		return"Player/user";
 	}
-
-	@GetMapping("/searchmain.controller")
-	public String search(Model model) {
-		return "User/Select";
-	}
-
-	@GetMapping("/loginsystemmain.controller")
-	public String processMainAction() {
-		return "User/loginSystem";
-	}
-
-	@GetMapping("/uploadmain.controller") // 新增圖
-	public String processAction() {
-		return "User/uploadFile";
-	}
-
 }
