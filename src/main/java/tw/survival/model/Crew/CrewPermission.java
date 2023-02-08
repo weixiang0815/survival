@@ -15,18 +15,18 @@ public class CrewPermission {
 	@Column(name = "id")	
 	private Integer id;
 	
-	@Column(name = "id")	
+	@Column(name = "join_crew_competition")	
 	private String join_crew_competition;
 	
-	@Column(name = "id")
+	@Column(name = "kickout")
 	private String kickout;
 	
-	@Column(name = "id")
+	@Column(name = "modify_member_permission")
 	private String modify_member_permission ;
 	
-	@Column(name = "id")
+	@Column(name = "on_behalf_of_crew")
 	private String on_behalf_of_crew;
 	
-	@Column(name = "id")
+	@Column(name = "disband")
 	private String disband;
 }

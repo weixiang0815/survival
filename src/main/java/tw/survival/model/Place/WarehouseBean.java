@@ -35,7 +35,7 @@ public class WarehouseBean {
 	@JoinColumn(name="fk_place_id")
 	private PlaceBean place;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>(); 
 	
 	

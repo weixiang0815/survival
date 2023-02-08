@@ -17,71 +17,71 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import tw.survival.model.Crew.Crew;
+import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 
 @Entity
-@Table(name="Player")
+@Table(name = "Player")
 public class PlayerBean {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-	
-	@Column(name="account")
+
+	@Column(name = "account")
 	private String account;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="age")
+
+	@Column(name = "age")
 	private Integer age;
-	
-	@Column(name="region")
+
+	@Column(name = "region")
 	private String region;
-	
-	@Column(name="address")
+
+	@Column(name = "address")
 	private String address;
-	
-	@Column(name="salary")
+
+	@Column(name = "salary")
 	private Integer salary;
-	
-	@Column(name="thumbnail")
+
+	@Column(name = "thumbnail")
 	@Lob
 	private byte[] thumbnail;
-	
-	@Column(name="sex")
+
+	@Column(name = "sex")
 	private String sex;
-	
-	@Column(name="birthday")
+
+	@Column(name = "birthday")
 	private Date birthday;
-	
-	@Column(name="join_date")
+
+	@Column(name = "join_date")
 	private Date join_date;
-	
-	@Column(name="cellphone")
+
+	@Column(name = "cellphone")
 	private String phone;
-	
-	@Column(name="banned")
+
+	@Column(name = "banned")
 	private String banned;
-	
-	@Column(name="banned_reason")
+
+	@Column(name = "banned_reason")
 	private String banned_reason;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_crew_id")
-	private Crew crew;
-	
-	@OneToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="fk_player_permission")
-	private List<CrewPermission> cPmission=new ArrayList<>();
-	
-	 public PlayerBean() {
-		 
-	 }
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_crew_id")
+	private CrewBean crew;
+
+	// @OneToOne(cascade = CascadeType.ALL)
+	// @JoinColumn(name = "fk_player_permission")
+	// private List<CrewPermission> cPmission = new ArrayList<>();
+
+	public PlayerBean() {
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -203,20 +203,20 @@ public class PlayerBean {
 		this.banned_reason = banned_reason;
 	}
 
-	public Crew getCrew() {
+	public CrewBean getCrew() {
 		return crew;
 	}
 
-	public void setCrew(Crew crew) {
+	public void setCrew(CrewBean crew) {
 		this.crew = crew;
 	}
 
-	public List<CrewPermission> getcPmission() {
-		return cPmission;
-	}
+	// public List<CrewPermission> getcPmission() {
+	// 	return cPmission;
+	// }
 
-	public void setcPmission(List<CrewPermission> cPmission) {
-		this.cPmission = cPmission;
-	}
-	 
+	// public void setcPmission(List<CrewPermission> cPmission) {
+	// 	this.cPmission = cPmission;
+	// }
+
 }

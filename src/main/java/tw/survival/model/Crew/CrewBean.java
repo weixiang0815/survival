@@ -17,7 +17,7 @@ import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "Crew")
-public class Crew {
+public class CrewBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,10 @@ public class Crew {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="Crew",cascade=CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,mappedBy="crew",cascade=CascadeType.ALL)
 	private Set<PlayerBean> bean=new LinkedHashSet<PlayerBean>();
     
-	public Crew() {
+	public CrewBean() {
 		
 	}
 	public Integer getId() {

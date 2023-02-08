@@ -47,8 +47,8 @@ public class PlaceBean {
 	@Column(name = "place_capacity")
 	private Integer place_capacity;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-	private Set<EmployeeBean> employee = new LinkedHashSet<>();
+	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	// private Set<EmployeeBean> employee = new LinkedHashSet<>();
 	
 
 	@Column(name = "fk_product_id")
@@ -59,13 +59,13 @@ public class PlaceBean {
 	@JoinColumn(name="fk_warehouse_id")
 	private ProductBean product;
 
-	@OneToOne(mappedBy = "WarehouseBean")
+	@OneToOne(mappedBy = "place")
 	private WarehouseBean warehouse; //倉庫
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<PlaceOrderBean> placeOrder = new LinkedHashSet<>(); // 場地訂單
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "schedule", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
 
 	public PlaceBean() {
@@ -119,13 +119,13 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	public Set<EmployeeBean> getEmployee() {
-		return employee;
-	}
+	// public Set<EmployeeBean> getEmployee() {
+	// 	return employee;
+	// }
 
-	public void setEmployee(Set<EmployeeBean> employee) {
-		this.employee = employee;
-	}
+	// public void setEmployee(Set<EmployeeBean> employee) {
+	// 	this.employee = employee;
+	// }
 
 	public Integer getProductId() {
 		return productId;

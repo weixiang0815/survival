@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -27,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
-import tw.survival.model.User.UserBean;
+import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "Competition")
@@ -50,9 +51,9 @@ public class CompetitionBean {
 	@Column(name = "start_date")
 	private Date startDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	// @Temporal(TemporalType.TIMESTAMP)
+	// @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	// @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "start_timespan")
 	private String startTimespan;
 
@@ -62,9 +63,9 @@ public class CompetitionBean {
 	@Column(name = "end_date")
 	private Date endDate;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	// @Temporal(TemporalType.TIMESTAMP)
+	// @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	// @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "end_timespan")
 	private String endTimespan;
 
@@ -78,7 +79,7 @@ public class CompetitionBean {
 	@Transient
 	private Integer placeId;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
 
@@ -103,8 +104,9 @@ public class CompetitionBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
-
-	@OneToOne(mappedBy = "competitionId")
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "competitionId")
 	private CompetitionPrizeBean competitionPrizes;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
@@ -114,13 +116,13 @@ public class CompetitionBean {
 	@JoinTable(name = "Participation", inverseJoinColumns = {
 			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
 					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
-	private Set<UserBean> participantPlayers = new LinkedHashSet<UserBean>();
+	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //	@JoinTable(name = "Participation", inverseJoinColumns = {
 //			@JoinColumn(name = "fk_crew_id", referencedColumnName = "id") }, joinColumns = {
 //					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
-//	private Set<UserBean> participantCrews = new LinkedHashSet<UserBean>();
+//	private Set<PlayerBean> participantCrews = new LinkedHashSet<PlayerBean>();
 
 	public CompetitionBean() {
 	}
@@ -277,11 +279,11 @@ public class CompetitionBean {
 		this.signUps = signUps;
 	}
 
-	public Set<UserBean> getParticipantPlayers() {
+	public Set<PlayerBean> getParticipantPlayers() {
 		return participantPlayers;
 	}
 
-	public void setParticipantPlayers(Set<UserBean> participantPlayers) {
+	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
 		this.participantPlayers = participantPlayers;
 	}
 

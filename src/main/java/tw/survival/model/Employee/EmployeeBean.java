@@ -55,6 +55,6 @@ private Integer id;
 	@Column(name="status")
 	private String status;
 	@JoinColumn(name="fk_boss_id")
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "Employee",cascade = CascadeType.ALL)
+	@OneToMany(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	private Set<EmployeeBean> employee=new LinkedHashSet<EmployeeBean>();
 }
