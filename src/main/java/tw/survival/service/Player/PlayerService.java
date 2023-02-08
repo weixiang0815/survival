@@ -17,5 +17,6 @@ public class PlayerService {
 public PlayerBean addplayer(String name,String account,String password,Integer age,String region,
 		String address,Integer salary	) {
 	
+	return null;
 }
 } 

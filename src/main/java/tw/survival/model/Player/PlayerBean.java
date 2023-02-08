@@ -37,6 +37,12 @@ public class PlayerBean {
 	@Column(name="password")
 	private String password;
 	
+	@Column(name="identity_number")
+	private String identity_number;
+	
+	@Column(name="email")
+	private String email;
+	
 	@Column(name="age")
 	private Integer age;
 	
@@ -66,7 +72,7 @@ public class PlayerBean {
 	private String phone;
 	
 	@Column(name="banned")
-	private String banned;
+	private Character banned;
 	
 	@Column(name="banned_reason")
 	private String banned_reason;
@@ -190,11 +196,11 @@ public class PlayerBean {
 		this.phone = phone;
 	}
 
-	public String getBanned() {
+	public Character getBanned() {
 		return banned;
 	}
 
-	public void setBanned(String banned) {
+	public void setBanned(Character banned) {
 		this.banned = banned;
 	}
 
@@ -228,6 +234,22 @@ public class PlayerBean {
 
 	public void setpPermission(List<playerPermission> pPermission) {
 		this.pPermission = pPermission;
+	}
+
+	public String getIdentity_number() {
+		return identity_number;
+	}
+
+	public void setIdentity_number(String identity_number) {
+		this.identity_number = identity_number;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	 
 }

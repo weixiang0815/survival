@@ -1,9 +1,6 @@
 package tw.survival.model.Employee;
 
-
 import java.util.Date;
-
-
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,53 +16,70 @@ import javax.persistence.Table;
 
 import tw.survival.model.Place.PlaceBean;
 
-
 @Entity
-@Table(name="Employee")
+@Table(name = "Employee")
 public class EmployeeBean {
-  
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
-private Integer id;
-	@Column(name="name")
+	@Column(name = "id")
+	private Integer id;
+	
+	@Column(name = "name")
 	private String name;
-	@Column(name="account")
+	
+	@Column(name = "account")
 	private String account;
-	@Column(name="password")
+	
+	@Column(name = "password")
 	private String password;
-	@Column(name="age")
+	
+	@Column(name = "age")
 	private Integer age;
-	@Column(name="region")
+	
+	@Column(name = "region")
 	private String region;
-	@Column(name="address")
+	
+	@Column(name = "address")
 	private String address;
-	@Column(name="salary")
+	
+	@Column(name = "salary")
 	private Integer salary;
-	@Column(name="thumbnail")
+	
+	@Column(name = "thumbnail")
 	@Lob
 	private byte[] thumbnail;
-	@Column(name="sex")
+	@Column(name = "sex")
 	private String sex;
-	@Column(name="birthday")
+	
+	@Column(name = "birthday")
 	private Date birthday;
-	@Column(name="title")
+	
+	@Column(name = "title")
 	private String title;
-	@Column(name="hire_date")
+	
+	@Column(name = "hire_date")
 	private Date hire_date;
-	@Column(name="status")
+	
+	@Column(name = "status")
 	private String status;
 	
-	@JoinColumn(name="fk_workplace_id")
-	@ManyToOne(fetch=FetchType.EAGER)
+	@Column(name = "identity_number")
+	private String identity_number;
+
+	@Column(name = "email")
+	private String email;
+
+	@JoinColumn(name = "fk_workplace_id")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private PlaceBean place;
-	
-	@JoinColumn(name="fk_permission")
-	@ManyToOne(fetch=FetchType.EAGER)
+
+	@JoinColumn(name = "fk_permission")
+	@ManyToOne(fetch = FetchType.EAGER)
 	private EmployeePermission employeePermission;
-	
-	public  EmployeeBean() {
-		
+
+	public EmployeeBean() {
+
 	}
 
 	public Integer getId() {
@@ -195,5 +209,21 @@ private Integer id;
 	public void setEmployeePermission(EmployeePermission employeePermission) {
 		this.employeePermission = employeePermission;
 	}
-	
+
+	public String getIdentity_number() {
+		return identity_number;
+	}
+
+	public void setIdentity_number(String identity_number) {
+		this.identity_number = identity_number;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 }
