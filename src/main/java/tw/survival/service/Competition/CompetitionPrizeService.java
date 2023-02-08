@@ -12,5 +12,6 @@ import tw.survival.model.Competition.CompetitionPrizeRepository;
 public class CompetitionPrizeService {
 
 	@Autowired
-	private CompetitionPrizeRepository cpDao;
+	private CompetitionPrizeRepository competitionPrizeRepository;
+
 }

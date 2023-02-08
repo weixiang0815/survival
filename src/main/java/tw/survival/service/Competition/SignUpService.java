@@ -12,5 +12,6 @@ import tw.survival.model.Competition.SignUpRepository;
 public class SignUpService {
 
 	@Autowired
-	private SignUpRepository suDao;
+	private SignUpRepository signUpRepository;
+
 }
