@@ -15,7 +15,7 @@ public class PlayerService {
 	@Autowired
 	private PlayerRepository pDAO;
 public PlayerBean addplayer(String name,String account,String password,Integer age,String region,
-		String address,Integer salary,	) {
+		String address,Integer salary	) {
 	
 }
 } 
