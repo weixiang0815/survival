@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Player.PlayerBean;
@@ -51,9 +52,6 @@ public class CompetitionBean {
 	@Column(name = "start_date")
 	private Date startDate;
 
-	// @Temporal(TemporalType.TIMESTAMP)
-	// @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	// @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "start_timespan")
 	private String startTimespan;
 
@@ -63,9 +61,6 @@ public class CompetitionBean {
 	@Column(name = "end_date")
 	private Date endDate;
 
-	// @Temporal(TemporalType.TIMESTAMP)
-	// @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	// @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "end_timespan")
 	private String endTimespan;
 
@@ -104,7 +99,7 @@ public class CompetitionBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
-	
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "competitionId")
 	private CompetitionPrizeBean competitionPrizes;
@@ -118,11 +113,11 @@ public class CompetitionBean {
 					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
 	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//	@JoinTable(name = "Participation", inverseJoinColumns = {
-//			@JoinColumn(name = "fk_crew_id", referencedColumnName = "id") }, joinColumns = {
-//					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
-//	private Set<PlayerBean> participantCrews = new LinkedHashSet<PlayerBean>();
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Participation", inverseJoinColumns = {
+			@JoinColumn(name = "fk_crew_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
+	private Set<CrewBean> participantCrews = new LinkedHashSet<CrewBean>();
 
 	public CompetitionBean() {
 	}
@@ -285,6 +280,14 @@ public class CompetitionBean {
 
 	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
 		this.participantPlayers = participantPlayers;
+	}
+
+	public Set<CrewBean> getParticipantCrews() {
+		return participantCrews;
+	}
+
+	public void setParticipantCrews(Set<CrewBean> participantCrews) {
+		this.participantCrews = participantCrews;
 	}
 
 }

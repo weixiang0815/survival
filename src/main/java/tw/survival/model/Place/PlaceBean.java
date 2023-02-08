@@ -15,11 +15,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Market.ProductBean;
@@ -49,20 +50,23 @@ public class PlaceBean {
 	@Column(name = "place_capacity")
 	private Integer place_capacity;
 
-	// @OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-	// private Set<EmployeeBean> employee = new LinkedHashSet<>();
-	
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+//	private Set<EmployeeBean> employee = new LinkedHashSet<>();
+
 	@JsonBackReference
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_product_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
 
 	@OneToOne(mappedBy = "place")
-	private WarehouseBean warehouse; //倉庫
+	private WarehouseBean warehouse; // 倉庫
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<PlaceOrderBean> placeOrder = new LinkedHashSet<>(); // 場地訂單
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
 
@@ -117,15 +121,6 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	// public Set<EmployeeBean> getEmployee() {
-	// 	return employee;
-	// }
-
-	// public void setEmployee(Set<EmployeeBean> employee) {
-	// 	this.employee = employee;
-	// }
-
-
 	public ProductBean getProduct() {
 		return product;
 	}
@@ -157,7 +152,5 @@ public class PlaceBean {
 	public void setSchedule(Set<ScheduleBean> schedule) {
 		this.schedule = schedule;
 	}
-
-	
 
 }

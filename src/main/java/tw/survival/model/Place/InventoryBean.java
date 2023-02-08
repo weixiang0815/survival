@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 import org.springframework.stereotype.Component;
 
@@ -24,28 +24,25 @@ public class InventoryBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="inventory_sellamount")
-	private Integer inventory_sellamount; //販賣庫存
-	
 
-	@Column(name="inventory_rentamount")
-	private Integer inventory_rentamount; //租借庫存
+	@Column(name = "inventory_sellamount")
+	private Integer inventory_sellamount; // 販賣庫存
+
+	@Column(name = "inventory_rentamount")
+	private Integer inventory_rentamount; // 租借庫存
 
 	@JsonBackReference
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_warehouse_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_warehouse_id")
 	private WarehouseBean warehouse;
-	
+
 	@JsonBackReference
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="fk_product_id")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
-	
-	
-	
+
 	public InventoryBean() {
 	}
 
@@ -57,23 +54,12 @@ public class InventoryBean {
 		this.id = id;
 	}
 
-
 	public Integer getInventory_sellamount() {
 		return inventory_sellamount;
 	}
 
-	public void setInventory_sellamount(Integer inventory_amount) {
-		this.inventory_sellamount = inventory_amount;
-	}
-
-
-
-	public WarehouseBean getWarehouse() {
-		return warehouse;
-	}
-
-	public void setWarehouse(WarehouseBean warehouse) {
-		this.warehouse = warehouse;
+	public void setInventory_sellamount(Integer inventory_sellamount) {
+		this.inventory_sellamount = inventory_sellamount;
 	}
 
 	public Integer getInventory_rentamount() {
@@ -84,6 +70,13 @@ public class InventoryBean {
 		this.inventory_rentamount = inventory_rentamount;
 	}
 
+	public WarehouseBean getWarehouse() {
+		return warehouse;
+	}
+
+	public void setWarehouse(WarehouseBean warehouse) {
+		this.warehouse = warehouse;
+	}
 
 	public ProductBean getProduct() {
 		return product;
@@ -93,6 +86,4 @@ public class InventoryBean {
 		this.product = product;
 	}
 
-	
-	
 }
