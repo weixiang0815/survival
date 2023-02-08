@@ -1,21 +1,25 @@
 package tw.survival.service.Market;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.ProductBean;
+import tw.survival.model.Market.ProductRepository;
+
 
 @Service
+@Transactional
 public class ProductService {
-	
+
 	@Autowired
-	ProductBean productDao;
+	private ProductRepository productDao;
 	
-	public List<ProductBean> getTodosByUserId(Integer id) {
-		return null;
-//		List<ProductBean> data = productDao.;
-//        return data;
+	public ProductBean insertProduct(ProductBean ip) {
+		
+		return productDao.save(ip);
 	}
+	
+
 }

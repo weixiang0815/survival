@@ -17,7 +17,7 @@ public class ProductInventory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@OneToOne(mappedBy = "fk_product_inventory_id")
+//	@OneToOne(mappedBy = "fk_product_inventory_id")
 	@Column(name="id")
 	private Integer id;
 	
