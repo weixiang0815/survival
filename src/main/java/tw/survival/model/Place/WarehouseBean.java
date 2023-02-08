@@ -30,8 +30,6 @@ public class WarehouseBean {
 	@Column(name="warehouse_name")
 	private String warehouse_name;
 	
-	@Column(name="warehouse_address")
-	private String warehouse_address;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="fk_place_id")
@@ -69,17 +67,6 @@ public class WarehouseBean {
 		this.warehouse_name = warehouse_name;
 	}
 
-
-
-	public String getWarehouse_address() {
-		return warehouse_address;
-	}
-
-
-
-	public void setWarehouse_address(String warehouse_address) {
-		this.warehouse_address = warehouse_address;
-	}
 
 
 

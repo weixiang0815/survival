@@ -10,11 +10,17 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
+
+import tw.survival.model.Employee.EmployeeBean;
+import tw.survival.model.Market.ProductBean;
 
 @Entity
 @Table(name = "Place")
@@ -36,13 +42,22 @@ public class PlaceBean {
 	private byte[] place_photo;
 
 	@Column(name = "place_fee")
-	private String place_fee;
+	private Integer place_fee;
 
 	@Column(name = "place_capacity")
-	private String place_capacity;
+	private Integer place_capacity;
 
-//	@OneToMany()
-//	private Manager manager;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employee = new LinkedHashSet<>();
+	
+
+	@Column(name = "fk_product_id")
+	@Transient
+	private Integer productId;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="fk_warehouse_id")
+	private ProductBean product;
 
 	@OneToOne(mappedBy = "WarehouseBean")
 	private WarehouseBean warehouse; //倉庫
@@ -88,20 +103,44 @@ public class PlaceBean {
 		this.place_photo = place_photo;
 	}
 
-	public String getPlace_fee() {
+	public Integer getPlace_fee() {
 		return place_fee;
 	}
 
-	public void setPlace_fee(String place_fee) {
+	public void setPlace_fee(Integer place_fee) {
 		this.place_fee = place_fee;
 	}
 
-	public String getPlace_capacity() {
+	public Integer getPlace_capacity() {
 		return place_capacity;
 	}
 
-	public void setPlace_capacity(String place_capacity) {
+	public void setPlace_capacity(Integer place_capacity) {
 		this.place_capacity = place_capacity;
+	}
+
+	public Set<EmployeeBean> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<EmployeeBean> employee) {
+		this.employee = employee;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	public ProductBean getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductBean product) {
+		this.product = product;
 	}
 
 	public WarehouseBean getWarehouse() {
@@ -127,5 +166,7 @@ public class PlaceBean {
 	public void setSchedule(Set<ScheduleBean> schedule) {
 		this.schedule = schedule;
 	}
+
+	
 
 }
