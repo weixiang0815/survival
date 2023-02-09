@@ -10,5 +10,5 @@ public class TemplateController {
 	public String goEmployeeSidebar() {
 		return "Template/Employee/main_sidebar";
 	}
-	
+
 }
