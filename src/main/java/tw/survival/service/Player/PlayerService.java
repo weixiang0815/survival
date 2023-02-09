@@ -1,7 +1,5 @@
 package tw.survival.service.Player;
 
-
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,8 @@ public class PlayerService {
 
 	@Autowired
 	private PlayerRepository pDAO;
-public void addplayer(PlayerBean pBean) {
-	pDAO.save(pBean);
-	
+
+	public void addplayer(PlayerBean pBean) {
+		pDAO.save(pBean);
+	}
 }
-} 

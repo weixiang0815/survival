@@ -68,6 +68,8 @@ public class PlaceBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employees=new LinkedHashSet<EmployeeBean>();
 	public PlaceBean() {
 	}
 
@@ -119,14 +121,6 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	// public Set<EmployeeBean> getEmployee() {
-	// 	return employee;
-	// }
-
-	// public void setEmployee(Set<EmployeeBean> employee) {
-	// 	this.employee = employee;
-	// }
-
 	public Integer getProductId() {
 		return productId;
 	}
@@ -165,6 +159,14 @@ public class PlaceBean {
 
 	public void setSchedule(Set<ScheduleBean> schedule) {
 		this.schedule = schedule;
+	}
+
+	public Set<EmployeeBean> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<EmployeeBean> employees) {
+		this.employees = employees;
 	}
 
 	

@@ -1,8 +1,6 @@
 package tw.survival.model.Player;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +12,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
@@ -52,19 +55,18 @@ public class PlayerBean {
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "salary")
-	private Integer salary;
-
 	@Column(name = "thumbnail")
 	@Lob
 	private byte[] thumbnail;
 
 	@Column(name = "sex")
 	private String sex;
-
-	@Column(name = "birthday")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@Column(name = "birthday")	
 	private Date birthday;
-
+	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
 
@@ -149,13 +151,6 @@ public class PlayerBean {
 		this.address = address;
 	}
 
-	public Integer getSalary() {
-		return salary;
-	}
-
-	public void setSalary(Integer salary) {
-		this.salary = salary;
-	}
 
 	public byte[] getThumbnail() {
 		return thumbnail;
