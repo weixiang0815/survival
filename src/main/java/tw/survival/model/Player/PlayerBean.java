@@ -18,6 +18,7 @@ import tw.survival.model.Crew.CrewPermission;
 @Entity
 @Table(name = "Player")
 public class PlayerBean {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -85,7 +86,6 @@ public class PlayerBean {
 	private playerPermission playerPermission;
 
 	public PlayerBean() {
-
 	}
 
 	public Integer getId() {

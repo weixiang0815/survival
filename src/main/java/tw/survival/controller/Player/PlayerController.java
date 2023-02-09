@@ -19,7 +19,6 @@ public class PlayerController {
 
 	@GetMapping("/player/add")
 	public String addPlayer() {
-		
-		return"Player/user";
+		return "Player/user";
 	}
 }
