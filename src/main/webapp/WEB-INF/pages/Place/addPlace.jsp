@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
+
+<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />    
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,9 +10,11 @@
 <title>場地表</title>
 </head>
 <body>
-<h1>AddPlace</h1>
+<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
+
 <div class="container">
-<form action="addPlace" method="post">
+<h1>AddPlace</h1>
+<form action="" id="ajaxForm">
 		<table>
 			<tr>
 				<td>場地名稱：</td>
@@ -34,10 +39,50 @@
 			</tr>
 			
 			<tr>
-				<td><input type="submit" value="新增" /></td>
+				<td><input type="submit" value="新增" id="uploadBtn"/></td>
 			</tr>
 		</table>
 	</form>
-</div>	
+	
+	<div id="upload_result"></div>
+</div>
+
+        <script>
+				const uploadBtn = document.getElementById('uploadBtn')
+
+				uploadBtn.addEventListener('click', e => {
+					e.preventDefault(); // 取消原本 form 表單 submit 送出的功能 , 因為要用 js 送
+
+					let ajaxForm = document.getElementById('ajaxForm');
+
+					let formData = new FormData(ajaxForm);
+
+					sendPostRequest(formData)
+				})
+
+
+				function sendPostRequest(formData) {
+					axios({
+						url: 'http://localhost:8080/Survival/place/post',
+						method: 'post',
+						data: formData,
+						headers: { 'Content-Type': 'multipart/form-data' }
+					})
+					.then(res => {
+							console.log(res)
+							let resultDiv = document.getElementById('upload_result');
+							resultDiv.innerHTML = res.data
+
+					})
+					.catch(err => {
+							console.log(err)
+
+					})
+
+				}
+
+
+
+			</script>	
 </body>
 </html>

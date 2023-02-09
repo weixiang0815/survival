@@ -27,13 +27,19 @@
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="${contextRoot}/place">場地系統首頁</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/place/post">新增場地</a></li>
+							href="${contextRoot}/place/uploadPage">新增場地</a></li>
 						
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
-
+<script type="text/javascript"
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+	<script type="text/javascript"
+		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
+		<script type="text/javascript"
+		src="${contextRoot}/js/jquery-3.6.3.min.js"></script>		
 </body>
 </html>
