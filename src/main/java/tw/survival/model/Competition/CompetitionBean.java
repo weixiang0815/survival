@@ -96,6 +96,9 @@ public class CompetitionBean {
 	@Column(name = "capacity")
 	private Integer capacity;
 
+	@Column(name = "status")
+	private String status;
+
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
@@ -288,6 +291,14 @@ public class CompetitionBean {
 
 	public void setParticipantCrews(Set<CrewBean> participantCrews) {
 		this.participantCrews = participantCrews;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 }
