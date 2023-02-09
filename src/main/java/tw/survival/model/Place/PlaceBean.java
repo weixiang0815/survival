@@ -22,6 +22,7 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -69,6 +70,9 @@ public class PlaceBean {
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employees = new LinkedHashSet<EmployeeBean>();
 
 	public PlaceBean() {
 	}
@@ -151,6 +155,14 @@ public class PlaceBean {
 
 	public void setSchedule(Set<ScheduleBean> schedule) {
 		this.schedule = schedule;
+	}
+
+	public Set<EmployeeBean> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<EmployeeBean> employees) {
+		this.employees = employees;
 	}
 
 }
