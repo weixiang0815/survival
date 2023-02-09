@@ -17,15 +17,15 @@
 <form action="${contextRoot}/ProductRepository/addproduct" method="post" enctype="multipart/form-data">
 
     <br>
-    <input type="text" name="photoName" />商品名稱
+    商品名稱:<input type="text" name="photoName" />
     <br>
-    <input type="text" name="photoContext" />商品介紹
+    商品介紹:<input type="text" name="photoContext" />
     <br>
-    <input type="text" name="Product_class" />商品種類
+    商品種類:<input type="text" name="Product_class" />
     <br>
-    <input type="text" name="Price" />商品售出價格
+    商品售出價格:<input type="text" name="Price" />
     <br>
-    <input type="text" name="setRent_fee" />商品租賃價格
+    商品租賃價格:<input type="text" name="setRent_fee" />
     <br>
     商品圖片
     <input type="file" name="photoFile" id="photoFileInput">

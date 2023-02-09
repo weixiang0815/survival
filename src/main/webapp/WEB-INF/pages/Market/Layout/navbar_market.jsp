@@ -30,7 +30,7 @@
 						aria-current="page" href="${contextRoot}/">首頁</a></li>
 					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Product">新增商品</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">槍枝</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/allProduct">全部商品</a>
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">服裝</a>
 					</li>

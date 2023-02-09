@@ -24,6 +24,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
@@ -32,6 +33,7 @@ import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
+import tw.survival.model.Market.OrderItemBean;
 
 @Entity
 @Table(name = "Player")
@@ -101,6 +103,10 @@ public class PlayerBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
+
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
@@ -261,22 +267,6 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-	public CrewPermission getCrewPermission() {
-		return crewPermission;
-	}
-
-	public void setCrewPermission(CrewPermission crewPermission) {
-		this.crewPermission = crewPermission;
-	}
-
-	public playerPermission getPlayerPermission() {
-		return playerPermission;
-	}
-
-	public void setPlayerPermission(playerPermission playerPermission) {
-		this.playerPermission = playerPermission;
-	}
-
 	public Set<PostsBean> getPostsOfPlayer() {
 		return postsOfPlayer;
 	}
@@ -315,6 +305,30 @@ public class PlayerBean {
 
 	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
 		this.bookmarkletOfPost = bookmarkletOfPost;
+	}
+
+	public CrewPermission getCrewPermission() {
+		return crewPermission;
+	}
+
+	public void setCrewPermission(CrewPermission crewPermission) {
+		this.crewPermission = crewPermission;
+	}
+
+	public playerPermission getPlayerPermission() {
+		return playerPermission;
+	}
+
+	public void setPlayerPermission(playerPermission playerPermission) {
+		this.playerPermission = playerPermission;
+	}
+
+	public Set<OrderItemBean> getOrderItem() {
+		return OrderItem;
+	}
+
+	public void setOrderItem(Set<OrderItemBean> orderItem) {
+		OrderItem = orderItem;
 	}
 
 }
