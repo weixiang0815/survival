@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import tw.survival.model.Player.PlayerBean;
+
 @Entity
 @Table(name="score")
 public class ScoreBean {
@@ -38,9 +40,9 @@ public class ScoreBean {
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date added;
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="fk_player_id")
-//	private Player player;	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_player_id")
+	private PlayerBean player;	
 	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
