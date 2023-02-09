@@ -7,6 +7,6 @@
 <title>出現錯誤</title>
 </head>
 <body>
-<h1>你現在看到的是威翔自訂的其它錯誤頁面～～～</h1>
+<h1>你現在看到的是威翔自訂的 ${statusCode} 錯誤頁面～～～</h1>
 </body>
 </html>
