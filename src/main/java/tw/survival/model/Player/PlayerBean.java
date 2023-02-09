@@ -1,9 +1,10 @@
 package tw.survival.model.Player;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,12 +14,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
+import tw.survival.model.Market.OrderItemBean;
 
 @Entity
 @Table(name = "Player")
@@ -88,6 +91,10 @@ public class PlayerBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "player",cascade = CascadeType.ALL)
+	private Set<OrderItemBean> OrderItem =new LinkedHashSet<>();
 
 	public PlayerBean() {
 
@@ -251,6 +258,30 @@ public class PlayerBean {
 
 	public void setpPermission(playerPermission pPermission) {
 		this.playerPermission = pPermission;
+	}
+
+	public CrewPermission getCrewPermission() {
+		return crewPermission;
+	}
+
+	public void setCrewPermission(CrewPermission crewPermission) {
+		this.crewPermission = crewPermission;
+	}
+
+	public playerPermission getPlayerPermission() {
+		return playerPermission;
+	}
+
+	public void setPlayerPermission(playerPermission playerPermission) {
+		this.playerPermission = playerPermission;
+	}
+
+	public Set<OrderItemBean> getOrderItem() {
+		return OrderItem;
+	}
+
+	public void setOrderItem(Set<OrderItemBean> orderItem) {
+		OrderItem = orderItem;
 	}
 
 }

@@ -1,14 +1,22 @@
 package tw.survival.controller.Market;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductInventory;
@@ -32,6 +40,7 @@ public class ProductController {
 	private String uploadPage() {
 		return "Market/add_Product";
 	}
+	
 
 	@ResponseBody
 	@PostMapping("ProductRepository/add")
@@ -65,10 +74,8 @@ public class ProductController {
 	@ResponseBody
 	@PostMapping("ProductRepository/addproduct")
 	public String insertProduct(@RequestParam("photoName") String fileName,
-			@RequestParam("photoContext") String Context, 
-			@RequestParam("Product_class") String Product_class,
-			@RequestParam("Price") Integer Price, 
-			@RequestParam("setRent_fee") Integer setRent_fee,
+			@RequestParam("photoContext") String Context, @RequestParam("Product_class") String Product_class,
+			@RequestParam("Price") Integer Price, @RequestParam("setRent_fee") Integer setRent_fee,
 			@RequestParam("photoFile") MultipartFile file) {
 		try {
 			ProductBean pb = new ProductBean();
@@ -87,5 +94,49 @@ public class ProductController {
 			return "上傳失敗";
 		}
 	}
-
+	
+	@GetMapping("/Market/allProduct")
+	public ModelAndView getAllProduct(ModelAndView mav) {
+		List<ProductBean> list = pService.findAllProduct();
+		mav.setViewName("/Market/show_AllProduct");
+		mav.getModel().put("list", list);
+		return mav;
+	}
+	
+	@ResponseBody
+	@GetMapping("/Market/id")
+	public ResponseEntity<byte[]> getProductById(@RequestParam Integer id){
+		ProductBean photo = pService.getProductById(id);
+		
+		
+		byte[] photoFile = photo.getImg();
+		HttpHeaders headers = new HttpHeaders();
+		
+		headers.setContentType(MediaType.IMAGE_JPEG);
+        //ResponseEntity 內建 @ResponseBody   // 資料, headers, 回應的 http status
+		return new ResponseEntity<byte[]>(photoFile,headers,HttpStatus.OK);
+		
+	}
+	@GetMapping("/Market/edit")
+	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
+		ProductBean p1 = pService.findById(id);
+		model.addAttribute("product", p1);
+		return "Market/editProduct";
+	}
+	@PostMapping("/Market/edit")
+	public String sendEditedMessage(@RequestParam("id") Integer id,@RequestParam("name") String name,
+			@RequestParam("img")byte[] img,@RequestParam("product_class") String product_class,
+			@RequestParam("context")String context,@RequestParam("rent_fee")Integer rent_fee,
+			@RequestParam("price") Integer price) {
+		
+		ProductService productService = new ProductService();
+		productService.updateMsgById(id, name,  img,product_class, context, rent_fee, price);
+		return "redirect:/Market/allProduct";
+	}
+	@DeleteMapping("/Market/delete")
+	public String deleteProdduct(@RequestParam("id") Integer id) {
+		pService.deleteById(id);
+		return "redirect:/Market/allProduct";
+	}
+	
 }
