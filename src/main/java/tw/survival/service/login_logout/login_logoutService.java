@@ -21,6 +21,6 @@ public class login_logoutService {
 			return null;
 		}
 		return player;
-	}
+	}	
 
 }
