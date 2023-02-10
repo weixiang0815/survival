@@ -29,6 +29,8 @@
 			</tr>
 		</table>
 	</form>
+	${player.account}<br/>
+	${player.password}
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

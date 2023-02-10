@@ -1,5 +1,8 @@
 package tw.survival.controller.login_logout;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,13 +28,19 @@ public class loginController {
 
 	@PostMapping("/Player/loginSystem")
 	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password,
-			HttpSession session, Model model) {
+			HttpSession session) {
 		PlayerBean player = service.login(account, password);
 		if (player != null) {
 			session.setAttribute("player", player);
 			return "Player/loginSuccess";
 		}
 		return "Player/loginSystem";
+	}
+
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("player", null);
+		return "redirect:/Player/login";
 	}
 
 }
