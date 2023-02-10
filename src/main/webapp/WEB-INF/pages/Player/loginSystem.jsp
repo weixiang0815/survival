@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 	<h3>登入</h3>
-	<form action="checkLogin.controller" method="post">
+	<form action="${contextRoot}/Player/loginSystem"method="post">
 		<table>
 			<tr>
 				<td>使用者名稱：</td>
