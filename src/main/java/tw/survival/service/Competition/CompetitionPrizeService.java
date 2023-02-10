@@ -72,6 +72,21 @@ public class CompetitionPrizeService {
 	}
 
 	/**
+	 * 透過實體刪除一筆活動獎品紀錄
+	 * 
+	 * @param compPrize 欲刪除紀錄的活動獎品實體
+	 * @return 刪除成功回傳 true，失敗回傳 false
+	 */
+	public boolean deleteByEntity(CompetitionPrizeBean compPrize) {
+		try {
+			competitionPrizeRepository.delete(compPrize);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
 	 * 更新一筆活動獎品實體
 	 * 
 	 * @param compPrize 欲更新內容的活動獎品實體
@@ -79,10 +94,14 @@ public class CompetitionPrizeService {
 	 * @author 王威翔
 	 */
 	public CompetitionPrizeBean updateByEntity(CompetitionPrizeBean compPrize) {
-		try {
-			competitionPrizeRepository.save(compPrize);
-			return compPrize;
-		} catch (Exception e) {
+		if (competitionPrizeRepository.findById(compPrize.getId()).isPresent()) {
+			try {
+				competitionPrizeRepository.save(compPrize);
+				return compPrize;
+			} catch (Exception e) {
+				return null;
+			}
+		} else {
 			return null;
 		}
 	}

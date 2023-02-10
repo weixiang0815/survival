@@ -72,16 +72,36 @@ public class SignUpService {
 	}
 
 	/**
+	 * 透過實體刪除一筆活動報名紀錄
+	 * 
+	 * @param signup 欲刪除的活動報名紀錄實體
+	 * @return 刪除成功回傳 true，失敗回傳 false
+	 * @author 王威翔
+	 */
+	public boolean deleteByEntity(SignUpBean signup) {
+		try {
+			signUpRepository.delete(signup);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	/**
 	 * 更新一筆報名紀錄
 	 * 
 	 * @param signup 欲更新內容的報名紀錄實體
 	 * @return 更新成功回傳該報名紀錄實體，失敗回傳 null
 	 */
 	public SignUpBean updateByEntity(SignUpBean signup) {
-		try {
-			signUpRepository.save(signup);
-			return signup;
-		} catch (Exception e) {
+		if (signUpRepository.findById(signup.getId()).isPresent()) {
+			try {
+				signUpRepository.save(signup);
+				return signup;
+			} catch (Exception e) {
+				return null;
+			}
+		} else {
 			return null;
 		}
 	}
