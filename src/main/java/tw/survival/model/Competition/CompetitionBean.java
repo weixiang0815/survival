@@ -110,6 +110,9 @@ public class CompetitionBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
 
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
+	private Set<CompetitionPictureBean> pictures = new LinkedHashSet<>();
+
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Participation", inverseJoinColumns = {
 			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
@@ -279,6 +282,14 @@ public class CompetitionBean {
 
 	public Set<PlayerBean> getParticipantPlayers() {
 		return participantPlayers;
+	}
+
+	public Set<CompetitionPictureBean> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(Set<CompetitionPictureBean> pictures) {
+		this.pictures = pictures;
 	}
 
 	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
