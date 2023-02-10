@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import tw.survival.model.Player.PlayerBean;
-
 @Entity
 @Table(name="empPermission")
 public class EmployeePermission {
