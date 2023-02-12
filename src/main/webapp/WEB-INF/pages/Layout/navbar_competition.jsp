@@ -67,10 +67,10 @@
 				</div>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
-						<a href="#"><button class="btn btn-primary">登入</button></a>
+						<a href="${contextRoot}/Player/login"><button class="btn btn-primary">登入</button></a>
 					</c:when>
 					<c:otherwise>
-						<a href="#"><button class="btn btn-primary">登出</button></a>
+						<a href="${contextRoot}/logout"><button class="btn btn-primary">登出</button></a>
 					</c:otherwise>
 				</c:choose>
 			</div>
