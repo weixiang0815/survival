@@ -46,7 +46,21 @@ public class PlaceService {
 		 pDAO.deleteById(id);
 	}
 	
-	public PlaceBean updatePlace(PlaceBean place) {
-		return pDAO.save(place);
+	public PlaceBean updatePlaceById(Integer id, String placeName,String placeAddress,
+			byte[] placePhoto, Integer placeFee, Integer placeCapacity) {
+		Optional<PlaceBean> optional = pDAO.findById(id);
+		
+		if(optional.isPresent()) {
+			PlaceBean pb = optional.get();
+			pb.setPlace_name(placeName);
+			pb.setPlace_address(placeAddress);
+			pb.setPlace_photo(placePhoto);
+			pb.setPlace_fee(placeFee);
+			pb.setPlace_capacity(placeCapacity);
+			return pb;
+		}
+		System.out.println("沒有這筆資料");
+		return null;
+				
 	}
 }

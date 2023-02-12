@@ -17,7 +17,7 @@
 				<a class="navbar-brand" href="${contextRoot}/competition/">活動系統</a>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item active"><a class="nav-link"
+						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/competition/">首頁 </a></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
@@ -83,11 +83,5 @@
 		integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
 		crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<script>
-		$(document).ready(function() {
-			$(".nav-item").addClass("active");
-		});
-	</script>
 </body>
-
 </html>
