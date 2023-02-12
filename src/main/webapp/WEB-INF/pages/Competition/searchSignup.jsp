@@ -11,6 +11,6 @@
 <body>
 <jsp:include page="../Layout/navbar_competition.jsp"/>
 <h1>搜尋報名資訊</h1>
-<jsp:include page="../Layout/footer.jsp"/>
+<%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>
 </html>
