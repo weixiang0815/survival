@@ -2,11 +2,13 @@ package tw.survival.controller.Competition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
@@ -43,7 +45,8 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/new")
-	public String newCompetition() {
+	public String newCompetition(Model model) {
+		model.addAttribute("competition", new CompetitionBean());
 		return "Competition/newCompetition";
 	}
 

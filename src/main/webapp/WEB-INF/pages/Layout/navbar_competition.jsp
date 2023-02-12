@@ -9,6 +9,9 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 </head>
 <body>
 	<header>
@@ -67,10 +70,12 @@
 				</div>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
-						<a href="${contextRoot}/Player/login"><button class="btn btn-primary">登入</button></a>
+						<a href="${contextRoot}/Player/login"><button
+								class="btn btn-primary">登入</button></a>
 					</c:when>
 					<c:otherwise>
-						<a href="${contextRoot}/logout"><button class="btn btn-primary">登出</button></a>
+						<a href="${contextRoot}/logout"><button
+								class="btn btn-primary">登出</button></a>
 					</c:otherwise>
 				</c:choose>
 			</div>
