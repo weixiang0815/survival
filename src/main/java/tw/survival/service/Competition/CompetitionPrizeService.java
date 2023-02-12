@@ -16,7 +16,7 @@ import tw.survival.model.Competition.CompetitionPrizeRepository;
 public class CompetitionPrizeService {
 
 	@Autowired
-	private CompetitionPrizeRepository competitionPrizeRepository;
+	private CompetitionPrizeRepository compPrizeDao;
 
 	/**
 	 * 新增一筆活動獎品紀錄
@@ -27,7 +27,7 @@ public class CompetitionPrizeService {
 	 */
 	public CompetitionPrizeBean insert(CompetitionPrizeBean compPrize) {
 		try {
-			return competitionPrizeRepository.save(compPrize);
+			return compPrizeDao.save(compPrize);
 		} catch (Exception e) {
 			return null;
 		}
@@ -41,7 +41,7 @@ public class CompetitionPrizeService {
 	 * @author 王威翔
 	 */
 	public CompetitionPrizeBean findById(Integer id) {
-		Optional<CompetitionPrizeBean> optional = competitionPrizeRepository.findById(id);
+		Optional<CompetitionPrizeBean> optional = compPrizeDao.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -52,7 +52,7 @@ public class CompetitionPrizeService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionPrizeBean> findAll() {
-		return competitionPrizeRepository.findAll();
+		return compPrizeDao.findAll();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CompetitionPrizeService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
-			competitionPrizeRepository.deleteById(id);
+			compPrizeDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -79,7 +79,7 @@ public class CompetitionPrizeService {
 	 */
 	public boolean deleteByEntity(CompetitionPrizeBean compPrize) {
 		try {
-			competitionPrizeRepository.delete(compPrize);
+			compPrizeDao.delete(compPrize);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -94,9 +94,9 @@ public class CompetitionPrizeService {
 	 * @author 王威翔
 	 */
 	public CompetitionPrizeBean updateByEntity(CompetitionPrizeBean compPrize) {
-		if (competitionPrizeRepository.findById(compPrize.getId()).isPresent()) {
+		if (compPrizeDao.findById(compPrize.getId()).isPresent()) {
 			try {
-				competitionPrizeRepository.save(compPrize);
+				compPrizeDao.save(compPrize);
 				return compPrize;
 			} catch (Exception e) {
 				return null;

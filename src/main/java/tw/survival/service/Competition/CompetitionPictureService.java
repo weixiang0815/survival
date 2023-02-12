@@ -16,7 +16,7 @@ import tw.survival.model.Competition.CompetitionPictureRepository;
 public class CompetitionPictureService {
 
 	@Autowired
-	private CompetitionPictureRepository competitionPictureRepository;
+	private CompetitionPictureRepository compPictureDao;
 
 	/**
 	 * 新建一張活動照片
@@ -27,7 +27,7 @@ public class CompetitionPictureService {
 	 */
 	public CompetitionPictureBean addPicture(CompetitionPictureBean compPicture) {
 		try {
-			return competitionPictureRepository.save(compPicture);
+			return compPictureDao.save(compPicture);
 		} catch (Exception e) {
 			return null;
 		}
@@ -41,7 +41,7 @@ public class CompetitionPictureService {
 	 * @author 王威翔
 	 */
 	public CompetitionPictureBean findById(Integer id) {
-		Optional<CompetitionPictureBean> optional = competitionPictureRepository.findById(id);
+		Optional<CompetitionPictureBean> optional = compPictureDao.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -52,7 +52,7 @@ public class CompetitionPictureService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionPictureBean> findAll() {
-		return competitionPictureRepository.findAll();
+		return compPictureDao.findAll();
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class CompetitionPictureService {
 	 */
 	public boolean deletePictureById(Integer id) {
 		try {
-			competitionPictureRepository.deleteById(id);
+			compPictureDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -80,7 +80,7 @@ public class CompetitionPictureService {
 	 */
 	public boolean deletePictureByEntity(CompetitionPictureBean compPicture) {
 		try {
-			competitionPictureRepository.delete(compPicture);
+			compPictureDao.delete(compPicture);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -95,9 +95,9 @@ public class CompetitionPictureService {
 	 * @author 王威翔
 	 */
 	public CompetitionPictureBean updateByEntity(CompetitionPictureBean compPicture) {
-		if (competitionPictureRepository.findById(compPicture.getId()).isPresent()) {
+		if (compPictureDao.findById(compPicture.getId()).isPresent()) {
 			try {
-				return competitionPictureRepository.save(compPicture);
+				return compPictureDao.save(compPicture);
 			} catch (Exception e) {
 				return null;
 			}

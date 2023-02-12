@@ -16,7 +16,7 @@ import tw.survival.model.Competition.CompetitionRepository;
 public class CompetitionService {
 
 	@Autowired
-	private CompetitionRepository competitionRepository;
+	private CompetitionRepository compDao;
 
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
@@ -28,7 +28,7 @@ public class CompetitionService {
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
 			// 要先給一些欄位加入預設值
-			return competitionRepository.save(comp);
+			return compDao.save(comp);
 		} catch (Exception e) {
 			return null;
 		}
@@ -54,7 +54,7 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean findById(Integer id) {
-		Optional<CompetitionBean> optional = competitionRepository.findById(id);
+		Optional<CompetitionBean> optional = compDao.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -65,7 +65,7 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> findAll() {
-		return competitionRepository.findAll();
+		return compDao.findAll();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class CompetitionService {
 	public boolean deleteById(Integer id) {
 		try {
 			// 需先刪除對應活動獎品實體與論壇系統貼文
-			competitionRepository.deleteById(id);
+			compDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -93,7 +93,7 @@ public class CompetitionService {
 	 */
 	public boolean deleteByEntity(CompetitionBean comp) {
 		try {
-			competitionRepository.delete(comp);
+			compDao.delete(comp);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -121,9 +121,9 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean updateByEntity(CompetitionBean comp) {
-		if (competitionRepository.findById(comp.getId()).isPresent()) {
+		if (compDao.findById(comp.getId()).isPresent()) {
 			try {
-				return competitionRepository.save(comp);
+				return compDao.save(comp);
 			} catch (Exception e) {
 				return null;
 			}
@@ -140,11 +140,11 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean republishById(Integer id) {
-		Optional<CompetitionBean> optional = competitionRepository.findById(id);
+		Optional<CompetitionBean> optional = compDao.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
-			competitionRepository.save(comp);
+			compDao.save(comp);
 		}
 		return null;
 	}

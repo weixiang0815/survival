@@ -16,10 +16,10 @@ import tw.survival.model.Competition.SignUpRepository;
 public class SignUpService {
 
 	@Autowired
-	private SignUpRepository signUpRepository;
+	private SignUpRepository signupDao;
 
 	/**
-	 * 新增一筆報名紀錄
+	 * 新增一筆報名紀錄，但不一定已付款
 	 * 
 	 * @param signup 欲新增紀錄的報名紀錄實體
 	 * @return 新增成功回傳該報名紀錄實體，失敗回傳 null
@@ -27,7 +27,22 @@ public class SignUpService {
 	 */
 	public SignUpBean insert(SignUpBean signup) {
 		try {
-			return signUpRepository.save(signup);
+			return signupDao.save(signup);
+		} catch (Exception e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * 繳交報名費
+	 * 
+	 * @param signup 欲繳費的報名紀錄實體
+	 * @return 繳費成功回傳該報名紀錄實體，失敗回傳 null
+	 * @author 王威翔
+	 */
+	public SignUpBean payup(SignUpBean signup) {
+		try {
+			return signupDao.save(signup);
 		} catch (Exception e) {
 			return null;
 		}
@@ -41,7 +56,7 @@ public class SignUpService {
 	 * @author 王威翔
 	 */
 	public SignUpBean findById(Integer id) {
-		Optional<SignUpBean> optional = signUpRepository.findById(id);
+		Optional<SignUpBean> optional = signupDao.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -52,7 +67,7 @@ public class SignUpService {
 	 * @author 王威翔
 	 */
 	public List<SignUpBean> findAll() {
-		return signUpRepository.findAll();
+		return signupDao.findAll();
 	}
 
 	/**
@@ -64,7 +79,7 @@ public class SignUpService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
-			signUpRepository.deleteById(id);
+			signupDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -80,7 +95,7 @@ public class SignUpService {
 	 */
 	public boolean deleteByEntity(SignUpBean signup) {
 		try {
-			signUpRepository.delete(signup);
+			signupDao.delete(signup);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -94,9 +109,9 @@ public class SignUpService {
 	 * @return 更新成功回傳該報名紀錄實體，失敗回傳 null
 	 */
 	public SignUpBean updateByEntity(SignUpBean signup) {
-		if (signUpRepository.findById(signup.getId()).isPresent()) {
+		if (signupDao.findById(signup.getId()).isPresent()) {
 			try {
-				signUpRepository.save(signup);
+				signupDao.save(signup);
 				return signup;
 			} catch (Exception e) {
 				return null;
