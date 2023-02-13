@@ -23,20 +23,13 @@
 					<input type="text" name="id" value="${place.id}" hidden />
 					<table class="table table-hover">
 						<tr>
-<<<<<<< HEAD
-							<td colspan="2"><img style="max-width: 100%;"
-								src="${contextRoot}/place/id?id=${place.id}" /></td>
-						</tr>
-						<tr>
-							<td>場地圖片:</td>
-							<td><input type="file" name="placePhoto" />
-=======
+
 							<td colspan="2"><img src="${contextRoot}/place/id?id=${place.id}" /></td>
 						</tr>
 						<tr>
 							<td>場地圖片:</td>
 							<td><input type="file" name="place_photo" />
->>>>>>> 3fd04a606c07b16f9c7ee4e80481969f5c0921a9
+
 						</tr>
 						<tr>
 							<td>場地名稱：</td>
