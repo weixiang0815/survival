@@ -25,35 +25,6 @@
 				<th colspan="2"></th>
 			</tr>
 			<jstl:forEach items="${list}" var="onePlace">
-<<<<<<< HEAD
-
-				<div>
-					<img alt="" src="${contextRoot}/place/id?id=${onePlace.id}">
-
-
-<<<<<<< HEAD
-					場地名稱:${onePlace.place_name} 場地地址:${onePlace.place_address}
-
-					場地費用/小時:${onePlace.place_fee} 容納人口數:${onePlace.place_capacity}
-=======
-					場地名稱:${onePlace.place_name}, 場地地址:${onePlace.place_address},
-
-					場地費用/小時:${onePlace.place_fee}, 容納人口數:${onePlace.place_capacity}
->>>>>>> 3fd04a606c07b16f9c7ee4e80481969f5c0921a9
-
-
-					<form action="${contextRoot}/place/edit" method="get">
-						<input name="id" type="hidden" value="${onePlace.id}" /> <input
-							type="submit" class="btn btn-info btn-sm" value="編輯" />
-					</form>
-					<form action="${contextRoot}/place/delete" method="post">
-						<input name="_method" type="hidden" value="delete" /> <input
-							name="id" type="hidden" value="${onePlace.id}" /> <input
-							type="submit" class="btn btn-danger btn-sm" value="刪除" />
-					</form>
-				</div>
-
-=======
 				<tr>
 					<td><img alt=""
 						src="${contextRoot}/place/id?id=${onePlace.id}"></td>
@@ -75,7 +46,7 @@
 						</form>
 					</td>
 				</tr>
->>>>>>> a1d3652299ac9f65c8b28f18ee63b5d8aaf1e833
+
 			</jstl:forEach>
 		</table>
 	</div>

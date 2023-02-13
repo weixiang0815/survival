@@ -98,9 +98,9 @@ public class CompetitionBean {
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_competition_prize_id")
-	private CompetitionPrizeBean competitionPrizes;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "fk_competition_prize_id")
+//	private CompetitionPrizeBean competitionPrizes;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
@@ -258,13 +258,13 @@ public class CompetitionBean {
 		this.post = post;
 	}
 
-	public CompetitionPrizeBean getCompetitionPrizes() {
-		return competitionPrizes;
-	}
-
-	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
-		this.competitionPrizes = competitionPrizes;
-	}
+//	public CompetitionPrizeBean getCompetitionPrizes() {
+//		return competitionPrizes;
+//	}
+//
+//	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
+//		this.competitionPrizes = competitionPrizes;
+//	}
 
 	public Set<SignUpBean> getSignUps() {
 		return signUps;
