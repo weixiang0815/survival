@@ -87,10 +87,14 @@ public class PlaceController {
 	
 	@PostMapping("/place/edit")
 	public  String sendEditPlace(@RequestParam("id") Integer id,@RequestParam("place_name") String place_name,
-			@RequestParam("place_address") String place_address, @RequestParam("place_photo") byte[] img ,
-			@RequestParam("place_fee") Integer place_fee,@RequestParam("place_capacity") Integer place_capacity) {
-		 PlaceService pService = new PlaceService();
-		 pService.updatePlaceById(id,place_name,place_address,img,place_fee,place_capacity);
+			@RequestParam("place_address") String place_address, @RequestParam("place_photo") MultipartFile place_photo ,
+			@RequestParam("place_fee") Integer place_fee,@RequestParam("place_capacity") Integer place_capacity)  {
+		 try {
+			pService.updatePlaceById(id,place_name,place_address,place_photo.getBytes(),place_fee,place_capacity);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 return "redirect:/place/all";
 		
 	}
