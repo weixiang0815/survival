@@ -58,8 +58,8 @@ public class EmployeeBean {
 	@Column(name = "title")
 	private String title;
 	
-	@Column(name = "hire_date")
-	private Date hire_date;
+	@Column(name = "hired_date")
+	private Date hired_date;
 	
 	@Column(name = "status")
 	private String status;
@@ -179,11 +179,11 @@ public class EmployeeBean {
 	}
 
 	public Date getHire_date() {
-		return hire_date;
+		return hired_date;
 	}
 
-	public void setHire_date(Date hire_date) {
-		this.hire_date = hire_date;
+	public void setHire_date(Date hired_date) {
+		this.hired_date = hired_date;
 	}
 
 	public String getStatus() {
