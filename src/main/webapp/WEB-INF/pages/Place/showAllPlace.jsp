@@ -22,9 +22,15 @@
 					<img alt="" src="${contextRoot}/place/id?id=${onePlace.id}">
 
 
+<<<<<<< HEAD
 					場地名稱:${onePlace.place_name} 場地地址:${onePlace.place_address}
 
 					場地費用/小時:${onePlace.place_fee} 容納人口數:${onePlace.place_capacity}
+=======
+					場地名稱:${onePlace.place_name}, 場地地址:${onePlace.place_address},
+
+					場地費用/小時:${onePlace.place_fee}, 容納人口數:${onePlace.place_capacity}
+>>>>>>> 3fd04a606c07b16f9c7ee4e80481969f5c0921a9
 
 
 					<form action="${contextRoot}/place/edit" method="get">
