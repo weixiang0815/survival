@@ -3,10 +3,13 @@ package tw.survival.controller.Competition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.service.Competition.CompetitionPictureService;
@@ -57,7 +60,9 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/create")
-	public String createCompetition() {
+	public String createCompetition(@ModelAttribute("CompetitionBean") CompetitionBean comp, BindingResult result,
+			Model model) {
+		model.addAttribute("competition", comp);
 		return "redirect:/competition";
 	}
 
@@ -98,7 +103,8 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/search/result")
-	public String searchAll() {
+	public String searchAll(Model model) {
+		model.addAttribute("compList", compService.findAll());
 		return "Competition/showCompetitions";
 	}
 
@@ -108,7 +114,8 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/edit")
-	public String editCompetition() {
+	public String editCompetition(@RequestParam("id") Integer id, Model model) {
+		model.addAttribute("comp", compService.findById(id));
 		return "Competition/editCompetition";
 	}
 
@@ -130,7 +137,7 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@DeleteMapping("/competition/delete")
-	public String deleteCompetitionById() {
+	public String deleteCompetitionById(@RequestParam("id") Integer id) {
 		return "redirect:/competition/search/result";
 	}
 

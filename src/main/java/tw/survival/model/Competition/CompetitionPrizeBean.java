@@ -1,5 +1,6 @@
 package tw.survival.model.Competition;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,10 +21,11 @@ public class CompetitionPrizeBean {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "fk_competition_id")
+	private Integer competitionId;
 
-	@OneToOne(mappedBy = "competitionPrizes")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 
 	@Column(name = "fk_1ts_prize_id")
@@ -77,12 +79,12 @@ public class CompetitionPrizeBean {
 	public CompetitionPrizeBean() {
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getCompetitionId() {
+		return competitionId;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCompetitionId(Integer competitionId) {
+		this.competitionId = competitionId;
 	}
 
 	public CompetitionBean getCompetition() {

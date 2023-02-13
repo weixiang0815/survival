@@ -25,46 +25,32 @@
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">活動系統原生 JSP</a>
+							data-bs-toggle="dropdown" aria-expanded="false">活動系統</a>
 							<ul class="dropdown-menu dropdown-menu-dark"
 								aria-labelledby="navbarDarkDropdownMenuLink">
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/new">新增活動</a></li>
+									href="${contextRoot}/competition/new">新增活動（JSP）</a></li>
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/search">查詢活動</a></li>
+									href="${contextRoot}/competition/search/result">查詢活動（JSP）</a></li>
+								<li><a class="dropdown-item"
+									href="${contextRoot}/competition/new">新增活動（AJAX）</a></li>
+								<li><a class="dropdown-item"
+									href="${contextRoot}/competition/search/result">查詢活動（AJAX）</a></li>
 							</ul></li>
 						<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">活動系統 AJAX</a>
+							data-bs-toggle="dropdown" aria-expanded="false">報名系統</a>
 							<ul class="dropdown-menu dropdown-menu-dark"
 								aria-labelledby="navbarDarkDropdownMenuLink">
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/new">新增活動</a></li>
+									href="${contextRoot}/competition/signup">新增報名（JSP）</a></li>
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/search">查詢活動</a></li>
-							</ul></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">報名系統原生 JSP</a>
-							<ul class="dropdown-menu dropdown-menu-dark"
-								aria-labelledby="navbarDarkDropdownMenuLink">
+									href="${contextRoot}/competition/signup/search">查詢報名（JSP）</a></li>
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/signup">新增報名</a></li>
+									href="${contextRoot}/competition/signup">新增報名（AJAX）</a></li>
 								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/signup/search">查詢報名</a></li>
-							</ul></li>
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDarkDropdownMenuLink" role="button"
-							data-bs-toggle="dropdown" aria-expanded="false">報名系統 AJAX</a>
-							<ul class="dropdown-menu dropdown-menu-dark"
-								aria-labelledby="navbarDarkDropdownMenuLink">
-								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/signup">新增報名</a></li>
-								<li><a class="dropdown-item"
-									href="${contextRoot}/competition/signup/search">查詢報名</a></li>
+									href="${contextRoot}/competition/signup/search">查詢報名（AJAX）</a></li>
 							</ul></li>
 					</ul>
 				</div>

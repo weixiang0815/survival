@@ -99,7 +99,7 @@ public class CompetitionBean {
 	private PostsBean post;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "competitionId")
+	@JoinColumn(name = "fk_competition_prize_id")
 	private CompetitionPrizeBean competitionPrizes;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)

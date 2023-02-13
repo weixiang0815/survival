@@ -86,23 +86,24 @@ public class CompetitionPrizeService {
 		}
 	}
 
-	/**
-	 * 更新一筆活動獎品實體
-	 * 
-	 * @param compPrize 欲更新內容的活動獎品實體
-	 * @return 更新成功回傳該活動獎品實體，失敗回傳 null
-	 * @author 王威翔
-	 */
-	public CompetitionPrizeBean updateByEntity(CompetitionPrizeBean compPrize) {
-		if (compPrizeDao.findById(compPrize.getId()).isPresent()) {
-			try {
-				compPrizeDao.save(compPrize);
-				return compPrize;
-			} catch (Exception e) {
-				return null;
-			}
-		} else {
-			return null;
-		}
-	}
+//	/**
+//	 * 更新一筆活動獎品實體
+//	 * 
+//	 * @param compPrize 欲更新內容的活動獎品實體
+//	 * @return 更新成功回傳該活動獎品實體，失敗回傳 null
+//	 * @author 王威翔
+//	 */
+//	public CompetitionPrizeBean updateByEntity(CompetitionPrizeBean compPrize) {
+//		if (compPrizeDao.findById(compPrize.getId()).isPresent()) {
+//			try {
+//				compPrizeDao.save(compPrize);
+//				return compPrize;
+//			} catch (Exception e) {
+//				return null;
+//			}
+//		} else {
+//			return null;
+//		}
+//	}
+
 }
