@@ -9,28 +9,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Table(name="Logistics")
+@Table(name = "Logistics")
 @Component
 public class LogisticsBean {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="star_date")
+
+	@Column(name = "star_date")
 	private Date star_date;
-	
-	@Column(name="arrive_date")
+
+	@Column(name = "arrive_date")
 	private Date arrive_date;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private String status;
-	
+
 //	@Column(name="fk_inventory_id")
 //	private Integer fk_inventory_id;
 //	
@@ -39,7 +38,6 @@ public class LogisticsBean {
 //	
 //	@Column(name="fk_orderitem_id")
 //	private Integer fk_orderitem_id;
-
 
 	public Integer getId() {
 		return id;
@@ -72,6 +70,5 @@ public class LogisticsBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	
-	
+
 }
