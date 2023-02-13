@@ -43,6 +43,9 @@ public class PlayerBean {
 	@Column(name = "identity_number")
 	private String identity_number;
 
+	@Column(name="nickname")
+	private String nickname;
+	
 	@Column(name = "email")
 	private String email;
 
@@ -54,6 +57,9 @@ public class PlayerBean {
 
 	@Column(name = "address")
 	private String address;
+	
+	@Column(name = "info")
+	private String info;
 
 	@Column(name = "thumbnail")
 	@Lob
@@ -246,6 +252,22 @@ public class PlayerBean {
 
 	public void setpPermission(playerPermission pPermission) {
 		this.playerPermission = pPermission;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

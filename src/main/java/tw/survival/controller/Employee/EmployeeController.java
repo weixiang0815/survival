@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Employee.EmployeeBean;
+import tw.survival.model.Employee.EmployeeReposity;
 import tw.survival.service.Employee.EmployeeService;
 
 @Controller
@@ -20,10 +21,18 @@ public class EmployeeController {
 
 	@Autowired
 	public EmployeeService empService;
+	@Autowired
+	public EmployeeReposity empReposity;
 
 	@GetMapping("/Employee/add")
 	public String addemployee() {
 		return "Employee/addemployees";
+	}
+	@GetMapping("/Employee/list")
+	public String list(Model model) {
+		List<EmployeeBean> list=empReposity.findAll();
+		model.addAttribute("Employee",list);
+		return "Employee/empallResult";
 	}
 
 	@ResponseBody
@@ -60,13 +69,6 @@ public class EmployeeController {
 		}
 
 		return "Employee/addemployees ";
-	}
-
-	@PostMapping("/getEmplouee.controller")
-	public String serchEmployee(Model m) {
-		List<EmployeeBean> employee = empService.getAllemp();
-		m.addAttribute("employee", employee);
-		return "Employee/empallResult";
 	}
 
 }
