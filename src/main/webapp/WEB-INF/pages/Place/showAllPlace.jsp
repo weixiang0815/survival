@@ -15,29 +15,37 @@
 	<div class="container">
 		<h1>All Place</h1>
 
-		<table>
+		<table class="table table-hover table-bordered">
+			<tr>
+				<th>照片</th>
+				<th>名稱</th>
+				<th>地址</th>
+				<th>費用/小時</th>
+				<th>容納人數</th>
+				<th colspan="2"></th>
+			</tr>
 			<jstl:forEach items="${list}" var="onePlace">
-
-				<div>
-					<img alt="" src="${contextRoot}/place/id?id=${onePlace.id}">
-
-
-					場地名稱:${onePlace.place_name}, 場地地址:${onePlace.place_address},
-
-					場地費用/小時:${onePlace.place_fee}, 容納人口數:${onePlace.place_capacity}
-
-
-					<form action="${contextRoot}/place/edit" method="get">
-						<input name="id" type="hidden" value="${onePlace.id}" /> <input
-							type="submit" class="btn btn-info btn-sm" value="編輯" />
-					</form>
-					<form action="${contextRoot}/place/delete" method="post">
-						<input name="_method" type="hidden" value="delete" /> <input
-							name="id" type="hidden" value="${onePlace.id}" /> <input
-							type="submit" class="btn btn-danger btn-sm" value="刪除" />
-					</form>
-				</div>
-
+				<tr>
+					<td><img alt=""
+						src="${contextRoot}/place/id?id=${onePlace.id}"></td>
+					<td>${onePlace.place_name}</td>
+					<td>${onePlace.place_address}</td>
+					<td>${onePlace.place_fee}</td>
+					<td>${onePlace.place_capacity}</td>
+					<td>
+						<form action="${contextRoot}/place/edit" method="get">
+							<input name="id" type="hidden" value="${onePlace.id}" /> <input
+								type="submit" class="btn btn-info btn-sm" value="編輯" />
+						</form>
+					</td>
+					<td>
+						<form action="${contextRoot}/place/delete" method="post">
+							<input name="_method" type="hidden" value="delete" />
+							<input name="id" type="hidden" value="${onePlace.id}" />
+							<input type="submit" class="btn btn-danger btn-sm" value="刪除" />
+						</form>
+					</td>
+				</tr>
 			</jstl:forEach>
 		</table>
 	</div>
