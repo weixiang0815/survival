@@ -85,7 +85,7 @@ public class CompetitionBean {
 	@Column(name = "fee")
 	private Integer fee;
 
-	@Column(name = "single_or_crew")
+	@Column(name = "single_or_crew", length = 1)
 	private Character singleOrCrew;
 
 	@Column(name = "capacity")

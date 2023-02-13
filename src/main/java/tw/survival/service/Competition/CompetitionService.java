@@ -103,7 +103,7 @@ public class CompetitionService {
 	/**
 	 * 透過 id 下架一筆活動資訊並刪除貼文，但尚未從資料庫中刪除整個紀錄
 	 * 
-	 * @param id 欲下嫁的活動實體 id
+	 * @param id 欲下架的活動實體 id
 	 * @return 下架成功回傳該活動實體，失敗回傳 null
 	 * @author 王威翔
 	 */

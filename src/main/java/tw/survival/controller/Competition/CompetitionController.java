@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.service.Competition.CompetitionHistoryService;
 import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
@@ -28,6 +29,9 @@ public class CompetitionController {
 
 	@Autowired
 	private CompetitionPictureService compPicService;
+
+	@Autowired
+	private CompetitionHistoryService compHistoryService;
 
 	@Autowired
 	private SignUpService signupService;
