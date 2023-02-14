@@ -53,6 +53,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/new")
 	public String newCompetition(Model model) {
+		String[] ruleOptions = {};
 		model.addAttribute("competition", new CompetitionBean());
 		return "Competition/newCompetition";
 	}
