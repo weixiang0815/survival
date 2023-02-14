@@ -60,25 +60,36 @@ public class CompetitionController {
 	/**
 	 * 新增一筆活動實體，但不一定直接發布
 	 * 
-	 * @return 重新導向至活動系統首頁
+	 * @return 重新導向至活動詳情頁面
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/create")
-	public String createCompetition(@ModelAttribute("CompetitionBean") CompetitionBean comp, BindingResult result,
+	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, BindingResult result,
 			Model model) {
-		model.addAttribute("competition", comp);
-		return "redirect:/competition";
+		if (result.hasErrors()) {
+			model.addAttribute("新增失敗，請重新輸入");
+			return "redirect:/competition/new";
+		}
+		compService.create(comp);
+		comp = compService.findLatestCompetition();
+		if (comp.getStatus().contentEquals("已發布")) {
+			compService.publishById(comp.getId());
+		}
+		model.addAttribute("comp", comp);
+		return "Competition/competitionDetail";
 	}
 
 	/**
 	 * 正式發布一筆活動資訊
 	 * 
-	 * @return 重新導向至活動系統首頁
+	 * @return 重新導向至活動詳情頁面
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/publish")
-	public String publishCompetition() {
-		return "redirect:/competition";
+	public String publishCompetition(@RequestParam("id") Integer id, Model model) {
+		CompetitionBean comp = compService.publishById(id);
+		model.addAttribute("comp", comp);
+		return "Competition/competitionDetail";
 	}
 
 	/**
@@ -97,7 +108,8 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/detail")
-	public String competitionDetailById() {
+	public String competitionDetailById(@RequestParam("id") Integer id, Model model) {
+		model.addAttribute("comp", compService.findById(id));
 		return "Competition/competitionDetail";
 	}
 
@@ -148,12 +160,14 @@ public class CompetitionController {
 	/**
 	 * 透過 id 將一筆活動資訊下架，但不一定直接刪除
 	 * 
-	 * @return 重新導向至多筆活動資訊搜尋結果
+	 * @return 重新導向至活動詳情頁面
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/takedown")
-	public String takedownCompetitionById() {
-		return "redirect:/competition/search/result";
+	public String takedownCompetitionById(@RequestParam("id") Integer id, Model model) {
+		compService.takedownById(id);
+		model.addAttribute("comp", compService.findById(id));
+		return "Competition/competitionDetail";
 	}
 
 }
