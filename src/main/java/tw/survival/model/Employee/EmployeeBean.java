@@ -13,6 +13,10 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import tw.survival.model.Place.PlaceBean;
 
@@ -57,6 +61,7 @@ public class EmployeeBean {
 	
 	@Column(name = "title")
 	private String title;
+	
 	
 	@Column(name = "hired_date")
 	private Date hired_date;
@@ -178,7 +183,7 @@ public class EmployeeBean {
 		this.title = title;
 	}
 
-	public Date getHire_date() {
+	public Date getHired_date() {
 		return hired_date;
 	}
 

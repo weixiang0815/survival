@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="zh-hant-tw">
@@ -16,68 +17,75 @@ max-width: 100%;
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 <h3>使用者修改資料</h3>
-	<form action="updateUser" method="post">
+	<form:form action="${ContextRoot}/player/update" method="put" modelAttribute="player">
 		<table class="table table-hover">
-			<tr>
-				<td colspan="2" style="width: 100px;"><img alt="查無圖片" src="/Survival/showImg?id=${user.id}"/></td>
-			</tr>
-			<tr>
+		    <tr>
 				<td>大頭貼:</td>
 				<td><input type="file" name="thumbnail" value="上傳圖片" />
 			</tr>
 			<tr>
 				<td>ID：</td>
-				<td><input type="text" name="id" value="${user.id}" readOnly /></td>
+				<td><form:input type="text" path="id" value="${player.id}" /></td>
 			</tr>
 			<tr>
 				<td>名稱：</td>
-				<td><input type="text" name="name" value="${user.name}" /></td>
+				<td><form:input type="text" path="name" value="${player.name}" /></td>
 			</tr>
 			<tr>
 				<td>帳號：</td>
-				<td><input type="text" name="account" value="${user.account}" /></td>
+				<td><form:input type="text" path="account" value="${player.account}" /></td>
 			</tr>
 			<tr>
 				<td>密碼：</td>
-				<td><input type="password" name="password"
-					value="${user.password}" /></td>
+				<td><form:input type="password" path="password"
+					value="${player.password}" /></td>
 			</tr>
 			<tr>
 				<td>暱稱：</td>
-				<td><input type="text" name="nickname" value="${user.nickname}" /></td>
+				<td><form:input type="text" path="nickname" value="${player.nickname}" /></td>
+			</tr>
+			<tr>
+				<td>生日：</td>
+				<td><form:input type="Date" path="birthday" value="${player.birthday}" /></td>
 			</tr>
 			<tr>
 				<td>性別：</td>
 				<td>
 				<c:choose>
-				<c:when test="${user.sex == \"M\"}">
-				<label>男:</label><input type="radio" name="sex" value="M" checked="checked"/>
-				<label>女:</label><input type="radio" name="sex" value="F"/>
+				<c:when test="${player.sex == 'M'}">
+					<form:radiobutton name="sex" class="form-check-input" path="sex" value="M" label="男" required="true" checked="checked"/>
+					<form:radiobutton name="sex" class="form-check-input" path="sex" value="F" label="女" required="true" />
 				</c:when>
 				<c:otherwise>
-				<label>男:</label><input type="radio" name="sex" value="M"/>
-				<label>女:</label><input type="radio" name="sex" value="F" checked="checked"/>
+					<form:radiobutton name="sex" class="form-check-input" path="sex" value="M" label="男" required="true"/>
+					<form:radiobutton name="sex" class="form-check-input" path="sex" value="F" label="女" required="true" checked="checked"/>
 				</c:otherwise>
 				</c:choose>
 				</td>
-				<td><label>男:</label><input type="radio" name="sex" value="M" /><label>女:</label><input
-					type="radio" name="sex" value="F" /></td>
+			</tr>
+			<tr>
+				<td>縣市：</td>
+				<td><form:input type="text" path="address" value="${player.address}" /></td>
 			</tr>
 			<tr>
 				<td>地址：</td>
-				<td><input type="text" name="address" value="${user.address}" /></td>
+				<td><form:input type="text" path="address" value="${player.address}" /></td>
+			</tr>
+			<tr>
+				<td>電話：</td>
+				<td><form:input type="text" path="address" value="${player.phone}" /></td>
 			</tr>
 			<tr>
 				<td>Email：</td>
-				<td><input type="text" name="email" value="${user.email}" /></td>
+				<td><form:input type="text" path="email" value="${player.email}" /></td>
 			</tr>
 			<tr>
 				<td>年齡：</td>
-				<td><input type="text" name="age" value="${user.age}" /></td>
+				<td><form:input type="text" path="age" value="${player.age}" /></td>
 			</tr>
 		</table>
 		<input class="btn btn-primary" type="submit" value="更新" />
-	</form>
+	</form:form>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

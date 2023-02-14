@@ -57,8 +57,8 @@ max-width: 100%;
 				<td>${player.age}</td>
 				<!-- <td>${player.info}</td> -->
 				<!-- <tf>${player.crew}</tf> -->
-		<td><a href="updateUserById?id=${user.id}"><button class="btn btn-info">編輯</button></a>
-		<td><a href="deleteUserById?id=${user.id}"><button class="btn btn-danger">刪除</button></a>
+		<td><a href="${contextRoot}/player/update/?id=${player.id}"><button class="btn btn-info">編輯</button></a>
+		<td><a href="deleteUserById?id=${player.id}"><button class="btn btn-danger">刪除</button></a>
 		</tr>
 		</c:forEach>
 	</table>
