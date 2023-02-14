@@ -76,9 +76,6 @@ public class CompetitionBean {
 	@Column(name = "content")
 	private String content;
 
-	@Column(name = "rules")
-	private String rules;
-
 	@Column(name = "budget")
 	private Integer budget;
 
@@ -210,14 +207,6 @@ public class CompetitionBean {
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	public String getRules() {
-		return rules;
-	}
-
-	public void setRules(String rules) {
-		this.rules = rules;
 	}
 
 	public Integer getBudget() {
