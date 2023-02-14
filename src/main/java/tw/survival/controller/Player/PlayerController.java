@@ -44,7 +44,7 @@ public class PlayerController {
 		m.addAttribute("player", list);
 		return "Player/SelectAllResult";
 	}
-
+//U
 	@GetMapping("/player/update")
 	public String updatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
@@ -92,7 +92,7 @@ public class PlayerController {
 
 	@PutMapping("/player/update")
 	public String updateById(@ModelAttribute("player") PlayerBean player, Model model) {
-		pService.addplayer(player);
+		pService.update(player);
 		return "redirect:/player/list";
 
 	}

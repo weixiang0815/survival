@@ -84,7 +84,7 @@ max-width: 100%;
 				<td><form:input type="text" path="age" value="${player.age}" /></td>
 			</tr>
 		</table>
-		<input class="btn btn-primary" type="submit" value="更新" />
+		<input class="btn btn-outline-primary" type="submit"  value="更新"/>
 	</form:form>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
