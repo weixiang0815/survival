@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>商城首頁</title>
+<title>赫赫商城首頁</title>
 </head>
 <body>
 
@@ -12,8 +12,7 @@
     
 <div class="container"></div>
 <h1>測試首頁</h1>
-<h1>有顯示就是成功</h1>
-
+<iframe align="middle" width="640" height="360" src="https://www.youtube.com/embed/xyNwRVtQEFo?autoplay=1"  title="FBI！" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 </body>

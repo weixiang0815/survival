@@ -4,13 +4,20 @@ import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import tw.survival.model.Place.InventoryBean;
+import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name="Logistics")
@@ -31,15 +38,21 @@ public class LogisticsBean {
 	@Column(name="status")
 	private String status;
 	
-//	@Column(name="fk_inventory_id")
-//	private Integer fk_inventory_id;
-//	
-//	@Column(name="fk_receiver_id")
-//	private Integer fk_receiver_id;
-//	
-//	@Column(name="fk_orderitem_id")
-//	private Integer fk_orderitem_id;
-
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_inventory_id")
+	private InventoryBean Inventory;
+	
+//	接收者(player_id)
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_receiver_id")
+	private PlayerBean Player;
+	
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_orderitem_id")
+	private OrderItemBean OrderItem;
 
 	public Integer getId() {
 		return id;
@@ -72,6 +85,31 @@ public class LogisticsBean {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+	public InventoryBean getInventory() {
+		return Inventory;
+	}
+
+	public void setInventory(InventoryBean inventory) {
+		Inventory = inventory;
+	}
+
+	public PlayerBean getPlayer() {
+		return Player;
+	}
+
+	public void setPlayer(PlayerBean player) {
+		Player = player;
+	}
+
+	public OrderItemBean getOrderItem() {
+		return OrderItem;
+	}
+
+	public void setOrderItem(OrderItemBean orderItem) {
+		OrderItem = orderItem;
+	}
+	
 	
 	
 }
