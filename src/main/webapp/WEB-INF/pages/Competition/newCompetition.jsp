@@ -16,7 +16,7 @@
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-6 col-lg-8"
 				style="border: 2px solid red; border-radius: 5px;">
-				<h1>活動詳情表單</h1>
+				<h1>活動詳情表單</h1><span>${error}</span>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
 						<h1>請先登入再新增活動呦😊～</h1>
@@ -42,7 +42,7 @@
 							<div class="col-3">
 								<form:label class="form-label" path="startDate">開始日期</form:label>
 								<form:input class="form-control" type="text" path="startDate"
-									placeholder="MM/DD/YYYY" required="true" />
+									placeholder="yyyy/mm/dd" required="true" />
 							</div>
 							<div class="col-3">
 								<form:label path="startTimespan" class="form-label">開始時間</form:label>
@@ -56,7 +56,7 @@
 							<div class="col-3">
 								<form:label class="form-label" path="endDate">結束日期</form:label>
 								<form:input class="form-control" type="text" id="endDate"
-									path="endDate" placeholder="MM/DD/YYYY" required="true" />
+									path="endDate" placeholder="yyyy/mm/dd" required="true" />
 							</div>
 							<div class="col-3">
 								<form:label path="endTimespan" class="form-label">結束時間</form:label>
@@ -86,7 +86,7 @@
 									path="singleOrCrew" id="single" value="S" label="單人戰"
 									required="true" />
 								<form:radiobutton name="singleOrCrew" class="form-check-input"
-									path="singleOrCrew" id="crew" value="M" label="團體戰"
+									path="singleOrCrew" id="crew" value="C" label="團體戰"
 									required="true" />
 							</div>
 							<div class="col-6"></div>
@@ -135,9 +135,8 @@
 							</div>
 						</fieldset>
 						<fieldset class="row mt-3 mb-3 p-3">
-							<input class="col auto m-3 btn btn-primary" type="submit"
-								value="送出" /> <input class="col auto m-3 btn btn-danger"
-								type="reset" value="清除" />
+							<button class="col auto m-3 btn btn-primary" type="submit">送出</button> 
+							<button class="col auto m-3 btn btn-danger" type="reset">清除</button>
 						</fieldset>
 					</div>
 				</form:form>
@@ -147,34 +146,21 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
-		$(function() {
-			const startDate = $("#startDate");
-			const endDate = $("#endDate");
-
-			function updateEndDate() {
-				endDate.datepicker("option", "minDate", getDate(this));
+		$(document).ready(function() {
+		$("#startDate").datepicker({
+			dateFormat: "yy-mm-dd",
+			onSelect: function(date) {
+				$("#endDate").datepicker("option", "minDate", date);
 			}
-
-			startDate.datepicker({
-				onSelect : updateEndDate,
-				dateFormat : "mm/dd/yy"
-			});
-
-			endDate.datepicker({
-				dateFormat : "mm/dd/yy"
-			});
 		});
-
-		function getDate(element) {
-			var date;
-			try {
-				date = $.datepicker.parseDate("mm/dd/yy", element.value);
-			} catch (error) {
-				date = null;
+		$("#endDate").datepicker({
+			dateFormat: "yy-mm-dd",
+			onSelect: function(date) {
+				$("#startDate").datepicker("option", "maxDate", date);
 			}
+		});
+});
 
-			return date;
-		}
 	</script>
 	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
 </body>

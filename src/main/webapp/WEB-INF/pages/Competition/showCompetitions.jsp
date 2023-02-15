@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="zh-hant-tw">
@@ -29,28 +30,31 @@
     </thead>
     <tbody>
     	<c:forEach items="${compList}" var="comp">
-    		<td>${comp.nameMandarin}</td>
-    		<td>${comp.nameEnglish}</td>
-    		<td>
-    			<c:choose>
-    				<c:when test="${comp.singleOrCrew == 'C'}">
-    					團體戰
-    				</c:when>
-    				<c:when test="${comp.singleOrCrew == 'S'}">
-    					單人戰
-    				</c:when>
-    				<c:otherwise>
-    					未定
-    				</c:otherwise>
-    			</c:choose>
-    		</td>
-    		<td>台北場</td>
-    		<td>${comp.startDate}</td>
-    		<td>${comp.endDate}</td>
-    		<td>${comp.capacity}</td>
-    		<td>${comp.status}</td>
-    		<td><a href="${contextRoot}/competition/edit?id=${comp.id}"><button class="btn btn-primary">編輯</button></a></td>
-    		<td><a href="${contextRoot}//competition/delete?id=${comp.id}"><button class="btn btn-danger">刪除</button></a></td>
+    		<tr>		
+	    		<td>${comp.mandarinName}</td>
+	    		<td>${comp.englishName}</td>
+	    		<td>
+<%-- 	    		singleOrCrew: ${comp.singleOrCrew.getClass()} ${comp.singleOrCrew} --%>
+	    			<c:choose>
+	    				<c:when test="${comp.singleOrCrew == \"C\"}">
+	    					團體戰
+	    				</c:when>
+	    				<c:when test="${comp.singleOrCrew.equals(\"S\")}">
+	    					單人戰
+	    				</c:when>
+	    				<c:otherwise>
+	    					未定
+	    				</c:otherwise>
+	    			</c:choose>
+	    		</td>
+	    		<td>台北場</td>
+	    		<td>${comp.startDate}</td>
+	    		<td>${comp.endDate}</td>
+	    		<td>${comp.capacity}</td>
+	    		<td>${comp.status}</td>
+	    		<td><a href="${contextRoot}/competition/edit?id=${comp.id}"><button class="btn btn-primary">編輯</button></a></td>
+	    		<td><a href="${contextRoot}//competition/delete?id=${comp.id}"><button class="btn btn-danger">刪除</button></a></td>
+    		</tr>
     	</c:forEach>
     </tbody>
 </table>

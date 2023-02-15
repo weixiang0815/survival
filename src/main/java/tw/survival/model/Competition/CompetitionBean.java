@@ -43,7 +43,7 @@ public class CompetitionBean {
 	private Integer id;
 
 	@Column(name = "public_or_private", length = 1)
-	private Character publicOrPrivate;
+	private String publicOrPrivate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_founder_player")
@@ -59,20 +59,14 @@ public class CompetitionBean {
 	@Column(name = "name_english")
 	private String englishName;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "start_date")
-	private Date startDate;
+	private String startDate;
 
 	@Column(name = "start_timespan")
 	private String startTimespan;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "end_date")
-	private Date endDate;
+	private String endDate;
 
 	@Column(name = "end_timespan")
 	private String endTimespan;
@@ -101,7 +95,7 @@ public class CompetitionBean {
 	private Integer fee;
 
 	@Column(name = "single_or_crew", length = 1)
-	private Character singleOrCrew;
+	private String singleOrCrew;
 
 	@Column(name = "capacity")
 	private Integer capacity;
@@ -155,12 +149,16 @@ public class CompetitionBean {
 		this.id = id;
 	}
 
-	public Character getPublicOrPrivate() {
+	public String getPublicOrPrivate() {
 		return publicOrPrivate;
 	}
 
-	public void setPublicOrPrivate(Character publicOrPrivate) {
+	public void setPublicOrPrivate(String publicOrPrivate) {
 		this.publicOrPrivate = publicOrPrivate;
+	}
+
+	public void setSingleOrCrew(String singleOrCrew) {
+		this.singleOrCrew = singleOrCrew;
 	}
 
 	public PlayerBean getFounderPlayer() {
@@ -195,11 +193,11 @@ public class CompetitionBean {
 		this.englishName = englishName;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
@@ -211,11 +209,11 @@ public class CompetitionBean {
 		this.startTimespan = startTimespan;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
@@ -275,12 +273,8 @@ public class CompetitionBean {
 		this.fee = fee;
 	}
 
-	public Character getSingleOrCrew() {
+	public String getSingleOrCrew() {
 		return singleOrCrew;
-	}
-
-	public void setSingleOrCrew(Character singleOrCrew) {
-		this.singleOrCrew = singleOrCrew;
 	}
 
 	public Integer getCapacity() {

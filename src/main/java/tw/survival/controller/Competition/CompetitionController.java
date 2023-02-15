@@ -3,7 +3,6 @@ package tw.survival.controller.Competition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Forum.PostsService;
 import tw.survival.service.Place.PlaceService;
 
 @Controller
@@ -54,13 +52,10 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/create")
-	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, BindingResult result,
-			Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("新增失敗，請重新輸入");
-			return "redirect:/competition/new";
-		}
+	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, Model model) {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
+		comp.setFounderEmployee(null);
+		comp.setFounderPlayer(null);
 		compService.create(comp);
 		comp = compService.findLatestCompetition();
 		if (comp.getStatus().contentEquals("已發布")) {

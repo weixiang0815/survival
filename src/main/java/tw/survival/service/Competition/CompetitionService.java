@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionRepository;
+import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Forum.PostsService;
 
 @Service
@@ -49,6 +50,11 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
+			PostsBean newPost = new PostsBean();
+			newPost.setName(comp.getMandarinName());
+			newPost.setClassify("活動競賽😎");
+			newPost.setEssay(comp.getContent());
+			postsService.addPost(newPost);
 			compDao.save(comp);
 			return comp;
 		}
