@@ -14,7 +14,7 @@
 	<form action="${contextRoot}/Player/loginSystem"method="post">
 		<table>
 			<tr>
-				<td>職員帳號：</td>
+				<td>玩家帳號：</td>
 				<td><input type="text" name="account" /></td>
 				<td>${errors.account}</td>
 			</tr>

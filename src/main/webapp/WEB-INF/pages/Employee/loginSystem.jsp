@@ -14,7 +14,7 @@
 	<form action="${contextRoot}/Employee/loginSystem"method="post">
 		<table>
 			<tr>
-				<td>使用者帳號：</td>
+				<td>職員帳號：</td>
 				<td><input type="text" name="account" /></td>
 				<td>${errors.account}</td>
 			</tr>

@@ -45,7 +45,7 @@
         </form>
       </td>
       <td>
-        <form action="${contextRoot}/Market/delete" method="post">
+        <form action="${contextRoot}/player/delete" method="post">
           <input name="_method" type="hidden" value="delete" />
           <input name="id" type="hidden" value="${show_AllProduct.id}" />
           <input type="submit" class="btn btn-danger btn-sm" value="刪除" />

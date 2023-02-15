@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,24 +61,24 @@ public class PlayerController {
 	}
 	
 	@DeleteMapping("/player/delete")
-	public String deletePlayer(Integer id) {
-		pService.delete(id);
+	public String deletePlayer(@RequestParam("id") Integer id) {
+		
+		pService.delete(id);	
 		return "redirect:/player/list";
 	}
 
-	@ResponseBody
+	
 	@PostMapping("/player/addpost")
-	public String postPlayer(@RequestParam("id") Integer id, @RequestParam("name") String name,
+	public String postPlayer(@RequestParam("name") String name,
 			@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("identity") String identity_number, @RequestParam("email") String email,
 			@RequestParam("age") Integer age, @RequestParam("region") String region,
 			@RequestParam("nickname") String nickname, @RequestParam("address") String address,
 			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("sex") String sex,
-			@RequestParam("birthday") Date birthday, @RequestParam("info") Date info,
+			@RequestParam("birthday") Date birthday, @RequestParam("info") String info,
 			@RequestParam("phone") String phone, @RequestParam("banned") String banned, Model model) {
 		try {
-			PlayerBean player = new PlayerBean();
-			player.setId(id);
+			PlayerBean player = new PlayerBean();			
 			player.setName(name);
 			player.setAccount(account);
 			player.setPassword(password);
@@ -92,6 +93,7 @@ public class PlayerController {
 			player.setSex(sex);
 			player.setBirthday(birthday);
 			player.setPhone(phone);
+			player.setInfo("null");
 			player.setBanned("T");
 			pService.addplayer(player);
 
@@ -100,7 +102,7 @@ public class PlayerController {
 			e.printStackTrace();
 		}
 
-		return "Player/user";
+		return "redirect:/player/list";
 	}
 
 	

@@ -15,10 +15,8 @@
 	<h3>新增使用者</h3>
 	<form:form action="${contextRoot}/player/addpost"  enctype="multipart/form-data">
 		<table>
-			<tr style="hidden">
-				<td>id：</td>
-				<td><input type="text" name="id" style="hidden" /></td>
-			</tr>
+			<tr>
+			
 			<tr>
 				<td>使用者名稱：</td>
 				<td><input type="text" name="name" /></td>
@@ -72,15 +70,23 @@
 				<td>生日：</td>
 				<td><input type="date" name="birthday" /></td>
 			</tr>
+			<tr>				
+				<td><input  type="hidden" name="banned" /></td>
+			</tr>
 			<tr>
-				<td>個人狀況：</td>
-				<td><input type="text" name="banned" /></td>
-			</tr>			
+				<td>個人介紹：</td>
+				<td><input type="hidden" name="info" /></td>
+			</tr>				
 			<tr>
 				<td><input type="submit" value="註冊" /></td>
 			</tr>
+			
 		</table>
 	</form:form>
 	<jsp:include page="../Layout/footer.jsp" />
+	<script>
+	import random
+	
+	</script>
 </body>
 </html>

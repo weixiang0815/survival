@@ -110,29 +110,29 @@ public class PlayerBean {
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
 
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
 
 	public PlayerBean() {
 	}
@@ -273,45 +273,45 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-	public Set<PostsBean> getPostsOfPlayer() {
-		return postsOfPlayer;
-	}
-
-	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
-		this.postsOfPlayer = postsOfPlayer;
-	}
-
-	public Set<MsgsBean> getMsgsOfPlayer() {
-		return msgsOfPlayer;
-	}
-
-	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
-		this.msgsOfPlayer = msgsOfPlayer;
-	}
-
-	public Set<ThumbUpBean> getThumbUpOfPost() {
-		return thumbUpOfPost;
-	}
-
-	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
-		this.thumbUpOfPost = thumbUpOfPost;
-	}
-
-	public Set<ScoreBean> getScoreOfPost() {
-		return scoreOfPost;
-	}
-
-	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
-		this.scoreOfPost = scoreOfPost;
-	}
-
-	public Set<BookmarkletBean> getBookmarkletOfPost() {
-		return bookmarkletOfPost;
-	}
-
-	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
-		this.bookmarkletOfPost = bookmarkletOfPost;
-	}
+//	public Set<PostsBean> getPostsOfPlayer() {
+//		return postsOfPlayer;
+//	}
+//
+//	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
+//		this.postsOfPlayer = postsOfPlayer;
+//	}
+//
+//	public Set<MsgsBean> getMsgsOfPlayer() {
+//		return msgsOfPlayer;
+//	}
+//
+//	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
+//		this.msgsOfPlayer = msgsOfPlayer;
+//	}
+//
+//	public Set<ThumbUpBean> getThumbUpOfPost() {
+//		return thumbUpOfPost;
+//	}
+//
+//	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
+//		this.thumbUpOfPost = thumbUpOfPost;
+//	}
+//
+//	public Set<ScoreBean> getScoreOfPost() {
+//		return scoreOfPost;
+//	}
+//
+//	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
+//		this.scoreOfPost = scoreOfPost;
+//	}
+//
+//	public Set<BookmarkletBean> getBookmarkletOfPost() {
+//		return bookmarkletOfPost;
+//	}
+//
+//	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
+//		this.bookmarkletOfPost = bookmarkletOfPost;
+//	}
 
 	public CrewPermission getCrewPermission() {
 		return crewPermission;
@@ -344,5 +344,7 @@ public class PlayerBean {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+
+	
 
 }
