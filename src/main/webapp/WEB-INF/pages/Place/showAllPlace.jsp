@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>show all place</title>
+<title>所有場地</title>
 </head>
 <body>
 	<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Place</title>
+<title>修改場地</title>
 </head>
 <body>
 <div class="container">
