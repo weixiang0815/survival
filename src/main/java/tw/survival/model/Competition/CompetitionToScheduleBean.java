@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import tw.survival.model.Place.ScheduleBean;
@@ -21,11 +21,11 @@ public class CompetitionToScheduleBean {
 	@Column(name = "id")
 	private Integer id;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_schedule_id")
 	private ScheduleBean schedule;
 
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 
