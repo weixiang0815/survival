@@ -10,5 +10,10 @@ public class TemplateController {
 	public String goEmployeeSidebar() {
 		return "Template/Employee/main_sidebar";
 	}
+	
+	@GetMapping("/template/player/sidebar")
+	public String goPlayerSidebar() {
+		return "Template/Employee/main_sidebar";
+	}
 
 }
