@@ -25,16 +25,24 @@
             <th>結束日期</th>
             <th>預計報名人數</th>
             <th>狀態</th>
-            <th colspan="2"></th>
+            <th>編輯</th>
+            <th>刪除</th>
         </tr>
     </thead>
     <tbody>
     	<c:forEach items="${compList}" var="comp">
     		<tr>		
-	    		<td>${comp.mandarinName}</td>
-	    		<td>${comp.englishName}</td>
 	    		<td>
-<%-- 	    		singleOrCrew: ${comp.singleOrCrew.getClass()} ${comp.singleOrCrew} --%>
+                    <a style="text-decoration: none; color: white; font-weight: bolder;" href="${contextRoot}/competition/detail?id=${comp.id}">
+                        ${comp.mandarinName}
+                    </a>
+                </td>
+	    		<td>
+                    <a style="text-decoration: none; color: white; font-weight: bolder;" href="${contextRoot}/competition/detail?id=${comp.id}">
+                        ${comp.englishName}
+                    </a>
+                </td>
+	    		<td>
 	    			<c:choose>
 	    				<c:when test="${comp.singleOrCrew == \"C\"}">
 	    					團體戰
@@ -53,7 +61,7 @@
 	    		<td>${comp.capacity}</td>
 	    		<td>${comp.status}</td>
 	    		<td><a href="${contextRoot}/competition/edit?id=${comp.id}"><button class="btn btn-primary">編輯</button></a></td>
-	    		<td><a href="${contextRoot}//competition/delete?id=${comp.id}"><button class="btn btn-danger">刪除</button></a></td>
+	    		<td><a href="${contextRoot}/competition/delete?id=${comp.id}"><button class="btn btn-danger">刪除</button></a></td>
     		</tr>
     	</c:forEach>
     </tbody>

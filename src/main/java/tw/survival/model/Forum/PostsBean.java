@@ -77,8 +77,8 @@ public class PostsBean {
 	@JoinColumn(name="fk_player_id")
 	private PlayerBean player;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_post_id")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "post")
+	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事

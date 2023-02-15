@@ -60,6 +60,14 @@
 								class="btn btn-primary">登入</button></a>
 					</c:when>
 					<c:otherwise>
+						<c:choose>
+							<c:when test="${player == null && employee != null}">
+						<p style="color: white;">你好，職員&nbsp;${employee.name}</p>
+						</c:when>
+							<c:when test="${player != null && employee == null}">
+						<p style="color: white;">你好，會員&nbsp;${player.name}</p>
+						</c:when>
+						</c:choose>
 						<a href="${contextRoot}/logout"><button
 								class="btn btn-primary">登出</button></a>
 					</c:otherwise>

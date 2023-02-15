@@ -63,13 +63,13 @@ public class CompetitionBean {
 	private String startDate;
 
 	@Column(name = "start_timespan")
-	private String startTimespan;
+	private Integer startTimespan;
 
 	@Column(name = "end_date")
 	private String endDate;
 
 	@Column(name = "end_timespan")
-	private String endTimespan;
+	private Integer endTimespan;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -201,11 +201,11 @@ public class CompetitionBean {
 		this.startDate = startDate;
 	}
 
-	public String getStartTimespan() {
+	public Integer getStartTimespan() {
 		return startTimespan;
 	}
 
-	public void setStartTimespan(String startTimespan) {
+	public void setStartTimespan(Integer startTimespan) {
 		this.startTimespan = startTimespan;
 	}
 
@@ -217,11 +217,11 @@ public class CompetitionBean {
 		this.endDate = endDate;
 	}
 
-	public String getEndTimespan() {
+	public Integer getEndTimespan() {
 		return endTimespan;
 	}
 
-	public void setEndTimespan(String endTimespan) {
+	public void setEndTimespan(Integer endTimespan) {
 		this.endTimespan = endTimespan;
 	}
 

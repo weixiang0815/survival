@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Place.PlaceService;
 
@@ -62,7 +63,7 @@ public class CompetitionController {
 			compService.publishById(comp.getId());
 		}
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -95,7 +96,44 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/detail")
 	public String competitionDetailById(@RequestParam("id") Integer id, Model model) {
-		model.addAttribute("comp", compService.findById(id));
+		CompetitionBean comp = compService.findById(id);
+		int startTimespan = comp.getStartTimespan();
+		String start = "";
+		int endTimespan = comp.getEndTimespan();
+		String end = "";
+		switch (startTimespan) {
+		case 1:
+			start = "早上（6:00～12:00）";
+			break;
+		case 2:
+			start = "下午（12:00～18:00）";
+			break;
+		case 3:
+			start = "晚上（18:00～00:00）";
+			break;
+		case 4:
+			start = "半夜（00:00～6:00）";
+			break;
+		}
+		switch (endTimespan) {
+		case 1:
+			end = "早上（6:00～12:00）";
+			break;
+		case 2:
+			end = "下午（12:00～18:00）";
+			break;
+		case 3:
+			end = "晚上（18:00～00:00）";
+			break;
+		case 4:
+			end = "半夜（00:00～6:00）";
+			break;
+		}
+		PlaceBean place = comp.getPlace();
+		model.addAttribute("place", place);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("comp", comp);
 		return "Competition/competitionDetail";
 	}
 
