@@ -3,6 +3,8 @@ package tw.survival.controller.Market;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductInventory;
 import tw.survival.model.Market.ProductInventoryRepository;
@@ -40,7 +41,6 @@ public class ProductController {
 	private String uploadPage() {
 		return "Market/add_Product";
 	}
-	
 
 	@ResponseBody
 	@PostMapping("ProductRepository/add")
@@ -54,6 +54,7 @@ public class ProductController {
 		return response;
 	}
 
+	// 測試用沒用處
 	@ResponseBody
 	@PostMapping("ProductRepository/addproduct_text")
 	public ProductBean insertProduct1() {
@@ -71,6 +72,7 @@ public class ProductController {
 		return pdb1;
 	}
 
+	// 新增商品
 	@ResponseBody
 	@PostMapping("ProductRepository/addproduct")
 	public String insertProduct(@RequestParam("photoName") String fileName,
@@ -94,7 +96,8 @@ public class ProductController {
 			return "上傳失敗";
 		}
 	}
-	
+
+	// 搜尋全部商品
 	@GetMapping("/Market/allProduct")
 	public ModelAndView getAllProduct(ModelAndView mav) {
 		List<ProductBean> list = pService.findAllProduct();
@@ -102,45 +105,87 @@ public class ProductController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
-	
+
+	// 搜尋商品 by ID
 	@ResponseBody
 	@GetMapping("/Market/id")
-	public ResponseEntity<byte[]> getProductById(@RequestParam Integer id){
+	public ResponseEntity<byte[]> getProductById(@RequestParam("id") Integer id) {
 		ProductBean photo = pService.getProductById(id);
-		
-		
+
 		byte[] photoFile = photo.getImg();
 		HttpHeaders headers = new HttpHeaders();
-		
+
 		headers.setContentType(MediaType.IMAGE_JPEG);
-        //ResponseEntity 內建 @ResponseBody   // 資料, headers, 回應的 http status
-		return new ResponseEntity<byte[]>(photoFile,headers,HttpStatus.OK);
-		
+		// ResponseEntity 內建 @ResponseBody // 資料, headers, 回應的 http status
+		return new ResponseEntity<byte[]>(photoFile, headers, HttpStatus.OK);
+
 	}
+
+	// 修改商品
 	@GetMapping("/Market/edit")
 	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
 		ProductBean p1 = pService.findById(id);
 		model.addAttribute("product", p1);
 		return "Market/editProduct";
 	}
+
+	// 修改商品
 	@PostMapping("/Market/edit")
-	public String sendEditedMessage(@RequestParam("id") Integer id,@RequestParam("name") String name,
-			@RequestParam("img")MultipartFile img,@RequestParam("product_class") String product_class,
-			@RequestParam("context")String context,@RequestParam("rent_fee")Integer rent_fee,
+	public String sendEditedMessage(@RequestParam("id") Integer id, @RequestParam("name") String name,
+			@RequestParam("img") byte[] img, @RequestParam("product_class") String product_class,
+			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
-		
-		try {
-			pService.updateMsgById(id, name,  img.getBytes(),product_class, context, rent_fee, price);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
+		ProductService productService = new ProductService();
+		productService.updateMsgById(id, name, img, product_class, context, rent_fee, price);
 		return "redirect:/Market/allProduct";
 	}
+
+	// 刪除商品
 	@DeleteMapping("/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
 		pService.deleteById(id);
 		return "redirect:/Market/allProduct";
 	}
-	
+
+	// 模糊搜尋商品
+//	 @ResponseBody     
+//	 @GetMapping("/Market/productNameLike")
+//	 public List<ProductBean> findProductLike(@RequestParam("Search") String name){
+//	  return productBeanDao.findProductLike(name);
+//	 }
+
+//	@ResponseBody
+	@PostMapping("/Market/productNameLike")
+	public String findProductLike(@RequestParam("Search") String name, Model model) {
+		List<ProductBean> searchResult = pService.findByName(name);
+		model.addAttribute("SearchResult", searchResult);
+		return "Market/searchResult";
+	}
+
+//	@GetMapping("/Market/productNameLike")
+//	public List<ProductBean> findProductLike(@RequestParam String name) {
+//		boolean idSprocail = isSpecialChar(name);
+//		if (idSprocail) {
+//			try {
+//				String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
+//				System.out.println("encodedName:" + encodedName);
+//				return productBeanDao.findProductLike(encodedName);
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//				return null;
+//			}
+//		} else {
+//			return productBeanDao.findProductLike(name);
+//		}
+//
+//	}
+//
+//	public static boolean isSpecialChar(String str) {
+//		String regEx = "[ _`~!@#$%^&*()+=|{}‘:;‘,\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\r|\t";
+//		Pattern p = Pattern.compile(regEx);
+//		Matcher m = p.matcher(str);
+//		return m.find();
+//	} 
+
 }
