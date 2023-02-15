@@ -31,8 +31,9 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/place/all">所有場地</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/warehouse/uploadPage">新增倉庫</a></li>		
-						
+							href="${contextRoot}/warehouse/new">新增倉庫</a></li>		
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/warehouse/all">所有倉庫</a></li>
 					</ul>
 				</div>
 			</div>

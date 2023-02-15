@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -32,9 +33,14 @@ public class WarehouseBean {
 	@Column(name = "warehouse_name")
 	private String warehouseName;
 
+	@Column(name="fk_place_id")
+	@Transient
+	private Integer placeId;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
+	
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "warehouse", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
@@ -50,12 +56,20 @@ public class WarehouseBean {
 		this.id = id;
 	}
 
-	public String getWarehouse_name() {
+	public String getWarehouseName() {
 		return warehouseName;
 	}
 
-	public void setWarehouse_name(String warehouseName) {
+	public void setWarehouseName(String warehouseName) {
 		this.warehouseName = warehouseName;
+	}
+
+	public Integer getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(Integer placeId) {
+		this.placeId = placeId;
 	}
 
 	public PlaceBean getPlace() {
@@ -73,5 +87,9 @@ public class WarehouseBean {
 	public void setInventory(Set<InventoryBean> inventory) {
 		this.inventory = inventory;
 	}
+
+	
+	
+	
 
 }
