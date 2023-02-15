@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>所有場地</title>
+<title>所有倉庫</title>
 </head>
 <body>
 	<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
@@ -17,32 +17,25 @@
 
 		<table class="table table-hover table-bordered">
 			<tr>
-				<th>照片</th>
+				<th>場地</th>
 				<th>名稱</th>
-				<th>地址</th>
-				<th>費用/時段</th>
-				<th>容納人數</th>
 				<th colspan="2"></th>
 			</tr>
-			<jstl:forEach items="${list}" var="onePlace">
+			<jstl:forEach items="${list}" var="warehouse">
 				<tr>
-					<td><img alt=""
-						src="${contextRoot}/place/id?id=${onePlace.id}" width="50%"></td>
-					<td>${onePlace.place_name}</td>
-					<td>${onePlace.place_address}</td>
-					<td>${onePlace.place_fee}</td>
-					<td>${onePlace.place_capacity}</td>
+					<td>${warehouse.place.place_name}</td>
+					<td>${warehouse.warehouseName}</td>
 					<td>
-						<form action="${contextRoot}/place/edit" method="get">
-							<input name="id" type="hidden" value="${onePlace.id}" /> <input
+						<form action="${contextRoot}/warehouse/edit" method="get">
+							<input name="id" type="hidden" value="${warehouse.id}" /> <input
 								type="submit" class="btn btn-info btn-sm" value="編輯" />
 						</form>
 					</td>
 					<td>
 						<form action="${contextRoot}/place/delete" method="post">
-							<input name="_method" type="hidden" value="delete" />
-							<input name="id" type="hidden" value="${onePlace.id}" />
-							<input type="submit" class="btn btn-danger btn-sm" value="刪除" />
+							<input name="_method" type="hidden" value="delete" /> <input
+								name="id" type="hidden" value="${warehouse.id}" /> <input
+								type="submit" class="btn btn-danger btn-sm" value="刪除" />
 						</form>
 					</td>
 				</tr>
@@ -50,6 +43,5 @@
 			</jstl:forEach>
 		</table>
 	</div>
-
 </body>
 </html>

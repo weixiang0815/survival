@@ -28,10 +28,10 @@ public class InventoryBean {
 	private Integer id;
 
 	@Column(name = "inventory_sellamount")
-	private Integer inventory_sellamount; // 販賣庫存
+	private Integer inventorySellamount; // 販賣庫存
 
 	@Column(name = "inventory_rentamount")
-	private Integer inventory_rentamount; // 租借庫存
+	private Integer inventoryRentamount; // 租借庫存
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -54,20 +54,20 @@ public class InventoryBean {
 		this.id = id;
 	}
 
-	public Integer getInventory_sellamount() {
-		return inventory_sellamount;
+	public Integer getInventorySellamount() {
+		return inventorySellamount;
 	}
 
-	public void setInventory_sellamount(Integer inventory_sellamount) {
-		this.inventory_sellamount = inventory_sellamount;
+	public void setInventory_sellamount(Integer inventorySellamount) {
+		this.inventorySellamount = inventorySellamount;
 	}
 
-	public Integer getInventory_rentamount() {
-		return inventory_rentamount;
+	public Integer getInventoryRentamount() {
+		return inventoryRentamount;
 	}
 
-	public void setInventory_rentamount(Integer inventory_rentamount) {
-		this.inventory_rentamount = inventory_rentamount;
+	public void setInventoryRentamount(Integer inventoryRentamount) {
+		this.inventoryRentamount = inventoryRentamount;
 	}
 
 	public WarehouseBean getWarehouse() {
