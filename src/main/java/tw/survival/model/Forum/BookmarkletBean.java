@@ -49,6 +49,16 @@ public class BookmarkletBean {
 	public void setPosts(PostsBean posts) {
 		this.posts = posts;
 	}
+
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+	
 	
 	
 	

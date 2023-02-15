@@ -19,40 +19,48 @@ max-width: 100%;
 	<h3>查詢全部結果</h3>
 	<table class="table table-hover">
 		<tr>
-			<th>大頭貼</th>
+			<!-- <th>大頭貼</th> -->
 			<th>名稱</th>
 			<th>帳號</th>
 			<th>密碼</th>
 			<th>暱稱</th>
 			<th>性別</th>
+			<th>個人身分證</th>
 			<th>地址</th>
 			<th>Email</th>
 			<th>年齡</th>
+			<th>電話</th>
+			<!-- <th>個人介紹</th> -->
+			<!-- <th>戰隊</th> -->
 			<th colspan="2"></th>
 		</tr>
-		<c:forEach items="${users}" var="user">
+		<c:forEach items="${player}" var="player">
 			<tr>
-				<td style="width: 100px;"><img alt="查無圖片" src="/Survival/showImg?id=${user.id}"/></td>
-				<td>${user.name}</td>
-				<td>${user.account}</td>
-				<td>${user.password}</td>
+				<!-- <td style="width: 100px;"><img alt="查無圖片" src="${contextRoot}/Player/showImg?id=${player.id}"/></td> -->
+				<td>${player.name}</td>
+				<td>${player.account}</td>
+				<td>${player.password}</td>
 				<td>
 				<c:choose>
-				<c:when test="${user.nickname == null}">無</c:when>
-				<c:otherwise>${user.nickname}</c:otherwise>
+				<c:when test="${player.nickname == null}">無</c:when>
+				<c:otherwise>${player.nickname}</c:otherwise>
 				</c:choose>
 				</td>
 				<td>
 				<c:choose>
-				<c:when test="${user.sex == \"M\"}">男</c:when>
+				<c:when test="${player.sex == \"M\"}">男</c:when>
 				<c:otherwise>女</c:otherwise>
 				</c:choose>
 				</td>
-				<td>${user.address}</td>
-				<td>${user.email}</td>
-				<td>${user.age}</td>
-		<td><a href="updateUserById?id=${user.id}"><button class="btn btn-info">編輯</button></a>
-		<td><a href="deleteUserById?id=${user.id}"><button class="btn btn-danger">刪除</button></a>
+				<td>${player.identity_number}</td>
+				<td>${player.address}</td>
+				<td>${player.email}</td>
+				<td>${player.age}</td>
+				<td>${player.phone}</td> 
+				<!-- <td>${player.info}</td> -->
+				<!-- <tf>${player.crew}</tf> -->
+		<td><a href="${contextRoot}/player/update/?id=${player.id}"><button class="btn btn-info">編輯</button></a>
+		<td><a href="${contextRoot}/player/delete/?id=${player.id}"><button class="btn btn-danger">刪除</button></a>
 		</tr>
 		</c:forEach>
 	</table>

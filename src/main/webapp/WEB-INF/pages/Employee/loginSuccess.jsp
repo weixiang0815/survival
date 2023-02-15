@@ -6,25 +6,14 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>成功</title>
+<title>登入成功</title>
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
-	<h3>會員資訊</h3>
-	<table>
-		<tr>
-			<td>會員名稱</td>
-			<td>${memberName}</td>
-		</tr>
-		<tr>
-			<td>性別</td>
-			<td>${gender}</td>
-		</tr>
-		<tr>
-			<td>年齡</td>
-			<td>${age}</td>
-		</tr>
-	</table>
+<h3>成功</h3>
+帳號：${employee.account}<br>
+密碼：${employee.password}
+<a href="${contextRoot}/logout" >登出</a>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

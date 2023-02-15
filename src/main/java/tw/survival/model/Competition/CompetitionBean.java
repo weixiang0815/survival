@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Crew.CrewBean;
+import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Player.PlayerBean;
@@ -38,6 +39,17 @@ public class CompetitionBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
+	@Column(name = "public_or_private", length = 1)
+	private Character publicOrPrivate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_player")
+	private PlayerBean founderPlayer;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_employee")
+	private EmployeeBean founderEmployee;
 
 	@Column(name = "name_mandarin")
 	private String mandarinName;
@@ -76,16 +88,13 @@ public class CompetitionBean {
 	@Column(name = "content")
 	private String content;
 
-	@Column(name = "rules")
-	private String rules;
-
 	@Column(name = "budget")
 	private Integer budget;
 
 	@Column(name = "fee")
 	private Integer fee;
 
-	@Column(name = "single_or_crew")
+	@Column(name = "single_or_crew", length = 1)
 	private Character singleOrCrew;
 
 	@Column(name = "capacity")
@@ -98,9 +107,11 @@ public class CompetitionBean {
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "fk_competition_prize_id")
-//	private CompetitionPrizeBean competitionPrizes;
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
+	private CompetitionPrizeBean competitionPrizes;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
+	private CompetitionHistoryBean competitionHistory;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
@@ -136,6 +147,30 @@ public class CompetitionBean {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Character getPublicOrPrivate() {
+		return publicOrPrivate;
+	}
+
+	public void setPublicOrPrivate(Character publicOrPrivate) {
+		this.publicOrPrivate = publicOrPrivate;
+	}
+
+	public PlayerBean getFounderPlayer() {
+		return founderPlayer;
+	}
+
+	public void setFounderPlayer(PlayerBean founderPlayer) {
+		this.founderPlayer = founderPlayer;
+	}
+
+	public EmployeeBean getFounderEmployee() {
+		return founderEmployee;
+	}
+
+	public void setFounderEmployee(EmployeeBean founderEmployee) {
+		this.founderEmployee = founderEmployee;
 	}
 
 	public String getMandarinName() {
@@ -210,14 +245,6 @@ public class CompetitionBean {
 		this.content = content;
 	}
 
-	public String getRules() {
-		return rules;
-	}
-
-	public void setRules(String rules) {
-		this.rules = rules;
-	}
-
 	public Integer getBudget() {
 		return budget;
 	}
@@ -258,13 +285,21 @@ public class CompetitionBean {
 		this.post = post;
 	}
 
-//	public CompetitionPrizeBean getCompetitionPrizes() {
-//		return competitionPrizes;
-//	}
-//
-//	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
-//		this.competitionPrizes = competitionPrizes;
-//	}
+	public CompetitionPrizeBean getCompetitionPrizes() {
+		return competitionPrizes;
+	}
+
+	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
+		this.competitionPrizes = competitionPrizes;
+	}
+
+	public CompetitionHistoryBean getCompetitionHistory() {
+		return competitionHistory;
+	}
+
+	public void setCompetitionHistory(CompetitionHistoryBean competitionHistory) {
+		this.competitionHistory = competitionHistory;
+	}
 
 	public Set<SignUpBean> getSignUps() {
 		return signUps;

@@ -9,22 +9,24 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Employee.EmployeeDao;
+import tw.survival.model.Employee.EmployeeReposity;
 
 @Service
 @Transactional
 public class EmployeeService {
 	@Autowired
-	public EmployeeDao empdao;
+	public EmployeeReposity empDAO;
 	/**
 	 * 查詢所有使用者資料
 	 * 
 	 * @return 回傳裝著所有 EmployeeBean 的列表
 	 */
 	public List<EmployeeBean> getAllemp() {
-		return empdao.findAllemp();
+		return empDAO.findAll();
 	}
-	public EmployeeBean addEmployee(EmployeeBean employee) {
+	public void addEmployee(EmployeeBean employee) {
 		
-		return empdao.addemp(employee);
+		 empDAO.save(employee);
 	}
+	
 }

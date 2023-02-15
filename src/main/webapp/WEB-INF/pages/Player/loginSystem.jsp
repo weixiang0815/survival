@@ -14,7 +14,7 @@
 	<form action="${contextRoot}/Player/loginSystem"method="post">
 		<table>
 			<tr>
-				<td>使用者名稱：</td>
+				<td>職員帳號：</td>
 				<td><input type="text" name="account" /></td>
 				<td>${errors.account}</td>
 			</tr>
@@ -29,8 +29,7 @@
 			</tr>
 		</table>
 	</form>
-	${player.account}<br/>
-	${player.password}
+	<a href="${contextRoot}/Employee/login">職員登入</a>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

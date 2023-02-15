@@ -42,7 +42,14 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean publishById(Integer id) {
-		// 要與論壇系統的發文功能連動
+		Optional<CompetitionBean> optional = compDao.findById(id);
+		if (optional.isPresent()) {
+			CompetitionBean comp = optional.get();
+			comp.setStatus("已發布");
+			// 要與論壇系統的發文功能連動
+			compDao.save(comp);
+			return comp;
+		}
 		return null;
 	}
 
@@ -56,6 +63,20 @@ public class CompetitionService {
 	public CompetitionBean findById(Integer id) {
 		Optional<CompetitionBean> optional = compDao.findById(id);
 		return optional.isPresent() ? optional.get() : null;
+	}
+
+	/**
+	 * 查詢最新活動實體
+	 * 
+	 * @return 查詢成功回傳該活動實體，失敗回傳 null
+	 * @author 王威翔
+	 */
+	public CompetitionBean findLatestCompetition() {
+		try {
+			return compDao.findFirstByOrderByIdDesc();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	/**
@@ -103,14 +124,20 @@ public class CompetitionService {
 	/**
 	 * 透過 id 下架一筆活動資訊並刪除貼文，但尚未從資料庫中刪除整個紀錄
 	 * 
-	 * @param id 欲下嫁的活動實體 id
+	 * @param id 欲下架的活動實體 id
 	 * @return 下架成功回傳該活動實體，失敗回傳 null
 	 * @author 王威翔
 	 */
 	public CompetitionBean takedownById(Integer id) {
-		// 改變活動實體的 status 屬性
-		// 需刪除論壇系統的對應貼文
-		return findById(id);
+		Optional<CompetitionBean> optional = compDao.findById(id);
+		if (optional.isPresent()) {
+			CompetitionBean comp = optional.get();
+			comp.setStatus("未發布");
+			// 需刪除論壇系統的對應貼文
+			compDao.save(comp);
+			return comp;
+		}
+		return null;
 	}
 
 	/**
@@ -144,7 +171,9 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
+			// 重新發布貼文
 			compDao.save(comp);
+			return comp;
 		}
 		return null;
 	}

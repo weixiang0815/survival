@@ -56,6 +56,9 @@ public class PlayerBean {
 	@Column(name = "identity_number")
 	private String identity_number;
 
+	@Column(name = "nickname")
+	private String nickname;
+
 	@Column(name = "email")
 	private String email;
 
@@ -67,6 +70,9 @@ public class PlayerBean {
 
 	@Column(name = "address")
 	private String address;
+
+	@Column(name = "info")
+	private String info;
 
 	@Column(name = "thumbnail")
 	@Lob
@@ -323,12 +329,20 @@ public class PlayerBean {
 		this.playerPermission = playerPermission;
 	}
 
-	public Set<OrderItemBean> getOrderItem() {
-		return OrderItem;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setOrderItem(Set<OrderItemBean> orderItem) {
-		OrderItem = orderItem;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

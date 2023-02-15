@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import tw.survival.service.Competition.CompetitionHistoryService;
 import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
@@ -23,6 +24,9 @@ public class SignUpController {
 
 	@Autowired
 	private CompetitionPictureService compPicService;
+
+	@Autowired
+	private CompetitionHistoryService compHistoryService;
 
 	@Autowired
 	private SignUpService signupService;
