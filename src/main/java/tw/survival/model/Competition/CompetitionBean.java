@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Crew.CrewBean;
+import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Player.PlayerBean;
@@ -38,6 +39,17 @@ public class CompetitionBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
+
+	@Column(name = "public_or_private", length = 1)
+	private Character publicOrPrivate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_player")
+	private PlayerBean founderPlayer;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_employee")
+	private EmployeeBean founderEmployee;
 
 	@Column(name = "name_mandarin")
 	private String mandarinName;
@@ -135,6 +147,30 @@ public class CompetitionBean {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Character getPublicOrPrivate() {
+		return publicOrPrivate;
+	}
+
+	public void setPublicOrPrivate(Character publicOrPrivate) {
+		this.publicOrPrivate = publicOrPrivate;
+	}
+
+	public PlayerBean getFounderPlayer() {
+		return founderPlayer;
+	}
+
+	public void setFounderPlayer(PlayerBean founderPlayer) {
+		this.founderPlayer = founderPlayer;
+	}
+
+	public EmployeeBean getFounderEmployee() {
+		return founderEmployee;
+	}
+
+	public void setFounderEmployee(EmployeeBean founderEmployee) {
+		this.founderEmployee = founderEmployee;
 	}
 
 	public String getMandarinName() {
