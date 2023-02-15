@@ -59,22 +59,6 @@
 <script>
     // 以下使用 jQuery 擴充套件 DataTables 來顯示表格資料
 $(document).ready(function () {
-    // 此處用程式寫出 1000 筆假資料
-//     let str = '';
-//     let i = 0;
-//     for (; i < 1000; i++) {
-//         str += `
-//     <tr>
-//         <td>Tiger Nixon</td>
-//         <td>System Architect</td>
-//         <td>Edinburgh</td>
-//         <td>61</td>
-//         <td>2011/04/25</td>
-//         <td>$320,800</td>
-//     </tr>`;
-//     }
-//     $('tbody').append(str);
-
     // 以下為啟動 DataTable 的方法
     var table = $('#compTable').DataTable({
         "pagingType": "full_numbers",   //  pagingType 屬性提供使用者選擇每頁顯示幾筆資料的功能
@@ -83,7 +67,6 @@ $(document).ready(function () {
             url: 'https://cdn.datatables.net/plug-ins/1.13.2/i18n/zh-HANT.json'
         }
     });
-
     // 以下為使用者改變每頁顯示資料筆數的事件繫節
     $('#page-length-select').on('change', function () {
         table.page.len(this.value).draw();

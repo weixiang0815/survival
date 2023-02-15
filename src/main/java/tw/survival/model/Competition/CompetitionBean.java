@@ -21,6 +21,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -80,6 +82,10 @@ public class CompetitionBean {
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "announced_datetime")
 	private Date announcedDatetime;
+
+	@Column(name = "fk_place_id")
+	@Transient
+	private Integer placeId;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_place_id")
@@ -227,6 +233,14 @@ public class CompetitionBean {
 
 	public void setAnnouncedDatetime(Date announcedDatetime) {
 		this.announcedDatetime = announcedDatetime;
+	}
+
+	public Integer getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(Integer placeId) {
+		this.placeId = placeId;
 	}
 
 	public PlaceBean getPlace() {
