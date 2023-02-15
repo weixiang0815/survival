@@ -1,7 +1,6 @@
 package tw.survival.model.Market;
 
-
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,31 +11,38 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
-@Table(name="orderitem")
+@Table(name = "orderitem")
 @Component
 public class OrderItemBean {
 
 	@Id
-	@Column(name="id")
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="order_create_date")
+
+	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
+	@Column(name = "order_create_date")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date order_create_date;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private String status;
-	
+
 	@JsonBackReference
-	@JoinColumn(name="fk_player_id")
+	@JoinColumn(name = "fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
 
@@ -51,11 +57,11 @@ public class OrderItemBean {
 		this.id = id;
 	}
 
-	public Date getOrder_create_data() {
+	public Date getOrder_create_date() {
 		return order_create_date;
 	}
 
-	public void setOrder_create_data(Date order_create_date) {
+	public void setOrder_create_date(Date order_create_date) {
 		this.order_create_date = order_create_date;
 	}
 
