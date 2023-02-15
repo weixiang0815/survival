@@ -55,7 +55,7 @@ public class WarehouseController {
 	
 	@PostMapping("/warehouse/edit")
 	public String editWarehouse() {
-		
+		return "";
 	}
 	
 }
