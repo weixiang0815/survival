@@ -69,4 +69,9 @@ public class ProductService {
 	public void deleteByEntity(ProductBean msg) {
 		productDao.delete(msg);
 	}
+	
+	public List<ProductBean> findByName(String name){
+		return productDao.findProductLike(name);
+	}
+	
 }

@@ -36,17 +36,14 @@
 						href="${contextRoot}/Market/add_OrderItem">新增訂單</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/Market/all_OrderItem">所有訂單</a></li>
-
-
-
 				</ul>
 			</div>
 		</div>
 		<!-- 搜尋欄位 -->
-		<form class="d-flex" role="search">
-			<input class="form-control me-2" type="search" placeholder="Search"
+		<form class="d-flex" role="search" action="${contextRoot}/Market/productNameLike" method="post">
+			<input name="Search" class="form-control me-2" type="search" placeholder="Search"
 				aria-label="Search">
-			<button class="btn btn-outline-success" type="submit">Search</button>
+			<button id="Search" class="btn btn-outline-success" type="submit">Search</button>
 		</form>
 
 	</nav>
