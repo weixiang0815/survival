@@ -13,12 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Forum.PostsService;
+import tw.survival.service.Place.PlaceService;
 
 @Controller
 public class CompetitionController {
 
 	@Autowired
 	private CompetitionService compService;
+
+	@Autowired
+	private PlaceService placeService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -37,6 +42,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/new")
 	public String newCompetition(Model model) {
+		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("competition", new CompetitionBean());
 		return "Competition/newCompetition";
 	}
@@ -54,6 +60,7 @@ public class CompetitionController {
 			model.addAttribute("新增失敗，請重新輸入");
 			return "redirect:/competition/new";
 		}
+		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
 		compService.create(comp);
 		comp = compService.findLatestCompetition();
 		if (comp.getStatus().contentEquals("已發布")) {

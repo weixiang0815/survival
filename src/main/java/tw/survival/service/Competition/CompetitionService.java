@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionRepository;
+import tw.survival.service.Forum.PostsService;
 
 @Service
 @Transactional
@@ -17,6 +18,9 @@ public class CompetitionService {
 
 	@Autowired
 	private CompetitionRepository compDao;
+
+	@Autowired
+	private PostsService postsService;
 
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
@@ -27,7 +31,6 @@ public class CompetitionService {
 	 */
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
-			// 要先給一些欄位加入預設值
 			return compDao.save(comp);
 		} catch (Exception e) {
 			return null;
@@ -46,7 +49,6 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
-			// 要與論壇系統的發文功能連動
 			compDao.save(comp);
 			return comp;
 		}

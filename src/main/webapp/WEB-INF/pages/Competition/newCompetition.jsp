@@ -12,98 +12,135 @@
 </head>
 <body>
 	<jsp:include page="../Layout/navbar_competition.jsp" />
-	<div class="container">
+	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
-			<div class="col-10 col-md-6 col-lg-8">
-				<h1>新增活動</h1>
-				<div class="card">
-					<div class="card-header">活動詳情表單</div>
-					<div class="card-body">
-						<form:form action="${contextRoot}/competition/create"
-							modelAttribute="competition">
-							<div class="input-group">
-								<fieldset>
-									<legend>基本資料</legend>
-									<form:label class="form-label" path="mandarinName">中文活動名稱</form:label>
-									<form:input class="form-control" type="text"
-										path="mandarinName" placeholder="請填寫中文" required="true" />
-									<form:label class="form-label" path="englishName">英文活動名稱</form:label>
-									<form:input class="form-control" type="text" path="englishName"
-										placeholder="English Only" required="true" />
-									<form:label class="form-label" path="startDate">開始日期</form:label>
-									<form:input class="form-control" type="text" path="startDate"
-										placeholder="MM/DD/YYYY" required="true" />
-									<form:label path="startTimespan" class="form-label">開始時間</form:label>
-									<form:select class="form-select" path="startTimespan">
-										<form:option value="早上" label="早上（6:00～12:00）" />
-										<form:option value="下午" label="下午（12:00～18:00）" />
-										<form:option value="晚上" label="晚上（18:00～00:00）" />
-										<form:option value="半夜" label="半夜（00:00～6:00）" />
-									</form:select>
-									<form:label class="form-label" path="endDate">結束日期</form:label>
-									<form:input class="form-control" type="text" id="endDate"
-										path="endDate" placeholder="MM/DD/YYYY" required="true" />
-									<form:label path="endTimespan" class="form-label">結束時間</form:label>
-									<form:select class="form-select" path="endTimespan"
-										id="end_timespan">
-										<form:option value="早上" label="早上（6:00～12:00）" />
-										<form:option value="下午" label="下午（12:00～18:00）" />
-										<form:option value="晚上" label="晚上（18:00～00:00）" />
-										<form:option value="半夜" label="半夜（00:00～6:00）" />
-									</form:select>
-								</fieldset>
-								<fieldset>
-									<legend>行政資料</legend>
-									<p>是否直接發布</p>
-									<form:radiobutton name="status" class="form-check-input"
-										path="status" id="publish" value="已發布" label="是"
-										required="true" />
-									<form:radiobutton name="status" class="form-check-input"
-										path="status" id="notPublish" value="未發布" label="否"
-										required="true" />
-									<br>
-									<form:label path="place" class="form-label">活動場地</form:label>
-									<form:select class="form-select" path="place" id="place">
-										<form:option value="台北場">台北場</form:option>
-										<form:option value="台中場">台中場</form:option>
-										<form:option value="南投場">南投場</form:option>
-										<form:option value="高雄場">高雄場</form:option>
-										<form:option value="屏東場">屏東場</form:option>
-										<form:option value="宜蘭場">宜蘭場</form:option>
-										<form:option value="台東場">台東場</form:option>
-									</form:select>
-									<form:label path="budget" class="form-label">預算</form:label>
-									<form:input class="form-control" type="number" min="0"
-										pattern="[0-9]+" path="budget" id="budget"
-										placeholder="以新台幣計算" required="true" />
-									<form:label path="fee" class="form-label">報名費</form:label>
-									<form:input class="form-control" type="number" min="0"
-										pattern="[0-9]+" path="fee" id="fee" placeholder="以新台幣計算"
-										required="true" />
-									<form:label path="capacity" class="form-label">預計報名人數</form:label>
-									<form:input class="form-control" type="number" min="0"
-										pattern="[0-9]+" path="capacity" id="capacity"
-										placeholder="請填寫整數" required="true" />
-									<p>競賽模式</p>
-									<form:radiobutton name="singleOrCrew" class="form-check-input"
-										path="singleOrCrew" id="single" value="S" label="單人戰"
-										required="true" />
-									<form:radiobutton name="singleOrCrew" class="form-check-input"
-										path="singleOrCrew" id="crew" value="M" label="團體戰"
-										required="true" />
-								</fieldset>
-								<fieldset>
-									<legend>詳細資料</legend>
-									<form:label path="content" class="form-label">活動介紹</form:label>
-									<form:textarea id="ckeditor" path="content"
-										class="form-control" />
-								</fieldset>
-								<input class="btn btn-primary" type="submit" value="送出" /> <input
-									class="btn btn-danger" type="reset" value="清除" />
+			<div class="col-10 col-md-6 col-lg-8"
+				style="border: 2px solid red; border-radius: 5px;">
+				<h1>活動詳情表單</h1>
+				<c:choose>
+					<c:when test="${player == null && employee == null}">
+						<h1>請先登入再新增活動呦😊～</h1>
+					</c:when>
+					<c:otherwise>
+					</c:otherwise>
+				</c:choose>
+				<form:form action="${contextRoot}/competition/create"
+					modelAttribute="competition">
+					<div class="input-group">
+						<fieldset class="row mt-3 mb-3 p-3">
+							<legend>基本資料</legend>
+							<div class="col-6">
+								<form:label class="form-label" path="mandarinName">中文活動名稱</form:label>
+								<form:input class="form-control" type="text" path="mandarinName"
+									placeholder="請填寫中文" required="true" />
 							</div>
-						</form:form>
+							<div class="col-6">
+								<form:label class="form-label" path="englishName">英文活動名稱</form:label>
+								<form:input class="form-control" type="text" path="englishName"
+									placeholder="English Only" required="true" />
+							</div>
+							<div class="col-3">
+								<form:label class="form-label" path="startDate">開始日期</form:label>
+								<form:input class="form-control" type="text" path="startDate"
+									placeholder="MM/DD/YYYY" required="true" />
+							</div>
+							<div class="col-3">
+								<form:label path="startTimespan" class="form-label">開始時間</form:label>
+								<form:select class="form-select" path="startTimespan">
+									<form:option value="1" label="早上（6:00～12:00）" />
+									<form:option value="2" label="下午（12:00～18:00）" />
+									<form:option value="3" label="晚上（18:00～00:00）" />
+									<form:option value="4" label="半夜（00:00～6:00）" />
+								</form:select>
+							</div>
+							<div class="col-3">
+								<form:label class="form-label" path="endDate">結束日期</form:label>
+								<form:input class="form-control" type="text" id="endDate"
+									path="endDate" placeholder="MM/DD/YYYY" required="true" />
+							</div>
+							<div class="col-3">
+								<form:label path="endTimespan" class="form-label">結束時間</form:label>
+								<form:select class="form-select" path="endTimespan"
+									id="end_timespan">
+									<form:option value="1" label="早上（6:00～12:00）" />
+									<form:option value="2" label="下午（12:00～18:00）" />
+									<form:option value="3" label="晚上（18:00～00:00）" />
+									<form:option value="4" label="半夜（00:00～6:00）" />
+								</form:select>
+							</div>
+						</fieldset>
+						<fieldset class="row mt-3 mb-3 p-3">
+							<legend>行政資料</legend>
+							<div class="col-3">
+								<p>是否直接發布</p>
+								<form:radiobutton name="status" class="form-check-input"
+									path="status" id="publish" value="已發布" label="是"
+									required="true" />
+								<form:radiobutton name="status" class="form-check-input"
+									path="status" id="notPublish" value="未發布" label="否"
+									required="true" />
+							</div>
+							<div class="col-3">
+								<p>競賽模式</p>
+								<form:radiobutton name="singleOrCrew" class="form-check-input"
+									path="singleOrCrew" id="single" value="S" label="單人戰"
+									required="true" />
+								<form:radiobutton name="singleOrCrew" class="form-check-input"
+									path="singleOrCrew" id="crew" value="M" label="團體戰"
+									required="true" />
+							</div>
+							<div class="col-6"></div>
+							<div class="col-12">
+								<form:label path="place" class="form-label">活動場地</form:label>
+								<form:select title="選擇一個場地" class="form-select" path="placeId" id="placeId">
+									<c:forEach items="${placeList}" var="place">
+										<c:choose>
+											<c:when test="${player != null && employee == null}">
+												<form:option value="${place.id}">${place.place_name}（費用/時段：${place.place_fee} 元，容納人數：${place.place_capacity} 人）</form:option>
+											</c:when>
+											<c:when test="${player == null && employee != null}">
+												<form:option value="${place.id}">${place.place_name}（容納人數：${place.place_capacity} 人）</form:option>
+											</c:when>
+											<c:otherwise>
+												<form:option value="${place.id}">${place.place_name}（費用/時段：${place.place_fee} 元，容納人數：${place.place_capacity} 人）</form:option>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+								</form:select>
+							</div>
+							<div class="col-6">
+								<form:label path="capacity" class="form-label">預計報名人數</form:label>
+								<form:input class="form-control" type="number" min="0"
+									pattern="[0-9]+" path="capacity" id="capacity"
+									placeholder="請填寫整數" required="true" />
+							</div>
+							<div class="col-6">
+								<form:label path="budget" class="form-label">預算</form:label>
+								<form:input class="form-control" type="number" min="0"
+									pattern="[0-9]+" path="budget" id="budget" placeholder="以新台幣計算"
+									required="true" />
+							</div>
+							<div class="col-6">
+								<form:label path="fee" class="form-label">報名費</form:label>
+								<form:input class="form-control" type="number" min="0"
+									pattern="[0-9]+" path="fee" id="fee" placeholder="以新台幣計算"
+									required="true" />
+							</div>
+						</fieldset>
+						<fieldset class="row mt-3 mb-3 p-3">
+							<legend>詳細資料</legend>
+							<div class="col">
+								<form:label path="content" class="form-label">活動介紹</form:label>
+								<form:textarea id="ckeditor" path="content" class="form-control" />
+							</div>
+						</fieldset>
+						<fieldset class="row mt-3 mb-3 p-3">
+							<input class="col auto m-3 btn btn-primary" type="submit"
+								value="送出" /> <input class="col auto m-3 btn btn-danger"
+								type="reset" value="清除" />
+						</fieldset>
 					</div>
-				</div>
+				</form:form>
 			</div>
 		</div>
 	</div>
