@@ -60,7 +60,7 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/create")
-	public String createCompetition(@ModelAttribute("CompetitionBean") CompetitionBean comp, BindingResult result,
+	public String createCompetition(@ModelAttribute("competitionBean") CompetitionBean comp, BindingResult result,
 			Model model) {
 		model.addAttribute("competition", comp);
 		return "redirect:/competition";

@@ -20,14 +20,14 @@
 				<th>照片</th>
 				<th>名稱</th>
 				<th>地址</th>
-				<th>費用/小時</th>
+				<th>費用/時段</th>
 				<th>容納人數</th>
 				<th colspan="2"></th>
 			</tr>
 			<jstl:forEach items="${list}" var="onePlace">
 				<tr>
 					<td><img alt=""
-						src="${contextRoot}/place/id?id=${onePlace.id}"></td>
+						src="${contextRoot}/place/id?id=${onePlace.id}" width="50%"></td>
 					<td>${onePlace.place_name}</td>
 					<td>${onePlace.place_address}</td>
 					<td>${onePlace.place_fee}</td>

@@ -29,7 +29,9 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/place/uploadPage">新增場地</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/place/all">所有場地</a></li>	
+							href="${contextRoot}/place/all">所有場地</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/schedule/addSchedule">新增活動排程</a></li>		
 						
 					</ul>
 				</div>
