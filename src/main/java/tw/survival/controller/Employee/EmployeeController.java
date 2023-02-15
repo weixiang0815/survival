@@ -31,7 +31,7 @@ public class EmployeeController {
 	@GetMapping("/Employee/list")
 	public String list(Model model) {
 		List<EmployeeBean> list=empReposity.findAll();
-		model.addAttribute("Employee",list);
+		model.addAttribute("Employees",list);
 		return "Employee/empallResult";
 	}
 
