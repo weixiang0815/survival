@@ -60,7 +60,11 @@ max-width: 100%;
 				<!-- <td>${player.info}</td> -->
 				<!-- <tf>${player.crew}</tf> -->
 		<td><a href="${contextRoot}/player/update/?id=${player.id}"><button class="btn btn-info">編輯</button></a>
-		<td><a href="${contextRoot}/player/delete/?id=${player.id}"><button class="btn btn-danger">刪除</button></a>
+		 <form action="${contextRoot}/player/delete" method="post">
+          <input name="_method" type="hidden" value="delete" />
+          <input name="id" type="hidden" value="${player.id}" />
+          <input type="submit" class="btn btn-danger" value="刪除" />
+      </form>
 		</tr>
 		</c:forEach>
 	</table>
