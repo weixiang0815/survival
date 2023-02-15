@@ -12,29 +12,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
-import tw.survival.service.Competition.CompetitionHistoryService;
-import tw.survival.service.Competition.CompetitionPictureService;
-import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Competition.SignUpService;
 
 @Controller
 public class CompetitionController {
 
 	@Autowired
 	private CompetitionService compService;
-
-	@Autowired
-	private CompetitionPrizeService compPrizeService;
-
-	@Autowired
-	private CompetitionPictureService compPicService;
-
-	@Autowired
-	private CompetitionHistoryService compHistoryService;
-
-	@Autowired
-	private SignUpService signupService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -53,7 +37,6 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/new")
 	public String newCompetition(Model model) {
-		String[] ruleOptions = {};
 		model.addAttribute("competition", new CompetitionBean());
 		return "Competition/newCompetition";
 	}

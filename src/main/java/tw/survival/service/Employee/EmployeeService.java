@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Employee.EmployeeBean;
-import tw.survival.model.Employee.EmployeeDao;
 import tw.survival.model.Employee.EmployeeReposity;
 
 @Service
