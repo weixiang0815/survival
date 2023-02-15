@@ -23,11 +23,12 @@ public class loginController {
 	public String login() {
 		return "Player/loginSystem";
 	}
+
 	@GetMapping("/Employee/login")
-    public String loginemp() {
-		return"Employee/loginSystem";
+	public String loginemp() {
+		return "Employee/loginSystem";
 	}
-	
+
 	@PostMapping("/Player/loginSystem")
 	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password,
 			HttpSession session) {
@@ -41,19 +42,20 @@ public class loginController {
 
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
+		session.setAttribute("emp", null);
 		session.setAttribute("player", null);
 		return "redirect:/Player/login";
 	}
+
 	@PostMapping("/Employee/loginSystem")
 	public String checkLogemp(@RequestParam("account") String account, @RequestParam("password") String password,
 			HttpSession session) {
-		EmployeeBean emp=service.loginEmp(account, password);
-		if(emp !=null) {
+		EmployeeBean emp = service.loginEmp(account, password);
+		if (emp != null) {
 			session.setAttribute("employee", emp);
-			return"Employee/loginSystem";
+			return "Employee/loginSystem";
 		}
-		return"Employee/loginSystem";
-		
+		return "Employee/loginSystem";
 	}
 
 }
