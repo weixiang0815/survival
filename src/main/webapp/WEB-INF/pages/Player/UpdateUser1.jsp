@@ -17,7 +17,7 @@ max-width: 100%;
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 <h3>使用者修改資料</h3>
-	<form:form action="${ContextRoot}/player/update" method="put" modelAttribute="player">
+	<form:form action="${contextRoot}/player/update1" method="put" modelAttribute="player">
 		<table class="table table-hover">
 		    <tr>
 				<td>大頭貼:</td>
@@ -65,7 +65,7 @@ max-width: 100%;
 			</tr>
 			<tr>
 				<td>縣市：</td>
-				<td><form:input type="text" path="address" value="${player.address}" /></td>
+				<td><form:input type="text" path="region" value="${player.region}" /></td>
 			</tr>
 			<tr>
 				<td>地址：</td>
@@ -73,7 +73,7 @@ max-width: 100%;
 			</tr>
 			<tr>
 				<td>電話：</td>
-				<td><form:input type="text" path="address" value="${player.phone}" /></td>
+				<td><form:input type="text" path="phone" value="${player.phone}" /></td>
 			</tr>
 			<tr>
 				<td>Email：</td>
@@ -82,6 +82,10 @@ max-width: 100%;
 			<tr>
 				<td>年齡：</td>
 				<td><form:input type="text" path="age" value="${player.age}" /></td>
+			</tr>
+			<tr>
+				<td>個人身分證：</td>
+				<td><form:input type="text" path="identity_number" value="${player.identity_number}" /></td>
 			</tr>
 		</table>
 		<input class="btn btn-outline-primary" type="submit"  value="更新"/>

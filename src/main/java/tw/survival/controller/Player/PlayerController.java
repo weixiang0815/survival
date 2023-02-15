@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Player.PlayerBean;
-import tw.survival.model.Player.PlayerRepository;
 import tw.survival.service.Player.PlayerService;
 
 @Controller
@@ -50,6 +50,19 @@ public class PlayerController {
 		PlayerBean player = pService.findByBean(id);
 		model.addAttribute("player", player);
 		return "Player/UpdateUser1";
+	}
+	
+	@PutMapping("/player/update1")
+	public String updateById(@ModelAttribute("player") PlayerBean player) {
+		pService.update(player);
+		return "redirect:/player/list";
+
+	}
+	
+	@DeleteMapping("/player/delete")
+	public String deletePlayer(Integer id) {
+		pService.delete(id);
+		return "redirect:/player/list";
 	}
 
 	@ResponseBody
@@ -90,10 +103,5 @@ public class PlayerController {
 		return "Player/user";
 	}
 
-	@PutMapping("/player/update")
-	public String updateById(@ModelAttribute("player") PlayerBean player, Model model) {
-		pService.update(player);
-		return "redirect:/player/list";
-
-	}
+	
 }
