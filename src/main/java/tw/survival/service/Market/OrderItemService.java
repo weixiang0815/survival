@@ -1,5 +1,8 @@
 package tw.survival.service.Market;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,4 +21,24 @@ public class OrderItemService {
 		orderItemDao.save(op);
 	}
 	
+	public OrderItemBean findById(Integer id) {
+		Optional<OrderItemBean> optional = orderItemDao.findById(id);
+		
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		System.out.println("沒找到id 為" + id + "的資料");
+		return null;
+	}
+	public List<OrderItemBean> findAllOrderItem() {
+		return orderItemDao.findAll();
+	}
+	public OrderItemBean getProductById(Integer id) {
+		Optional<OrderItemBean> optional = orderItemDao.findById(id);
+		
+		if(optional.isPresent()) {     //判斷optional有東西
+			return optional.get();
+		}
+		return null;
+	}
 }
