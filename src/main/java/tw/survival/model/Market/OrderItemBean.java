@@ -1,6 +1,7 @@
 package tw.survival.model.Market;
 
-import java.util.Date;
+
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -28,8 +29,8 @@ public class OrderItemBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@Column(name="order_create_data")
-	private Date order_create_data;
+	@Column(name="order_create_date")
+	private Date order_create_date;
 	
 	@Column(name="status")
 	private String status;
@@ -38,7 +39,7 @@ public class OrderItemBean {
 	@JoinColumn(name="fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
-	
+
 	public OrderItemBean() {
 	}
 
@@ -51,11 +52,11 @@ public class OrderItemBean {
 	}
 
 	public Date getOrder_create_data() {
-		return order_create_data;
+		return order_create_date;
 	}
 
-	public void setOrder_create_data(Date order_create_data) {
-		this.order_create_data = order_create_data;
+	public void setOrder_create_data(Date order_create_date) {
+		this.order_create_date = order_create_date;
 	}
 
 	public String getStatus() {
