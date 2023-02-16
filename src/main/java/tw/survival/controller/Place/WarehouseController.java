@@ -6,11 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.WarehouseBean;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.WarehouseService;
@@ -42,7 +46,7 @@ public class WarehouseController {
 		warehouse.setPlace(placeService.getOnePlaceById(warehouse.getPlaceId()));
 		WarehouseBean wb = warehouseService.insertWarehouse(warehouse);
 		model.addAttribute("warehouse",wb);
-		return "Place/index";
+		return "redirect:/warehouse/all";
 	}
 	
 	@GetMapping("/warehouse/all")
@@ -53,9 +57,33 @@ public class WarehouseController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
 	@PostMapping("/warehouse/edit")
 	public String editWarehouse() {
 		return "";
+=======
+	@GetMapping("/warehouse/edit")
+	public String editWarehouse(@RequestParam("id") Integer id, Model model) {
+		WarehouseBean warehouse = warehouseService.getOneWarehouseById(id);
+		PlaceBean place = warehouse.getPlace();
+		model.addAttribute("place", place);
+		model.addAttribute("warehouse", warehouse);
+		return "Place/editWarehouse";
+>>>>>>> 83101f04a544a9bae40295c47637b6f0f2d8f9bb
 	}
+	
+	@PutMapping("/warehouse/edit")
+	public String sendEditWarehouse(@ModelAttribute("warehouse") WarehouseBean warehouse) {
+		warehouseService.updateWarehouse(warehouse);
+		return "redirect:/warehouse/all";
+	}
+	
+	@PostMapping("/warehouse/delete")
+	public String deleteWarehouse(@RequestParam("id") Integer id) {
+		warehouseService.deleteWarehouseById(id);
+		return "redirect:/warehouse/all";
+	}
+	
+	
 	
 }

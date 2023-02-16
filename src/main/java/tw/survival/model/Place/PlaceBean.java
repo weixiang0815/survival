@@ -93,6 +93,14 @@ public class PlaceBean {
 		this.place_name = place_name;
 	}
 
+	public Set<EmployeeBean> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<EmployeeBean> employee) {
+		this.employee = employee;
+	}
+
 	public String getPlace_address() {
 		return place_address;
 	}
