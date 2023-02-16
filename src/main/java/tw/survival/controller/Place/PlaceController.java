@@ -105,4 +105,9 @@ public class PlaceController {
 		return "redirect:/place/all";
 	}
 
+	
+	@GetMapping("/place/detail")
+	public String placeDetail() {
+		return "Place/placeDetail";
+	}
 }

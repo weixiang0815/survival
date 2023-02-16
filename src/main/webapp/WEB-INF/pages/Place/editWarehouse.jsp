@@ -21,8 +21,8 @@
 						modelAttribute="warehouse" method="put">
 						<form:input type="hidden" path="id" />
 						<div class="input-group">
-							<div class="col-6">${place.place_name}</div>
-							<div class="col-6">
+							<div class="col-3">${place.place_name}</div>
+							<div class="col-3">
 								<form:input class="form-control" path="warehouseName" />
 							</div>
 						</div>

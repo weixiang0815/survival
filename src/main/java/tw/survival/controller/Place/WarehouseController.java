@@ -78,4 +78,6 @@ public class WarehouseController {
 		return "redirect:/warehouse/all";
 	}
 	
+	
+	
 }
