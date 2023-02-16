@@ -13,12 +13,12 @@
 <body>
 	<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
 	<div class="container">
-		<h1>All Place</h1>
+		<h1>所有倉庫</h1>
 
 		<table class="table table-hover table-bordered">
 			<tr>
 				<th>場地</th>
-				<th>名稱</th>
+				<th>倉庫</th>
 				<th colspan="2"></th>
 			</tr>
 			<jstl:forEach items="${list}" var="warehouse">
@@ -27,13 +27,12 @@
 					<td>${warehouse.warehouseName}</td>
 					<td>
 						<form action="${contextRoot}/warehouse/edit" method="get">
-							<input name="id" type="hidden" value="${warehouse.id}" /> <input
-								type="submit" class="btn btn-info btn-sm" value="編輯" />
+							<input name="id" type="hidden" value="${warehouse.id}" /> 
+							<input type="submit" class="btn btn-info btn-sm" value="修改" />
 						</form>
 					</td>
 					<td>
-						<form action="${contextRoot}/place/delete" method="post">
-							<input name="_method" type="hidden" value="delete" /> <input
+						<form action="${contextRoot}/warehouse/delete" method="post"> <input
 								name="id" type="hidden" value="${warehouse.id}" /> <input
 								type="submit" class="btn btn-danger btn-sm" value="刪除" />
 						</form>

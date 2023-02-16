@@ -58,7 +58,7 @@ public class EmployeeBean {
 	private String title;
 	
 	
-	@Column(name = "hired_date")
+	@Column(name = "hire_date")
 	private Date hired_date;
 	
 	@Column(name = "status")
