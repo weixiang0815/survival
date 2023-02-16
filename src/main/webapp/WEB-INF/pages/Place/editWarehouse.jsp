@@ -12,26 +12,27 @@
 </head>
 <body>
 	<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
-
-	<div class="card">
-		<div class="card-header">修改倉庫</div>
-		<div class="card-body">
-			<form:form action="${contextRoot}/warehouse/edit"
-				modelAttribute="warehouse" method="put">
-
-				<form:input type="hidden" path="id" />
-				
-
-				<div class="input-group">
-				     <form:input class="form-control" path="place" />
-					<form:input class="form-control" path="warehouseName" />
+	<div class="container">
+		<div class="card">
+			<div class="card-header">修改倉庫</div>
+			<div class="card-body">
+				<div class="row">
+					<form:form action="${contextRoot}/warehouse/edit"
+						modelAttribute="warehouse" method="put">
+						<form:input type="hidden" path="id" />
+						<div class="input-group">
+							<div class="col-6">${place.place_name}</div>
+							<div class="col-6">
+								<form:input class="form-control" path="warehouseName" />
+							</div>
+						</div>
+						<div class="col">
+							<input type="submit" class="btn btn-outline-primary" value="送出" />
+						</div>
+					</form:form>
 				</div>
-
-				<br />
-				<input type="submit" class="btn btn-outline-primary" value="送出"/>
-			</form:form>
+			</div>
 		</div>
-	    </div>
-	
+	</div>
 </body>
 </html>

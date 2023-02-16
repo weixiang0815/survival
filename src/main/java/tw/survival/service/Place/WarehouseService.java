@@ -57,7 +57,13 @@ public class WarehouseService {
 	}
 
 	public WarehouseBean updateWarehouse(WarehouseBean warehouse) {
-		return wDAO.save(warehouse);
+		Optional<WarehouseBean> optional = wDAO.findById(warehouse.getId());
+		if (optional.isPresent()) {
+			WarehouseBean warehouseToUpdate = optional.get();
+			warehouseToUpdate.setWarehouseName(warehouse.getWarehouseName());
+			return wDAO.save(warehouseToUpdate);
+		}
+		return null;
 	}
 
 }

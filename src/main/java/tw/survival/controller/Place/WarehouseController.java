@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.WarehouseBean;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.WarehouseService;
@@ -59,13 +60,15 @@ public class WarehouseController {
 	@GetMapping("/warehouse/edit")
 	public String editWarehouse(@RequestParam("id") Integer id, Model model) {
 		WarehouseBean warehouse = warehouseService.getOneWarehouseById(id);
+		PlaceBean place = warehouse.getPlace();
+		model.addAttribute("place", place);
 		model.addAttribute("warehouse", warehouse);
 		return "Place/editWarehouse";
 	}
 	
 	@PutMapping("/warehouse/edit")
 	public String sendEditWarehouse(@ModelAttribute("warehouse") WarehouseBean warehouse) {
-		warehouseService.insertWarehouse(warehouse);
+		warehouseService.updateWarehouse(warehouse);
 		return "redirect:/warehouse/all";
 	}
 	
