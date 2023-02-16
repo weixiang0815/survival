@@ -13,6 +13,13 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.survival.model.Place.PlaceBean;
 
 @Entity
@@ -51,14 +58,19 @@ public class EmployeeBean {
 	@Column(name = "sex")
 	private String sex;
 	
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthday")
 	private Date birthday;
 	
 	@Column(name = "title")
 	private String title;
 	
-	
-	@Column(name = "hire_date")
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")	
+	@Column(name = "hired_date")
 	private Date hired_date;
 	
 	@Column(name = "status")
@@ -182,7 +194,7 @@ public class EmployeeBean {
 		return hired_date;
 	}
 
-	public void setHire_date(Date hired_date) {
+	public void setHired_date(Date hired_date) {
 		this.hired_date = hired_date;
 	}
 

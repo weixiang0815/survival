@@ -3,6 +3,12 @@ package tw.survival.controller.Player;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -55,7 +61,7 @@ public class PlayerController {
 		return "redirect:/player/list";
 
 	}
-	
+	//D
 	@DeleteMapping("/player/delete")
 	public String deletePlayer(@RequestParam("id") Integer id) {
 		
@@ -84,7 +90,7 @@ public class PlayerController {
 			player.setNickname(nickname);
 			player.setRegion(region);
 			player.setAddress(address);
-//			player.setThumbnail();
+			player.setThumbnail(thumbnail.getBytes());
 			player.setInfo(banned);
 			player.setSex(sex);
 			player.setBirthday(birthday);
@@ -100,6 +106,14 @@ public class PlayerController {
 
 		return "redirect:/player/list";
 	}
-
+	//GetPhoto
+		@GetMapping("/player/photo")
+		public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id){
+			PlayerBean player=pService.findByBean(id);
+			byte[] photofile = player.getThumbnail();
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.IMAGE_JPEG);
+			return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
+		}
 	
 }
