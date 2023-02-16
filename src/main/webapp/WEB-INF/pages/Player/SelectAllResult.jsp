@@ -19,7 +19,7 @@ max-width: 100%;
 	<h3>查詢全部結果</h3>
 	<table class="table table-hover">
 		<tr>
-			<!-- <th>大頭貼</th> -->
+			<th>大頭貼</th> 
 			<th>名稱</th>
 			<th>帳號</th>
 			<th>密碼</th>
@@ -36,7 +36,7 @@ max-width: 100%;
 		</tr>
 		<c:forEach items="${player}" var="player">
 			<tr>
-				<!-- <td style="width: 100px;"><img alt="查無圖片" src="${contextRoot}/Player/showImg?id=${player.id}"/></td> -->
+			 <td style="width: 100px;"><img alt="查無圖片" src="${contextRoot}/player/photo?id=${player.id}"/></td>
 				<td>${player.name}</td>
 				<td>${player.account}</td>
 				<td>${player.password}</td>

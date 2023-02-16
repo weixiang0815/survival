@@ -15,10 +15,6 @@
 <h3>新增職員</h3>
 <form:form action="${contextRoot}/Employee/addEmployee"  enctype="multipart/form-data">
 <table>
-			<tr style="hidden">
-				<td>id：</td>
-				<td><input type="text" name="id" style="hidden" /></td>
-			</tr>
 			<tr>
 				<td>使用者名稱：</td>
 				<td><input type="text" name="name" /></td>

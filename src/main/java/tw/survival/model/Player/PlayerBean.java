@@ -16,6 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -85,6 +86,7 @@ public class PlayerBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "birthday")
 	private Date birthday;
+	
 	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
@@ -134,6 +136,12 @@ public class PlayerBean {
 //	@OrderBy("added desc")
 //	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
 
+	@PrePersist
+	public void autoCreate() {
+		if(join_date == null) {
+			join_date=new Date();
+		}
+	}
 	public PlayerBean() {
 	}
 

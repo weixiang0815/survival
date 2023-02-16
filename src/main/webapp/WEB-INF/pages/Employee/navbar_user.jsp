@@ -24,11 +24,11 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" href="${contextRoot}/player.main">首頁</a></li>
+							aria-current="page" href="${contextRoot}/user">首頁</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/player/add">新增使用者</a></li>
+							href="${contextRoot}/Employee/add">新增職員</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/player/list">查詢使用者</a></li>
+							href="${contextRoot}/Employee/list">查詢職員</a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/Player/login">登入</a></li>
 					</ul>
