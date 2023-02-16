@@ -11,8 +11,9 @@
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 <h3>成功</h3>
-帳號：${account}<br>
-密碼：${password}
+帳號：${player.account}<br>
+密碼：${player.password}
+<a href="${contextRoot}/logout" >登出</a>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

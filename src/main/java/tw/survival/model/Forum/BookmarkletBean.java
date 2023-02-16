@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import tw.survival.model.Player.PlayerBean;
+
 
 @Entity
 @Table(name="bookmarklet")
@@ -25,9 +27,9 @@ public class BookmarkletBean {
 	@JoinColumn(name="fk_posts_id")
 	private PostsBean posts;
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="fk_player_id")
-//	private Player player;	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_player_id")
+	private PlayerBean player;	
 	
 	public BookmarkletBean() {
 	}
@@ -47,6 +49,16 @@ public class BookmarkletBean {
 	public void setPosts(PostsBean posts) {
 		this.posts = posts;
 	}
+
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+	
 	
 	
 	

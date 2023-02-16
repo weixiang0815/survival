@@ -20,38 +20,38 @@ import tw.survival.model.Place.InventoryBean;
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
-@Table(name="Logistics")
+@Table(name = "Logistics")
 @Component
 public class LogisticsBean {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id")
+	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="star_date")
+
+	@Column(name = "star_date")
 	private Date star_date;
-	
-	@Column(name="arrive_date")
+
+	@Column(name = "arrive_date")
 	private Date arrive_date;
-	
-	@Column(name="status")
+
+	@Column(name = "status")
 	private String status;
-	
+
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_inventory_id")
+	@JoinColumn(name = "fk_inventory_id")
 	private InventoryBean Inventory;
-	
+
 //	接收者(player_id)
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_receiver_id")
+	@JoinColumn(name = "fk_receiver_id")
 	private PlayerBean Player;
-	
+
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_orderitem_id")
+	@JoinColumn(name = "fk_orderitem_id")
 	private OrderItemBean OrderItem;
 
 	public Integer getId() {
@@ -109,7 +109,5 @@ public class LogisticsBean {
 	public void setOrderItem(OrderItemBean orderItem) {
 		OrderItem = orderItem;
 	}
-	
-	
-	
+
 }

@@ -11,11 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 import org.springframework.stereotype.Component;
 
@@ -41,6 +41,7 @@ public class PlaceBean {
 	@Column(name = "place_address")
 	private String place_address;
 
+	@Lob
 	@Column(name = "place_photo")
 	private byte[] place_photo;
 
@@ -50,9 +51,9 @@ public class PlaceBean {
 	@Column(name = "place_capacity")
 	private Integer place_capacity;
 
-//	@JsonManagedReference
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-//	private Set<EmployeeBean> employee = new LinkedHashSet<>();
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employee = new LinkedHashSet<>();
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -69,6 +70,9 @@ public class PlaceBean {
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employees = new LinkedHashSet<EmployeeBean>();
 
 	public PlaceBean() {
 	}
@@ -151,6 +155,14 @@ public class PlaceBean {
 
 	public void setSchedule(Set<ScheduleBean> schedule) {
 		this.schedule = schedule;
+	}
+
+	public Set<EmployeeBean> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<EmployeeBean> employees) {
+		this.employees = employees;
 	}
 
 }

@@ -17,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import tw.survival.model.Player.PlayerBean;
+
 @Entity
 @Table(name="msgs")
 public class MsgsBean {
@@ -43,9 +45,9 @@ public class MsgsBean {
 	@JoinColumn(name="fk_posts_id")
 	private PostsBean posts;
 	
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="fk_player_id")
-//	private Player player;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_player_id")
+	private PlayerBean player;
 	
 	
 	public MsgsBean() {

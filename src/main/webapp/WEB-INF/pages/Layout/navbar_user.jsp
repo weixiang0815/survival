@@ -26,11 +26,11 @@
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" href="${contextRoot}/user">首頁</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/usersmain.controller">新增使用者</a></li>
+							href="${contextRoot}/player/add">新增使用者</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/searchmain.controller">查詢使用者</a></li>
+							href="${contextRoot}/player/list">查詢使用者</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/loginsystemmain.controller">登入</a></li>
+							href="${contextRoot}/Player/login">登入</a></li>
 					</ul>
 				</div>
 			</div>

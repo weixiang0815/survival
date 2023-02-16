@@ -10,7 +10,9 @@
 </head>
 <body>
 <jsp:include page="../Layout/navbar_competition.jsp"/>
+<div class="container">
 <h1>報名資訊詳情</h1>
-<jsp:include page="../Layout/footer.jsp"/>
+</div>
+<%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>
 </html>

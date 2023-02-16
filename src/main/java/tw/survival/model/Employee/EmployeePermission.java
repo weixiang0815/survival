@@ -1,10 +1,16 @@
 package tw.survival.model.Employee;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +36,8 @@ public class EmployeePermission {
 	@Column(name = "inventory")
 	private Character inventory;
  
+	@OneToMany(fetch=FetchType.LAZY,mappedBy = "employeePermission",cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employees=new LinkedHashSet<EmployeeBean>();;
 	private EmployeePermission() {
 		
 	}
@@ -80,6 +88,14 @@ public class EmployeePermission {
 
 	public void setInventory(Character inventory) {
 		this.inventory = inventory;
+	}
+
+	public Set<EmployeeBean> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<EmployeeBean> employees) {
+		this.employees = employees;
 	}
 	
 }

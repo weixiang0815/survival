@@ -11,7 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -19,6 +22,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Player.PlayerBean;
 
 
 
@@ -67,9 +73,13 @@ public class PostsBean {
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();	
 
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name="fk_player_id")
-//	private Player player;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="fk_player_id")
+	private PlayerBean player;
+	
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "post")
+	@JoinColumn(name = "fk_competition_id")
+	private CompetitionBean competition;
 	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
