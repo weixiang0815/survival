@@ -57,11 +57,6 @@ public class WarehouseController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
-	@PostMapping("/warehouse/edit")
-	public String editWarehouse() {
-		return "";
-=======
 	@GetMapping("/warehouse/edit")
 	public String editWarehouse(@RequestParam("id") Integer id, Model model) {
 		WarehouseBean warehouse = warehouseService.getOneWarehouseById(id);
@@ -69,7 +64,6 @@ public class WarehouseController {
 		model.addAttribute("place", place);
 		model.addAttribute("warehouse", warehouse);
 		return "Place/editWarehouse";
->>>>>>> 83101f04a544a9bae40295c47637b6f0f2d8f9bb
 	}
 	
 	@PutMapping("/warehouse/edit")
