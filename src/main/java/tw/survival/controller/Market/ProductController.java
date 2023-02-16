@@ -132,12 +132,16 @@ public class ProductController {
 	// 修改商品
 	@PostMapping("/Market/edit")
 	public String sendEditedMessage(@RequestParam("id") Integer id, @RequestParam("name") String name,
-			@RequestParam("img") byte[] img, @RequestParam("product_class") String product_class,
+			@RequestParam("img") MultipartFile img, @RequestParam("product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
-		ProductService productService = new ProductService();
-		productService.updateMsgById(id, name, img, product_class, context, rent_fee, price);
+		try {
+			pService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "redirect:/Market/allProduct";
 	}
 
