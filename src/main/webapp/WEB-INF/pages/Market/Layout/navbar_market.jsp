@@ -9,13 +9,14 @@
 <head>
 <meta charset="UTF-8">
 
+
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg" style="background-color: #DCDCDC">
+	<nav class="navbar navbar-expand-lg" style="background-color: #DCDCDC ">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${contextRoot}/">赫赫商城</a>
 			<button class="navbar-toggler" type="button"
