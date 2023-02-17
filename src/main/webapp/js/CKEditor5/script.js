@@ -27,8 +27,8 @@ function handleError(error) {
 // 以下是表單送出後去抓 CKEditor 裡寫的東西的程式碼
 // 內容會轉成 markdown 語法的程式碼字串（就是純 string 而已不用懷疑～）
 // 這個部分可以自訂成想要的功能
-const whatiwrite = document.getElementById('whatiwrite');
-document.querySelector('form').addEventListener('submit', function (e) {
-    e.preventDefault();
-    console.log(watchdog.editor.getData());
-});
+//const whatiwrite = document.getElementById('whatiwrite');
+//document.querySelector('form').addEventListener('submit', function (e) {
+//    e.preventDefault();
+//    console.log(watchdog.editor.getData());
+//});

@@ -3,7 +3,6 @@ package tw.survival.controller.Competition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,11 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
-import tw.survival.service.Competition.CompetitionHistoryService;
-import tw.survival.service.Competition.CompetitionPictureService;
-import tw.survival.service.Competition.CompetitionPrizeService;
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Competition.SignUpService;
+import tw.survival.service.Place.PlaceService;
 
 @Controller
 public class CompetitionController {
@@ -25,16 +22,7 @@ public class CompetitionController {
 	private CompetitionService compService;
 
 	@Autowired
-	private CompetitionPrizeService compPrizeService;
-
-	@Autowired
-	private CompetitionPictureService compPicService;
-
-	@Autowired
-	private CompetitionHistoryService compHistoryService;
-
-	@Autowired
-	private SignUpService signupService;
+	private PlaceService placeService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -53,7 +41,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/new")
 	public String newCompetition(Model model) {
-		String[] ruleOptions = {};
+		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("competition", new CompetitionBean());
 		return "Competition/newCompetition";
 	}
@@ -65,19 +53,17 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/create")
-	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, BindingResult result,
-			Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("新增失敗，請重新輸入");
-			return "redirect:/competition/new";
-		}
+	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, Model model) {
+		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
+		comp.setFounderEmployee(null);
+		comp.setFounderPlayer(null);
 		compService.create(comp);
 		comp = compService.findLatestCompetition();
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());
 		}
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -110,7 +96,44 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/detail")
 	public String competitionDetailById(@RequestParam("id") Integer id, Model model) {
-		model.addAttribute("comp", compService.findById(id));
+		CompetitionBean comp = compService.findById(id);
+		int startTimespan = comp.getStartTimespan();
+		String start = "";
+		int endTimespan = comp.getEndTimespan();
+		String end = "";
+		switch (startTimespan) {
+		case 1:
+			start = "早上（6:00～12:00）";
+			break;
+		case 2:
+			start = "下午（12:00～18:00）";
+			break;
+		case 3:
+			start = "晚上（18:00～00:00）";
+			break;
+		case 4:
+			start = "半夜（00:00～6:00）";
+			break;
+		}
+		switch (endTimespan) {
+		case 1:
+			end = "早上（6:00～12:00）";
+			break;
+		case 2:
+			end = "下午（12:00～18:00）";
+			break;
+		case 3:
+			end = "晚上（18:00～00:00）";
+			break;
+		case 4:
+			end = "半夜（00:00～6:00）";
+			break;
+		}
+		PlaceBean place = comp.getPlace();
+		model.addAttribute("place", place);
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		model.addAttribute("comp", comp);
 		return "Competition/competitionDetail";
 	}
 

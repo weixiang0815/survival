@@ -15,6 +15,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import tw.survival.model.Place.InventoryBean;
 
 @Entity
@@ -52,7 +54,7 @@ public class ProductBean {
 	private Integer price;
 
 	// 庫存數量
-//	@JsonManagedReference
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
 

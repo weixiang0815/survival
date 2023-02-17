@@ -3,8 +3,6 @@ package tw.survival.controller.Employee;
 import java.sql.Date;
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder.In;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,11 +16,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Employee.EmployeeBean;
-import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.Employee.EmployeeService;
 
 @Controller

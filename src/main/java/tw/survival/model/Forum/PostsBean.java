@@ -1,5 +1,6 @@
 package tw.survival.model.Forum;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -23,6 +24,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Player.PlayerBean;
 
@@ -30,7 +33,9 @@ import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name="posts")
-public class PostsBean {
+public class PostsBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
@@ -49,11 +54,13 @@ public class PostsBean {
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name="added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date added;
 	
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name="final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date finalAdded;
 	
 	
@@ -77,8 +84,7 @@ public class PostsBean {
 	@JoinColumn(name="fk_player_id")
 	private PlayerBean player;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_post_id")
+	@OneToOne(mappedBy = "post")
 	private CompetitionBean competition;
 	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事

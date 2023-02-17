@@ -9,6 +9,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
 <style>
 .sidebar {
 	height: 100vh;
@@ -37,7 +38,17 @@
 						class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
 						data-bs-toggle="dropdown" aria-expanded="false"> <img
 						src="https://github.com/mdo.png" alt="" width="32" height="32"
-						class="rounded-circle me-2"> <strong>員工名稱</strong>
+						class="rounded-circle me-2">
+						<strong>
+							<c:choose>
+								<c:when test="${emp != null}">
+									${emp.name}
+								</c:when>
+								<c:otherwise>
+									員工名稱
+								</c:otherwise>
+							</c:choose>
+						</strong>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark text-small shadow">
 						<li><a class="dropdown-item" href="#">設定</a></li>
@@ -49,33 +60,19 @@
 				<hr>
 				<ul class="nav nav-pills flex-column mb-auto">
 					<li class="nav-item"><a href="#" class="nav-link active"
-						aria-current="page"> <svg class="bi pe-none me-2" width="16"
-								height="16">
-								<use xlink:href="#home" /></svg> 首頁
+						aria-current="page"><i class="bi bi-house"></i>&nbsp;&nbsp;&nbsp;首頁
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#speedometer2" /></svg> 員工管理
+					<li><a href="#" class="nav-link text-white"><i class="bi bi-person-badge"></i>&nbsp;&nbsp;&nbsp;員工管理
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#table" /></svg> 會員管理
+					<li><a href="#" class="nav-link text-white"><i class="bi bi-people-fill"></i>&nbsp;&nbsp;&nbsp;會員管理
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#grid" /></svg> 活動管理
+					<li><a href="${contextRoot}/competition" class="nav-link text-white"><i class="bi bi-calendar-check"></i>&nbsp;&nbsp;&nbsp;活動管理
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#people-circle" /></svg> 商城管理
+					<li><a href="#" class="nav-link text-white"><i class="bi bi-shop"></i>&nbsp;&nbsp;&nbsp;商城管理
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#people-circle" /></svg> 場地管理
+					<li><a href="#" class="nav-link text-white"><i class="bi bi-building"></i>&nbsp;&nbsp;&nbsp;場地管理
 					</a></li>
-					<li><a href="#" class="nav-link text-white"> <svg
-								class="bi pe-none me-2" width="16" height="16">
-								<use xlink:href="#people-circle" /></svg> 論壇管理
+					<li><a href="#" class="nav-link text-white"><i class="bi bi-envelope-paper-fill"></i>&nbsp;&nbsp;&nbsp;論壇管理
 					</a></li>
 				</ul>
 			</div>

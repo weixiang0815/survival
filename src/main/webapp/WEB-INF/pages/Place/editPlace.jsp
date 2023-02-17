@@ -9,9 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Edit Place</title>
+<title>修改場地</title>
 </head>
 <body>
+<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
 <div class="container">
 		<h1>修改場地資訊</h1>
 
