@@ -11,7 +11,7 @@
 <title>新增使用者</title>
 </head>
 <body>
-	<jsp:include page="../Layout/navbar_user.jsp" />
+	<jsp:include page="../Template/admin.jsp" />
 	<h3>新增使用者</h3>
 	<form:form action="${contextRoot}/player/addpost"  enctype="multipart/form-data">
 		<table>
