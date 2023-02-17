@@ -2,6 +2,7 @@ package tw.survival.model.Player;
 
 import java.io.IOException;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
