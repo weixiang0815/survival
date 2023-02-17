@@ -17,11 +17,11 @@ max-width: 100%;
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 <h3>使用者修改資料</h3>
-	<form:form action="${contextRoot}/player/update1" method="put" modelAttribute="player">
+	<form:form action="${contextRoot}/player/update1" method="put" modelAttribute="player" enctype="multipart/form-data">
 		<table class="table table-hover">
 		    <tr>
 				<td>大頭貼:</td>
-				<td><form:input type="file" path="thumbnail" value="上傳圖片" />
+				<td><form:input type="file" path="thumbnail" />
 			</tr>
 			<tr>
 				<td>ID：</td>
