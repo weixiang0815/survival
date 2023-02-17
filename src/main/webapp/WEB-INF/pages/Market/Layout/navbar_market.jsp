@@ -10,7 +10,9 @@
 <meta charset="UTF-8">
 
 
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
 
 
 </head>
@@ -57,9 +59,8 @@
 
 	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 	<script type="text/javascript"
-		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript"
-		src="${contextRoot}/js/jquery-3.6.3.min.js"></script>
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 
 
 </body>
