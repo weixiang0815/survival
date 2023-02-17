@@ -19,7 +19,7 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	@Query(value = "from PostsBean order by added desc")
 	public List<PostsBean> findPostsBeanDesc();
 	
-	
+//	public List<PostsBean> findByNameOrderByAddedDesc();
 	
 	
 }

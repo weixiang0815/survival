@@ -1,5 +1,6 @@
 package tw.survival.model.Forum;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -21,7 +22,9 @@ import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name="thumbUp")
-public class ThumbUpBean {
+public class ThumbUpBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
