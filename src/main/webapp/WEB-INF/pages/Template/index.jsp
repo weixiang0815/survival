@@ -116,7 +116,7 @@
 							href="${contextRoot}/place"><i class="bi bi-building"></i>&nbsp;&nbsp;場地系統
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/"><i class="bi bi-file-text"></i>&nbsp;&nbsp;論壇系統
+							href="${contextRoot}/forum.main"><i class="bi bi-file-text"></i>&nbsp;&nbsp;論壇系統
 						</a></li>
 					</ul>
 					<h6
