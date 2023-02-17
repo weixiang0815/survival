@@ -1,5 +1,6 @@
 package tw.survival.controller.Player;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,7 @@ public class PlayerController {
 		m.addAttribute("player", list);
 		return "Player/SelectAllResult";
 	}
+
 //U
 	@GetMapping("/player/update")
 	public String updatePlayer(@RequestParam("id") Integer id, Model model) {
@@ -51,33 +53,35 @@ public class PlayerController {
 		model.addAttribute("player", player);
 		return "Player/UpdateUser1";
 	}
-	
+
 	@PutMapping("/player/update1")
 	public String updateById(@ModelAttribute("player") PlayerBean player) {
+//		if (thumbnail != null) {
+//			player.setThumbnail(thumbnail.getBytes());
+//		}
 		pService.update(player);
 		return "redirect:/player/list";
 
 	}
-	//D
+
+	// D
 	@DeleteMapping("/player/delete")
 	public String deletePlayer(@RequestParam("id") Integer id) {
-		
-		pService.delete(id);	
+
+		pService.delete(id);
 		return "redirect:/player/list";
 	}
 
-	
 	@PostMapping("/player/addpost")
-	public String postPlayer(@RequestParam("name") String name,
-			@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("identity") String identity_number, @RequestParam("email") String email,
-			@RequestParam("age") Integer age, @RequestParam("region") String region,
-			@RequestParam("nickname") String nickname, @RequestParam("address") String address,
-			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("sex") String sex,
-			@RequestParam("birthday") Date birthday, @RequestParam("info") String info,
+	public String postPlayer(@RequestParam("name") String name, @RequestParam("account") String account,
+			@RequestParam("password") String password, @RequestParam("identity") String identity_number,
+			@RequestParam("email") String email, @RequestParam("age") Integer age,
+			@RequestParam("region") String region, @RequestParam("nickname") String nickname,
+			@RequestParam("address") String address, @RequestParam("thumbnail") MultipartFile thumbnail,
+			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday, @RequestParam("info") String info,
 			@RequestParam("phone") String phone, @RequestParam("banned") String banned, Model model) {
 		try {
-			PlayerBean player = new PlayerBean();			
+			PlayerBean player = new PlayerBean();
 			player.setName(name);
 			player.setAccount(account);
 			player.setPassword(password);
@@ -103,14 +107,15 @@ public class PlayerController {
 
 		return "redirect:/player/list";
 	}
-	//GetPhoto
-		@GetMapping("/player/photo")
-		public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id){
-			PlayerBean player=pService.findByBean(id);
-			byte[] photofile = player.getThumbnail();
-			HttpHeaders headers = new HttpHeaders();
-			headers.setContentType(MediaType.IMAGE_JPEG);
-			return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
-		}
-	
+
+	// GetPhoto
+	@GetMapping("/player/photo")
+	public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id) {
+		PlayerBean player = pService.findByBean(id);
+		byte[] photofile = player.getThumbnail();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+		return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
+	}
+
 }

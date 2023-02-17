@@ -26,47 +26,49 @@ public class EmployeeController {
 
 	@Autowired
 	public EmployeeService empService;
+
 //C
 	@GetMapping("/Employee/add")
 	public String addemployee() {
 		return "Employee/addemployees";
 	}
-	//R
+
+	// R
 	@GetMapping("/Employee/list")
 	public String list(Model model) {
-		List<EmployeeBean> list=empService.getAllemp();
-		model.addAttribute("Employee",list);
+		List<EmployeeBean> list = empService.getAllemp();
+		model.addAttribute("Employee", list);
 		return "Employee/empallResult";
 	}
-	//U
+
+	// U
 	@GetMapping("/Employee/update")
-	public String updateEmployee(@RequestParam("id")Integer id,Model model) {
-		EmployeeBean bean=empService.employeeFindById(id);
-		model.addAttribute("Employee",bean);
-		return"Employee/UpdateEmployee";
-		
-	}
-	@PutMapping("/Employee/update1")
-	public String updateById(@ModelAttribute("Employee")EmployeeBean employee) {
-		empService.update(employee);
-		return"redirect:/Employee/list";
+	public String updateEmployee(@RequestParam("id") Integer id, Model model) {
+		EmployeeBean bean = empService.employeeFindById(id);
+		model.addAttribute("Employee", bean);
+		return "Employee/UpdateEmployee";
+
 	}
 
-	
+	@PutMapping("/Employee/update1")
+	public String updateById(@ModelAttribute("Employee") EmployeeBean employee) {
+		empService.update(employee);
+		return "redirect:/Employee/list";
+	}
+
 	@PostMapping("/Employee/addEmployee")
-	public String postEmployee( @RequestParam("account") String account,
-			@RequestParam("password") String password, @RequestParam("age") Integer age,
-			@RequestParam("region") String region, @RequestParam("title") String title,
-			@RequestParam("address") String address, @RequestParam("salary") Integer salary,
-			@RequestParam("hired_date") Date hired_date, @RequestParam("thumbnail") MultipartFile thumbnail,
-			@RequestParam("name") String name, @RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
-			@RequestParam("identity") String identity_number,
-			@RequestParam("email") String email, Model model) {
+	public String postEmployee(@RequestParam("account") String account, @RequestParam("password") String password,
+			@RequestParam("age") Integer age, @RequestParam("region") String region,
+			@RequestParam("title") String title, @RequestParam("address") String address,
+			@RequestParam("salary") Integer salary, @RequestParam("hired_date") Date hired_date,
+			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
+			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
+			@RequestParam("identity") String identity_number, @RequestParam("email") String email, Model model) {
 		try {
 			EmployeeBean employee = new EmployeeBean();
 			employee.setName(name);
 			employee.setAccount(account);
-			employee.setPassword(password);	
+			employee.setPassword(password);
 			employee.setIdentity_number(identity_number);
 			employee.setEmail(email);
 			employee.setAge(age);
@@ -86,20 +88,22 @@ public class EmployeeController {
 
 		return "redirect:/Employee/list ";
 	}
+
 	@DeleteMapping("Employee/delete")
 	public String deleteEmployeeById(@RequestParam("id") Integer id) {
 		empService.delete(id);
-		return"redirect:/Employee/list";
-		
+		return "redirect:/Employee/list";
+
 	}
-	//GetPhoto
-			@GetMapping("/Employee/photo")
-			public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id){
-				EmployeeBean employee=empService.employeeFindById(id);
-				byte[] photofile = employee.getThumbnail();
-				HttpHeaders headers = new HttpHeaders();
-				headers.setContentType(MediaType.IMAGE_JPEG);
-				return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
-			}
+
+	// GetPhoto
+	@GetMapping("/Employee/photo")
+	public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id) {
+		EmployeeBean employee = empService.employeeFindById(id);
+		byte[] photofile = employee.getThumbnail();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+		return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
+	}
 
 }

@@ -1,6 +1,8 @@
 package tw.survival.model.Player;
 
+import java.io.IOException;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,8 +19,10 @@ import javax.persistence.TemporalType;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 
@@ -72,7 +76,7 @@ public class PlayerBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "birthday")
 	private Date birthday;
-	
+
 	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
@@ -124,10 +128,11 @@ public class PlayerBean {
 
 	@PrePersist
 	public void autoCreate() {
-		if(join_date == null) {
-			join_date=new Date();
+		if (join_date == null) {
+			join_date = new Date();
 		}
 	}
+
 	public PlayerBean() {
 	}
 
@@ -209,6 +214,10 @@ public class PlayerBean {
 
 	public void setThumbnail(byte[] thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	public void setThumbnail(MultipartFile file) throws IOException {
+		this.thumbnail = file.getBytes();
 	}
 
 	public String getSex() {
@@ -338,7 +347,5 @@ public class PlayerBean {
 	public void setInfo(String info) {
 		this.info = info;
 	}
-
-	
 
 }
