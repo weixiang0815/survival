@@ -1,13 +1,21 @@
 package tw.survival.controller.Competition;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import tw.survival.model.Competition.SignUpBean;
+import tw.survival.service.Competition.SignUpService;
+
 @Controller
 public class SignUpController {
+	
+	@Autowired
+	private SignUpService signupService;
 
 	/**
 	 * 跳轉至報名頁面
@@ -15,7 +23,8 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/signup")
-	public String newSignup() {
+	public String newSignup(Model model) {
+		model.addAttribute("signup", new SignUpBean());
 		return "Competition/newSignup";
 	}
 
