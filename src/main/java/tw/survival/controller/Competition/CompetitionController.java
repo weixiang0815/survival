@@ -3,11 +3,11 @@ package tw.survival.controller.Competition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -155,7 +155,9 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/edit")
 	public String editCompetition(@RequestParam("id") Integer id, Model model) {
-		model.addAttribute("comp", compService.findById(id));
+		CompetitionBean competition = compService.findById(id);
+		model.addAttribute("competition", competition);
+		model.addAttribute("placeList", placeService.getAllPlace());
 		return "Competition/editCompetition";
 	}
 
@@ -165,9 +167,10 @@ public class CompetitionController {
 	 * @return 重新導向至該活動詳情頁面
 	 * @author 王威翔
 	 */
-	@PutMapping("/competition/edit/send")
-	public String editCompetitionById() {
-		return "redirect:/competition/detail";
+	@PostMapping("/competition/edit/send")
+	public String editCompetitionById(@ModelAttribute("competition") CompetitionBean comp, Model model) {
+		compService.updateByEntity(comp);
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -176,8 +179,9 @@ public class CompetitionController {
 	 * @return 重新導向至多筆活動資訊搜尋結果
 	 * @author 王威翔
 	 */
-	@DeleteMapping("/competition/delete")
+	@GetMapping("/competition/delete")
 	public String deleteCompetitionById(@RequestParam("id") Integer id) {
+		compService.deleteById(id);
 		return "redirect:/competition/search/result";
 	}
 
