@@ -27,47 +27,14 @@ import tw.survival.service.Market.ProductService;
 public class ProductController {
 
 	@Autowired
-	private ProductInventoryRepository productInventoryDao;
-
-	@Autowired
 	private ProductRepository productBeanDao;
 
 	@Autowired
-	private ProductService pService;
+	private ProductService ProductService;
 
 	@GetMapping("/Market/add_Product")
 	private String uploadPage() {
 		return "Market/add_Product";
-	}
-
-	@ResponseBody
-	@PostMapping("ProductRepository/add")
-	public ProductInventory insertProductInventory() {
-		ProductInventory pdb = new ProductInventory();
-		pdb.setAmount(100);
-		pdb.setPrice(5000);
-
-		ProductInventory response = productInventoryDao.save(pdb);
-
-		return response;
-	}
-
-	// 測試用沒用處
-	@ResponseBody
-	@PostMapping("ProductRepository/addproduct_text")
-	public ProductBean insertProduct1() {
-		ProductBean pdb1 = new ProductBean();
-		pdb1.setName("KJM700狙擊槍");
-		pdb1.setImg(new byte[100]);
-		pdb1.setContext("10發裝金屬彈匣");
-		pdb1.setPrice(8000);
-		pdb1.setRent_fee(1200);
-		pdb1.setProduct_class("狙擊槍");
-
-//		pdb1.setProductClassBean(productClassDao.findById2(1));
-		productBeanDao.save(pdb1);
-
-		return pdb1;
 	}
 
 	// 新增商品
@@ -86,7 +53,7 @@ public class ProductController {
 			pb.setRent_fee(setRent_fee);
 			pb.setImg(file.getBytes());
 
-			pService.insertProduct(pb);
+			ProductService.insertProduct(pb);
 
 			return "上傳成功";
 		} catch (IOException e) {
@@ -98,7 +65,7 @@ public class ProductController {
 	// 搜尋全部商品
 	@GetMapping("/Market/allProduct")
 	public ModelAndView getAllProduct(ModelAndView mav) {
-		List<ProductBean> list = pService.findAllProduct();
+		List<ProductBean> list = ProductService.findAllProduct();
 		mav.setViewName("/Market/show_AllProduct");
 		mav.getModel().put("list", list);
 		return mav;
@@ -108,7 +75,7 @@ public class ProductController {
 	@ResponseBody
 	@GetMapping("/Market/id")
 	public ResponseEntity<byte[]> getProductById(@RequestParam("id") Integer id) {
-		ProductBean photo = pService.getProductById(id);
+		ProductBean photo = ProductService.getProductById(id);
 
 		byte[] photoFile = photo.getImg();
 		HttpHeaders headers = new HttpHeaders();
@@ -122,7 +89,7 @@ public class ProductController {
 	// 修改商品
 	@GetMapping("/Market/edit")
 	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
-		ProductBean p1 = pService.findById(id);
+		ProductBean p1 = ProductService.findById(id);
 		model.addAttribute("product", p1);
 		return "Market/editProduct";
 	}
@@ -135,9 +102,8 @@ public class ProductController {
 			@RequestParam("price") Integer price) {
 
 		try {
-			pService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+			ProductService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/Market/allProduct";
@@ -146,48 +112,17 @@ public class ProductController {
 	// 刪除商品
 	@DeleteMapping("/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
-		pService.deleteById(id);
+		ProductService.deleteById(id);
 		return "redirect:/Market/allProduct";
 	}
 
 	// 模糊搜尋商品
-//	 @ResponseBody     
-//	 @GetMapping("/Market/productNameLike")
-//	 public List<ProductBean> findProductLike(@RequestParam("Search") String name){
-//	  return productBeanDao.findProductLike(name);
-//	 }
-
-//	@ResponseBody
 	@PostMapping("/Market/productNameLike")
 	public String findProductLike(@RequestParam("Search") String name, Model model) {
-		List<ProductBean> searchResult = pService.findByName(name);
+		List<ProductBean> searchResult = ProductService.findByName(name);
 		model.addAttribute("SearchResult", searchResult);
 		return "Market/searchResult";
 	}
 
-//	@GetMapping("/Market/productNameLike")
-//	public List<ProductBean> findProductLike(@RequestParam String name) {
-//		boolean idSprocail = isSpecialChar(name);
-//		if (idSprocail) {
-//			try {
-//				String encodedName = URLEncoder.encode(name, StandardCharsets.UTF_8.toString());
-//				System.out.println("encodedName:" + encodedName);
-//				return productBeanDao.findProductLike(encodedName);
-//			} catch (UnsupportedEncodingException e) {
-//				e.printStackTrace();
-//				return null;
-//			}
-//		} else {
-//			return productBeanDao.findProductLike(name);
-//		}
-//
-//	}
-//
-//	public static boolean isSpecialChar(String str) {
-//		String regEx = "[ _`~!@#$%^&*()+=|{}‘:;‘,\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]|\n|\r|\t";
-//		Pattern p = Pattern.compile(regEx);
-//		Matcher m = p.matcher(str);
-//		return m.find();
-//	} 
 
 }
