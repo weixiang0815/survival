@@ -34,6 +34,10 @@
 							href="${contextRoot}/warehouse/new">新增倉庫</a></li>		
 						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/warehouse/all">所有倉庫</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/inventory/new">新增庫存表</a></li>	
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/inventory/all">所有庫存表</a></li>		
 					</ul>
 				</div>
 			</div>
