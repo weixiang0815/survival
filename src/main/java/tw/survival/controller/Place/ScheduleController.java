@@ -1,11 +1,8 @@
 package tw.survival.controller.Place;
 
 
-import java.util.Date;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +16,7 @@ import tw.survival.service.Place.ScheduleService;
 public class ScheduleController {
 
 	
-	private ScheduleService sService;
+	private ScheduleService scheduleService;
 	
 	
 	@GetMapping("/schedule/addSchedule")
@@ -33,7 +30,7 @@ public class ScheduleController {
 	public String addPagePost(@ModelAttribute("scheduleBean") ScheduleBean sch ) {
 		System.out.println("進入CONTROLLER");
 		if(sch!=null) {
-		sService.insertSchedule(sch);
+			scheduleService.insertSchedule(sch);
 		System.out.println("已儲存");
 			
 		}
