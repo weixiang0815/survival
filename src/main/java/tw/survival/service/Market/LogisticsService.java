@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.LogisticsRepository;
-import tw.survival.model.Place.PlaceBean;
 
 @Service
 @Transactional
@@ -22,8 +21,8 @@ public class LogisticsService {
 
 	}
 	
-	public LogisticsBean insertLogistics(LogisticsBean Logistics) {
-		return LogisticsDao.save(Logistics);
+	public void insertLogistics(LogisticsBean Logistics) {
+		LogisticsDao.save(Logistics);
 	}
 	
 	public LogisticsBean getOneLogisticsById(Integer id) {
