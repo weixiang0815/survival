@@ -18,19 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import tw.survival.model.Market.ProductBean;
-import tw.survival.model.Market.ProductInventory;
-import tw.survival.model.Market.ProductInventoryRepository;
-import tw.survival.model.Market.ProductRepository;
 import tw.survival.service.Market.ProductService;
 
 @Controller
 public class ProductController {
 
-	@Autowired
-	private ProductRepository productBeanDao;
 
 	@Autowired
-	private ProductService ProductService;
+	private ProductService productService;
 
 	@GetMapping("/Market/add_Product")
 	private String uploadPage() {
@@ -53,7 +48,7 @@ public class ProductController {
 			pb.setRent_fee(setRent_fee);
 			pb.setImg(file.getBytes());
 
-			ProductService.insertProduct(pb);
+			productService.insertProduct(pb);
 
 			return "上傳成功";
 		} catch (IOException e) {
@@ -65,7 +60,7 @@ public class ProductController {
 	// 搜尋全部商品
 	@GetMapping("/Market/allProduct")
 	public ModelAndView getAllProduct(ModelAndView mav) {
-		List<ProductBean> list = ProductService.findAllProduct();
+		List<ProductBean> list = productService.findAllProduct();
 		mav.setViewName("/Market/show_AllProduct");
 		mav.getModel().put("list", list);
 		return mav;
@@ -75,7 +70,7 @@ public class ProductController {
 	@ResponseBody
 	@GetMapping("/Market/id")
 	public ResponseEntity<byte[]> getProductById(@RequestParam("id") Integer id) {
-		ProductBean photo = ProductService.getProductById(id);
+		ProductBean photo = productService.getProductById(id);
 
 		byte[] photoFile = photo.getImg();
 		HttpHeaders headers = new HttpHeaders();
@@ -89,7 +84,7 @@ public class ProductController {
 	// 修改商品
 	@GetMapping("/Market/edit")
 	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
-		ProductBean p1 = ProductService.findById(id);
+		ProductBean p1 = productService.findById(id);
 		model.addAttribute("product", p1);
 		return "Market/editProduct";
 	}
@@ -102,7 +97,7 @@ public class ProductController {
 			@RequestParam("price") Integer price) {
 
 		try {
-			ProductService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+			productService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -112,14 +107,14 @@ public class ProductController {
 	// 刪除商品
 	@DeleteMapping("/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
-		ProductService.deleteById(id);
+		productService.deleteById(id);
 		return "redirect:/Market/allProduct";
 	}
 
 	// 模糊搜尋商品
 	@PostMapping("/Market/productNameLike")
 	public String findProductLike(@RequestParam("Search") String name, Model model) {
-		List<ProductBean> searchResult = ProductService.findByName(name);
+		List<ProductBean> searchResult = productService.findByName(name);
 		model.addAttribute("SearchResult", searchResult);
 		return "Market/searchResult";
 	}
