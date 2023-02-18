@@ -54,7 +54,7 @@ public class CompetitionService {
 			newPost.setName(comp.getMandarinName());
 			newPost.setClassify("活動競賽😎");
 			newPost.setEssay(comp.getContent());
-			postsService.addPost(newPost);
+//			postsService.addPost(newPost);
 			compDao.save(comp);
 			return comp;
 		}
