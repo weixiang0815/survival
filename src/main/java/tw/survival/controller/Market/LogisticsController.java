@@ -15,25 +15,23 @@ import tw.survival.service.Market.LogisticsService;
 
 @Controller
 public class LogisticsController {
-	
+
 	@Autowired
 	private LogisticsService LogisticsService;
-	
-	@GetMapping("/Market/Logistics")
+
+	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
-		return "Market/Logistics";
+		return "Market/add_Logistics";
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/Market/addLogistics")
-	public String addLogistics(
-			@RequestParam("order_create_date") Date Logistics_create_date,
-			@RequestParam("arrive_date") Date arrive_date,
-			@RequestParam("Logistics_status") String status
-		
-			) throws IOException {
+	public String addLogistics(@RequestParam("start_date") Date start_date,
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("Logistics_status") String status)
+			throws IOException {
+
 		LogisticsBean lb = new LogisticsBean();
-		lb.setStar_date(Logistics_create_date);
+		lb.setStart_date(start_date);
 		lb.setArrive_date(arrive_date);
 		lb.setStatus(status);
 
@@ -43,4 +41,5 @@ public class LogisticsController {
 	}
 	
 	
+
 }

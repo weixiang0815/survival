@@ -1,6 +1,5 @@
 package tw.survival.model.Market;
 
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -37,8 +36,8 @@ public class LogisticsBean {
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	@Column(name = "star_date")
-	private Date star_date;
+	@Column(name = "start_date")
+	private Date start_date;
 
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -73,12 +72,12 @@ public class LogisticsBean {
 		this.id = id;
 	}
 
-	public Date getStar_date() {
-		return star_date;
+	public Date getStart_date() {
+		return start_date;
 	}
 
-	public void setStar_date(Date star_date) {
-		this.star_date = star_date;
+	public void setStart_date(Date star_date) {
+		this.start_date = star_date;
 	}
 
 	public Date getArrive_date() {
