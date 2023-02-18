@@ -55,6 +55,7 @@ public class CompetitionService {
 			newPost.setClassify("活動競賽😎");
 			newPost.setEssay(comp.getContent());
 			postsService.insertPost(newPost);
+//			postsService.addPost(newPost);
 			compDao.save(comp);
 			return comp;
 		}
