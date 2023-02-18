@@ -42,8 +42,8 @@ public class CompetitionBean {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "public_or_private", length = 1)
-	private String publicOrPrivate;
+	@Column(name = "public_or_private")
+	private Integer publicOrPrivate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_founder_player")
@@ -148,11 +148,11 @@ public class CompetitionBean {
 		this.id = id;
 	}
 
-	public String getPublicOrPrivate() {
+	public Integer getPublicOrPrivate() {
 		return publicOrPrivate;
 	}
 
-	public void setPublicOrPrivate(String publicOrPrivate) {
+	public void setPublicOrPrivate(Integer publicOrPrivate) {
 		this.publicOrPrivate = publicOrPrivate;
 	}
 

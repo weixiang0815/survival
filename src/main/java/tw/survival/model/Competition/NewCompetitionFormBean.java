@@ -14,8 +14,6 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -32,16 +30,14 @@ public class NewCompetitionFormBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "fk_player_id")
-	@Transient
+	@Column(name = "fk_player_id", insertable = false, updatable = false)
 	private Integer playerId;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
 
-	@Column(name = "fk_employee_id")
-	@Transient
+	@Column(name = "fk_employee_id", insertable = false, updatable = false)
 	private Integer employeeId;
 
 	@OneToOne(cascade = CascadeType.ALL)
