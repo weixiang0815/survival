@@ -29,13 +29,22 @@
 					modelAttribute="signup">
 					<div class="input-group">
 						<fieldset class="row mt-3 mb-3 p-3">
-							<legend>請選一個活動</legend>
+							<legend>一、會員基本資料</legend>
+							<form:input hidden="true" path="playerId" value="${player.id}" required="true" />
+							<div class="col-12">名稱：${player.name}</div>
+							<div class="col-12">暱稱：${player.nickname}</div>
+							<div class="col-12">帳號：${player.account}</div>
+							<div class="col-12">Email：${player.email}</div>
+							<div class="col-12">手機：${player.phone}</div>
+						</fieldset>
+						<fieldset class="row mt-3 mb-3 p-3">
+							<legend>二、請選一個活動</legend>
 							<div class="col-12">
 <%-- 								<form:label path="competitionId" class="form-label">活動</form:label> --%>
 								<form:select title="選擇一個活動" class="form-select"
-									path="competitionId" id="placeId">
+									path="competitionId" id="competitionId">
 									<c:forEach items="${compList}" var="comp">
-										<form:option value="${comp.id}">${comp.mandarinName}（${comp.englishName}）
+										<form:option value="${comp.id}">${comp.mandarinName}（${comp.englishName}）；
 										競賽模式：
 										<c:choose>
 												<c:when test="${comp.singleOrCrew == \"S\"}">個人戰</c:when>
@@ -46,6 +55,17 @@
 										</form:option>
 									</c:forEach>
 								</form:select>
+							</div>
+						</fieldset>
+						<fieldset class="row mt-3 mb-3 p-3">
+							<legend>三、是否直接繳費</legend>
+							<div class="col-12">
+								<form:radiobutton name="status" class="form-check-input"
+									path="status" id="paid" value="已繳費" label="是"
+									required="true" />
+								<form:radiobutton name="status" class="form-check-input"
+									path="status" id="notpaid" value="未繳費" label="否"
+									required="true" />
 							</div>
 						</fieldset>
 						<fieldset class="row mt-3 mb-3 p-3">
