@@ -25,7 +25,7 @@ import tw.survival.service.Place.PlaceService;
 public class PlaceController {
 
 	@Autowired
-	private PlaceService pService;
+	private PlaceService placeService;
 
 	@GetMapping("/place")
 	public String gotoIndex() {
@@ -51,7 +51,7 @@ public class PlaceController {
 			pb.setPlace_fee(placeFee);
 			pb.setPlace_photo(file.getBytes());
 
-			pService.insertPlace(pb);
+			placeService.insertPlace(pb);
 			return "上傳成功";
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class PlaceController {
 
 	@GetMapping("/place/all")
 	public ModelAndView getAllPlace(ModelAndView mav) {
-		List<PlaceBean> list = pService.getAllPlace();
+		List<PlaceBean> list = placeService.getAllPlace();
 		mav.setViewName("Place/showAllPlace");
 		mav.getModel().put("list", list);
 		return mav;
@@ -70,7 +70,7 @@ public class PlaceController {
 
 	@GetMapping("/place/id")
 	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
-		PlaceBean place1 = pService.getOnePlaceById(id);
+		PlaceBean place1 = placeService.getOnePlaceById(id);
 		byte[] placeFile = place1.getPlace_photo();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
@@ -80,7 +80,7 @@ public class PlaceController {
 
 	@GetMapping("/place/edit")
 	public String editPlacePage(@RequestParam("id") Integer id, Model model) {
-		PlaceBean p1 = pService.getOnePlaceById(id);
+		PlaceBean p1 = placeService.getOnePlaceById(id);
 		model.addAttribute("place", p1);
 		return "Place/editPlace";
 	}
@@ -90,7 +90,7 @@ public class PlaceController {
 			@RequestParam("place_address") String place_address, @RequestParam("place_photo") MultipartFile place_photo,
 			@RequestParam("place_fee") Integer place_fee, @RequestParam("place_capacity") Integer place_capacity) {
 		try {
-			pService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
+			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,7 +101,7 @@ public class PlaceController {
 
 	@DeleteMapping("/place/delete")
 	public String deletePlace(@RequestParam("id") Integer id) {
-		pService.deletePlaceById(id);
+		placeService.deletePlaceById(id);
 		return "redirect:/place/all";
 	}
 
