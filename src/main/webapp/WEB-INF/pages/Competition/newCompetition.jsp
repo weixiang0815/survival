@@ -62,8 +62,7 @@
 							</div>
 							<div class="col-3">
 								<form:label path="endTimespan" class="form-label">結束時間</form:label>
-								<form:select class="form-select" path="endTimespan"
-									id="end_timespan">
+								<form:select class="form-select" path="endTimespan">
 									<form:option value="1" label="早上（6:00～12:00）" />
 									<form:option value="2" label="下午（12:00～18:00）" />
 									<form:option value="3" label="晚上（18:00～00:00）" />
@@ -93,7 +92,7 @@
 							</div>
 							<div class="col-6"></div>
 							<div class="col-12">
-								<form:label path="place" class="form-label">活動場地</form:label>
+								<form:label path="placeId" class="form-label">活動場地</form:label>
 								<form:select title="選擇一個場地" class="form-select" path="placeId"
 									id="placeId">
 									<c:forEach items="${placeList}" var="place">
@@ -149,6 +148,23 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
+		const updateFormURL = "${contextRoot}/competition/api/create/update";
+		const form = $("#competition");
+		const formInputs = [
+			$("#mandarinName"),
+			$("#englishName"),
+			$("#startDate"),
+			$("#startTimespan"),
+			$("#endDate"),
+			$("#endTimespan"),
+			$("#status"),
+			$("#singleOrCrew"),
+			$("#placeId"),
+			$("#capacity"),
+			$("#budget"),
+			$("#fee"),
+		]
+		const content = watchdog.editor;
 		$(document).ready(function() {
 			$("#startDate").datepicker({
 				dateFormat : "yy-mm-dd",
@@ -163,6 +179,19 @@
 				}
 			});
 		});
+		$("input").on({
+			change: updateFormData(),
+		});
+		content.model.document.on('change', updateFormData());
+		function updateFormData() {
+			let formData = {};
+			for (input of formInputs) {
+				formData[input.attr("id")] = input.val();
+			}
+			formData["content"] = content.getData();
+			console.log(content.getData());
+			console.log(formData);
+		}
 	</script>
 	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
 </body>
