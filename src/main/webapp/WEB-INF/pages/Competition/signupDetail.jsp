@@ -9,7 +9,8 @@
 <title>報名資訊詳情</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_competition.jsp"/>
+<%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
+<jsp:include page="../Template/admin.jsp" />
 <div class="container">
 <h1>報名資訊詳情</h1>
 </div>

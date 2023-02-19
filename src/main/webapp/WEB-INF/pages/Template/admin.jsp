@@ -91,7 +91,7 @@
 		<div class="position-sticky pt-3 sidebar-sticky">
 			<ul class="nav flex-column">
 				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="${contextRoot}/template/">
+					<a class="nav-link active" aria-current="page" href="#">
 						<i class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
 					</a>
 				</li>
@@ -101,10 +101,10 @@
 						<i class="bi bi-card-checklist"></i>&nbsp;&nbsp;活動系統
 					</a>
 					<ul class="collapse" id="submenu-competition">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/competition/new" class="nav-link">新增活動</a></li>
+						<li><a href="${contextRoot}/competition/search/result" class="nav-link">查詢活動</a></li>
+						<li><a href="${contextRoot}/competition/signup" class="nav-link">新增報名</a></li>
+						<li><a href="${contextRoot}/competition/signup/search/result" class="nav-link">查詢報名</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
