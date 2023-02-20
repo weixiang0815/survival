@@ -60,7 +60,15 @@
 
               <div class="st1">
                 <label class="t1"> 商品種類: </label>
-                <input type="text" style="width:253px" name="Product_class" />
+                <select  type="text" name="Product_class">
+                  <option>請選擇商品種類</option>
+                  <option>手槍</option>
+                  <option>步槍</option>
+                  <option>衝鋒槍</option>
+                  <option>狙擊槍</option>
+                  <option>霰彈槍</option>
+              </select>
+                <!-- <input type="text" style="width:253px" name="Product_class" /> -->
               </div>
 
               <div class="st1">
