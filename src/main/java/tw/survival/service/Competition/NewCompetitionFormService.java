@@ -41,11 +41,13 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) {
-		try {
-			return mainDao.save(mainBean);
-		} catch (Exception e) {
-			return null;
-		}
+		NewCompetitionFormPart1Bean part1 = part1Dao.save(new NewCompetitionFormPart1Bean());
+		mainBean.setFirstPart(part1);
+		NewCompetitionFormPart2Bean part2 = part2Dao.save(new NewCompetitionFormPart2Bean());
+		mainBean.setSecondPart(part2);
+		NewCompetitionFormPart3Bean part3 = part3Dao.save(new NewCompetitionFormPart3Bean());
+		mainBean.setThirdPart(part3);
+		return mainDao.save(mainBean);
 	}
 
 	/**
@@ -63,21 +65,16 @@ public class NewCompetitionFormService {
 	/**
 	 * 透過創作者 id 查詢一筆活動新增表單暫存實體
 	 * 
-	 * @param creatorId       欲查詢活動新增表單暫存實體的創作者 id
-	 * @param publicOrPrivate 若創作者為會員應傳入整數 1，員工則整數 2
+	 * @param creatorId   欲查詢活動新增表單暫存實體的創作者 id
+	 * @param creatorType 若創作者為會員應傳入整數 1，員工則整數 2
 	 * @return 查詢成功回傳該活動新增表單暫存實體，否則回傳 null
 	 * @author 王威翔
 	 */
-	public NewCompetitionFormBean findByCreatorId(Integer creatorId, Integer publicOrPrivate) {
+	public NewCompetitionFormBean findByCreator(Integer creatorId, Integer creatorType) {
 		try {
-			if (publicOrPrivate == 0) {
-				return mainDao.findByEmployeeId(creatorId);
-			} else if (publicOrPrivate == 1) {
-				return mainDao.findByPlayerId(creatorId);
-			} else {
-				return null;
-			}
+			return mainDao.findByCreator(creatorId, creatorType);
 		} catch (Exception e) {
+			System.out.println("something went wrong");
 			return null;
 		}
 	}

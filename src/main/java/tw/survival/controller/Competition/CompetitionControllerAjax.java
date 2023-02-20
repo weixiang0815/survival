@@ -9,12 +9,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
+import tw.survival.service.Employee.EmployeeService;
+import tw.survival.service.Player.PlayerService;
 
 @RestController
 public class CompetitionControllerAjax {
@@ -25,6 +28,33 @@ public class CompetitionControllerAjax {
 	@Autowired
 	private CompetitionService compService;
 
+	@Autowired
+	private PlayerService playerService;
+
+	@Autowired
+	private EmployeeService employeeService;
+
+	/**
+	 * 用 AJAX 取得使用者先前的填表紀錄，若查無資料則創建新的活動新增表單暫存紀錄實體
+	 * 
+	 * @param creatorId   登入使用者 id
+	 * @param creatorType 使用者型態，會員為 1，員工為 2
+	 * @return 回傳該活動新增表單暫存紀錄實體
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/api/create/newForm/getlatest")
+	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestParam("id") Integer creatorId,
+			@RequestParam("type") Integer creatorType) {
+		NewCompetitionFormBean latestForm = newFormService.findByCreator(creatorId, creatorType);
+		if (latestForm == null) {
+			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
+			newForm.setCreatorId(creatorId);
+			newForm.setCreatorType(creatorType);
+			latestForm = newFormService.insert(newForm);
+		}
+		return latestForm;
+	}
+
 	/**
 	 * 用 AJAX 新增一筆活動新增表單暫存實體
 	 * 
@@ -33,7 +63,7 @@ public class CompetitionControllerAjax {
 	 */
 	@PostMapping("/competition/api/create/newForm")
 	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-		
+
 	}
 
 	/**

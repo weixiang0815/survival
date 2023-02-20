@@ -170,24 +170,4 @@
 			</ul>
 		</div>
 	</nav>
-	<script>
-		// const menuItems = document.querySelectorAll('.nav-item');
-
-		// function hideAllSubmenus() {
-		// 	const submenus = document.querySelectorAll('.collapse.show');
-		// 	submenus.forEach(submenu => submenu.classList.remove('show'));
-		// }
-
-		// menuItems.forEach(menuItem => {
-		// 	const submenu = menuItem.querySelector('.collapse');
-		// 	menuItem.addEventListener('click', () => {
-		// 		if (submenu.classList.contains('show')) {
-		// 			return;
-		// 		} else {
-		// 			hideAllSubmenus();
-		// 			submenu.classList.add('show');
-		// 		}
-		// 	});
-		// });
-	</script>
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">

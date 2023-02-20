@@ -148,6 +148,7 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
+		const retrieveFromURL = "${contextRoot}/competition/api/";
 		const updateFormURL = "${contextRoot}/competition/api/create/update";
 		const form = $("#competition");
 		const formInputs = [
@@ -157,8 +158,10 @@
 			$("#startTimespan"),
 			$("#endDate"),
 			$("#endTimespan"),
-			$("#status"),
-			$("#singleOrCrew"),
+			$("[name='status']"),
+			$("[name='singleOrCrew']"),
+			$("#single"),
+			$("#crew"),
 			$("#placeId"),
 			$("#capacity"),
 			$("#budget"),
@@ -178,15 +181,26 @@
 					$("#startDate").datepicker("option", "maxDate", date);
 				}
 			});
-		});
-		$("input").on({
-			change: updateFormData(),
-		});
-		content.model.document.on('change', updateFormData());
+			console.log(formInputs);
+			//	先發送第一支 AJAX 請求透過登入者 ID 得到先前的填表進度
+			//	有進度就填入表格，沒進度就建立新進度實體
+			formInputs.forEach(el => {
+				el.on({
+					change: updateFormData,
+				});
+			});
+			content.model.document.on('change', updateFormData);
+			});
 		function updateFormData() {
 			let formData = {};
 			for (input of formInputs) {
-				formData[input.attr("id")] = input.val();
+				let name = input.attr("name");
+				if (name == "status" || name == "singleOrCrew") {
+					let checkedValue = input.filter(":checked").val();
+					formData[input.attr("name")] = checkedValue ? checkedValue : "";
+				} else {
+					formData[input.attr("name")] = input.val();
+				}
 			}
 			formData["content"] = content.getData();
 			console.log(content.getData());
