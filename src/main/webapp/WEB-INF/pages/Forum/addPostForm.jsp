@@ -23,7 +23,8 @@
 		    <br/>
 		    <label for="inputClassify">請輸入分類:</label>
 		    <form:select class="form-control" id="inputClassify" path="classify">
-		    	<form:option value="活動">活動</form:option>
+		    	<form:option value="none" selected="true" disabled="true" hidden="true" >請選擇選項</form:option> 
+		    	<form:option value="活動" >活動</form:option>
 		    	<form:option value="心得">心得</form:option>
 		    	<form:option value="問題">問題</form:option>
 		    	<form:option value="閒聊">閒聊</form:option>

@@ -60,7 +60,7 @@ public class PostsController {
 	public String postEditPage(@Param("id") Integer id, Model model){
 		PostsBean post = pService.findPostById(id);
 		model.addAttribute("editPost", post);
-		return "Forum/editPostsPage";
+		return "Forum/editPostPage";
 	}
 	
 	@PutMapping("/post/update")
