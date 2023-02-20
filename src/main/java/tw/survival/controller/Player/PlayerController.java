@@ -1,7 +1,9 @@
 package tw.survival.controller.Player;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -54,13 +56,39 @@ public class PlayerController {
 	}
 
 	@PutMapping("/player/update1")
-	public String updateById(@ModelAttribute("player") PlayerBean player) {
-//		if (thumbnail != null) {
-//			player.setThumbnail(thumbnail.getBytes());
-//		}
-		pService.update(player);
-		return "redirect:/player/list";
+	public String updateById(@RequestParam Integer id,
+			@RequestParam("name") String name, @RequestParam("account") String account,
+			@RequestParam("password") String password, @RequestParam("identity") String identity_number,
+			@RequestParam("email") String email, @RequestParam("age") Integer age,
+			@RequestParam("region") String region, @RequestParam("nickname") String nickname,
+			@RequestParam("address") String address, @RequestParam("thumbnail") MultipartFile thumbnail,
+			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday, @RequestParam("info") String info,
+			@RequestParam("phone") String phone) {
 
+		try {
+			PlayerBean player = pService.findByBean(id);
+			player.setName(name);
+			player.setAccount(account);
+			player.setPassword(password);
+			player.setIdentity_number(identity_number);
+			player.setEmail(email);
+			player.setAge(age);
+			player.setNickname(nickname);
+			player.setRegion(region);
+			player.setAddress(address);
+			if(thumbnail !=null) {
+				player.setThumbnail(thumbnail.getBytes());
+			}			
+			player.setSex(sex);
+			player.setBirthday(birthday);
+			player.setPhone(phone);
+			player.setInfo("null");
+			player.setBanned("T");
+			pService.update(player);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}		
+		return "redirect:/player/list";
 	}
 
 	// D

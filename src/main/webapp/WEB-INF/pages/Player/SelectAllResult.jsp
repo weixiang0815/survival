@@ -23,6 +23,7 @@ max-width: 100%;
 			<th>名稱</th>
 			<th>帳號</th>
 			<th>密碼</th>
+			<th>生日</th>
 			<th>暱稱</th>
 			<th>性別</th>
 			<th>個人身分證</th>
@@ -40,6 +41,7 @@ max-width: 100%;
 				<td>${player.name}</td>
 				<td>${player.account}</td>
 				<td>${player.password}</td>
+				<td>${player.birthday}</td>
 				<td>
 				<c:choose>
 				<c:when test="${player.nickname == null}">無</c:when>

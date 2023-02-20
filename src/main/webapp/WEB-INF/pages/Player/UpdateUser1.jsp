@@ -21,72 +21,76 @@ max-width: 100%;
 		<table class="table table-hover">
 		    <tr>
 				<td>大頭貼:</td>
-				<td><form:input type="file" path="thumbnail" />
+				<td><input type="file" name="thumbnail" />
 			</tr>
 			<tr>
 				<td>ID：</td>
-				<td><form:input type="text" path="id" value="${player.id}" /></td>
+				<td><input type="text" name="id" value="${player.id}" /></td>
 			</tr>
 			<tr>
 				<td>名稱：</td>
-				<td><form:input type="text" path="name" value="${player.name}" /></td>
+				<td><input type="text" name="name" value="${player.name}" /></td>
 			</tr>
 			<tr>
 				<td>帳號：</td>
-				<td><form:input type="text" path="account" value="${player.account}" /></td>
+				<td><input type="text" name="account" value="${player.account}" /></td>
 			</tr>
 			<tr>
 				<td>密碼：</td>
-				<td><form:input type="password" path="password"
+				<td><input type="password" name="password"
 					value="${player.password}" /></td>
 			</tr>
 			<tr>
 				<td>暱稱：</td>
-				<td><form:input type="text" path="nickname" value="${player.nickname}" /></td>
+				<td><input type="text" name="nickname" value="${player.nickname}" /></td>
 			</tr>
 			<tr>
 				<td>生日：</td>
-				<td><form:input type="Date" path="birthday" value="${player.birthday}" /></td>
+				<td><input type="Date" name="birthday"  value="${player.birthday}" /></td>
 			</tr>
 			<tr>
 				<td>性別：</td>
 				<td>
 				<c:choose>
 				<c:when test="${player.sex == 'M'}">
-					<form:radiobutton name="sex" class="form-check-input" path="sex" value="M" label="男" required="true" checked="checked"/>
-					<form:radiobutton name="sex" class="form-check-input" path="sex" value="F" label="女" required="true" />
+					<input type="radio" name="sex" class="form-check-input"  value="M"   checked="checked"/><label>男</label>
+					<input type="radio" name="sex" class="form-check-input"  value="F"   /><label>女</label>
 				</c:when>
 				<c:otherwise>
-					<form:radiobutton name="sex" class="form-check-input" path="sex" value="M" label="男" required="true"/>
-					<form:radiobutton name="sex" class="form-check-input" path="sex" value="F" label="女" required="true" checked="checked"/>
+					<input type="radio" name="sex" class="form-check-input"  value="M"  /><label>男</label>
+					<input type="radio" name="sex" class="form-check-input"  value="F"  checked="checked"/><label>女</label>
 				</c:otherwise>
 				</c:choose>
 				</td>
 			</tr>
 			<tr>
 				<td>縣市：</td>
-				<td><form:input type="text" path="region" value="${player.region}" /></td>
+				<td><input type="text" name="region" value="${player.region}" /></td>
 			</tr>
 			<tr>
 				<td>地址：</td>
-				<td><form:input type="text" path="address" value="${player.address}" /></td>
+				<td><input type="text" name="address" value="${player.address}" /></td>
 			</tr>
 			<tr>
 				<td>電話：</td>
-				<td><form:input type="text" path="phone" value="${player.phone}" /></td>
+				<td><input type="text" name="phone" value="${player.phone}" /></td>
 			</tr>
 			<tr>
 				<td>Email：</td>
-				<td><form:input type="text" path="email" value="${player.email}" /></td>
+				<td><input type="text" name="email" value="${player.email}" /></td>
 			</tr>
 			<tr>
 				<td>年齡：</td>
-				<td><form:input type="text" path="age" value="${player.age}" /></td>
+				<td><input type="text" name="age" value="${player.age}" /></td>
 			</tr>
 			<tr>
 				<td>個人身分證：</td>
-				<td><form:input type="text" path="identity_number" value="${player.identity_number}" /></td>
+				<td><input type="text" name="identity" value="${player.identity_number}" /></td>
 			</tr>
+			<tr>
+				<td>個人介紹：</td>
+				<td><input type="hidden" name="info" /></td>
+			</tr>	
 		</table>
 		<input class="btn btn-outline-primary" type="submit"  value="更新"/>
 	</form:form>

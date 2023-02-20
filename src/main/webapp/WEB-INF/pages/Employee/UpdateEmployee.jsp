@@ -17,7 +17,7 @@ max-width: 100%;
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
 <h3>使用者修改資料</h3>
-	<form:form action="${contextRoot}/Employee/update1" method="put" modelAttribute="Employee">
+	<form:form action="${contextRoot}/Employee/update1" method="put" modelAttribute="Employee" enctype="multipart/form-data">
 		<table class="table table-hover">
 		    <tr>
 				<td>大頭貼:</td>
