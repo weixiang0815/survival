@@ -46,7 +46,7 @@ max-width: 100%;
 			</tr>
 			<tr>
 				<td>生日：</td>
-				<td><input type="Date" name="birthday"  value="${player.birthday}" /></td>
+				<td><input type="text" name="birthday"  value="${player.birthday}" /></td>
 			</tr>
 			<tr>
 				<td>性別：</td>

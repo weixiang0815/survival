@@ -12,16 +12,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
-import tw.survival.model.Competition.NewCompetitionFormBean;
+
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Competition.NewCompetitionFormService;
+
 
 @RestController
 public class CompetitionControllerAjax {
 
-	@Autowired
-	private NewCompetitionFormService newFormService;
-
+	
 	@Autowired
 	private CompetitionService compService;
 
@@ -31,10 +29,10 @@ public class CompetitionControllerAjax {
 	 * @param newForm 欲新增的活動新曾表單暫存實體
 	 * @author 王威翔
 	 */
-	@PostMapping("/competition/api/create/newForm")
-	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-		
-	}
+//	@PostMapping("/competition/api/create/newForm")
+//	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
+//		
+//	}
 
 	/**
 	 * 用 AJAX 新增一筆活動實體，但不一定直接發布

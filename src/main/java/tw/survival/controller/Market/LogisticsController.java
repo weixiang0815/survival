@@ -11,13 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Market.LogisticsBean;
-import tw.survival.service.Market.LogisticsService;
-
 @Controller
 public class LogisticsController {
 
 	@Autowired
-	private LogisticsService LogisticsService;
+//	private LogisticsService LogisticsService;
 
 	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
@@ -35,7 +33,7 @@ public class LogisticsController {
 		lb.setArrive_date(arrive_date);
 		lb.setStatus(status);
 
-		LogisticsService.insertLogistics(lb);
+//		LogisticsService.insertLogistics(lb);
 
 		return "新增成功";
 	}
