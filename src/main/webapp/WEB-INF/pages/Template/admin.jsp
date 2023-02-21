@@ -155,6 +155,7 @@
 						<li><a href="${contextRoot}/warehouse/all" class="nav-link">所有倉庫</a></li>
 						<li><a href="${contextRoot}/inventory/new" class="nav-link">新增庫存</a></li>
 						<li><a href="${contextRoot}/inventory/all" class="nav-link">所有庫存</a></li>
+						<li><a href="${contextRoot}/schedule/new" class="nav-link">新增排程</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">

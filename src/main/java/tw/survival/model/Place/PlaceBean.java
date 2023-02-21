@@ -55,10 +55,7 @@ public class PlaceBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<EmployeeBean> employee = new LinkedHashSet<>();
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_product_id")
-	private ProductBean product;
+
 
 	@OneToOne(mappedBy = "place")
 	private WarehouseBean warehouse; // 倉庫
@@ -71,8 +68,7 @@ public class PlaceBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-	private Set<EmployeeBean> employees = new LinkedHashSet<EmployeeBean>();
+	
 
 	public PlaceBean() {
 	}
@@ -133,13 +129,7 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	public ProductBean getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductBean product) {
-		this.product = product;
-	}
+	
 
 	public WarehouseBean getWarehouse() {
 		return warehouse;
@@ -165,12 +155,6 @@ public class PlaceBean {
 		this.schedule = schedule;
 	}
 
-	public Set<EmployeeBean> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Set<EmployeeBean> employees) {
-		this.employees = employees;
-	}
+	
 
 }

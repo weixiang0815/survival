@@ -39,10 +39,20 @@ public class ScheduleService {
 	}
 	
 	public void deleteScheduleById(Integer id) {
+		ScheduleBean schedule = getOneScheduleById(id);
+	    schedule.setPlace(null);	
+	
 		 sDAO.deleteById(id);
 	}
 	
 	public ScheduleBean updateSchedule(ScheduleBean schedule) {
-		return sDAO.save(schedule);
+		Optional<ScheduleBean> optional = sDAO.findById(schedule.getId());
+		if(optional.isPresent()) {
+			ScheduleBean scheduleToUpdate = optional.get();
+			scheduleToUpdate.setScheduleDatetime(schedule.getScheduleDatetime());
+			scheduleToUpdate.setScheduleTimespan(schedule.getScheduleTimespan());
+			return sDAO.save(scheduleToUpdate);
+		}
+		return null;
 	}
 }
