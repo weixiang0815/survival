@@ -51,9 +51,9 @@ public class PlaceBean {
 	@Column(name = "place_capacity")
 	private Integer place_capacity;
 
-//	@JsonManagedReference
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-//	private Set<EmployeeBean> employee = new LinkedHashSet<>();
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employee = new LinkedHashSet<>();
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -91,6 +91,14 @@ public class PlaceBean {
 
 	public void setPlace_name(String place_name) {
 		this.place_name = place_name;
+	}
+
+	public Set<EmployeeBean> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<EmployeeBean> employee) {
+		this.employee = employee;
 	}
 
 	public String getPlace_address() {

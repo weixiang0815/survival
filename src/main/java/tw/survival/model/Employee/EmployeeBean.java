@@ -1,5 +1,6 @@
 package tw.survival.model.Employee;
 
+import java.io.IOException;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,8 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Place.PlaceBean;
 
@@ -24,46 +31,52 @@ public class EmployeeBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "account")
 	private String account;
-	
+
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "age")
 	private Integer age;
-	
+
 	@Column(name = "region")
 	private String region;
-	
+
 	@Column(name = "address")
 	private String address;
-	
+
 	@Column(name = "salary")
 	private Integer salary;
-	
+
 	@Column(name = "thumbnail")
 	@Lob
 	private byte[] thumbnail;
 	@Column(name = "sex")
 	private String sex;
-	
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthday")
 	private Date birthday;
-	
+
 	@Column(name = "title")
 	private String title;
-	
-	@Column(name = "hire_date")
-	private Date hire_date;
-	
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "hired_date")
+	private Date hired_date;
+
 	@Column(name = "status")
 	private String status;
-	
+
 	@Column(name = "identity_number")
 	private String identity_number;
 
@@ -154,6 +167,10 @@ public class EmployeeBean {
 		this.thumbnail = thumbnail;
 	}
 
+	public void setThumbnail(MultipartFile file) throws IOException {
+		this.thumbnail = file.getBytes();
+	}
+
 	public String getSex() {
 		return sex;
 	}
@@ -178,12 +195,12 @@ public class EmployeeBean {
 		this.title = title;
 	}
 
-	public Date getHire_date() {
-		return hire_date;
+	public Date getHired_date() {
+		return hired_date;
 	}
 
-	public void setHire_date(Date hire_date) {
-		this.hire_date = hire_date;
+	public void setHired_date(Date hired_date) {
+		this.hired_date = hired_date;
 	}
 
 	public String getStatus() {
@@ -225,6 +242,5 @@ public class EmployeeBean {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 }

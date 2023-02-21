@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
 
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
@@ -9,13 +9,16 @@
 <head>
 <meta charset="UTF-8">
 
-<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet" />
 
 
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg" style="background-color: #DCDCDC">
+	<nav class="navbar navbar-expand-lg" style="background-color: #DCDCDC ">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="${contextRoot}/">赫赫商城</a>
 			<button class="navbar-toggler" type="button"
@@ -36,23 +39,29 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_OrderItem">所有訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">服裝</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Logistics">新增物流訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">消耗品</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_Logistics">查看物流訂單</a>
 					</li>
 					
 					
 				</ul>
 			</div>
 		</div>
+		<!-- 搜尋欄位 -->
+		<form class="d-flex" role="search" action="${contextRoot}/Market/productNameLike" method="post">
+			<input name="Search" class="form-control me-2" type="search" placeholder="Search"
+				aria-label="Search">
+			<button id="Search" class="btn btn-outline-success" type="submit">Search</button>
+		</form>
+
 	</nav>
-	
+
 	<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
 	<script type="text/javascript"
-		src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
-		<script type="text/javascript"
-		src="${contextRoot}/js/jquery-3.6.3.min.js"></script>
-		
-		
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+
+
 </body>
 </html>

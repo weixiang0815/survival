@@ -17,6 +17,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,6 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Crew.CrewBean;
+import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Player.PlayerBean;
@@ -40,29 +42,34 @@ public class CompetitionBean {
 	@Column(name = "id")
 	private Integer id;
 
+	@Column(name = "public_or_private", length = 1)
+	private String publicOrPrivate;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_player")
+	private PlayerBean founderPlayer;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_founder_employee")
+	private EmployeeBean founderEmployee;
+
 	@Column(name = "name_mandarin")
 	private String mandarinName;
 
 	@Column(name = "name_english")
 	private String englishName;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "start_date")
-	private Date startDate;
+	private String startDate;
 
 	@Column(name = "start_timespan")
-	private String startTimespan;
+	private Integer startTimespan;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "end_date")
-	private Date endDate;
+	private String endDate;
 
 	@Column(name = "end_timespan")
-	private String endTimespan;
+	private Integer endTimespan;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
@@ -81,17 +88,14 @@ public class CompetitionBean {
 	@Column(name = "content")
 	private String content;
 
-	@Column(name = "rules")
-	private String rules;
-
 	@Column(name = "budget")
 	private Integer budget;
 
 	@Column(name = "fee")
 	private Integer fee;
 
-	@Column(name = "single_or_crew")
-	private Character singleOrCrew;
+	@Column(name = "single_or_crew", length = 1)
+	private String singleOrCrew;
 
 	@Column(name = "capacity")
 	private Integer capacity;
@@ -103,9 +107,11 @@ public class CompetitionBean {
 	@JoinColumn(name = "fk_post_id")
 	private PostsBean post;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "competitionId")
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
 	private CompetitionPrizeBean competitionPrizes;
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
+	private CompetitionHistoryBean competitionHistory;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
@@ -125,6 +131,13 @@ public class CompetitionBean {
 					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
 	private Set<CrewBean> participantCrews = new LinkedHashSet<CrewBean>();
 
+	@PrePersist
+	public void onCreate() {
+		if (announcedDatetime == null) {
+			announcedDatetime = new Date();
+		}
+	}
+
 	public CompetitionBean() {
 	}
 
@@ -134,6 +147,34 @@ public class CompetitionBean {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public String getPublicOrPrivate() {
+		return publicOrPrivate;
+	}
+
+	public void setPublicOrPrivate(String publicOrPrivate) {
+		this.publicOrPrivate = publicOrPrivate;
+	}
+
+	public void setSingleOrCrew(String singleOrCrew) {
+		this.singleOrCrew = singleOrCrew;
+	}
+
+	public PlayerBean getFounderPlayer() {
+		return founderPlayer;
+	}
+
+	public void setFounderPlayer(PlayerBean founderPlayer) {
+		this.founderPlayer = founderPlayer;
+	}
+
+	public EmployeeBean getFounderEmployee() {
+		return founderEmployee;
+	}
+
+	public void setFounderEmployee(EmployeeBean founderEmployee) {
+		this.founderEmployee = founderEmployee;
 	}
 
 	public String getMandarinName() {
@@ -152,35 +193,35 @@ public class CompetitionBean {
 		this.englishName = englishName;
 	}
 
-	public Date getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getStartTimespan() {
+	public Integer getStartTimespan() {
 		return startTimespan;
 	}
 
-	public void setStartTimespan(String startTimespan) {
+	public void setStartTimespan(Integer startTimespan) {
 		this.startTimespan = startTimespan;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
-	public String getEndTimespan() {
+	public Integer getEndTimespan() {
 		return endTimespan;
 	}
 
-	public void setEndTimespan(String endTimespan) {
+	public void setEndTimespan(Integer endTimespan) {
 		this.endTimespan = endTimespan;
 	}
 
@@ -216,14 +257,6 @@ public class CompetitionBean {
 		this.content = content;
 	}
 
-	public String getRules() {
-		return rules;
-	}
-
-	public void setRules(String rules) {
-		this.rules = rules;
-	}
-
 	public Integer getBudget() {
 		return budget;
 	}
@@ -240,12 +273,8 @@ public class CompetitionBean {
 		this.fee = fee;
 	}
 
-	public Character getSingleOrCrew() {
+	public String getSingleOrCrew() {
 		return singleOrCrew;
-	}
-
-	public void setSingleOrCrew(Character singleOrCrew) {
-		this.singleOrCrew = singleOrCrew;
 	}
 
 	public Integer getCapacity() {
@@ -270,6 +299,14 @@ public class CompetitionBean {
 
 	public void setCompetitionPrizes(CompetitionPrizeBean competitionPrizes) {
 		this.competitionPrizes = competitionPrizes;
+	}
+
+	public CompetitionHistoryBean getCompetitionHistory() {
+		return competitionHistory;
+	}
+
+	public void setCompetitionHistory(CompetitionHistoryBean competitionHistory) {
+		this.competitionHistory = competitionHistory;
 	}
 
 	public Set<SignUpBean> getSignUps() {

@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface PlayerRepository extends JpaRepository<PlayerBean, Integer> {
 
-	@Query(value = "Select * from Player Where account=:account", nativeQuery = true)
-	public PlayerBean findByAccount(@Param(value = "account") String account);
+	@Query(value = "Select * from Player Where account=:account and password=:password", nativeQuery = true)
+	public PlayerBean findByAccount(@Param(value = "account") String account,@Param(value = "password")String password);
 
 }

@@ -1,6 +1,8 @@
 package tw.survival.model.Forum;
 
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,9 @@ import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name="bookmarklet")
-public class BookmarkletBean {
+public class BookmarkletBean implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -49,6 +53,16 @@ public class BookmarkletBean {
 	public void setPosts(PostsBean posts) {
 		this.posts = posts;
 	}
+
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+	
 	
 	
 	

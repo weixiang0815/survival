@@ -55,11 +55,11 @@ public class PlaceController {
 			return "上傳成功";
 		} catch (IOException e) {
 			e.printStackTrace();
-			
+
 			return "失敗";
 		}
 	}
-	
+
 	@GetMapping("/place/all")
 	public ModelAndView getAllPlace(ModelAndView mav) {
 		List<PlaceBean> list = pService.getAllPlace();
@@ -67,38 +67,47 @@ public class PlaceController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
-	
+
 	@GetMapping("/place/id")
-	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id){
+	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
 		PlaceBean place1 = pService.getOnePlaceById(id);
 		byte[] placeFile = place1.getPlace_photo();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
-		
-		return new ResponseEntity<byte[]>(placeFile,headers,HttpStatus.OK);
+
+		return new ResponseEntity<byte[]>(placeFile, headers, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/place/edit")
-	public String editPlacePage(@RequestParam("id")Integer id, Model model) {
+	public String editPlacePage(@RequestParam("id") Integer id, Model model) {
 		PlaceBean p1 = pService.getOnePlaceById(id);
 		model.addAttribute("place", p1);
 		return "Place/editPlace";
 	}
-	
+
 	@PostMapping("/place/edit")
-	public  String sendEditPlace(@RequestParam("id") Integer id,@RequestParam("place_name") String place_name,
-			@RequestParam("place_address") String place_address, @RequestParam("place_photo") byte[] img ,
-			@RequestParam("place_fee") Integer place_fee,@RequestParam("place_capacity") Integer place_capacity) {
-		 PlaceService pService = new PlaceService();
-		 pService.updatePlaceById(id,place_name,place_address,img,place_fee,place_capacity);
-		 return "redirect:/place/all";
-		
+	public String sendEditPlace(@RequestParam("id") Integer id, @RequestParam("place_name") String place_name,
+			@RequestParam("place_address") String place_address, @RequestParam("place_photo") MultipartFile place_photo,
+			@RequestParam("place_fee") Integer place_fee, @RequestParam("place_capacity") Integer place_capacity) {
+		try {
+			pService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "redirect:/place/all";
+
 	}
-	
+
 	@DeleteMapping("/place/delete")
 	public String deletePlace(@RequestParam("id") Integer id) {
 		pService.deletePlaceById(id);
 		return "redirect:/place/all";
 	}
 
+	
+	@GetMapping("/place/detail")
+	public String placeDetail() {
+		return "Place/placeDetail";
+	}
 }

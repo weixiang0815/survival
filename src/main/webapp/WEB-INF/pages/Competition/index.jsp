@@ -9,10 +9,7 @@
 <title>活動系統首頁</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_competition.jsp"/>
-<div class="container">
+<jsp:include page="../Template/admin.jsp" />
 <h1>活動系統首頁</h1>
-</div>
-<%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>
 </html>

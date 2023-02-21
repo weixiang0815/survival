@@ -1,10 +1,8 @@
 package tw.survival.model.Player;
 
+import java.io.IOException;
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,26 +12,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
-
+import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
-import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.MsgsBean;
-import tw.survival.model.Forum.PostsBean;
-import tw.survival.model.Forum.ScoreBean;
-import tw.survival.model.Forum.ThumbUpBean;
-import tw.survival.model.Market.OrderItemBean;
 
 @Entity
 @Table(name = "Player")
@@ -56,6 +44,9 @@ public class PlayerBean {
 	@Column(name = "identity_number")
 	private String identity_number;
 
+	@Column(name = "nickname")
+	private String nickname;
+
 	@Column(name = "email")
 	private String email;
 
@@ -68,6 +59,9 @@ public class PlayerBean {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "info")
+	private String info;
+
 	@Column(name = "thumbnail")
 	@Lob
 	private byte[] thumbnail;
@@ -79,6 +73,7 @@ public class PlayerBean {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	@Column(name = "birthday")
 	private Date birthday;
+
 	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
@@ -104,29 +99,36 @@ public class PlayerBean {
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
 
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
+//
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	@OrderBy("added desc")
+//	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
+	@PrePersist
+	public void autoCreate() {
+		if (join_date == null) {
+			join_date = new Date();
+		}
+	}
 
 	public PlayerBean() {
 	}
@@ -211,6 +213,10 @@ public class PlayerBean {
 		this.thumbnail = thumbnail;
 	}
 
+	public void setThumbnail(MultipartFile file) throws IOException {
+		this.thumbnail = file.getBytes();
+	}
+
 	public String getSex() {
 		return sex;
 	}
@@ -267,45 +273,45 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-	public Set<PostsBean> getPostsOfPlayer() {
-		return postsOfPlayer;
-	}
-
-	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
-		this.postsOfPlayer = postsOfPlayer;
-	}
-
-	public Set<MsgsBean> getMsgsOfPlayer() {
-		return msgsOfPlayer;
-	}
-
-	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
-		this.msgsOfPlayer = msgsOfPlayer;
-	}
-
-	public Set<ThumbUpBean> getThumbUpOfPost() {
-		return thumbUpOfPost;
-	}
-
-	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
-		this.thumbUpOfPost = thumbUpOfPost;
-	}
-
-	public Set<ScoreBean> getScoreOfPost() {
-		return scoreOfPost;
-	}
-
-	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
-		this.scoreOfPost = scoreOfPost;
-	}
-
-	public Set<BookmarkletBean> getBookmarkletOfPost() {
-		return bookmarkletOfPost;
-	}
-
-	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
-		this.bookmarkletOfPost = bookmarkletOfPost;
-	}
+//	public Set<PostsBean> getPostsOfPlayer() {
+//		return postsOfPlayer;
+//	}
+//
+//	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
+//		this.postsOfPlayer = postsOfPlayer;
+//	}
+//
+//	public Set<MsgsBean> getMsgsOfPlayer() {
+//		return msgsOfPlayer;
+//	}
+//
+//	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
+//		this.msgsOfPlayer = msgsOfPlayer;
+//	}
+//
+//	public Set<ThumbUpBean> getThumbUpOfPost() {
+//		return thumbUpOfPost;
+//	}
+//
+//	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
+//		this.thumbUpOfPost = thumbUpOfPost;
+//	}
+//
+//	public Set<ScoreBean> getScoreOfPost() {
+//		return scoreOfPost;
+//	}
+//
+//	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
+//		this.scoreOfPost = scoreOfPost;
+//	}
+//
+//	public Set<BookmarkletBean> getBookmarkletOfPost() {
+//		return bookmarkletOfPost;
+//	}
+//
+//	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
+//		this.bookmarkletOfPost = bookmarkletOfPost;
+//	}
 
 	public CrewPermission getCrewPermission() {
 		return crewPermission;
@@ -323,12 +329,20 @@ public class PlayerBean {
 		this.playerPermission = playerPermission;
 	}
 
-	public Set<OrderItemBean> getOrderItem() {
-		return OrderItem;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setOrderItem(Set<OrderItemBean> orderItem) {
-		OrderItem = orderItem;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
 }

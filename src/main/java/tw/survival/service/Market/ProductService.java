@@ -45,7 +45,7 @@ public class ProductService {
 		return null;
 	}
 
-	public ProductBean updateProductById(Integer id, String updateName, byte[] updateImg, String updateContext,
+	public ProductBean updateMsgById(Integer id, String updateName, byte[] updateImg, String updateContext,
 			String updateClass, Integer updateRent_fee, Integer updatePrice) {
 		Optional<ProductBean> optional = productDao.findById(id);
 

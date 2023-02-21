@@ -29,7 +29,7 @@
 				<td><input type="text" name="place_capacity" /></td>
 			</tr>
 			<tr>
-				<td>費用/小時：</td>
+				<td>費用/時段：</td>
 				<td><input type="text" name="place_fee" /></td>
 			</tr>
 						
