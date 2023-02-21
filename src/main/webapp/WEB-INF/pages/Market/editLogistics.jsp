@@ -17,15 +17,19 @@
 		<h1>修改訊息</h1>
 
 		<div class="card">
-			<div class="card-header">修改訂單訊息</div>
+			<div class="card-header">修改物流訊息</div>
 			<div class="card-body">
-				<form:form action="${contextRoot}/Market/editOrder" method="put"
-					modelAttribute="order">
+				<form:form action="${contextRoot}/Market/editLogistics" method="put"
+					modelAttribute="logistics">
 					<form:input type="hidden" path="id" />
 					<table class="table table-hover">
 						<tr>
-							<td><form:label class="form-label" path="order_create_date">訂單時間:</form:label></td>
-							<td><form:input type="text" path="order_create_date" placeholder="yyyy/mm/dd" required="true" /></td>
+							<td><form:label class="form-label" path="start_date">起始日期:</form:label></td>
+							<td><form:input type="text" path="start_date" placeholder="yyyy/mm/dd" required="true" /></td>
+						</tr>
+						<tr>
+							<td><form:label class="form-label" path="arrive_date">到貨日期:</form:label></td>
+							<td><form:input type="text" path="arrive_date" placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 
 						<tr>

@@ -27,7 +27,7 @@ public class LogisticsService {
 	}
 	
 	//r
-	public LogisticsBean findByLogisticsId(Integer id) {
+	public LogisticsBean findById(Integer id) {
 		Optional<LogisticsBean> optional = LogisticsDao.findById(id);
 		
 		if (optional.isPresent()) {
@@ -48,15 +48,19 @@ public class LogisticsService {
 		return LogisticsDao.findAll();
 	}
 
+	public LogisticsBean updatelog(LogisticsBean logBean) {
+		LogisticsDao.save(logBean);
+		return null;
+	}
+	
 	//d
-	public void deleteByLogisticsId(Integer id) {
+	public void deleteById(Integer id) {
 		
-		LogisticsBean lb = findByLogisticsId(id);
+		LogisticsBean lb = findById(id);
 		lb.setInventory(null);
 		lb.setOrderItem(null);
 		lb.setPlayer(null);
 		LogisticsDao.deleteById(id);
 		
 	}
-	
 }
