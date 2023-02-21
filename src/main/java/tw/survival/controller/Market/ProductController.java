@@ -118,6 +118,12 @@ public class ProductController {
 		model.addAttribute("SearchResult", searchResult);
 		return "Market/searchResult";
 	}
-
-
+	
+	@ResponseBody
+	@GetMapping("/Market/productFindByproductclassIn")
+	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
+		List<ProductBean> searchResult = productService.findByClass(clazz);
+		
+		return searchResult.toString();
+	}
 }
