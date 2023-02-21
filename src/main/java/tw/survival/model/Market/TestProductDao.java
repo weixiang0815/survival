@@ -31,9 +31,9 @@ public class TestProductDao {
 		}else if(product_class.contains("衝鋒槍")){
 			sqlString +="衝鋒槍";
 		}else if(product_class.contains("狙擊槍")){
-			sqlString +="%:狙擊槍%";
+			sqlString +="狙擊槍";
 		}else if(product_class.contains("霰彈槍")){
-			sqlString +="%:霰彈槍%";
+			sqlString +="霰彈槍";
 		}
 		return query.getResultList();
 

@@ -12,17 +12,18 @@ import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.TestProductDaoText;
 
 @Component
-class SurvivalRunner implements ApplicationRunner	 {
+class SurvivalRunner implements ApplicationRunner {
 
 	@Autowired
-	private TestProductDaoText tpdt;	
-	
+	private TestProductDaoText tpdt;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		List<String> al =new ArrayList<>();
+		List<String> al = new ArrayList<>();
 		al.add("手槍");
-		List<ProductBean> fd =tpdt.findByproductclassIn(al);
-		System.out.println(fd);
+		List<ProductBean> fd = tpdt.findByProductclassIn(al);
+//		fd.forEach(p -> System.out.println(p));
+//		System.out.println(fd);
 	}
 
 }
