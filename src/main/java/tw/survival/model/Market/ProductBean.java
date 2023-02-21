@@ -1,5 +1,6 @@
 package tw.survival.model.Market;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -43,7 +44,7 @@ public class ProductBean {
 
 	// 商品分類(搜尋用)
 	@Column(name = "class")
-	private String product_class;
+	private String productclass;
 
 	// 租賃價格
 	@Column(name = "rent_fee")
@@ -94,11 +95,11 @@ public class ProductBean {
 	}
 
 	public String getProduct_class() {
-		return product_class;
+		return productclass;
 	}
 
 	public void setProduct_class(String product_class) {
-		this.product_class = product_class;
+		this.productclass = product_class;
 	}
 
 	public Integer getRent_fee() {
@@ -124,5 +125,28 @@ public class ProductBean {
 	public void setInventory(Set<InventoryBean> inventory) {
 		this.inventory = inventory;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("ProductBean [id=");
+		builder.append(id);
+		builder.append(", img=");
+		builder.append(Arrays.toString(img));
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", context=");
+		builder.append(context);
+		builder.append(", productclass=");
+		builder.append(productclass);
+		builder.append(", rent_fee=");
+		builder.append(rent_fee);
+		builder.append(", price=");
+		builder.append(price);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
 
 }

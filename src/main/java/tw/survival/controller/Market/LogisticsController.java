@@ -2,9 +2,11 @@ package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,7 +41,18 @@ public class LogisticsController {
 
 		return "新增成功";
 	}
-	
-	
+	//r
+	@GetMapping("/Market/all_Logistics")
+	public String getAllLogistics(Model model) {
+		List<LogisticsBean> list = LogisticsService.findAllLogistics();
+		model.addAttribute("list", list);
+		return "/Market/show_AllLogistics";
+	}
+	//d
+	@PostMapping("/Market/deleteLogistics")
+	public String deleteLogistics(@RequestParam("id") Integer id) {
+		LogisticsService.deleteById(id);
+		return "redirect:/Market/all_Logistics";
+	}
 
 }
