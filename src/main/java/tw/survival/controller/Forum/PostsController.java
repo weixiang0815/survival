@@ -1,5 +1,6 @@
 package tw.survival.controller.Forum;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -62,11 +64,19 @@ public class PostsController {
 		model.addAttribute("editPost", post);
 		return "Forum/editPostPage";
 	}
-	
-	@PutMapping("/post/update")
+
+	@PutMapping("/post/edit")
+	@InitBinder
 	public String postUpdate(@ModelAttribute("editPost") PostsBean editPost) {
+		
+		editPost.setFinalAdded(new Date());
+		editPost.setBookmarkletOfPost(null);
+		editPost.setMsgsOfPost(null);
+		editPost.setScoreOfPost(null);
+		editPost.setThumbUpOfPost(null);
+		
 		pService.updatePost(editPost);
-		return "Forum/showPostsPage";
+		return "redirect:/posts/getAll";
 	}
 	
 	

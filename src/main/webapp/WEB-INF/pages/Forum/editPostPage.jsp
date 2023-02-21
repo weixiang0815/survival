@@ -16,7 +16,9 @@
 	<div class="container">
 		<jsp:include page="../Layout/navbar_forum.jsp"/>
 		<div class="col-10">
-			<form:form action="${contextRoot}/post/update" modelAttribute="editPost" method="PUT">
+			<form:form action="${contextRoot}/post/edit" modelAttribute="editPost" method="PUT">
+				<form:input type="hidden" path="id"/>
+				<form:input class="form-control" type="date" path="added"/>
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>
 			    <br/>
@@ -33,6 +35,7 @@
 			    <label for="inputEssay">請輸入內容:</label>
 			    <form:textarea class="form-control" id="inputEssay" path="essay" rows="3"/>
 			    <br/>
+			    
 			    <button type="submit" class="btn btn-outline-primary">送出</button>
 			    
 			</form:form>
