@@ -149,10 +149,12 @@
 						<i class="bi bi-building"></i>&nbsp;&nbsp;場地系統
 					</a>
 					<ul class="collapse" id="submenu-place">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/place/uploadPage" class="nav-link">新增場地</a></li>
+						<li><a href="${contextRoot}/place/all" class="nav-link">所有場地</a></li>
+						<li><a href="${contextRoot}/warehouse/new" class="nav-link">新增倉庫</a></li>
+						<li><a href="${contextRoot}/warehouse/all" class="nav-link">所有倉庫</a></li>
+						<li><a href="${contextRoot}/inventory/new" class="nav-link">新增庫存</a></li>
+						<li><a href="${contextRoot}/inventory/all" class="nav-link">所有庫存</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
