@@ -11,7 +11,8 @@
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
 </head>
 <body>
-<jsp:include page="../Layout/navbar_competition.jsp"/>
+<%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
+<jsp:include page="../Template/admin.jsp" />
 <div class="container">
 <h1>活動搜尋結果</h1>
 <table class="table table-hover table-bordered table-dark" id="compTable">

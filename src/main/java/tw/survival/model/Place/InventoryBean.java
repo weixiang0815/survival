@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -36,11 +37,22 @@ public class InventoryBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_warehouse_id")
 	private WarehouseBean warehouse;
+	
+	@Column(name="fk_warehouse_id")
+	@Transient
+	private Integer warehouseId;
+	
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
+	
+	@Column(name="fk_product_id")
+	@Transient
+	private Integer productId;
+	
+	
 
 //	@OneToMany(mappedBy = "inventory")
 //	private List<LogisticsBean> logistics;
@@ -52,10 +64,6 @@ public class InventoryBean {
 //	public void setLogistics(List<LogisticsBean> logistics) {
 //		this.logistics = logistics;
 //	}
-
-	public void setInventorySellamount(Integer inventorySellamount) {
-		this.inventorySellamount = inventorySellamount;
-	}
 
 	public InventoryBean() {
 	}
@@ -72,7 +80,7 @@ public class InventoryBean {
 		return inventorySellamount;
 	}
 
-	public void setInventory_sellamount(Integer inventorySellamount) {
+	public void setInventorySellamount(Integer inventorySellamount) {
 		this.inventorySellamount = inventorySellamount;
 	}
 
@@ -100,4 +108,21 @@ public class InventoryBean {
 		this.product = product;
 	}
 
+	public Integer getWarehouseId() {
+		return warehouseId;
+	}
+
+	public void setWarehouseId(Integer warehouseId) {
+		this.warehouseId = warehouseId;
+	}
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
+
+	
 }

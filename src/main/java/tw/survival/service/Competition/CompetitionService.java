@@ -54,6 +54,7 @@ public class CompetitionService {
 			newPost.setName(comp.getMandarinName());
 			newPost.setClassify("活動競賽😎");
 			newPost.setEssay(comp.getContent());
+			postsService.insertPost(newPost);
 //			postsService.addPost(newPost);
 			compDao.save(comp);
 			return comp;
@@ -155,13 +156,25 @@ public class CompetitionService {
 	 * @return 更新成功回傳該活動實體，拋出錯誤回傳 null
 	 * @author 王威翔
 	 */
+	@Transactional
 	public CompetitionBean updateByEntity(CompetitionBean comp) {
-		if (compDao.findById(comp.getId()).isPresent()) {
-			try {
-				return compDao.save(comp);
-			} catch (Exception e) {
-				return null;
-			}
+		Optional<CompetitionBean> optional = compDao.findById(comp.getId());
+		if (optional.isPresent()) {
+			CompetitionBean compToUpdate = optional.get();
+			compToUpdate.setMandarinName(comp.getMandarinName());
+			compToUpdate.setEnglishName(comp.getEnglishName());
+			compToUpdate.setStartDate(comp.getStartDate());
+			compToUpdate.setStartTimespan(comp.getStartTimespan());
+			compToUpdate.setEndDate(comp.getEndDate());
+			compToUpdate.setEndTimespan(comp.getEndTimespan());
+			compToUpdate.setStatus(comp.getStatus());
+			compToUpdate.setSingleOrCrew(comp.getSingleOrCrew());
+			compToUpdate.setPlaceId(comp.getPlaceId());
+			compToUpdate.setCapacity(comp.getCapacity());
+			compToUpdate.setBudget(comp.getBudget());
+			compToUpdate.setFee(comp.getFee());
+			compToUpdate.setContent(comp.getContent());
+			return compDao.save(compToUpdate);
 		} else {
 			return null;
 		}

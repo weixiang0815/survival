@@ -13,13 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Player.PlayerBean;
 
@@ -34,8 +33,8 @@ public class OrderItemBean {
 	private Integer id;
 
 	@Column(name = "order_create_date")
-	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	private Date order_create_date;
 
 	@Column(name = "status")
