@@ -22,7 +22,7 @@ class SurvivalRunner implements ApplicationRunner	 {
 		List<String> al =new ArrayList<>();
 		al.add("手槍");
 		List<ProductBean> fd =tpdt.findByproductclassIn(al);
-		System.out.println(fd);
+//		System.out.println(fd);
 	}
 
 }

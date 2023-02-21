@@ -1,5 +1,7 @@
 package tw.survival.model.Place;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,6 +18,7 @@ import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -54,16 +58,17 @@ public class InventoryBean {
 	
 	
 
-//	@OneToMany(mappedBy = "inventory")
-//	private List<LogisticsBean> logistics;
+	@OneToMany(fetch = FetchType.LAZY,mappedBy = "inventory")
+	private List<LogisticsBean> logistics;
 	
-//	public List<LogisticsBean> getLogistics() {
-//		return logistics;
-//	}
 
-//	public void setLogistics(List<LogisticsBean> logistics) {
-//		this.logistics = logistics;
-//	}
+	public List<LogisticsBean> getLogistics() {
+		return logistics;
+	}
+
+	public void setLogistics(List<LogisticsBean> logistics) {
+		this.logistics = logistics;
+	}
 
 	public InventoryBean() {
 	}
