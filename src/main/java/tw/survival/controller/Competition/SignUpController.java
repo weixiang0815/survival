@@ -1,13 +1,30 @@
 package tw.survival.controller.Competition;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import tw.survival.model.Competition.SignUpBean;
+import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Competition.SignUpService;
+import tw.survival.service.Player.PlayerService;
 
 @Controller
 public class SignUpController {
+
+	@Autowired
+	private SignUpService signupService;
+
+	@Autowired
+	private CompetitionService compService;
+
+	@Autowired
+	private PlayerService playerService;
 
 	/**
 	 * 跳轉至報名頁面
@@ -15,7 +32,9 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/signup")
-	public String newSignup() {
+	public String newSignup(Model model) {
+		model.addAttribute("signup", new SignUpBean());
+		model.addAttribute("compList", compService.findAll());
 		return "Competition/newSignup";
 	}
 
@@ -26,8 +45,11 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/signup/create")
-	public String createSignup() {
-		return "redirect:/competition";
+	public String createSignup(@ModelAttribute("signup") SignUpBean signup, Model model) {
+		signup.setCompetition(compService.findById(signup.getCompetitionId()));
+		signup.setPlayer(playerService.findByBean(signup.getPlayerId()));
+		signupService.insert(signup);
+		return "redirect:/competition/signup/search/result";
 	}
 
 	/**
@@ -67,7 +89,8 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/signup/search/result")
-	public String searchAll() {
+	public String searchAll(Model model) {
+		model.addAttribute("signupList", signupService.findAll());
 		return "Competition/showSignups";
 	}
 
@@ -77,7 +100,8 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/signup/edit")
-	public String editSignup() {
+	public String editSignup(@RequestParam("id") Integer id, Model model) {
+		model.addAttribute("signup", signupService.findById(id));
 		return "Competition/editSignup";
 	}
 
@@ -88,7 +112,8 @@ public class SignUpController {
 	 * @author 王威翔
 	 */
 	@PutMapping("/competition/signup/edit/send")
-	public String editSignupById() {
+	public String editSignupById(@ModelAttribute("signup") SignUpBean signup) {
+		
 		return "redirect:/competition/signup/detail";
 	}
 
@@ -98,8 +123,9 @@ public class SignUpController {
 	 * @return 重新導向至多筆報名紀錄搜尋結果
 	 * @author 王威翔
 	 */
-	@DeleteMapping("/competition/signup/delete")
-	public String deleteSignupById() {
+	@GetMapping("/competition/signup/delete")
+	public String deleteSignupById(@RequestParam("id") Integer id) {
+		signupService.deleteById(id);
 		return "redirect:/competition/signup/search/result";
 	}
 

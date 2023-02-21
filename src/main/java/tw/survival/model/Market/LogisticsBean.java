@@ -1,6 +1,6 @@
 package tw.survival.model.Market;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +11,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Place.InventoryBean;
 import tw.survival.model.Player.PlayerBean;
@@ -29,12 +33,18 @@ public class LogisticsBean {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "star_date")
-	private Date star_date;
+	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	@Column(name = "start_date")
+	private Date start_date;
 
+	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
 	@Column(name = "arrive_date")
 	private Date arrive_date;
-
+	
 	@Column(name = "status")
 	private String status;
 
@@ -62,12 +72,12 @@ public class LogisticsBean {
 		this.id = id;
 	}
 
-	public Date getStar_date() {
-		return star_date;
+	public Date getStart_date() {
+		return start_date;
 	}
 
-	public void setStar_date(Date star_date) {
-		this.star_date = star_date;
+	public void setStart_date(Date star_date) {
+		this.start_date = star_date;
 	}
 
 	public Date getArrive_date() {

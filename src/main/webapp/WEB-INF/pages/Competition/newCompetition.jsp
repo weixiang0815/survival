@@ -11,12 +11,14 @@
 <title>新增活動</title>
 </head>
 <body>
-	<jsp:include page="../Layout/navbar_competition.jsp" />
+<%-- 	<jsp:include page="../Layout/navbar_competition.jsp" /> --%>
+<jsp:include page="../Template/admin.jsp" />
 	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-6 col-lg-8"
 				style="border: 2px solid red; border-radius: 5px;">
-				<h1>活動詳情表單</h1><span>${error}</span>
+				<h1>活動詳情表單</h1>
+				<span>${error}</span>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
 						<h1>請先登入再新增活動呦😊～</h1>
@@ -60,8 +62,7 @@
 							</div>
 							<div class="col-3">
 								<form:label path="endTimespan" class="form-label">結束時間</form:label>
-								<form:select class="form-select" path="endTimespan"
-									id="end_timespan">
+								<form:select class="form-select" path="endTimespan">
 									<form:option value="1" label="早上（6:00～12:00）" />
 									<form:option value="2" label="下午（12:00～18:00）" />
 									<form:option value="3" label="晚上（18:00～00:00）" />
@@ -91,8 +92,9 @@
 							</div>
 							<div class="col-6"></div>
 							<div class="col-12">
-								<form:label path="place" class="form-label">活動場地</form:label>
-								<form:select title="選擇一個場地" class="form-select" path="placeId" id="placeId">
+								<form:label path="placeId" class="form-label">活動場地</form:label>
+								<form:select title="選擇一個場地" class="form-select" path="placeId"
+									id="placeId">
 									<c:forEach items="${placeList}" var="place">
 										<c:choose>
 											<c:when test="${player != null && employee == null}">
@@ -135,7 +137,7 @@
 							</div>
 						</fieldset>
 						<fieldset class="row mt-3 mb-3 p-3">
-							<button class="col auto m-3 btn btn-primary" type="submit">送出</button> 
+							<button class="col auto m-3 btn btn-primary" type="submit">送出</button>
 							<button class="col auto m-3 btn btn-danger" type="reset">清除</button>
 						</fieldset>
 					</div>
@@ -146,21 +148,50 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
+		const updateFormURL = "${contextRoot}/competition/api/create/update";
+		const form = $("#competition");
+		const formInputs = [
+			$("#mandarinName"),
+			$("#englishName"),
+			$("#startDate"),
+			$("#startTimespan"),
+			$("#endDate"),
+			$("#endTimespan"),
+			$("#status"),
+			$("#singleOrCrew"),
+			$("#placeId"),
+			$("#capacity"),
+			$("#budget"),
+			$("#fee"),
+		]
+		const content = watchdog.editor;
 		$(document).ready(function() {
-		$("#startDate").datepicker({
-			dateFormat: "yy-mm-dd",
-			onSelect: function(date) {
-				$("#endDate").datepicker("option", "minDate", date);
-			}
+			$("#startDate").datepicker({
+				dateFormat : "yy-mm-dd",
+				onSelect : function(date) {
+					$("#endDate").datepicker("option", "minDate", date);
+				}
+			});
+			$("#endDate").datepicker({
+				dateFormat : "yy-mm-dd",
+				onSelect : function(date) {
+					$("#startDate").datepicker("option", "maxDate", date);
+				}
+			});
 		});
-		$("#endDate").datepicker({
-			dateFormat: "yy-mm-dd",
-			onSelect: function(date) {
-				$("#startDate").datepicker("option", "maxDate", date);
-			}
+		$("input").on({
+			change: updateFormData(),
 		});
-});
-
+		content.model.document.on('change', updateFormData());
+		function updateFormData() {
+			let formData = {};
+			for (input of formInputs) {
+				formData[input.attr("id")] = input.val();
+			}
+			formData["content"] = content.getData();
+			console.log(content.getData());
+			console.log(formData);
+		}
 	</script>
 	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
 </body>

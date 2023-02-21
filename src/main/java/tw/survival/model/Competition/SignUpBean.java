@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,6 +55,13 @@ public class SignUpBean {
 
 	@Column(name = "status")
 	private String status;
+
+	@PrePersist
+	void onCreate() {
+		if (signUpDate == null) {
+			signUpDate = new Date();
+		}
+	}
 
 	public SignUpBean() {
 	}

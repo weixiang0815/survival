@@ -7,10 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import tw.survival.model.Market.OrderItemBean;
 import tw.survival.service.Market.OrderItemService;
 
@@ -45,5 +49,24 @@ public class OrderItemController {
 		List<OrderItemBean> list = oService.findAllOrderItem();
 		model.addAttribute("list", list);
 		return "/Market/show_AllOrderItem";
+	}
+
+	@GetMapping("/Market/editOrder")
+	public String editOrder(@RequestParam("id") Integer id, Model model) {
+		OrderItemBean order = oService.findById(id);
+		model.addAttribute("order", order);
+		return "Market/editOrderItem";
+	}
+
+	@PutMapping("/Market/editOrder")
+	public String updateOrder(@ModelAttribute("order") OrderItemBean order) {
+		oService.update(order);
+		return "redirect:/Market/all_OrderItem";
+	}
+
+	@DeleteMapping("/Market/deleteOrder")
+	public String deleteOrderItem(@RequestParam("id") Integer id) {
+		oService.deleteById(id);
+		return "redirect:/Market/all_OrderItem";
 	}
 }

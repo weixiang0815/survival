@@ -28,6 +28,17 @@
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${show.order_create_date}" /></td>
 						<td>${show.status}</td>
+						<td><form action="${contextRoot}/Market/editOrder" method="get">
+								<input name="id" type="hidden" value="${show.id}" />
+								<input type="submit" class="btn btn-info btn-sm" value="編輯" />
+							</form></td>
+
+						<td><form action="${contextRoot}/Market/deleteOrder" method="post">
+								<input name="_method" type="hidden" value="delete" /> <input
+									name="id" type="hidden" value="${show.id}" /> <input
+									type="submit" class="btn btn-danger btn-sm" value="刪除" />
+							</form></td>
+
 					</tr>
 				</jstl:forEach>
 			</tbody>

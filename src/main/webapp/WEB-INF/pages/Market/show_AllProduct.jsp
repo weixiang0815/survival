@@ -14,6 +14,27 @@
 <jsp:include page="Layout/navbar_market.jsp"></jsp:include>
 <h1>所有商品</h1>
 
+<form>
+  <input type="checkbox" id="vehicle1" name="product_class" value="手槍">
+  <label for="vehicle1"> 手槍</label><br>
+
+  <input type="checkbox" id="vehicle2" name="product_class" value="步槍">
+  <label for="vehicle2"> 步槍</label><br>
+
+  <input type="checkbox" id="vehicle3" name="product_class" value="衝鋒槍">
+  <label for="vehicle3"> 衝鋒槍</label><br>
+  
+  <input type="checkbox" id="vehicle4" name="product_class" value="狙擊槍">
+  <label for="vehicle3"> 狙擊槍</label><br>
+  
+  <input type="checkbox" id="vehicle5" name="product_class" value="霰彈槍">
+  <label for="vehicle3"> 霰彈槍</label><br>
+
+  <input type="submit" value="submit">
+</form>
+
+<!-- 改成用直接打勾就可以搜尋，要用監聽去看打勾選項與否的動作 -->
+
 <table class="table">
   <thead>
     <tr>
@@ -45,7 +66,7 @@
         </form>
       </td>
       <td>
-        <form action="${contextRoot}/player/delete" method="post">
+        <form action="${contextRoot}/Market/delete" method="post">
           <input name="_method" type="hidden" value="delete" />
           <input name="id" type="hidden" value="${show_AllProduct.id}" />
           <input type="submit" class="btn btn-danger btn-sm" value="刪除" />

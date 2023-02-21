@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -84,7 +83,8 @@ public class PostsBean implements Serializable{
 	@JoinColumn(name="fk_player_id")
 	private PlayerBean player;
 	
-	@OneToOne(mappedBy = "post")
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事

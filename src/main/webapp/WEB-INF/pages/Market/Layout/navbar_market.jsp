@@ -39,9 +39,9 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_OrderItem">所有訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">服裝</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Logistics">新增物流訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/????????">消耗品</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_Logistics">查看物流訂單</a>
 					</li>
 					
 					

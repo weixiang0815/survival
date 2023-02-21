@@ -16,7 +16,7 @@ import tw.survival.service.Place.ScheduleService;
 public class ScheduleController {
 
 	
-	private ScheduleService sService;
+	private ScheduleService scheduleService;
 	
 	
 	@GetMapping("/schedule/addSchedule")
@@ -30,7 +30,7 @@ public class ScheduleController {
 	public String addPagePost(@ModelAttribute("scheduleBean") ScheduleBean sch ) {
 		System.out.println("進入CONTROLLER");
 		if(sch!=null) {
-		sService.insertSchedule(sch);
+			scheduleService.insertSchedule(sch);
 		System.out.println("已儲存");
 			
 		}

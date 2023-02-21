@@ -9,7 +9,8 @@
 <title>搜尋活動</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_competition.jsp"/>
+<%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
+<jsp:include page="../Template/admin.jsp" />
 <div class="container">
 <h1>搜尋活動</h1>
 <form action="${contextRoot}/competition/search/result" method="get">
