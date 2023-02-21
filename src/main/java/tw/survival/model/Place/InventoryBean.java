@@ -1,5 +1,10 @@
 package tw.survival.model.Place;
 
+import java.util.LinkedHashSet;
+
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,13 +13,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -53,17 +61,11 @@ public class InventoryBean {
 	private Integer productId;
 	
 	
-
-//	@OneToMany(mappedBy = "inventory")
-//	private List<LogisticsBean> logistics;
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory",cascade = CascadeType.ALL)
+	private Set<LogisticsBean> logistics = new LinkedHashSet<>();
 	
-//	public List<LogisticsBean> getLogistics() {
-//		return logistics;
-//	}
-
-//	public void setLogistics(List<LogisticsBean> logistics) {
-//		this.logistics = logistics;
-//	}
+	
 
 	public InventoryBean() {
 	}
@@ -122,6 +124,14 @@ public class InventoryBean {
 
 	public void setProductId(Integer productId) {
 		this.productId = productId;
+	}
+
+	public Set<LogisticsBean> getLogistics() {
+		return logistics;
+	}
+
+	public void setLogistics(Set<LogisticsBean> logistics) {
+		this.logistics = logistics;
 	}
 
 	
