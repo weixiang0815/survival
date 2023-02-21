@@ -18,7 +18,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Place.InventoryBean;
 import tw.survival.model.Player.PlayerBean;
@@ -33,16 +32,14 @@ public class LogisticsBean {
 	@Column(name = "id")
 	private Integer id;
 
+	@Column(name = "start_date")
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	@Column(name = "start_date")
 	private Date start_date;
 
+	@Column(name = "arrive_date")
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
-	@Column(name = "arrive_date")
 	private Date arrive_date;
 	
 	@Column(name = "status")
@@ -51,7 +48,7 @@ public class LogisticsBean {
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_inventory_id")
-	private InventoryBean Inventory;
+	private InventoryBean inventory;
 
 //	接收者(player_id)
 	@JsonBackReference
@@ -96,12 +93,13 @@ public class LogisticsBean {
 		this.status = status;
 	}
 
+
 	public InventoryBean getInventory() {
-		return Inventory;
+		return inventory;
 	}
 
 	public void setInventory(InventoryBean inventory) {
-		Inventory = inventory;
+		this.inventory = inventory;
 	}
 
 	public PlayerBean getPlayer() {

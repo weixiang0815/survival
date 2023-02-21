@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -42,6 +41,21 @@ public class InventoryBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
+
+//	@OneToMany(mappedBy = "inventory")
+//	private List<LogisticsBean> logistics;
+	
+//	public List<LogisticsBean> getLogistics() {
+//		return logistics;
+//	}
+
+//	public void setLogistics(List<LogisticsBean> logistics) {
+//		this.logistics = logistics;
+//	}
+
+	public void setInventorySellamount(Integer inventorySellamount) {
+		this.inventorySellamount = inventorySellamount;
+	}
 
 	public InventoryBean() {
 	}
