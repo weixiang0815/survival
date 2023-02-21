@@ -42,14 +42,13 @@ public class CompetitionControllerAjax {
 	 * @return 回傳該活動新增表單暫存紀錄實體
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/api/create/newForm/getlatest")
-	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestParam("id") Integer creatorId,
-			@RequestParam("type") Integer creatorType) {
-		NewCompetitionFormBean latestForm = newFormService.findByCreator(creatorId, creatorType);
+	@PostMapping("/competition/api/create/newForm/getlatest")
+	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form) {
+		NewCompetitionFormBean latestForm = newFormService.findByCreator(form.getCreatorId(), form.getCreatorType());
 		if (latestForm == null) {
 			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
-			newForm.setCreatorId(creatorId);
-			newForm.setCreatorType(creatorType);
+			newForm.setCreatorId(form.getCreatorId());
+			newForm.setCreatorType(form.getCreatorType());
 			latestForm = newFormService.insert(newForm);
 		}
 		return latestForm;

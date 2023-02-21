@@ -148,7 +148,7 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
-		const retrieveFromURL = "${contextRoot}/competition/api/";
+		const retrieveFromURL = "${contextRoot}/competition/api/create/newForm/getlatest";
 		const updateFormURL = "${contextRoot}/competition/api/create/update";
 		const form = $("#competition");
 		const formInputs = [
@@ -182,6 +182,16 @@
 				}
 			});
 			console.log(formInputs);
+			let obj = {"creatorId": 1, "creatorType": 1};
+			let objString = JSON.stringify(obj);
+			axios.post(retrieveFromURL, objString, {
+				headers: {'Content-Type': 'application/json'}
+			}).then(res => {
+				console.log(res.data);
+				insertValues(res.data);
+			}).catch(err => {
+				console.log(err);
+			});
 			//	先發送第一支 AJAX 請求透過登入者 ID 得到先前的填表進度
 			//	有進度就填入表格，沒進度就建立新進度實體
 			formInputs.forEach(el => {
@@ -191,6 +201,25 @@
 			});
 			content.model.document.on('change', updateFormData);
 			});
+		function insertValues(values){
+			let firstPart = values.firstPart;
+			console.log(firstPart);
+			for (let i = 0; i < 6; i++) {
+				let id = formInputs[i].attr("id");
+				if (i == 3 || i == 5) {
+					let el = firstPart[id];
+					if (formInputs[i].val() == null) {
+						formInputs[i].val() = 1;
+					} else {
+						formInputs[i].val();
+					}
+				} else {
+					let el = firstPart[id];
+					formInputs[i].val(el);
+				}
+			}
+			for (let i = 6; i < )
+		}
 		function updateFormData() {
 			let formData = {};
 			for (input of formInputs) {
