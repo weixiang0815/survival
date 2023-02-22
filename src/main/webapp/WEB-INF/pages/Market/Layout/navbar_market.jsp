@@ -41,6 +41,8 @@
 					</li>
 					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Logistics">新增物流訂單</a>
 					</li>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_Logistics">查看物流訂單</a>
+					</li>
 					
 					
 				</ul>

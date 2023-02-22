@@ -51,7 +51,7 @@ public class LogisticsBean {
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_inventory_id")
-	private InventoryBean Inventory;
+	private InventoryBean inventory;
 
 //	接收者(player_id)
 	@JsonBackReference
@@ -97,11 +97,11 @@ public class LogisticsBean {
 	}
 
 	public InventoryBean getInventory() {
-		return Inventory;
+		return inventory;
 	}
 
 	public void setInventory(InventoryBean inventory) {
-		Inventory = inventory;
+		this.inventory = inventory;
 	}
 
 	public PlayerBean getPlayer() {

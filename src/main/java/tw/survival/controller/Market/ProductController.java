@@ -35,10 +35,10 @@ public class ProductController {
 	// 新增商品
 	@ResponseBody
 	@PostMapping("ProductRepository/addproduct")
-	public String insertProduct(@RequestParam("photoName") String fileName,
-			@RequestParam("photoContext") String Context, @RequestParam("Product_class") String Product_class,
+	public String insertProduct(@RequestParam("ProductName") String fileName,
+			@RequestParam("ProductContext") String Context, @RequestParam("Product_class") String Product_class,
 			@RequestParam("Price") Integer Price, @RequestParam("setRent_fee") Integer setRent_fee,
-			@RequestParam("photoFile") MultipartFile file) {
+			@RequestParam("ProductFile") MultipartFile file) {
 		try {
 			ProductBean pb = new ProductBean();
 			pb.setName(fileName);
@@ -118,6 +118,12 @@ public class ProductController {
 		model.addAttribute("SearchResult", searchResult);
 		return "Market/searchResult";
 	}
-
-
+	
+	@ResponseBody
+	@GetMapping("/Market/productFindByproductclassIn")
+	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
+		List<ProductBean> searchResult = productService.findByClass(clazz);
+		
+		return searchResult.toString();
+	}
 }

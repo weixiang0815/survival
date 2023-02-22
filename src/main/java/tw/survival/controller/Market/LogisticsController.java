@@ -2,11 +2,15 @@ package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,10 +26,10 @@ public class LogisticsController {
 		return "Market/add_Logistics";
 	}
 
-	@ResponseBody
 	@PostMapping("/Market/addLogistics")
+	@ResponseBody
 	public String addLogistics(@RequestParam("start_date") Date start_date,
-			@RequestParam("arrive_date") Date arrive_date, @RequestParam("Logistics_status") String status)
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status)
 			throws IOException {
 
 		LogisticsBean lb = new LogisticsBean();
@@ -37,7 +41,18 @@ public class LogisticsController {
 
 		return "新增成功";
 	}
-	
-	
+	//r
+	@GetMapping("/Market/all_Logistics")
+	public String getAllLogistics(Model model) {
+		List<LogisticsBean> list = LogisticsService.findAllLogistics();
+		model.addAttribute("list", list);
+		return "/Market/show_AllLogistics";
+	}
+	//d
 
+	@RequestMapping(value="/Market/deleteLogistics", method=RequestMethod.DELETE)
+	public String deleteLogistics(@RequestParam("deleteid") Integer id) {
+	    LogisticsService.deleteById(id);
+	    return "redirect:/Market/all_Logistics";
+	}
 }
