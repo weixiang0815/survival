@@ -13,8 +13,8 @@
 </head>
 <body>
 
+<jsp:include page="../Template/admin.jsp"/>
 <div class="container">
-	<jsp:include page="../Layout/navbar_forum.jsp"/>
 	<h1>新增貼文</h1>
 	<div class="col-10">
 		<form:form action="${contextRoot}/posts/post" modelAttribute="PostsBean">
@@ -39,7 +39,7 @@
 		    
 		</form:form>
 	</div>
-	<jsp:include page="../Layout/footer.jsp"/>
+	
 </div>
 <script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 <script src="${contextRoot}/js/CKEditor5/script.js"></script>

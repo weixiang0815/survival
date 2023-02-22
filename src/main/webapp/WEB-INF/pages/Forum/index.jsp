@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="zh-hant-tw">
 <head>
@@ -9,8 +10,8 @@
 <title>論壇系統首頁</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_forum.jsp"/>
+<jsp:include page="../Template/admin.jsp"/>
 <h1>論壇系統首頁</h1>
-<jsp:include page="../Layout/footer.jsp"/>
+
 </body>
 </html>
