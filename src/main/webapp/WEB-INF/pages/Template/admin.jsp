@@ -125,10 +125,10 @@
 						<i class="bi bi-people"></i>&nbsp;&nbsp;會員系統
 					</a>
 					<ul class="collapse" id="submenu-player">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
+						<li><a href="${contextRoot}/player/add" class="nav-link">新增</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/player/list" class="nav-link">查詢</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
@@ -137,10 +137,10 @@
 						<i class="bi bi-person-badge"></i>&nbsp;&nbsp;員工系統
 					</a>
 					<ul class="collapse" id="submenu-employee">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
+						<li><a href="${contextRoot}/Employee/add" class="nav-link">新增</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/Employee/list" class="nav-link">查詢</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">

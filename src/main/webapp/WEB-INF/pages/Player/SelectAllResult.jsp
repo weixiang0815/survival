@@ -14,7 +14,7 @@ max-width: 100%;
 </style>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../Template/admin.jsp"/>
 	<div class="container">
 	<h3>查詢全部結果</h3>
 	<table class="table table-hover">
