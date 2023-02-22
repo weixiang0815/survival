@@ -85,7 +85,7 @@ public class ProductService {
 	}
 
 	public List<ProductBean> findByClass(List<String> clazz) {
-		return tpdt.findByproductclassIn(clazz);
+		return tpdt.findByProductclassIn(clazz);
 	}
 
 }

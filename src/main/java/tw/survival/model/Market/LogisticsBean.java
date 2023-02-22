@@ -76,8 +76,8 @@ public class LogisticsBean {
 		return start_date;
 	}
 
-	public void setStart_date(Date star_date) {
-		this.start_date = star_date;
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
 	}
 
 	public Date getArrive_date() {
@@ -122,4 +122,5 @@ public class LogisticsBean {
 		OrderItem = orderItem;
 	}
 
+	
 }

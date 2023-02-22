@@ -1,7 +1,10 @@
 package tw.survival.controller.Market;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -119,11 +122,24 @@ public class ProductController {
 		return "Market/searchResult";
 	}
 	
+	//多條件搜尋商品
 	@ResponseBody
 	@GetMapping("/Market/productFindByproductclassIn")
-	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
+	public List<ProductBean> findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
 		List<ProductBean> searchResult = productService.findByClass(clazz);
-		
-		return searchResult.toString();
+		return searchResult;
 	}
+	
+	@ResponseBody
+	@GetMapping("/Market/productImage")
+	public Map<String, String> getProductImage(@RequestParam("productId") Integer productId) {
+	    ProductBean product = productService.getProductById(productId);
+	    Map<String, String> imageMap = new HashMap<>();
+	    if (product != null && product.getImg() != null) {
+	        String imageData = Base64.getEncoder().encodeToString(product.getImg());
+	        imageMap.put("imageData", imageData);
+	    }
+	    return imageMap;
+	}
+	
 }
