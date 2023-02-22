@@ -1,11 +1,10 @@
 package tw.survival.model.Competition;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -13,12 +12,9 @@ import javax.persistence.Table;
 public class NewCompetitionFormPart1Bean {
 
 	@Id
-	@Column(name = "fk_new_competition_form_id")
-	private Integer newCompetitionFormId;
-
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_new_competition_form_id")
-	private NewCompetitionFormBean newCompetitionForm;
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name = "name_mandarin")
 	private String mandarinName;
@@ -41,20 +37,12 @@ public class NewCompetitionFormPart1Bean {
 	public NewCompetitionFormPart1Bean() {
 	}
 
-	public Integer getNewCompetitionFormId() {
-		return newCompetitionFormId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNewCompetitionFormId(Integer newCompetitionFormId) {
-		this.newCompetitionFormId = newCompetitionFormId;
-	}
-
-	public NewCompetitionFormBean getNewCompetitionForm() {
-		return newCompetitionForm;
-	}
-
-	public void setNewCompetitionForm(NewCompetitionFormBean newCompetitionForm) {
-		this.newCompetitionForm = newCompetitionForm;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getMandarinName() {

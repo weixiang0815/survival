@@ -51,7 +51,7 @@ public class LogisticsBean {
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_inventory_id")
-	private InventoryBean Inventory;
+	private InventoryBean inventory;
 
 //	接收者(player_id)
 	@JsonBackReference
@@ -76,8 +76,8 @@ public class LogisticsBean {
 		return start_date;
 	}
 
-	public void setStart_date(Date star_date) {
-		this.start_date = star_date;
+	public void setStart_date(Date start_date) {
+		this.start_date = start_date;
 	}
 
 	public Date getArrive_date() {
@@ -96,12 +96,14 @@ public class LogisticsBean {
 		this.status = status;
 	}
 
+	
+
 	public InventoryBean getInventory() {
-		return Inventory;
+		return inventory;
 	}
 
 	public void setInventory(InventoryBean inventory) {
-		Inventory = inventory;
+		this.inventory = inventory;
 	}
 
 	public PlayerBean getPlayer() {
@@ -120,4 +122,5 @@ public class LogisticsBean {
 		OrderItem = orderItem;
 	}
 
+	
 }

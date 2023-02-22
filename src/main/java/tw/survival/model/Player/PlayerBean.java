@@ -2,7 +2,10 @@ package tw.survival.model.Player;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,16 +15,22 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-//import org.springframework.data.annotation.CreatedDate;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
+import tw.survival.model.Forum.BookmarkletBean;
+import tw.survival.model.Forum.PostsBean;
 
 @Entity
 @Table(name = "Player")
@@ -104,9 +113,9 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();//RZ 2023/2/21
 //
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	@OrderBy("added desc")
@@ -120,9 +129,9 @@ public class PlayerBean {
 //	@OrderBy("added desc")
 //	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
 //
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();//RZ 2023/2/21
 
 	@PrePersist
 	public void autoCreate() {
@@ -274,13 +283,13 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-//	public Set<PostsBean> getPostsOfPlayer() {
-//		return postsOfPlayer;
-//	}
-//
-//	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
-//		this.postsOfPlayer = postsOfPlayer;
-//	}
+	public Set<PostsBean> getPostsOfPlayer() {
+		return postsOfPlayer;
+	}
+
+	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
+		this.postsOfPlayer = postsOfPlayer;
+	}
 //
 //	public Set<MsgsBean> getMsgsOfPlayer() {
 //		return msgsOfPlayer;
@@ -306,13 +315,13 @@ public class PlayerBean {
 //		this.scoreOfPost = scoreOfPost;
 //	}
 //
-//	public Set<BookmarkletBean> getBookmarkletOfPost() {
-//		return bookmarkletOfPost;
-//	}
-//
-//	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
-//		this.bookmarkletOfPost = bookmarkletOfPost;
-//	}
+	public Set<BookmarkletBean> getBookmarkletOfPost() {
+		return bookmarkletOfPost;
+	}
+
+	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
+		this.bookmarkletOfPost = bookmarkletOfPost;
+	}
 
 	public CrewPermission getCrewPermission() {
 		return crewPermission;

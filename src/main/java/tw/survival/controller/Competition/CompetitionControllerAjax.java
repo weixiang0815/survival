@@ -1,6 +1,7 @@
 package tw.survival.controller.Competition;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,27 +13,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
-
+import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionService;
-
+import tw.survival.service.Competition.NewCompetitionFormService;
+import tw.survival.service.Employee.EmployeeService;
+import tw.survival.service.Player.PlayerService;
 
 @RestController
 public class CompetitionControllerAjax {
 
-	
+	@Autowired
+	private NewCompetitionFormService newFormService;
+
 	@Autowired
 	private CompetitionService compService;
 
+	@Autowired
+	private PlayerService playerService;
+
+	@Autowired
+	private EmployeeService employeeService;
+
 	/**
-	 * 用 AJAX 新增一筆活動新增表單暫存實體
+	 * 用 AJAX 取得使用者先前的填表紀錄，若查無資料則創建新的活動新增表單暫存紀錄實體
 	 * 
-	 * @param newForm 欲新增的活動新曾表單暫存實體
+	 * @param creatorId   登入使用者 id
+	 * @param creatorType 使用者型態，會員為 1，員工為 2
+	 * @return 回傳該活動新增表單暫存紀錄實體
 	 * @author 王威翔
 	 */
-//	@PostMapping("/competition/api/create/newForm")
-//	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-//		
-//	}
+	@PostMapping("/competition/api/create/newForm/getlatest")
+	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form) {
+		NewCompetitionFormBean latestForm = newFormService.findByCreator(form.getCreatorId(), form.getCreatorType());
+		if (latestForm == null) {
+			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
+			newForm.setCreatorId(form.getCreatorId());
+			newForm.setCreatorType(form.getCreatorType());
+			latestForm = newFormService.insert(newForm);
+		}
+		return latestForm;
+	}
+
+	/**
+	 * 用 AJAX 更新一筆活動新增表單暫存實體
+	 * 
+	 * @param newForm 欲更新的活動新曾表單暫存實體
+	 * @author 王威翔
+	 */
+	@PutMapping("/competition/api/create/update")
+	public Date updateNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
+		return newFormService.updateByEntity(newForm).getLastEdited();
+	}
 
 	/**
 	 * 用 AJAX 新增一筆活動實體，但不一定直接發布

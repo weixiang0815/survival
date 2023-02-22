@@ -9,9 +9,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Place.InventoryBean;
+import tw.survival.model.Place.WarehouseBean;
 import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.InventoryService;
 import tw.survival.service.Place.WarehouseService;
@@ -58,5 +62,28 @@ public class InventoryController {
 		mav.setViewName("Place/showAllInventory");
 		mav.getModel().put("list", list);
 		return mav;
+	}
+	
+	@GetMapping("/inventory/edit")
+	public String editInventory(@RequestParam("id") Integer id, Model model) {
+		InventoryBean inventory = inventoryService.getInventoryById(id);
+		WarehouseBean warehouse = inventory.getWarehouse();
+		ProductBean product = inventory.getProduct();
+		model.addAttribute("warehouse", warehouse);
+		model.addAttribute("product", product);
+		model.addAttribute("inventory", inventory);
+		return "Place/editInventory";
+	}
+	
+	@PutMapping("/inventory/edit")
+	public String sendEditInventory(@ModelAttribute("inventory") InventoryBean inventory) {
+		inventoryService.updateInventory(inventory);
+		return "redirect:/inventory/all";
+	}
+	
+	@PostMapping("/inventory/delete")
+	public String deleteInventory(@RequestParam("id") Integer id) {
+		inventoryService.deleteInventoryById(id);
+		return "redirect:/inventory/all";
 	}
 }

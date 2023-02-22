@@ -40,10 +40,24 @@ public class InventoryService {
 	}
 	
 	public void deleteInventoryById(Integer id) {
-		 iDAO.deleteById(id);
+		InventoryBean inventory = getInventoryById(id);
+		inventory.setProduct(null);
+		inventory.setProductId(null);
+		inventory.setWarehouse(null);
+		inventory.setWarehouseId(null);
+		inventory.setLogistics(null);
+		
+		iDAO.deleteById(id);
 	}
 	
 	public InventoryBean updateInventory(InventoryBean inventory) {
-		return iDAO.save(inventory);
+		Optional<InventoryBean> optional = iDAO.findById(inventory.getId());
+		if(optional.isPresent()) {
+			InventoryBean inventoryToUpdate = optional.get();
+			inventoryToUpdate.setInventorySellamount(inventory.getInventorySellamount());
+			inventoryToUpdate.setInventoryRentamount(inventory.getInventoryRentamount());
+			return iDAO.save(inventoryToUpdate);
+		}
+		return null;
 	}
 }

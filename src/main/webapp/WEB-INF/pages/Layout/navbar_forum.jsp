@@ -28,7 +28,13 @@
 						<li class="nav-item"><a class="nav-link"
 							href="${contextRoot}/formToAdd">貼文發佈</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/messages/page">連結 2</a></li>
+							href="${contextRoot}/posts/getAll">最新貼文</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/posts/getAll">最新貼文</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/posts/getAll">最新貼文</a></li>
+						<li class="nav-item"><a class="nav-link"
+							href="${contextRoot}/posts/getAll">最新貼文</a></li>
 						<li class="nav-item"><a class="nav-link disabled">連結 3</a></li>
 					</ul>
 				</div>
