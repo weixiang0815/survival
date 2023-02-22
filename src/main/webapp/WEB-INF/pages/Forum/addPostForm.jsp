@@ -33,7 +33,7 @@
 
 		    <br/>
 		    <label for="inputEssay">請輸入內容:</label>
-		    <form:textarea class="form-control" id="inputEssay" path="essay" rows="3"/>
+		    <form:textarea id="ckeditor" path="essay" class="form-control" />
 		    <br/>
 		    <button type="submit" class="btn btn-outline-primary">送出</button>
 		    
@@ -41,5 +41,7 @@
 	</div>
 	<jsp:include page="../Layout/footer.jsp"/>
 </div>
+<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
+<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 </body>
 </html>
