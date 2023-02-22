@@ -1,5 +1,6 @@
 package tw.survival.service.Competition;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -162,8 +163,27 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean updateByEntity(NewCompetitionFormBean mainForm) {
-		if (mainDao.findById(mainForm.getId()).isPresent()) {
-			return mainDao.save(mainForm);
+		Optional<NewCompetitionFormBean> optional = mainDao.findById(mainForm.getId());
+		if (optional.isPresent()) {
+			NewCompetitionFormBean form = optional.get();
+			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
+			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
+			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
+			firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
+			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
+			firstPart.setEndDate(mainForm.getFirstPart().getEndDate());
+			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
+			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
+			secondPart.setStatus(mainForm.getSecondPart().getStatus());
+			secondPart.setSingleOrCrew(mainForm.getSecondPart().getSingleOrCrew());
+			secondPart.setPlaceId(mainForm.getSecondPart().getPlaceId());
+			secondPart.setBudget(mainForm.getSecondPart().getBudget());
+			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
+			secondPart.setFee(mainForm.getSecondPart().getFee());
+			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
+			thirdPart.setContent(mainForm.getThirdPart().getContent());
+			form.setLastEdited(new Date());
+			return mainDao.save(form);
 		} else {
 			return null;
 		}

@@ -1,6 +1,7 @@
 package tw.survival.controller.Competition;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -55,14 +55,14 @@ public class CompetitionControllerAjax {
 	}
 
 	/**
-	 * 用 AJAX 新增一筆活動新增表單暫存實體
+	 * 用 AJAX 更新一筆活動新增表單暫存實體
 	 * 
-	 * @param newForm 欲新增的活動新曾表單暫存實體
+	 * @param newForm 欲更新的活動新曾表單暫存實體
 	 * @author 王威翔
 	 */
-	@PostMapping("/competition/api/create/newForm")
-	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-
+	@PutMapping("/competition/api/create/update")
+	public Date updateNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
+		return newFormService.updateByEntity(newForm).getLastEdited();
 	}
 
 	/**

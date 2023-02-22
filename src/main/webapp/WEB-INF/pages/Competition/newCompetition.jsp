@@ -19,6 +19,10 @@
 				style="border: 2px solid red; border-radius: 5px;">
 				<h1>活動詳情表單</h1>
 				<span>${error}</span>
+				<div hidden>
+					<span id="creatorId">1</span>
+					<span id="creatorType">1</span>
+				</div>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
 						<h1>請先登入再新增活動呦😊～</h1>
@@ -26,7 +30,7 @@
 					<c:otherwise>
 					</c:otherwise>
 				</c:choose>
-				<form:form action="${contextRoot}/competition/create"
+				<form:form name="competition" action="${contextRoot}/competition/create"
 					modelAttribute="competition">
 					<div class="input-group">
 						<fieldset class="row mt-3 mb-3 p-3">
@@ -148,6 +152,8 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
+		const creatorId = $("#creatorId");
+		const creatorType = $("#creatorType");
 		const retrieveFromURL = "${contextRoot}/competition/api/create/newForm/getlatest";
 		const updateFormURL = "${contextRoot}/competition/api/create/update";
 		const form = $("#competition");
@@ -160,14 +166,20 @@
 			$("#endTimespan"),
 			$("[name='status']"),
 			$("[name='singleOrCrew']"),
-			$("#single"),
-			$("#crew"),
 			$("#placeId"),
 			$("#capacity"),
 			$("#budget"),
 			$("#fee"),
 		]
+		const singleCheck = document.getElementById("single");
+		const crewCheck = document.getElementById("crew");
+		const publishCheck = document.getElementById("publish");
+		const notPublishCheck = document.getElementById("notPublish");
 		const content = watchdog.editor;
+		let newFormId;
+		let firstPartId;
+		let secondPartId;
+		let thirdPartId;
 		$(document).ready(function() {
 			$("#startDate").datepicker({
 				dateFormat : "yy-mm-dd",
@@ -182,7 +194,7 @@
 				}
 			});
 			console.log(formInputs);
-			let obj = {"creatorId": 1, "creatorType": 1};
+			let obj = {"creatorId": creatorId.text(), "creatorType": creatorType.text()};
 			let objString = JSON.stringify(obj);
 			axios.post(retrieveFromURL, objString, {
 				headers: {'Content-Type': 'application/json'}
@@ -192,48 +204,94 @@
 			}).catch(err => {
 				console.log(err);
 			});
-			//	先發送第一支 AJAX 請求透過登入者 ID 得到先前的填表進度
-			//	有進度就填入表格，沒進度就建立新進度實體
 			formInputs.forEach(el => {
 				el.on({
-					change: updateFormData,
+					change: function () {
+						//	開始日期和結束日期無法讀到 DatePicker 的輸入
+						//	要將 reset 按鈕與更新資料庫功能同步
+						updateFormData();
+					},
 				});
 			});
-			content.model.document.on('change', updateFormData);
+			content.model.document.on('change', function () {
+				updateFormData();
 			});
+		});
 		function insertValues(values){
+			newFormId = values["id"];
 			let firstPart = values.firstPart;
-			console.log(firstPart);
+			firstPartId = firstPart.id;
 			for (let i = 0; i < 6; i++) {
 				let id = formInputs[i].attr("id");
+				let el = firstPart[id];
 				if (i == 3 || i == 5) {
-					let el = firstPart[id];
-					if (formInputs[i].val() == null) {
-						formInputs[i].val() = 1;
-					} else {
-						formInputs[i].val();
-					}
+					formInputs[i].val(el == null ? 1 : el);
 				} else {
-					let el = firstPart[id];
 					formInputs[i].val(el);
 				}
 			}
-			for (let i = 6; i < )
+			let secondPart = values.secondPart;
+			secondPartId = secondPart.id;
+			for (let i = 8; i < 12; i++) {
+				let id = formInputs[i].attr("id");
+				let el = secondPart[id];
+				if (i == 8) {
+					formInputs[i].val(el == null ? 1 : el);
+				} else {
+					formInputs[i].val(el);
+				}
+			}
+			if (secondPart.status == "已發布") {
+				publishCheck.checked = true;
+			} else if (secondPart.status == "未發布") {
+				notPublishCheck.checked = true;
+			}
+			if (secondPart.singleOrCrew == "S") {
+				singleCheck.checked = true;
+			} else if (secondPart.singleOrCrew == "C") {
+				crewCheck.checked = true;
+			}
+			let thirdPart = values.thirdPart;
+			thirdPartId = thirdPart.id;
+			if (thirdPart.content != null) {
+				content.setData(thirdPart.content);
+			}
 		}
 		function updateFormData() {
 			let formData = {};
-			for (input of formInputs) {
-				let name = input.attr("name");
+			formData["id"] = newFormId;
+			let firstPart = {};
+			firstPart["id"] = firstPartId;
+			let secondPart = {};
+			secondPart["id"] = secondPartId;
+			let thirdPart = {};
+			thirdPart["id"] = thirdPartId;
+			for (let i = 0; i < 6; i++) {
+				let name = formInputs[i].attr("name");
+				firstPart[formInputs[i].attr("name")] = formInputs[i].val();
+			}
+			formData["firstPart"] = firstPart;
+			for (let i = 6; i < 12; i++) {
+				let name = formInputs[i].attr("name");
 				if (name == "status" || name == "singleOrCrew") {
-					let checkedValue = input.filter(":checked").val();
-					formData[input.attr("name")] = checkedValue ? checkedValue : "";
+					let checkedValue = formInputs[i].filter(":checked").val();
+					secondPart[formInputs[i].attr("name")] = checkedValue ? checkedValue : "";
 				} else {
-					formData[input.attr("name")] = input.val();
+					secondPart[formInputs[i].attr("name")] = formInputs[i].val();
 				}
 			}
-			formData["content"] = content.getData();
-			console.log(content.getData());
+			formData["secondPart"] = secondPart;
+			thirdPart["content"] = content.getData();
+			formData["thirdPart"] = thirdPart;
 			console.log(formData);
+			let jsonObj = JSON.stringify(formData);
+			axios.put(updateFormURL, jsonObj, {
+				headers: {"Content-Type": "application/json"}
+			}).then(res => {
+				console.log("上次儲存：" + res.data);
+			}).catch(err => {
+				console.log(err);
+			})
 		}
 	</script>
 	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
