@@ -169,9 +169,17 @@ public class NewCompetitionFormService {
 			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
 			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
 			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
-			firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
+			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
+				firstPart.setStartDate(null);
+			} else {				
+				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
+			}
 			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
-			firstPart.setEndDate(mainForm.getFirstPart().getEndDate());
+			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
+				firstPart.setEndDate(null);
+			} else {
+				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
+			}
 			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
 			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
 			secondPart.setStatus(mainForm.getSecondPart().getStatus());

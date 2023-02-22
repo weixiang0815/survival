@@ -18,6 +18,7 @@ const formInputs = [
     $("#budget"),
     $("#fee"),
 ]
+const resetBtn = $("button[type='reset']");
 const singleCheck = document.getElementById("single");
 const crewCheck = document.getElementById("crew");
 const publishCheck = document.getElementById("publish");
@@ -32,12 +33,14 @@ $(document).ready(function() {
         dateFormat : "yy-mm-dd",
         onSelect : function(date) {
             $("#endDate").datepicker("option", "minDate", date);
+            updateFormData();
         }
     });
     $("#endDate").datepicker({
         dateFormat : "yy-mm-dd",
         onSelect : function(date) {
             $("#startDate").datepicker("option", "maxDate", date);
+            updateFormData();
         }
     });
     console.log(formInputs);
@@ -54,13 +57,37 @@ $(document).ready(function() {
     formInputs.forEach(el => {
         el.on({
             change: function () {
-                //	開始日期和結束日期無法讀到 DatePicker 的輸入
                 //	要將 reset 按鈕與更新資料庫功能同步
                 updateFormData();
             },
         });
     });
     content.model.document.on('change', function () {
+        updateFormData();
+    });
+    resetBtn.on('click', function () {
+        for (let i = 0; i < formInputs.length; i++) {
+            switch (i) {
+                case 3:
+                    formInputs[i].val(1);
+                    break;
+                case 5:
+                    formInputs[i].val(1);
+                    break;
+                case 6:
+                    publishCheck.checked = false;
+                    notPublishCheck.checked = false;
+                    break;
+                case 7:
+                    singleCheck.checked = false;
+                    crewCheck.checked = false;
+                    break;
+                default:
+                    formInputs[i].val('');
+                    break;
+            }
+        }
+        content.setData('');
         updateFormData();
     });
 });
@@ -76,7 +103,7 @@ function insertValues(values){
         if (i == 3 || i == 5) {
             formInputs[i].val(el == null ? 1 : el);
         } else {
-            formInputs[i].val(el);
+            formInputs[i].val(el == null ? '' : el);
         }
     }
     let secondPart = values.secondPart;

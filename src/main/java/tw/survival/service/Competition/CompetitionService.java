@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionDao;
 import tw.survival.model.Competition.CompetitionRepository;
+import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Forum.PostsService;
 
@@ -18,7 +20,10 @@ import tw.survival.service.Forum.PostsService;
 public class CompetitionService {
 
 	@Autowired
-	private CompetitionRepository compDao;
+	private CompetitionRepository compRepo;
+	
+	@Autowired
+	private CompetitionDao compDao;
 
 	@Autowired
 	private PostsService postsService;
@@ -32,7 +37,7 @@ public class CompetitionService {
 	 */
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
-			return compDao.save(comp);
+			return compRepo.save(comp);
 		} catch (Exception e) {
 			return null;
 		}
@@ -46,7 +51,7 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean publishById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
@@ -56,7 +61,7 @@ public class CompetitionService {
 			newPost.setEssay(comp.getContent());
 			postsService.insertPost(newPost);
 //			postsService.addPost(newPost);
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
@@ -70,7 +75,7 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean findById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -82,7 +87,7 @@ public class CompetitionService {
 	 */
 	public CompetitionBean findLatestCompetition() {
 		try {
-			return compDao.findFirstByOrderByIdDesc();
+			return compRepo.findFirstByOrderByIdDesc();
 		} catch (Exception e) {
 			return null;
 		}
@@ -95,7 +100,18 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> findAll() {
-		return compDao.findAll();
+		return compRepo.findAll();
+	}
+
+	/**
+	 * 多條件查詢活動結果
+	 * 
+	 * @param conditions 查詢依據的各種條件
+	 * @return 裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionBean> multiconditionSearch(CompetitionSearchCondititonsDto conditions) {
+		return compDao.multiconditionSearch(conditions);
 	}
 
 	/**
@@ -108,7 +124,7 @@ public class CompetitionService {
 	public boolean deleteById(Integer id) {
 		try {
 			// 需先刪除對應活動獎品實體與論壇系統貼文
-			compDao.deleteById(id);
+			compRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -123,7 +139,7 @@ public class CompetitionService {
 	 */
 	public boolean deleteByEntity(CompetitionBean comp) {
 		try {
-			compDao.delete(comp);
+			compRepo.delete(comp);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -138,12 +154,12 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean takedownById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("未發布");
 			// 需刪除論壇系統的對應貼文
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
@@ -158,7 +174,7 @@ public class CompetitionService {
 	 */
 	@Transactional
 	public CompetitionBean updateByEntity(CompetitionBean comp) {
-		Optional<CompetitionBean> optional = compDao.findById(comp.getId());
+		Optional<CompetitionBean> optional = compRepo.findById(comp.getId());
 		if (optional.isPresent()) {
 			CompetitionBean compToUpdate = optional.get();
 			compToUpdate.setMandarinName(comp.getMandarinName());
@@ -174,7 +190,7 @@ public class CompetitionService {
 			compToUpdate.setBudget(comp.getBudget());
 			compToUpdate.setFee(comp.getFee());
 			compToUpdate.setContent(comp.getContent());
-			return compDao.save(compToUpdate);
+			return compRepo.save(compToUpdate);
 		} else {
 			return null;
 		}
@@ -188,12 +204,12 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean republishById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
 			// 重新發布貼文
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
