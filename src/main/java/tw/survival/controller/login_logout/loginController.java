@@ -33,9 +33,14 @@ public class loginController {
 	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password,
 			HttpSession session) {
 		PlayerBean player = service.login(account, password);
+		EmployeeBean emp = service.loginEmp(account, password);
 		if (player != null) {
 			session.setAttribute("player", player);
 			return "Player/loginSuccess";
+		}
+		if(emp != null) {
+			session.setAttribute("employee", emp);
+			return"Player/loginSystem";
 		}
 		return "Player/loginSystem";
 	}

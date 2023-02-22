@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Market.TestProductDaoText;
 
 @Service
 @Transactional
@@ -17,6 +18,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productDao;
+	
+	@Autowired
+	private TestProductDaoText tpdt;
 
 	public void insertProduct(ProductBean ip) {
 		productDao.save(ip);
@@ -78,6 +82,10 @@ public class ProductService {
 
 	public List<ProductBean> findByName(String name) {
 		return productDao.findProductLike(name);
+	}
+
+	public List<ProductBean> findByClass(List<String> clazz) {
+		return tpdt.findByProductclassIn(clazz);
 	}
 
 }

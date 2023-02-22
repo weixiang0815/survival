@@ -1,5 +1,6 @@
 package tw.survival.service.Competition;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +42,13 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) {
-		try {
-			return mainDao.save(mainBean);
-		} catch (Exception e) {
-			return null;
-		}
+		NewCompetitionFormPart1Bean part1 = part1Dao.save(new NewCompetitionFormPart1Bean());
+		mainBean.setFirstPart(part1);
+		NewCompetitionFormPart2Bean part2 = part2Dao.save(new NewCompetitionFormPart2Bean());
+		mainBean.setSecondPart(part2);
+		NewCompetitionFormPart3Bean part3 = part3Dao.save(new NewCompetitionFormPart3Bean());
+		mainBean.setThirdPart(part3);
+		return mainDao.save(mainBean);
 	}
 
 	/**
@@ -63,21 +66,16 @@ public class NewCompetitionFormService {
 	/**
 	 * 透過創作者 id 查詢一筆活動新增表單暫存實體
 	 * 
-	 * @param creatorId       欲查詢活動新增表單暫存實體的創作者 id
-	 * @param publicOrPrivate 若創作者為會員應傳入整數 1，員工則整數 2
+	 * @param creatorId   欲查詢活動新增表單暫存實體的創作者 id
+	 * @param creatorType 若創作者為會員應傳入整數 1，員工則整數 2
 	 * @return 查詢成功回傳該活動新增表單暫存實體，否則回傳 null
 	 * @author 王威翔
 	 */
-	public NewCompetitionFormBean findByCreatorId(Integer creatorId, Integer publicOrPrivate) {
+	public NewCompetitionFormBean findByCreator(Integer creatorId, Integer creatorType) {
 		try {
-			if (publicOrPrivate == 0) {
-				return mainDao.findByEmployeeId(creatorId);
-			} else if (publicOrPrivate == 1) {
-				return mainDao.findByPlayerId(creatorId);
-			} else {
-				return null;
-			}
+			return mainDao.findByCreator(creatorId, creatorType);
 		} catch (Exception e) {
+			System.out.println("something went wrong");
 			return null;
 		}
 	}
@@ -165,8 +163,27 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean updateByEntity(NewCompetitionFormBean mainForm) {
-		if (mainDao.findById(mainForm.getId()).isPresent()) {
-			return mainDao.save(mainForm);
+		Optional<NewCompetitionFormBean> optional = mainDao.findById(mainForm.getId());
+		if (optional.isPresent()) {
+			NewCompetitionFormBean form = optional.get();
+			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
+			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
+			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
+			firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
+			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
+			firstPart.setEndDate(mainForm.getFirstPart().getEndDate());
+			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
+			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
+			secondPart.setStatus(mainForm.getSecondPart().getStatus());
+			secondPart.setSingleOrCrew(mainForm.getSecondPart().getSingleOrCrew());
+			secondPart.setPlaceId(mainForm.getSecondPart().getPlaceId());
+			secondPart.setBudget(mainForm.getSecondPart().getBudget());
+			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
+			secondPart.setFee(mainForm.getSecondPart().getFee());
+			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
+			thirdPart.setContent(mainForm.getThirdPart().getContent());
+			form.setLastEdited(new Date());
+			return mainDao.save(form);
 		} else {
 			return null;
 		}

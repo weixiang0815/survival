@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp" />
+<jsp:include page="../Template/admin.jsp" />
 <h3>新增職員</h3>
 <form:form action="${contextRoot}/Employee/addEmployee"  enctype="multipart/form-data">
 <table>

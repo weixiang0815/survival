@@ -41,7 +41,10 @@ public class PlaceService {
 	public void deletePlaceById(Integer id) {
 
 		PlaceBean place = getOnePlaceById(id);
-		place.setProduct(null);
+		place.setPlaceOrder(null);
+		place.setSchedule(null);
+		place.setWarehouse(null);
+		place.setEmployee(null);
 		pDAO.deleteById(id);
 		return;
 	}

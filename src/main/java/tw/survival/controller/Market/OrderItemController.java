@@ -9,7 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -48,22 +50,20 @@ public class OrderItemController {
 		model.addAttribute("list", list);
 		return "/Market/show_AllOrderItem";
 	}
-
+//u
 	@GetMapping("/Market/editOrder")
 	public String editOrder(@RequestParam("id") Integer id, Model model) {
-		OrderItemBean ob = oService.findById(id);
-		model.addAttribute("order", ob);
+		OrderItemBean order = oService.findById(id);
+		model.addAttribute("order", order);
 		return "Market/editOrderItem";
 	}
 
-	@PostMapping("/Market/editOrder")
-	public String sendEditOrder(@RequestParam("id") Integer id,
-			@RequestParam("order_create_date") Date order_create_date, @RequestParam("status") String status)
-			throws IOException {
-		oService.updateOrderById(id, order_create_date, status);
+	@PutMapping("/Market/editOrder")
+	public String updateOrder(@ModelAttribute("order") OrderItemBean order) {
+		oService.update(order);
 		return "redirect:/Market/all_OrderItem";
 	}
-
+//d
 	@DeleteMapping("/Market/deleteOrder")
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);

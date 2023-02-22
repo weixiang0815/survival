@@ -22,7 +22,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -78,13 +77,14 @@ public class PlayerBean {
 
 	@Column(name = "sex")
 	private String sex;
+	
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthday")
 	private Date birthday;
 
-	@CreatedDate
+//	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
 

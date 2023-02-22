@@ -6,12 +6,12 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>修改成功</title>
+<title>註冊成功</title>
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>
-<h3>修改成功</h3>
-<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+<h2>註冊成功</h2>
+<a href="usersmain.controller"><button>返回新增畫面</button></a>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>
 </html>

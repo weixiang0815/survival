@@ -125,10 +125,10 @@
 						<i class="bi bi-people"></i>&nbsp;&nbsp;會員系統
 					</a>
 					<ul class="collapse" id="submenu-player">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
+						<li><a href="${contextRoot}/player/add" class="nav-link">新增</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/player/list" class="nav-link">查詢</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
@@ -137,10 +137,10 @@
 						<i class="bi bi-person-badge"></i>&nbsp;&nbsp;員工系統
 					</a>
 					<ul class="collapse" id="submenu-employee">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
+						<li><a href="${contextRoot}/Employee/add" class="nav-link">新增</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/Employee/list" class="nav-link">查詢</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
@@ -149,10 +149,13 @@
 						<i class="bi bi-building"></i>&nbsp;&nbsp;場地系統
 					</a>
 					<ul class="collapse" id="submenu-place">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/place/uploadPage" class="nav-link">新增場地</a></li>
+						<li><a href="${contextRoot}/place/all" class="nav-link">所有場地</a></li>
+						<li><a href="${contextRoot}/warehouse/new" class="nav-link">新增倉庫</a></li>
+						<li><a href="${contextRoot}/warehouse/all" class="nav-link">所有倉庫</a></li>
+						<li><a href="${contextRoot}/inventory/new" class="nav-link">新增庫存</a></li>
+						<li><a href="${contextRoot}/inventory/all" class="nav-link">所有庫存</a></li>
+						<li><a href="${contextRoot}/schedule/new" class="nav-link">新增排程</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
@@ -170,24 +173,4 @@
 			</ul>
 		</div>
 	</nav>
-	<script>
-		// const menuItems = document.querySelectorAll('.nav-item');
-
-		// function hideAllSubmenus() {
-		// 	const submenus = document.querySelectorAll('.collapse.show');
-		// 	submenus.forEach(submenu => submenu.classList.remove('show'));
-		// }
-
-		// menuItems.forEach(menuItem => {
-		// 	const submenu = menuItem.querySelector('.collapse');
-		// 	menuItem.addEventListener('click', () => {
-		// 		if (submenu.classList.contains('show')) {
-		// 			return;
-		// 		} else {
-		// 			hideAllSubmenus();
-		// 			submenu.classList.add('show');
-		// 		}
-		// 	});
-		// });
-	</script>
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
