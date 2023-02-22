@@ -17,14 +17,14 @@ public class CompetitionSearchCondititonsDto implements Serializable {
 
 	private List<String> status;
 
-	private List<String> capacity;
+	private List<Integer> capacity;
 
-	private List<String> budget;
+	private List<Integer> budget;
 
-	private List<String> fee;
+	private List<Integer> fee;
 
 	private List<Integer> publicOrPrivate;
-	
+
 	private String date;
 
 	public CompetitionSearchCondititonsDto() {
@@ -70,27 +70,27 @@ public class CompetitionSearchCondititonsDto implements Serializable {
 		this.status = status;
 	}
 
-	public List<String> getCapacity() {
+	public List<Integer> getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(List<String> capacity) {
+	public void setCapacity(List<Integer> capacity) {
 		this.capacity = capacity;
 	}
 
-	public List<String> getBudget() {
+	public List<Integer> getBudget() {
 		return budget;
 	}
 
-	public void setBudget(List<String> budget) {
+	public void setBudget(List<Integer> budget) {
 		this.budget = budget;
 	}
 
-	public List<String> getFee() {
+	public List<Integer> getFee() {
 		return fee;
 	}
 
-	public void setFee(List<String> fee) {
+	public void setFee(List<Integer> fee) {
 		this.fee = fee;
 	}
 
