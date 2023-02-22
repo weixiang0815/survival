@@ -66,14 +66,11 @@ public class PostsController {
 	}
 
 	@PutMapping("/post/edit")
-	@InitBinder
+//	@InitBinder
 	public String postUpdate(@ModelAttribute("editPost") PostsBean editPost) {
 		
 		editPost.setFinalAdded(new Date());
-		editPost.setBookmarkletOfPost(null);
-		editPost.setMsgsOfPost(null);
-		editPost.setScoreOfPost(null);
-		editPost.setThumbUpOfPost(null);
+	
 		
 		pService.updatePost(editPost);
 		return "redirect:/posts/getAll";

@@ -18,7 +18,7 @@
 		<div class="col-10">
 			<form:form action="${contextRoot}/post/edit" modelAttribute="editPost" method="PUT">
 				<form:input type="hidden" path="id"/>
-				<form:input class="form-control" type="date" path="added"/>
+				<form:input  type="hidden" path="added"/>
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>
 			    <br/>
@@ -33,7 +33,7 @@
 	
 			    <br/>
 			    <label for="inputEssay">請輸入內容:</label>
-			    <form:textarea class="form-control" id="inputEssay" path="essay" rows="3"/>
+			    <form:textarea id="ckeditor" path="essay" class="form-control" />
 			    <br/>
 			    
 			    <button type="submit" class="btn btn-outline-primary">送出</button>
@@ -42,6 +42,7 @@
 		</div>
 		<jsp:include page="../Layout/footer.jsp"/>
 	</div>
-
+	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
+	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 </body>
 </html>
