@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Market.LogisticsBean;
+import tw.survival.service.Market.LogisticsService;
+
 @Controller
 public class LogisticsController {
 
 	@Autowired
-//	private LogisticsService LogisticsService;
+	private LogisticsService logisticsService;
 
 	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
@@ -29,8 +31,7 @@ public class LogisticsController {
 	@PostMapping("/Market/addLogistics")
 	@ResponseBody
 	public String addLogistics(@RequestParam("start_date") Date start_date,
-			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status)
-			throws IOException {
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status) throws IOException {
 
 		LogisticsBean lb = new LogisticsBean();
 		lb.setStart_date(start_date);
@@ -41,18 +42,19 @@ public class LogisticsController {
 
 		return "新增成功";
 	}
-	//r
+
+	// r
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
-		List<LogisticsBean> list = LogisticsService.findAllLogistics();
+		List<LogisticsBean> list = logisticsService.findAllLogistics();
 		model.addAttribute("list", list);
 		return "/Market/show_AllLogistics";
 	}
-	//d
+	// d
 
-	@RequestMapping(value="/Market/deleteLogistics", method=RequestMethod.DELETE)
+	@RequestMapping(value = "/Market/deleteLogistics", method = RequestMethod.DELETE)
 	public String deleteLogistics(@RequestParam("deleteid") Integer id) {
-	    LogisticsService.deleteById(id);
-	    return "redirect:/Market/all_Logistics";
+		logisticsService.deleteById(id);
+		return "redirect:/Market/all_Logistics";
 	}
 }
