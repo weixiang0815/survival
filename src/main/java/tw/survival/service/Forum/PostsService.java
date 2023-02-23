@@ -1,6 +1,7 @@
 package tw.survival.service.Forum;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -71,14 +72,21 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public PostsBean updatePost(PostsBean post) {
-		if(!pDao.existsById(post.getId())) {
-			return null;
-		}
-		try {
+		Optional<PostsBean> optional = pDao.findById(post.getId());
+		if (optional.isPresent()) {
 			return pDao.save(post);
-		} catch (Exception e) {
-			return null;
 		}
+		return null;
+//		if(!pDao.existsById(post.getId())) {
+//			return null;
+//		}
+//		try {
+//			System.out.println(pDao.findById(post.getId()).get().getAdded());
+//			
+//			return pDao.save(post);
+//		} catch (Exception e) {
+//			return null;
+//		}
 	}
 	
 	/**

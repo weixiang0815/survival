@@ -172,6 +172,30 @@ public class PostsBean implements Serializable{
 
 
 
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+
+
+	public CompetitionBean getCompetition() {
+		return competition;
+	}
+
+
+
+	public void setCompetition(CompetitionBean competition) {
+		this.competition = competition;
+	}
+
+
+
 	public Date getFinalAdded() {
 		return finalAdded;
 	}

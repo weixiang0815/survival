@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
@@ -107,6 +108,18 @@ public class CompetitionControllerAjax {
 	@GetMapping("/competition/api/search/result")
 	public List<CompetitionBean> searchAll() {
 		return new ArrayList<>();
+	}
+
+	/**
+	 * 用 AJAX 進行多條件查詢活動
+	 * 
+	 * @param conditions 查詢依據的各種條件
+	 * @return 裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/api/search/multicondition")
+	public List<CompetitionBean> multiconditionSearch(@RequestBody CompetitionSearchCondititonsDto conditions) {
+		return compService.multiconditionSearch(conditions);
 	}
 
 	/**
