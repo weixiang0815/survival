@@ -1,5 +1,11 @@
 package tw.survival.service.Competition;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +27,7 @@ public class CompetitionService {
 
 	@Autowired
 	private CompetitionRepository compRepo;
-	
+
 	@Autowired
 	private CompetitionDao compDao;
 
@@ -37,8 +43,19 @@ public class CompetitionService {
 	 */
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
-			return compRepo.save(comp);
+			String content = comp.getContent();
+			compRepo.save(comp);
+			comp = findLatestCompetition();
+			String filepath = "C:/Survival/Competition/Competition/content/content_" + comp.getId() + ".txt";
+			comp.setContentFileLocation(filepath);
+			try (FileOutputStream fos = new FileOutputStream(filepath);
+					OutputStreamWriter osw = new OutputStreamWriter(fos);
+					PrintWriter pw = new PrintWriter(osw);) {
+				pw.write(content);
+			}
+			return updateByEntity(comp);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -76,7 +93,24 @@ public class CompetitionService {
 	 */
 	public CompetitionBean findById(Integer id) {
 		Optional<CompetitionBean> optional = compRepo.findById(id);
-		return optional.isPresent() ? optional.get() : null;
+		if (optional.isPresent()) {
+			CompetitionBean comp = optional.get();
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis);
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+				return comp;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -87,7 +121,18 @@ public class CompetitionService {
 	 */
 	public CompetitionBean findLatestCompetition() {
 		try {
-			return compRepo.findFirstByOrderByIdDesc();
+			CompetitionBean comp = compRepo.findFirstByOrderByIdDesc();
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis);
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			}
+			return comp;
 		} catch (Exception e) {
 			return null;
 		}
@@ -100,7 +145,22 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> findAll() {
-		return compRepo.findAll();
+		List<CompetitionBean> comps = compRepo.findAll();
+		comps.forEach(comp -> {
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis);
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return comps;
 	}
 
 	/**
@@ -111,7 +171,22 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> multiconditionSearch(CompetitionSearchCondititonsDto conditions) {
-		return compDao.multiconditionSearch(conditions);
+		List<CompetitionBean> comps = compDao.multiconditionSearch(conditions);
+		comps.forEach(comp -> {
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis);
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return comps;
 	}
 
 	/**
@@ -190,6 +265,7 @@ public class CompetitionService {
 			compToUpdate.setBudget(comp.getBudget());
 			compToUpdate.setFee(comp.getFee());
 			compToUpdate.setContent(comp.getContent());
+			compToUpdate.setContentFileLocation(comp.getContentFileLocation());
 			return compRepo.save(compToUpdate);
 		} else {
 			return null;
