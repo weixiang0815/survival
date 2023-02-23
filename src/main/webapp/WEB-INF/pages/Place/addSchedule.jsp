@@ -22,6 +22,8 @@
     </script>
   </head>
   <body>
-    <div id='calendar'></div>
+  <jsp:include page="../Template/admin.jsp"></jsp:include>
+    <div id='calendar'>
+    </div>
   </body>
 </html>
