@@ -38,8 +38,9 @@
 
 					<td>
 						<form action="${contextRoot}/Market/deleteLogistics" method="post">
-							<input type="hidden" name="id" value="${Logistics.id}">
-							<button type="submit" class="btn btn-danger btn-sm">刪除</button>
+							<input name="_method" type="hidden" value="DELETE" /> <input
+								name="deleteid" type="hidden" value="${Logistics.id}" /> <input
+								type="submit" class="btn btn-danger btn-sm" value="刪除" />
 						</form>
 				</tr>
 			</jstl:forEach>

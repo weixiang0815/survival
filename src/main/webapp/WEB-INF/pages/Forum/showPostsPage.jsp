@@ -9,9 +9,15 @@
 <head>
 <meta charset="UTF-8">
 <title>論壇系統首頁</title>
+
+<style>
+table{
+width: 200px;
+}
+</style>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_forum.jsp"/>
+<jsp:include page="../Template/admin.jsp"/>
 	<div class="container">
 		<h1>All Posts</h1>
 
@@ -20,7 +26,7 @@
 				<tr>
 					<th>貼文名</th>
 					<th>貼文類別</th>
-					<th>貼文內容</th>
+					
 					<th colspan="2"></th>
 				</tr>
 			</thead>
@@ -30,7 +36,7 @@
 						
 						<td>${Post.name}</td>
 						<td>${Post.classify}</td>
-						<td>${Post.essay}</td>
+						
 						
 						<td>
 							<form action="${contextRoot}/post/edit" method="get">
@@ -51,6 +57,6 @@
 			</tbody>
 		</table>
 	</div>
-<jsp:include page="../Layout/footer.jsp"/>
+
 </body>
 </html>

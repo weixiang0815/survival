@@ -1,6 +1,7 @@
 package tw.survival.controller.Competition;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
@@ -42,28 +43,27 @@ public class CompetitionControllerAjax {
 	 * @return 回傳該活動新增表單暫存紀錄實體
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/api/create/newForm/getlatest")
-	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestParam("id") Integer creatorId,
-			@RequestParam("type") Integer creatorType) {
-		NewCompetitionFormBean latestForm = newFormService.findByCreator(creatorId, creatorType);
+	@PostMapping("/competition/api/create/newForm/getlatest")
+	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form) {
+		NewCompetitionFormBean latestForm = newFormService.findByCreator(form.getCreatorId(), form.getCreatorType());
 		if (latestForm == null) {
 			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
-			newForm.setCreatorId(creatorId);
-			newForm.setCreatorType(creatorType);
+			newForm.setCreatorId(form.getCreatorId());
+			newForm.setCreatorType(form.getCreatorType());
 			latestForm = newFormService.insert(newForm);
 		}
 		return latestForm;
 	}
 
 	/**
-	 * 用 AJAX 新增一筆活動新增表單暫存實體
+	 * 用 AJAX 更新一筆活動新增表單暫存實體
 	 * 
-	 * @param newForm 欲新增的活動新曾表單暫存實體
+	 * @param newForm 欲更新的活動新曾表單暫存實體
 	 * @author 王威翔
 	 */
-	@PostMapping("/competition/api/create/newForm")
-	public void createNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-
+	@PutMapping("/competition/api/create/update")
+	public Date updateNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
+		return newFormService.updateByEntity(newForm).getLastEdited();
 	}
 
 	/**
@@ -108,6 +108,18 @@ public class CompetitionControllerAjax {
 	@GetMapping("/competition/api/search/result")
 	public List<CompetitionBean> searchAll() {
 		return new ArrayList<>();
+	}
+
+	/**
+	 * 用 AJAX 進行多條件查詢活動
+	 * 
+	 * @param conditions 查詢依據的各種條件
+	 * @return 裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/api/search/multicondition")
+	public List<CompetitionBean> multiconditionSearch(@RequestBody CompetitionSearchCondititonsDto conditions) {
+		return compService.multiconditionSearch(conditions);
 	}
 
 	/**

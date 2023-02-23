@@ -1,12 +1,10 @@
 package tw.survival.model.Competition;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -17,9 +15,6 @@ public class NewCompetitionFormPart2Bean {
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
-//	@OneToOne(cascade = CascadeType.ALL, mappedBy = "secondPart")
-//	private NewCompetitionFormBean newCompetitionForm;
 
 	@Column(name = "fk_place_id")
 	private Integer placeId;
@@ -49,18 +44,6 @@ public class NewCompetitionFormPart2Bean {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
-//	public NewCompetitionFormPart2Bean(NewCompetitionFormBean newCompetitionForm) {
-//		this.newCompetitionForm = newCompetitionForm;
-//	}
-//
-//	public NewCompetitionFormBean getNewCompetitionForm() {
-//		return newCompetitionForm;
-//	}
-//
-//	public void setNewCompetitionForm(NewCompetitionFormBean newCompetitionForm) {
-//		this.newCompetitionForm = newCompetitionForm;
-//	}
 
 	public Integer getPlaceId() {
 		return placeId;

@@ -6,7 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.hibernate.boot.jaxb.hbm.spi.JaxbHbmConfigParameterContainer;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,9 +30,9 @@ public class TestProductDao {
 		}else if(product_class.contains("衝鋒槍")){
 			sqlString +="衝鋒槍";
 		}else if(product_class.contains("狙擊槍")){
-			sqlString +="%:狙擊槍%";
+			sqlString +="狙擊槍";
 		}else if(product_class.contains("霰彈槍")){
-			sqlString +="%:霰彈槍%";
+			sqlString +="霰彈槍";
 		}
 		return query.getResultList();
 

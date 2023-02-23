@@ -55,16 +55,12 @@ public class LogisticsService {
 	
 	//d
 	public void deleteById(Integer id) {
+		
 	    LogisticsBean lb = findById(id);
-	    if (lb == null) {
-	        System.out.println("ID " + id + " 的資料不存在，無法刪除");
-	        return;
-	    }
 	    lb.setInventory(null);
 	    lb.setOrderItem(null);
 	    lb.setPlayer(null);
 	    LogisticsDao.deleteById(id);
-	    System.out.println("已刪除 ID " + id + " 的資料");
 	    return;
 	}
 }

@@ -1,6 +1,6 @@
 package tw.survival.controller.Employee;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +51,37 @@ public class EmployeeController {
 	}
 
 	@PutMapping("/Employee/update1")
-	public String updateById(@ModelAttribute("Employee") EmployeeBean employee) {
-		empService.update(employee);
+	public String updateById(@RequestParam Integer id,@RequestParam("account") String account, @RequestParam("password") String password,
+	@RequestParam("age") Integer age, @RequestParam("region") String region,
+	@RequestParam("title") String title, @RequestParam("address") String address,
+	@RequestParam("salary") Integer salary, @RequestParam("hired_date") Date hired_date,
+	@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
+	@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
+	@RequestParam("identity") String identity_number, @RequestParam("email") String email) {
+		try {
+			EmployeeBean employee=empService.employeeFindById(id);
+			employee.setName(name);
+			employee.setAccount(account);
+			employee.setPassword(password);
+			employee.setIdentity_number(identity_number);
+			employee.setEmail(email);
+			employee.setAge(age);
+			employee.setRegion(region);
+			employee.setAddress(address);
+			employee.setSalary(salary);
+			employee.setHired_date(hired_date);
+			employee.setStatus("在職中");
+			employee.setTitle(title);
+			if(thumbnail !=null) {
+				employee.setThumbnail(thumbnail.getBytes());
+			}			
+			employee.setSex(sex);
+			employee.setBirthday(birthday);
+			empService.update(employee);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
 		return "redirect:/Employee/list";
 	}
 

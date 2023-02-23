@@ -159,4 +159,31 @@ public class NewCompetitionFormBean {
 		this.fkPart3Id = thirdPart.getId();
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("NewCompetitionFormBean [id=");
+		builder.append(id);
+		builder.append(", creatorId=");
+		builder.append(creatorId);
+		builder.append(", creatorType=");
+		builder.append(creatorType);
+		builder.append(", lastEdited=");
+		builder.append(lastEdited);
+		builder.append(", fkPart1Id=");
+		builder.append(fkPart1Id);
+		builder.append(", firstPart=");
+		builder.append(firstPart);
+		builder.append(", fkPart2Id=");
+		builder.append(fkPart2Id);
+		builder.append(", secondPart=");
+		builder.append(secondPart);
+		builder.append(", fkPart3Id=");
+		builder.append(fkPart3Id);
+		builder.append(", thirdPart=");
+		builder.append(thirdPart);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
