@@ -1,6 +1,7 @@
 package tw.survival.model.Competition;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CompetitionSearchCondititonsDto implements Serializable {
@@ -11,19 +12,19 @@ public class CompetitionSearchCondititonsDto implements Serializable {
 
 	private String englishName;
 
-	private List<Integer> place;
+	private List<Integer> place = new ArrayList<>();
 
-	private List<String> singleOrCrew;
+	private List<String> singleOrCrew = new ArrayList<>();
 
-	private List<String> status;
+	private List<String> status = new ArrayList<>();
 
-	private List<Integer> capacity;
+	private List<Integer> capacity = new ArrayList<>();
 
-	private List<Integer> budget;
+	private List<Integer> budget = new ArrayList<>();
 
-	private List<Integer> fee;
+	private List<Integer> fee = new ArrayList<>();
 
-	private List<Integer> publicOrPrivate;
+	private List<Integer> publicOrPrivate = new ArrayList<>();
 
 	private String date;
 
