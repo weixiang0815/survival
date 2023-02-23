@@ -85,7 +85,9 @@ public class CompetitionBean {
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
 
-	@Column(name = "content")
+	@Column(name = "content_file_location")
+	private String contentFileLocation;
+
 	private String content;
 
 	@Column(name = "budget")
@@ -246,6 +248,14 @@ public class CompetitionBean {
 
 	public void setPlace(PlaceBean place) {
 		this.place = place;
+	}
+
+	public String getContentFileLocation() {
+		return contentFileLocation;
+	}
+
+	public void setContentFileLocation(String contentFileLocation) {
+		this.contentFileLocation = contentFileLocation;
 	}
 
 	public String getContent() {
