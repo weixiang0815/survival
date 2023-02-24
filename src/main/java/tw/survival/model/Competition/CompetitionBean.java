@@ -87,7 +87,7 @@ public class CompetitionBean {
 
 	@Column(name = "content_file_location")
 	private String contentFileLocation;
-	
+
 	@Transient
 	private String content;
 

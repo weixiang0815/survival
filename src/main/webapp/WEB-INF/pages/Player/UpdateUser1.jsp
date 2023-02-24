@@ -93,8 +93,19 @@ max-width: 100%;
 				<td><input type="hidden" name="info" /></td>
 			</tr>	
 		</table>
-		<input class="btn btn-outline-primary" type="submit"  value="更新"/>
+		<input class="btn btn-outline-primary" type="submit"  value="更新"  onclick="return confirmUpdate('${player.name}', '${player.accountNo}');"/>
 	</form:form>
 <jsp:include page="../Layout/footer.jsp"/>
+<script type="text/javascript">
+function confirmUpdate(id) {
+	var result = confirm("確定送出此筆記錄(帳號:" + id.trim() + ")?");
+	if (result) {
+		 		  document.forms[0].putOrDelete.name = "_method";
+		 		  document.forms[0].putOrDelete.value = "PUT";
+		return true;
+	}
+	return false;
+}
+</script>
 </body>
 </html>
