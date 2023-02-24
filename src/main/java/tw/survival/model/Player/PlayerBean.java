@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +31,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
+import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
+import tw.survival.model.Forum.ScoreBean;
+import tw.survival.model.Forum.ThumbUpBean;
 
 @Entity
 @Table(name = "Player")
@@ -84,7 +88,7 @@ public class PlayerBean {
 	@Column(name = "birthday")
 	private Date birthday;
 
-//	@CreatedDate
+	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
 
@@ -116,19 +120,19 @@ public class PlayerBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();//RZ 2023/2/21
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
-//
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();//RZ 2023/2/21

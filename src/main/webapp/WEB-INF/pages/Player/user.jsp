@@ -10,7 +10,6 @@
 <head>
 <meta charset="UTF-8">
 <title>新增使用者</title>
-
 </head>
 
 <body>
@@ -44,13 +43,13 @@
 			<tr>
 				<td>縣市:</td>
 				<td class="twzipcode">
-					<select data-role="county">
+					<select data-role="county" name="county">
 						<option value="">縣市</option>
 					</select>
-					<select data-role="district">
+					<select data-role="district" name="district">
 						<option value="">鄉鎮市區</option>
 					</select>
-					<input type="text" data-role="zipcode" placeholder="郵遞區號" name="region">
+					<input type="text" data-role="zipcode" placeholder="郵遞區號" name="zipcode" >
 				</td>
 			</tr>
 			<tr>

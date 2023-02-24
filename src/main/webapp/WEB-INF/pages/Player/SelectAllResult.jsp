@@ -13,6 +13,18 @@ img {
 max-width: 100%;
 }
 </style>
+<script type="text/javascript">
+	function confirmDelete(name, id) {
+		var result = confirm("確定刪除此筆記錄(姓名：" + name.trim() + ", 帳號：" + account + ")?");
+		if (result) {
+			document.forms[0].putOrDelete.name = "_method";
+			document.forms[0].putOrDelete.value = "DELETE";
+			return true;
+		}
+		return false;
+	}
+	
+</script>
 </head>
 <body>
 <jsp:include page="../Template/admin.jsp"/>
@@ -56,6 +68,7 @@ max-width: 100%;
 				</c:choose>
 				</td>
 				<td>${player.identity_number}</td>
+				<td>${player.region}</td>
 				<td>${player.address}</td>
 				<td>${player.email}</td>
 				<td>${player.age}</td>
@@ -64,7 +77,7 @@ max-width: 100%;
 				<!-- <tf>${player.crew}</tf> -->
 		<td><a href="${contextRoot}/player/update/?id=${player.id}"><button class="btn btn-info">編輯</button></a>
 		 <form action="${contextRoot}/player/delete" method="post">
-          <input name="_method" type="hidden" value="delete" />
+          <input name="_method" type="hidden" value="delete" onclick="return confirmDelete('${player.name}', '${player.id}');" />
           <input name="id" type="hidden" value="${player.id}" />
           <input type="submit" class="btn btn-danger" value="刪除" />
       </form>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isErrorPage="true" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -16,9 +16,10 @@
 <jsp:include page="../Template/admin.jsp"/>
 	<div class="container">
 		<div class="col-10">
-			<form:form action="${contextRoot}/post/edit" modelAttribute="editPost" method="PUT">
-				<form:input type="hidden" path="id"/>
-				<form:input  type="hidden" path="added"/>
+			<form:form modelAttribute="postsBean" method="POST">
+				<input type="hidden" name="_method"  id='putOrDelete'   value="" >
+
+
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>
 			    <br/>
@@ -36,13 +37,36 @@
 			    <form:textarea id="ckeditor" path="essay" class="form-control" />
 			    <br/>
 			    
-			    <button type="submit" class="btn btn-outline-primary">送出</button>
-			    
+<!-- 			    <button type="submit" >送出</button> -->
+			    <input type='submit' class='btn btn-outline-primary' value='修改' name='updateBtn' onclick="return confirmUpdate('${postsBean.id}');">&nbsp; 	
+				<input type='submit' class='btn btn-outline-danger' value='刪除' name='deleteBtn' onclick="return confirmDelete('${postsBean.id}');" >
+						
 			</form:form>
 		</div>
 		
 	</div>
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
+	<script type="text/javascript">
+  function confirmDelete(id){
+	  var result = confirm("確定刪除此筆記錄(帳號:" + id.trim() + ")?");
+	  if (result) {
+// 		  document.forms[0].putOrDelete.name = "_method";
+		  document.forms[0].putOrDelete.value = "DELETE";
+	      return true;
+	  }
+	  return false;
+  }
+  function confirmUpdate(id){
+	  var result = confirm("確定送出此筆記錄(帳號:" + id.trim() + ")?");
+	  if (result) {
+// 		  document.forms[0].putOrDelete.name = "_method";
+		  document.forms[0].putOrDelete.value = "PUT";
+	      return true;
+	  }
+	  return false;
+  }
+</script>
+	
 </body>
 </html>

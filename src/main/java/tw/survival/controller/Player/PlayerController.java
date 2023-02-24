@@ -25,12 +25,9 @@ import tw.survival.service.Player.PlayerService;
 
 @Controller
 public class PlayerController {
-	
-    
 
 	@Autowired
 	private PlayerService pService;
-
 
 	@GetMapping("/player.main")
 	public String main() {
@@ -60,13 +57,13 @@ public class PlayerController {
 	}
 
 	@PutMapping("/player/update1")
-	public String updateById(@RequestParam Integer id,
-			@RequestParam("name") String name, @RequestParam("account") String account,
-			@RequestParam("password") String password, @RequestParam("identity") String identity_number,
-			@RequestParam("email") String email, @RequestParam("age") Integer age,
-			@RequestParam("region") String region, @RequestParam("nickname") String nickname,
-			@RequestParam("address") String address, @RequestParam("thumbnail") MultipartFile thumbnail,
-			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday, @RequestParam("info") String info,
+	public String updateById(@RequestParam Integer id, @RequestParam("name") String name,
+			@RequestParam("account") String account, @RequestParam("password") String password,
+			@RequestParam("identity") String identity_number, @RequestParam("email") String email,
+			@RequestParam("age") Integer age, @RequestParam("region") String region,
+			@RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("sex") String sex,
+			@RequestParam("birthday") Date birthday, @RequestParam("info") String info,
 			@RequestParam("phone") String phone) {
 
 		try {
@@ -80,18 +77,18 @@ public class PlayerController {
 			player.setNickname(nickname);
 			player.setRegion(region);
 			player.setAddress(address);
-			if(thumbnail !=null) {
+			if (thumbnail != null) {
 				player.setThumbnail(thumbnail.getBytes());
-			}			
+			}
 			player.setSex(sex);
 			player.setBirthday(birthday);
 			player.setPhone(phone);
 			player.setInfo("null");
 			player.setBanned("T");
 			pService.update(player);
-			}catch(Exception e) {
-				e.printStackTrace();
-			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "redirect:/player/list";
 	}
 
@@ -107,10 +104,12 @@ public class PlayerController {
 	public String postPlayer(@RequestParam("name") String name, @RequestParam("account") String account,
 			@RequestParam("password") String password, @RequestParam("identity") String identity_number,
 			@RequestParam("email") String email, @RequestParam("age") Integer age,
-			@RequestParam("region") String region, @RequestParam("nickname") String nickname,
-			@RequestParam("address") String address, @RequestParam("thumbnail") MultipartFile thumbnail,
-			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday, @RequestParam("info") String info,
+			@RequestParam("county") String county, @RequestParam("district") String district,
+			@RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("sex") String sex,
+			@RequestParam("birthday") Date birthday, @RequestParam("info") String info,
 			@RequestParam("phone") String phone, @RequestParam("banned") String banned, Model model) {
+		String region = county + district;
 		try {
 			PlayerBean player = new PlayerBean();
 			player.setName(name);
@@ -130,6 +129,7 @@ public class PlayerController {
 			player.setInfo("null");
 			player.setBanned("T");
 			pService.addplayer(player);
+			System.out.print("註冊成功");
 
 		} catch (Exception e) {
 

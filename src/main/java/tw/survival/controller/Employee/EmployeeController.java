@@ -52,12 +52,13 @@ public class EmployeeController {
 
 	@PutMapping("/Employee/update1")
 	public String updateById(@RequestParam Integer id,@RequestParam("account") String account, @RequestParam("password") String password,
-	@RequestParam("age") Integer age, @RequestParam("region") String region,
+	@RequestParam("age") Integer age, @RequestParam("conuty") String county,@RequestParam("district") String district,@RequestParam("zipcode") Integer zipcode,
 	@RequestParam("title") String title, @RequestParam("address") String address,
 	@RequestParam("salary") Integer salary, @RequestParam("hired_date") Date hired_date,
 	@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
 	@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
 	@RequestParam("identity") String identity_number, @RequestParam("email") String email) {
+		String region=county+district+zipcode.toString(); 
 		try {
 			EmployeeBean employee=empService.employeeFindById(id);
 			employee.setName(name);

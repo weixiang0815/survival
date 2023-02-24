@@ -7,6 +7,26 @@
 <head>
 <meta charset="UTF-8">
 <title>成功</title>
+<script type="text/javascript">
+	function confirmDelete(name, id) {
+		var result = confirm("確定刪除此筆記錄(姓名：" + name.trim() + ", 帳號：" + id + ")?");
+		if (result) {
+			document.forms[0].putOrDelete.name = "_method";
+			document.forms[0].putOrDelete.value = "DELETE";
+			return true;
+		}
+		return false;
+	}
+	function confirmUpdate(id) {
+		var result = confirm("確定送出此筆記錄(帳號:" + id.trim() + ")?");
+		if (result) {
+			 		  document.forms[0].putOrDelete.name = "_method";
+			 		  document.forms[0].putOrDelete.value = "PUT";
+			return true;
+		}
+		return false;
+	}
+</script>
 </head>
 <body>
 <jsp:include page="../Layout/navbar_user.jsp"/>

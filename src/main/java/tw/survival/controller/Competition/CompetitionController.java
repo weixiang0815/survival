@@ -55,8 +55,7 @@ public class CompetitionController {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
 		comp.setFounderEmployee(null);
 		comp.setFounderPlayer(null);
-		compService.create(comp);
-		comp = compService.findLatestCompetition();
+		comp = compService.create(comp);
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());
 		}
