@@ -14,7 +14,7 @@
 <jsp:include page="Layout/navbar_market.jsp"></jsp:include>
 <h1>所有商品</h1>
 
-<form>
+<form action="${contextRoot}/Market/productIn" method="get">
   <input type="checkbox" id="vehicle1" name="product_class" value="手槍">
   <label for="vehicle1"> 手槍</label><br>
 
