@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -87,7 +88,7 @@ public class PlayerBean {
 	@Column(name = "birthday")
 	private Date birthday;
 
-//	@CreatedDate
+	@CreatedDate
 	@Column(name = "join_date")
 	private Date join_date;
 
