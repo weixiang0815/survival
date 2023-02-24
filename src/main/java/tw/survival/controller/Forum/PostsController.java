@@ -48,7 +48,7 @@ public class PostsController {
 	
 	@GetMapping("/posts/getAll")
 	public String showAllPosts(Model model) {
-		List<PostsBean> postList = pService.getAllPosts();
+		List<PostsBean> postList = pService.getAllPosts1();
 		model.addAttribute("List", postList);
 		return "Forum/showPostsPage";
 	}

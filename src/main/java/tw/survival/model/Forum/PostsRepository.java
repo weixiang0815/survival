@@ -16,10 +16,10 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	public List<PostsBean> findPostsBeanLike(@Param("name") String name);
 	
 
-	@Query(value = "from PostsBean order by added desc")
-	public List<PostsBean> findPostsBeanDesc();
+
+	public List<PostsBean> findPostsBeanOrderByFinalAddedDesc();
 	
-//	public List<PostsBean> findByNameOrderByAddedDesc();
+	public List<PostsBean> findPostsBeanOrderByAddedDesc();
 	
 	
 }
