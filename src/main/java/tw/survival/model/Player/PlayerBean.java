@@ -66,8 +66,11 @@ public class PlayerBean {
 	@Column(name = "age")
 	private Integer age;
 
-	@Column(name = "region")
-	private String region;
+	@Column(name = "county")
+	private String county;
+	
+	@Column(name="district")
+	private String district;
 
 	@Column(name = "address")
 	private String address;
@@ -203,12 +206,22 @@ public class PlayerBean {
 		this.age = age;
 	}
 
-	public String getRegion() {
-		return region;
+	
+
+	public String getCounty() {
+		return county;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public String getAddress() {
