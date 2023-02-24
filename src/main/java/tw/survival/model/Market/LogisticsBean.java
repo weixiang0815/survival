@@ -96,6 +96,8 @@ public class LogisticsBean {
 		this.status = status;
 	}
 
+	
+
 	public InventoryBean getInventory() {
 		return inventory;
 	}

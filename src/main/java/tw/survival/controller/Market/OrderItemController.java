@@ -50,7 +50,7 @@ public class OrderItemController {
 		model.addAttribute("list", list);
 		return "/Market/show_AllOrderItem";
 	}
-
+//u
 	@GetMapping("/Market/editOrder")
 	public String editOrder(@RequestParam("id") Integer id, Model model) {
 		OrderItemBean order = oService.findById(id);
@@ -63,7 +63,7 @@ public class OrderItemController {
 		oService.update(order);
 		return "redirect:/Market/all_OrderItem";
 	}
-
+//d
 	@DeleteMapping("/Market/deleteOrder")
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);

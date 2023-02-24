@@ -11,7 +11,7 @@
 <title>庫存表</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
+<jsp:include page="../Template/admin.jsp"></jsp:include>
 <div class="container">
 		<c:choose>
 			<c:when test="${player == null && employee == null}">

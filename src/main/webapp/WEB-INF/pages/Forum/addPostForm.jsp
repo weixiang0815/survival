@@ -13,8 +13,8 @@
 </head>
 <body>
 
+<jsp:include page="../Template/admin.jsp"/>
 <div class="container">
-	<jsp:include page="../Layout/navbar_competition.jsp"/>
 	<h1>新增貼文</h1>
 	<div class="col-10">
 		<form:form action="${contextRoot}/posts/post" modelAttribute="PostsBean">
@@ -23,7 +23,8 @@
 		    <br/>
 		    <label for="inputClassify">請輸入分類:</label>
 		    <form:select class="form-control" id="inputClassify" path="classify">
-		    	<form:option value="活動">活動</form:option>
+		    	<form:option value="none" selected="true" disabled="true" hidden="true" >請選擇選項</form:option> 
+		    	<form:option value="活動" >活動</form:option>
 		    	<form:option value="心得">心得</form:option>
 		    	<form:option value="問題">問題</form:option>
 		    	<form:option value="閒聊">閒聊</form:option>
@@ -32,13 +33,15 @@
 
 		    <br/>
 		    <label for="inputEssay">請輸入內容:</label>
-		    <form:textarea class="form-control" id="inputEssay" path="essay" rows="3"/>
+		    <form:textarea id="ckeditor" path="essay" class="form-control" />
 		    <br/>
 		    <button type="submit" class="btn btn-outline-primary">送出</button>
 		    
 		</form:form>
 	</div>
-	<jsp:include page="../Layout/footer.jsp"/>
+	
 </div>
+<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
+<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package tw.survival.service.Forum;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,6 +30,23 @@ public class PostsService {
 			return null;
 		}
 	}
+	
+	/**
+	 * 找到一筆該id紀錄的那筆貼文資料
+	 * 
+	 * @param id 欲查詢的貼文id
+	 * @return 成功回傳PostsBean，失敗回傳Null
+	 * @author 鄭力豪
+	 */
+	public PostsBean findPostById(Integer id) {
+		if(pDao.existsById(id)) {
+			return pDao.findById(id).get();
+		}else {
+			return null;
+		}
+	}
+	
+	
 	/**
 	 * 刪除一筆該id紀錄的那筆貼文資料
 	 * 
@@ -45,6 +63,7 @@ public class PostsService {
 		System.out.println("未找到該ID:" + id);
 		return false;
 	} 
+	
 	/**
 	 * 修改一筆貼文
 	 * 
@@ -53,14 +72,21 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public PostsBean updatePost(PostsBean post) {
-		if(!pDao.existsById(post.getId())) {
-			return null;
-		}
-		try {
+		Optional<PostsBean> optional = pDao.findById(post.getId());
+		if (optional.isPresent()) {
 			return pDao.save(post);
-		} catch (Exception e) {
-			return null;
 		}
+		return null;
+//		if(!pDao.existsById(post.getId())) {
+//			return null;
+//		}
+//		try {
+//			System.out.println(pDao.findById(post.getId()).get().getAdded());
+//			
+//			return pDao.save(post);
+//		} catch (Exception e) {
+//			return null;
+//		}
 	}
 	
 	/**

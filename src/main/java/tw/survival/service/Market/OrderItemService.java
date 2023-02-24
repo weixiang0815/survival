@@ -44,25 +44,11 @@ public class OrderItemService {
 		return null;
 	}
 
-//	public OrderItemBean updateOrderById(Integer id, Date updateorder_create_date, String updatestatus) {
-//		Optional<OrderItemBean> optional = orderItemDao.findById(id);
-//
-//		if (optional.isPresent()) {
-//			OrderItemBean ob = optional.get();
-//			ob.setOrder_create_date(updateorder_create_date);
-//			ob.setStatus(updatestatus);
-//			ob.setPlayer(null);
-//			return ob;
-//		}
-//		System.out.println("沒有這筆資料");
-//
-//		return null;
-//	}
 	public OrderItemBean update(OrderItemBean oBean) {
 		orderItemDao.save(oBean);
 		 return null;
 	}
-	
+	//d
 	public void deleteById(Integer id) {
 
 		OrderItemBean ob = findById(id);

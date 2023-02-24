@@ -19,6 +19,10 @@
 				style="border: 2px solid red; border-radius: 5px;">
 				<h1>活動詳情表單</h1>
 				<span>${error}</span>
+				<div hidden>
+					<span id="creatorId">1</span>
+					<span id="creatorType">1</span>
+				</div>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
 						<h1>請先登入再新增活動呦😊～</h1>
@@ -26,7 +30,7 @@
 					<c:otherwise>
 					</c:otherwise>
 				</c:choose>
-				<form:form action="${contextRoot}/competition/create"
+				<form:form name="competition" action="${contextRoot}/competition/create"
 					modelAttribute="competition">
 					<div class="input-group">
 						<fieldset class="row mt-3 mb-3 p-3">
@@ -147,52 +151,7 @@
 	</div>
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
-	<script>
-		const updateFormURL = "${contextRoot}/competition/api/create/update";
-		const form = $("#competition");
-		const formInputs = [
-			$("#mandarinName"),
-			$("#englishName"),
-			$("#startDate"),
-			$("#startTimespan"),
-			$("#endDate"),
-			$("#endTimespan"),
-			$("#status"),
-			$("#singleOrCrew"),
-			$("#placeId"),
-			$("#capacity"),
-			$("#budget"),
-			$("#fee"),
-		]
-		const content = watchdog.editor;
-		$(document).ready(function() {
-			$("#startDate").datepicker({
-				dateFormat : "yy-mm-dd",
-				onSelect : function(date) {
-					$("#endDate").datepicker("option", "minDate", date);
-				}
-			});
-			$("#endDate").datepicker({
-				dateFormat : "yy-mm-dd",
-				onSelect : function(date) {
-					$("#startDate").datepicker("option", "maxDate", date);
-				}
-			});
-		});
-		$("input").on({
-			change: updateFormData(),
-		});
-		content.model.document.on('change', updateFormData());
-		function updateFormData() {
-			let formData = {};
-			for (input of formInputs) {
-				formData[input.attr("id")] = input.val();
-			}
-			formData["content"] = content.getData();
-			console.log(content.getData());
-			console.log(formData);
-		}
-	</script>
+	<script src="${contextRoot}/js/Competition/newCompetition.js"></script>
 	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
 </body>
 </html>
