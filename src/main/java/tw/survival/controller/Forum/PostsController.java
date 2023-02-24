@@ -9,11 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Forum.PostsService;
@@ -67,7 +66,7 @@ public class PostsController {
 	}
 	
 	@GetMapping("/post/edit")
-	public String postEditPage(@Param("id") Integer id, Model model){
+	public String postEditPage(@RequestParam("id") Integer id, Model model){
 		PostsBean post = pService.findPostById(id);
 		model.addAttribute("postsBean", post);
 		return "Forum/editPostPage";
