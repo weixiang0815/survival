@@ -253,16 +253,6 @@ public class PostsBean implements Serializable{
 	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
 		this.bookmarkletOfPost = bookmarkletOfPost;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Posts [id=" + id + ", name=" + name + ", classify=" + classify + ", essay=" + essay + ", added=" + added
-				+ ", final_added=" + finalAdded + "]";
-	}
-	
-
 	
 	
 }

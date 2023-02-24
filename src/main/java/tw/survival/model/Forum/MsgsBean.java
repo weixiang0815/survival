@@ -43,7 +43,7 @@ public class MsgsBean implements Serializable{
 	@Column(name="final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date finalAdded;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="fk_posts_id")
 	private PostsBean posts;
@@ -90,20 +90,20 @@ public class MsgsBean implements Serializable{
 		this.added = added;
 	}
 
-	public Date getFinal_added() {
-		return finalAdded;
-	}
-
-	public void setFinal_added(Date final_added) {
-		this.finalAdded = final_added;
-	}
-
 	public Date getFinalAdded() {
 		return finalAdded;
 	}
 
 	public void setFinalAdded(Date finalAdded) {
 		this.finalAdded = finalAdded;
+	}
+	
+	public PlayerBean getPlayer() {
+		return player;
+	}
+	
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
 	}
 
 	public PostsBean getPosts() {
