@@ -97,7 +97,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> getAllPosts1(){
-		return pDao.findPostsBeanOrderByAddedDesc();
+		return pDao.findPostsBeanByOrderByAddedDesc();
 	}
 	
 	/**
@@ -108,7 +108,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> getAllPosts2(){
-		return pDao.findPostsBeanOrderByFinalAddedDesc();
+		return pDao.findPostsBeanByOrderByFinalAddedDesc();
 	}
 	
 	

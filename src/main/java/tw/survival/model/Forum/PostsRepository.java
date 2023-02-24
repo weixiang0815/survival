@@ -17,9 +17,9 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	
 
 
-	public List<PostsBean> findPostsBeanOrderByFinalAddedDesc();
+	public List<PostsBean> findPostsBeanByOrderByFinalAddedDesc();
 	
-	public List<PostsBean> findPostsBeanOrderByAddedDesc();
+	public List<PostsBean> findPostsBeanByOrderByAddedDesc();
 	
 	
 }
