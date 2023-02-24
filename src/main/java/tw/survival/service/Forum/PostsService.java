@@ -90,17 +90,26 @@ public class PostsService {
 	}
 	
 	/**
-	 * 得到所有貼文資料，依照最新時間排序
+	 * 得到所有貼文資料，依照貼文新增的初始時間排序
 	 * 
 	 * 
 	 * @return 一個PostsBean型別的List集合物件，或者null
 	 * @author 鄭力豪
 	 */
-	public List<PostsBean> getAllPosts(){
-		return pDao.findPostsBeanDesc();
+	public List<PostsBean> getAllPosts1(){
+		return pDao.findPostsBeanByOrderByAddedDesc();
 	}
 	
-	
+	/**
+	 * 得到所有貼文資料，依照貼文最近一次的更新時間排序
+	 * 
+	 * 
+	 * @return 一個PostsBean型別的List集合物件，或者null
+	 * @author 鄭力豪
+	 */
+	public List<PostsBean> getAllPosts2(){
+		return pDao.findPostsBeanByOrderByFinalAddedDesc();
+	}
 	
 	
 	
