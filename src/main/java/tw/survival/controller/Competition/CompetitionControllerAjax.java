@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.NewCompetitionFormBean;
+import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
 
@@ -29,6 +30,9 @@ public class CompetitionControllerAjax {
 
 	@Autowired
 	private CompetitionService compService;
+
+	@Autowired
+	private CompetitionPictureService compPictureService;
 
 	/**
 	 * 用 AJAX 取得使用者先前的填表紀錄，若查無資料則創建新的活動新增表單暫存紀錄實體
@@ -98,6 +102,12 @@ public class CompetitionControllerAjax {
 		return compService.publishById(id) != null ? "發布成功" : "發布失敗";
 	}
 
+	/**
+	 * 用 AJAX 回傳最新一筆活動資訊
+	 * 
+	 * @return 回傳查到的最新一筆活動實體
+	 * @author 王威翔
+	 */
 	@GetMapping("/competition/api/latest")
 	public CompetitionBean latest() {
 		return compService.findLatestCompetition();
@@ -113,6 +123,18 @@ public class CompetitionControllerAjax {
 	@GetMapping("/competition/api/{id}")
 	public CompetitionBean competitionDetailById(@PathVariable Integer id) {
 		return compService.findById(id);
+	}
+
+	/**
+	 * 用 AJAX 獲得指定 id 活動照片
+	 * 
+	 * @param id 欲獲得的指定 id 活動照片
+	 * @return 回傳查到的指定 id 活動照片
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/api/photo/{id}")
+	public byte[] getCompPhoto(@PathVariable Integer id) {
+		return compPictureService.findById(id).getPicture();
 	}
 
 	/**

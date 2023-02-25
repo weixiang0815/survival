@@ -9,6 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import tw.survival.model.Market.ProductBean;
 
 @Entity
@@ -19,6 +23,7 @@ public class CompetitionPrizeBean {
 	@Column(name = "fk_competition_id")
 	private Integer competitionId;
 
+	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
