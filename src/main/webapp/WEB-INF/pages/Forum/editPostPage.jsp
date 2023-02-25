@@ -18,7 +18,7 @@
 		<div class="col-10">
 			<form:form modelAttribute="postsBean" method="POST">
 				<input type="hidden" name="_method"  id='putOrDelete'   value="" >
-<%-- 				<form:input  type="hidden" path="added"/> --%>
+
 
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>

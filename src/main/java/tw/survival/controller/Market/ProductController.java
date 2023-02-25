@@ -20,12 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import tw.survival.model.Market.ProductBean;
+import tw.survival.model.Market.ProductRepository;
 import tw.survival.service.Market.ProductService;
 
 @Controller
 public class ProductController {
-
+	
+	@Autowired
+	private ProductRepository productDao;
 
 	@Autowired
 	private ProductService productService;
@@ -122,13 +126,35 @@ public class ProductController {
 		return "Market/searchResult";
 	}
 	
+	// 搜尋類型商品>>ProductRepository>>findProductClassLike
+		@GetMapping("/Market/productIn")
+		public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
+			List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
+			model.addAttribute("SearchResult2", searchResult);
+			return "Market/searchResult2";
+		}
+	
+//	// 模糊搜尋商品
+//		@GetMapping("/Market/productIn")
+//		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
+//				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
+//				@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
+//			List<ProductBean> searchResult = productDao.find(name,productclass,context);
+//			model.addAttribute("SearchResult2", searchResult);
+//			return "Market/searchResult2";
+//		}
+//		
+	
+	
+	
 	//多條件搜尋商品
-	@ResponseBody
-	@GetMapping("/Market/productFindByproductclassIn")
-	public List<ProductBean> findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
-		List<ProductBean> searchResult = productService.findByClass(clazz);
-		return searchResult;
-	}
+//	@ResponseBody
+//	@GetMapping("/Market/productFindByproductclassIn")
+//	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {
+//		List<ProductBean> searchResult = productService.findByClass(clazz);
+//		model.addAttribute("SearchResult2", searchResult);
+//		return "Market/serchResult";
+//	}
 	
 	@ResponseBody
 	@GetMapping("/Market/productImage")
