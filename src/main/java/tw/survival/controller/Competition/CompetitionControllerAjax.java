@@ -1,5 +1,10 @@
 package tw.survival.controller.Competition;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,15 +47,28 @@ public class CompetitionControllerAjax {
 	 * @param creatorType 使用者型態，會員為 1，員工為 2
 	 * @return 回傳該活動新增表單暫存紀錄實體
 	 * @author 王威翔
+	 * @throws IOException
 	 */
 	@PostMapping("/competition/api/create/newForm/getlatest")
-	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form) {
+	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form)
+			throws IOException {
 		NewCompetitionFormBean latestForm = newFormService.findByCreator(form.getCreatorId(), form.getCreatorType());
 		if (latestForm == null) {
 			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
 			newForm.setCreatorId(form.getCreatorId());
 			newForm.setCreatorType(form.getCreatorType());
 			latestForm = newFormService.insert(newForm);
+			String filepath = "C:/Survival/Competition/Competition/temp_content/";
+			File file = new File(filepath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			filepath += "temp_" + latestForm.getThirdPart().getId() + ".txt";
+			file = new File(filepath);
+			if (!file.exists()) {
+				file.createNewFile();
+			}
+			latestForm.getThirdPart().setContentFileLocation(filepath);
 		}
 		return latestForm;
 	}
