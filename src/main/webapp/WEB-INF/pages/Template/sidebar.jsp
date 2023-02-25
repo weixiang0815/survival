@@ -12,7 +12,7 @@
 				href="${contextRoot}/competition"> <span data-feather="file"
 					class="align-text-bottom"></span> 活動系統
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="${contextRoot}/">
+			<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/marketMain">
 					<span data-feather="shopping-cart" class="align-text-bottom"></span>
 					商城系統
 			</a></li>

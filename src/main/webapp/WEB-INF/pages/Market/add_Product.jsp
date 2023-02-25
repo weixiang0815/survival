@@ -39,13 +39,13 @@
 </head>
 
 <body>
-	<jsp:include page="Layout/navbar_market.jsp"></jsp:include>
+	<jsp:include page="../Template/admin.jsp"></jsp:include>
 	<div class="container">
 		<div class="st1">
 			<h1>新增商品</h1>
 		</div>
-		<form action="${contextRoot}/ProductRepository/addproduct"
-			method="post" enctype="multipart/form-data">
+		<form action="${contextRoot}/Market/addproduct" method="post"
+			enctype="multipart/form-data">
 
 			<div class="st1">
 				<label class="t1"> 商品名稱: </label> <input type="text"
@@ -92,9 +92,9 @@
 				<input id="uploadBtn" type="submit" value="新增商品">
 			</div>
 
+		</form>
 
-
-			<script>
+		<script>
               ProductFileInput.onchange = evt => {
                   const [file] = ProductFileInput.files
                   if (file) {

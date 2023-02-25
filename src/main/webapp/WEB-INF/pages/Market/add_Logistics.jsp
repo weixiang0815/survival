@@ -11,7 +11,7 @@
 <title>新增物流訂單</title>
 </head>
 <body>
-<jsp:include page="Layout/navbar_market.jsp"></jsp:include>
+<jsp:include page="../Template/admin.jsp"></jsp:include>
 <div class="container">
 <h1>新增物流訂單</h1>
 <form action="${contextRoot}/Market/addLogistics" method="post" >

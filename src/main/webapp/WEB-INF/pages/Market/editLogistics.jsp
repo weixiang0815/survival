@@ -11,7 +11,7 @@
 <title>修改訊息</title>
 </head>
 <body>
-	<jsp:include page="Layout/navbar_market.jsp"></jsp:include>
+	<jsp:include page="../Template/admin.jsp"></jsp:include>
 
 	<div class="container">
 		<h1>修改訊息</h1>

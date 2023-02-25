@@ -112,7 +112,7 @@
 								class="align-text-bottom"></span> 活動系統
 						</a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${contextRoot}/"> <span data-feather="shopping-cart"
+							href="${contextRoot}/Market/marketMain"> <span data-feather="shopping-cart"
 							class="align-text-bottom"></span> 商城系統
 						</a></li>
 						<li class="nav-item"><a class="nav-link"

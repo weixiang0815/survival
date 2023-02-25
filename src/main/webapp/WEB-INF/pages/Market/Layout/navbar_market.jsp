@@ -31,17 +31,17 @@
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link active"
 						aria-current="page" href="${contextRoot}/">首頁</a></li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Product">新增商品</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">新增商品</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/allProduct">全部商品</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">全部商品</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_OrderItem">新增訂單</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">新增訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_OrderItem">所有訂單</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">所有訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/add_Logistics">新增物流訂單</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">新增物流訂單</a>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="${contextRoot}/Market/all_Logistics">查看物流訂單</a>
+					<li class="nav-item"><a class="nav-link" href="${contextRoot}/">查看物流訂單</a>
 					</li>
 					
 					
