@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.survival.model.Competition.CompetitionToScheduleBean;
 import tw.survival.model.Competition.CompetitionToScheduleRepository;
+import tw.survival.model.Place.ScheduleBean;
+import tw.survival.service.Place.ScheduleService;
 
 @Service
 @Transactional
@@ -16,6 +18,9 @@ public class CompetitionToScheduleService {
 
 	@Autowired
 	private CompetitionToScheduleRepository compToScheduleRepo;
+
+	@Autowired
+	private ScheduleService scheduleService;
 
 	/**
 	 * 新增一筆活動時程中介表實體
@@ -64,7 +69,9 @@ public class CompetitionToScheduleService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
+			ScheduleBean schedule = compToScheduleRepo.findById(id).get().getSchedule();
 			compToScheduleRepo.deleteById(id);
+			scheduleService.deleteScheduleById(schedule.getId());
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,7 +88,28 @@ public class CompetitionToScheduleService {
 	 */
 	public boolean deleteByEntity(CompetitionToScheduleBean compToSchedule) {
 		try {
+			ScheduleBean schedule = compToSchedule.getSchedule();
 			compToScheduleRepo.delete(compToSchedule);
+			scheduleService.deleteScheduleById(schedule.getId());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * 根據活動實體 id 刪除多筆時程表實體與活動時程中介表實體
+	 * 
+	 * @param id 欲刪除的活動實體 id
+	 * @return 刪除成功回傳 true，失敗回傳 false
+	 * @author 王威翔
+	 */
+	public boolean deleteByCompetitionId(Integer id) {
+		try {
+			List<CompetitionToScheduleBean> compToSchedules = compToScheduleRepo.findByCompetitionId(id);
+			compToScheduleRepo.deleteByCompetitionId(id);
+			compToSchedules.forEach(cts -> scheduleService.deleteScheduleById(cts.getSchedule().getId()));
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

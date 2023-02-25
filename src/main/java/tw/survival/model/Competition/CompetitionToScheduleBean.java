@@ -27,11 +27,13 @@ public class CompetitionToScheduleBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
-	
-
-	
 
 	public CompetitionToScheduleBean() {
+	}
+
+	public CompetitionToScheduleBean(ScheduleBean schedule, CompetitionBean competition) {
+		this.schedule = schedule;
+		this.competition = competition;
 	}
 
 	public Integer getId() {

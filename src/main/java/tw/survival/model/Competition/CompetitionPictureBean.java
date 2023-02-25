@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,6 +31,7 @@ public class CompetitionPictureBean {
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
 
+	@Transient
 	private byte[] picture;
 
 	public CompetitionPictureBean() {

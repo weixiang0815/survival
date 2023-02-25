@@ -19,8 +19,6 @@ import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
-import tw.survival.service.Employee.EmployeeService;
-import tw.survival.service.Player.PlayerService;
 
 @RestController
 public class CompetitionControllerAjax {
@@ -30,12 +28,6 @@ public class CompetitionControllerAjax {
 
 	@Autowired
 	private CompetitionService compService;
-
-	@Autowired
-	private PlayerService playerService;
-
-	@Autowired
-	private EmployeeService employeeService;
 
 	/**
 	 * 用 AJAX 取得使用者先前的填表紀錄，若查無資料則創建新的活動新增表單暫存紀錄實體
@@ -101,6 +93,11 @@ public class CompetitionControllerAjax {
 	@GetMapping("/competition/api/publish")
 	public String publishCompetition() {
 		return "發布成功";
+	}
+
+	@GetMapping("/competition/api/latest")
+	public CompetitionBean latest() {
+		return compService.findLatestCompetition();
 	}
 
 	/**

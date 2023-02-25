@@ -66,11 +66,11 @@ public class PlayerBean {
 	@Column(name = "age")
 	private Integer age;
 
-	@Column(name = "county")
-	private String county;
-	
-	@Column(name="district")
-	private String district;
+//	@Column(name = "county")
+//	private String county;
+//
+//	@Column(name = "district")
+//	private String district;
 
 	@Column(name = "address")
 	private String address;
@@ -84,7 +84,7 @@ public class PlayerBean {
 
 	@Column(name = "sex")
 	private String sex;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -122,7 +122,7 @@ public class PlayerBean {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();//RZ 2023/2/21
+	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/2/21
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
@@ -138,7 +138,7 @@ public class PlayerBean {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();//RZ 2023/2/21
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
 
 	@PrePersist
 	public void autoCreate() {
@@ -206,23 +206,21 @@ public class PlayerBean {
 		this.age = age;
 	}
 
-	
-
-	public String getCounty() {
-		return county;
-	}
-
-	public void setCounty(String county) {
-		this.county = county;
-	}
-
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
+//	public String getCounty() {
+//		return county;
+//	}
+//
+//	public void setCounty(String county) {
+//		this.county = county;
+//	}
+//
+//	public String getDistrict() {
+//		return district;
+//	}
+//
+//	public void setDistrict(String district) {
+//		this.district = district;
+//	}
 
 	public String getAddress() {
 		return address;
@@ -307,6 +305,7 @@ public class PlayerBean {
 	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
 		this.postsOfPlayer = postsOfPlayer;
 	}
+
 //
 //	public Set<MsgsBean> getMsgsOfPlayer() {
 //		return msgsOfPlayer;

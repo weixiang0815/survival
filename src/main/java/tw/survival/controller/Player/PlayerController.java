@@ -99,8 +99,8 @@ public class PlayerController {
 			player.setEmail(email);
 			player.setAge(age);
 			player.setNickname(nickname);
-			player.setCounty(county);
-			player.setDistrict(district);
+//			player.setCounty(county);
+//			player.setDistrict(district);
 			player.setAddress(address);
 			player.setThumbnail(thumbnail.getBytes());
 			player.setInfo(banned);

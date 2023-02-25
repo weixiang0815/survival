@@ -1,6 +1,5 @@
 package tw.survival.controller.Place;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,14 +13,15 @@ public class ScheduleController {
 
 	@Autowired
 	private ScheduleService scheduleService;
+
 	@Autowired
 	private PlaceService placeService;
-	
+
 	@GetMapping("/schedule/new")
 	public String newSchedule(Model model) {
 		model.addAttribute("schedule", new ScheduleBean());
 		model.addAttribute("placeList", placeService.getAllPlace());
 		return "Place/addSchedule";
 	}
-	
+
 }
