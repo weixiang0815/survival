@@ -20,22 +20,21 @@ public class TestProductDao {
 
 	public List<ProductBean> someSQL(List<String> product_class) {
 		TypedQuery<ProductBean> query = em.createQuery("sqlString", ProductBean.class);
-		String sqlString ="from ProductBean where class in";
+		String sqlString = "from ProductBean where class in";
 		if (product_class != null && !product_class.isEmpty()) {
-			
-		}else if(product_class.contains("手槍")){
-			sqlString +="手槍";
-		}else if(product_class.contains("步槍")){
-			sqlString +="步槍";
-		}else if(product_class.contains("衝鋒槍")){
-			sqlString +="衝鋒槍";
-		}else if(product_class.contains("狙擊槍")){
-			sqlString +="狙擊槍";
-		}else if(product_class.contains("霰彈槍")){
-			sqlString +="霰彈槍";
+
+		} else if (product_class.contains("手槍")) {
+			sqlString += "手槍";
+		} else if (product_class.contains("步槍")) {
+			sqlString += "步槍";
+		} else if (product_class.contains("衝鋒槍")) {
+			sqlString += "衝鋒槍";
+		} else if (product_class.contains("狙擊槍")) {
+			sqlString += "狙擊槍";
+		} else if (product_class.contains("霰彈槍")) {
+			sqlString += "霰彈槍";
 		}
 		return query.getResultList();
-
 	}
 
 }
