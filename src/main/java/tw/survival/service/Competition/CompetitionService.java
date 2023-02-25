@@ -62,7 +62,6 @@ public class CompetitionService {
 			String endDate = comp.getEndDate();
 			Integer endTimespan = comp.getEndTimespan();
 			comp = compRepo.save(comp);
-			System.out.println(comp);
 			competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(), comp.getPlaceId());
 			File file = new File("C:/Survival/Competition/Competition/content");
 			if (!file.exists()) {

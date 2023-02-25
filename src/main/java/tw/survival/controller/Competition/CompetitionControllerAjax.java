@@ -27,6 +27,7 @@ import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.NewCompetitionFormService;
+import tw.survival.service.Place.PlaceService;
 
 @RestController
 public class CompetitionControllerAjax {
@@ -37,6 +38,9 @@ public class CompetitionControllerAjax {
 	@Autowired
 	private CompetitionService compService;
 
+	@Autowired
+	private PlaceService placeService;
+	
 	@Autowired
 	private CompetitionPictureService compPictureService;
 
@@ -92,7 +96,13 @@ public class CompetitionControllerAjax {
 	 */
 	@PostMapping("/competition/api/create")
 	public String createCompetition(@RequestBody CompetitionBean comp) {
+		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
+		comp.setFounderEmployee(null);
+		comp.setFounderPlayer(null);
 		compService.create(comp);
+		if (comp.getStatus().contentEquals("已發布")) {
+			compService.publishById(comp.getId());
+		}
 		return "新增成功";
 	}
 
