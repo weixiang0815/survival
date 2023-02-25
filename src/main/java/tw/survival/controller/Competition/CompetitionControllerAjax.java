@@ -3,8 +3,11 @@ package tw.survival.controller.Competition;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,9 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPictureBean;
 import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.NewCompetitionFormBean;
 import tw.survival.service.Competition.CompetitionPictureService;
@@ -91,6 +97,35 @@ public class CompetitionControllerAjax {
 	}
 
 	/**
+	 * 用 AJAX 上傳多張照片給指定 id 活動實體
+	 * 
+	 * @param files  欲上傳照片的 MultipartFile 物件陣列
+	 * @param compId 欲上傳照片的活動實體 id
+	 * @return 上傳成功與否
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/api/photos/upload")
+	public String uploadCompPictures(@RequestParam("files") MultipartFile[] files,
+			@RequestParam("compId") Integer compId) {
+		Set<CompetitionPictureBean> pics = new LinkedHashSet<>();
+		CompetitionBean comp = compService.findById(compId);
+		Arrays.asList(files).forEach(file -> {
+			CompetitionPictureBean compPicture = new CompetitionPictureBean();
+			try {
+				compPicture.setPicture(file);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			compPicture.setCompetition(comp);
+			compPicture = compPictureService.addPicture(compPicture);
+			pics.add(compPicture);
+		});
+		comp.setPictures(pics);
+		return compService.updateByEntity(comp) != null ? "上傳成功" : "上傳失敗";
+	}
+
+	/**
 	 * 用 AJAX 正式發布一筆活動資訊
 	 * 
 	 * @param id 欲發布的活動實體 id
@@ -128,13 +163,28 @@ public class CompetitionControllerAjax {
 	/**
 	 * 用 AJAX 獲得指定 id 活動照片
 	 * 
-	 * @param id 欲獲得的指定 id 活動照片
+	 * @param id 欲獲得的指定活動照片 id
 	 * @return 回傳查到的指定 id 活動照片
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/api/photo/{id}")
 	public byte[] getCompPhoto(@PathVariable Integer id) {
 		return compPictureService.findById(id).getPicture();
+	}
+
+	/**
+	 * 用 AJAX 獲得指定活動 id 的所有照片 id
+	 * 
+	 * @param id 欲獲得所有照片 id 的指定活動 id
+	 * @return 回傳裝著指定活動所有照片 id 的 List 物件
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/api/photoid-of-comp/{id}")
+	public List<Integer> getPhotoIdByComp(@PathVariable Integer id) {
+		List<Integer> list = new ArrayList<>();
+		Set<CompetitionPictureBean> pictures = compService.findById(id).getPictures();
+		pictures.forEach(p -> list.add(p.getId()));
+		return list;
 	}
 
 	/**
@@ -145,7 +195,7 @@ public class CompetitionControllerAjax {
 	 */
 	@GetMapping("/competition/api/search/result")
 	public List<CompetitionBean> searchAll() {
-		return new ArrayList<>();
+		return compService.findAll();
 	}
 
 	/**
@@ -182,6 +232,18 @@ public class CompetitionControllerAjax {
 	@DeleteMapping("/competition/api/delete/{id}")
 	public String deleteCompetitionById(@PathVariable Integer id) {
 		return compService.deleteById(id) ? "刪除成功" : "刪除失敗";
+	}
+
+	/**
+	 * 用 AJAX 刪除指定 id 活動照片
+	 * 
+	 * @param id 欲刪除的活動照片 id
+	 * @return 刪除成功與否
+	 * @author 王威翔
+	 */
+	@DeleteMapping("/competition/api/delete/photo/{id}")
+	public String deleteCompPictureById(@PathVariable Integer id) {
+		return compPictureService.deletePictureById(id) ? "刪除成功" : "刪除失敗";
 	}
 
 	/**

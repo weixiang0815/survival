@@ -49,6 +49,7 @@ public class CompetitionPictureService {
 				bos.write(picture);
 			}
 			compPicture.setFileLocation(filepath);
+			compPicture.setPicture(picture);
 			return compPicture;
 		} catch (Exception e) {
 			e.printStackTrace();
