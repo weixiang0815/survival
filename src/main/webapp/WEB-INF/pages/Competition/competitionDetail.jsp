@@ -61,6 +61,7 @@ button {
 			<div class="col-12">預計報名人數：${comp.capacity} 人</div>
 			<div class="col-12">預算：${comp.budget} 元</div>
 			<div class="col-12">報名費：${comp.fee} 元</div>
+			<div class="col-12">內容：${comp.content}</div>
 			<div class="col-12 align-text-start">
 				<a href="${contextRoot}/competition/edit?id=${comp.id}"><button
 						class="btn btn-primary">編輯</button></a> <a

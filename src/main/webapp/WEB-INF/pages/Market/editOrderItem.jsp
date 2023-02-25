@@ -24,8 +24,8 @@
 					<form:input type="hidden" path="id" />
 					<table class="table table-hover">
 						<tr>
-							<td>訂單時間:</td>
-							<td><form:input type="Date" path="order_create_date" /></td>
+							<td><form:label class="form-label" path="order_create_date">訂單時間:</form:label></td>
+							<td><form:input type="text" path="order_create_date" placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 
 						<tr>

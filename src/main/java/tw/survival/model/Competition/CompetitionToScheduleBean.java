@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import tw.survival.model.Place.ScheduleBean;
 
 @Entity
@@ -28,6 +27,9 @@ public class CompetitionToScheduleBean {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
+	
+
+	
 
 	public CompetitionToScheduleBean() {
 	}

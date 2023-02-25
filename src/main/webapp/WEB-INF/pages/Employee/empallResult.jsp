@@ -8,7 +8,7 @@
 				<meta charset="UTF-8">
 				<title>Employee</title>
 			</head>
-			<jsp:include page="../Employee/navbar_user.jsp" />
+			<jsp:include page="../Template/admin.jsp" />
 			<h3>職員所有資料</h3>
 
 			<body>

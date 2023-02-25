@@ -1,5 +1,12 @@
 package tw.survival.service.Competition;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,11 +48,13 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) {
-		try {
-			return mainDao.save(mainBean);
-		} catch (Exception e) {
-			return null;
-		}
+		NewCompetitionFormPart1Bean part1 = part1Dao.save(new NewCompetitionFormPart1Bean());
+		mainBean.setFirstPart(part1);
+		NewCompetitionFormPart2Bean part2 = part2Dao.save(new NewCompetitionFormPart2Bean());
+		mainBean.setSecondPart(part2);
+		NewCompetitionFormPart3Bean part3 = part3Dao.save(new NewCompetitionFormPart3Bean());
+		mainBean.setThirdPart(part3);
+		return mainDao.save(mainBean);
 	}
 
 	/**
@@ -57,27 +66,54 @@ public class NewCompetitionFormService {
 	 */
 	public NewCompetitionFormBean findById(Integer id) {
 		Optional<NewCompetitionFormBean> optional = mainDao.findById(id);
-		return optional.isPresent() ? optional.get() : null;
+		if (optional.isPresent()) {
+			NewCompetitionFormBean form = optional.get();
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return form;
+		}
+		return null;
 	}
 
 	/**
 	 * 透過創作者 id 查詢一筆活動新增表單暫存實體
 	 * 
-	 * @param creatorId       欲查詢活動新增表單暫存實體的創作者 id
-	 * @param publicOrPrivate 若創作者為會員應傳入整數 1，員工則整數 2
+	 * @param creatorId   欲查詢活動新增表單暫存實體的創作者 id
+	 * @param creatorType 若創作者為會員應傳入整數 1，員工則整數 2
 	 * @return 查詢成功回傳該活動新增表單暫存實體，否則回傳 null
 	 * @author 王威翔
 	 */
-	public NewCompetitionFormBean findByCreatorId(Integer creatorId, Integer publicOrPrivate) {
+	public NewCompetitionFormBean findByCreator(Integer creatorId, Integer creatorType) {
 		try {
-			if (publicOrPrivate == 0) {
-				return mainDao.findByEmployeeId(creatorId);
-			} else if (publicOrPrivate == 1) {
-				return mainDao.findByPlayerId(creatorId);
-			} else {
-				return null;
+			NewCompetitionFormBean form = mainDao.findByCreator(creatorId, creatorType);
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
 			}
+			return form;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -90,8 +126,22 @@ public class NewCompetitionFormService {
 	 */
 	public NewCompetitionFormBean findLatestCreated() {
 		try {
-			return mainDao.findFirstByOrderByLastEditedDesc();
+			NewCompetitionFormBean form = mainDao.findFirstByOrderByLastEditedDesc();
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			}
+			return form;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -103,7 +153,24 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public List<NewCompetitionFormBean> findAll() {
-		return mainDao.findAll();
+		List<NewCompetitionFormBean> forms = mainDao.findAll();
+		forms.forEach(form -> {
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return forms;
 	}
 
 	/**
@@ -165,8 +232,32 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public NewCompetitionFormBean updateByEntity(NewCompetitionFormBean mainForm) {
-		if (mainDao.findById(mainForm.getId()).isPresent()) {
-			return mainDao.save(mainForm);
+		Optional<NewCompetitionFormBean> optional = mainDao.findById(mainForm.getId());
+		if (optional.isPresent()) {
+			NewCompetitionFormBean form = optional.get();
+			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
+			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
+				firstPart.setStartDate(null);
+			} else {				
+				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
+			}
+			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
+				firstPart.setEndDate(null);
+			} else {
+				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
+			}
+			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
+			try (
+					FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
+					OutputStreamWriter osw = new OutputStreamWriter(fos);
+					PrintWriter pw = new PrintWriter(osw);
+					) {
+				pw.print(thirdPart.getContent());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			form.setLastEdited(new Date());
+			return mainDao.save(form);
 		} else {
 			return null;
 		}

@@ -172,6 +172,30 @@ public class PostsBean implements Serializable{
 
 
 
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+
+
+	public CompetitionBean getCompetition() {
+		return competition;
+	}
+
+
+
+	public void setCompetition(CompetitionBean competition) {
+		this.competition = competition;
+	}
+
+
+
 	public Date getFinalAdded() {
 		return finalAdded;
 	}
@@ -229,16 +253,6 @@ public class PostsBean implements Serializable{
 	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
 		this.bookmarkletOfPost = bookmarkletOfPost;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "Posts [id=" + id + ", name=" + name + ", classify=" + classify + ", essay=" + essay + ", added=" + added
-				+ ", final_added=" + finalAdded + "]";
-	}
-	
-
 	
 	
 }

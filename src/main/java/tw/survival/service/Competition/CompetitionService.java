@@ -1,7 +1,17 @@
 package tw.survival.service.Competition;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -9,19 +19,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionDao;
 import tw.survival.model.Competition.CompetitionRepository;
+import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Forum.PostsBean;
+import tw.survival.model.Place.ScheduleBean;
 import tw.survival.service.Forum.PostsService;
+import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Place.ScheduleService;
 
 @Service
 @Transactional
 public class CompetitionService {
 
 	@Autowired
-	private CompetitionRepository compDao;
+	private CompetitionRepository compRepo;
+
+	@Autowired
+	private CompetitionDao compDao;
 
 	@Autowired
 	private PostsService postsService;
+	
+	@Autowired
+	private PlaceService placeService;
+	
+	@Autowired
+	private ScheduleService scheduleService;
 
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
@@ -32,8 +56,29 @@ public class CompetitionService {
 	 */
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
-			return compDao.save(comp);
+			String content = comp.getContent();
+			String startDate = comp.getStartDate();
+			Integer startTimespan = comp.getStartTimespan();
+			String endDate = comp.getEndDate();
+			Integer endTimespan = comp.getEndTimespan();
+			compRepo.save(comp);
+			comp = findLatestCompetition();
+			competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(), comp.getPlaceId());
+			File file = new File("C:/Survival/Competition/Competition/content");
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			String filepath = "C:/Survival/Competition/Competition/content/content_" + comp.getId() + ".txt";
+			comp.setContentFileLocation(filepath);
+			comp.setContent(content);
+			try (FileOutputStream fos = new FileOutputStream(filepath);
+					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+					PrintWriter pw = new PrintWriter(osw);) {
+				pw.println(content);
+			}
+			return comp;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -46,17 +91,16 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean publishById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
-			CompetitionBean comp = optional.get();
+			CompetitionBean comp = findById(id);
 			comp.setStatus("已發布");
 			PostsBean newPost = new PostsBean();
 			newPost.setName(comp.getMandarinName());
 			newPost.setClassify("活動競賽😎");
 			newPost.setEssay(comp.getContent());
 			postsService.insertPost(newPost);
-//			postsService.addPost(newPost);
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
@@ -70,8 +114,25 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean findById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
-		return optional.isPresent() ? optional.get() : null;
+		Optional<CompetitionBean> optional = compRepo.findById(id);
+		if (optional.isPresent()) {
+			CompetitionBean comp = optional.get();
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return comp;
+		}
+		return null;
 	}
 
 	/**
@@ -82,7 +143,18 @@ public class CompetitionService {
 	 */
 	public CompetitionBean findLatestCompetition() {
 		try {
-			return compDao.findFirstByOrderByIdDesc();
+			CompetitionBean comp = compRepo.findFirstByOrderByIdDesc();
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			}
+			return comp;
 		} catch (Exception e) {
 			return null;
 		}
@@ -95,7 +167,48 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> findAll() {
-		return compDao.findAll();
+		List<CompetitionBean> comps = compRepo.findAll();
+		comps.forEach(comp -> {
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return comps;
+	}
+
+	/**
+	 * 多條件查詢活動結果
+	 * 
+	 * @param conditions 查詢依據的各種條件
+	 * @return 裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionBean> multiconditionSearch(CompetitionSearchCondititonsDto conditions) {
+		List<CompetitionBean> comps = compDao.multiconditionSearch(conditions);
+		comps.forEach(comp -> {
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return comps;
 	}
 
 	/**
@@ -108,7 +221,7 @@ public class CompetitionService {
 	public boolean deleteById(Integer id) {
 		try {
 			// 需先刪除對應活動獎品實體與論壇系統貼文
-			compDao.deleteById(id);
+			compRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -123,7 +236,7 @@ public class CompetitionService {
 	 */
 	public boolean deleteByEntity(CompetitionBean comp) {
 		try {
-			compDao.delete(comp);
+			compRepo.delete(comp);
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -138,12 +251,12 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean takedownById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("未發布");
 			// 需刪除論壇系統的對應貼文
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
@@ -158,26 +271,19 @@ public class CompetitionService {
 	 */
 	@Transactional
 	public CompetitionBean updateByEntity(CompetitionBean comp) {
-		Optional<CompetitionBean> optional = compDao.findById(comp.getId());
+		Optional<CompetitionBean> optional = compRepo.findById(comp.getId());
 		if (optional.isPresent()) {
-			CompetitionBean compToUpdate = optional.get();
-			compToUpdate.setMandarinName(comp.getMandarinName());
-			compToUpdate.setEnglishName(comp.getEnglishName());
-			compToUpdate.setStartDate(comp.getStartDate());
-			compToUpdate.setStartTimespan(comp.getStartTimespan());
-			compToUpdate.setEndDate(comp.getEndDate());
-			compToUpdate.setEndTimespan(comp.getEndTimespan());
-			compToUpdate.setStatus(comp.getStatus());
-			compToUpdate.setSingleOrCrew(comp.getSingleOrCrew());
-			compToUpdate.setPlaceId(comp.getPlaceId());
-			compToUpdate.setCapacity(comp.getCapacity());
-			compToUpdate.setBudget(comp.getBudget());
-			compToUpdate.setFee(comp.getFee());
-			compToUpdate.setContent(comp.getContent());
-			return compDao.save(compToUpdate);
-		} else {
-			return null;
+			try (FileOutputStream fos = new FileOutputStream(comp.getContentFileLocation());
+					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+					PrintWriter pw = new PrintWriter(osw);) {
+				pw.print(comp.getContent());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return compRepo.save(comp);
 		}
+		return null;
 	}
 
 	/**
@@ -188,15 +294,48 @@ public class CompetitionService {
 	 * @author 王威翔
 	 */
 	public CompetitionBean republishById(Integer id) {
-		Optional<CompetitionBean> optional = compDao.findById(id);
+		Optional<CompetitionBean> optional = compRepo.findById(id);
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
 			// 重新發布貼文
-			compDao.save(comp);
+			compRepo.save(comp);
 			return comp;
 		}
 		return null;
+	}
+
+	/**
+	 * 將活動舉辦時間與時段轉化為對應時程表，並同步更新到 CompetitionToScheduleBean
+	 * 
+	 * @param startDate     活動開始日期
+	 * @param startTimespan 活動開始時段
+	 * @param endDate       活動結束日期
+	 * @param endTimespan   活動結束時段
+	 * @author 王威翔
+	 */
+	public void competitionToSchedule(String startDate, Integer startTimespan, String endDate, Integer endTimespan, Integer competitionId, Integer placeId) {
+		// 將時間轉化為時程表，並同步更新到 CompetitionToScheduleBean
+		try {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Date start = formatter.parse(startDate);
+			Date end = formatter.parse(endDate);
+			if (start.compareTo(end) < 0) {
+				Long diffInMillies = Math.abs(end.getTime() - start.getTime());
+				Integer diffInDays = Long.valueOf(TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)).intValue();
+				
+			} else if (start.compareTo(end) == 0) {
+				for (Integer i = startTimespan; i <= endTimespan; i ++) {
+					ScheduleBean schedule = new ScheduleBean();
+					schedule.setPlace(placeService.getOnePlaceById(placeId));
+					schedule.setScheduleDatetime(start);
+					schedule.setScheduleTimespan(i);
+					scheduleService.insertSchedule(schedule);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

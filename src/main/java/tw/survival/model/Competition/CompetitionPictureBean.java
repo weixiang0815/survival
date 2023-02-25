@@ -1,5 +1,7 @@
 package tw.survival.model.Competition;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "Competition_Picture")
@@ -25,6 +29,8 @@ public class CompetitionPictureBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
+
+	private byte[] picture;
 
 	public CompetitionPictureBean() {
 	}
@@ -51,6 +57,18 @@ public class CompetitionPictureBean {
 
 	public void setCompetition(CompetitionBean competition) {
 		this.competition = competition;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
+	public void setPicture(MultipartFile picture) throws IOException {
+		this.picture = picture.getBytes();
 	}
 
 }

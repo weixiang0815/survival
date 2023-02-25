@@ -37,11 +37,11 @@
 						</form></td>
 
 					<td>
-						<form action="${contextRoot}/Market/deleteLogistics" method="post"><input
-								name="id" type="hidden" value="${Logistics.id}" /> <input
+						<form action="${contextRoot}/Market/deleteLogistics" method="post">
+							<input name="_method" type="hidden" value="DELETE" /> <input
+								name="deleteid" type="hidden" value="${Logistics.id}" /> <input
 								type="submit" class="btn btn-danger btn-sm" value="刪除" />
-						</form></td>
-
+						</form>
 				</tr>
 			</jstl:forEach>
 		</tbody>

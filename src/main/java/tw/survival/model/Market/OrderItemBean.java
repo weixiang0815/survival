@@ -20,6 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Player.PlayerBean;
 
@@ -36,6 +37,7 @@ public class OrderItemBean {
 	@Column(name = "order_create_date")
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date order_create_date;
 
 	@Column(name = "status")
@@ -45,9 +47,6 @@ public class OrderItemBean {
 	@JoinColumn(name = "fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
-
-	public OrderItemBean() {
-	}
 
 	public Integer getId() {
 		return id;
@@ -81,4 +80,5 @@ public class OrderItemBean {
 		this.player = player;
 	}
 
+	
 }

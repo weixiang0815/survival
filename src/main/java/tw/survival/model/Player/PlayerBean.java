@@ -2,7 +2,10 @@ package tw.survival.model.Player;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,16 +15,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
+import tw.survival.model.Forum.BookmarkletBean;
+import tw.survival.model.Forum.MsgsBean;
+import tw.survival.model.Forum.PostsBean;
+import tw.survival.model.Forum.ScoreBean;
+import tw.survival.model.Forum.ThumbUpBean;
 
 @Entity
 @Table(name = "Player")
@@ -53,8 +66,11 @@ public class PlayerBean {
 	@Column(name = "age")
 	private Integer age;
 
-	@Column(name = "region")
-	private String region;
+	@Column(name = "county")
+	private String county;
+	
+	@Column(name="district")
+	private String district;
 
 	@Column(name = "address")
 	private String address;
@@ -68,9 +84,10 @@ public class PlayerBean {
 
 	@Column(name = "sex")
 	private String sex;
+	
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birthday")
 	private Date birthday;
 
@@ -103,25 +120,25 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
-//
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-//	@OrderBy("added desc")
-//	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();//RZ 2023/2/21
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+	@OrderBy("added desc")
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();//RZ 2023/2/21
 
 	@PrePersist
 	public void autoCreate() {
@@ -189,12 +206,22 @@ public class PlayerBean {
 		this.age = age;
 	}
 
-	public String getRegion() {
-		return region;
+	
+
+	public String getCounty() {
+		return county;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public String getAddress() {
@@ -273,13 +300,13 @@ public class PlayerBean {
 		this.crew = crew;
 	}
 
-//	public Set<PostsBean> getPostsOfPlayer() {
-//		return postsOfPlayer;
-//	}
-//
-//	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
-//		this.postsOfPlayer = postsOfPlayer;
-//	}
+	public Set<PostsBean> getPostsOfPlayer() {
+		return postsOfPlayer;
+	}
+
+	public void setPostsOfPlayer(Set<PostsBean> postsOfPlayer) {
+		this.postsOfPlayer = postsOfPlayer;
+	}
 //
 //	public Set<MsgsBean> getMsgsOfPlayer() {
 //		return msgsOfPlayer;
@@ -305,13 +332,13 @@ public class PlayerBean {
 //		this.scoreOfPost = scoreOfPost;
 //	}
 //
-//	public Set<BookmarkletBean> getBookmarkletOfPost() {
-//		return bookmarkletOfPost;
-//	}
-//
-//	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
-//		this.bookmarkletOfPost = bookmarkletOfPost;
-//	}
+	public Set<BookmarkletBean> getBookmarkletOfPost() {
+		return bookmarkletOfPost;
+	}
+
+	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
+		this.bookmarkletOfPost = bookmarkletOfPost;
+	}
 
 	public CrewPermission getCrewPermission() {
 		return crewPermission;

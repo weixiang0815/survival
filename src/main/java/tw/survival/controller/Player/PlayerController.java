@@ -1,7 +1,9 @@
 package tw.survival.controller.Player;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
+//import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,10 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.Player.PlayerService;
@@ -46,6 +52,7 @@ public class PlayerController {
 	}
 
 //U
+
 	@GetMapping("/player/update")
 	public String updatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
@@ -54,20 +61,22 @@ public class PlayerController {
 	}
 
 	@PutMapping("/player/update1")
-	public String updateById(@ModelAttribute("player") PlayerBean player) {
-//		if (thumbnail != null) {
-//			player.setThumbnail(thumbnail.getBytes());
-//		}
+	public String updateById(@ModelAttribute PlayerBean player) {
 		pService.update(player);
 		return "redirect:/player/list";
-
 	}
 
 	// D
 	@DeleteMapping("/player/delete")
-	public String deletePlayer(@RequestParam("id") Integer id) {
+	public String deletePlayer(@PathVariable("id") Integer id, RedirectAttributes ra) {
+		try {
+			ra.addFlashAttribute("DeleteMessage", "刪除成功: 編號=" + id);
+			pService.delete(id);
 
-		pService.delete(id);
+		} catch (Exception error) {
+
+		}
+
 		return "redirect:/player/list";
 	}
 
@@ -75,10 +84,12 @@ public class PlayerController {
 	public String postPlayer(@RequestParam("name") String name, @RequestParam("account") String account,
 			@RequestParam("password") String password, @RequestParam("identity") String identity_number,
 			@RequestParam("email") String email, @RequestParam("age") Integer age,
-			@RequestParam("region") String region, @RequestParam("nickname") String nickname,
-			@RequestParam("address") String address, @RequestParam("thumbnail") MultipartFile thumbnail,
-			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday, @RequestParam("info") String info,
+			@RequestParam("county") String county, @RequestParam("district") String district,
+			@RequestParam("nickname") String nickname, @RequestParam("address") String address,
+			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("sex") String sex,
+			@RequestParam("birthday") Date birthday, @RequestParam("info") String info,
 			@RequestParam("phone") String phone, @RequestParam("banned") String banned, Model model) {
+
 		try {
 			PlayerBean player = new PlayerBean();
 			player.setName(name);
@@ -88,7 +99,8 @@ public class PlayerController {
 			player.setEmail(email);
 			player.setAge(age);
 			player.setNickname(nickname);
-			player.setRegion(region);
+			player.setCounty(county);
+			player.setDistrict(district);
 			player.setAddress(address);
 			player.setThumbnail(thumbnail.getBytes());
 			player.setInfo(banned);
@@ -98,6 +110,7 @@ public class PlayerController {
 			player.setInfo("null");
 			player.setBanned("T");
 			pService.addplayer(player);
+			System.out.print("註冊成功");
 
 		} catch (Exception e) {
 

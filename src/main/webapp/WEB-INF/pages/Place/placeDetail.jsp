@@ -11,7 +11,7 @@
 <title>場地詳情</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_place.jsp"></jsp:include>
+<jsp:include page="../Template/admin.jsp"></jsp:include>
 
 <div class="container">
 <h1>場地詳情</h1>

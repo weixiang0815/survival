@@ -1,45 +1,45 @@
 package tw.survival.model.Competition;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "New_Competition_Form_Part_1")
+@Table(name = "New_Competition_Form_Part_3")
 public class NewCompetitionFormPart3Bean {
 
 	@Id
-	@Column(name = "fk_new_competition_form_id")
-	private Integer newCompetitionFormId;
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_new_competition_form_id")
-	private NewCompetitionFormBean newCompetitionForm;
+	@Column(name = "content_file_location")
+	private String contentFileLocation;
 
-	@Column(name = "content")
+	@Transient
 	private String content;
 
 	public NewCompetitionFormPart3Bean() {
 	}
 
-	public Integer getNewCompetitionFormId() {
-		return newCompetitionFormId;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNewCompetitionFormId(Integer newCompetitionFormId) {
-		this.newCompetitionFormId = newCompetitionFormId;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public NewCompetitionFormBean getNewCompetitionForm() {
-		return newCompetitionForm;
+	public String getContentFileLocation() {
+		return contentFileLocation;
 	}
 
-	public void setNewCompetitionForm(NewCompetitionFormBean newCompetitionForm) {
-		this.newCompetitionForm = newCompetitionForm;
+	public void setContentFileLocation(String contentFileLocation) {
+		this.contentFileLocation = contentFileLocation;
 	}
 
 	public String getContent() {
