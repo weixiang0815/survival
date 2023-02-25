@@ -58,7 +58,7 @@ public class EmployeeController {
 	@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
 	@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
 	@RequestParam("identity") String identity_number, @RequestParam("email") String email) {
-		String region=county+district+zipcode.toString(); 
+		String region=county+district;
 		try {
 			EmployeeBean employee=empService.employeeFindById(id);
 			employee.setName(name);
