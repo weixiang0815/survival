@@ -34,6 +34,9 @@ public class CompetitionPictureBean {
 	@Transient
 	private byte[] picture;
 
+	@Column(name = "content_type")
+	private String contentType;
+
 	public CompetitionPictureBean() {
 	}
 
@@ -70,7 +73,16 @@ public class CompetitionPictureBean {
 	}
 
 	public void setPicture(MultipartFile picture) throws IOException {
+		this.contentType = picture.getContentType();
 		this.picture = picture.getBytes();
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }
