@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -80,19 +81,21 @@ public class CompetitionControllerAjax {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/api/create")
-	public String createCompetition() {
+	public String createCompetition(@RequestBody CompetitionBean comp) {
+		compService.create(comp);
 		return "新增成功";
 	}
 
 	/**
 	 * 用 AJAX 正式發布一筆活動資訊
 	 * 
+	 * @param id 欲發布的活動實體 id
 	 * @return 發布成功與否
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/api/publish")
-	public String publishCompetition() {
-		return "發布成功";
+	@GetMapping("/competition/api/publish/{id}")
+	public String publishCompetition(@PathVariable Integer id) {
+		return compService.publishById(id) != null ? "發布成功" : "發布失敗";
 	}
 
 	@GetMapping("/competition/api/latest")
@@ -103,12 +106,13 @@ public class CompetitionControllerAjax {
 	/**
 	 * 用 AJAX 獲得指定 id 活動實體
 	 * 
+	 * @param id 欲查詢的活動實體 id
 	 * @return 回傳查到的指定 id 活動實體
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/api/")
-	public CompetitionBean competitionDetailById() {
-		return new CompetitionBean();
+	@GetMapping("/competition/api/{id}")
+	public CompetitionBean competitionDetailById(@PathVariable Integer id) {
+		return compService.findById(id);
 	}
 
 	/**
@@ -141,30 +145,33 @@ public class CompetitionControllerAjax {
 	 * @author 王威翔
 	 */
 	@PutMapping("/competition/api/edit")
-	public String editCompetitionById() {
+	public String editCompetition(@RequestBody CompetitionBean comp) {
+		compService.updateByEntity(comp);
 		return "更新成功";
 	}
 
 	/**
 	 * 用 AJAX 刪除指定 id 活動資訊
 	 * 
+	 * @param id 欲刪除的活動實體 id
 	 * @return 刪除成功與否
 	 * @author 王威翔
 	 */
-	@DeleteMapping("/competition/api/delete")
-	public String deleteCompetitionById() {
-		return "刪除成功";
+	@DeleteMapping("/competition/api/delete/{id}")
+	public String deleteCompetitionById(@PathVariable Integer id) {
+		return compService.deleteById(id) ? "刪除成功" : "刪除失敗";
 	}
 
 	/**
 	 * 用 AJAX 下架指定 id 活動資訊，但不一定直接刪除
 	 * 
+	 * @param id 欲下架的活動實體 id
 	 * @return 下架成功與否
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/api/takedown")
-	public String takedownCompetitionById() {
-		return "已下架";
+	@GetMapping("/competition/api/takedown/{id}")
+	public String takedownCompetitionById(@PathVariable Integer id) {
+		return compService.takedownById(id) != null ? "已下架" : "下架失敗";
 	}
 
 }
