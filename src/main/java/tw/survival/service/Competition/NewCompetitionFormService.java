@@ -1,5 +1,11 @@
 package tw.survival.service.Competition;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +66,26 @@ public class NewCompetitionFormService {
 	 */
 	public NewCompetitionFormBean findById(Integer id) {
 		Optional<NewCompetitionFormBean> optional = mainDao.findById(id);
-		return optional.isPresent() ? optional.get() : null;
+		if (optional.isPresent()) {
+			NewCompetitionFormBean form = optional.get();
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return form;
+		}
+		return null;
 	}
 
 	/**
@@ -73,9 +98,22 @@ public class NewCompetitionFormService {
 	 */
 	public NewCompetitionFormBean findByCreator(Integer creatorId, Integer creatorType) {
 		try {
-			return mainDao.findByCreator(creatorId, creatorType);
+			NewCompetitionFormBean form = mainDao.findByCreator(creatorId, creatorType);
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			}
+			return form;
 		} catch (Exception e) {
-			System.out.println("something went wrong");
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -88,8 +126,22 @@ public class NewCompetitionFormService {
 	 */
 	public NewCompetitionFormBean findLatestCreated() {
 		try {
-			return mainDao.findFirstByOrderByLastEditedDesc();
+			NewCompetitionFormBean form = mainDao.findFirstByOrderByLastEditedDesc();
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			}
+			return form;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -101,7 +153,24 @@ public class NewCompetitionFormService {
 	 * @author 王威翔
 	 */
 	public List<NewCompetitionFormBean> findAll() {
-		return mainDao.findAll();
+		List<NewCompetitionFormBean> forms = mainDao.findAll();
+		forms.forEach(form -> {
+			StringBuilder content = new StringBuilder("");
+			try (
+					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);
+					) {
+				String line = "";
+				while((line = br.readLine()) != null) {
+					content.append(line);
+				}
+				form.getThirdPart().setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return forms;
 	}
 
 	/**
@@ -167,29 +236,26 @@ public class NewCompetitionFormService {
 		if (optional.isPresent()) {
 			NewCompetitionFormBean form = optional.get();
 			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
-			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
-			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
 			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
 				firstPart.setStartDate(null);
 			} else {				
 				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
 			}
-			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
 			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
 				firstPart.setEndDate(null);
 			} else {
 				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
 			}
-			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
-			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
-			secondPart.setStatus(mainForm.getSecondPart().getStatus());
-			secondPart.setSingleOrCrew(mainForm.getSecondPart().getSingleOrCrew());
-			secondPart.setPlaceId(mainForm.getSecondPart().getPlaceId());
-			secondPart.setBudget(mainForm.getSecondPart().getBudget());
-			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
-			secondPart.setFee(mainForm.getSecondPart().getFee());
 			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
-			thirdPart.setContent(mainForm.getThirdPart().getContent());
+			try (
+					FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
+					OutputStreamWriter osw = new OutputStreamWriter(fos);
+					PrintWriter pw = new PrintWriter(osw);
+					) {
+				pw.print(thirdPart.getContent());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			form.setLastEdited(new Date());
 			return mainDao.save(form);
 		} else {

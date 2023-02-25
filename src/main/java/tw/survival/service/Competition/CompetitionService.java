@@ -276,7 +276,7 @@ public class CompetitionService {
 			try (FileOutputStream fos = new FileOutputStream(comp.getContentFileLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 					PrintWriter pw = new PrintWriter(osw);) {
-				pw.println(comp.getContent());
+				pw.print(comp.getContent());
 			} catch (Exception e) {
 				e.printStackTrace();
 				return null;
