@@ -122,9 +122,9 @@
 						<i class="bi bi-cart4"></i>&nbsp;&nbsp;商城系統
 				</a>
 					<ul class="collapse" id="submenu-market">
-						<li><a href="${contextRoot}/" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
+						<li><a href="${contextRoot}/Market/add_Product" class="nav-link">新增商品</a></li>
+						<li><a href="${contextRoot}/Market/allProduct" class="nav-link">管理商品</a></li>
+						<li><a href="${contextRoot}/" class="nav-link">訂單管理</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"

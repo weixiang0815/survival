@@ -41,7 +41,7 @@ public class ProductController {
 
 	// 新增商品
 	@ResponseBody
-	@PostMapping("ProductRepository/addproduct")
+	@PostMapping("/Market/addproduct")
 	public String insertProduct(@RequestParam("ProductName") String fileName,
 			@RequestParam("ProductContext") String Context, @RequestParam("Product_class") String Product_class,
 			@RequestParam("Price") Integer Price, @RequestParam("setRent_fee") Integer setRent_fee,

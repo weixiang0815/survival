@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class PageController {
 
-	@GetMapping("/")
+	@GetMapping("Market/marketMain")
 	public String goToIndex(Model model) {
 		return "Market/marketMain";
 	}
