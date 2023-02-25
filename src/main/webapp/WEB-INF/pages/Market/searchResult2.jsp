@@ -27,26 +27,26 @@
 			</tr>
 		</thead>
 		<tbody>
-			<jstl:forEach items="${SearchResult}" var="search" varStatus="Status">
+			<jstl:forEach items="${SearchResult2}" var="search2" varStatus="Status">
 				<tr>
 					<th scope="row">${Status.index+1}</th>
-					<td>${search.name}</td>
+					<td>${search2.name}</td>
 					<td><img alt="" height="100" width="160"
-						src="${contextRoot}/Market/id?id=${search.id}"></td>
-					<td>${search.product_class}</td>
-					<td>${search.context}</td>
-					<td>${search.rent_fee}</td>
-					<td>${search.price}</td>
+						src="${contextRoot}/Market/id?id=${search2.id}"></td>
+					<td>${search2.product_class}</td>
+					<td>${search2.context}</td>
+					<td>${search2.rent_fee}</td>
+					<td>${search2.price}</td>
 					<td>
 						<form action="${contextRoot}/Market/edit" method="get">
-							<input name="id" type="hidden" value="${search.id}" /> <input
+							<input name="id" type="hidden" value="${product_class.id}" /> <input
 								type="submit" class="btn btn-info btn-sm" value="編輯" />
 						</form>
 					</td>
 					<td>
 						<form action="${contextRoot}/Market/delete" method="post">
 							<input name="_method" type="hidden" value="delete" /> <input
-								name="id" type="hidden" value="${show_AllProduct.id}" /> <input
+								name="id" type="hidden" value="${product_class.id}" /> <input
 								type="submit" class="btn btn-danger btn-sm" value="刪除" />
 						</form>
 					</td>

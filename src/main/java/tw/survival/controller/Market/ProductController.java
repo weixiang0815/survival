@@ -1,7 +1,10 @@
 package tw.survival.controller.Market;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -17,12 +20,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
 import tw.survival.model.Market.ProductBean;
+import tw.survival.model.Market.ProductRepository;
 import tw.survival.service.Market.ProductService;
 
 @Controller
 public class ProductController {
-
+	
+	@Autowired
+	private ProductRepository productDao;
 
 	@Autowired
 	private ProductService productService;
@@ -35,10 +42,10 @@ public class ProductController {
 	// 新增商品
 	@ResponseBody
 	@PostMapping("ProductRepository/addproduct")
-	public String insertProduct(@RequestParam("photoName") String fileName,
-			@RequestParam("photoContext") String Context, @RequestParam("Product_class") String Product_class,
+	public String insertProduct(@RequestParam("ProductName") String fileName,
+			@RequestParam("ProductContext") String Context, @RequestParam("Product_class") String Product_class,
 			@RequestParam("Price") Integer Price, @RequestParam("setRent_fee") Integer setRent_fee,
-			@RequestParam("photoFile") MultipartFile file) {
+			@RequestParam("ProductFile") MultipartFile file) {
 		try {
 			ProductBean pb = new ProductBean();
 			pb.setName(fileName);
@@ -119,11 +126,46 @@ public class ProductController {
 		return "Market/searchResult";
 	}
 	
+	// 搜尋類型商品>>ProductRepository>>findProductClassLike
+		@GetMapping("/Market/productIn")
+		public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
+			List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
+			model.addAttribute("SearchResult2", searchResult);
+			return "Market/searchResult2";
+		}
+	
+//	// 模糊搜尋商品
+//		@GetMapping("/Market/productIn")
+//		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
+//				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
+//				@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
+//			List<ProductBean> searchResult = productDao.find(name,productclass,context);
+//			model.addAttribute("SearchResult2", searchResult);
+//			return "Market/searchResult2";
+//		}
+//		
+	
+	
+	
+	//多條件搜尋商品
+//	@ResponseBody
+//	@GetMapping("/Market/productFindByproductclassIn")
+//	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {
+//		List<ProductBean> searchResult = productService.findByClass(clazz);
+//		model.addAttribute("SearchResult2", searchResult);
+//		return "Market/serchResult";
+//	}
+	
 	@ResponseBody
-	@GetMapping("/Market/productFindByproductclassIn")
-	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz) {
-		List<ProductBean> searchResult = productService.findByClass(clazz);
-		
-		return searchResult.toString();
+	@GetMapping("/Market/productImage")
+	public Map<String, String> getProductImage(@RequestParam("productId") Integer productId) {
+	    ProductBean product = productService.getProductById(productId);
+	    Map<String, String> imageMap = new HashMap<>();
+	    if (product != null && product.getImg() != null) {
+	        String imageData = Base64.getEncoder().encodeToString(product.getImg());
+	        imageMap.put("imageData", imageData);
+	    }
+	    return imageMap;
 	}
+	
 }

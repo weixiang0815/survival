@@ -83,9 +83,15 @@ public class ProductService {
 	public List<ProductBean> findByName(String name) {
 		return productDao.findProductLike(name);
 	}
+	
+	
+//	public List<ProductBean> findInClazz(String Clazz) {
+//		return productDao.findProductIn(Clazz);
+//	}
 
 	public List<ProductBean> findByClass(List<String> clazz) {
-		return tpdt.findByproductclassIn(clazz);
+		return tpdt.findByProductclassIn(clazz);
 	}
+	
 
 }
