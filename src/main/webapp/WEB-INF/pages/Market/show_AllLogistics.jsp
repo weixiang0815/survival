@@ -10,7 +10,7 @@
 <title>所有物流</title>
 </head>
 <body>
-	<jsp:include page="Layout/navbar_market.jsp"></jsp:include>
+	<jsp:include page="../Template/admin.jsp"></jsp:include>
 	<h1>所有物流</h1>
 	<table class="table table-hover table-bordered table-dark">
 		<thead>
