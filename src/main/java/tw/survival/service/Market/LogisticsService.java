@@ -48,19 +48,19 @@ public class LogisticsService {
 		return LogisticsDao.findAll();
 	}
 
-	public LogisticsBean updatelog(LogisticsBean logBean) {
-		LogisticsDao.save(logBean);
-		return null;
-	}
-	
 	//d
 	public void deleteById(Integer id) {
 		
-	    LogisticsBean lb = findById(id);
-	    lb.setInventory(null);
-	    lb.setOrderItem(null);
-	    lb.setPlayer(null);
-	    LogisticsDao.deleteById(id);
-	    return;
+		LogisticsBean lb = findById(id);
+		lb.setInventory(null);
+		lb.setOrderItem(null);
+		lb.setPlayer(null);
+		LogisticsDao.deleteById(id);
+		
 	}
+	public LogisticsBean update(LogisticsBean logistics) {
+		LogisticsDao.save(logistics);
+		return null;
+	}
+	
 }
