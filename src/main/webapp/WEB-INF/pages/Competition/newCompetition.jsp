@@ -11,13 +11,11 @@
 <title>新增活動</title>
 </head>
 <body>
-<%-- 	<jsp:include page="../Layout/navbar_competition.jsp" /> --%>
 <jsp:include page="../Template/admin.jsp" />
 	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
-			<div class="col-10 col-md-6 col-lg-8"
-				style="border: 2px solid red; border-radius: 5px;">
-				<h1>活動詳情表單</h1>
+			<div class="col-10 col-md-6 col-lg-8">
+				<h1 class="text-center">活動新增表單</h1>
 				<span>${error}</span>
 				<div hidden>
 					<span id="creatorId">1</span>
@@ -25,7 +23,7 @@
 				</div>
 				<c:choose>
 					<c:when test="${player == null && employee == null}">
-						<h1>請先登入再新增活動呦😊～</h1>
+						<h1 class="text-center">請先登入再新增活動呦😊～</h1>
 					</c:when>
 					<c:otherwise>
 					</c:otherwise>
@@ -33,8 +31,8 @@
 				<form:form name="competition" action="${contextRoot}/competition/create"
 					modelAttribute="competition">
 					<div class="input-group">
-						<fieldset class="row mt-3 mb-3 p-3">
-							<legend>基本資料</legend>
+						<div class="row mt-3 mb-3 p-3">
+							<h3>基本資料</h3>
 							<div class="col-6">
 								<form:label class="form-label" path="mandarinName">中文活動名稱</form:label>
 								<form:input class="form-control" type="text" path="mandarinName"
@@ -73,9 +71,9 @@
 									<form:option value="4" label="半夜（00:00～6:00）" />
 								</form:select>
 							</div>
-						</fieldset>
-						<fieldset class="row mt-3 mb-3 p-3">
-							<legend>行政資料</legend>
+						</div>
+						<div class="row mt-3 mb-3 p-3">
+							<h3>行政資料</h3>
 							<div class="col-3">
 								<p>是否直接發布</p>
 								<form:radiobutton name="status" class="form-check-input"
@@ -132,19 +130,19 @@
 									pattern="[0-9]+" path="fee" id="fee" placeholder="以新台幣計算"
 									required="true" />
 							</div>
-						</fieldset>
-						<fieldset class="row mt-3 mb-3 p-3">
-							<legend>詳細資料</legend>
+						</div>
+						<div class="row mt-3 mb-3 p-3">
+							<h3>詳細資料</h3>
 							<div class="col">
 								<form:label path="content" class="form-label">活動介紹</form:label>
 								<form:textarea id="ckeditor" path="content" class="form-control" />
 							</div>
-						</fieldset>
-						<fieldset class="row mt-3 mb-3 p-3">
-							<button class="col auto m-3 btn btn-primary" type="submit">送出</button>
-							<button class="col auto m-3 btn btn-danger" type="reset">清除</button>
-						</fieldset>
+						</div>
+						<div class="row mt-3 mb-3 p-3">
+						</div>
 					</div>
+					<button class="col auto m-3 btn btn-primary" type="submit">送出</button>
+					<button class="col auto m-3 btn btn-danger" type="reset">清除</button>
 				</form:form>
 			</div>
 		</div>
@@ -152,6 +150,5 @@
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script src="${contextRoot}/js/Competition/newCompetition.js"></script>
-	<%-- <jsp:include page="../Layout/footer.jsp" /> --%>
 </body>
 </html>

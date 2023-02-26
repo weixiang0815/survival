@@ -272,7 +272,7 @@ public class NewCompetitionFormService {
 					OutputStreamWriter osw = new OutputStreamWriter(fos);
 					PrintWriter pw = new PrintWriter(osw);
 					) {
-				pw.print(mainForm.getThirdPart().getContent());
+				pw.println(mainForm.getThirdPart().getContent());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

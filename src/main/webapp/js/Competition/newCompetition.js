@@ -1,4 +1,3 @@
-
 const creatorId = $("#creatorId");
 const creatorType = $("#creatorType");
 const retrieveFromURL = "http://localhost:8080/Survival/competition/api/create/newForm/getlatest";
