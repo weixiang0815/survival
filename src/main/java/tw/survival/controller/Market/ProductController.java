@@ -90,7 +90,7 @@ public class ProductController {
 
 	// 修改商品
 	@GetMapping("/Market/edit")
-	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
+	public String editProductPage(@RequestParam("id") Integer id, Model model) {
 		ProductBean p1 = productService.findById(id);
 		model.addAttribute("product", p1);
 		return "Market/editProduct";
@@ -98,13 +98,13 @@ public class ProductController {
 
 	// 修改商品
 	@PostMapping("/Market/edit")
-	public String sendEditedMessage(@RequestParam("id") Integer id, @RequestParam("name") String name,
+	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
 			@RequestParam("img") MultipartFile img, @RequestParam("product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
 		try {
-			productService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+			productService.updateProductById(id, name, img.getBytes(), product_class, context, rent_fee, price);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -134,16 +134,25 @@ public class ProductController {
 			return "Market/searchResult2";
 		}
 	
-	// 簡易多條件搜尋商品 未測試
-		@GetMapping("/Market/productIn2")
-		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
-				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
-				@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
-			List<ProductBean> searchResult = productDao.find(name,productclass,context);
-			model.addAttribute("SearchResult2", searchResult);
-			return "Market/searchResult2";
-		}
+//	// 簡易多條件搜尋商品 未測試
+//		@GetMapping("/Market/productIn2")
+//		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
+//				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
+//				@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
+//			List<ProductBean> searchResult = productDao.findProductText(name,productclass,context);
+//			model.addAttribute("SearchResult2", searchResult);
+//			return "Market/searchResult2";
+//		}
 		
+		@GetMapping("/Market/productIn2")
+	    public String findProductIn(@RequestParam(name = "name", required = false, defaultValue = "") String name,
+	                                @RequestParam(name = "productclass", required = false, defaultValue = "") String productclass,
+	                                @RequestParam(name = "context", required = false, defaultValue = "") String context,
+	                                Model model) {
+	        List<ProductBean> searchResult = productDao.findProductText(name, productclass, context);
+	        model.addAttribute("SearchResult2", searchResult);
+	        return "Market/searchResult2";
+	    }
 	
 	
 	
