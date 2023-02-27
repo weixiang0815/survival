@@ -58,11 +58,13 @@ public class CompetitionControllerAjax {
 	public NewCompetitionFormBean getLatestNewCompetitionForm(@RequestBody NewCompetitionFormBean form)
 			throws IOException {
 		NewCompetitionFormBean latestForm = newFormService.findByCreator(form.getCreatorId(), form.getCreatorType());
+		System.out.println(latestForm);
 		if (latestForm == null) {
 			NewCompetitionFormBean newForm = new NewCompetitionFormBean();
 			newForm.setCreatorId(form.getCreatorId());
 			newForm.setCreatorType(form.getCreatorType());
 			latestForm = newFormService.insert(newForm);
+			System.out.println(latestForm);
 		}
 		return latestForm;
 	}
