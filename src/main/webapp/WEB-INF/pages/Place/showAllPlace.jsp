@@ -13,7 +13,7 @@
 <body>
 	<jsp:include page="../Template/admin.jsp"></jsp:include>
 	<div class="container">
-		<h1>All Place</h1>
+		<h1>所有場地</h1>
 
 		<table class="table table-hover table-bordered">
 			<tr>
