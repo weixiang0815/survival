@@ -13,6 +13,7 @@ import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
 
 @Controller
@@ -26,6 +27,9 @@ public class CompetitionController {
 
 	@Autowired
 	private CompetitionPrizeService compPrizeService;
+	
+	@Autowired
+	private ProductService productService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -89,11 +93,15 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@GetMapping("/competition/prize/new")
-	public String newPrizes(@RequestParam("id") Integer id, Model model) {
+	public String newPrizes(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
 		CompetitionPrizeBean compPrize = new CompetitionPrizeBean();
+		CompetitionBean comp = compService.findById(id);
 		compPrize.setCompetitionId(id);
-		compPrize.setCompetition(compService.findById(id));
+		compPrize.setCompetition(comp);
 		model.addAttribute("prizes", compPrize);
+		model.addAttribute("comp", comp);
+		model.addAttribute("place", comp.getPlace());
+		model.addAttribute("products", productService.findAllProduct());
 		return "Competition/newCompPrize";
 	}
 
