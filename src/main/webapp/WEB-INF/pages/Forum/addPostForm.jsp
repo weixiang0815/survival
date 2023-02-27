@@ -33,7 +33,7 @@
 
 		    <br/>
 		    <label for="inputEssay">請輸入內容:</label>
-		    <form:textarea id="ckeditor" path="essay" class="form-control" />
+		    <form:textarea id="ckeditor" path="content" class="form-control" />
 		    <br/>
 		    <button type="submit" class="btn btn-outline-primary">送出</button>
 		    

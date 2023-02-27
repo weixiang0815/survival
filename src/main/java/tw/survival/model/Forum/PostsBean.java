@@ -20,6 +20,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -48,8 +49,12 @@ public class PostsBean implements Serializable{
 	@Column(name = "classify")
 	private String classify;
 	
-	@Column(name = "essay")
-	private String essay;
+	@Column(name = "essay_file_location")
+	private String essayLocation;
+	
+
+	@Transient
+	private String content;
 	
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name="added")
@@ -106,10 +111,10 @@ public class PostsBean implements Serializable{
 	
 	
 
-	public PostsBean(String name, String classify, String essay, Date added) {
+	public PostsBean(String name, String classify, String essayLocation) {
 		this.name = name;
 		this.classify = classify;
-		this.essay = essay;
+		this.essayLocation = essayLocation;
 	}
 
 
@@ -150,14 +155,26 @@ public class PostsBean implements Serializable{
 
 
 
-	public String getEssay() {
-		return essay;
+	public String getEssayLocation() {
+		return essayLocation;
 	}
 
 
 
-	public void setEssay(String essay) {
-		this.essay = essay;
+	public void setEssayLocation(String essayLocation) {
+		this.essayLocation = essayLocation;
+	}
+
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 
@@ -174,30 +191,6 @@ public class PostsBean implements Serializable{
 
 
 
-	public PlayerBean getPlayer() {
-		return player;
-	}
-
-
-
-	public void setPlayer(PlayerBean player) {
-		this.player = player;
-	}
-
-
-
-	public CompetitionBean getCompetition() {
-		return competition;
-	}
-
-
-
-	public void setCompetition(CompetitionBean competition) {
-		this.competition = competition;
-	}
-
-
-
 	public Date getFinalAdded() {
 		return finalAdded;
 	}
@@ -208,7 +201,7 @@ public class PostsBean implements Serializable{
 		this.finalAdded = finalAdded;
 	}
 
-	
+
 
 	public Set<MsgsBean> getMsgsOfPost() {
 		return msgsOfPost;
@@ -255,6 +248,34 @@ public class PostsBean implements Serializable{
 	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
 		this.bookmarkletOfPost = bookmarkletOfPost;
 	}
+
+
+
+	public PlayerBean getPlayer() {
+		return player;
+	}
+
+
+
+	public void setPlayer(PlayerBean player) {
+		this.player = player;
+	}
+
+
+
+	public CompetitionBean getCompetition() {
+		return competition;
+	}
+
+
+
+	public void setCompetition(CompetitionBean competition) {
+		this.competition = competition;
+	}
+
+
+
+	
 	
 	
 }
