@@ -14,7 +14,6 @@ public interface CompetitionToScheduleRepository extends JpaRepository<Competiti
 	public void deleteByCompetitionId(@Param("id") Integer id);
 
 	@Query(value = "select * from Competition_To_Schedule where fk_competition_id = :id", nativeQuery = true)
-	public List<CompetitionToScheduleBean> findByCompetitionId(@Param("id")Integer id);
-	
-	
+	public List<CompetitionToScheduleBean> findByCompetitionId(@Param("id") Integer id);
+
 }

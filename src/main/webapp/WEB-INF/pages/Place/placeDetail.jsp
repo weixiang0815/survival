@@ -15,11 +15,31 @@
 
 <div class="container">
 <h1>場地詳情</h1>
-<form:form>
-
-
-
-</form:form>
+<br/>
+<div class="row">
+	<div class="col-2">場地照片:</div>
+	<div class="col-6"><img src="${contextRoot}/place/id?id=${place.id}" width="50%"></div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-2">場地名稱:</div>
+	<div class="col-2">${place.place_name}</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-2">場地地址:</div>
+	<div class="col-2">${place.place_address}</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-2">場地費用/時段:</div>
+	<div class="col-2">${place.place_fee} 元</div>
+</div>
+<br/>
+<div class="row">
+	<div class="col-2">場地容納人數:</div>
+	<div class="col-2">${place.place_capacity} 人</div>
+</div>
 
 </div>
 </body>

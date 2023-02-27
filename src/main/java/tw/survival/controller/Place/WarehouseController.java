@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.WarehouseBean;
+import tw.survival.service.Place.InventoryService;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.WarehouseService;
 
@@ -27,6 +28,8 @@ public class WarehouseController {
 	@Autowired
 	private PlaceService placeService;
 	
+	@Autowired
+	private InventoryService inventoryService;
 	
 	@GetMapping("/warehouse/new")
 	public String newWarehouse(Model model) {
@@ -77,6 +80,11 @@ public class WarehouseController {
 		return "redirect:/warehouse/all";
 	}
 	
-	
+	@GetMapping("/warehouse/detail")
+	public String warehouseDetail(@RequestParam("id") Integer id,Model model) {
+		model.addAttribute("inventory", warehouseService.getOneWarehouseById(id).getInventory());
+		model.addAttribute("warehouse", warehouseService.getOneWarehouseById(id));
+		return "Place/warehouseDetail";
+	} 
 	
 }
