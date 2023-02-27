@@ -1,5 +1,6 @@
 package tw.survival.controller.Forum;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
@@ -38,6 +39,8 @@ public class PostsController {
 	
 	@PostMapping("/posts/post")
 	public String insertPost(@ModelAttribute PostsBean post, Model model) {
+		
+		
 		pService.insertPost(post);
 		
 		PostsBean newPost = new PostsBean();

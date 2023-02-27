@@ -97,7 +97,7 @@ public class CompetitionService {
 			PostsBean newPost = new PostsBean();
 			newPost.setName(comp.getMandarinName());
 			newPost.setClassify("competition");
-			newPost.setEssay(comp.getContent());
+			newPost.setContent(comp.getContent());
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;
@@ -117,6 +117,7 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			StringBuffer content = new StringBuffer("");
+			//StringBuffer 預防記憶體爆掉
 			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr);) {
