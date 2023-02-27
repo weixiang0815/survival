@@ -13,7 +13,7 @@
 <jsp:include page="../Template/admin.jsp"></jsp:include>
 
 <div class="container">
-<h1>AddPlace</h1>
+<h1>新增場地</h1>
 <form action="" id="ajaxForm">
 		<table>
 			<tr>
