@@ -134,7 +134,7 @@ public class ProductController {
 			return "Market/searchResult2";
 		}
 	
-	// 簡易多條件搜尋商品
+	// 簡易多條件搜尋商品 未測試
 		@GetMapping("/Market/productIn2")
 		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
 				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
