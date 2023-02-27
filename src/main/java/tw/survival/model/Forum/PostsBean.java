@@ -23,6 +23,7 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -83,6 +84,7 @@ public class PostsBean implements Serializable{
 	@JoinColumn(name="fk_player_id")
 	private PlayerBean player;
 	
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
