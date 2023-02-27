@@ -120,7 +120,6 @@ public class CompetitionControllerAjax {
 			CompetitionPictureBean compPicture = new CompetitionPictureBean();
 			try {
 				compPicture.setPicture(file);
-
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
