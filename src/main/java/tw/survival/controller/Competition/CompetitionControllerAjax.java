@@ -2,6 +2,7 @@ package tw.survival.controller.Competition;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -40,7 +41,7 @@ public class CompetitionControllerAjax {
 
 	@Autowired
 	private PlaceService placeService;
-	
+
 	@Autowired
 	private CompetitionPictureService compPictureService;
 
@@ -62,17 +63,6 @@ public class CompetitionControllerAjax {
 			newForm.setCreatorId(form.getCreatorId());
 			newForm.setCreatorType(form.getCreatorType());
 			latestForm = newFormService.insert(newForm);
-			String filepath = "C:/Survival/Competition/Competition/temp_content/";
-			File file = new File(filepath);
-			if (!file.exists()) {
-				file.mkdirs();
-			}
-			filepath += "temp_" + latestForm.getThirdPart().getId() + ".txt";
-			file = new File(filepath);
-			if (!file.exists()) {
-				file.createNewFile();
-			}
-			latestForm.getThirdPart().setContentFileLocation(filepath);
 		}
 		return latestForm;
 	}
@@ -84,8 +74,10 @@ public class CompetitionControllerAjax {
 	 * @author 王威翔
 	 */
 	@PutMapping("/competition/api/create/update")
-	public Date updateNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
-		return newFormService.updateByEntity(newForm).getLastEdited();
+	public String updateNewCompetitionForm(@RequestBody NewCompetitionFormBean newForm) {
+		Date lastEdited = newFormService.updateByEntity(newForm).getLastEdited();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日 EEEE aahh:mm:ss");
+		return formatter.format(lastEdited);
 	}
 
 	/**
@@ -96,12 +88,17 @@ public class CompetitionControllerAjax {
 	 */
 	@PostMapping("/competition/api/create")
 	public String createCompetition(@RequestBody CompetitionBean comp) {
-		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
-		comp.setFounderEmployee(null);
-		comp.setFounderPlayer(null);
-		compService.create(comp);
-		if (comp.getStatus().contentEquals("已發布")) {
-			compService.publishById(comp.getId());
+		try {
+			comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
+			comp.setFounderEmployee(null);
+			comp.setFounderPlayer(null);
+			comp = compService.create(comp);
+			if (comp.getStatus().contentEquals("已發布")) {
+				compService.publishById(comp.getId());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "新增失敗";
 		}
 		return "新增成功";
 	}

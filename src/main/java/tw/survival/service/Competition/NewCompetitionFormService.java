@@ -55,19 +55,19 @@ public class NewCompetitionFormService {
 		mainBean.setFirstPart(part1);
 		NewCompetitionFormPart2Bean part2 = part2Dao.save(new NewCompetitionFormPart2Bean());
 		mainBean.setSecondPart(part2);
-		NewCompetitionFormPart3Bean part3 = new NewCompetitionFormPart3Bean();
+		NewCompetitionFormPart3Bean part3 = part3Dao.save(new NewCompetitionFormPart3Bean());
 		String filepath = "C:/Survival/Competition/Competition/temp_content/";
 		File file = new File(filepath);
 		if (!file.exists()) {
 			file.mkdirs();
 		}
-		part3 = part3Dao.save(part3);
-		file = new File(filepath + "/temp_" + part3.getId());
+		filepath += "/temp_" + part3.getId() + ".txt";
+		file = new File(filepath);
 		if (!file.exists()) {
 			file.createNewFile();
 		}
+		part3.setContentFileLocation(filepath);
 		mainBean.setThirdPart(part3);
-		
 		return mainDao.save(mainBean);
 	}
 

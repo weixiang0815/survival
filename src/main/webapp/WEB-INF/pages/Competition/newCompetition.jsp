@@ -15,22 +15,17 @@
 	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-6 col-lg-8">
-				<h1 class="text-center">活動新增表單</h1>
-				<span>${error}</span>
-				<div hidden>
-					<span id="creatorId">1</span>
-					<span id="creatorType">1</span>
+				<div class="text-center">
+					<h1>活動新增表單</h1>
+					<div hidden>
+						<span id="creatorId">1</span>
+						<span id="creatorType">1</span>
+					</div>
+					<span id="lastEdited">&nbsp;</span>
 				</div>
-				<c:choose>
-					<c:when test="${player == null && employee == null}">
-						<h1 class="text-center">請先登入再新增活動呦😊～</h1>
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-				</c:choose>
 				<form:form name="competition" action="${contextRoot}/competition/create"
-					modelAttribute="competition">
-					<div class="input-group">
+				modelAttribute="competition">
+				<div class="input-group">
 						<div class="row mt-3 mb-3 p-3">
 							<h3>基本資料</h3>
 							<div class="col-6">
