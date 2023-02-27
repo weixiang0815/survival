@@ -77,16 +77,6 @@ public class PostsService {
 			return pDao.save(post);
 		}
 		return null;
-//		if(!pDao.existsById(post.getId())) {
-//			return null;
-//		}
-//		try {
-//			System.out.println(pDao.findById(post.getId()).get().getAdded());
-//			
-//			return pDao.save(post);
-//		} catch (Exception e) {
-//			return null;
-//		}
 	}
 	
 	/**
@@ -110,6 +100,30 @@ public class PostsService {
 	public List<PostsBean> getAllPosts2(){
 		return pDao.findPostsBeanByOrderByFinalAddedDesc();
 	}
+	
+	/**
+	 * 得到所有該活動相關的貼文資料，依照貼文最近一次的更新時間排序
+	 * 
+	 * 
+	 * @return 一個PostsBean型別的List集合物件，或者null
+	 * @author 鄭力豪
+	 */
+	public List<PostsBean> getPostsByCpttId(Integer id){
+		return pDao.findPostsByCompetitionId(id);
+	}
+	
+	/**
+	 * 刪除所有該活動相關的貼文資料
+	 * 
+	 * 
+	 * @return
+	 * @author 鄭力豪
+	 */
+	public void deletePostsByCpttId(Integer id){
+		pDao.deletePostsByCompetitionId(id);
+		return;
+	}
+	
 	
 	
 	
