@@ -11,7 +11,7 @@
 <title>新增訂單</title>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"></jsp:include>
+<jsp:include page="../../Template/admin.jsp"></jsp:include>
 <div class="container">
 <h1>新增訂單</h1>
 <form action="${contextRoot}/OrderItem/addorder" method="post" >

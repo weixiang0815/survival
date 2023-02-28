@@ -39,7 +39,7 @@
 </head>
 
 <body>
-	<jsp:include page="../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
 		<div class="st1">
 			<h1>新增商品</h1>

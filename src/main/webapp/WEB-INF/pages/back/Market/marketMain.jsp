@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<jsp:include page="../Template/admin.jsp"></jsp:include>
+<jsp:include page="../../Template/admin.jsp"></jsp:include>
     
 <div class="container"></div>
 <h4>在這世界上一共有伍億伍千萬支軍火在流通，那就是說每12個人就有1個人有槍，唯一的問題是：我們如何讓其他11個人也有槍？

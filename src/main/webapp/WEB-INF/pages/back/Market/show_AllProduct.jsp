@@ -11,7 +11,7 @@
 <title>所有商品</title>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"></jsp:include>
+<jsp:include page="../../Template/admin.jsp"></jsp:include>
 <h1>所有商品</h1>
 
 <form action="${contextRoot}/Market/productIn" method="get">

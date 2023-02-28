@@ -10,7 +10,7 @@
 <title>查詢商品</title>
 </head>
 <body>
-	<jsp:include page="../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<h1>查詢商品</h1>
 	<table class="table">
 		<thead>
@@ -26,6 +26,8 @@
 				<th scope="col">刪除商品</th>
 			</tr>
 		</thead>
+		
+		
 		<tbody>
 			<jstl:forEach items="${SearchResult2}" var="search2" varStatus="Status">
 				<tr>

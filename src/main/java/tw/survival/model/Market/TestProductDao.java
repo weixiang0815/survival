@@ -42,7 +42,7 @@ public class TestProductDao {
 	public List<ProductBean> findProductText2(String name, String productclass, String context) {
 		String sql = "SELECT * FROM Product WHERE"
 				+ "		ISNULL(name, '') LIKE CONCAT('%', ?1, '%') "
-				+ "	OR ISNULL(class, '') = ?2 "
+				+ "	OR ISNULL(class, '') In( ?2 ) "
 				+ "	OR ISNULL(context, '') LIKE CONCAT('%', ?3, '%');";
 		Query query = em.createNativeQuery(sql, ProductBean.class);
 		query.setParameter(1, name);
