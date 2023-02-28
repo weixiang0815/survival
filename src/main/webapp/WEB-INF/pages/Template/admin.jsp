@@ -166,11 +166,11 @@
 						<i class="bi bi-file-text"></i>&nbsp;&nbsp;論壇系統
 				</a>
 					<ul class="collapse" id="submenu-forum">
-						<li><a href="${contextRoot}/forum.main" class="nav-link">首頁</a></li>
+						<li><a href="${contextRoot}/posts.main" class="nav-link">首頁</a></li>
 						<li><a href="${contextRoot}/formToAdd" class="nav-link">貼文發布</a></li>
 						<li><a href="${contextRoot}/posts/getAll" class="nav-link">最新貼文</a></li>
-						<li><a href="${contextRoot}/forum.main" class="nav-link">我的最愛(未給網址)</a></li>
-						<li><a href="${contextRoot}/forum.main" class="nav-link">我的貼文(未給網址)</a></li>
+						<li><a href="${contextRoot}/posts.main" class="nav-link">我的最愛(未給網址)</a></li>
+						<li><a href="${contextRoot}/posts.main" class="nav-link">我的貼文(未給網址)</a></li>
 						<%-- 						<li><a href="${contextRoot}/" class="nav-link">無命題</a></li> --%>
 					</ul></li>
 			</ul>

@@ -1,6 +1,6 @@
 package tw.survival.controller.Forum;
 
-import java.io.File;
+
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +25,7 @@ public class PostsController {
 	@Autowired
 	private PostsService pService;
 	
-	@GetMapping("/forum.main")
+	@GetMapping("/posts.main")
 	public String mainPage() {
 		return "Forum/index";
 	}
