@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Market.TestProductDao;
 import tw.survival.service.Market.ProductService;
 
 @Controller
@@ -33,6 +34,9 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private TestProductDao TestDao ;
 
 	@GetMapping("/Market/add_Product")
 	private String uploadPage() {
@@ -126,7 +130,7 @@ public class ProductController {
 		return "Market/searchResult";
 	}
 	
-	// 搜尋類型商品>>ProductRepository>>findProductClassLike
+//	 搜尋類型商品>>ProductRepository>>findProductClassLike
 		@GetMapping("/Market/productIn")
 		public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
 			List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
@@ -145,14 +149,14 @@ public class ProductController {
 //		}
 		
 		@GetMapping("/Market/productIn2")
-	    public String findProductIn(@RequestParam(name = "name", required = false, defaultValue = "") String name,
-	                                @RequestParam(name = "productclass", required = false, defaultValue = "") String productclass,
-	                                @RequestParam(name = "context", required = false, defaultValue = "") String context,
-	                                Model model) {
-	        List<ProductBean> searchResult = productDao.findProductText(name, productclass, context);
-	        model.addAttribute("SearchResult2", searchResult);
-	        return "Market/searchResult2";
-	    }
+		public String findProductIn(@RequestParam(name = "name", defaultValue = "") String name,
+		@RequestParam(name = "productclass", defaultValue = "") String productclass,
+		@RequestParam(name = "context", defaultValue = "") String context,
+		Model model) {
+		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
+		model.addAttribute("SearchResult2", searchResult);
+		return "Market/searchResult2";
+		}
 	
 	
 	
