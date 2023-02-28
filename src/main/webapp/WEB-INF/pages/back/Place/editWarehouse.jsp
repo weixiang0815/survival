@@ -11,7 +11,7 @@
 <title>修改倉庫</title>
 </head>
 <body>
-	<jsp:include page="../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
 		<div class="card">
 			<div class="card-header">修改倉庫</div>
