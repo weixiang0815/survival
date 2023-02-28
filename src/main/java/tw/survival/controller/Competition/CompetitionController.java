@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
 
 @Controller
@@ -21,6 +24,12 @@ public class CompetitionController {
 
 	@Autowired
 	private PlaceService placeService;
+
+	@Autowired
+	private CompetitionPrizeService compPrizeService;
+	
+	@Autowired
+	private ProductService productService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -74,6 +83,40 @@ public class CompetitionController {
 		CompetitionBean comp = compService.publishById(id);
 		model.addAttribute("comp", comp);
 		return "Competition/competitionDetail";
+	}
+
+	/**
+	 * 跳轉至新增活動獎品頁面
+	 * 
+	 * @param id 欲新增活獎品的活動 id
+	 * @return 跳轉至新增活動獎品頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/prize/new")
+	public String newPrizes(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
+		CompetitionPrizeBean compPrize = new CompetitionPrizeBean();
+		CompetitionBean comp = compService.findById(id);
+		compPrize.setCompetitionId(id);
+		compPrize.setCompetition(comp);
+		model.addAttribute("prizes", compPrize);
+		model.addAttribute("comp", comp);
+		model.addAttribute("place", comp.getPlace());
+		model.addAttribute("products", productService.findAllProduct());
+		return "Competition/newCompPrize";
+	}
+
+	/**
+	 * 新增指定活動 id 的獎品
+	 * 
+	 * @return 重新導向至指定 id 活動的詳情頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/prize/add")
+	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
+		compPrize = compPrizeService.insert(compPrize);
+		CompetitionBean comp = compPrize.getCompetition();
+		comp.setCompetitionPrizes(compPrize);
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**

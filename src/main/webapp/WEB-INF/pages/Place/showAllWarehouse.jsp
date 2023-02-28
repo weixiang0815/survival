@@ -23,8 +23,8 @@
 			</tr>
 			<jstl:forEach items="${list}" var="warehouse">
 				<tr>
-					<td><a href="http://localhost:8080/Survival/place/detail">${warehouse.place.place_name}</a></td>
-					<td>${warehouse.warehouseName}</td>
+					<td><a href="${contextRoot}/place/detail?id=${warehouse.place.id}">${warehouse.place.place_name}</a></td>
+					<td><a href="${contextRoot}/warehouse/detail?id=${warehouse.id}">${warehouse.warehouseName}</a></td>
 					<td>
 						<form action="${contextRoot}/warehouse/edit" method="get">
 							<input name="id" type="hidden" value="${warehouse.id}" /> 

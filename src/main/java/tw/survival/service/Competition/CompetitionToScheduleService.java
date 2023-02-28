@@ -61,6 +61,17 @@ public class CompetitionToScheduleService {
 	}
 
 	/**
+	 * 透過 competitionId 查詢一筆活動時程中介表實體
+	 * 
+	 * @param compId 欲查詢的活動中介表實體 id
+	 * @return 回傳裝著活動時程中介表實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionToScheduleBean> findByCompetitionId(Integer compId) {
+		return compToScheduleRepo.findByCompetitionId(compId);
+	}
+
+	/**
 	 * 透過 id 刪除一筆活動時程中介表實體
 	 * 
 	 * @param id 欲刪除的活動中介表實體 id

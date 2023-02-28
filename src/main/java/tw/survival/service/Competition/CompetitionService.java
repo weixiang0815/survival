@@ -96,8 +96,8 @@ public class CompetitionService {
 			comp.setStatus("已發布");
 			PostsBean newPost = new PostsBean();
 			newPost.setName(comp.getMandarinName());
-			newPost.setClassify("活動競賽😎");
-			newPost.setEssay(comp.getContent());
+			newPost.setClassify("competition");
+			newPost.setContent(comp.getContent());
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;
@@ -117,6 +117,7 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			StringBuffer content = new StringBuffer("");
+			//StringBuffer 預防記憶體爆掉
 			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr);) {
@@ -211,6 +212,26 @@ public class CompetitionService {
 	}
 
 	/**
+	 * 查詢已發布的所有活動實體
+	 * 
+	 * @return 回傳裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionBean> findPublishedComps() {
+		return compRepo.findByStatus("已發布");
+	}
+
+	/**
+	 * 查詢已發布的所有活動實體 id
+	 * 
+	 * @return 回傳裝著活動實體 id 的 List 物件
+	 * @author 王威翔
+	 */
+	public List<Integer> findPublishedCompIds() {
+		return compRepo.findCompetitionIdByStatus("已發布");
+	}
+
+	/**
 	 * 透過 id 刪除一筆活動紀錄
 	 * 
 	 * @param id 欲刪除紀錄的活動實體 id
@@ -220,6 +241,7 @@ public class CompetitionService {
 	public boolean deleteById(Integer id) {
 		try {
 			// 需先刪除對應活動獎品實體與論壇系統貼文
+			postsService.deletePostsByCpttId(id);
 			String filepath = compRepo.findById(id).get().getContentFileLocation();
 			File file = new File(filepath);
 			file.delete();
@@ -239,6 +261,7 @@ public class CompetitionService {
 	 */
 	public boolean deleteByEntity(CompetitionBean comp) {
 		try {
+			postsService.deletePostsByCpttId(comp.getId());
 			String filepath = comp.getContentFileLocation();
 			File file = new File(filepath);
 			file.delete();
@@ -262,7 +285,6 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("未發布");
-			// 需刪除論壇系統的對應貼文
 			compRepo.save(comp);
 			return comp;
 		}
@@ -313,7 +335,6 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
-			// 重新發布貼文
 			compRepo.save(comp);
 			return comp;
 		}
@@ -370,10 +391,13 @@ public class CompetitionService {
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(start);
 			while (true) {
+				// 獲得 Calendar 物件目前的時間並轉成 Date 物件
 				Date currentDate = calendar.getTime();
+				// 如果目前日期超過結束日期就跳出迴圈
 				if (currentDate.compareTo(end) > 0) {
 					break;
 				}
+				// 先檢查活動是否在一天內結束（開始日期等於結束日期）
 				if (start.compareTo(end) == 0) {
 					for (int timespan = startTimespan; timespan <= endTimespan; timespan++) {
 						ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
@@ -381,18 +405,21 @@ public class CompetitionService {
 						compToScheduleService.insert(ctsb);
 					}
 				} else {
+					// 不是的話，再檢查目前日期是否為第一天，是的話就計算從開始時段開始當天剩下的所有時段
 					if (currentDate.compareTo(start) == 0) {
 						for (int timespan = startTimespan; timespan <= 4; timespan++) {
 							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
 							CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
 							compToScheduleService.insert(ctsb);
 						}
+						// 不是第一天的話，再檢查是否為最後一天，是的話就計算當天直到結束時段前剩下的所有時段
 					} else if (currentDate.compareTo(end) == 0) {
 						for (int timespan = 1; timespan <= endTimespan; timespan++) {
 							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
 							CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
 							compToScheduleService.insert(ctsb);
 						}
+						// 也不是最後一天的話，就計算一整天所有四個時段
 					} else {
 						for (int timespan = 1; timespan <= 4; timespan++) {
 							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
@@ -401,6 +428,7 @@ public class CompetitionService {
 						}
 					}
 				}
+				// 跳出迴圈後，將 Calendar 物件當前時間加一天，然後進入下一次迴圈
 				calendar.add(Calendar.DATE, 1);
 			}
 		} catch (Exception e) {

@@ -38,6 +38,8 @@ public class PostsController {
 	
 	@PostMapping("/posts/post")
 	public String insertPost(@ModelAttribute PostsBean post, Model model) {
+		
+		
 		pService.insertPost(post);
 		
 		PostsBean newPost = new PostsBean();

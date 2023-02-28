@@ -256,16 +256,27 @@ public class NewCompetitionFormService {
 		if (optional.isPresent()) {
 			NewCompetitionFormBean form = optional.get();
 			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
+			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
+			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
 			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
 				firstPart.setStartDate(null);
 			} else {				
 				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
 			}
+			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
 			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
 				firstPart.setEndDate(null);
 			} else {
 				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
 			}
+			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
+			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
+			secondPart.setStatus(mainForm.getSecondPart().getStatus());
+			secondPart.setSingleOrCrew(mainForm.getSecondPart().getSingleOrCrew());
+			secondPart.setPlaceId(mainForm.getSecondPart().getPlaceId());
+			secondPart.setBudget(mainForm.getSecondPart().getBudget());
+			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
+			secondPart.setFee(mainForm.getSecondPart().getFee());
 			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
 			try (
 					FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
