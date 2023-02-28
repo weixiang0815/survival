@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -38,7 +39,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition")
 	public String main() {
-		return "Competition/index";
+		return "back/Competition/index";
 	}
 
 	/**
@@ -50,7 +51,7 @@ public class CompetitionController {
 	public String newCompetition(Model model) {
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("competition", new CompetitionBean());
-		return "Competition/newCompetition";
+		return "back/Competition/newCompetition";
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class CompetitionController {
 	public String publishCompetition(@RequestParam("id") Integer id, Model model) {
 		CompetitionBean comp = compService.publishById(id);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 	/**
@@ -102,7 +103,7 @@ public class CompetitionController {
 		model.addAttribute("comp", comp);
 		model.addAttribute("place", comp.getPlace());
 		model.addAttribute("products", productService.findAllProduct());
-		return "Competition/newCompPrize";
+		return "back/Competition/newCompPrize";
 	}
 
 	/**
@@ -126,7 +127,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/search")
 	public String searchCompetition() {
-		return "Competition/searchCompetition";
+		return "back/Competition/searchCompetition";
 	}
 
 	/**
@@ -174,7 +175,7 @@ public class CompetitionController {
 		model.addAttribute("start", start);
 		model.addAttribute("end", end);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 	/**
@@ -185,7 +186,7 @@ public class CompetitionController {
 	@GetMapping("/competition/search/result")
 	public String searchAll(Model model) {
 		model.addAttribute("compList", compService.findAll());
-		return "Competition/showCompetitions";
+		return "back/Competition/showCompetitions";
 	}
 
 	/**
@@ -198,7 +199,7 @@ public class CompetitionController {
 		CompetitionBean competition = compService.findById(id);
 		model.addAttribute("competition", competition);
 		model.addAttribute("placeList", placeService.getAllPlace());
-		return "Competition/editCompetition";
+		return "back/Competition/editCompetition";
 	}
 
 	/**
@@ -235,7 +236,7 @@ public class CompetitionController {
 	public String takedownCompetitionById(@RequestParam("id") Integer id, Model model) {
 		compService.takedownById(id);
 		model.addAttribute("comp", compService.findById(id));
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 }

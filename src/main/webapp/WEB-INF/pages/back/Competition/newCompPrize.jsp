@@ -10,7 +10,7 @@
 <title>新增活動獎品</title>
 </head>
 <body>
-	<jsp:include page="../Template/admin.jsp" />
+<jsp:include page="../../Template/admin.jsp" />
 	<div class="container pt-3 pb-3">
 		<h1>活動獎品新增表單</h1>
 		<h2>活動基本資訊</h2>

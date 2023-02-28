@@ -6,17 +6,13 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>搜尋活動</title>
+<title>報名資訊詳情</title>
 </head>
 <body>
 <%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
-<jsp:include page="../Template/admin.jsp" />
+<jsp:include page="../../Template/admin.jsp" />
 <div class="container">
-<h1>搜尋活動</h1>
-<form action="${contextRoot}/competition/search/result" method="get">
-    <label for="searchAll">搜尋全部</label>
-    <input type="submit" value="搜尋">
-</form>
+<h1>報名資訊詳情</h1>
 </div>
 <%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>

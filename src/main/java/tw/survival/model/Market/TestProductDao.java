@@ -38,8 +38,13 @@ public class TestProductDao {
 		return query.getResultList();
 	}
 
-	public List<ProductBean> findProductText(String name, String productclass, String context) {
-		String sql = "SELECT * FROM Product WHERE IF(?1 != '', name LIKE CONCAT('%',?,'%'), 1=1) AND IF(?2 != '', class = ?, 1=1) AND IF(?3 != '', context LIKE CONCAT('%',?,'%'), 1=1)";		Query query = em.createNativeQuery(sql, ProductBean.class);
+	// 多條件查詢
+	public List<ProductBean> findProductText2(String name, String productclass, String context) {
+		String sql = "SELECT * FROM Product WHERE"
+				+ "		ISNULL(name, '') LIKE CONCAT('%', ?1, '%') "
+				+ "	OR ISNULL(class, '') = ?2 "
+				+ "	OR ISNULL(context, '') LIKE CONCAT('%', ?3, '%');";
+		Query query = em.createNativeQuery(sql, ProductBean.class);
 		query.setParameter(1, name);
 		query.setParameter(2, productclass);
 		query.setParameter(3, context);
