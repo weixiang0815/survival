@@ -6,13 +6,13 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>編輯活動資訊</title>
+<title>搜尋報名資訊</title>
 </head>
 <body>
 <%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
-<jsp:include page="../Template/admin.jsp" />
+<jsp:include page="../../Template/admin.jsp" />
 <div class="container">
-<h1>編輯活動資訊</h1>
+<h1>搜尋報名資訊</h1>
 </div>
 <%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>

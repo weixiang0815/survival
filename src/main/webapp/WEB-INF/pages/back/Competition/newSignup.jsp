@@ -12,7 +12,7 @@
 </head>
 <body>
 <%-- 	<jsp:include page="../Layout/navbar_competition.jsp" /> --%>
-<jsp:include page="../Template/admin.jsp" />
+<jsp:include page="../../Template/admin.jsp" />
 	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-6 col-lg-8"
