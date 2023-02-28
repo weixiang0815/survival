@@ -9,7 +9,7 @@
 <title>場地首頁</title>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"></jsp:include>
+<jsp:include page="../../Template/admin.jsp"></jsp:include>
 <h1>場地系統首頁</h1>
 </body>
 </html>

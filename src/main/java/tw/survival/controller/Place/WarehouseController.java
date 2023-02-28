@@ -35,7 +35,7 @@ public class WarehouseController {
 	public String newWarehouse(Model model) {
 		model.addAttribute("placeList",placeService.getAllPlace() );
 		model.addAttribute("warehouse", new WarehouseBean());
-	    return "Place/addWarehouse";
+	    return "back/Place/addWarehouse";
 	}
 	
 	@PostMapping("warehouse/create")
@@ -54,7 +54,7 @@ public class WarehouseController {
 	@GetMapping("/warehouse/all")
 	public ModelAndView getAllWarehouse(ModelAndView mav) {
 		List<WarehouseBean> list = warehouseService.getAllWarehouse();
-		mav.setViewName("Place/showAllWarehouse");
+		mav.setViewName("back/Place/showAllWarehouse");
 		mav.getModel().put("list", list);
 		return mav;
 	}
@@ -65,7 +65,7 @@ public class WarehouseController {
 		PlaceBean place = warehouse.getPlace();
 		model.addAttribute("place", place);
 		model.addAttribute("warehouse", warehouse);
-		return "Place/editWarehouse";
+		return "back/Place/editWarehouse";
 	}
 	
 	@PutMapping("/warehouse/edit")
@@ -84,7 +84,7 @@ public class WarehouseController {
 	public String warehouseDetail(@RequestParam("id") Integer id,Model model) {
 		model.addAttribute("inventory", warehouseService.getOneWarehouseById(id).getInventory());
 		model.addAttribute("warehouse", warehouseService.getOneWarehouseById(id));
-		return "Place/warehouseDetail";
+		return "back/Place/warehouseDetail";
 	} 
 	
 }
