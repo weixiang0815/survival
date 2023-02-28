@@ -20,12 +20,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Place.WarehouseService;
 
 @Controller
 public class PlaceController {
 
 	@Autowired
 	private PlaceService placeService;
+	
+	@Autowired
+	private WarehouseService warehouseService;
 
 	@GetMapping("/place")
 	public String gotoIndex() {
@@ -92,7 +96,6 @@ public class PlaceController {
 		try {
 			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/place/all";
@@ -107,7 +110,8 @@ public class PlaceController {
 
 	
 	@GetMapping("/place/detail")
-	public String placeDetail() {
+	public String placeDetail(@RequestParam("id") Integer id, Model model ) {
+		model.addAttribute("place", placeService.getOnePlaceById(id));
 		return "Place/placeDetail";
 	}
 }

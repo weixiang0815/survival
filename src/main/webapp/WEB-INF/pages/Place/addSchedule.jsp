@@ -12,20 +12,26 @@
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-        	initialView: 'dayGridMonth'
-          
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+        	initialView: 'dayGridMonth',
+        	navLinks:true,
+        	headerToolbar:{
+        		left:'prev,next today',
+        		center:'title',
+        		right:'dayGridMonth,timeGridWeek'
+        	},
+        	locale:'zh-tw',
         });
         calendar.render();
       });
-      
-
     </script>
+    
   </head>
   <body>
   <jsp:include page="../Template/admin.jsp"></jsp:include>
-    <div id='calendar'>
-    </div>
+  <div class="container">
+    <div id='calendar'></div>
+  </div>  
   </body>
 </html>

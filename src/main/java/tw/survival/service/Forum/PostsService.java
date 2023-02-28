@@ -104,7 +104,6 @@ public class PostsService {
 				File file = new File(filepath);
 				file.delete();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 				return false;
 			}
