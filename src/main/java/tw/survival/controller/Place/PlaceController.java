@@ -96,7 +96,6 @@ public class PlaceController {
 		try {
 			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/place/all";
