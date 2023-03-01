@@ -16,23 +16,25 @@ public class login_logoutService {
 
 	@Autowired
 	public PlayerRepository pRepository;
-	@Autowired 
+
+	@Autowired
 	public EmployeeReposity empRepository;
 
 	public PlayerBean login(String account, String password) {
-		PlayerBean player = pRepository.findByAccount(account,password);
+		PlayerBean player = pRepository.findByAccount(account, password);
 		if (player == null) {
 			return null;
 		}
 		return player;
 	}
-	public EmployeeBean loginEmp(String account,String password) {
-		EmployeeBean emp=empRepository.findByAccount(account,password);
-		if(emp ==null) {
+
+	public EmployeeBean loginEmp(String account, String password) {
+		EmployeeBean emp = empRepository.findByAccount(account, password);
+		if (emp == null) {
 			return null;
 		}
 		return emp;
-		
+
 	}
 
 }

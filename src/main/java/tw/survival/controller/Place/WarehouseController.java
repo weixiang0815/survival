@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.WarehouseBean;
+import tw.survival.service.Place.InventoryService;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.WarehouseService;
 
@@ -27,12 +28,14 @@ public class WarehouseController {
 	@Autowired
 	private PlaceService placeService;
 	
+	@Autowired
+	private InventoryService inventoryService;
 	
 	@GetMapping("/warehouse/new")
 	public String newWarehouse(Model model) {
 		model.addAttribute("placeList",placeService.getAllPlace() );
 		model.addAttribute("warehouse", new WarehouseBean());
-	    return "Place/addWarehouse";
+	    return "back/Place/addWarehouse";
 	}
 	
 	@PostMapping("warehouse/create")
@@ -51,7 +54,7 @@ public class WarehouseController {
 	@GetMapping("/warehouse/all")
 	public ModelAndView getAllWarehouse(ModelAndView mav) {
 		List<WarehouseBean> list = warehouseService.getAllWarehouse();
-		mav.setViewName("Place/showAllWarehouse");
+		mav.setViewName("back/Place/showAllWarehouse");
 		mav.getModel().put("list", list);
 		return mav;
 	}
@@ -62,7 +65,7 @@ public class WarehouseController {
 		PlaceBean place = warehouse.getPlace();
 		model.addAttribute("place", place);
 		model.addAttribute("warehouse", warehouse);
-		return "Place/editWarehouse";
+		return "back/Place/editWarehouse";
 	}
 	
 	@PutMapping("/warehouse/edit")
@@ -77,6 +80,11 @@ public class WarehouseController {
 		return "redirect:/warehouse/all";
 	}
 	
-	
+	@GetMapping("/warehouse/detail")
+	public String warehouseDetail(@RequestParam("id") Integer id,Model model) {
+		model.addAttribute("inventory", warehouseService.getOneWarehouseById(id).getInventory());
+		model.addAttribute("warehouse", warehouseService.getOneWarehouseById(id));
+		return "back/Place/warehouseDetail";
+	} 
 	
 }

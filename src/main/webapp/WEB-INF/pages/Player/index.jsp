@@ -9,7 +9,7 @@
 <title>會員系統首頁</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../Template/admin.jsp"/>
 <h1>會員系統首頁</h1>
 <jsp:include page="../Layout/footer.jsp"/>
 </body>

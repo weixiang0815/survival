@@ -10,20 +10,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Employee.EmployeeBean;
-import tw.survival.model.Market.ProductBean;
 
 @Entity
 @Table(name = "Place")
@@ -55,10 +51,7 @@ public class PlaceBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<EmployeeBean> employee = new LinkedHashSet<>();
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_product_id")
-	private ProductBean product;
+
 
 	@OneToOne(mappedBy = "place")
 	private WarehouseBean warehouse; // 倉庫
@@ -71,8 +64,7 @@ public class PlaceBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
 	private Set<ScheduleBean> schedule = new LinkedHashSet<>(); // 活動排程表
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "place", cascade = CascadeType.ALL)
-	private Set<EmployeeBean> employees = new LinkedHashSet<EmployeeBean>();
+	
 
 	public PlaceBean() {
 	}
@@ -133,13 +125,7 @@ public class PlaceBean {
 		this.place_capacity = place_capacity;
 	}
 
-	public ProductBean getProduct() {
-		return product;
-	}
-
-	public void setProduct(ProductBean product) {
-		this.product = product;
-	}
+	
 
 	public WarehouseBean getWarehouse() {
 		return warehouse;
@@ -165,12 +151,6 @@ public class PlaceBean {
 		this.schedule = schedule;
 	}
 
-	public Set<EmployeeBean> getEmployees() {
-		return employees;
-	}
-
-	public void setEmployees(Set<EmployeeBean> employees) {
-		this.employees = employees;
-	}
+	
 
 }

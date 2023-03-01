@@ -1,5 +1,11 @@
 package tw.survival.service.Competition;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +33,26 @@ public class CompetitionPictureService {
 	 */
 	public CompetitionPictureBean addPicture(CompetitionPictureBean compPicture) {
 		try {
-			return compPictureDao.save(compPicture);
+			byte[] picture = compPicture.getPicture();
+			Integer compId = compPicture.getCompetition().getId();
+			String contentType = compPicture.getContentType();
+			String filepath = "C:/Survival/Competition/Competition/images/comp_" + compId + "/";
+			File file = new File(filepath);
+			if (!file.exists()) {
+				file.mkdirs();
+			}
+			compPicture = compPictureDao.save(compPicture);
+			Integer id = compPicture.getId();
+			filepath += "image_" + id + "." + contentType;
+			try (FileOutputStream fos = new FileOutputStream(filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);) {
+				bos.write(picture);
+			}
+			compPicture.setFileLocation(filepath);
+			compPicture.setPicture(picture);
+			return compPicture;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -42,7 +66,18 @@ public class CompetitionPictureService {
 	 */
 	public CompetitionPictureBean findById(Integer id) {
 		Optional<CompetitionPictureBean> optional = compPictureDao.findById(id);
-		return optional.isPresent() ? optional.get() : null;
+		if (optional.isPresent()) {
+			CompetitionPictureBean compPicture = optional.get();
+			try (FileInputStream fis = new FileInputStream(compPicture.getFileLocation());
+					BufferedInputStream bis = new BufferedInputStream(fis);) {
+				compPicture.setPicture(bis.readAllBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
+			return compPicture;
+		}
+		return null;
 	}
 
 	/**
@@ -52,7 +87,16 @@ public class CompetitionPictureService {
 	 * @author 王威翔
 	 */
 	public List<CompetitionPictureBean> findAll() {
-		return compPictureDao.findAll();
+		List<CompetitionPictureBean> compPictures = compPictureDao.findAll();
+		compPictures.forEach(compPicture -> {
+			try (FileInputStream fis = new FileInputStream(compPicture.getFileLocation());
+					BufferedInputStream bis = new BufferedInputStream(fis);) {
+				compPicture.setPicture(bis.readAllBytes());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return compPictures;
 	}
 
 	/**
@@ -64,6 +108,9 @@ public class CompetitionPictureService {
 	 */
 	public boolean deletePictureById(Integer id) {
 		try {
+			String filepath = compPictureDao.findById(id).get().getFileLocation();
+			File file = new File(filepath);
+			file.delete();
 			compPictureDao.deleteById(id);
 			return true;
 		} catch (Exception e) {
@@ -80,6 +127,9 @@ public class CompetitionPictureService {
 	 */
 	public boolean deletePictureByEntity(CompetitionPictureBean compPicture) {
 		try {
+			String filepath = compPicture.getFileLocation();
+			File file = new File(filepath);
+			file.delete();
 			compPictureDao.delete(compPicture);
 			return true;
 		} catch (Exception e) {
@@ -95,15 +145,41 @@ public class CompetitionPictureService {
 	 * @author 王威翔
 	 */
 	public CompetitionPictureBean updateByEntity(CompetitionPictureBean compPicture) {
-		if (compPictureDao.findById(compPicture.getId()).isPresent()) {
-			try {
-				return compPictureDao.save(compPicture);
+		Optional<CompetitionPictureBean> optional = compPictureDao.findById(compPicture.getId());
+		if (optional.isPresent()) {
+			byte[] newPic = compPicture.getPicture();
+			byte[] oldPic;
+			CompetitionPictureBean oldCompPicture = optional.get();
+			try (
+					FileInputStream fis = new FileInputStream(oldCompPicture.getFileLocation());
+					BufferedInputStream bis = new BufferedInputStream(fis);
+					) {
+				oldPic = bis.readAllBytes();
+				oldCompPicture.setPicture(oldPic);
 			} catch (Exception e) {
+				e.printStackTrace();
 				return null;
 			}
-		} else {
-			return null;
+			if (!Arrays.equals(newPic, oldPic)) {
+				String filepath = compPicture.getFileLocation();
+				File file = new File(filepath);
+				file.delete();
+				filepath = filepath.substring(0, filepath.lastIndexOf("/") + 1);
+				filepath += "image_" + compPicture.getId() + "." + compPicture.getContentType();
+				try (
+						FileOutputStream fos = new FileOutputStream(filepath);
+						BufferedOutputStream bos = new BufferedOutputStream(fos);
+						) {
+					bos.write(newPic);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return null;
+				}
+				compPicture.setFileLocation(filepath);
+			}
+			return compPictureDao.save(compPicture);
 		}
+		return null;
 	}
 
 }

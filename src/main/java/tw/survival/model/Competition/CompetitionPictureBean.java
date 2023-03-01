@@ -1,5 +1,7 @@
 package tw.survival.model.Competition;
 
+import java.io.IOException;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Competition_Picture")
@@ -22,9 +30,17 @@ public class CompetitionPictureBean {
 	@Column(name = "file_location")
 	private String fileLocation;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
+
+	@JsonIgnore
+	@Transient
+	private byte[] picture;
+
+	@Column(name = "content_type")
+	private String contentType;
 
 	public CompetitionPictureBean() {
 	}
@@ -51,6 +67,27 @@ public class CompetitionPictureBean {
 
 	public void setCompetition(CompetitionBean competition) {
 		this.competition = competition;
+	}
+
+	public byte[] getPicture() {
+		return picture;
+	}
+
+	public void setPicture(byte[] picture) {
+		this.picture = picture;
+	}
+
+	public void setPicture(MultipartFile picture) throws IOException {
+		this.contentType = picture.getContentType();
+		this.picture = picture.getBytes();
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 
 }

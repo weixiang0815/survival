@@ -20,21 +20,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Place.WarehouseService;
 
 @Controller
 public class PlaceController {
 
 	@Autowired
-	private PlaceService pService;
+	private PlaceService placeService;
+	
+	@Autowired
+	private WarehouseService warehouseService;
 
 	@GetMapping("/place")
 	public String gotoIndex() {
-		return "Place/index";
+		return "back/Place/index";
 	}
 
 	@GetMapping("/place/uploadPage")
 	public String uploadPage() {
-		return "Place/addPlace";
+		return "back/Place/addPlace";
 	}
 
 	@ResponseBody
@@ -51,7 +55,7 @@ public class PlaceController {
 			pb.setPlace_fee(placeFee);
 			pb.setPlace_photo(file.getBytes());
 
-			pService.insertPlace(pb);
+			placeService.insertPlace(pb);
 			return "上傳成功";
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -62,15 +66,15 @@ public class PlaceController {
 
 	@GetMapping("/place/all")
 	public ModelAndView getAllPlace(ModelAndView mav) {
-		List<PlaceBean> list = pService.getAllPlace();
-		mav.setViewName("Place/showAllPlace");
+		List<PlaceBean> list = placeService.getAllPlace();
+		mav.setViewName("back/Place/showAllPlace");
 		mav.getModel().put("list", list);
 		return mav;
 	}
 
 	@GetMapping("/place/id")
 	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
-		PlaceBean place1 = pService.getOnePlaceById(id);
+		PlaceBean place1 = placeService.getOnePlaceById(id);
 		byte[] placeFile = place1.getPlace_photo();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
@@ -80,9 +84,9 @@ public class PlaceController {
 
 	@GetMapping("/place/edit")
 	public String editPlacePage(@RequestParam("id") Integer id, Model model) {
-		PlaceBean p1 = pService.getOnePlaceById(id);
+		PlaceBean p1 = placeService.getOnePlaceById(id);
 		model.addAttribute("place", p1);
-		return "Place/editPlace";
+		return "back/Place/editPlace";
 	}
 
 	@PostMapping("/place/edit")
@@ -90,9 +94,8 @@ public class PlaceController {
 			@RequestParam("place_address") String place_address, @RequestParam("place_photo") MultipartFile place_photo,
 			@RequestParam("place_fee") Integer place_fee, @RequestParam("place_capacity") Integer place_capacity) {
 		try {
-			pService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
+			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return "redirect:/place/all";
@@ -101,13 +104,14 @@ public class PlaceController {
 
 	@DeleteMapping("/place/delete")
 	public String deletePlace(@RequestParam("id") Integer id) {
-		pService.deletePlaceById(id);
+		placeService.deletePlaceById(id);
 		return "redirect:/place/all";
 	}
 
 	
 	@GetMapping("/place/detail")
-	public String placeDetail() {
-		return "Place/placeDetail";
+	public String placeDetail(@RequestParam("id") Integer id, Model model ) {
+		model.addAttribute("place", placeService.getOnePlaceById(id));
+		return "back/Place/placeDetail";
 	}
 }

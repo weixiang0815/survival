@@ -3,16 +3,18 @@ package tw.survival.controller.Competition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
 
 @Controller
@@ -24,6 +26,12 @@ public class CompetitionController {
 	@Autowired
 	private PlaceService placeService;
 
+	@Autowired
+	private CompetitionPrizeService compPrizeService;
+	
+	@Autowired
+	private ProductService productService;
+
 	/**
 	 * 跳轉至活動系統首頁
 	 * 
@@ -31,7 +39,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition")
 	public String main() {
-		return "Competition/index";
+		return "back/Competition/index";
 	}
 
 	/**
@@ -43,7 +51,7 @@ public class CompetitionController {
 	public String newCompetition(Model model) {
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("competition", new CompetitionBean());
-		return "Competition/newCompetition";
+		return "back/Competition/newCompetition";
 	}
 
 	/**
@@ -57,8 +65,7 @@ public class CompetitionController {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
 		comp.setFounderEmployee(null);
 		comp.setFounderPlayer(null);
-		compService.create(comp);
-		comp = compService.findLatestCompetition();
+		comp = compService.create(comp);
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());
 		}
@@ -76,7 +83,41 @@ public class CompetitionController {
 	public String publishCompetition(@RequestParam("id") Integer id, Model model) {
 		CompetitionBean comp = compService.publishById(id);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
+	}
+
+	/**
+	 * 跳轉至新增活動獎品頁面
+	 * 
+	 * @param id 欲新增活獎品的活動 id
+	 * @return 跳轉至新增活動獎品頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/prize/new")
+	public String newPrizes(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
+		CompetitionPrizeBean compPrize = new CompetitionPrizeBean();
+		CompetitionBean comp = compService.findById(id);
+		compPrize.setCompetitionId(id);
+		compPrize.setCompetition(comp);
+		model.addAttribute("prizes", compPrize);
+		model.addAttribute("comp", comp);
+		model.addAttribute("place", comp.getPlace());
+		model.addAttribute("products", productService.findAllProduct());
+		return "back/Competition/newCompPrize";
+	}
+
+	/**
+	 * 新增指定活動 id 的獎品
+	 * 
+	 * @return 重新導向至指定 id 活動的詳情頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/prize/add")
+	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
+		compPrize = compPrizeService.insert(compPrize);
+		CompetitionBean comp = compPrize.getCompetition();
+		comp.setCompetitionPrizes(compPrize);
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -86,7 +127,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/search")
 	public String searchCompetition() {
-		return "Competition/searchCompetition";
+		return "back/Competition/searchCompetition";
 	}
 
 	/**
@@ -134,7 +175,7 @@ public class CompetitionController {
 		model.addAttribute("start", start);
 		model.addAttribute("end", end);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 	/**
@@ -145,7 +186,7 @@ public class CompetitionController {
 	@GetMapping("/competition/search/result")
 	public String searchAll(Model model) {
 		model.addAttribute("compList", compService.findAll());
-		return "Competition/showCompetitions";
+		return "back/Competition/showCompetitions";
 	}
 
 	/**
@@ -155,8 +196,10 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/edit")
 	public String editCompetition(@RequestParam("id") Integer id, Model model) {
-		model.addAttribute("comp", compService.findById(id));
-		return "Competition/editCompetition";
+		CompetitionBean competition = compService.findById(id);
+		model.addAttribute("competition", competition);
+		model.addAttribute("placeList", placeService.getAllPlace());
+		return "back/Competition/editCompetition";
 	}
 
 	/**
@@ -165,9 +208,10 @@ public class CompetitionController {
 	 * @return 重新導向至該活動詳情頁面
 	 * @author 王威翔
 	 */
-	@PutMapping("/competition/edit/send")
-	public String editCompetitionById() {
-		return "redirect:/competition/detail";
+	@PostMapping("/competition/edit/send")
+	public String editCompetitionById(@ModelAttribute("competition") CompetitionBean comp, Model model) {
+		compService.updateByEntity(comp);
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -176,8 +220,9 @@ public class CompetitionController {
 	 * @return 重新導向至多筆活動資訊搜尋結果
 	 * @author 王威翔
 	 */
-	@DeleteMapping("/competition/delete")
+	@GetMapping("/competition/delete")
 	public String deleteCompetitionById(@RequestParam("id") Integer id) {
+		compService.deleteById(id);
 		return "redirect:/competition/search/result";
 	}
 
@@ -191,7 +236,7 @@ public class CompetitionController {
 	public String takedownCompetitionById(@RequestParam("id") Integer id, Model model) {
 		compService.takedownById(id);
 		model.addAttribute("comp", compService.findById(id));
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 }

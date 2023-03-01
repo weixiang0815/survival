@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Market.TestProductDaoText;
 
 @Service
 @Transactional
@@ -17,6 +18,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productDao;
+	
+	@Autowired
+	private TestProductDaoText tpdt;
 
 	public void insertProduct(ProductBean ip) {
 		productDao.save(ip);
@@ -32,10 +36,12 @@ public class ProductService {
 		return null;
 	}
 
+	//找全部商品
 	public List<ProductBean> findAllProduct() {
 		return productDao.findAll();
 	}
 
+	//用ID找商品
 	public ProductBean getProductById(Integer id) {
 		Optional<ProductBean> optional = productDao.findById(id);
 
@@ -45,7 +51,8 @@ public class ProductService {
 		return null;
 	}
 
-	public ProductBean updateMsgById(Integer id, String updateName, byte[] updateImg, String updateContext,
+	//更新商品
+	public ProductBean updateProductById(Integer id, String updateName, byte[] updateImg, String updateContext,
 			String updateClass, Integer updateRent_fee, Integer updatePrice) {
 		Optional<ProductBean> optional = productDao.findById(id);
 
@@ -79,5 +86,21 @@ public class ProductService {
 	public List<ProductBean> findByName(String name) {
 		return productDao.findProductLike(name);
 	}
+	
+//	public List<ProductBean> findProductText2(String name,String productclass,String context) {
+//		
+//		return productDao.findProductText(name,productclass,context);
+//	}
+	
+//	public List<ProductBean> findInClazz(String Clazz) {
+//		return productDao.findProductIn(Clazz);
+//	}
+
+	public List<ProductBean> findByClass(List<String> clazz) {
+		return tpdt.findByProductclassIn(clazz);
+	}
+	
+	
+	
 
 }

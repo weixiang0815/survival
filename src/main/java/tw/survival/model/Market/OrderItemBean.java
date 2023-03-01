@@ -1,5 +1,7 @@
 package tw.survival.model.Market;
 
+
+
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -32,10 +34,10 @@ public class OrderItemBean {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name = "order_create_date")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	private Date order_create_date;
 
 	@Column(name = "status")
@@ -45,9 +47,6 @@ public class OrderItemBean {
 	@JoinColumn(name = "fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
-
-	public OrderItemBean() {
-	}
 
 	public Integer getId() {
 		return id;
@@ -81,4 +80,5 @@ public class OrderItemBean {
 		this.player = player;
 	}
 
+	
 }

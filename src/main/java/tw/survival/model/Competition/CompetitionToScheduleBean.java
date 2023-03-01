@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import tw.survival.model.Place.ScheduleBean;
 
 @Entity
@@ -30,6 +29,11 @@ public class CompetitionToScheduleBean {
 	private CompetitionBean competition;
 
 	public CompetitionToScheduleBean() {
+	}
+
+	public CompetitionToScheduleBean(ScheduleBean schedule, CompetitionBean competition) {
+		this.schedule = schedule;
+		this.competition = competition;
 	}
 
 	public Integer getId() {

@@ -36,20 +36,20 @@ public class BookmarkletService {
 		return;
 	}
 	
-//	deletePlayerMark
-//	public void deleteBmlOfPlayer(Integer id) {
-//		bDao.deletePlayerMark(id);
-//		return;
-//	}
-//	
-//	public void deleteBmlOfPost(Integer id) {
-//		bDao.deletePostMark(id);
-//		return;
-//	}
-//	
-//	public void dislike(Integer postId, Integer playerId) {
-//		bDao.PlayerDeleteOnePostMark(postId, playerId);
-//	}
+	
+	public void deleteBmlOfPlayer(Integer id) {
+		bDao.deletePlayerMark(id);
+		return;
+	}
+	
+	public void deleteBmlOfPost(Integer id) {
+		bDao.deletePostMark(id);
+		return;
+	}
+	
+	public void dislike(Integer postId, Integer playerId) {
+		bDao.PlayerDeleteOnePostMark(postId, playerId);
+	}
 	
 	
 	

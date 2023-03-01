@@ -12,7 +12,7 @@
 <title>修改訊息</title>
 </head>
 <body>
-	<jsp:include page="Layout/navbar_market.jsp"></jsp:include>
+	<jsp:include page="../Template/admin.jsp"></jsp:include>
 
 	<div class="container">
 		<h1>修改訊息 Page</h1>
@@ -38,8 +38,16 @@
 						</tr>
 						<tr>
 							<td>商品分類：</td>
-							<td><input type="text" name="product_class"
-								value="${product.product_class}" /></td>
+							<td><select  type="text" name="Product_class">
+								<option>請選擇商品種類</option>
+								<option>手槍</option>
+								<option>步槍</option>
+								<option>衝鋒槍</option>
+								<option>狙擊槍</option>
+								<option>霰彈槍</option>
+							</select></td>
+							<!-- <td><input type="text" name="product_class"
+								value="${product.product_class}" /></td> -->
 						</tr>
 						<tr>
 							<td>商品敘述：</td>

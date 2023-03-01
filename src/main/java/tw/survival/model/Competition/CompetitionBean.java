@@ -26,6 +26,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Employee.EmployeeBean;
@@ -42,8 +43,8 @@ public class CompetitionBean {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "public_or_private", length = 1)
-	private String publicOrPrivate;
+	@Column(name = "public_or_private")
+	private Integer publicOrPrivate;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_founder_player")
@@ -85,7 +86,10 @@ public class CompetitionBean {
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
 
-	@Column(name = "content")
+	@Column(name = "content_file_location")
+	private String contentFileLocation;
+
+	@Transient
 	private String content;
 
 	@Column(name = "budget")
@@ -103,19 +107,21 @@ public class CompetitionBean {
 	@Column(name = "status")
 	private String status;
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_post_id")
-	private PostsBean post;
-
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
 	private CompetitionPrizeBean competitionPrizes;
 
+	@JsonManagedReference
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
 	private CompetitionHistoryBean competitionHistory;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
+	private Set<PostsBean> posts = new LinkedHashSet<>();
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<CompetitionPictureBean> pictures = new LinkedHashSet<>();
 
@@ -149,11 +155,11 @@ public class CompetitionBean {
 		this.id = id;
 	}
 
-	public String getPublicOrPrivate() {
+	public Integer getPublicOrPrivate() {
 		return publicOrPrivate;
 	}
 
-	public void setPublicOrPrivate(String publicOrPrivate) {
+	public void setPublicOrPrivate(Integer publicOrPrivate) {
 		this.publicOrPrivate = publicOrPrivate;
 	}
 
@@ -249,6 +255,14 @@ public class CompetitionBean {
 		this.place = place;
 	}
 
+	public String getContentFileLocation() {
+		return contentFileLocation;
+	}
+
+	public void setContentFileLocation(String contentFileLocation) {
+		this.contentFileLocation = contentFileLocation;
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -285,12 +299,12 @@ public class CompetitionBean {
 		this.capacity = capacity;
 	}
 
-	public PostsBean getPost() {
-		return post;
+	public Set<PostsBean> getPosts() {
+		return posts;
 	}
 
-	public void setPost(PostsBean post) {
-		this.post = post;
+	public void setPosts(Set<PostsBean> posts) {
+		this.posts = posts;
 	}
 
 	public CompetitionPrizeBean getCompetitionPrizes() {
