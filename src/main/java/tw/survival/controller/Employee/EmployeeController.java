@@ -1,20 +1,30 @@
 package tw.survival.controller.Employee;
 
-import java.util.Date;
+import java.io.ByteArrayOutputStream;
+
+import java.io.InputStream;
+import java.sql.Blob;
+
 import java.util.List;
 
+import javax.sql.rowset.serial.SerialBlob;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Employee.EmployeeBean;
@@ -28,8 +38,15 @@ public class EmployeeController {
 
 //C
 	@GetMapping("/Employee/add")
-	public String addemployee() {
-		return "Employee/addemployees";
+	public String addemployee(Model m) {
+		m.addAttribute("employee", new EmployeeBean());
+		return "back/Employee/addemployees";
+	}
+
+	@ResponseBody
+	@GetMapping("/Employee/get/{id}")
+	public EmployeeBean getEmployeeById(@PathVariable Integer id) {
+		return empService.employeeFindById(id);
 	}
 
 	// R
@@ -37,7 +54,7 @@ public class EmployeeController {
 	public String list(Model model) {
 		List<EmployeeBean> list = empService.getAllemp();
 		model.addAttribute("Employee", list);
-		return "Employee/empallResult";
+		return "back/Employee/empallResult";
 	}
 
 	// U
@@ -45,76 +62,40 @@ public class EmployeeController {
 	public String updateEmployee(@RequestParam("id") Integer id, Model model) {
 		EmployeeBean bean = empService.employeeFindById(id);
 		model.addAttribute("Employee", bean);
-		return "Employee/UpdateEmployee";
+		return "back/Employee/UpdateEmployee";
 
 	}
 
 	@PutMapping("/Employee/update1")
-	public String updateById(@RequestParam Integer id,@RequestParam("account") String account, @RequestParam("password") String password,
-	@RequestParam("age") Integer age, @RequestParam("conuty") String county,@RequestParam("district") String district,@RequestParam("zipcode") Integer zipcode,
-	@RequestParam("title") String title, @RequestParam("address") String address,
-	@RequestParam("salary") Integer salary, @RequestParam("hired_date") Date hired_date,
-	@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
-	@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
-	@RequestParam("identity") String identity_number, @RequestParam("email") String email) {
-		String region=county+district;
-		try {
-			EmployeeBean employee=empService.employeeFindById(id);
-			employee.setName(name);
-			employee.setAccount(account);
-			employee.setPassword(password);
-			employee.setIdentity_number(identity_number);
-			employee.setEmail(email);
-			employee.setAge(age);
-			employee.setRegion(region);
-			employee.setAddress(address);
-			employee.setSalary(salary);
-			employee.setHired_date(hired_date);
-			employee.setStatus("在職中");
-			employee.setTitle(title);
-			if(thumbnail !=null) {
-				employee.setThumbnail(thumbnail.getBytes());
-			}			
-			employee.setSex(sex);
-			employee.setBirthday(birthday);
-			empService.update(employee);
-		}catch(Exception e) {
-			e.printStackTrace();
+	public String updateById(@ModelAttribute EmployeeBean employee) {
+		MultipartFile employeeImage = employee.getEmployeeImage();
+		if (employeeImage != null && !employeeImage.isEmpty()) {
+			try {
+				byte[] img = employeeImage.getBytes();
+				Blob blob = new SerialBlob(img);
+				employee.setThumbnail(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
+		empService.update(employee);
 		return "redirect:/Employee/list";
 	}
 
 	@PostMapping("/Employee/addEmployee")
-	public String postEmployee(@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("age") Integer age, @RequestParam("region") String region,
-			@RequestParam("title") String title, @RequestParam("address") String address,
-			@RequestParam("salary") Integer salary, @RequestParam("hired_date") Date hired_date,
-			@RequestParam("thumbnail") MultipartFile thumbnail, @RequestParam("name") String name,
-			@RequestParam("sex") String sex, @RequestParam("birthday") Date birthday,
-			@RequestParam("identity") String identity_number, @RequestParam("email") String email, Model model) {
-		try {
-			EmployeeBean employee = new EmployeeBean();
-			employee.setName(name);
-			employee.setAccount(account);
-			employee.setPassword(password);
-			employee.setIdentity_number(identity_number);
-			employee.setEmail(email);
-			employee.setAge(age);
-			employee.setRegion(region);
-			employee.setAddress(address);
-			employee.setSalary(salary);
-			employee.setHired_date(hired_date);
-			employee.setStatus("在職中");
-			employee.setTitle(title);
-			employee.setThumbnail(thumbnail.getBytes());
-			employee.setSex(sex);
-			employee.setBirthday(birthday);
-			empService.addEmployee(employee);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String postEmployee(@ModelAttribute EmployeeBean employee, Model model) {
+		MultipartFile employeeImage = employee.getEmployeeImage();
+		if (employeeImage != null && !employeeImage.isEmpty()) {
+			System.out.println(employeeImage.getOriginalFilename());
+			try {
+				byte[] img = employeeImage.getBytes();
+				Blob blob = new SerialBlob(img);
+				employee.setThumbnail(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
+		empService.addEmployee(employee);
 		return "redirect:/Employee/list ";
 	}
 
@@ -126,13 +107,36 @@ public class EmployeeController {
 	}
 
 	// GetPhoto
-	@GetMapping("/Employee/photo")
-	public ResponseEntity<byte[]> getPhotobyId(@RequestParam Integer id) {
+	@ResponseBody
+	@GetMapping("/Employee/photo/{id}")
+	public ResponseEntity<byte[]> getPhotobyId(@PathVariable Integer id) {
 		EmployeeBean employee = empService.employeeFindById(id);
-		byte[] photofile = employee.getThumbnail();
+		byte[] photofile = null;
+		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.IMAGE_JPEG);
-		return new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
+		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+		Blob blob = employee.getThumbnail();
+		if (blob != null) {
+			photofile = blobToByteArray(blob);
+		}
+		re = new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
+		return re;
+	}
+
+	public byte[] blobToByteArray(Blob blob) {
+		byte[] result = null;
+		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) 
+		{
+			byte[] b = new byte[819200];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			result = baos.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

@@ -8,7 +8,7 @@
 				<meta charset="UTF-8">
 				<title>Employee</title>
 			</head>
-<jsp:include page="../../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 			<h3>職員所有資料</h3>
 
 			<body>
@@ -32,14 +32,14 @@
 						</tr>
 						<c:forEach items="${Employee}" var="employee">
 						<tr>
-						 <td style="width: 100px;"><img alt="查無圖片" src="${contextRoot}/Employee/photo?id=${employee.id}"/></td>
+						 <td style="width: 100px;"><img alt="查無圖片" src="${contextRoot}/Employee/photo/${employee.id}"/></td>
 							<td>${employee.id}</td>
 							<td>${employee.name}</td>
 							<td>${employee.account}</td>
 							<td>${employee.password}</td>
 							<td>${employee.age}</td>						
 							<td>${employee.identity_number}</td>
-						<td><label>${employee.region}</label><label>${employee.address}</label></td>
+						<td><label>${employee.county}</label><label>${employee.district}</label><label>${employee.address}</label></td>
 							<td>
 								<c:choose>
 									<c:when test="${employee.sex == \" M\"}">男</c:when>

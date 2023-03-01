@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="../../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 <jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

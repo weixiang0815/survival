@@ -41,7 +41,7 @@ img {
 			<c:forEach items="${player}" var="player">
 				<tr>
 					<td style="width: 100px;"><img alt="查無圖片"
-						src="${contextRoot}/player/photo?id=${player.id}" /></td>
+						src="${contextRoot}/player/photo/${player.id}" /></td>
 					<td>${player.name}</td>
 					<td>${player.account}</td>
 					<td>${player.password}</td>
