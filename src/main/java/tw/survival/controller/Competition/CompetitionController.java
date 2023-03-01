@@ -108,7 +108,7 @@ public class CompetitionController {
 		CompetitionBean comp = compService.findById(id);
 		compPrize.setCompetitionId(id);
 		compPrize.setCompetition(comp);
-		model.addAttribute("prizes", compPrize);
+		model.addAttribute("compPrize", compPrize);
 		model.addAttribute("comp", comp);
 		model.addAttribute("place", comp.getPlace());
 		model.addAttribute("products", productService.findAllProduct());
@@ -121,7 +121,7 @@ public class CompetitionController {
 	 * @return 重新導向至指定 id 活動的詳情頁面
 	 * @author 王威翔
 	 */
-	@GetMapping("/competition/prize/add")
+	@PostMapping("/competition/prize/add")
 	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
 		compPrize = compPrizeService.insert(compPrize);
 		CompetitionBean comp = compPrize.getCompetition();
@@ -184,6 +184,8 @@ public class CompetitionController {
 		model.addAttribute("start", start);
 		model.addAttribute("end", end);
 		model.addAttribute("comp", comp);
+		model.addAttribute("prizes", comp.getCompetitionPrizes());
+		model.addAttribute("pictures", comp.getPictures());
 		return "back/Competition/competitionDetail";
 	}
 
