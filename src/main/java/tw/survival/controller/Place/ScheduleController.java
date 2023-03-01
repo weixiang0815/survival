@@ -26,7 +26,7 @@ public class ScheduleController {
 		model.addAttribute("schedule", new ScheduleBean());
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("ctsList", CTSService.findAll());
-		return "Place/addSchedule";
+		return "back/Place/addSchedule";
 	}
 
 }

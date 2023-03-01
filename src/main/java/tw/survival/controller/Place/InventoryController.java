@@ -37,7 +37,7 @@ public class InventoryController {
 		model.addAttribute("inventory", new InventoryBean());
 		model.addAttribute("productList", productService.findAllProduct());
 		model.addAttribute("warehouseList", warehouseService.getAllWarehouse());
-		return "Place/addInventory";
+		return "back/Place/addInventory";
 
 	}
 
@@ -59,7 +59,7 @@ public class InventoryController {
 	@GetMapping("/inventory/all")
 	public ModelAndView getAllInventory(ModelAndView mav) {
 		List<InventoryBean> list = inventoryService.getAllInventory();
-		mav.setViewName("Place/showAllInventory");
+		mav.setViewName("back/Place/showAllInventory");
 		mav.getModel().put("list", list);
 		return mav;
 	}
@@ -72,7 +72,7 @@ public class InventoryController {
 		model.addAttribute("warehouse", warehouse);
 		model.addAttribute("product", product);
 		model.addAttribute("inventory", inventory);
-		return "Place/editInventory";
+		return "back/Place/editInventory";
 	}
 	
 	@PutMapping("/inventory/edit")

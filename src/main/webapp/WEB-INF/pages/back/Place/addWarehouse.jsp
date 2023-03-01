@@ -11,7 +11,7 @@
 <title>倉庫表</title>
 </head>
 <body>
-	<jsp:include page="../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 
 	<div class="container">
 		<c:choose>

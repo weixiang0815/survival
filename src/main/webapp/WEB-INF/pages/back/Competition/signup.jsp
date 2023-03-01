@@ -12,6 +12,6 @@
 <%-- <jsp:include page="../Layout/navbar_competition.jsp"/> --%>
 <jsp:include page="../../Template/admin.jsp" />
 <h1>報名頁面</h1>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

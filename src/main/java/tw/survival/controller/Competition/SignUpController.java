@@ -35,7 +35,7 @@ public class SignUpController {
 	public String newSignup(Model model) {
 		model.addAttribute("signup", new SignUpBean());
 		model.addAttribute("compList", compService.findAll());
-		return "Competition/newSignup";
+		return "back/Competition/newSignup";
 	}
 
 	/**
@@ -70,7 +70,7 @@ public class SignUpController {
 	 */
 	@GetMapping("/competition/signup/search")
 	public String searchSignup() {
-		return "Competition/searchSignup";
+		return "back/Competition/searchSignup";
 	}
 
 	/**
@@ -80,7 +80,7 @@ public class SignUpController {
 	 */
 	@GetMapping("/competition/signup/detail")
 	public String signupDetailById() {
-		return "Competition/signupDetail";
+		return "back/Competition/signupDetail";
 	}
 
 	/**
@@ -91,7 +91,7 @@ public class SignUpController {
 	@GetMapping("/competition/signup/search/result")
 	public String searchAll(Model model) {
 		model.addAttribute("signupList", signupService.findAll());
-		return "Competition/showSignups";
+		return "back/Competition/showSignups";
 	}
 
 	/**
@@ -102,7 +102,7 @@ public class SignUpController {
 	@GetMapping("/competition/signup/edit")
 	public String editSignup(@RequestParam("id") Integer id, Model model) {
 		model.addAttribute("signup", signupService.findById(id));
-		return "Competition/editSignup";
+		return "back/Competition/editSignup";
 	}
 
 	/**
