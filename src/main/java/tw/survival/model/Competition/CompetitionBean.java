@@ -25,7 +25,9 @@ import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
@@ -115,9 +117,11 @@ public class CompetitionBean {
 	@OneToOne(cascade = CascadeType.ALL, mappedBy = "competition")
 	private CompetitionHistoryBean competitionHistory;
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<PostsBean> posts = new LinkedHashSet<>();
 
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<SignUpBean>();
 
@@ -125,12 +129,14 @@ public class CompetitionBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<CompetitionPictureBean> pictures = new LinkedHashSet<>();
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Participation", inverseJoinColumns = {
 			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
 					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
 	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
+	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Participation", inverseJoinColumns = {
 			@JoinColumn(name = "fk_crew_id", referencedColumnName = "id") }, joinColumns = {
