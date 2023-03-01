@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Place.InventoryBean;
@@ -32,6 +33,7 @@ public class ProductBean {
 
 	// 商品圖片
 	@Column(name = "img")
+	@JsonIgnore
 	private byte[] img;
 
 	// 商品名稱

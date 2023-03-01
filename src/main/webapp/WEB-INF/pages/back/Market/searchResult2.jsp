@@ -29,7 +29,7 @@
 		
 		
 		<tbody>
-			<jstl:forEach items="${SearchResult2}" var="search2" varStatus="Status">
+			<jstl:forEach items="${searchResult2}" var="search2" varStatus="Status">
 				<tr>
 					<th scope="row">${Status.index+1}</th>
 					<td>${search2.name}</td>

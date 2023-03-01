@@ -125,7 +125,7 @@
 						<li><a href="${contextRoot}/Market/add_Product" class="nav-link">新增商品</a></li>
 						<li><a href="${contextRoot}/Market/allProduct" class="nav-link">管理商品</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">訂單管理</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">查詢</a></li>
+						<li><a href="${contextRoot}/" class="nav-link">測試</a></li>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link" href="#submenu-player">
