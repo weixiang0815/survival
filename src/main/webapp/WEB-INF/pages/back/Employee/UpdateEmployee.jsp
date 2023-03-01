@@ -15,7 +15,7 @@ max-width: 100%;
 </style>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Layout/navbar_user.jsp"/>
 <h3>使用者修改資料</h3>
 	<form:form action="${contextRoot}/Employee/update1" method="put" modelAttribute="Employee" enctype="multipart/form-data">
 		<table class="table table-hover">
@@ -98,6 +98,6 @@ max-width: 100%;
 		</table>
 		<input class="btn btn-outline-primary" type="submit"  value="更新"/>
 	</form:form>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

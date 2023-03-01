@@ -6,14 +6,11 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>登入成功</title>
+<title>會員系統首頁</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
-<h3>成功</h3>
-帳號：${player.account}<br>
-密碼：${player.password}
-<a href="${contextRoot}/logout" >登出</a>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
+<h1>會員系統首頁</h1>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

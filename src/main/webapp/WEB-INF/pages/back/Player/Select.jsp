@@ -9,7 +9,7 @@
 <title>查詢ID</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<h3>查詢</h3>
 	<form action="getOneUserById" method="post">
 		<table>
@@ -41,6 +41,6 @@
 			</tr>
 		</table>
 	</form>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

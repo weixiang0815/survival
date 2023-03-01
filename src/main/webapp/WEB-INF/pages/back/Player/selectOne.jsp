@@ -9,7 +9,7 @@
 <title>查詢結果</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<h3>查詢結果</h3>
 		<table>
 				<tr><td><label>使用者ID：</label>${user.id}
@@ -31,6 +31,6 @@
 		<a href="updateUserById?id=${user.id}"><button>編輯此資料</button></a>
 		<a href="deleteUserById?id=${user.id}"><button>刪除此資料</button></a>
 		<a href="searchmain.controller"><button>回到搜尋頁</button></a>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

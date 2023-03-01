@@ -8,7 +8,7 @@
 				<meta charset="UTF-8">
 				<title>Employee</title>
 			</head>
-			<jsp:include page="../Template/admin.jsp" />
+<jsp:include page="../../Layout/navbar_user.jsp"/>
 			<h3>職員所有資料</h3>
 
 			<body>
@@ -65,6 +65,7 @@
 					</c:forEach>
 				</table>
 				<a href="searchmain.controller"><button>回到搜尋頁</button></a>
+<jsp:include page="../../Layout/footer.jsp"/>
 			</body>
 
 			</html>
