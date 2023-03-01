@@ -23,7 +23,7 @@ public class PlayerloginController {
 
 	@GetMapping("/Player/login")
 	public String login() {
-		return "Player/loginSystem";
+		return "back/Player/loginSystem";
 	}
 
 	@GetMapping("/Player/index")
@@ -41,13 +41,13 @@ public class PlayerloginController {
 		EmployeeBean emp = service.loginEmp(account, password);
 		if (player != null) {
 			session.setAttribute("player", player);
-			return "Player/loginSuccess";
+			return "back/Player/loginSuccess";
 		}
 		if (emp != null) {
 			session.setAttribute("employee", emp);
-			return "Player/loginSystem";
+			return "back/Player/loginSystem";
 		}
-		return "Player/loginSystem";
+		return "back/Player/loginSystem";
 	}
 
 	@GetMapping("/logout")

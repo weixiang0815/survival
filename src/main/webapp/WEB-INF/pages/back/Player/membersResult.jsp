@@ -29,7 +29,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<h3>會員資訊</h3>
 	<table>
 		<tr>
@@ -45,6 +45,6 @@
 			<td>${age}</td>
 		</tr>
 	</table>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

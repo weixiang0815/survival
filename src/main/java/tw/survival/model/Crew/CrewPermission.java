@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
@@ -20,29 +22,30 @@ import tw.survival.model.Player.PlayerBean;
 public class CrewPermission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")	
+	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name = "join_crew_competition")	
+
+	@Column(name = "join_crew_competition")
 	private String join_crew_competition;
-	
+
 	@Column(name = "kickout")
 	private String kickout;
-	
+
 	@Column(name = "modify_member_permission")
-	private String modify_member_permission ;
-	
+	private String modify_member_permission;
+
 	@Column(name = "on_behalf_of_crew")
 	private String on_behalf_of_crew;
-	
+
 	@Column(name = "disband")
 	private String disband;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "crewPermission",cascade = CascadeType.ALL)
-	private Set<PlayerBean> players=new LinkedHashSet<PlayerBean>();
-	
+
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "crewPermission", cascade = CascadeType.ALL)
+	private Set<PlayerBean> players = new LinkedHashSet<PlayerBean>();
+
 	public CrewPermission() {
-		
+
 	}
 
 	public Integer getId() {
@@ -100,5 +103,5 @@ public class CrewPermission {
 	public void setPlayers(Set<PlayerBean> players) {
 		this.players = players;
 	}
-	
+
 }

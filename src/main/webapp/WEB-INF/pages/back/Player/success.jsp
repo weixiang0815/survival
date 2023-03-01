@@ -6,12 +6,11 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="UTF-8">
-<title>Path Result</title>
+<title>歡迎</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
-	result: ${memberId}
-	<br/>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
+	<h3>登入成功，${name}</h3>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

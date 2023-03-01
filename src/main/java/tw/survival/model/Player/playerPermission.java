@@ -13,30 +13,34 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
-@Table(name="playerPermission")
+@Table(name = "playerPermission")
 public class playerPermission {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "join_single_competition")
 	private Character join_single_competition;
-	
+
 	@Column(name = "shopping")
 	private Character shopping;
-	
+
 	@Column(name = "rent")
 	private Character rent;
-	
+
 	@Column(name = "join_crew")
 	private Character join_crew;
-	
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "playerPermission",cascade = CascadeType.ALL)
-	private Set<PlayerBean> players=new LinkedHashSet<PlayerBean>();
+
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "playerPermission", cascade = CascadeType.ALL)
+	private Set<PlayerBean> players = new LinkedHashSet<PlayerBean>();
+
 	public playerPermission() {
-		
+
 	}
 
 	public Integer getId() {
@@ -86,6 +90,5 @@ public class playerPermission {
 	public void setPlayers(Set<PlayerBean> players) {
 		this.players = players;
 	}
-	
-	
+
 }

@@ -9,7 +9,7 @@
 <title>登入</title>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<h3>登入</h3>
 	<form action="${contextRoot}/Player/loginSystem"method="post">
 		<table>

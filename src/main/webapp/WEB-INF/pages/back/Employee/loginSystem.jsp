@@ -9,7 +9,7 @@
 <title>登入</title>
 </head>
 <body>
-<jsp:include page="../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Layout/navbar_user.jsp"/>
 	<h3>登入</h3>
 	<form action="${contextRoot}/Employee/loginSystem"method="post">
 		<table>
@@ -30,6 +30,6 @@
 		</table>
 	</form>
 	<a href="${contextRoot}/Player/login">職員登入</a>
-<jsp:include page="../Layout/footer.jsp"/>
+<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>
