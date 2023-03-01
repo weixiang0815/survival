@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -16,6 +15,7 @@ import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Player.PlayerService;
 
 @Controller
 public class CompetitionController {
@@ -24,11 +24,14 @@ public class CompetitionController {
 	private CompetitionService compService;
 
 	@Autowired
+	private PlayerService playerService;
+	
+	@Autowired
 	private PlaceService placeService;
 
 	@Autowired
 	private CompetitionPrizeService compPrizeService;
-	
+
 	@Autowired
 	private ProductService productService;
 
@@ -64,11 +67,17 @@ public class CompetitionController {
 	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, Model model) {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
 		comp.setFounderEmployee(null);
-		comp.setFounderPlayer(null);
+		comp.setFounderPlayer(playerService.findByBean(1));
 		comp = compService.create(comp);
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());
 		}
+		String startDate = comp.getStartDate();
+		Integer startTimespan = comp.getStartTimespan();
+		String endDate = comp.getEndDate();
+		Integer endTimespan = comp.getEndTimespan();
+		compService.competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(),
+				comp.getPlaceId());
 		model.addAttribute("comp", comp);
 		return "redirect:/competition/detail?id=" + comp.getId();
 	}

@@ -49,7 +49,7 @@ public class PostsService {
 				pw.println(content);
 			}
 			postSave.setEssayLocation(location);
-			
+
 			return pDao.save(postSave);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -186,8 +186,11 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public void deletePostsByCpttId(Integer id) {
-		pDao.deletePostsByCompetitionId(id);
-		return;
+		try {
+			pDao.deletePostsByCompetitionId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
