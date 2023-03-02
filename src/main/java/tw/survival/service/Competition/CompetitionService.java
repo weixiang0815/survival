@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,7 @@ public class CompetitionService {
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
 			String content = comp.getContent();
-			String startDate = comp.getStartDate();
-			Integer startTimespan = comp.getStartTimespan();
-			String endDate = comp.getEndDate();
-			Integer endTimespan = comp.getEndTimespan();
 			comp = compRepo.save(comp);
-			competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(), comp.getPlaceId());
 			File file = new File("C:/Survival/Competition/Competition/content");
 			if (!file.exists()) {
 				file.mkdirs();
@@ -98,6 +94,8 @@ public class CompetitionService {
 			newPost.setName(comp.getMandarinName());
 			newPost.setClassify("competition");
 			newPost.setContent(comp.getContent());
+			newPost.setCompetition(comp);
+			newPost.setPlayer(comp.getFounderPlayer());
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;
@@ -117,7 +115,7 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			StringBuffer content = new StringBuffer("");
-			//StringBuffer 預防記憶體爆掉
+			// StringBuffer 預防記憶體爆掉
 			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr);) {
@@ -384,6 +382,7 @@ public class CompetitionService {
 		// 將時間轉化為時程表，並同步更新到 CompetitionToScheduleBean
 		try {
 			CompetitionBean comp = findById(competitionId);
+			System.out.println(comp.getId());
 			PlaceBean place = placeService.getOnePlaceById(placeId);
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date start = formatter.parse(startDate);

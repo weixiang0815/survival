@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
@@ -27,12 +29,14 @@ public class CrewBean {
 	@Column(name = "name")
 	private String name;
 
-	@OneToMany(fetch=FetchType.LAZY,mappedBy="crew",cascade=CascadeType.ALL)
-	private Set<PlayerBean> bean=new LinkedHashSet<PlayerBean>();
-    
+	@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "crew", cascade = CascadeType.ALL)
+	private Set<PlayerBean> bean = new LinkedHashSet<PlayerBean>();
+
 	public CrewBean() {
-		
+
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,5 +60,5 @@ public class CrewBean {
 	public void setBean(Set<PlayerBean> bean) {
 		this.bean = bean;
 	}
-	
+
 }

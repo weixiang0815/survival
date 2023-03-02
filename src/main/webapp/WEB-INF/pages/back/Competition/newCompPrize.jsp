@@ -37,7 +37,8 @@
 			</div>
 		</div>
 		<form:form action="${contextRoot}/competition/prize/add" method="post"
-			modelAttribute="prizes">
+			modelAttribute="compPrize">
+			<form:input type="text" hidden="true" path="competition" value="${comp.id}" />
 			<div class="row mt-3 mb-3">
 				<div class="col-2 text-end">
 					<form:label class="form-label" path="firstPrize">冠軍獎品</form:label>

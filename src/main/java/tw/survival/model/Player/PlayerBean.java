@@ -1,6 +1,7 @@
 package tw.survival.model.Player;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -21,12 +22,15 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
@@ -66,11 +70,11 @@ public class PlayerBean {
 	@Column(name = "age")
 	private Integer age;
 
-//	@Column(name = "county")
-//	private String county;
-//
-//	@Column(name = "district")
-//	private String district;
+	@Column(name = "county")
+	private String county;
+
+	@Column(name = "district")
+	private String district;
 
 	@Column(name = "address")
 	private String address;
@@ -78,9 +82,14 @@ public class PlayerBean {
 	@Column(name = "info")
 	private String info;
 
+	@JsonIgnore
 	@Column(name = "thumbnail")
 	@Lob
-	private byte[] thumbnail;
+	private Blob thumbnail;
+
+	@JsonIgnore
+	@Transient
+	MultipartFile playerImage;
 
 	@Column(name = "sex")
 	private String sex;
@@ -104,14 +113,17 @@ public class PlayerBean {
 	@Column(name = "banned_reason")
 	private String banned_reason;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_id")
 	private CrewBean crew;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_permission")
 	private CrewPermission crewPermission;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
@@ -120,22 +132,27 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/2/21
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
 
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
@@ -206,21 +223,21 @@ public class PlayerBean {
 		this.age = age;
 	}
 
-//	public String getCounty() {
-//		return county;
-//	}
-//
-//	public void setCounty(String county) {
-//		this.county = county;
-//	}
-//
-//	public String getDistrict() {
-//		return district;
-//	}
-//
-//	public void setDistrict(String district) {
-//		this.district = district;
-//	}
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
 
 	public String getAddress() {
 		return address;
@@ -230,16 +247,20 @@ public class PlayerBean {
 		this.address = address;
 	}
 
-	public byte[] getThumbnail() {
+	public Blob getThumbnail() {
 		return thumbnail;
 	}
 
-	public void setThumbnail(byte[] thumbnail) {
+	public void setThumbnail(Blob thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 
-	public void setThumbnail(MultipartFile file) throws IOException {
-		this.thumbnail = file.getBytes();
+	public MultipartFile getPlayerImage() {
+		return playerImage;
+	}
+
+	public void setPlayerImage(MultipartFile playerImage) {
+		this.playerImage = playerImage;
 	}
 
 	public String getSex() {

@@ -10,8 +10,9 @@ public class PageController {
 
 	@GetMapping("Market/marketMain")
 	public String goToIndex(Model model) {
-		return "Market/marketMain";
+		return "back/Market/marketMain";
 	}
+	
 
 	@ResponseBody
 	@GetMapping("/test1")

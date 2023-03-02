@@ -1,6 +1,7 @@
 package tw.survival.model.Employee;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -15,11 +16,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import tw.survival.model.Place.PlaceBean;
 
@@ -44,8 +47,11 @@ public class EmployeeBean {
 	@Column(name = "age")
 	private Integer age;
 
-	@Column(name = "region")
-	private String region;
+	@Column(name = "county")
+	private String county;
+
+	@Column(name = "district")
+	private String district;
 
 	@Column(name = "address")
 	private String address;
@@ -53,9 +59,18 @@ public class EmployeeBean {
 	@Column(name = "salary")
 	private Integer salary;
 
+	@Column(name = "phone")
+	private String phone;
+
+	@JsonIgnore
 	@Column(name = "thumbnail")
 	@Lob
-	private byte[] thumbnail;
+	private Blob thumbnail;
+
+	@JsonIgnore
+	@Transient
+	MultipartFile employeeImage;
+
 	@Column(name = "sex")
 	private String sex;
 
@@ -135,12 +150,20 @@ public class EmployeeBean {
 		this.age = age;
 	}
 
-	public String getRegion() {
-		return region;
+	public String getCounty() {
+		return county;
 	}
 
-	public void setRegion(String region) {
-		this.region = region;
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
 	}
 
 	public String getAddress() {
@@ -159,16 +182,20 @@ public class EmployeeBean {
 		this.salary = salary;
 	}
 
-	public byte[] getThumbnail() {
+	public Blob getThumbnail() {
 		return thumbnail;
 	}
 
-	public void setThumbnail(byte[] thumbnail) {
+	public void setThumbnail(Blob thumbnail) {
 		this.thumbnail = thumbnail;
 	}
 
-	public void setThumbnail(MultipartFile file) throws IOException {
-		this.thumbnail = file.getBytes();
+	public MultipartFile getEmployeeImage() {
+		return employeeImage;
+	}
+
+	public void setEmployeeImage(MultipartFile employeeImage) {
+		this.employeeImage = employeeImage;
 	}
 
 	public String getSex() {
@@ -241,6 +268,14 @@ public class EmployeeBean {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 }

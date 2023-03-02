@@ -33,7 +33,7 @@ public class PostsService {
 		try {
 			String content = post.getContent();
 			PostsBean postSave = pDao.save(post);
-			String location = "C:/Survival/Posts/" + postSave.getClassify() + "/content/";
+			String location = "C:/Survival/Posts/content/";
 			File folder = new File(location);
 			if (!folder.exists()) {
 				folder.mkdirs();
@@ -49,7 +49,8 @@ public class PostsService {
 				pw.println(content);
 			}
 			postSave.setEssayLocation(location);
-			return postSave;
+
+			return pDao.save(postSave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -66,7 +67,7 @@ public class PostsService {
 	public PostsBean findPostById(Integer id) {
 		if (pDao.existsById(id)) {
 			PostsBean post = pDao.findById(id).get();
-			String location = "C:/Survival/Posts/" + post.getClassify() + "/content/" + post.getId() + ".txt";
+			String location = post.getEssayLocation();
 
 			StringBuilder content = new StringBuilder("");
 			String line = null;
@@ -125,7 +126,13 @@ public class PostsService {
 	public PostsBean updatePost(PostsBean post) {
 		Optional<PostsBean> optional = pDao.findById(post.getId());
 		if (optional.isPresent()) {
-			try (FileOutputStream fos = new FileOutputStream(post.getEssayLocation());
+			PostsBean oldPost = optional.get();
+			oldPost.setFinalAdded(post.getFinalAdded());
+			oldPost.setClassify(post.getClassify());
+			oldPost.setName(post.getName());
+			oldPost.setContent(post.getContent());
+			System.out.println(oldPost.getEssayLocation());
+			try (FileOutputStream fos = new FileOutputStream(oldPost.getEssayLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 					PrintWriter pw = new PrintWriter(osw);) {
 				pw.println(post.getContent());
@@ -133,7 +140,7 @@ public class PostsService {
 				e.printStackTrace();
 				return null;
 			}
-			return pDao.save(post);
+			return pDao.save(oldPost);
 		}
 		return null;
 	}
@@ -179,8 +186,11 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public void deletePostsByCpttId(Integer id) {
-		pDao.deletePostsByCompetitionId(id);
-		return;
+		try {
+			pDao.deletePostsByCompetitionId(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
