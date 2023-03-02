@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<div class="container">
 		<div class="col-10">
 			<form:form modelAttribute="postsBean" method="POST">

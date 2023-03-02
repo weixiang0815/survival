@@ -17,7 +17,7 @@ width: 200px;
 </style>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<div class="container">
 		<h1>All Posts</h1>
 
