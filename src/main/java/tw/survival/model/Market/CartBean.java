@@ -2,6 +2,7 @@ package tw.survival.model.Market;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -17,34 +20,46 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
-@Table(name = "orderitem")
+@Table(name = "cart")
 @Component
-public class OrderItemBean {
+public class CartBean {
 
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	@Column(name = "order_create_date")
-	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
-	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
-	private Date order_create_date;
+	// 購買的商品
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_product_id")
+	private ProductBean product;
 
-	@Column(name = "status")
-	private String status;
-
-	@JsonBackReference
-	@JoinColumn(name = "fk_player_id")
+	// 玩家購買
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
+
+	// 新增日期
+	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	@Column(name = "added")
+	private Date added;
+
+	@PrePersist
+	public void onCreate() {
+		if (added == null) {
+			added = new Date();
+		}
+	}
+
+	public CartBean() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -54,20 +69,12 @@ public class OrderItemBean {
 		this.id = id;
 	}
 
-	public Date getOrder_create_date() {
-		return order_create_date;
+	public ProductBean getProduct() {
+		return product;
 	}
 
-	public void setOrder_create_date(Date order_create_date) {
-		this.order_create_date = order_create_date;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
+	public void setProduct(ProductBean product) {
+		this.product = product;
 	}
 
 	public PlayerBean getPlayer() {
@@ -76,6 +83,14 @@ public class OrderItemBean {
 
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
+	}
+
+	public Date getAdded() {
+		return added;
+	}
+
+	public void setAdded(Date added) {
+		this.added = added;
 	}
 
 }
