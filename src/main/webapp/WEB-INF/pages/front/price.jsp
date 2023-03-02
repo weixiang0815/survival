@@ -6,7 +6,7 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="utf-8">
-<title>HairCut - Hair Salon HTML Template</title>
+<title>價位</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>
@@ -17,14 +17,12 @@
 		data-wow-delay="0.1s">
 		<div class="container text-center py-5">
 			<h1
-				class="display-3 text-white text-uppercase mb-3 animated slideInDown">Pricing
-				Plan</h1>
+				class="display-3 text-white text-uppercase mb-3 animated slideInDown">價位</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
-					<li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-					<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-					<li class="breadcrumb-item text-primary active" aria-current="page">Pricing
-						Plan</li>
+					<li class="breadcrumb-item"><a class="text-white" href="#">首頁</a></li>
+					<li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li>
+					<li class="breadcrumb-item text-primary active" aria-current="page">價位</li>
 				</ol>
 			</nav>
 		</div>
@@ -73,7 +71,7 @@
 				</div>
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
 					<div class="h-100">
-						<img class="img-fluid h-100" src="img/price.jpg" alt="">
+						<img class="img-fluid h-100" src="${contextRoot}/img/price.jpg" alt="">
 					</div>
 				</div>
 			</div>

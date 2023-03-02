@@ -9,18 +9,18 @@
 	<div class="container py-5">
 		<div class="row g-5">
 			<div class="col-lg-4 col-md-6">
-				<h4 class="text-uppercase mb-4">Get In Touch</h4>
+				<h4 class="text-uppercase mb-4">聯絡資訊</h4>
 				<div class="d-flex align-items-center mb-2">
 					<div class="btn-square bg-dark flex-shrink-0 me-3">
 						<span class="fa fa-map-marker-alt text-primary"></span>
 					</div>
-					<span>123 Street, New York, USA</span>
+					<span>台北市復興南路一段390號2樓</span>
 				</div>
 				<div class="d-flex align-items-center mb-2">
 					<div class="btn-square bg-dark flex-shrink-0 me-3">
 						<span class="fa fa-phone-alt text-primary"></span>
 					</div>
-					<span>+012 345 67890</span>
+					<span>（02）6631-6588</span>
 				</div>
 				<div class="d-flex align-items-center">
 					<div class="btn-square bg-dark flex-shrink-0 me-3">
@@ -30,19 +30,19 @@
 				</div>
 			</div>
 			<div class="col-lg-4 col-md-6">
-				<h4 class="text-uppercase mb-4">Quick Links</h4>
-				<a class="btn btn-link" href="">About Us</a> <a class="btn btn-link"
-					href="">Contact Us</a> <a class="btn btn-link" href="">Our
-					Services</a> <a class="btn btn-link" href="">Terms & Condition</a> <a
-					class="btn btn-link" href="">Support</a>
+				<h4 class="text-uppercase mb-4">快速連結</h4>
+				<a class="btn btn-link" href="">關於我們</a> <a class="btn btn-link"
+					href="">聯絡我們</a> <a class="btn btn-link" href="">服務項目</a> <a
+					class="btn btn-link" href="">使用條款</a> <a class="btn btn-link"
+					href="">贊助項目</a>
 			</div>
 			<div class="col-lg-4 col-md-6">
-				<h4 class="text-uppercase mb-4">Newsletter</h4>
+				<h4 class="text-uppercase mb-4">最新資訊</h4>
 				<div class="position-relative mb-4">
 					<input class="form-control border-0 w-100 py-3 ps-4 pe-5"
-						type="text" placeholder="Your email">
+						type="text" placeholder="電子信箱">
 					<button type="button"
-						class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+						class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">訂閱</button>
 				</div>
 				<div class="d-flex pt-1 m-n1">
 					<a class="btn btn-lg-square btn-dark text-primary m-1" href=""><i
@@ -61,8 +61,7 @@
 		<div class="copyright">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-					&copy; <a class="border-bottom" href="#">Your Site Name</a>, All
-					Right Reserved.
+					&copy; <a class="border-bottom" href="${contextRoot}/">Survival</a> 著作權所有
 				</div>
 				<div class="col-md-6 text-center text-md-end">
 					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
