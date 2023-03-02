@@ -21,7 +21,8 @@
         		center:'title',
         		right:'dayGridMonth,timeGridWeek'
         	},
-        	locale:'zh-tw',
+        	
+        	events:'${contextRoot}/schedule/all'
         });
         calendar.render();
       });
