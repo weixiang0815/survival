@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Place.ScheduleBean;
 import tw.survival.model.Place.ScheduleDTO;
 import tw.survival.service.Competition.CompetitionService;
@@ -54,8 +55,34 @@ public class ScheduleController {
 	@ResponseBody
 	@GetMapping("/schedule/all")
 	public List<ScheduleDTO> getAllSchedule(){
-		competitionService.find
+		List<CompetitionBean> compList1 = competitionService.findByStatus("已發布");
+		List<CompetitionBean> compList2 = competitionService.findByStatus("已結束");
+		String startStr[] = {"06:00:00","12:00:00","18:00:00","00:00:00"};
+		String endStr[] = {"12:00:00","18:00:00","00:00:00","06:00:00"};
 		List<ScheduleDTO> list = new ArrayList<>();
+		
+		
+		for(CompetitionBean comp : compList1) {
+			String title = comp.getMandarinName();
+			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
+			System.out.println(start);
+			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
+			
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			list.add(Sdto);
+		
+		}
+		
+		for(CompetitionBean comp : compList2) {
+			String title = comp.getMandarinName();
+			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
+			System.out.println(start);
+			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
+			
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			list.add(Sdto);
+		
+		}
 		
 		return list;
 	}

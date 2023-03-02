@@ -22,7 +22,7 @@
         		right:'dayGridMonth,timeGridWeek'
         	},
         	
-        	events:[]
+        	events:"${contextRoot}/schedule/all"
         });
         calendar.render();
       });

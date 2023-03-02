@@ -13,18 +13,12 @@ public class ScheduleDTO implements Serializable {
 	private String title;
 	
 	@JsonProperty("start")
-	private Date start;
+	private String start;
 	
 	@JsonProperty("end")
-	private Date end;
+	private String end;
 
 	public ScheduleDTO() {
-	}
-
-	public ScheduleDTO(String title, Date start, Date end) {
-		this.title = title;
-		this.start = start;
-		this.end = end;
 	}
 
 	public String getTitle() {
@@ -35,20 +29,29 @@ public class ScheduleDTO implements Serializable {
 		this.title = title;
 	}
 
-	public Date getStart() {
+	public String getStart() {
 		return start;
 	}
 
-	public void setStart(Date start) {
+	public void setStart(String start) {
 		this.start = start;
 	}
 
-	public Date getEnd() {
+	public String getEnd() {
 		return end;
 	}
 
-	public void setEnd(Date end) {
+	public void setEnd(String end) {
 		this.end = end;
 	}
+
+	public ScheduleDTO(String title, String start, String end) {
+		super();
+		this.title = title;
+		this.start = start;
+		this.end = end;
+	}
+
+	
 
 }
