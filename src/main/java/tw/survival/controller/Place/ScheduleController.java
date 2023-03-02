@@ -1,10 +1,23 @@
 package tw.survival.controller.Place;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Place.ScheduleBean;
+import tw.survival.model.Place.ScheduleDTO;
+import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Competition.CompetitionToScheduleService;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.ScheduleService;
@@ -20,6 +33,16 @@ public class ScheduleController {
 	
 	@Autowired
 	private CompetitionToScheduleService CTSService;
+	
+	@Autowired
+	private CompetitionService competitionService;
+	
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        dateFormat.setLenient(false);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+    }
 
 	@GetMapping("/schedule/new")
 	public String newSchedule(Model model) {
@@ -29,4 +52,41 @@ public class ScheduleController {
 		return "back/Place/addSchedule";
 	}
 
+	@ResponseBody
+	@GetMapping("/schedule/all")
+	public List<ScheduleDTO> getAllSchedule(){
+		List<CompetitionBean> compList1 = competitionService.findByStatus("已發布");
+		List<CompetitionBean> compList2 = competitionService.findByStatus("已結束");
+		String startStr[] = {"06:00:00","12:00:00","18:00:00","00:00:00"};
+		String endStr[] = {"12:00:00","18:00:00","00:00:00","06:00:00"};
+		List<ScheduleDTO> list = new ArrayList<>();
+		
+		
+		for(CompetitionBean comp : compList1) {
+			String title = comp.getMandarinName();
+			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
+			System.out.println(start);
+			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
+			
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			list.add(Sdto);
+		
+		}
+		
+		for(CompetitionBean comp : compList2) {
+			String title = comp.getMandarinName();
+			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
+			System.out.println(start);
+			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
+			
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			list.add(Sdto);
+		
+		}
+		
+		return list;
+	}
+	
+	
+	
 }
