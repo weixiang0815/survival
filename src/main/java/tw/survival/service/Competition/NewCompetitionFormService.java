@@ -1,8 +1,10 @@
 package tw.survival.service.Competition;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -46,13 +48,25 @@ public class NewCompetitionFormService {
 	 * @param comp 欲新建的活動新增表單暫存實體
 	 * @return 新建成功回傳活動新增表單暫存實體，失敗回傳 null
 	 * @author 王威翔
+	 * @throws IOException 
 	 */
-	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) {
+	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) throws IOException {
 		NewCompetitionFormPart1Bean part1 = part1Dao.save(new NewCompetitionFormPart1Bean());
 		mainBean.setFirstPart(part1);
 		NewCompetitionFormPart2Bean part2 = part2Dao.save(new NewCompetitionFormPart2Bean());
 		mainBean.setSecondPart(part2);
 		NewCompetitionFormPart3Bean part3 = part3Dao.save(new NewCompetitionFormPart3Bean());
+		String filepath = "C:/Survival/Competition/Competition/temp_content/";
+		File file = new File(filepath);
+		if (!file.exists()) {
+			file.mkdirs();
+		}
+		filepath += "/temp_" + part3.getId() + ".txt";
+		file = new File(filepath);
+		if (!file.exists()) {
+			file.createNewFile();
+		}
+		part3.setContentFileLocation(filepath);
 		mainBean.setThirdPart(part3);
 		return mainDao.save(mainBean);
 	}
@@ -76,7 +90,7 @@ public class NewCompetitionFormService {
 					) {
 				String line = "";
 				while((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
 			} catch (Exception e) {
@@ -107,7 +121,7 @@ public class NewCompetitionFormService {
 					) {
 				String line = "";
 				while((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
 			}
@@ -135,7 +149,7 @@ public class NewCompetitionFormService {
 					) {
 				String line = "";
 				while((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
 			}
@@ -163,7 +177,7 @@ public class NewCompetitionFormService {
 					) {
 				String line = "";
 				while((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
 			} catch (Exception e) {
@@ -188,6 +202,9 @@ public class NewCompetitionFormService {
 			NewCompetitionFormPart2Bean secondPart = mainForm.getSecondPart();
 			mainForm.setSecondPart(null);
 			NewCompetitionFormPart3Bean thirdPart = mainForm.getThirdPart();
+			String filepath = thirdPart.getContentFileLocation();
+			File file = new File(filepath);
+			file.delete();
 			mainForm.setThirdPart(null);
 			part1Dao.delete(firstPart);
 			part2Dao.delete(secondPart);
@@ -213,6 +230,9 @@ public class NewCompetitionFormService {
 			NewCompetitionFormPart2Bean secondPart = mainForm.getSecondPart();
 			mainForm.setSecondPart(null);
 			NewCompetitionFormPart3Bean thirdPart = mainForm.getThirdPart();
+			String filepath = thirdPart.getContentFileLocation();
+			File file = new File(filepath);
+			file.delete();
 			mainForm.setThirdPart(null);
 			part1Dao.delete(firstPart);
 			part2Dao.delete(secondPart);
@@ -236,23 +256,34 @@ public class NewCompetitionFormService {
 		if (optional.isPresent()) {
 			NewCompetitionFormBean form = optional.get();
 			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
+			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
+			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
 			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
 				firstPart.setStartDate(null);
 			} else {				
 				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
 			}
+			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
 			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
 				firstPart.setEndDate(null);
 			} else {
 				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
 			}
+			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
+			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
+			secondPart.setStatus(mainForm.getSecondPart().getStatus());
+			secondPart.setSingleOrCrew(mainForm.getSecondPart().getSingleOrCrew());
+			secondPart.setPlaceId(mainForm.getSecondPart().getPlaceId());
+			secondPart.setBudget(mainForm.getSecondPart().getBudget());
+			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
+			secondPart.setFee(mainForm.getSecondPart().getFee());
 			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
 			try (
 					FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos);
 					PrintWriter pw = new PrintWriter(osw);
 					) {
-				pw.print(thirdPart.getContent());
+				pw.println(mainForm.getThirdPart().getContent());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

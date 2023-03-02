@@ -1,4 +1,3 @@
-
 const creatorId = $("#creatorId");
 const creatorType = $("#creatorType");
 const retrieveFromURL = "http://localhost:8080/Survival/competition/api/create/newForm/getlatest";
@@ -24,6 +23,7 @@ const crewCheck = document.getElementById("crew");
 const publishCheck = document.getElementById("publish");
 const notPublishCheck = document.getElementById("notPublish");
 const content = watchdog.editor;
+const lastEdited = $("#lastEdited");
 let newFormId;
 let firstPartId;
 let secondPartId;
@@ -166,7 +166,8 @@ function updateFormData() {
     axios.put(updateFormURL, jsonObj, {
         headers: {"Content-Type": "application/json"}
     }).then(res => {
-        console.log("上次儲存：" + res.data);
+        let lastEditedTime = "上次儲存：" + res.data;
+        lastEdited.text(lastEditedTime);
     }).catch(err => {
         console.log(err);
     })

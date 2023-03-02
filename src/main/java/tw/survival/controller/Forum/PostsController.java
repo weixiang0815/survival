@@ -24,7 +24,7 @@ public class PostsController {
 	@Autowired
 	private PostsService pService;
 	
-	@GetMapping("/forum.main")
+	@GetMapping("/posts.main")
 	public String mainPage() {
 		return "Forum/index";
 	}
@@ -38,6 +38,8 @@ public class PostsController {
 	
 	@PostMapping("/posts/post")
 	public String insertPost(@ModelAttribute PostsBean post, Model model) {
+		
+		
 		pService.insertPost(post);
 		
 		PostsBean newPost = new PostsBean();

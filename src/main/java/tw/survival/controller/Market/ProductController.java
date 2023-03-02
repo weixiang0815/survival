@@ -1,6 +1,7 @@
 package tw.survival.controller.Market;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -23,20 +24,29 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Market.TestProductDao;
 import tw.survival.service.Market.ProductService;
 
 @Controller
 public class ProductController {
-	
+
 	@Autowired
 	private ProductRepository productDao;
 
 	@Autowired
 	private ProductService productService;
 
+	@Autowired
+	private TestProductDao TestDao;
+
 	@GetMapping("/Market/add_Product")
 	private String uploadPage() {
-		return "Market/add_Product";
+		return "/back/Market/add_Product";
+	}
+
+	@GetMapping("/Market/show_AllProduct")
+	private String showAllProfuct() {
+		return "/back/Market/show_AllProduct";
 	}
 
 	// 新增商品
@@ -68,7 +78,7 @@ public class ProductController {
 	@GetMapping("/Market/allProduct")
 	public ModelAndView getAllProduct(ModelAndView mav) {
 		List<ProductBean> list = productService.findAllProduct();
-		mav.setViewName("/Market/show_AllProduct");
+		mav.setViewName("back/Market/show_AllProduct");
 		mav.getModel().put("list", list);
 		return mav;
 	}
@@ -89,26 +99,26 @@ public class ProductController {
 	}
 
 	// 修改商品
-	@GetMapping("/Market/edit")
-	public String editMessagePage(@RequestParam("id") Integer id, Model model) {
+	@GetMapping("/back/Market/edit")
+	public String editProductPage(@RequestParam("id") Integer id, Model model) {
 		ProductBean p1 = productService.findById(id);
 		model.addAttribute("product", p1);
-		return "Market/editProduct";
+		return "back/Market/editProduct";
 	}
 
 	// 修改商品
-	@PostMapping("/Market/edit")
-	public String sendEditedMessage(@RequestParam("id") Integer id, @RequestParam("name") String name,
+	@PostMapping("/back/Market/edit")
+	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
 			@RequestParam("img") MultipartFile img, @RequestParam("product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
 		try {
-			productService.updateMsgById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+			productService.updateProductById(id, name, img.getBytes(), product_class, context, rent_fee, price);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/Market/allProduct";
+		return "redirect:/back/Market/allProduct";
 	}
 
 	// 刪除商品
@@ -125,29 +135,57 @@ public class ProductController {
 		model.addAttribute("SearchResult", searchResult);
 		return "Market/searchResult";
 	}
+
+//	 搜尋類型商品>>ProductRepository>>findProductClassLike
+	@GetMapping("/Market/productIn")
+	public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
+		List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
+		model.addAttribute("SearchResult2", searchResult);
+		return "Market/searchResult2";
+	}
+
+	// 測試後可行的多條件
+	@GetMapping("/Market/productIn2")
+	public String findProductIn(@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "productclass", defaultValue = "") String[] productclass,
+			@RequestParam(name = "context", defaultValue = "") String context, Model model) {
+		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
+		model.addAttribute("searchResult2", searchResult);
+		return "/back/Market/searchResult2";
+	}
 	
-	// 搜尋類型商品>>ProductRepository>>findProductClassLike
-		@GetMapping("/Market/productIn")
-		public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
-			List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
-			model.addAttribute("SearchResult2", searchResult);
-			return "Market/searchResult2";
+	@ResponseBody
+	@GetMapping("Market/multicondition")
+	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "productclass", defaultValue = "") String[] productclass,
+			@RequestParam(name = "context", defaultValue = "") String context) {
+		return TestDao.findProductText2(name, productclass, context);
+	}
+
+	// 圖片處理
+	@ResponseBody
+	@GetMapping("/Market/productImage")
+	public Map<String, String> getProductImage(@RequestParam("productId") Integer productId) {
+		ProductBean product = productService.getProductById(productId);
+		Map<String, String> imageMap = new HashMap<>();
+		if (product != null && product.getImg() != null) {
+			String imageData = Base64.getEncoder().encodeToString(product.getImg());
+			imageMap.put("imageData", imageData);
 		}
 	
-	// 簡易多條件搜尋商品 未測試
-		@GetMapping("/Market/productIn2")
-		public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
-				@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
-				@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
-			List<ProductBean> searchResult = productDao.find(name,productclass,context);
-			model.addAttribute("SearchResult2", searchResult);
-			return "Market/searchResult2";
-		}
-		
+		return imageMap;
+	}
+
+//	// 簡易多條件搜尋商品 未測試
+//	@GetMapping("/Market/productIn2")
+//	public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
+//			@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
+//			@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
+//		List<ProductBean> searchResult = productDao.find(name,productclass,context);
+//		model.addAttribute("SearchResult2", searchResult);
+//		return "Market/searchResult2";
+//	}
 	
-	
-	
-	//多條件搜尋商品
 //	@ResponseBody
 //	@GetMapping("/Market/productFindByproductclassIn")
 //	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {
@@ -155,17 +193,5 @@ public class ProductController {
 //		model.addAttribute("SearchResult2", searchResult);
 //		return "Market/serchResult";
 //	}
-	
-	@ResponseBody
-	@GetMapping("/Market/productImage")
-	public Map<String, String> getProductImage(@RequestParam("productId") Integer productId) {
-	    ProductBean product = productService.getProductById(productId);
-	    Map<String, String> imageMap = new HashMap<>();
-	    if (product != null && product.getImg() != null) {
-	        String imageData = Base64.getEncoder().encodeToString(product.getImg());
-	        imageMap.put("imageData", imageData);
-	    }
-	    return imageMap;
-	}
-	
+
 }

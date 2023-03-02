@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "Competition_History")
 public class CompetitionHistoryBean {
@@ -16,6 +18,7 @@ public class CompetitionHistoryBean {
 	@Column(name = "fk_competition_id")
 	private Integer competitionId;
 
+	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;

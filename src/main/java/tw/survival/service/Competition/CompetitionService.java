@@ -8,10 +8,10 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import javax.transaction.Transactional;
 
@@ -22,11 +22,12 @@ import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionDao;
 import tw.survival.model.Competition.CompetitionRepository;
 import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
+import tw.survival.model.Competition.CompetitionToScheduleBean;
 import tw.survival.model.Forum.PostsBean;
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.ScheduleBean;
 import tw.survival.service.Forum.PostsService;
 import tw.survival.service.Place.PlaceService;
-import tw.survival.service.Place.ScheduleService;
 
 @Service
 @Transactional
@@ -40,12 +41,12 @@ public class CompetitionService {
 
 	@Autowired
 	private PostsService postsService;
-	
+
 	@Autowired
 	private PlaceService placeService;
-	
+
 	@Autowired
-	private ScheduleService scheduleService;
+	private CompetitionToScheduleService compToScheduleService;
 
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
@@ -57,13 +58,7 @@ public class CompetitionService {
 	public CompetitionBean create(CompetitionBean comp) {
 		try {
 			String content = comp.getContent();
-			String startDate = comp.getStartDate();
-			Integer startTimespan = comp.getStartTimespan();
-			String endDate = comp.getEndDate();
-			Integer endTimespan = comp.getEndTimespan();
-			compRepo.save(comp);
-			comp = findLatestCompetition();
-			competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(), comp.getPlaceId());
+			comp = compRepo.save(comp);
 			File file = new File("C:/Survival/Competition/Competition/content");
 			if (!file.exists()) {
 				file.mkdirs();
@@ -97,8 +92,10 @@ public class CompetitionService {
 			comp.setStatus("已發布");
 			PostsBean newPost = new PostsBean();
 			newPost.setName(comp.getMandarinName());
-			newPost.setClassify("活動競賽😎");
-			newPost.setEssay(comp.getContent());
+			newPost.setClassify("competition");
+			newPost.setContent(comp.getContent());
+			newPost.setCompetition(comp);
+			newPost.setPlayer(comp.getFounderPlayer());
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;
@@ -118,12 +115,13 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			StringBuffer content = new StringBuffer("");
+			// StringBuffer 預防記憶體爆掉
 			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
@@ -150,7 +148,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				comp.setContent(content.toString());
 			}
@@ -175,7 +173,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
@@ -201,7 +199,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line);
+					content.append(line + "\n\n");
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
@@ -209,6 +207,26 @@ public class CompetitionService {
 			}
 		});
 		return comps;
+	}
+
+	/**
+	 * 查詢已發布的所有活動實體
+	 * 
+	 * @return 回傳裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionBean> findPublishedComps() {
+		return compRepo.findByStatus("已發布");
+	}
+
+	/**
+	 * 查詢已發布的所有活動實體 id
+	 * 
+	 * @return 回傳裝著活動實體 id 的 List 物件
+	 * @author 王威翔
+	 */
+	public List<Integer> findPublishedCompIds() {
+		return compRepo.findCompetitionIdByStatus("已發布");
 	}
 
 	/**
@@ -221,6 +239,11 @@ public class CompetitionService {
 	public boolean deleteById(Integer id) {
 		try {
 			// 需先刪除對應活動獎品實體與論壇系統貼文
+			postsService.deletePostsByCpttId(id);
+			String filepath = compRepo.findById(id).get().getContentFileLocation();
+			File file = new File(filepath);
+			file.delete();
+			compToScheduleService.deleteByCompetitionId(id);
 			compRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
@@ -236,6 +259,11 @@ public class CompetitionService {
 	 */
 	public boolean deleteByEntity(CompetitionBean comp) {
 		try {
+			postsService.deletePostsByCpttId(comp.getId());
+			String filepath = comp.getContentFileLocation();
+			File file = new File(filepath);
+			file.delete();
+			compToScheduleService.deleteByCompetitionId(comp.getId());
 			compRepo.delete(comp);
 			return true;
 		} catch (Exception e) {
@@ -255,7 +283,6 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("未發布");
-			// 需刪除論壇系統的對應貼文
 			compRepo.save(comp);
 			return comp;
 		}
@@ -269,10 +296,18 @@ public class CompetitionService {
 	 * @return 更新成功回傳該活動實體，拋出錯誤回傳 null
 	 * @author 王威翔
 	 */
-	@Transactional
 	public CompetitionBean updateByEntity(CompetitionBean comp) {
 		Optional<CompetitionBean> optional = compRepo.findById(comp.getId());
 		if (optional.isPresent()) {
+			CompetitionBean oldComp = optional.get();
+			if (scheduleIsChanged(comp, oldComp)) {
+				String startDate = comp.getStartDate();
+				Integer startTimespan = comp.getStartTimespan();
+				String endDate = comp.getEndDate();
+				Integer endTimespan = comp.getEndTimespan();
+				compToScheduleService.deleteByCompetitionId(comp.getId());
+				competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(), comp.getPlaceId());
+			}
 			try (FileOutputStream fos = new FileOutputStream(comp.getContentFileLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 					PrintWriter pw = new PrintWriter(osw);) {
@@ -298,7 +333,6 @@ public class CompetitionService {
 		if (optional.isPresent()) {
 			CompetitionBean comp = optional.get();
 			comp.setStatus("已發布");
-			// 重新發布貼文
 			compRepo.save(comp);
 			return comp;
 		}
@@ -306,32 +340,95 @@ public class CompetitionService {
 	}
 
 	/**
-	 * 將活動舉辦時間與時段轉化為對應時程表，並同步更新到 CompetitionToScheduleBean
+	 * 檢查活動時程有無更動
+	 * 
+	 * @param newComp 新活動實體
+	 * @param oldComp 救活動實體
+	 * @return 有更動回傳 true，否則回傳 false
+	 * @author 王威翔
+	 */
+	public boolean scheduleIsChanged(CompetitionBean newComp, CompetitionBean oldComp) {
+		String newStartDate = newComp.getStartDate();
+		String oldStartDate = oldComp.getStartDate();
+
+		Integer newStartTimespan = newComp.getStartTimespan();
+		Integer oldStartTimespan = oldComp.getStartTimespan();
+
+		String newEndDate = newComp.getEndDate();
+		String oldEndDate = oldComp.getEndDate();
+
+		Integer newEndTimespan = newComp.getEndTimespan();
+		Integer oldEndTimespan = oldComp.getEndTimespan();
+
+		boolean test = newStartDate.contentEquals(oldStartDate) && newStartTimespan == oldStartTimespan
+				&& newEndDate.contentEquals(oldEndDate) && newEndTimespan == oldEndTimespan;
+
+		return test ? false : true;
+	}
+
+	/**
+	 * 將活動舉辦日期與時段轉化為對應時程表，並同步更新到活動時程中介表
 	 * 
 	 * @param startDate     活動開始日期
 	 * @param startTimespan 活動開始時段
 	 * @param endDate       活動結束日期
 	 * @param endTimespan   活動結束時段
+	 * @param competitionId 活動實體 id
+	 * @param placeId       場地實體 id
 	 * @author 王威翔
 	 */
-	public void competitionToSchedule(String startDate, Integer startTimespan, String endDate, Integer endTimespan, Integer competitionId, Integer placeId) {
+	public void competitionToSchedule(String startDate, Integer startTimespan, String endDate, Integer endTimespan,
+			Integer competitionId, Integer placeId) {
 		// 將時間轉化為時程表，並同步更新到 CompetitionToScheduleBean
 		try {
+			CompetitionBean comp = findById(competitionId);
+			System.out.println(comp.getId());
+			PlaceBean place = placeService.getOnePlaceById(placeId);
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date start = formatter.parse(startDate);
 			Date end = formatter.parse(endDate);
-			if (start.compareTo(end) < 0) {
-				Long diffInMillies = Math.abs(end.getTime() - start.getTime());
-				Integer diffInDays = Long.valueOf(TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS)).intValue();
-				
-			} else if (start.compareTo(end) == 0) {
-				for (Integer i = startTimespan; i <= endTimespan; i ++) {
-					ScheduleBean schedule = new ScheduleBean();
-					schedule.setPlace(placeService.getOnePlaceById(placeId));
-					schedule.setScheduleDatetime(start);
-					schedule.setScheduleTimespan(i);
-					scheduleService.insertSchedule(schedule);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(start);
+			while (true) {
+				// 獲得 Calendar 物件目前的時間並轉成 Date 物件
+				Date currentDate = calendar.getTime();
+				// 如果目前日期超過結束日期就跳出迴圈
+				if (currentDate.compareTo(end) > 0) {
+					break;
 				}
+				// 先檢查活動是否在一天內結束（開始日期等於結束日期）
+				if (start.compareTo(end) == 0) {
+					for (int timespan = startTimespan; timespan <= endTimespan; timespan++) {
+						ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
+						CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
+						compToScheduleService.insert(ctsb);
+					}
+				} else {
+					// 不是的話，再檢查目前日期是否為第一天，是的話就計算從開始時段開始當天剩下的所有時段
+					if (currentDate.compareTo(start) == 0) {
+						for (int timespan = startTimespan; timespan <= 4; timespan++) {
+							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
+							CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
+							compToScheduleService.insert(ctsb);
+						}
+						// 不是第一天的話，再檢查是否為最後一天，是的話就計算當天直到結束時段前剩下的所有時段
+					} else if (currentDate.compareTo(end) == 0) {
+						for (int timespan = 1; timespan <= endTimespan; timespan++) {
+							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
+							CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
+							compToScheduleService.insert(ctsb);
+						}
+						// 也不是最後一天的話，就計算一整天所有四個時段
+					} else {
+						for (int timespan = 1; timespan <= 4; timespan++) {
+							ScheduleBean schedule = new ScheduleBean(timespan, currentDate, place);
+							CompetitionToScheduleBean ctsb = new CompetitionToScheduleBean(schedule, comp);
+							compToScheduleService.insert(ctsb);
+						}
+					}
+				}
+				// 跳出迴圈後，將 Calendar 物件當前時間加一天，然後進入下一次迴圈
+				calendar.add(Calendar.DATE, 1);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

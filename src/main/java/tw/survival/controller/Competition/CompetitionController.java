@@ -9,9 +9,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Player.PlayerService;
 
 @Controller
 public class CompetitionController {
@@ -20,7 +24,16 @@ public class CompetitionController {
 	private CompetitionService compService;
 
 	@Autowired
+	private PlayerService playerService;
+	
+	@Autowired
 	private PlaceService placeService;
+
+	@Autowired
+	private CompetitionPrizeService compPrizeService;
+
+	@Autowired
+	private ProductService productService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -29,7 +42,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition")
 	public String main() {
-		return "Competition/index";
+		return "back/Competition/index";
 	}
 
 	/**
@@ -41,7 +54,7 @@ public class CompetitionController {
 	public String newCompetition(Model model) {
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("competition", new CompetitionBean());
-		return "Competition/newCompetition";
+		return "back/Competition/newCompetition";
 	}
 
 	/**
@@ -54,11 +67,17 @@ public class CompetitionController {
 	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, Model model) {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
 		comp.setFounderEmployee(null);
-		comp.setFounderPlayer(null);
+		comp.setFounderPlayer(playerService.findByBean(1));
 		comp = compService.create(comp);
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());
 		}
+		String startDate = comp.getStartDate();
+		Integer startTimespan = comp.getStartTimespan();
+		String endDate = comp.getEndDate();
+		Integer endTimespan = comp.getEndTimespan();
+		compService.competitionToSchedule(startDate, startTimespan, endDate, endTimespan, comp.getId(),
+				comp.getPlaceId());
 		model.addAttribute("comp", comp);
 		return "redirect:/competition/detail?id=" + comp.getId();
 	}
@@ -73,7 +92,41 @@ public class CompetitionController {
 	public String publishCompetition(@RequestParam("id") Integer id, Model model) {
 		CompetitionBean comp = compService.publishById(id);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
+	}
+
+	/**
+	 * 跳轉至新增活動獎品頁面
+	 * 
+	 * @param id 欲新增活獎品的活動 id
+	 * @return 跳轉至新增活動獎品頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/prize/new")
+	public String newPrizes(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
+		CompetitionPrizeBean compPrize = new CompetitionPrizeBean();
+		CompetitionBean comp = compService.findById(id);
+		compPrize.setCompetitionId(id);
+		compPrize.setCompetition(comp);
+		model.addAttribute("compPrize", compPrize);
+		model.addAttribute("comp", comp);
+		model.addAttribute("place", comp.getPlace());
+		model.addAttribute("products", productService.findAllProduct());
+		return "back/Competition/newCompPrize";
+	}
+
+	/**
+	 * 新增指定活動 id 的獎品
+	 * 
+	 * @return 重新導向至指定 id 活動的詳情頁面
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/prize/add")
+	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
+		compPrize = compPrizeService.insert(compPrize);
+		CompetitionBean comp = compPrize.getCompetition();
+		comp.setCompetitionPrizes(compPrize);
+		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 
 	/**
@@ -83,7 +136,7 @@ public class CompetitionController {
 	 */
 	@GetMapping("/competition/search")
 	public String searchCompetition() {
-		return "Competition/searchCompetition";
+		return "back/Competition/searchCompetition";
 	}
 
 	/**
@@ -131,7 +184,9 @@ public class CompetitionController {
 		model.addAttribute("start", start);
 		model.addAttribute("end", end);
 		model.addAttribute("comp", comp);
-		return "Competition/competitionDetail";
+		model.addAttribute("prizes", comp.getCompetitionPrizes());
+		model.addAttribute("pictures", comp.getPictures());
+		return "back/Competition/competitionDetail";
 	}
 
 	/**
@@ -142,7 +197,7 @@ public class CompetitionController {
 	@GetMapping("/competition/search/result")
 	public String searchAll(Model model) {
 		model.addAttribute("compList", compService.findAll());
-		return "Competition/showCompetitions";
+		return "back/Competition/showCompetitions";
 	}
 
 	/**
@@ -155,7 +210,7 @@ public class CompetitionController {
 		CompetitionBean competition = compService.findById(id);
 		model.addAttribute("competition", competition);
 		model.addAttribute("placeList", placeService.getAllPlace());
-		return "Competition/editCompetition";
+		return "back/Competition/editCompetition";
 	}
 
 	/**
@@ -192,7 +247,7 @@ public class CompetitionController {
 	public String takedownCompetitionById(@RequestParam("id") Integer id, Model model) {
 		compService.takedownById(id);
 		model.addAttribute("comp", compService.findById(id));
-		return "Competition/competitionDetail";
+		return "back/Competition/competitionDetail";
 	}
 
 }

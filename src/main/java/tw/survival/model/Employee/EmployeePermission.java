@@ -13,6 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="empPermission")
 public class EmployeePermission {
@@ -36,6 +39,7 @@ public class EmployeePermission {
 	@Column(name = "inventory")
 	private Character inventory;
  
+	@JsonBackReference
 	@OneToMany(fetch=FetchType.LAZY,mappedBy = "employeePermission",cascade = CascadeType.ALL)
 	private Set<EmployeeBean> employees=new LinkedHashSet<EmployeeBean>();;
 	private EmployeePermission() {

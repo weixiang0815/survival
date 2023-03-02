@@ -45,6 +45,12 @@ public class ScheduleBean {
 	public ScheduleBean() {
 	}
 
+	public ScheduleBean(Integer scheduleTimespan, Date scheduleDatetime, PlaceBean place) {
+		this.scheduleTimespan = scheduleTimespan;
+		this.scheduleDatetime = scheduleDatetime;
+		this.place = place;
+	}
+
 	public Integer getId() {
 		return id;
 	}

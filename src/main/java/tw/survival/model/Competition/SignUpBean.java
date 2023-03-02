@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Player.PlayerBean;
 
@@ -35,6 +36,7 @@ public class SignUpBean {
 	@Transient
 	private Integer competitionId;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
