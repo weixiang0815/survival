@@ -6,7 +6,7 @@
 <html lang="zh-hant-tw">
 <head>
 <meta charset="utf-8">
-<title>HairCut - Hair Salon HTML Template</title>
+<title>聯絡我們</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>
@@ -17,12 +17,12 @@
 		data-wow-delay="0.1s">
 		<div class="container text-center py-5">
 			<h1
-				class="display-3 text-white text-uppercase mb-3 animated slideInDown">Contact</h1>
+				class="display-3 text-white text-uppercase mb-3 animated slideInDown">聯絡我們</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
-					<li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
-					<li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
-					<li class="breadcrumb-item text-primary active" aria-current="page">Contact</li>
+					<li class="breadcrumb-item"><a class="text-white" href="#">首頁</a></li>
+					<li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li>
+					<li class="breadcrumb-item text-primary active" aria-current="page">聯絡我們</li>
 				</ol>
 			</nav>
 		</div>
@@ -36,10 +36,8 @@
 			<div class="row g-0">
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
 					<div class="bg-secondary p-5">
-						<p class="d-inline-block bg-dark text-primary py-1 px-4">Contact
-							Us</p>
-						<h1 class="text-uppercase mb-4">Have Any Query? Please
-							Contact Us!</h1>
+						<p class="d-inline-block bg-dark text-primary py-1 px-4">聯絡我們</p>
+						<h1 class="text-uppercase mb-4">有任何問題？請聯絡我們！</h1>
 						<p class="mb-4">
 							The contact form is currently inactive. Get a functional and
 							working contact form with Ajax & PHP in a few minutes. Just copy
@@ -51,35 +49,33 @@
 								<div class="col-md-6">
 									<div class="form-floating">
 										<input type="text" class="form-control bg-transparent"
-											id="name" placeholder="Your Name"> <label for="name">Your
-											Name</label>
+											id="name" placeholder="姓名"> <label for="name">姓名</label>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-floating">
 										<input type="email" class="form-control bg-transparent"
-											id="email" placeholder="Your Email"> <label
-											for="email">Your Email</label>
+											id="email" placeholder="電子信箱"> <label
+											for="email">電子信箱</label>
 									</div>
 								</div>
 								<div class="col-12">
 									<div class="form-floating">
 										<input type="text" class="form-control bg-transparent"
-											id="subject" placeholder="Subject"> <label
-											for="subject">Subject</label>
+											id="subject" placeholder="主旨"> <label
+											for="subject">主旨</label>
 									</div>
 								</div>
 								<div class="col-12">
 									<div class="form-floating">
 										<textarea class="form-control bg-transparent"
-											placeholder="Leave a message here" id="message"
+											placeholder="有什麼想告訴我們的？" id="message"
 											style="height: 100px"></textarea>
-										<label for="message">Message</label>
+										<label for="message">訊息</label>
 									</div>
 								</div>
 								<div class="col-12">
-									<button class="btn btn-primary w-100 py-3" type="submit">Send
-										Message</button>
+									<button class="btn btn-primary w-100 py-3" type="submit">送出</button>
 								</div>
 							</div>
 						</form>
@@ -88,7 +84,7 @@
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
 					<div class="h-100" style="min-height: 400px;">
 						<iframe class="google-map w-100 h-100"
-							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sNew%20York%2C%20USA!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
+							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d391.11585059587577!2d121.54269064594865!3d25.03358214678788!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abd4825ecdf1%3A0x1376611696cf0cff!2z5Y-w5YyX5biC6L6y5pyD5aSn5qiT!5e0!3m2!1szh-TW!2stw!4v1677773970735!5m2!1szh-TW!2stw"
 							frameborder="0" allowfullscreen="" aria-hidden="false"
 							tabindex="0"
 							style="filter: grayscale(100%) invert(92%) contrast(83%); border: 0;"></iframe>
