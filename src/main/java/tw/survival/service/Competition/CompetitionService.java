@@ -229,6 +229,10 @@ public class CompetitionService {
 		return compRepo.findCompetitionIdByStatus("已發布");
 	}
 
+	public List<CompetitionBean> findByStatus(String status) {
+		return compRepo.findByStatus(status);
+	}
+
 	/**
 	 * 透過 id 刪除一筆活動紀錄
 	 * 

@@ -1,6 +1,6 @@
 package tw.survival.model.Employee;
 
-import java.io.IOException;
+
 import java.sql.Blob;
 import java.util.Date;
 

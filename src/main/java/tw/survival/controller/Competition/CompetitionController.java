@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPictureBean;
 import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Market.ProductService;
@@ -25,12 +27,15 @@ public class CompetitionController {
 
 	@Autowired
 	private PlayerService playerService;
-	
+
 	@Autowired
 	private PlaceService placeService;
 
 	@Autowired
 	private CompetitionPrizeService compPrizeService;
+
+	@Autowired
+	private CompetitionPictureService compPictureService;
 
 	@Autowired
 	private ProductService productService;
@@ -113,6 +118,13 @@ public class CompetitionController {
 		model.addAttribute("place", comp.getPlace());
 		model.addAttribute("products", productService.findAllProduct());
 		return "back/Competition/newCompPrize";
+	}
+
+	@GetMapping("/competition/picture/new")
+	public String newPictures(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
+		CompetitionBean comp = compService.findById(id);
+		model.addAttribute("comp", comp);
+		return "back/Competition/uploadCompPictures";
 	}
 
 	/**
