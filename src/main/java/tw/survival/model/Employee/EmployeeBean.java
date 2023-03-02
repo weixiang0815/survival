@@ -21,8 +21,10 @@ import javax.persistence.Transient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Place.PlaceBean;
 
@@ -98,10 +100,12 @@ public class EmployeeBean {
 	@Column(name = "email")
 	private String email;
 
+	@JsonBackReference
 	@JoinColumn(name = "fk_workplace_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlaceBean place;
 
+	@JsonManagedReference
 	@JoinColumn(name = "fk_permission")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private EmployeePermission employeePermission;

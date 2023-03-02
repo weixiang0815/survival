@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Employee.EmployeeBean;
@@ -37,6 +38,7 @@ public class PlaceBean {
 	@Column(name = "place_address")
 	private String place_address;
 
+	@JsonIgnore
 	@Lob
 	@Column(name = "place_photo")
 	private byte[] place_photo;
@@ -52,7 +54,7 @@ public class PlaceBean {
 	private Set<EmployeeBean> employee = new LinkedHashSet<>();
 
 
-
+	@JsonManagedReference
 	@OneToOne(mappedBy = "place")
 	private WarehouseBean warehouse; // 倉庫
 
