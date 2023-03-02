@@ -1,5 +1,7 @@
 package tw.survival.controller.Competition;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionPictureBean;
@@ -134,11 +137,20 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/prize/add")
-	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
-		compPrize = compPrizeService.insert(compPrize);
-		CompetitionBean comp = compPrize.getCompetition();
-		comp.setCompetitionPrizes(compPrize);
-		return "redirect:/competition/detail?id=" + comp.getId();
+	public String addPrizes(@RequestParam("compId") Integer compId, @RequestParam("files") MultipartFile[] files) {
+		CompetitionBean comp = compService.findById(compId);
+		try {
+			for (MultipartFile file : files) {
+				CompetitionPictureBean compPicture = new CompetitionPictureBean();
+				compPicture.setCompetition(comp);
+				compPicture.setPicture(file);
+				compPictureService.addPicture(compPicture);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "back/Competition";
+		}
+		return "redirect:/competition/detail?id=" + compId;
 	}
 
 	/**

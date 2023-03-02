@@ -69,9 +69,10 @@
 	<jsp:include page="../../Template/admin.jsp" />
 	<div class="container">
 		<h1>上傳活動相簿</h1>
-		<form action="/upload" method="POST" enctype="multipart/form-data">
-			<div id="drop-zone" class="mt-5 mb-5">將照片拖拉進來以上傳，可同時上傳多張照片</div>
-			<input type="file" name="files[]" multiple style="display: none;">
+		<form action="${contextRoot}/competition/prize/add" method="POST" enctype="multipart/form-data">
+			<div id="drop-zone" class="mt-5 mb-5">將照片拖曳進來以上傳，可同時上傳多張照片</div>
+			<input type="hidden" name="compId" value="${comp.id}">
+			<input type="file" name="files" multiple style="display: none;">
 			<button type="submit" class="btn btn-primary btn-sm">上傳</button>
 		</form>
 		<div id="log" style="display: none"></div>
@@ -132,10 +133,10 @@
 						}
 					}
 				});
-		$("form").on("submit", function(e) {
-			e.preventDefault();
-			confirm("你上傳了好多張圖片呦～");
-		});
+		// $("form").on("submit", function(e) {
+		// 	e.preventDefault();
+		// 	confirm("你上傳了好多張圖片呦～");
+		// });
 	</script>
 </body>
 </html>
