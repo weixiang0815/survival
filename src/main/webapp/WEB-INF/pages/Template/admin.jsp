@@ -67,6 +67,11 @@
 .nav-link:hover {
 	background-color: rgba(0, 0, 0, .15);
 }
+.nav-item{
+	display: flex;
+}
+
+
 </style>
 <link href="${contextRoot}/css/dashboard.css" rel="stylesheet">
 <link rel="stylesheet"
@@ -89,13 +94,24 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100 rounded-0 border-0"
-			type="text" placeholder="搜尋" aria-label="Search">
-		<div class="navbar-nav">
-			<div class="nav-item text-nowrap">
-				<a class="nav-link px-3" href="#">登出</a>
+<!-- 		<input class="form-control form-control-dark w-100 rounded-0 border-0" -->
+<!-- 			type="text" placeholder="搜尋" aria-label="Search"> -->
+	 <div class="navbar-nav">
+			<div class="nav-item text-nowrap ">
+				<c:choose>
+				    <c:when test="${not empty sessionScope.employee}">
+				        <!-- 如果存在名为employee的对象，则显示name属性的值 -->
+								<p style="font-size: 12px; color: white;">您好, ${employee.name}!</p>
+								<a class="nav-link px-3" href="${contextRoot}/emplogout">登出</a>
+				    </c:when>
+				    <c:otherwise>
+				        <!-- 如果不存在名为employee的对象，则显示登录按钮 -->
+								<a class="nav-link px-3" href="${contextRoot}/Employee/login">登入</a>
+				    </c:otherwise>
+				</c:choose>
 			</div>
 		</div>
+		
 	</header>
 	<nav id="sidebarMenu"
 		class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
