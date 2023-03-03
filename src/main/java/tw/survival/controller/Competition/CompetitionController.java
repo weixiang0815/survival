@@ -123,6 +123,26 @@ public class CompetitionController {
 		return "back/Competition/newCompPrize";
 	}
 
+	/**
+	 * 新增指定活動 id 的獎品
+	 * 
+	 * @return 重新導向至指定 id 活動的詳情頁面
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/prize/add")
+	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize) {
+		Integer compId = compPrize.getCompetition().getId();
+		compPrizeService.insert(compPrize);
+		return "redirect:/competition/detail?id=" + compId;
+	}
+
+	/**
+	 * 跳轉至上傳活動相簿頁面
+	 * 
+	 * @param id 欲上傳相簿的活動 id
+	 * @return 跳轉至上傳活動相簿頁面
+	 * @author 王威翔
+	 */
 	@GetMapping("/competition/picture/new")
 	public String newPictures(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
 		CompetitionBean comp = compService.findById(id);
@@ -131,13 +151,13 @@ public class CompetitionController {
 	}
 
 	/**
-	 * 新增指定活動 id 的獎品
+	 * 新增指定活動 id 的相簿
 	 * 
 	 * @return 重新導向至指定 id 活動的詳情頁面
 	 * @author 王威翔
 	 */
-	@PostMapping("/competition/prize/add")
-	public String addPrizes(@RequestParam("compId") Integer compId, @RequestParam("files") MultipartFile[] files) {
+	@PostMapping("/competition/picture/add")
+	public String addPictures(@RequestParam("compId") Integer compId, @RequestParam("files") MultipartFile[] files) {
 		CompetitionBean comp = compService.findById(compId);
 		try {
 			for (MultipartFile file : files) {
