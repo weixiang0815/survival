@@ -19,10 +19,16 @@
         	headerToolbar:{
         		left:'prev,next today',
         		center:'title',
-        		right:'dayGridMonth,timeGridWeek'
+        		right:'dayGridMonth,timeGridWeek',
         	},
+        	locales: 'zh-tw',
+            initialDate: '2023-03-02',
+            navLinks: true, // can click day/week names to navigate views
+            businessHours: true, // display business hours
+            editable: true,
+            selectable: true,
         	
-        	events:"${contextRoot}/schedule/all"
+        	events:'${contextRoot}/schedule/all'
         });
         calendar.render();
       });

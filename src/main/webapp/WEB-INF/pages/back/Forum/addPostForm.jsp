@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 <div class="container">
 	<h1>新增貼文</h1>
 	<div class="col-10">
