@@ -32,6 +32,7 @@
 <body>
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
+	    <div></div>
 		<div id='calendar'></div>
 	</div>
 </body>

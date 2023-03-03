@@ -23,8 +23,8 @@ public class ScheduleDTO implements Serializable {
 	@JsonProperty("color")
 	private String color;
 	
-	@JsonProperty("id")
-	private String id;
+	@JsonProperty("placeId")
+	private String placeId;
 
 	public ScheduleDTO() {
 	}
@@ -69,6 +69,14 @@ public class ScheduleDTO implements Serializable {
 		this.color = color;
 	}
 
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
+	}
+
 	public ScheduleDTO(String title, String start, String end, String type, String color) {
 		super();
 		this.title = title;
@@ -76,21 +84,8 @@ public class ScheduleDTO implements Serializable {
 		this.end = end;
 		this.type = type;
 		this.color = color;
+		
 	}
-
-	
-	
-	
-
-	
-
-	
-
-
-	
-
-	
-
 	
 
 }
