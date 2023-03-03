@@ -44,13 +44,6 @@ public class ScheduleController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-	@GetMapping("/schedule/new")
-	public String newSchedule(Model model) {
-		model.addAttribute("schedule", new ScheduleBean());
-		model.addAttribute("placeList", placeService.getAllPlace());
-		model.addAttribute("ctsList", CTSService.findAll());
-		return "redirect:/schedule/all";
-	}
 
 	@ResponseBody
 	@GetMapping("/schedule/all")
