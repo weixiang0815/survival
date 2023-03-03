@@ -87,7 +87,7 @@
 <body>
 	<header
 		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Survival</a>
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="${contextRoot}/">Survival</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed"
 			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
 			aria-controls="sidebarMenu" aria-expanded="false"
@@ -118,7 +118,7 @@
 		<div class="position-sticky pt-3 sidebar-sticky">
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#"> <i class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
+					aria-current="page" href="${contextRoot}/admin"> <i class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
 				</a></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link"

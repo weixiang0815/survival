@@ -1,4 +1,4 @@
-package tw.survival.controller.Front;
+package tw.survival.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
