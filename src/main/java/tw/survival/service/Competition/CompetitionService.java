@@ -48,7 +48,7 @@ public class CompetitionService {
 
 	@Autowired
 	private CompetitionToScheduleService compToScheduleService;
-	
+
 	@Autowired
 	private SignUpService signupService;
 
@@ -246,12 +246,15 @@ public class CompetitionService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
+			CompetitionBean comp = findById(id);
 			postsService.deletePostsByCpttId(id);
 			String filepath = compRepo.findById(id).get().getContentFileLocation();
 			File file = new File(filepath);
 			file.delete();
 			compToScheduleService.deleteByCompetitionId(id);
-			signupService.deleteByCompetitionId(id);
+			if (!comp.getStatus().contentEquals("未發布")) {
+				signupService.deleteByCompetitionId(id);
+			}
 			compRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
@@ -272,7 +275,9 @@ public class CompetitionService {
 			File file = new File(filepath);
 			file.delete();
 			compToScheduleService.deleteByCompetitionId(comp.getId());
-			signupService.deleteByCompetitionId(comp.getId());
+			if (!comp.getStatus().contentEquals("未發布")) {
+				signupService.deleteByCompetitionId(comp.getId());
+			}
 			compRepo.delete(comp);
 			return true;
 		} catch (Exception e) {

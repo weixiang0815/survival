@@ -10,7 +10,7 @@ public class PageController_Front {
 
 	@GetMapping("/Market/index.html")
 	public String goToFrontIndex(Model model) {
-		return "/Market/index.html";
+		return "front/Market/index.html";
 	}
 
 }
