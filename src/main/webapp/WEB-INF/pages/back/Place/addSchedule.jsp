@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-<meta charset='utf-8' />
+<meta charset='UTF-8' />
  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 <script>
       document.addEventListener('DOMContentLoaded', function() {
@@ -21,7 +21,8 @@
         		right:'dayGridMonth,timeGridWeek',
         	},
         	locales: 'zh-tw',
-        	events:'${contextRoot}/schedule/all'
+        	events:'${contextRoot}/schedule/all',
+        	
         	
         });
         calendar.render();

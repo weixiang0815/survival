@@ -66,8 +66,8 @@ public class ScheduleController {
 		
 		for(CompetitionBean comp : publishedComps) {
 			String placeId = comp.getPlace().getId().toString();
-			System.out.println(placeId);
 			String title = comp.getMandarinName();
+			System.out.println(title+placeId);
 			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
 			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
 			String type = comp.getStatus();
@@ -79,8 +79,8 @@ public class ScheduleController {
 		
 		for(CompetitionBean comp : endedComps) {
 			String placeId = comp.getPlace().getId().toString();
-			System.out.println(placeId);
 			String title = comp.getMandarinName();
+			System.out.println(title+placeId);
 			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
 			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
 			String type = comp.getStatus();
@@ -92,8 +92,8 @@ public class ScheduleController {
 		
 		for(CompetitionBean comp : unpublishedComps) {
 			String placeId = comp.getPlace().getId().toString();
-			System.out.println(placeId);
 			String title = comp.getMandarinName();
+			System.out.println(title+placeId);
 			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
 			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
 			String type = comp.getStatus();
