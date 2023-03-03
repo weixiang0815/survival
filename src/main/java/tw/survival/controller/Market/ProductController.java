@@ -145,14 +145,14 @@ public class ProductController {
 	}
 
 	// 測試後可行的多條件
-//	@GetMapping("/Market/productIn2")
-//	public String findProductIn(@RequestParam(name = "name", defaultValue = "") String name,
-//			@RequestParam(name = "productclass", defaultValue = "") String productclass,
-//			@RequestParam(name = "context", defaultValue = "") String context, Model model) {
-//		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
-//		model.addAttribute("searchResult2", searchResult);
-//		return "/back/Market/searchResult2";
-//	}
+	@GetMapping("/Market/productIn2")
+	public String findProductIn(@RequestParam(name = "name", defaultValue = "") String name,
+			@RequestParam(name = "productclass", defaultValue = "") String[] productclass,
+			@RequestParam(name = "context", defaultValue = "") String context, Model model) {
+		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
+		model.addAttribute("searchResult2", searchResult);
+		return "/back/Market/searchResult2";
+	}
 	
 	@ResponseBody
 	@GetMapping("Market/multicondition")
