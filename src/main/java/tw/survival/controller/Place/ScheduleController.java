@@ -49,44 +49,56 @@ public class ScheduleController {
 		model.addAttribute("schedule", new ScheduleBean());
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("ctsList", CTSService.findAll());
-		return "back/Place/addSchedule";
+		return "redirect:/schedule/all";
 	}
 
 	@ResponseBody
 	@GetMapping("/schedule/all")
 	public List<ScheduleDTO> getAllSchedule(){
-		List<CompetitionBean> compList1 = competitionService.findByStatus("已發布");
-		List<CompetitionBean> compList2 = competitionService.findByStatus("已結束");
+		List<CompetitionBean> publishedComps = competitionService.findByStatus("已發布");
+		List<CompetitionBean> endedComps = competitionService.findByStatus("已結束");
+		List<CompetitionBean> unpublishedComps = competitionService.findByStatus("未發布");
+		
 		String startStr[] = {"06:00:00","12:00:00","18:00:00","00:00:00"};
 		String endStr[] = {"12:00:00","18:00:00","00:00:00","06:00:00"};
 		List<ScheduleDTO> list = new ArrayList<>();
 		
 		
-		for(CompetitionBean comp : compList1) {
+		for(CompetitionBean comp : publishedComps) {
 			String title = comp.getMandarinName();
 			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
-			System.out.println(start);
 			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
-			
-			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			String type = comp.getStatus();
+			String color = "grey";
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end,type,color);
 			list.add(Sdto);
 		
 		}
 		
-		for(CompetitionBean comp : compList2) {
+		for(CompetitionBean comp : endedComps) {
 			String title = comp.getMandarinName();
 			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
-			System.out.println(start);
 			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
-			
-			ScheduleDTO Sdto = new ScheduleDTO(title,start,end);
+			String type = comp.getStatus();
+			String color = "blue";
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end,type,color);
+			list.add(Sdto);
+		
+		}
+		
+		for(CompetitionBean comp : unpublishedComps) {
+			String title = comp.getMandarinName();
+			String start = comp.getStartDate() +"T"+ startStr[comp.getStartTimespan()-1];
+			String end = comp.getEndDate() +"T"+ endStr[comp.getEndTimespan()-1];
+			String type = comp.getStatus();
+			String color = "red";
+			ScheduleDTO Sdto = new ScheduleDTO(title,start,end,type,color);
 			list.add(Sdto);
 		
 		}
 		
 		return list;
 	}
-	
 	
 	
 }

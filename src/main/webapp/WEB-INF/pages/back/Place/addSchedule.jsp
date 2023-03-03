@@ -18,7 +18,7 @@
         const calendarEl = document.getElementById('calendar');
         const calendar = new FullCalendar.Calendar(calendarEl, {
         	initialView: 'dayGridMonth',
-        	navLinks:true,
+//         	navLinks:true,
         	headerToolbar:{
         		left:'prev,next today',
         		center:'title',
@@ -30,9 +30,21 @@
 //             businessHours: true, // display business hours
 //             editable: true,
 //             selectable: true,
-           
+//            eventsColor: function(events) {
+//              if (events.type === '已發布') {
+//              return 'purple';
+//              } else if(events.type === '未發布'){
+//             return 'green';
+//             }else if(events.type === '已結束'){
+//              return 'grey';
+//             }else{
+//             	return 'red';
+//             }
+//             },
+
         	
         	events:'${contextRoot}/schedule/all'
+        	
         });
         calendar.render();
       });
@@ -42,6 +54,7 @@
 <body>
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
+		<div></div>
 		<div id='calendar'></div>
 	</div>
 </body>
