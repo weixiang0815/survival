@@ -26,14 +26,14 @@ public class PostsController {
 	
 	@GetMapping("/posts.main")
 	public String mainPage() {
-		return "Forum/index";
+		return "back/Forum/index";
 	}
 	
 	@GetMapping("/formToAdd")
 	public String addPost(Model model) {
 		PostsBean newPost = new PostsBean();
 		model.addAttribute("PostsBean", newPost);
-		return "Forum/addPostForm";
+		return "back/Forum/addPostForm";
 	}
 	
 	@PostMapping("/posts/post")
@@ -44,7 +44,7 @@ public class PostsController {
 		
 		PostsBean newPost = new PostsBean();
 		model.addAttribute("PostsBean", newPost);
-		return "Forum/addPostForm";
+		return "back/Forum/addPostForm";
 		
 	}
 	
@@ -52,7 +52,7 @@ public class PostsController {
 	public String showAllPosts(Model model) {
 		List<PostsBean> postList = pService.getAllPosts1();
 		model.addAttribute("List", postList);
-		return "Forum/showPostsPage";
+		return "back/Forum/showPostsPage";
 	}
 	
 	@DeleteMapping("/post/edit")
@@ -71,7 +71,7 @@ public class PostsController {
 	public String postEditPage(@RequestParam("id") Integer id, Model model){
 		PostsBean post = pService.findPostById(id);
 		model.addAttribute("postsBean", post);
-		return "Forum/editPostPage";
+		return "back/Forum/editPostPage";
 	}
 
 	@PutMapping("/post/edit")

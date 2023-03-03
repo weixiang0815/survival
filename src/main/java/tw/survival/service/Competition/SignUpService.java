@@ -16,7 +16,7 @@ import tw.survival.model.Competition.SignUpRepository;
 public class SignUpService {
 
 	@Autowired
-	private SignUpRepository signupDao;
+	private SignUpRepository signupRepo;
 
 	/**
 	 * 新增一筆報名紀錄，但不一定已付款
@@ -27,12 +27,12 @@ public class SignUpService {
 	 */
 	public SignUpBean insert(SignUpBean signup) {
 		try {
-			return signupDao.save(signup);
+			return signupRepo.save(signup);
 		} catch (Exception e) {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * 繳交報名費
 	 * 
@@ -42,7 +42,7 @@ public class SignUpService {
 	 */
 	public SignUpBean payup(SignUpBean signup) {
 		try {
-			return signupDao.save(signup);
+			return signupRepo.save(signup);
 		} catch (Exception e) {
 			return null;
 		}
@@ -56,7 +56,7 @@ public class SignUpService {
 	 * @author 王威翔
 	 */
 	public SignUpBean findById(Integer id) {
-		Optional<SignUpBean> optional = signupDao.findById(id);
+		Optional<SignUpBean> optional = signupRepo.findById(id);
 		return optional.isPresent() ? optional.get() : null;
 	}
 
@@ -67,7 +67,11 @@ public class SignUpService {
 	 * @author 王威翔
 	 */
 	public List<SignUpBean> findAll() {
-		return signupDao.findAll();
+		return signupRepo.findAll();
+	}
+
+	public List<SignUpBean> findByCompetitionId(Integer compId) {
+		return signupRepo.findByCompetition(compId);
 	}
 
 	/**
@@ -79,9 +83,10 @@ public class SignUpService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
-			signupDao.deleteById(id);
+			signupRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -95,13 +100,24 @@ public class SignUpService {
 	 */
 	public boolean deleteByEntity(SignUpBean signup) {
 		try {
-			signupDao.delete(signup);
+			signupRepo.delete(signup);
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}
 
+	public boolean deleteByCompetitionId(Integer id) {
+		try {
+			signupRepo.deleteByCompetition(id);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	/**
 	 * 更新一筆報名紀錄
 	 * 
@@ -109,9 +125,9 @@ public class SignUpService {
 	 * @return 更新成功回傳該報名紀錄實體，失敗回傳 null
 	 */
 	public SignUpBean updateByEntity(SignUpBean signup) {
-		if (signupDao.findById(signup.getId()).isPresent()) {
+		if (signupRepo.findById(signup.getId()).isPresent()) {
 			try {
-				signupDao.save(signup);
+				signupRepo.save(signup);
 				return signup;
 			} catch (Exception e) {
 				return null;
