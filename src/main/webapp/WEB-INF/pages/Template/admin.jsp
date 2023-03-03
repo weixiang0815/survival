@@ -67,9 +67,9 @@
 .nav-link:hover {
 	background-color: rgba(0, 0, 0, .15);
 }
-.nav-item{
+/* .nav-item{
 	display: flex;
-}
+} */
 
 
 </style>
