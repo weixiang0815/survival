@@ -23,7 +23,6 @@ import tw.survival.model.Competition.CompetitionDao;
 import tw.survival.model.Competition.CompetitionRepository;
 import tw.survival.model.Competition.CompetitionSearchCondititonsDto;
 import tw.survival.model.Competition.CompetitionToScheduleBean;
-import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.ScheduleBean;
