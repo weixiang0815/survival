@@ -31,6 +31,5 @@
 	</form>
 	<a href="${contextRoot}/Employee/login">職員登入</a>
 	<a href="${contextRoot}/player/add">會員註冊</a>
-<%-- <jsp:include page="../Layout/footer.jsp"/> --%>
 </body>
 </html>

@@ -95,10 +95,10 @@ button {
 			<div class="col-12">
 				<c:choose>
 					<c:when test="${pictures == null || pictures.size() == 0}">
-			尚未上傳相簿：<a href="#"><button class="btn btn-primary btn-sm">上傳照片</button></a>
+			尚未上傳相簿：<a href="${contextRoot}/competition/picture/new?id=${comp.id}"><button class="btn btn-primary btn-sm">上傳照片</button></a>
 					</c:when>
 					<c:otherwise>
-			有相簿呦～
+			這次活動一共有 ${pictures.size()} 張照片呦～
 			</c:otherwise>
 				</c:choose>
 			</div>

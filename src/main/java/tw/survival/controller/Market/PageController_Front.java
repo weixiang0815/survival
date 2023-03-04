@@ -3,14 +3,13 @@ package tw.survival.controller.Market;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PageController_Front {
 
 	@GetMapping("/Market/index.html")
 	public String goToFrontIndex(Model model) {
-		return "/Market/index.html";
+		return "front/Market/index.html";
 	}
 
 }

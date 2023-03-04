@@ -11,21 +11,48 @@
 <title>新增活動</title>
 </head>
 <body>
-<jsp:include page="../../Template/admin.jsp" />
+	<jsp:include page="../../Template/admin.jsp" />
 	<div class="container pt-3 pb-3">
 		<div class="row justify-content-center">
 			<div class="col-10 col-md-6 col-lg-8">
 				<div class="text-center">
 					<h1>活動新增表單</h1>
-					<div hidden>
-						<span id="creatorId">1</span>
-						<span id="creatorType">1</span>
-					</div>
+					<c:choose>
+						<c:when
+							test="${empty sessionScope.employee && empty sessionScope.player}">
+							<h2>請先登入再新增活動呦😊</h2>
+						</c:when>
+					</c:choose>
 					<span id="lastEdited">&nbsp;</span>
 				</div>
-				<form:form name="competition" action="${contextRoot}/competition/create"
-				modelAttribute="competition">
-				<div class="input-group">
+				<form:form name="competition"
+					action="${contextRoot}/competition/create"
+					modelAttribute="competition">
+					<div class="input-group">
+						<c:choose>
+							<c:when test="${not empty sessionScope.employee}">
+								<div hidden="true">
+									<span id="creatorId">${employee.id}</span> <span
+										id="creatorType">2</span>
+								</div>
+								<form:input hidden="true" path="founderEmployee"
+									value="${employee.id}" />
+							</c:when>
+							<c:when test="${not empty sessionScope.player}">
+								<div hidden="true">
+									<span id="creatorId">${player.id}</span> <span id="creatorType">1</span>
+								</div>
+								<form:input hidden="true" path="founderPlayer"
+									value="${player.id}" />
+							</c:when>
+							<c:otherwise>
+								<div hidden="true">
+									<span id="creatorId">1</span> <span id="creatorType">1</span>
+								</div>
+								<form:input hidden="true" path="founderPlayer"
+									value="${player.id}" />
+							</c:otherwise>
+						</c:choose>
 						<div class="row mt-3 mb-3 p-3">
 							<h3>基本資料</h3>
 							<div class="col-6">
@@ -133,8 +160,7 @@
 								<form:textarea id="ckeditor" path="content" class="form-control" />
 							</div>
 						</div>
-						<div class="row mt-3 mb-3 p-3">
-						</div>
+						<div class="row mt-3 mb-3 p-3"></div>
 					</div>
 					<button class="col auto m-3 btn btn-primary" type="submit">送出</button>
 					<button class="col auto m-3 btn btn-danger" type="reset">清除</button>

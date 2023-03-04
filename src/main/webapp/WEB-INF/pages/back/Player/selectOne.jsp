@@ -31,6 +31,5 @@
 		<a href="updateUserById?id=${user.id}"><button>編輯此資料</button></a>
 		<a href="deleteUserById?id=${user.id}"><button>刪除此資料</button></a>
 		<a href="searchmain.controller"><button>回到搜尋頁</button></a>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

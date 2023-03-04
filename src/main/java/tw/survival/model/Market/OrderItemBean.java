@@ -1,7 +1,5 @@
 package tw.survival.model.Market;
 
-
-
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -80,5 +78,4 @@ public class OrderItemBean {
 		this.player = player;
 	}
 
-	
 }
