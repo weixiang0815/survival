@@ -27,6 +27,5 @@
 		</table>
 	</form>
 	<a href="${contextRoot}/Player/login">會員登入</a>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

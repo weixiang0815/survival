@@ -1,7 +1,5 @@
 package tw.survival.controller.login_logout;
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,27 +18,26 @@ import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.service.login_logout.login_logoutService;
 
 @Controller
-@SessionAttributes({"employee"})
+@SessionAttributes({ "employee" })
 public class EmployeeloginLogoutController {
 
 	@Autowired
 	public login_logoutService service;
-	
+
 	@GetMapping("/Employee/login")
 	public String loginemp() {
 		return "back/Employee/loginSystem";
 	}
 
 	@PostMapping("/Employee/loginSystem")
-	public String checkLogemp(@RequestParam("account") String account, 
-			@RequestParam("password") String password,
+	public String checkLogemp(@RequestParam("account") String account, @RequestParam("password") String password,
 			Model m) {
 		Map<String, String> err = new HashMap<>();
 		EmployeeBean emp = service.loginEmp(account, password);
 		if (emp != null) {
 			m.addAttribute("employee", emp);
 			return "back/Employee/index";
-		}else {
+		} else {
 			err.put("msg", "帳號密碼不正確");
 			m.addAttribute("errors", err);
 		}
