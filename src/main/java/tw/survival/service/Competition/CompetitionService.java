@@ -48,7 +48,7 @@ public class CompetitionService {
 
 	@Autowired
 	private CompetitionToScheduleService compToScheduleService;
-	
+
 	@Autowired
 	private SignUpService signupService;
 
@@ -235,6 +235,10 @@ public class CompetitionService {
 
 	public List<CompetitionBean> findByStatus(String status) {
 		return compRepo.findByStatus(status);
+	}
+
+	public List<CompetitionBean> findByPlaceId(Integer placeId) {
+		return compRepo.findByPlaceId(placeId);
 	}
 
 	/**
