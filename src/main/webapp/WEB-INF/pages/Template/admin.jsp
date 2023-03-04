@@ -83,7 +83,7 @@
 	<header
 		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6"
-			href="${contextRoot}/c">Survival</a>
+			href="${contextRoot}/">Survival</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed"
 			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
 			aria-controls="sidebarMenu" aria-expanded="false"
@@ -91,11 +91,11 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="navbar-nav">
-			<div class="nav-item text-nowrap" style="display: flex; justify-content: center;">
+			<div class="nav-item text-nowrap" style="display: flex; justify-content: center; align-items: center;">
 				<c:choose>
 					<c:when test="${not empty sessionScope.employee}">
 						<!-- 如果存在名為 employee 的實體，則顯示 name 屬性的值 -->
-						<span style="font-size: 12px; color: white;">你好，${employee.name}！</span>
+						<span style="color: white;">你好，${employee.name}！</span>
 						<a class="nav-link px-3" href="${contextRoot}/emplogout">登出</a>
 					</c:when>
 					<c:otherwise>
