@@ -6,13 +6,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>活動詳情</title>
+<title>${comp.mandarinName} 相簿</title>
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
 <jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 <div class="container text-center">
-<h1>活動詳情</h1>
+<h1>${comp.mandarinName} 相簿</h1>
 </div>
 <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
