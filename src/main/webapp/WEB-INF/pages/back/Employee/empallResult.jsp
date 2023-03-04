@@ -65,7 +65,6 @@
 					</c:forEach>
 				</table>
 				<a href="searchmain.controller"><button>回到搜尋頁</button></a>
-<jsp:include page="../../Layout/footer.jsp"/>
 			</body>
 
 			</html>

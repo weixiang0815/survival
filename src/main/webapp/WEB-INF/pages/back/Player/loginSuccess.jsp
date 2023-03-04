@@ -14,6 +14,5 @@
 帳號：${player.account}<br>
 密碼：${player.password}
 <a href="${contextRoot}/logout" >登出</a>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

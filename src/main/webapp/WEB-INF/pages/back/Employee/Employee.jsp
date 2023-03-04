@@ -8,6 +8,5 @@
 </head>
 <body>
 <jsp:include page="../../Template/admin.jsp"/>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>
