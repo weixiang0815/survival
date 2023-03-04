@@ -95,6 +95,6 @@
 	</div>
 	<!-- Contact End -->
 	<jsp:include page="../Template/front/footer.jsp"></jsp:include>
-	<jsp:include page="../Template/front/includeinbody.jsp"></jsp:include>
+	<jsp:include page="../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>
