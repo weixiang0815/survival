@@ -1,6 +1,5 @@
 package tw.survival.controller.login_logout;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +13,12 @@ import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.login_logout.login_logoutService;
 
 @Controller
-@SessionAttributes({"player"})
+@SessionAttributes({ "player" })
 public class PlayerLoginLogoutController {
 
 	@Autowired
 	public login_logoutService service;
 
-	
 	@GetMapping("/Player/login")
 	public String login() {
 		return "back/Player/loginSystem";
@@ -28,15 +26,15 @@ public class PlayerLoginLogoutController {
 
 	@GetMapping("/Player/index")
 	public String anotherPage(Model m) {
-		PlayerBean player=new PlayerBean();
-		m.addAttribute("player",player);
-   
+		PlayerBean player = new PlayerBean();
+		m.addAttribute("player", player);
+
 		return "redirect:/index";
 	}
 
 	@PostMapping("/Player/loginSystem")
-	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password, Model m
-			) {
+	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password,
+			Model m) {
 		PlayerBean player = service.login(account, password);
 
 		if (player != null) {
@@ -51,4 +49,5 @@ public class PlayerLoginLogoutController {
 		status.setComplete();
 		return "redirect:/Player/login";
 	}
+
 }
