@@ -16,14 +16,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Forum.PostsBean;
+import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Employee.EmployeeService;
 import tw.survival.service.Forum.PostsService;
+import tw.survival.service.Player.PlayerService;
 
 @Controller
-@SessionAttributes({"player"})
+@SessionAttributes({"employee"})
 //@RequestMapping()  統括/post 假如以下所有的Api路徑前都有"/post"字串可以寫在它裡面
 public class PostsController {
 
 	private PostsService pService;
+	
+	private CompetitionService competitionService;
+	
+	private EmployeeService employeeService;
+	
+	private PlayerService playerService;
+	
 	
 //	@Autowired //若是只有一個建構子，SpringBoot會自動加入Autowired功能。
 	public PostsController(PostsService pService) {
@@ -44,6 +54,7 @@ public class PostsController {
 	public String addPost(Model model) {
 		PostsBean newPost = new PostsBean();
 		model.addAttribute("PostsBean", newPost);
+		model.addAttribute("employee");
 		return "back/Forum/addPostForm";
 	}
 	
