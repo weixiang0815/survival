@@ -13,7 +13,6 @@ public class ErrorController implements org.springframework.boot.web.servlet.err
 	public String error(HttpServletRequest request, Model model) {
 		Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
 		model.addAttribute("statusCode", statusCode);
-		
 		return "Error/error";
 	}
 
