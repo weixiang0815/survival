@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
         <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-
         <!DOCTYPE html>
         <html>
 
@@ -10,9 +9,7 @@
             <meta name="description" content="">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-            <meta charset="UTF-8">
-            <title>赫赫商城</title>
+            <title>歡迎蒞臨赫赫商城</title>
 
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
@@ -20,6 +17,7 @@
             <!-- Core Style CSS -->
             <link rel="stylesheet" href="css/core-style.css">
             <link rel="stylesheet" href="style.css">
+
 
             <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
         </head>
@@ -69,7 +67,7 @@
                 outline: 0 solid transparent;
                 color: #fbf5f5;
                 font-weight: 600;
-                /* font-size: 12px; */
+                font-size: 12px;
             }
 
             a:hover,
@@ -1519,7 +1517,7 @@
                 margin-bottom: 15px;
                 display: block;
                 margin-bottom: 0;
-                color: #000000;
+                color: #fffefe;
                 font-weight: 600;
             }
 
@@ -1549,7 +1547,7 @@
             }
 
             .widget.price .ui-slider-handle {
-                background-color: #000000;
+                background-color: #fffdfd;
                 border: none;
                 border-radius: 0;
                 top: -6px;
@@ -1593,7 +1591,7 @@
                 background-color: #ffffff;
                 position: relative;
                 z-index: 1;
-                box-shadow: 0 0 3px rgba(0, 0, 0, 0.15);
+                box-shadow: 0 0 3px rgb(255, 255, 255);
             }
 
             .widget.color .widget-desc ul li a.color1 {
@@ -1605,7 +1603,7 @@
             }
 
             .widget.color .widget-desc ul li a.color3 {
-                background-color: #030303;
+                background-color: #ffffff;
             }
 
             .widget.color .widget-desc ul li a.color4 {
@@ -1663,7 +1661,7 @@
                 margin-bottom: 0;
                 font-size: 12px;
                 font-weight: 600;
-                color: #000000;
+                color: #ffffff;
                 text-transform: uppercase;
                 letter-spacing: 0.75px;
             }
@@ -1961,268 +1959,504 @@
             }
         </style>
 
-        <!---------------------------------------------------------------------------------------------->
+
 
         <body>
             <jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+
             <div class="container text-center">
-                <!-- <h1>商城</h1> -->
+                <h1>商品</h1>
             </div>
-
-            <!-- Page Header Start -->
-            <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-                <div class="container text-center py-5">
-                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">赫赫商城</h1>
-                    <nav aria-label="breadcrumb animated slideInDown">
-                        <ol class="breadcrumb justify-content-center text-uppercase mb-0">
-                            <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
-                            <!-- <li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li> -->
-                            <li class="breadcrumb-item text-primary active" aria-current="page">商城頁面</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-            <!-- Page Header End -->
-
-            <!-- ##### Welcome Area Start ##### -->
-            <span>
-                <section class="welcome_area bg-img background-overlay"
-                    style="background-image: url(${contextRoot}/img/bg-img/bg-1.jpg);">
-                    <div class="container h-100">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-12">
-                                <div class="hero-content">
-                                    <h6>Let Try It</h6>
-                                    <h2 style="color: aliceblue;">全新套裝</h2>
-                                    <a href="${contextRoot}/front/Market/shop" class="btn essence-btn"
-                                        style="font-size:2em">立即前往</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </span>
-            <!-- ##### Welcome Area End ##### -->
-
-            <!-- ##### Top Catagory Area Start ##### -->
-            <div class="top_catagory_area section-padding-80 clearfix">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <!-- Single Catagory -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
-                                style="background-image: url(${contextRoot}/img/bg-img/bg-2.jpg);">
-                                <div class="catagory-content">
-                                    <a href="#">槍枝</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Catagory -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
-                                style="background-image: url(${contextRoot}/img/bg-img/bg-3.jpg);">
-                                <div class="catagory-content">
-                                    <a href="#">配件</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single Catagory -->
-                        <div class="col-12 col-sm-6 col-md-4">
-                            <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
-                                style="background-image: url(${contextRoot}/img/bg-img/bg-4.jpg);">
-                                <div class="catagory-content">
-                                    <a href="#">服裝</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ##### Top Catagory Area End ##### -->
-
-            <!-- ##### CTA Area Start ##### -->
-            <div class="cta-area">
+            <!---------------------------------------------------------------------------------------------------------->
+            <!-- ##### Shop Grid Area Start ##### -->
+            <section class="shop_grid_area section-padding-80">
                 <div class="container">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="cta-content bg-img background-overlay"
-                                style="background-image: url(${contextRoot}/img/bg-img/bg-5.jpg);">
-                                <div class="h-100 d-flex align-items-center justify-content-end">
-                                    <div class="cta--text">
-                                        <h6>-30%</h6>
-                                        <h2 style="color: azure;">全球折扣</h2>
-                                        <a href="#" class="btn essence-btn" style="font-size:2em">立即購買</a>
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="shop_sidebar_area">
+
+                                <!-- ##### Single Widget ##### -->
+                                <div class="widget catagory mb-50">
+                                    <!-- Widget Title -->
+                                    <h6 class="widget-title mb-30">商品類別</h6>
+
+                                    <!--  Catagories  -->
+                                    <div class="catagories-menu">
+                                        <ul id="menu-content2" class="menu-content collapse show">
+                                            <!-- Single Item -->
+                                            <li data-toggle="collapse" data-target="#clothing">
+                                                <a href="#">槍枝</a>
+                                                <ul class="sub-menu collapse show" id="clothing">
+                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">Bodysuits</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                                    <li><a href="#">Jackets &amp; Coats</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="#">Pants &amp; Leggings</a></li>
+                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                </ul>
+                                            </li>
+                                            <!-- Single Item -->
+                                            <li data-toggle="collapse" data-target="#shoes" class="collapsed">
+                                                <a href="#">配件</a>
+                                                <ul class="sub-menu collapse show" id="shoes">
+                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">Bodysuits</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                                    <li><a href="#">Jackets &amp; Coats</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="#">Pants &amp; Leggings</a></li>
+                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                </ul>
+                                            </li>
+                                            <!-- Single Item -->
+                                            <li data-toggle="collapse" data-target="#accessories" class="collapsed">
+                                                <a href="#">服飾</a>
+                                                <ul class="sub-menu collapse show" id="accessories">
+                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">Bodysuits</a></li>
+                                                    <li><a href="#">Dresses</a></li>
+                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
+                                                    <li><a href="#">Jackets &amp; Coats</a></li>
+                                                    <li><a href="#">Jeans</a></li>
+                                                    <li><a href="#">Pants &amp; Leggings</a></li>
+                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
+                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
+                                                    <li><a href="#">Shirts</a></li>
+                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!---------------------------------------------------------------------------------------------------------->
+
+
+                                <!-- ##### Single Widget ##### -->
+                                <div class="widget price mb-50">
+                                    <!-- Widget Title -->
+                                    <h6 class="widget-title mb-30">Filter by</h6>
+                                    <!-- Widget Title 2 -->
+                                    <p class="widget-title2 mb-30" style="color: #ffffff;">Price</p>
+
+                                    <div class="widget-desc">
+                                        <div class="slider-range">
+                                            <div data-min="49" data-max="360" data-unit="$"
+                                                class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
+                                                data-value-min="49" data-value-max="360" data-label-result="Range:">
+                                                <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                    tabindex="0"></span>
+                                                <span class="ui-slider-handle ui-state-default ui-corner-all"
+                                                    tabindex="0"></span>
+                                            </div>
+                                            <div class="range-price">Range: $49.00 - $360.00</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ##### Single Widget ##### -->
+                                <div class="widget brands mb-50">
+                                    <!-- Widget Title 2 -->
+                                    <p class="widget-title2 mb-30" style="color: #ffffff;">Brands</p>
+                                    <div class="widget-desc">
+                                        <ul>
+                                            <li><a href="#">Asos</a></li>
+                                            <li><a href="#">Mango</a></li>
+                                            <li><a href="#">River Island</a></li>
+                                            <li><a href="#">Topshop</a></li>
+                                            <li><a href="#">Zara</a></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-            <!-- ##### CTA Area End ##### -->
 
-            <!-- ##### New Arrivals Area Start ##### -->
-            <section class="new_arrivals_area section-padding-80 clearfix">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="section-heading text-center">
-                                <h2 style="color: #ffffff;">熱門商品</h2>
+                        <div class="col-12 col-md-8 col-lg-9">
+                            <div class="shop_grid_product_area">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="product-topbar d-flex align-items-center justify-content-between">
+                                            <!-- Total Products -->
+                                            <div class="total-products">
+                                                <p><span>186</span> products found</p>
+                                            </div>
+                                            <!-- Sorting -->
+                                            <div class="product-sorting d-flex">
+                                                <p>Sort by:</p>
+                                                <form action="#" method="get">
+                                                    <select name="select" id="sortByselect">
+                                                        <option value="value">Highest Rated</option>
+                                                        <option value="value">Newest</option>
+                                                        <option value="value">Price: $$ - $</option>
+                                                        <option value="value">Price: $ - $$</option>
+                                                    </select>
+                                                    <input type="submit" class="d-none" value="">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-1.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
+
+                                                <!-- Product Badge -->
+                                                <div class="product-badge offer-badge">
+                                                    <span>-30%</span>
+                                                </div>
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price"><span class="old-price">$75.00</span> $55.00
+                                                </p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-2.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-3.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
+
+                                                <!-- Product Badge -->
+                                                <div class="product-badge new-badge">
+                                                    <span>New</span>
+                                                </div>
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-4.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-5.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-6.jpg" alt="">
+
+                                                <!-- Product Badge -->
+                                                <div class="product-badge offer-badge">
+                                                    <span>-30%</span>
+                                                </div>
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price"><span class="old-price">$75.00</span> $55.00
+                                                </p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-6.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-7.jpg" alt="">
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-7.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-8.jpg" alt="">
+
+                                                <!-- Product Badge -->
+                                                <div class="product-badge new-badge">
+                                                    <span>New</span>
+                                                </div>
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-8.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-9.jpg" alt="">
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Product -->
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="single-product-wrapper">
+                                            <!-- Product Image -->
+                                            <div class="product-img">
+                                                <img src="img/product-img/product-9.jpg" alt="">
+                                                <!-- Hover Thumb -->
+                                                <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
+
+                                                <!-- Favourite -->
+                                                <div class="product-favourite">
+                                                    <a href="#" class="favme fa fa-heart"></a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Product Description -->
+                                            <div class="product-description">
+                                                <span>topshop</span>
+                                                <a href="single-product-details.html">
+                                                    <h6>Knot Front Mini Dress</h6>
+                                                </a>
+                                                <p class="product-price">$80.00</p>
+
+                                                <!-- Hover Content -->
+                                                <div class="hover-content">
+                                                    <!-- Add to Cart -->
+                                                    <div class="add-to-cart-btn">
+                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!------------------------- 瀑布流排版方式 ------------------------->
-
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="popular-products-slides owl-carousel">
-
-                                <!-- Single Product -->
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="${contextRoot}/img/product-img/product-1.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="${contextRoot}/img/product-img/product-1.jpg"
-                                            alt="">
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>頂級商品</span>
-                                        <a href="single-product-details.html">
-                                            <h6>特勤黑衣套裝</h6>
-                                        </a>
-                                        <p class="product-price">8000元</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">加入購物車</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Product -->
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="${contextRoot}/img/product-img/product-2.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="${contextRoot}/img/product-img/product-2.jpg"
-                                            alt="">
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>頂級商品</span>
-                                        <a href="single-product-details.html">
-                                            <h6>陸戰套裝</h6>
-                                        </a>
-                                        <p class="product-price">8000元</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">加入購物車</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Product -->
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="${contextRoot}/img/product-img/product-3.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="${contextRoot}/img/product-img/product-3.jpg"
-                                            alt="">
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge offer-badge">
-                                            <span>-5000</span>
-                                        </div>
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>單一商品</span>
-                                        <a href="single-product-details.html">
-                                            <h6>AWV狙擊槍</h6>
-                                        </a>
-                                        <p class="product-price"><span class="old-price">60000元</span> 55000元</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">加入購物車</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Single Product -->
-                                <div class="single-product-wrapper">
-                                    <!-- Product Image -->
-                                    <div class="product-img">
-                                        <img src="${contextRoot}/img/product-img/product-4.jpg" alt="">
-                                        <!-- Hover Thumb -->
-                                        <img class="hover-img" src="${contextRoot}/img/product-img/product-4.jpg"
-                                            alt="">
-
-                                        <!-- Product Badge -->
-                                        <div class="product-badge new-badge">
-                                            <span>新貨</span>
-                                        </div>
-
-                                        <!-- Favourite -->
-                                        <div class="product-favourite">
-                                            <a href="#" class="favme fa fa-heart"></a>
-                                        </div>
-                                    </div>
-                                    <!-- Product Description -->
-                                    <div class="product-description">
-                                        <span>單一商品</span>
-                                        <a href="single-product-details.html">
-                                            <h6>Kar.98狙擊槍</h6>
-                                        </a>
-                                        <p class="product-price">80000元</p>
-
-                                        <!-- Hover Content -->
-                                        <div class="hover-content">
-                                            <!-- Add to Cart -->
-                                            <div class="add-to-cart-btn">
-                                                <a href="#" class="btn essence-btn">加入購物車</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- Pagination -->
+                            <nav aria-label="navigation">
+                                <ul class="pagination mt-50 mb-70">
+                                    <li class="page-item"><a class="page-link" href="#"><i
+                                                class="fa fa-angle-left"></i></a></li>
+                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
+                                    <li class="page-item"><a class="page-link" href="#">21</a></li>
+                                    <li class="page-item"><a class="page-link" href="#"><i
+                                                class="fa fa-angle-right"></i></a></li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- ##### New Arrivals Area End ##### -->
-
-            <!---------------------------------------------------------------------------------------------->
+            <!-- ##### Shop Grid Area End ##### -->
 
 
             <!-- jQuery (Necessary for All JavaScript Plugins) -->
@@ -2238,13 +2472,11 @@
             <!-- Active js -->
             <script src="js/active.js"></script>
 
-            <!---------------------------------------------------------------------------------------------->
+
 
             <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
             <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
         </body>
-
-        <!---------------------------------------------------------------------------------------------->
 
         <script>
             (function ($) {
