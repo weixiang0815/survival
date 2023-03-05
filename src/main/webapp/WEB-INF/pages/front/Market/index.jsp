@@ -1975,9 +1975,9 @@
                     <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">赫赫商城</h1>
                     <nav aria-label="breadcrumb animated slideInDown">
                         <ol class="breadcrumb justify-content-center text-uppercase mb-0">
-                            <li class="breadcrumb-item"><a class="text-white" href="#">首頁</a></li>
-                            <li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li>
-                            <li class="breadcrumb-item text-primary active" aria-current="page">商品導覽</li>
+                            <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
+                            <!-- <li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li> -->
+                            <li class="breadcrumb-item text-primary active" aria-current="page">商城頁面</li>
                         </ol>
                     </nav>
                 </div>
