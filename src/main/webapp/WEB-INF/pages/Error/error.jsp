@@ -21,35 +21,35 @@
 						<c:when test="${statusCode == 400}">
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">錯誤請求</h1>
-							<p class="mb-4">很抱歉，你尋找的頁面不在我們的網站裡。要不要回到首頁？</p>
+							<p class="mb-4">MDN 說這是伺服器收到錯誤語法？！</p>
 						</c:when>
 						<c:when test="${statusCode == 403}">
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">沒有權限</h1>
-							<p class="mb-4">很抱歉，你尋找的頁面不在我們的網站裡。要不要回到首頁？</p>
+							<p class="mb-4">我猜這時候應該要先登入才對？！</p>
 						</c:when>
 						<c:when test="${statusCode == 404}">
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">頁面不存在</h1>
-							<p class="mb-4">很抱歉，我們的程式功力不足😥，歡迎一個月花五萬培養我們👍</p>
-							<p class="mb-4">要不要回到首頁？</p>
+							<p class="mb-4">Servlet 的路徑比 Spring Boot 難抓一萬倍～</p>
 						</c:when>
 						<c:when test="${statusCode == 405}">
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">請求方法被禁或不可用</h1>
-							<p class="mb-4">很抱歉，你尋找的頁面不在我們的網站裡。要不要回到首頁？</p>
+							<p class="mb-4"></p>
 						</c:when>
 						<c:when test="${statusCode == 500}">
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">伺服器發生錯誤</h1>
-							<p class="mb-4">很抱歉，你尋找的頁面不在我們的網站裡。要不要回到首頁？</p>
+							<p class="mb-4">看來有人後端程式還有 bug 沒找到呦～</p>
 						</c:when>
 						<c:otherwise>
 							<h1 class="display-1">${statusCode}</h1>
 							<h1 class="mb-4">出現錯誤</h1>
-							<p class="mb-4">很抱歉，我們的程式功力不足😥。要不要回到首頁？</p>
+							<p class="mb-4">很抱歉，我們程式功力不足😥，歡迎一個月花五萬培養我們👍</p>
 						</c:otherwise>
 					</c:choose>
+					<p class="mb-4">要不要回到首頁？</p>
 					<a id="no" class="btn btn-primary py-3 px-5" data-bs-toggle="modal"
 						data-bs-target="#no-modal" href="${contextRoot}">我才不要</a> <a
 						class="btn btn-primary py-3 px-5" href="${contextRoot}">回到首頁</a>
