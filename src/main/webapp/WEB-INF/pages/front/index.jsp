@@ -18,8 +18,10 @@
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img class="w-100" src="${contextRoot}/img/carousel-1.jpg"
-						alt="Image">
+					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+						<source src="${contextRoot}/videos/kalashnikov-99910.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
@@ -37,8 +39,10 @@
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="w-100" src="${contextRoot}/img/carousel-2.jpg"
-						alt="Image">
+					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+						<source src="${contextRoot}/videos/war-16391.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">

@@ -1,5 +1,6 @@
 package tw.survival.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
@@ -51,6 +52,32 @@ public class FrontControllerAjax {
 			content = new StringBuilder("路徑出現錯誤");
 		}
 		return content.toString();
+	}
+
+	@GetMapping("/bg/video/{id}")
+	public byte[] getBackgroundVideo(@PathVariable Integer id) {
+		String filepath = "C:/Survival/videos/";
+		String filename;
+		switch (id) {
+		case 1:
+			filename = "kalashnikov-99910.mp4";
+			break;
+		case 2:
+			filename = "war-16391.mp4";
+			break;
+		default:
+			return null;
+		}
+		filename = filepath + filename;
+		byte[] video;
+		try (FileInputStream fis = new FileInputStream(filename);
+				BufferedInputStream bis = new BufferedInputStream(fis);) {
+			video = bis.readAllBytes();
+		} catch (Exception e) {
+			e.printStackTrace();
+			video = null;
+		}
+		return video;
 	}
 
 }
