@@ -25,7 +25,7 @@ public class LogisticsController {
 
 	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
-		return "Market/add_Logistics";
+		return "/back/Market/add_Logistics";
 	}
 	
 	//c
@@ -49,26 +49,26 @@ public class LogisticsController {
 	public String getAllLogistics(Model model) {
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
-		return "/Market/show_AllLogistics";
+		return "/back/Market/show_AllLogistics";
 	}
 	//u
 	@GetMapping("/Market/editLogistics")
 	public String editLogistics(@RequestParam("id") Integer id, Model model) {
 		LogisticsBean logistics = LogisticsService.findById(id);
 		model.addAttribute("logistics", logistics);
-		return "Market/editLogistics";
+		return "/back/Market/editLogistics";
 	}
 	
 	@PutMapping("/Market/editLogistics")
 	public String updateLogistics(@ModelAttribute("logistics") LogisticsBean logistics) {
 		LogisticsService.update(logistics);
-		return "redirect:/Market/all_Logistics";
+		return "redirect:/back/Market/all_Logistics";
 	}
 	//d
 	@PostMapping("/Market/deleteLogistics")
 	public String deleteLogistics(@RequestParam("id") Integer id) {
 		LogisticsService.deleteById(id);
-		return "redirect:/Market/all_Logistics";
+		return "redirect:/back/Market/all_Logistics";
 	}
 
 }
