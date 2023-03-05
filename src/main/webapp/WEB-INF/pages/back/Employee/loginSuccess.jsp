@@ -14,6 +14,5 @@
 帳號：${employee.account}<br>
 密碼：${employee.password}
 <a href="${contextRoot}/logout" >登出</a>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

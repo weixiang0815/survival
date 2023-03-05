@@ -48,6 +48,9 @@ public class CompetitionService {
 	@Autowired
 	private CompetitionToScheduleService compToScheduleService;
 
+	@Autowired
+	private SignUpService signupService;
+
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
 	 * 
@@ -229,6 +232,14 @@ public class CompetitionService {
 		return compRepo.findCompetitionIdByStatus("已發布");
 	}
 
+	public List<CompetitionBean> findByStatus(String status) {
+		return compRepo.findByStatus(status);
+	}
+
+	public List<CompetitionBean> findByPlaceId(Integer placeId) {
+		return compRepo.findByPlaceId(placeId);
+	}
+
 	/**
 	 * 透過 id 刪除一筆活動紀錄
 	 * 
@@ -238,12 +249,15 @@ public class CompetitionService {
 	 */
 	public boolean deleteById(Integer id) {
 		try {
-			// 需先刪除對應活動獎品實體與論壇系統貼文
+			CompetitionBean comp = findById(id);
 			postsService.deletePostsByCpttId(id);
 			String filepath = compRepo.findById(id).get().getContentFileLocation();
 			File file = new File(filepath);
 			file.delete();
 			compToScheduleService.deleteByCompetitionId(id);
+			if (!comp.getStatus().contentEquals("未發布")) {
+				signupService.deleteByCompetitionId(id);
+			}
 			compRepo.deleteById(id);
 			return true;
 		} catch (Exception e) {
@@ -264,6 +278,9 @@ public class CompetitionService {
 			File file = new File(filepath);
 			file.delete();
 			compToScheduleService.deleteByCompetitionId(comp.getId());
+			if (!comp.getStatus().contentEquals("未發布")) {
+				signupService.deleteByCompetitionId(comp.getId());
+			}
 			compRepo.delete(comp);
 			return true;
 		} catch (Exception e) {

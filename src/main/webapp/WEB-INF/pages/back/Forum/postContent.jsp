@@ -10,7 +10,7 @@
 <title>論壇系統首頁</title>
 </head>
 <body>
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 <h1>論壇系統首頁</h1>
 <div class="container">
 	<div>

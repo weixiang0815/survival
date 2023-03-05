@@ -79,6 +79,5 @@ img {
 		</table>
 		<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
 	</div>
-	<jsp:include page="../../Layout/footer.jsp" />
 </body>
 </html>

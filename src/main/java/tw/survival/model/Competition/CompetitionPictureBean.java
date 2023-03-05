@@ -77,8 +77,15 @@ public class CompetitionPictureBean {
 		this.picture = picture;
 	}
 
+	@SuppressWarnings("null")
 	public void setPicture(MultipartFile picture) throws IOException {
-		this.contentType = picture.getContentType();
+		String contentType = picture.getContentType();
+		if (contentType.contains("\"")) {
+			contentType = contentType.substring(contentType.indexOf("\"") + 1);
+		} else if (contentType.contains("/")) {
+			contentType = contentType.substring(contentType.indexOf("/") + 1);
+		}
+		this.contentType = contentType;
 		this.picture = picture.getBytes();
 	}
 
