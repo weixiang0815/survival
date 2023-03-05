@@ -35,6 +35,9 @@ public class FrontControllerAjax {
 		case "privacy":
 			filename = "隱私權.txt";
 			break;
+		case "signup":
+			filename = "活動報名條款.txt";
+			break;
 		default:
 			filename = "錯誤存取.txt";
 			break;

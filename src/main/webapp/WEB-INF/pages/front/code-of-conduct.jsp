@@ -117,6 +117,22 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+					<div class="team-item">
+						<div class="team-img position-relative overflow-hidden">
+							<img class="img-fluid" src="${contextRoot}/img/team-3.jpg" alt="">
+							<div class="team-social">
+								<button id="signup"
+									class="btn btn-primary btn-terms" data-bs-toggle="modal"
+									data-bs-target="#terms-modal">檢視</button>
+							</div>
+						</div>
+						<div class="bg-secondary text-center p-4">
+							<h5 class="text-uppercase">活動條款</h5>
+							<span class="text-primary">參閱詳細內文</span>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -171,6 +187,9 @@
 								break;
 							case "privacy":
 								title = "隱私權條款";
+								break;
+							case "signup":
+								title = "活動條款";
 								break;
 							default:
 								title = "錯誤存取";
