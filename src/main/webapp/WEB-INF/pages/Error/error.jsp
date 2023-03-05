@@ -36,7 +36,7 @@
 						</c:when>
 						<c:when test="${statusCode == 405}">
 							<h1 class="display-1">${statusCode}</h1>
-							<h1 class="mb-4">請求方法被禁或不可用</h1>
+							<h1 class="mb-4">請求方法被禁止或不可用</h1>
 							<p class="mb-4">很抱歉，你尋找的頁面不在我們的網站裡。要不要回到首頁？</p>
 						</c:when>
 						<c:when test="${statusCode == 500}">
