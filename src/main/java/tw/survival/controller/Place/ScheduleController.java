@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Competition.CompetitionBean;
-import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.ScheduleBean;
 import tw.survival.model.Place.ScheduleDTO;
 import tw.survival.service.Competition.CompetitionService;
