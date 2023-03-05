@@ -9,7 +9,15 @@
 <title>${statusCode}錯誤</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
+
+<style>
+h1,p{
+color:white;
+}
+</style>
+
 </head>
+
 <body>
 	<jsp:include page="../Template/front/navbar.jsp"></jsp:include>
 	<div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
@@ -35,8 +43,8 @@
 						</c:when>
 						<c:when test="${statusCode == 405}">
 							<h1 class="display-1">${statusCode}</h1>
-							<h1 class="mb-4">請求方法被禁或不可用</h1>
-							<p class="mb-4"></p>
+							<h1 class="mb-4">請求方法被禁止或不可用</h1>
+							<p class="mb-4">似乎你的前臺跟後臺請求方法不一致，難道你前後不一？</p>
 						</c:when>
 						<c:when test="${statusCode == 500}">
 							<h1 class="display-1">${statusCode}</h1>
