@@ -9,9 +9,10 @@
 <head>
 <meta charset='UTF-8' />
 <title>排程表</title>
+<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
-	<jsp:include page="../../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 	<div class="container">
 		<div>
 			<div class="col-3">
@@ -30,8 +31,8 @@
 		src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 	<script>
 		const calendarEl = document.getElementById('calendar');
-		const findAllURL = '${contextRoot}/schedule/all';
-		const findByPlaceIdURL = "${contextRoot}/schedule/select/";
+		const findAllURL = '${contextRoot}/front/schedule/all';
+		const findByPlaceIdURL = "${contextRoot}/front/schedule/select/";
 		let calendar;
 		$(document).on("DOMContentLoaded", function() {
 			renderCalendar(findAllURL);
@@ -71,5 +72,7 @@
 			calendar.render();
 		}
 	</script>
+<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>	
 </body>
 </html>

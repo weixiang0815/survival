@@ -236,6 +236,10 @@ public class CompetitionService {
 		return compRepo.findByStatus(status);
 	}
 
+	public List<CompetitionBean> findByPlaceId(Integer placeId) {
+		return compRepo.findByPlaceId(placeId);
+	}
+
 	/**
 	 * 透過 id 刪除一筆活動紀錄
 	 * 

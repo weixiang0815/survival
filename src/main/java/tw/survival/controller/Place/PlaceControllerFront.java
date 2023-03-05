@@ -1,22 +1,23 @@
 package tw.survival.controller.Place;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Place.PlaceBean;
@@ -28,8 +29,8 @@ import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.ScheduleService;
 
 @Controller
-public class ScheduleController {
-
+public class PlaceControllerFront {
+	
 	@Autowired
 	private ScheduleService scheduleService;
 
@@ -38,39 +39,60 @@ public class ScheduleController {
 
 	@Autowired
 	private CompetitionToScheduleService CTSService;
-
+	
 	@Autowired
 	private CompetitionService competitionService;
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	@GetMapping("/front/place/index")
+	public String goIndex() {
+		return "front/Place/index";
 	}
+	
+	@GetMapping("/front/place/detail")
+	public String goPlaceDetail() {
+		return "front/Place/detail";
+	}
+	
+	@GetMapping("/front/place/all")
+	public ModelAndView getAllPlace(ModelAndView mav) {
+		List<PlaceBean> list = placeService.getAllPlace();
+		mav.setViewName("front/Place/detail");
+		mav.getModel().put("list", list);
+		return mav;
+	}
+	
+	@GetMapping("/front/place/id")
+	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
+		PlaceBean place1 = placeService.getOnePlaceById(id);
+		byte[] placeFile = place1.getPlace_photo();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
 
-	@GetMapping("/schedule/new")
+		return new ResponseEntity<byte[]>(placeFile, headers, HttpStatus.OK);
+	}
+	
+	@GetMapping("front/schedule/new")
 	public String newSchedule(Model model) {
 		model.addAttribute("schedule", new ScheduleBean());
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("ctsList", CTSService.findAll());
-		return "back/Place/addSchedule";
+		return "front/Place/schedule";
 	}
 
-	@PostMapping("/schedule/create")
+	@PostMapping("/front/schedule/create")
 	public String createSchedule(@ModelAttribute("schedule") ScheduleBean schedule, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("失敗");
-			return "redirect:/schedule/new";
+			return "redirect:/front/schedule/new";
 		}
 		schedule.setPlace(placeService.getOnePlaceById(schedule.getPlaceId()));
 		ScheduleBean sb = scheduleService.insertSchedule(schedule);
 		model.addAttribute("schedule", sb);
-		return "redirect:/schedule/new";
+		return "redirect:/front/schedule/new";
 	}
 
 	@ResponseBody
-	@GetMapping("/schedule/all")
+	@GetMapping("/front/schedule/all")
 	public List<ScheduleDTO> getAllSchedule() {
 		List<CompetitionBean> publishedComps = competitionService.findByStatus("已發布");
 		List<CompetitionBean> endedComps = competitionService.findByStatus("已結束");
@@ -117,7 +139,7 @@ public class ScheduleController {
 	}
 	
 	@ResponseBody
-	@GetMapping("/schedule/select/{placeId}")
+	@GetMapping("/front/schedule/select/{placeId}")
 	public List<ScheduleDTO> findCompByPlaceId(@PathVariable Integer placeId) {
 		List<CompetitionBean> compList = competitionService.findByPlaceId(placeId);
 		String startStr[] = { "06:00:00", "12:00:00", "18:00:00", "00:00:00" };
