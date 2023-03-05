@@ -1994,7 +1994,7 @@
                                 <div class="hero-content">
                                     <h6>Let Try It</h6>
                                     <h2 style="color: aliceblue;">全新套裝</h2>
-                                    <a href="${contextRoot}/front/Market/shop" class="btn essence-btn"
+                                    <a href="${contextRoot}/Market/addproduct" class="btn essence-btn"
                                         style="font-size:2em">立即前往</a>
                                 </div>
                             </div>
@@ -2362,7 +2362,7 @@
                     });
                 });
 
-                // :: Favorite Button Active Code 我的最愛
+                // :: Favorite Button Active Code
                 var favme = $(".favme");
 
                 favme.on('click', function () {
