@@ -51,4 +51,9 @@ public class FrontController {
 		return "front/contact";
 	}
 
+	@GetMapping("/code-of-conduct")
+	public String getCodeOfConduct() {
+		return "front/code-of-conduct";
+	}
+	
 }
