@@ -44,7 +44,7 @@ public class LogisticsBean {
 	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	@Column(name = "arrive_date")
 	private Date arrive_date;
-	
+
 	@Column(name = "status")
 	private String status;
 
@@ -96,8 +96,6 @@ public class LogisticsBean {
 		this.status = status;
 	}
 
-	
-
 	public InventoryBean getInventory() {
 		return inventory;
 	}
@@ -122,5 +120,4 @@ public class LogisticsBean {
 		OrderItem = orderItem;
 	}
 
-	
 }

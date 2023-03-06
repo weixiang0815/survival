@@ -7,10 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPictureBean;
 import tw.survival.model.Competition.CompetitionPrizeBean;
 import tw.survival.model.Place.PlaceBean;
+import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Market.ProductService;
@@ -18,6 +22,7 @@ import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Player.PlayerService;
 
 @Controller
+@SessionAttributes({ "player", "employee" })
 public class CompetitionController {
 
 	@Autowired
@@ -25,12 +30,15 @@ public class CompetitionController {
 
 	@Autowired
 	private PlayerService playerService;
-	
+
 	@Autowired
 	private PlaceService placeService;
 
 	@Autowired
 	private CompetitionPrizeService compPrizeService;
+
+	@Autowired
+	private CompetitionPictureService compPictureService;
 
 	@Autowired
 	private ProductService productService;
@@ -122,11 +130,47 @@ public class CompetitionController {
 	 * @author 王威翔
 	 */
 	@PostMapping("/competition/prize/add")
-	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize, Model model) {
-		compPrize = compPrizeService.insert(compPrize);
-		CompetitionBean comp = compPrize.getCompetition();
-		comp.setCompetitionPrizes(compPrize);
-		return "redirect:/competition/detail?id=" + comp.getId();
+	public String addPrizes(@ModelAttribute("compPrize") CompetitionPrizeBean compPrize) {
+		Integer compId = compPrize.getCompetition().getId();
+		compPrizeService.insert(compPrize);
+		return "redirect:/competition/detail?id=" + compId;
+	}
+
+	/**
+	 * 跳轉至上傳活動相簿頁面
+	 * 
+	 * @param id 欲上傳相簿的活動 id
+	 * @return 跳轉至上傳活動相簿頁面
+	 * @author 王威翔
+	 */
+	@GetMapping("/competition/picture/new")
+	public String newPictures(@RequestParam(value = "id", defaultValue = "1") Integer id, Model model) {
+		CompetitionBean comp = compService.findById(id);
+		model.addAttribute("comp", comp);
+		return "back/Competition/uploadCompPictures";
+	}
+
+	/**
+	 * 新增指定活動 id 的相簿
+	 * 
+	 * @return 重新導向至指定 id 活動的詳情頁面
+	 * @author 王威翔
+	 */
+	@PostMapping("/competition/picture/add")
+	public String addPictures(@RequestParam("compId") Integer compId, @RequestParam("files") MultipartFile[] files) {
+		CompetitionBean comp = compService.findById(compId);
+		try {
+			for (MultipartFile file : files) {
+				CompetitionPictureBean compPicture = new CompetitionPictureBean();
+				compPicture.setCompetition(comp);
+				compPicture.setPicture(file);
+				compPictureService.addPicture(compPicture);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "back/Competition";
+		}
+		return "redirect:/competition/detail?id=" + compId;
 	}
 
 	/**

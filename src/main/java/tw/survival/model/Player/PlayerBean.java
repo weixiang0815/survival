@@ -1,9 +1,10 @@
 package tw.survival.model.Player;
 
-import java.io.IOException;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -39,6 +40,7 @@ import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
+import tw.survival.model.Market.CartBean;
 
 @Entity
 @Table(name = "Player")
@@ -157,6 +159,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
 
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+	private List<CartBean> cart = new ArrayList<>();
+	
 	@PrePersist
 	public void autoCreate() {
 		if (join_date == null) {

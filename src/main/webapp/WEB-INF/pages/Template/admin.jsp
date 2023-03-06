@@ -82,18 +82,27 @@
 <body>
 	<header
 		class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="#">Survival</a>
+		<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6"
+			href="${contextRoot}/">Survival</a>
 		<button class="navbar-toggler position-absolute d-md-none collapsed"
 			type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
 			aria-controls="sidebarMenu" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<input class="form-control form-control-dark w-100 rounded-0 border-0"
-			type="text" placeholder="搜尋" aria-label="Search">
 		<div class="navbar-nav">
-			<div class="nav-item text-nowrap">
-				<a class="nav-link px-3" href="#">登出</a>
+			<div class="nav-item text-nowrap" style="display: flex; justify-content: center; align-items: center;">
+				<c:choose>
+					<c:when test="${not empty sessionScope.employee}">
+						<!-- 如果存在名為 employee 的實體，則顯示 name 屬性的值 -->
+						<span style="color: white;">你好，${employee.name}！</span>
+						<a class="nav-link px-3" href="${contextRoot}/emplogout">登出</a>
+					</c:when>
+					<c:otherwise>
+						<!-- 如果不存在名為 employee 的實體，則顯示登入按鈕 -->
+						<a class="nav-link px-3" href="${contextRoot}/Employee/login">登入</a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</header>
@@ -102,7 +111,8 @@
 		<div class="position-sticky pt-3 sidebar-sticky">
 			<ul class="nav flex-column">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="#"> <i class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
+					aria-current="page" href="${contextRoot}/admin"> <i
+						class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
 				</a></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link"
@@ -122,10 +132,17 @@
 						<i class="bi bi-cart4"></i>&nbsp;&nbsp;商城系統
 				</a>
 					<ul class="collapse" id="submenu-market">
+<<<<<<< HEAD
 						<li><a href="${contextRoot}/Market/add_Product" class="nav-link">新增商品</a></li>
 						<li><a href="${contextRoot}/Market/add_Logistics" class="nav-link">暫時新增物流</a></li>
 						<li><a href="${contextRoot}/Market/allProduct" class="nav-link">管理商品</a></li>
 						<li><a href="${contextRoot}/Market/all_Logistics" class="nav-link">管理物流</a></li>
+=======
+						<li><a href="${contextRoot}/Market/add_Product"
+							class="nav-link">新增商品</a></li>
+						<li><a href="${contextRoot}/Market/allProduct"
+							class="nav-link">管理商品</a></li>
+>>>>>>> 5384bb1960332b70a4275869391994223b4537fc
 						<li><a href="${contextRoot}/" class="nav-link">訂單管理</a></li>
 						<li><a href="${contextRoot}/" class="nav-link">測試</a></li>
 					</ul></li>
@@ -161,7 +178,7 @@
 						<li><a href="${contextRoot}/warehouse/all" class="nav-link">所有倉庫</a></li>
 						<li><a href="${contextRoot}/inventory/new" class="nav-link">新增庫存</a></li>
 						<li><a href="${contextRoot}/inventory/all" class="nav-link">所有庫存</a></li>
-						<li><a href="${contextRoot}/schedule/new" class="nav-link">新增排程</a></li>
+						<li><a href="${contextRoot}/schedule/new" class="nav-link">所有排程</a></li>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link" href="#submenu-forum">

@@ -12,6 +12,5 @@
 <jsp:include page="../../Template/admin.jsp"/>
 <h2>註冊成功</h2>
 <a href="usersmain.controller"><button>返回新增畫面</button></a>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

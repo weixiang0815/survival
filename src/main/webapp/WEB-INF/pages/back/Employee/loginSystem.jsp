@@ -9,27 +9,23 @@
 <title>登入</title>
 </head>
 <body>
-<jsp:include page="../../Layout/navbar_user.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 	<h3>登入</h3>
-	<form action="${contextRoot}/Employee/loginSystem"method="post">
+	<form action="${contextRoot}/Employee/loginSystem" method="POST">
 		<table>
 			<tr>
 				<td>職員帳號：</td>
-				<td><input type="text" name="account" /></td>
-				<td>${errors.account}</td>
+				<td><input type="text" name="account" /></td>	
 			</tr>
 			<tr>
 				<td>密碼：</td>
 				<td><input type="password" name="password" /></td>
-				<td>${errors.password}</td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="登入" /></td>
-				<td>${errors.msg}</td>
 			</tr>
 		</table>
 	</form>
-	<a href="${contextRoot}/Player/login">職員登入</a>
-<jsp:include page="../../Layout/footer.jsp"/>
+	<a href="${contextRoot}/Player/login">會員登入</a>
 </body>
 </html>
