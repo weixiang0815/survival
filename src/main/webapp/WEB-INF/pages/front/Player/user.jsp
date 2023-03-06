@@ -5,22 +5,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html lang="zh-hant-tw">
-
+<html>
 <head>
 <meta charset="UTF-8">
-<title>新增使用者</title>
+<title>玩家加入</title>
+<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
-
 <body>
-	<jsp:include page="../../Template/admin.jsp" />
-	<h3>新增使用者</h3>
+<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+<div class="container text-center">
+<h1>玩家加入</h1>
 	<form:form action="${contextRoot}/player/addpost"
-		enctype="multipart/form-data" modelAttribute="player">
+		enctype="multipart/form-data" modelAttribute="player" id="form">
 		<table>
 			<tr>
 			<tr>
-				<td>使用者名稱：</td>
+				<td>玩家名稱：</td>
 				<td><form:input type="text" path="name" /></td>
 			</tr>
 			<tr>
@@ -87,10 +87,12 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="註冊" /></td>
+				<td><button onclick="fillForm()">一鍵註冊</button></td>
 			</tr>
 
-		</table>
+		</table>		
 	</form:form>
+	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="${contextRoot}/js/twzipcode.js"></script>
@@ -100,8 +102,27 @@
 		const district = $("select[data-role='district']");
 		const zipcode = $("input[data-role='zipcode']");
 		county.val();
+		function fillForm(){
+			var form=document.getElementById("form");
+			form.elements("name").value="夏天雷";
+			form.elements("account").value="123456789";
+			form.elements("password").value="123456"
+			form.elements("nickanem").value="小雷"
+			form.elements("sex").value="M";
+			form.elements("county").value="台北市";
+			form.elements("district").value="大安區"
+			from.elements("address").value="復興南路二段171巷";
+			form.elements("email").value="zzz963852789@gmail.com";
+			form.elements("age").value="30";
+			form.elements("identity_number").value="A168544839";
+		    form.elements("phone").value="0228519348";
+			form.elements("birthday").value="1993-01-01";		
+		}
+		
+		
 	</script>
 
+<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
-
 </html>

@@ -44,5 +44,9 @@ public class PlayerService {
 		pDAO.deleteById(id);
 		return;
 	}
+	//Search name
+	public List<PlayerBean> findName(String name){
+		return pDAO.searchByNameLike(name);
+	}
 		 
 }
