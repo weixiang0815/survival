@@ -102,22 +102,20 @@
 		const zipcode = $("input[data-role='zipcode']");
 		county.val();
 		function fillForm(){
-			var form=document.getElementById("id");
-			var name=form.element("name").value;
-			var account=form.element('account').value;
-			var password=form.element('password').value;
-			var nickname=form.element('nickanem').value;
-			var sex=form.element('sex').value;
-			var county=form.element('county').value;
-			var district=form.element('district').value;
-			var address=from.element('address').value;
-			var email=form.element('email').value;
-			var age=form.element('age').value;
-			var identity_number=form.element('identity_number').value;
-			var phone =form.element('phonr').value;
-			var birthday=form.element('birthday').value;
-			var button = document.querySelector("button");
-			button.textContent="Name:"+name;
+			var form=document.getElementById("form");
+			form.elements("name").value="夏天雷";
+			form.elements("account").value="123456789";
+			form.elements("password").value="123456"
+			form.elements("nickanem").value="小雷"
+			form.elements("sex").value="M";
+			form.elements("county").value="台北市";
+			form.elements("district").value="大安區"
+			from.elements("address").value="復興南路二段171巷";
+			form.elements("email").value="zzz963852789@gmail.com";
+			form.elements("age").value="30";
+			form.elements("identity_number").value="A168544839";
+		    form.elements("phone").value="0228519348";
+			form.elements("birthday").value="1993-01-01";		
 		}
 		
 		

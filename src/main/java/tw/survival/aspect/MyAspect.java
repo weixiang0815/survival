@@ -1,36 +1,40 @@
 package tw.survival.aspect;
 
+import java.lang.System.Logger;
+
 import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Aspect;
 //import org.aspectj.lang.ProceedingJoinPoint;
 //import org.aspectj.lang.annotation.AfterReturning;
 //import org.aspectj.lang.annotation.AfterThrowing;
 //import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Before;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
-import tw.survival.model.Player.PlayerBean;
 
 
 @SessionAttributes({"employee","player"})
+@Aspect
+@Controller
 public class MyAspect {
 		
-	@Autowired
-    private HttpSession session;
 	
-	@Before("execution(* tw.survival.controller.*(..)) && !execution(* tw.survival.controller.Login_Logout.*(..))")
-	public RedirectView before(JoinPoint joinPoint) {
+	
+	@Pointcut("execution(* tw.survival.service..*(..))")
+    public void pointcut() {
+    }
+	
+	@Before("pointcut()")
+	public void before(JoinPoint joinPoint) {
         // 取得目前使用者的登入資訊，例如從 session 取得使用者物件
-		PlayerBean player = (PlayerBean) session.getAttribute("player");
-		System.out.println("執行AOP>>>>>>>>>>>>>>>>");
+		System.out.println("=====before advice starts=====");
+		System.out.println("Before method execution: " + joinPoint.getSignature().getName());
         // 如果使用者未登入，拋出 UnauthorizedException
-        if (player == null) {
-        	return new RedirectView("/back/loginSystem");
-        }
-		return null;
+		return;
     }
 
 

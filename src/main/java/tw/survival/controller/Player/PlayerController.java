@@ -77,7 +77,11 @@ public class PlayerController {
 
 	@PutMapping("/player/update1")
 	public String updateById(@ModelAttribute PlayerBean player) {
+		String sex=player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
+		if(sex ==null) {
+			
+		}
 		if (playerImage != null && !playerImage.isEmpty()) {
 			try {
 				byte[] img = playerImage.getBytes();
@@ -125,15 +129,14 @@ public class PlayerController {
 	// GetPhoto
 	@ResponseBody
 	@GetMapping("/player/photo/{id}")
-	public ResponseEntity<byte[]> getPhotobyId(@PathVariable Integer id) {
-		 
-		
+	public ResponseEntity<byte[]> getPhotobyId(@PathVariable Integer id) {	
 		PlayerBean player = pService.findByBean(id);
 		byte[] photofile = null;
 		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		Blob blob = player.getThumbnail();
+	  
 		if (blob != null) {
 			photofile = blobToByteArray(blob);
 		}else {

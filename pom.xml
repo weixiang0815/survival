@@ -36,6 +36,14 @@
 		<dependency>
   <groupId>org.springframework</groupId>
   <artifactId>spring-context-support</artifactId>
+<<<<<<< HEAD
+=======
+</dependency>
+
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+>>>>>>> cb90f58c75a28d69a9e46ac40790ab6c871e795b
 </dependency>
 <!--mail的使用 -->
 		<dependency>
