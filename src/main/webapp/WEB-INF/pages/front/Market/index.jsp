@@ -1994,7 +1994,7 @@
                                 <div class="hero-content">
                                     <h6>Let Try It</h6>
                                     <h2 style="color: aliceblue;">全新套裝</h2>
-                                    <a href="${contextRoot}/Market/addproduct" class="btn essence-btn"
+                                    <a href="${contextRoot}/front/Market/shop" class="btn essence-btn"
                                         style="font-size:2em">立即前往</a>
                                 </div>
                             </div>
