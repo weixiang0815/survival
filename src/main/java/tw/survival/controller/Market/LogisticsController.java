@@ -62,7 +62,7 @@ public class LogisticsController {
 	@PutMapping("/Market/editLogistics")
 	public String updateLogistics(@ModelAttribute("logistics") LogisticsBean logistics) {
 		LogisticsService.update(logistics);
-		return "redirect:/back/Market/all_Logistics";
+		return "redirect:/Market/all_Logistics";
 	}
 	//d
 	@PostMapping("/Market/deleteLogistics")

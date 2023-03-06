@@ -37,10 +37,10 @@
 						<tr>
 							<td>訂單狀態：</td>
 							<td><form:select class="form-control" path="status">
-									<form:option value="NEW">新訂單</form:option>
-									<form:option value="IN_PROCESS">處理中</form:option>
-									<form:option value="COMPLETED">已完成</form:option>
-									<form:option value="CANCELLED">已取消</form:option>
+									<form:option value="新訂單">新訂單</form:option>
+									<form:option value="處理中">處理中</form:option>
+									<form:option value="已完成">已完成</form:option>
+									<form:option value="已取消">已取消</form:option>
 								</form:select></td>
 						</tr>
 					</table>
