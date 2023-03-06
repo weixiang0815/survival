@@ -40,7 +40,7 @@ public class CompetitionToScheduleBean {
 
 	public CompetitionToScheduleBean() {
 	}
-	
+
 	public CompetitionToScheduleBean(ScheduleBean schedule, CompetitionBean competition) {
 		this.schedule = schedule;
 		this.competition = competition;

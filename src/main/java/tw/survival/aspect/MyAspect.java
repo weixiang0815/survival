@@ -20,12 +20,12 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Controller
 public class MyAspect {
 
-	@Pointcut("execution(* tw.survival.controller..*(..)) "
-			+ "&& !execution(* tw.survival.controller.global..*(..)) "
+	@Pointcut("execution(* tw.survival.controller..*(..)) " + "&& !execution(* tw.survival.controller.global..*(..)) "
 			+ "&& !execution(* tw.survival.controller.login_logout..*(..))")
 	public void pointcut() {
 	}
 
+	@SuppressWarnings("null")
 	@Before("pointcut()")
 	public void before(JoinPoint joinPoint) throws IOException {
 		HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes())

@@ -149,6 +149,4 @@ public class ProductBean {
 		return builder.toString();
 	}
 
-	
-
 }

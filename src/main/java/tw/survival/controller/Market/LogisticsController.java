@@ -28,13 +28,13 @@ public class LogisticsController {
 
 	@Autowired
 	private OrderItemService oService;
-	
+
 	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
 		return "/back/Market/add_Logistics";
 	}
-	
-	//c
+
+	// c
 	@ResponseBody
 	@PostMapping("/Market/addLogistics")
 	public String addLogistics(@RequestParam("start_date") Date start_date,
@@ -50,29 +50,32 @@ public class LogisticsController {
 
 		return "新增成功";
 	}
-	//r
+
+	// r
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
 		List<OrderItemBean> orderList = oService.findAllOrderItem();
-	    model.addAttribute("orderList", orderList);
+		model.addAttribute("orderList", orderList);
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
 		return "/back/Market/show_AllLogistics";
 	}
-	//u
+
+	// u
 	@GetMapping("/Market/editLogistics")
 	public String editLogistics(@RequestParam("id") Integer id, Model model) {
 		LogisticsBean logistics = LogisticsService.findById(id);
 		model.addAttribute("logistics", logistics);
 		return "/back/Market/editLogistics";
 	}
-	
+
 	@PutMapping("/Market/editLogistics")
 	public String updateLogistics(@ModelAttribute("logistics") LogisticsBean logistics) {
 		LogisticsService.update(logistics);
 		return "redirect:/Market/all_Logistics";
 	}
-	//d
+
+	// d
 	@DeleteMapping("/Market/deleteLogistics")
 	public String deleteLogistics(@RequestParam("id") Integer id) {
 		LogisticsService.deleteById(id);

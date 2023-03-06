@@ -55,5 +55,5 @@ public class FrontController {
 	public String getCodeOfConduct() {
 		return "front/code-of-conduct";
 	}
-	
+
 }

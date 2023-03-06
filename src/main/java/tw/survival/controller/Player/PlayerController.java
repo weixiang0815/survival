@@ -19,13 +19,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
-//import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,8 +32,8 @@ import tw.survival.service.Player.PlayerService;
 @Controller
 public class PlayerController {
 
-	String Ladypreset="/images/lady.jpg";
-	String Manpreset="/images/man.jpg";
+	String Ladypreset = "/images/lady.jpg";
+	String Manpreset = "/images/man.jpg";
 	@Autowired
 	ServletContext context;
 	@Autowired
@@ -78,10 +75,10 @@ public class PlayerController {
 
 	@PutMapping("/player/update1")
 	public String updateById(@ModelAttribute PlayerBean player) {
-		String sex=player.getSex();
+		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
-		if(sex ==null) {
-			
+		if (sex == null) {
+
 		}
 		if (playerImage != null && !playerImage.isEmpty()) {
 			try {
@@ -130,29 +127,30 @@ public class PlayerController {
 	// GetPhoto
 	@ResponseBody
 	@GetMapping("/player/photo/{id}")
-	public ResponseEntity<byte[]> getPhotobyId(@PathVariable Integer id) {	
+	public ResponseEntity<byte[]> getPhotobyId(@PathVariable Integer id) {
 		PlayerBean player = pService.findByBean(id);
 		byte[] photofile = null;
 		ResponseEntity<byte[]> re = null;
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		Blob blob = player.getThumbnail();
-	  
+
 		if (blob != null) {
 			photofile = blobToByteArray(blob);
-		}else {
+		} else {
 			String path = null;
-			if(player.getSex().equals("F")) {
-				path=Ladypreset;
-			}else if(player.getSex().equals("M")) {
-				path=Manpreset;
+			if (player.getSex().equals("F")) {
+				path = Ladypreset;
+			} else if (player.getSex().equals("M")) {
+				path = Manpreset;
 			}
-			photofile=fileToByteArray(path);
+			photofile = fileToByteArray(path);
 		}
-		
+
 		re = new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
 		return re;
 	}
+
 	private byte[] fileToByteArray(String path) {
 		byte[] result = null;
 		try (InputStream is = context.getResourceAsStream(path);
@@ -183,21 +181,20 @@ public class PlayerController {
 		}
 		return result;
 	}
-	//searchName
+
+	// searchName
 	@PostMapping("/player/namelike")
-	public String findPlayerName0(@RequestParam("name") String name,Model m){
-		List<PlayerBean> player=pService.findName(name);
-		m.addAttribute("player",player);
+	public String findPlayerName0(@RequestParam("name") String name, Model m) {
+		List<PlayerBean> player = pService.findName(name);
+		m.addAttribute("player", player);
 		return "back/Player/SelectAllResult";
-				
+
 	}
 	//
-	
-	
+
 	public String oneButtonInsert(@ModelAttribute("player") PlayerBean player) {
-		
-		return"";
+
+		return "";
 	}
-	
 
 }

@@ -16,37 +16,41 @@ public class PlayerService {
 
 	@Autowired
 	private PlayerRepository pDAO;
-	
-	//C
+
+	// C
 	public void addplayer(PlayerBean pBean) {
 		pDAO.save(pBean);
 	}
-	//R
+
+	// R
 	public PlayerBean findByBean(Integer id) {
-		Optional<PlayerBean> option=pDAO.findById(id);
-		if(option.isPresent()) {
+		Optional<PlayerBean> option = pDAO.findById(id);
+		if (option.isPresent()) {
 			return option.get();
 		}
 		return null;
 	}
-	//U
+
+	// U
 	public PlayerBean update(PlayerBean pBean) {
-		 pDAO.save(pBean);
-		 return null;
+		pDAO.save(pBean);
+		return null;
 	}
-	
-	//R
+
+	// R
 	public List<PlayerBean> findAll() {
-		 return pDAO.findAll();
+		return pDAO.findAll();
 	}
-	//D
+
+	// D
 	public void delete(Integer id) {
 		pDAO.deleteById(id);
 		return;
 	}
-	//Search name
-	public List<PlayerBean> findName(String name){
+
+	// Search name
+	public List<PlayerBean> findName(String name) {
 		return pDAO.searchByNameLike(name);
 	}
-		 
+
 }

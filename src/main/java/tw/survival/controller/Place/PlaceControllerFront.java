@@ -30,7 +30,7 @@ import tw.survival.service.Place.ScheduleService;
 
 @Controller
 public class PlaceControllerFront {
-	
+
 	@Autowired
 	private ScheduleService scheduleService;
 
@@ -39,7 +39,7 @@ public class PlaceControllerFront {
 
 	@Autowired
 	private CompetitionToScheduleService CTSService;
-	
+
 	@Autowired
 	private CompetitionService competitionService;
 
@@ -47,20 +47,20 @@ public class PlaceControllerFront {
 	public String goIndex() {
 		return "front/Place/index";
 	}
-	
+
 	@GetMapping("/front/place/detail")
 	public String goPlaceDetail() {
 		return "front/Place/detail";
 	}
-	
+
 	@GetMapping("/front/place/all")
 	public String getAllPlace(Model model) {
 		List<PlaceBean> list = placeService.getAllPlace();
 		model.addAttribute("placelist", list);
-		
+
 		return "front/Place/detail";
 	}
-	
+
 	@GetMapping("/front/place/id")
 	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
 		PlaceBean place2 = placeService.getOnePlaceById(id);
@@ -70,7 +70,7 @@ public class PlaceControllerFront {
 
 		return new ResponseEntity<byte[]>(placeFile2, headers, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("front/schedule/new")
 	public String newSchedule(Model model) {
 		model.addAttribute("schedule", new ScheduleBean());
@@ -137,7 +137,7 @@ public class PlaceControllerFront {
 
 		return list;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/front/schedule/select/{placeId}")
 	public List<ScheduleDTO> findCompByPlaceId(@PathVariable Integer placeId) {
@@ -150,14 +150,14 @@ public class PlaceControllerFront {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
-			String color ;
-			if(type.contentEquals("已發布")) {
+			String color;
+			if (type.contentEquals("已發布")) {
 				color = "green";
-			}else if(type.contentEquals("未發布")) {
+			} else if (type.contentEquals("未發布")) {
 				color = "pink";
-			}else if(type.contentEquals("已結束")) {
+			} else if (type.contentEquals("已結束")) {
 				color = "blue";
-			}else {
+			} else {
 				color = "red";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);

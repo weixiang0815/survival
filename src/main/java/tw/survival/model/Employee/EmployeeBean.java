@@ -1,6 +1,5 @@
 package tw.survival.model.Employee;
 
-
 import java.sql.Blob;
 import java.util.Date;
 

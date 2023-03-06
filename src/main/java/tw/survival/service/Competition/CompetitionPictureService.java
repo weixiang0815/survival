@@ -150,10 +150,8 @@ public class CompetitionPictureService {
 			byte[] newPic = compPicture.getPicture();
 			byte[] oldPic;
 			CompetitionPictureBean oldCompPicture = optional.get();
-			try (
-					FileInputStream fis = new FileInputStream(oldCompPicture.getFileLocation());
-					BufferedInputStream bis = new BufferedInputStream(fis);
-					) {
+			try (FileInputStream fis = new FileInputStream(oldCompPicture.getFileLocation());
+					BufferedInputStream bis = new BufferedInputStream(fis);) {
 				oldPic = bis.readAllBytes();
 				oldCompPicture.setPicture(oldPic);
 			} catch (Exception e) {
@@ -166,10 +164,8 @@ public class CompetitionPictureService {
 				file.delete();
 				filepath = filepath.substring(0, filepath.lastIndexOf("/") + 1);
 				filepath += "image_" + compPicture.getId() + "." + compPicture.getContentType();
-				try (
-						FileOutputStream fos = new FileOutputStream(filepath);
-						BufferedOutputStream bos = new BufferedOutputStream(fos);
-						) {
+				try (FileOutputStream fos = new FileOutputStream(filepath);
+						BufferedOutputStream bos = new BufferedOutputStream(fos);) {
 					bos.write(newPic);
 				} catch (Exception e) {
 					e.printStackTrace();
