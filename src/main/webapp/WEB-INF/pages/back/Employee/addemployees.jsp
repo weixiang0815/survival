@@ -94,7 +94,6 @@
 
 
 	</form:form>
-	<jsp:include page="../../Layout/footer.jsp" />
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="${contextRoot}/js/twzipcode.js"></script>

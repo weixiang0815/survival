@@ -11,6 +11,5 @@
 <body>
 <jsp:include page="../../Template/admin.jsp"/>
 <h1>會員系統首頁</h1>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

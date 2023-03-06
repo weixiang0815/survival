@@ -14,10 +14,9 @@ public class PageController {
 	}
 	
 
-	@ResponseBody
-	@GetMapping("/test1")
-	public String testString() {
-		return "Hi there~~";
+	@GetMapping("/front/Market/shop")
+	public String shopMain() {
+		return "/front/Market/shop";
 	}
 
 	@GetMapping("/playAjax/intro1")

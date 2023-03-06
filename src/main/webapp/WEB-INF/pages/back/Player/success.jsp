@@ -11,6 +11,5 @@
 <body>
 <jsp:include page="../../Template/admin.jsp"/>
 	<h3>登入成功，${name}</h3>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

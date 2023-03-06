@@ -45,6 +45,5 @@
 			<td>${age}</td>
 		</tr>
 	</table>
-<jsp:include page="../../Layout/footer.jsp"/>
 </body>
 </html>

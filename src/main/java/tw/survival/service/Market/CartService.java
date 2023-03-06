@@ -1,7 +1,6 @@
 package tw.survival.service.Market;
 
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.CartRepository;
-import tw.survival.model.Market.ProductBean;
 
 @Service
 public class CartService {

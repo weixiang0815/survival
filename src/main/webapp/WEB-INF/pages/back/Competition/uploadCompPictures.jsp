@@ -69,7 +69,7 @@
 	<jsp:include page="../../Template/admin.jsp" />
 	<div class="container">
 		<h1>上傳活動相簿</h1>
-		<form action="${contextRoot}/competition/prize/add" method="POST" enctype="multipart/form-data">
+		<form action="${contextRoot}/competition/picture/add" method="POST" enctype="multipart/form-data">
 			<div id="drop-zone" class="mt-5 mb-5">將照片拖曳進來以上傳，可同時上傳多張照片</div>
 			<input type="hidden" name="compId" value="${comp.id}">
 			<input type="file" name="files" multiple style="display: none;">

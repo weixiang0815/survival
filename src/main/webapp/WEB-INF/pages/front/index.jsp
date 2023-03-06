@@ -18,39 +18,39 @@
 			data-bs-ride="carousel">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-					<img class="w-100" src="${contextRoot}/img/carousel-1.jpg"
-						alt="Image">
+					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+						<source src="${contextRoot}/videos/kalashnikov-99910.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">We
-								Will Keep You An Awesome Look</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我想一個超帥的標語吧</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
-								<i class="fa fa-map-marker-alt text-primary me-3"></i>123
-								Street, New York, USA
+								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
-								<i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890
+								<i class="fa fa-phone-alt text-primary me-3"></i>（02）6631-6588
 							</h4>
 						</div>
 					</div>
 				</div>
 				<div class="carousel-item">
-					<img class="w-100" src="${contextRoot}/img/carousel-2.jpg"
-						alt="Image">
+					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+						<source src="${contextRoot}/videos/war-16391.mp4" type="video/mp4">
+						Your browser does not support the video tag.
+					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">Luxury
-								Haircut at Affordable Price</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我再想一個超帥的標語吧</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
-								<i class="fa fa-map-marker-alt text-primary me-3"></i>123
-								Street, New York, USA
+								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
-								<i class="fa fa-phone-alt text-primary me-3"></i>+012 345 67890
+								<i class="fa fa-phone-alt text-primary me-3"></i>（02）6631-6588
 							</h4>
 						</div>
 					</div>
@@ -471,6 +471,6 @@
 	</div>
 	<!-- Testimonial End -->
 	<jsp:include page="../Template/front/footer.jsp"></jsp:include>
-	<jsp:include page="../Template/front/includeinbody.jsp"></jsp:include>
+	<jsp:include page="../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>

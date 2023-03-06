@@ -13,7 +13,7 @@
 </head>
 <body>
 
-<jsp:include page="../Template/admin.jsp"/>
+<jsp:include page="../../Template/admin.jsp"/>
 <div class="container">
 	<h1>新增貼文</h1>
 	<div class="col-10">
@@ -24,11 +24,11 @@
 		    <label for="inputClassify">請輸入分類:</label>
 		    <form:select class="form-control" id="inputClassify" path="classify">
 		    	<form:option value="none" selected="true" disabled="true" hidden="true" >請選擇選項</form:option> 
-		    	<form:option value="c">活動</form:option>
-		    	<form:option value="a">心得</form:option>
-		    	<form:option value="b">問題</form:option>
-		    	<form:option value="d">閒聊</form:option>
-		    	<form:option value="e">討論</form:option>
+		    	<form:option value="活動">活動</form:option>
+		    	<form:option value="心得">心得</form:option>
+		    	<form:option value="問題">問題</form:option>
+		    	<form:option value="閒聊">閒聊</form:option>
+		    	<form:option value="討論">討論</form:option>
 		    </form:select>
 
 		    <br/>

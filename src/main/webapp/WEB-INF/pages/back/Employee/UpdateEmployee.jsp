@@ -102,7 +102,6 @@ img {
 		</table>
 		<input class="btn btn-outline-primary" type="submit" value="更新" />
 	</form:form>
-	<jsp:include page="../../Layout/footer.jsp" />
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="${contextRoot}/js/twzipcode.js"></script>
