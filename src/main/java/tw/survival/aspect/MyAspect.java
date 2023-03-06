@@ -1,8 +1,6 @@
 package tw.survival.aspect;
 
-import java.lang.System.Logger;
 
-import javax.servlet.http.HttpSession;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
