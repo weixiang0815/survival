@@ -38,18 +38,40 @@
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">頁面</a>
 						<div class="dropdown-menu m-0">
-							<a href="${contextRoot}/price" class="dropdown-item">價位</a> <a href="${contextRoot}/team"
+							<a href="${contextRoot}/price" class="dropdown-item">價位</a> 
+							<a href="${contextRoot}/team"
 								class="dropdown-item">設計師</a> <a href="${contextRoot}/open"
 								class="dropdown-item">服務時段</a> <a href="${contextRoot}/testimonial"
 								class="dropdown-item">顧客評價</a> <a href="${contextRoot}/404page"
 								class="dropdown-item">404</a>
 						</div>
 					</div>
+					<div class="nav-item dropdown">
+					<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">加入我們</a>
+					<div class="dropdown-menu m-0">
+					<a href="${contextRoot}/Player/login" class="dropdown-item">使用者登入</a>
+					</div>
+					</div>
 					<a href="${contextRoot}/contact" class="nav-item nav-link">聯絡我們</a>
 				</div>
-				<a href="${contextRoot}/front/signup" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block">
-					立即報名<i class="fa fa-arrow-right ms-3"></i>
-				</a>
+<%-- 				<a href="${contextRoot}/front/signup" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block"> --%>
+<!-- 					立即報名<i class="fa fa-arrow-right ms-3"></i> -->
+<!-- 				</a> -->
+		<div class="navbar-nav">
+			<div class="nav-item text-nowrap" style="display: flex; justify-content: center; align-items: center;">
+				<c:choose>
+					<c:when test="${not empty sessionScope.player}">
+						<!-- 如果存在名為 employee 的實體，則顯示 name 屬性的值 -->
+						<span style="color: white;">你好，${player.name}！</span>
+						<a class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block" href="${contextRoot}/logout">登出</a>
+					</c:when>
+					<c:otherwise>
+						<!-- 如果不存在名為 employee 的實體，則顯示登入按鈕 -->
+						<a class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block" href="${contextRoot}/Player/login">登入</a>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 			</div>
 		</nav>
 		<!-- Navbar End -->

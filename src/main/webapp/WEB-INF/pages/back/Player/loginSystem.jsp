@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>登入</title>
+<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="../../Template/admin.jsp"/>
+<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+<div class="container text-center">
 	<h3>登入</h3>
 	<form action="${contextRoot}/Player/loginSystem"method="post">
 		<table>
@@ -31,5 +33,8 @@
 	</form>
 	<a href="${contextRoot}/Employee/login">職員登入</a>
 	<a href="${contextRoot}/player/add">會員註冊</a>
+	</div>
+<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>

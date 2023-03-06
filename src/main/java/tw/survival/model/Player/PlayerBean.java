@@ -159,9 +159,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
 	
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
-	private List<CartBean> cart = new ArrayList<>();
+//	@JsonIgnore
+//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+//	private List<CartBean> cart = new ArrayList<>();
 	
 	@PrePersist
 	public void autoCreate() {
@@ -397,5 +397,6 @@ public class PlayerBean {
 	public void setInfo(String info) {
 		this.info = info;
 	}
+
 
 }

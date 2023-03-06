@@ -5,22 +5,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
-<html lang="zh-hant-tw">
-
+<html>
 <head>
 <meta charset="UTF-8">
-<title>新增使用者</title>
+<title>玩家加入</title>
+<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
-
 <body>
-	<jsp:include page="../../Template/admin.jsp" />
-	<h3>新增使用者</h3>
+<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+<div class="container text-center">
+<h1>玩家加入</h1>
 	<form:form action="${contextRoot}/player/addpost"
 		enctype="multipart/form-data" modelAttribute="player" id="form">
 		<table>
 			<tr>
 			<tr>
-				<td>使用者名稱：</td>
+				<td>玩家名稱：</td>
 				<td><form:input type="text" path="name" /></td>
 			</tr>
 			<tr>
@@ -90,8 +90,9 @@
 				<td><button onclick="fillForm()">一鍵註冊</button></td>
 			</tr>
 
-		</table>
+		</table>		
 	</form:form>
+	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="${contextRoot}/js/twzipcode.js"></script>
@@ -121,6 +122,7 @@
 		
 	</script>
 
+<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
-
 </html>
