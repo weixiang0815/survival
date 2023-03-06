@@ -16,7 +16,7 @@
 	<jsp:include page="../../Template/admin.jsp" />
 	<h3>新增使用者</h3>
 	<form:form action="${contextRoot}/player/addpost"
-		enctype="multipart/form-data" modelAttribute="player">
+		enctype="multipart/form-data" modelAttribute="player" id="form">
 		<table>
 			<tr>
 			<tr>
@@ -87,6 +87,7 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="註冊" /></td>
+				<td><button onclick="fillForm()">一鍵註冊</button></td>
 			</tr>
 
 		</table>
@@ -101,6 +102,26 @@
 		const district = $("select[data-role='district']");
 		const zipcode = $("input[data-role='zipcode']");
 		county.val();
+		function fillForm(){
+			var form=document.getElementById("id");
+			var name=form.element("name").value;
+			var account=form.element('account').value;
+			var password=form.element('password').value;
+			var nickname=form.element('nickanem').value;
+			var sex=form.element('sex').value;
+			var county=form.element('county').value;
+			var district=form.element('district').value;
+			var address=from.element('address').value;
+			var email=form.element('email').value;
+			var age=form.element('age').value;
+			var identity_number=form.element('identity_number').value;
+			var phone =form.element('phonr').value;
+			var birthday=form.element('birthday').value;
+			var button = document.querySelector("button");
+			button.textContent="Name:"+name;
+		}
+		
+		
 	</script>
 
 </body>
