@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Market.LogisticsBean;
+import tw.survival.model.Market.OrderItemBean;
 import tw.survival.service.Market.LogisticsService;
+import tw.survival.service.Market.OrderItemService;
 
 @Controller
 public class LogisticsController {
@@ -23,9 +26,12 @@ public class LogisticsController {
 	@Autowired
 	private LogisticsService LogisticsService;
 
+	@Autowired
+	private OrderItemService oService;
+	
 	@GetMapping("/Market/add_Logistics")
 	private String Logistics() {
-		return "Market/add_Logistics";
+		return "/back/Market/add_Logistics";
 	}
 	
 	//c
@@ -47,16 +53,18 @@ public class LogisticsController {
 	//r
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
+		List<OrderItemBean> orderList = oService.findAllOrderItem();
+	    model.addAttribute("orderList", orderList);
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
-		return "/Market/show_AllLogistics";
+		return "/back/Market/show_AllLogistics";
 	}
 	//u
 	@GetMapping("/Market/editLogistics")
 	public String editLogistics(@RequestParam("id") Integer id, Model model) {
 		LogisticsBean logistics = LogisticsService.findById(id);
 		model.addAttribute("logistics", logistics);
-		return "Market/editLogistics";
+		return "/back/Market/editLogistics";
 	}
 	
 	@PutMapping("/Market/editLogistics")
@@ -65,7 +73,7 @@ public class LogisticsController {
 		return "redirect:/Market/all_Logistics";
 	}
 	//d
-	@PostMapping("/Market/deleteLogistics")
+	@DeleteMapping("/Market/deleteLogistics")
 	public String deleteLogistics(@RequestParam("id") Integer id) {
 		LogisticsService.deleteById(id);
 		return "redirect:/Market/all_Logistics";

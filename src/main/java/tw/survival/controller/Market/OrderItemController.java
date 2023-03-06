@@ -2,7 +2,6 @@ package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,7 +25,7 @@ public class OrderItemController {
 
 	@GetMapping("/Market/add_OrderItem")
 	private String addOrder() {
-		return "Market/add_OrderItem";
+		return "/back/Market/add_OrderItem";
 	}
 
 	@ResponseBody
@@ -44,29 +43,29 @@ public class OrderItemController {
 		return "上傳成功";
 	}
 
-	@GetMapping("/Market/all_OrderItem")
-	public String getAllProduct(Model model) {
-		List<OrderItemBean> list = oService.findAllOrderItem();
-		model.addAttribute("list", list);
-		return "/Market/show_AllOrderItem";
-	}
+//	@GetMapping("/Market/all_OrderItem")
+//	public String getAllOrderItem(Model model) {
+//	    List<OrderItemBean> orderList = oService.findAllOrderItem();
+//	    model.addAttribute("orderList", orderList);
+//	    return "/back/Market/show_AllLogistics";
+//	}
 //u
 	@GetMapping("/Market/editOrder")
 	public String editOrder(@RequestParam("id") Integer id, Model model) {
 		OrderItemBean order = oService.findById(id);
 		model.addAttribute("order", order);
-		return "Market/editOrderItem";
+		return "/back/Market/editOrderItem";
 	}
 
 	@PutMapping("/Market/editOrder")
 	public String updateOrder(@ModelAttribute("order") OrderItemBean order) {
 		oService.update(order);
-		return "redirect:/Market/all_OrderItem";
+		return "redirect:/Market/all_Logistics";
 	}
 //d
 	@DeleteMapping("/Market/deleteOrder")
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);
-		return "redirect:/Market/all_OrderItem";
+		return "redirect:/Market/all_Logistics";
 	}
 }
