@@ -54,21 +54,21 @@ public class PlaceControllerFront {
 	}
 	
 	@GetMapping("/front/place/all")
-	public ModelAndView getAllPlace(ModelAndView mav) {
+	public String getAllPlace(Model model) {
 		List<PlaceBean> list = placeService.getAllPlace();
-		mav.setViewName("front/Place/detail");
-		mav.getModel().put("list", list);
-		return mav;
+		model.addAttribute("placelist", list);
+		
+		return "front/Place/detail";
 	}
 	
 	@GetMapping("/front/place/id")
 	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
-		PlaceBean place1 = placeService.getOnePlaceById(id);
-		byte[] placeFile = place1.getPlace_photo();
+		PlaceBean place2 = placeService.getOnePlaceById(id);
+		byte[] placeFile2 = place2.getPlace_photo();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
 
-		return new ResponseEntity<byte[]>(placeFile, headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(placeFile2, headers, HttpStatus.OK);
 	}
 	
 	@GetMapping("front/schedule/new")
@@ -150,16 +150,15 @@ public class PlaceControllerFront {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
-			System.out.println(type);
 			String color ;
 			if(type.contentEquals("已發布")) {
 				color = "green";
 			}else if(type.contentEquals("未發布")) {
-				color = "red";
+				color = "pink";
 			}else if(type.contentEquals("已結束")) {
 				color = "blue";
 			}else {
-				color = "grey";
+				color = "red";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
 			Sdto.setPlaceId(placeId.toString());

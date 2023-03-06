@@ -10,18 +10,12 @@
 <meta charset="UTF-8">
 <title>場地詳情</title>
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
-<style>
-ul#comp-link>li {
-	list-style-type: none;
-}
-</style>
+
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 	
 	<div class="container">
-		<h1>所有場地</h1>
-
 		<table class="table table-hover table-bordered">
 			<tr>
 				<th>照片</th>
@@ -29,16 +23,15 @@ ul#comp-link>li {
 				<th>地址</th>
 				<th>費用/時段</th>
 				<th>容納人數</th>
-				
 			</tr>
-			<jstl:forEach items="${list}" var="onePlace">
+			<jstl:forEach items="${placelist}" var="frontplace">
 				<tr>
-					<td><img alt=""
-						src="${contextRoot}/front/place/id?id=${onePlace.id}" width="50%"></td>
-					<td>${onePlace.place_name}</td>
-					<td>${onePlace.place_address}</td>
-					<td>${onePlace.place_fee}</td>
-					<td>${onePlace.place_capacity}</td>
+					<td class="col-5"><img alt=""
+						src="${contextRoot}/front/place/id?id=${frontplace.id}" width="100%"></td>
+					<td>${frontplace.place_name}</td>
+					<td>${frontplace.place_address}</td>
+					<td>${frontplace.place_fee} 元</td>
+					<td>${frontplace.place_capacity} 人</td>
 				</tr>
 
 			</jstl:forEach>
