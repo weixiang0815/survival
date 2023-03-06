@@ -1,4 +1,4 @@
-package tw.survival.controller;
+package tw.survival.controller.global;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
