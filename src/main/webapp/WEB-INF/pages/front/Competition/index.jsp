@@ -12,6 +12,10 @@
 ul#comp-link>li {
 	list-style-type: none;
 }
+i {
+	font-size: 2rem;
+	color: red;
+}
 </style>
 </head>
 <body>
@@ -46,7 +50,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/haircut.png" alt="">
+							<i class="fa-solid fa-people-group"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/haircut.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">所有活動</h3>
@@ -64,7 +69,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/beard-trim.png" alt="">
+							<i class="bi bi-camera2"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/beard-trim.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">活動相簿</h3>
@@ -82,7 +88,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mans-shave.png" alt="">
+							<i class="fa-sharp fa-solid fa-location-dot"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/mans-shave.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">活動場地</h3>
@@ -100,7 +107,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/hair-dyeing.png" alt="">
+							<i class="fa-sharp fa-solid fa-right-to-bracket"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/hair-dyeing.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">報名資訊</h3>
@@ -118,7 +126,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mustache.png" alt="">
+							<i class="fa-solid fa-ranking-star"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/mustache.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">競賽紀錄</h3>
@@ -136,7 +145,8 @@ ul#comp-link>li {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/stacking.png" alt="">
+							<i class="fa-solid fa-handshake"></i>
+<%-- 							<img class="img-fluid" src="${contextRoot}/img/stacking.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">場地租借</h3>
@@ -152,15 +162,6 @@ ul#comp-link>li {
 		</div>
 	</div>
 	<!-- Service End -->
-	<div class="container text-center">
-		<h1>活動詳情</h1>
-		<ul id="comp-link">
-			<li><a href="${contextRoot}/front/competition/detail">單一活動詳情</a></li>
-			<li><a href="${contextRoot}/front/competition/history">活動紀錄</a></li>
-			<li><a href="${contextRoot}/front/competition/photo">活動相簿</a></li>
-			<li><a href="${contextRoot}/front/signup">報名活動</a></li>
-		</ul>
-	</div>
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>

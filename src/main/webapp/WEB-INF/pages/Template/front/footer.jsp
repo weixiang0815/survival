@@ -63,7 +63,7 @@
 			<div class="row">
 				<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
 					&copy; <a class="border-bottom" href="${contextRoot}/">Survival</a>
-					著作權所有
+					版權所有
 				</div>
 				<div class="col-md-6 text-center text-md-end">
 					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
