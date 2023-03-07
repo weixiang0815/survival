@@ -117,7 +117,7 @@ public class SignUpService {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * 更新一筆報名紀錄
 	 * 

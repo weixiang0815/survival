@@ -152,7 +152,7 @@ public class ProductController {
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("Market/multicondition")
 	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,
@@ -171,7 +171,7 @@ public class ProductController {
 			String imageData = Base64.getEncoder().encodeToString(product.getImg());
 			imageMap.put("imageData", imageData);
 		}
-	
+
 		return imageMap;
 	}
 
@@ -184,7 +184,7 @@ public class ProductController {
 //		model.addAttribute("SearchResult2", searchResult);
 //		return "Market/searchResult2";
 //	}
-	
+
 //	@ResponseBody
 //	@GetMapping("/Market/productFindByproductclassIn")
 //	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {

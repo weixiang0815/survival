@@ -18,7 +18,6 @@ public class EmployeeDao {
 	public SessionFactory sessionfactory;
 
 	public EmployeeDao() {
-
 	}
 
 	/**
@@ -35,6 +34,7 @@ public class EmployeeDao {
 		}
 		return employee;
 	}
+
 	/**
 	 * 透過 id 查詢一筆使用者資料
 	 * 
@@ -58,21 +58,22 @@ public class EmployeeDao {
 	 * @return 回傳裝著所有EmployeeBean 的列表
 	 */
 
-   public  List<EmployeeBean> findAllemp() {
-	   Session session = sessionfactory.getCurrentSession();
-	   
-	   String hqlstr = "from EmployeeBean ";
+	public List<EmployeeBean> findAllemp() {
+		Session session = sessionfactory.getCurrentSession();
+
+		String hqlstr = "from EmployeeBean ";
 		Query<EmployeeBean> query = session.createQuery(hqlstr, EmployeeBean.class);
-        List<EmployeeBean> list  =query.getResultList();
-        
-        return list;
-   }
-   public String deleteEmpId(Integer id) {
-	   Session session = sessionfactory.getCurrentSession();
-	   String hqlstr = "delete EmployeeBean where id = :id";
-	   int result = session.createQuery(hqlstr).setParameter("id", id).executeUpdate();
-   
-	   return result > 0 ? "刪除成功🤪🤪🤪" : "刪除失敗😥😥😥";
-   }
-   
+		List<EmployeeBean> list = query.getResultList();
+
+		return list;
+	}
+
+	public String deleteEmpId(Integer id) {
+		Session session = sessionfactory.getCurrentSession();
+		String hqlstr = "delete EmployeeBean where id = :id";
+		int result = session.createQuery(hqlstr).setParameter("id", id).executeUpdate();
+
+		return result > 0 ? "刪除成功🤪🤪🤪" : "刪除失敗😥😥😥";
+	}
+
 }

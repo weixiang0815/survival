@@ -27,7 +27,7 @@ public class PlaceController {
 
 	@Autowired
 	private PlaceService placeService;
-	
+
 	@Autowired
 	private WarehouseService warehouseService;
 
@@ -94,7 +94,8 @@ public class PlaceController {
 			@RequestParam("place_address") String place_address, @RequestParam("place_photo") MultipartFile place_photo,
 			@RequestParam("place_fee") Integer place_fee, @RequestParam("place_capacity") Integer place_capacity) {
 		try {
-			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee, place_capacity);
+			placeService.updatePlaceById(id, place_name, place_address, place_photo.getBytes(), place_fee,
+					place_capacity);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -108,10 +109,10 @@ public class PlaceController {
 		return "redirect:/place/all";
 	}
 
-	
 	@GetMapping("/place/detail")
-	public String placeDetail(@RequestParam("id") Integer id, Model model ) {
+	public String placeDetail(@RequestParam("id") Integer id, Model model) {
 		model.addAttribute("place", placeService.getOnePlaceById(id));
 		return "back/Place/placeDetail";
 	}
+
 }

@@ -67,7 +67,7 @@
                 outline: 0 solid transparent;
                 color: #fbf5f5;
                 font-weight: 600;
-                font-size: 12px;
+                /* font-size: 12px; */
             }
 
             a:hover,
@@ -76,7 +76,7 @@
                 transition: all 500ms ease 0s;
                 text-decoration: none;
                 outline: 0 solid transparent;
-                color: #000000;
+                color: #ff0000;
                 font-weight: 600;
                 font-size: 12px;
             }
@@ -263,7 +263,7 @@
             }
 
             .bg-overlay:hover {
-                background-color: rgba(0, 0, 0, 0.5);
+                background-color: rgba(255, 255, 255, 0.5);
             }
 
             .bg-overlay-white:hover {
@@ -392,7 +392,7 @@
             }
 
             .header_area .classynav ul li a:hover {
-                color: #000000;
+                color: #ffffff;
             }
 
             .header_area .classynav ul li .megamenu li a,
@@ -403,7 +403,7 @@
 
             .header_area .classynav ul li .megamenu li a:hover,
             .header_area .classynav ul li .dropdown li a:hover {
-                color: #000000;
+                color: #ffffff;
             }
 
             .header_area .search-area form {
@@ -562,7 +562,7 @@
                 height: 100%;
                 top: 0;
                 left: 0;
-                background-color: rgba(0, 0, 0, 0.4);
+                background-color: rgba(255, 255, 255, 0.4);
                 z-index: 1050;
             }
 
@@ -781,7 +781,7 @@
             }
 
             .right-side-cart-area .cart-content .cart-list .single-cart-item:hover .product-image .cart-item-desc {
-                background-color: rgba(0, 0, 0, 0.8);
+                background-color: rgba(255, 255, 255, 0.8);
             }
 
             .right-side-cart-area .cart-content .cart-amount-summary {
@@ -835,7 +835,7 @@
 
             .right-side-cart-area .cart-content .cart-amount-summary .summary-table li {
                 margin-bottom: 20px;
-                color: #000000;
+                color: #ffffff;
                 font-size: 14px;
                 letter-spacing: 0.75px;
                 text-transform: uppercase;
@@ -903,7 +903,7 @@
 
             .welcome_area .hero-content h2 {
                 font-size: 60px;
-                color: #000000;
+                color: #ffffff;
                 margin-bottom: 50px;
             }
 
@@ -964,7 +964,7 @@
                 display: block;
                 font-size: 30px;
                 font-weight: 700;
-                color: #000000;
+                color: #ffffff;
                 letter-spacing: 1px;
                 text-transform: uppercase;
             }
@@ -1010,7 +1010,7 @@
 
             .cta-area .cta-content h2 {
                 font-size: 60px;
-                color: #000000;
+                color: #fbfbfb;
                 margin-bottom: 50px;
             }
 
@@ -1077,7 +1077,7 @@
 
             .single-product-wrapper .product-img .product-badge {
                 height: 25px;
-                background-color: #000000;
+                background-color: #ffffff;
                 color: #ffffff;
                 font-family: "Ubuntu", sans-serif;
                 font-weight: 700;
@@ -1146,7 +1146,7 @@
                 font-size: 14px;
                 font-family: "Ubuntu", sans-serif;
                 font-weight: 700;
-                color: #000000;
+                color: #ffffff;
             }
 
             .single-product-wrapper .product-description p span {
@@ -1498,7 +1498,6 @@
             }
 
 
-
             /* :: 13.0 Product Sidebar Area CSS */
             .widget {
                 position: relative;
@@ -1523,7 +1522,7 @@
 
             .widget .catagories-menu li>a {
                 text-transform: uppercase;
-                font-size: 12px;
+                font-size: 17px;
                 margin-bottom: 15px;
                 display: block;
             }
@@ -1535,7 +1534,7 @@
 
             .widget .catagories-menu .sub-menu li>a {
                 text-transform: capitalize;
-                font-size: 14px;
+                font-size: 20px;
                 margin-bottom: 5px;
                 display: block;
                 font-weight: 300;
@@ -1661,20 +1660,20 @@
                 margin-bottom: 0;
                 font-size: 12px;
                 font-weight: 600;
-                color: #ffffff;
+                color: #ff0000;
                 text-transform: uppercase;
                 letter-spacing: 0.75px;
             }
 
             .product-topbar .total-products p span {
-                color: #0315ff;
+                color: #ff0000;
             }
 
             .product-topbar .product-sorting p {
                 margin-bottom: 0;
                 font-size: 12px;
                 font-weight: 600;
-                color: #000000;
+                color: #f60000;
                 text-transform: uppercase;
                 letter-spacing: 0.75px;
                 margin-right: 15px;
@@ -1688,7 +1687,7 @@
             .product-topbar .product-sorting form select option {
                 font-size: 12px;
                 font-weight: 600;
-                color: #000000;
+                color: #f90000;
                 text-transform: uppercase;
                 letter-spacing: 0.75px;
             }
@@ -1705,13 +1704,13 @@
             }
 
             .product-topbar .nice-select .list {
-                background-color: #f6f6f6;
+                background-color: #000000;
                 border-radius: 0;
                 border: none;
             }
 
             .product-topbar .nice-select .list .option.selected {
-                color: #0315ff;
+                color: #ff0000;
             }
 
             /* :: 14.0 Checkout Area CSS */
@@ -1840,7 +1839,7 @@
                 margin-left: 60px;
                 font-size: 16px;
                 font-weight: 600;
-                color: rgba(0, 0, 0, 0.6);
+                color: rgba(255, 255, 255, 0.6);
             }
 
             /* :: 17.0 Contact Area CSS */
@@ -1939,7 +1938,7 @@
 
             .contact-area .contact-info .contact-address p span {
                 font-weight: 600;
-                color: #000000;
+                color: #ffffff;
                 width: 100px;
                 display: inline-block;
                 text-transform: uppercase;
@@ -1959,6 +1958,7 @@
             }
         </style>
 
+        <!---------------------------------------------------------------------------------------------------------->
 
 
         <body>
@@ -1987,7 +1987,7 @@
                                             <li data-toggle="collapse" data-target="#clothing">
                                                 <a href="#">槍枝</a>
                                                 <ul class="sub-menu collapse show" id="clothing">
-                                                    <li><a href="#">All</a></li>
+                                                    <li><a href="#">全部</a></li>
                                                     <li><a href="#">Bodysuits</a></li>
                                                     <li><a href="#">Dresses</a></li>
                                                     <li><a href="#">Hoodies &amp; Sweats</a></li>
@@ -2002,7 +2002,7 @@
                                             </li>
                                             <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                                <a href="#">配件</a>
+                                                <a href="#" class="link_title">配件</a>
                                                 <ul class="sub-menu collapse show" id="shoes">
                                                     <li><a href="#">All</a></li>
                                                     <li><a href="#">Bodysuits</a></li>
@@ -2086,15 +2086,18 @@
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="product-topbar d-flex align-items-center justify-content-between">
+
                                             <!-- Total Products -->
                                             <div class="total-products">
                                                 <p><span>186</span> products found</p>
                                             </div>
+
                                             <!-- Sorting -->
                                             <div class="product-sorting d-flex">
                                                 <p>Sort by:</p>
                                                 <form action="#" method="get">
-                                                    <select name="select" id="sortByselect">
+                                                    <select name="select" id="sortByselect" style="color: #f90000;">
+                                                        <option value="value">選擇搜尋的方式</option>
                                                         <option value="value">Highest Rated</option>
                                                         <option value="value">Newest</option>
                                                         <option value="value">Price: $$ - $</option>
@@ -2473,9 +2476,9 @@
             <script src="js/active.js"></script>
 
 
-
             <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
             <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+
         </body>
 
         <script>
@@ -2627,6 +2630,13 @@
                 // :: PreventDefault a Click
                 $("a[href='#']").on('click', function ($) {
                     $.preventDefault();
+                });
+
+                // 左邊sidebar縮和
+                $("a.link_title").on("click", function (e) {
+                    e.preventDefault();
+                    $(this).closest("li").toggleClass("-on");
+                    $(this).closest("li").find("div.sub-menu collapse show").slideToggle();
                 });
 
             })(jQuery);

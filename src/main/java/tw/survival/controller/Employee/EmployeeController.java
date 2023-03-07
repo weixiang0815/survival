@@ -125,8 +125,7 @@ public class EmployeeController {
 
 	public byte[] blobToByteArray(Blob blob) {
 		byte[] result = null;
-		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) 
-		{
+		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
 			byte[] b = new byte[819200];
 			int len = 0;
 			while ((len = is.read(b)) != -1) {

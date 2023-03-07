@@ -6,6 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface EmployeeReposity extends JpaRepository<EmployeeBean, Integer> {
 
-	@Query(value="Select * from Employee where account=:account and password=:password",nativeQuery = true)
-	public EmployeeBean findByAccount(@Param(value = "account")String account,@Param(value = "password")String password);
+	@Query(value = "Select * from Employee where account=:account and password=:password", nativeQuery = true)
+	public EmployeeBean findByAccount(@Param(value = "account") String account,
+			@Param(value = "password") String password);
+
 }

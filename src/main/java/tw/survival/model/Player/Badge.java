@@ -33,9 +33,9 @@ public class Badge {
 	private String condition;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "Badge_Player", 
-	joinColumns = { @JoinColumn(name = "fk_user_id", referencedColumnName = "id") },
-	inverseJoinColumns = {@JoinColumn(name="fk_badge_id",referencedColumnName = "id")})
+	@JoinTable(name = "Badge_Player", joinColumns = {
+			@JoinColumn(name = "fk_user_id", referencedColumnName = "id") }, inverseJoinColumns = {
+					@JoinColumn(name = "fk_badge_id", referencedColumnName = "id") })
 	private Set<PlayerBean> playBean = new HashSet<PlayerBean>();
 
 	public Badge() {

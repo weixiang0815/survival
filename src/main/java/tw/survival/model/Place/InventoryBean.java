@@ -45,27 +45,23 @@ public class InventoryBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_warehouse_id")
 	private WarehouseBean warehouse;
-	
-	@Column(name="fk_warehouse_id")
+
+	@Column(name = "fk_warehouse_id")
 	@Transient
 	private Integer warehouseId;
-	
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
-	
-	@Column(name="fk_product_id")
+
+	@Column(name = "fk_product_id")
 	@Transient
 	private Integer productId;
-	
-	
+
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory",cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory", cascade = CascadeType.ALL)
 	private Set<LogisticsBean> logistics = new LinkedHashSet<>();
-	
-	
 
 	public InventoryBean() {
 	}
@@ -134,5 +130,4 @@ public class InventoryBean {
 		this.logistics = logistics;
 	}
 
-	
 }

@@ -48,7 +48,7 @@ public class NewCompetitionFormService {
 	 * @param comp 欲新建的活動新增表單暫存實體
 	 * @return 新建成功回傳活動新增表單暫存實體，失敗回傳 null
 	 * @author 王威翔
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	public NewCompetitionFormBean insert(NewCompetitionFormBean mainBean) throws IOException {
 		NewCompetitionFormPart1Bean part1 = part1Dao.save(new NewCompetitionFormPart1Bean());
@@ -83,13 +83,11 @@ public class NewCompetitionFormService {
 		if (optional.isPresent()) {
 			NewCompetitionFormBean form = optional.get();
 			StringBuilder content = new StringBuilder("");
-			try (
-					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+			try (FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr);
-					) {
+					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
-				while((line = br.readLine()) != null) {
+				while ((line = br.readLine()) != null) {
 					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
@@ -114,13 +112,11 @@ public class NewCompetitionFormService {
 		try {
 			NewCompetitionFormBean form = mainDao.findByCreator(creatorId, creatorType);
 			StringBuilder content = new StringBuilder("");
-			try (
-					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+			try (FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr);
-					) {
+					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
-				while((line = br.readLine()) != null) {
+				while ((line = br.readLine()) != null) {
 					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
@@ -142,13 +138,11 @@ public class NewCompetitionFormService {
 		try {
 			NewCompetitionFormBean form = mainDao.findFirstByOrderByLastEditedDesc();
 			StringBuilder content = new StringBuilder("");
-			try (
-					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+			try (FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr);
-					) {
+					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
-				while((line = br.readLine()) != null) {
+				while ((line = br.readLine()) != null) {
 					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
@@ -170,13 +164,11 @@ public class NewCompetitionFormService {
 		List<NewCompetitionFormBean> forms = mainDao.findAll();
 		forms.forEach(form -> {
 			StringBuilder content = new StringBuilder("");
-			try (
-					FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
+			try (FileInputStream fis = new FileInputStream(form.getThirdPart().getContentFileLocation());
 					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-					BufferedReader br = new BufferedReader(isr);
-					) {
+					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
-				while((line = br.readLine()) != null) {
+				while ((line = br.readLine()) != null) {
 					content.append(line + "\n\n");
 				}
 				form.getThirdPart().setContent(content.toString());
@@ -258,16 +250,16 @@ public class NewCompetitionFormService {
 			NewCompetitionFormPart1Bean firstPart = form.getFirstPart();
 			firstPart.setMandarinName(mainForm.getFirstPart().getMandarinName());
 			firstPart.setEnglishName(mainForm.getFirstPart().getEnglishName());
-			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {				
+			if (mainForm.getFirstPart().getStartDate().trim().length() == 0) {
 				firstPart.setStartDate(null);
-			} else {				
+			} else {
 				firstPart.setStartDate(mainForm.getFirstPart().getStartDate());
 			}
 			firstPart.setStartTimespan(mainForm.getFirstPart().getStartTimespan());
-			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {				
+			if (mainForm.getFirstPart().getEndDate().trim().length() == 0) {
 				firstPart.setEndDate(null);
 			} else {
-				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());				
+				firstPart.setEndDate(mainForm.getFirstPart().getEndDate());
 			}
 			firstPart.setEndTimespan(mainForm.getFirstPart().getEndTimespan());
 			NewCompetitionFormPart2Bean secondPart = form.getSecondPart();
@@ -278,11 +270,9 @@ public class NewCompetitionFormService {
 			secondPart.setCapacity(mainForm.getSecondPart().getCapacity());
 			secondPart.setFee(mainForm.getSecondPart().getFee());
 			NewCompetitionFormPart3Bean thirdPart = form.getThirdPart();
-			try (
-					FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
+			try (FileOutputStream fos = new FileOutputStream(thirdPart.getContentFileLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos);
-					PrintWriter pw = new PrintWriter(osw);
-					) {
+					PrintWriter pw = new PrintWriter(osw);) {
 				pw.println(mainForm.getThirdPart().getContent());
 			} catch (Exception e) {
 				e.printStackTrace();

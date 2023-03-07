@@ -5,24 +5,24 @@ import java.io.Serializable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ScheduleDTO implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@JsonProperty("title")
 	private String title;
-	
+
 	@JsonProperty("start")
 	private String start;
-	
+
 	@JsonProperty("end")
 	private String end;
-	
+
 	@JsonProperty("type")
 	private String type;
-	
+
 	@JsonProperty("color")
 	private String color;
-	
+
 	@JsonProperty("placeId")
 	private String placeId;
 	
@@ -91,14 +91,12 @@ public class ScheduleDTO implements Serializable {
 	}
 
 	public ScheduleDTO(String title, String start, String end, String type, String color) {
-		super();
 		this.title = title;
 		this.start = start;
 		this.end = end;
 		this.type = type;
 		this.color = color;
-		
+
 	}
-	
 
 }

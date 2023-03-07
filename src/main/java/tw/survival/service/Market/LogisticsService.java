@@ -14,28 +14,29 @@ import tw.survival.model.Market.LogisticsRepository;
 @Service
 @Transactional
 public class LogisticsService {
-	
+
 	@Autowired
 	private LogisticsRepository LogisticsDao;
 
 	public LogisticsService() {
-
 	}
-	//c
+
+	// c
 	public void insertLogistics(LogisticsBean Logistics) {
 		LogisticsDao.save(Logistics);
 	}
-	
-	//r
+
+	// r
 	public LogisticsBean findById(Integer id) {
 		Optional<LogisticsBean> optional = LogisticsDao.findById(id);
-		
+
 		if (optional.isPresent()) {
 			return optional.get();
 		}
 		System.out.println("沒找到id 為" + id + "的資料");
 		return null;
 	}
+
 	public LogisticsBean getOneLogisticsById(Integer id) {
 		Optional<LogisticsBean> optional = LogisticsDao.findById(id);
 		if (optional.isPresent()) {
@@ -48,19 +49,20 @@ public class LogisticsService {
 		return LogisticsDao.findAll();
 	}
 
-	//d
+	// d
 	public void deleteById(Integer id) {
-		
+
 		LogisticsBean lb = findById(id);
 		lb.setInventory(null);
 		lb.setOrderItem(null);
 		lb.setPlayer(null);
 		LogisticsDao.deleteById(id);
-		
+
 	}
+
 	public LogisticsBean update(LogisticsBean logistics) {
 		LogisticsDao.save(logistics);
 		return null;
 	}
-	
+
 }
