@@ -13,12 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-
-
-
-
-
 @Controller
 public class ThirdLogin {
 	private static String client_id = "78352890381-mng41n2ucnm5hsan9vg7ri4rfpgmqucc.apps.googleusercontent.com";
@@ -29,6 +23,7 @@ public class ThirdLogin {
 	private static String token_url = "https://www.googleapis.com/oauth2/v4/token";
 	private static String user_url = "https://www.googleapis.com/oauth2/v2/userinfo";
 	private static String verify_url = "https://www.googleapis.com/oauth2/v3/tokeninfo";
+
 	@RequestMapping(value = "/login")
 	public String toIndex(HttpServletRequest request) {
 		return "google";
@@ -122,8 +117,8 @@ public class ThirdLogin {
 	 * @author第四步，用accessToken獲取使用者資訊
 	 * @return String
 	 * @date Mar 25, 2017 11:50:23 AM
-	 * @throws
-//	 */
+	 * @throws //
+	 */
 //	public static JSONObject getUserInfo(String accessToken) {
 //		HashMap<String, String> params = new HashMap<String,String>();
 //		params.put("access_token", accessToken);
@@ -141,8 +136,8 @@ public class ThirdLogin {
 //		return userInfo;
 //	}
 	/**
-	 * @Title: verifyToken  
-	 * @Description:驗證使用者token是否是來自本應用的請求，校驗aud和clientID是否相同  
+	 * @Title: verifyToken
+	 * @Description:驗證使用者token是否是來自本應用的請求，校驗aud和clientID是否相同
 	 * @author第五步，驗證使用者是否來自你的應用，防刷，根據需要加到邏輯裡
 	 * @return String
 	 * @date Mar 25, 2017 7:36:33 PM
@@ -164,5 +159,5 @@ public class ThirdLogin {
 //		}
 //		return verifyInfo;
 //	}	
-	
+
 }

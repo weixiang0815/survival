@@ -26,12 +26,12 @@
 			</tr>
 			<jstl:forEach items="${list}" var="onePlace">
 				<tr>
-					<td><img alt=""
-						src="${contextRoot}/place/id?id=${onePlace.id}" width="50%"></td>
+					<td class="col-5"><img alt=""
+						src="${contextRoot}/place/id?id=${onePlace.id}" width="100%"></td>
 					<td>${onePlace.place_name}</td>
 					<td>${onePlace.place_address}</td>
-					<td>${onePlace.place_fee}</td>
-					<td>${onePlace.place_capacity}</td>
+					<td>${onePlace.place_fee} 元</td>
+					<td>${onePlace.place_capacity} 人</td>
 					<td>
 						<form action="${contextRoot}/place/edit" method="get">
 							<input name="id" type="hidden" value="${onePlace.id}" /> <input

@@ -46,9 +46,10 @@ public class OrderItemService {
 
 	public OrderItemBean update(OrderItemBean oBean) {
 		orderItemDao.save(oBean);
-		 return null;
+		return null;
 	}
-	//d
+
+	// d
 	public void deleteById(Integer id) {
 
 		OrderItemBean ob = findById(id);
@@ -56,4 +57,5 @@ public class OrderItemService {
 		orderItemDao.deleteById(id);
 		return;
 	}
+
 }

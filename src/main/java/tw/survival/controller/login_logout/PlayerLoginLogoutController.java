@@ -59,7 +59,7 @@ public class PlayerLoginLogoutController {
         }
 		if (player != null) {
 			m.addAttribute("player", player);
-			return "front/index";
+			return "redirect:/";
 		}
 		return "back/Player/loginSystem";
 	}

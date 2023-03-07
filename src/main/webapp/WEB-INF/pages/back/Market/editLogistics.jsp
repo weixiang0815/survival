@@ -25,16 +25,23 @@
 					<table class="table table-hover">
 						<tr>
 							<td><form:label class="form-label" path="start_date">起始日期:</form:label></td>
-							<td><form:input type="text" path="start_date" placeholder="yyyy/mm/dd" required="true" /></td>
+							<td><form:input type="text" path="start_date"
+									placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 						<tr>
 							<td><form:label class="form-label" path="arrive_date">到貨日期:</form:label></td>
-							<td><form:input type="text" path="arrive_date" placeholder="yyyy/mm/dd" required="true" /></td>
+							<td><form:input type="text" path="arrive_date"
+									placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 
 						<tr>
 							<td>訂單狀態：</td>
-							<td><form:input class="form-control" path="status" /></td>
+							<td><form:select class="form-control" path="status">
+									<form:option value="新訂單">新訂單</form:option>
+									<form:option value="處理中">處理中</form:option>
+									<form:option value="已完成">已完成</form:option>
+									<form:option value="已取消">已取消</form:option>
+								</form:select></td>
 						</tr>
 					</table>
 					<button type="submit" class="btn btn-outline-primary">送出</button>

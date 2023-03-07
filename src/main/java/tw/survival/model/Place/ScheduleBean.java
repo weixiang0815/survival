@@ -42,8 +42,8 @@ public class ScheduleBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_place_id")
 	private PlaceBean place;
-	
-	@Column(name="fk_place_id")
+
+	@Column(name = "fk_place_id")
 	@Transient
 	private Integer placeId;
 
@@ -96,5 +96,4 @@ public class ScheduleBean {
 		this.placeId = placeId;
 	}
 
-	
 }

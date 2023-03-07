@@ -10,9 +10,9 @@ import org.springframework.data.repository.query.Param;
 public interface SignUpRepository extends JpaRepository<SignUpBean, Integer> {
 
 	public List<SignUpBean> findByCompetition(Integer id);
-	
+
 	@Modifying
 	@Query(value = "delete from SignUp where fk_competition_id = :id", nativeQuery = true, countProjection = "SignUp")
 	public void deleteByCompetition(@Param("id") Integer id);
-	
+
 }

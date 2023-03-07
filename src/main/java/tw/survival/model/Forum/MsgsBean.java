@@ -21,47 +21,46 @@ import org.springframework.format.annotation.DateTimeFormat;
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
-@Table(name="msgs")
-public class MsgsBean implements Serializable{
-	
+@Table(name = "msgs")
+public class MsgsBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
-	@Column(name="essay")
+
+	@Column(name = "essay")
 	private String essay;
-	
+
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@Column(name="added")
+	@Column(name = "added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date added;
-	
+
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@Column(name="final_added")
+	@Column(name = "final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date finalAdded;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_posts_id")
+	@JoinColumn(name = "fk_posts_id")
 	private PostsBean posts;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_player_id")
+	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
-	
-	
+
 	public MsgsBean() {
 	}
-	
+
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
-		if(added == null) {
+		if (added == null) {
 			added = new Date();
 		}
-		if(finalAdded == null) {
+		if (finalAdded == null) {
 			finalAdded = new Date();
 		}
 	}
@@ -97,11 +96,11 @@ public class MsgsBean implements Serializable{
 	public void setFinalAdded(Date finalAdded) {
 		this.finalAdded = finalAdded;
 	}
-	
+
 	public PlayerBean getPlayer() {
 		return player;
 	}
-	
+
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
 	}

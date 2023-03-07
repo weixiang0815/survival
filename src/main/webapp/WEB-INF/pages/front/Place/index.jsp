@@ -19,7 +19,7 @@ ul#comp-link>li {
 	<div class="container text-center">
 		<h1>場地系統</h1>
 		<ul id="comp-link">
-			<li><a href="${contextRoot}/front/place/detail">場地詳情</a></li>
+			<li><a href="${contextRoot}/front/place/all">場地詳情</a></li>
 			<li><a href="${contextRoot}/front/schedule/new">活動排程</a></li>
 		</ul>
 	</div>

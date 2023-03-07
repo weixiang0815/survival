@@ -35,7 +35,7 @@ public class EmployeeloginLogoutController {
 		EmployeeBean emp = service.loginEmp(account, password);
 		if (emp != null) {
 			m.addAttribute("employee", emp);
-			return "back/Employee/index";
+			return "redirect:/";
 		} else {
 			err.put("msg", "帳號密碼不正確");
 			m.addAttribute("errors", err);

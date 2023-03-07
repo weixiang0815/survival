@@ -20,6 +20,7 @@ import tw.survival.model.Player.PlayerBean;
 @Entity
 @Table(name = "crewPermission")
 public class CrewPermission {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
