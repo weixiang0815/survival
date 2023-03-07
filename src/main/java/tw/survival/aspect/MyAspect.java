@@ -31,7 +31,6 @@ public class MyAspect {
 	public void pointcut() {
 	}
 
-	@SuppressWarnings("null")
 	@Before("pointcut()")
 	public void before(JoinPoint joinPoint) throws IOException {
 		

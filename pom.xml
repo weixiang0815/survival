@@ -39,21 +39,19 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
-<<<<<<< HEAD
-  <groupId>org.springframework</groupId>
-  <artifactId>spring-context-support</artifactId>
-</dependency>
-<!-- SpringAOP核心依赖 -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-aop</artifactId>
-</dependency>
-=======
+		  <groupId>org.springframework</groupId>
+		  <artifactId>spring-context-support</artifactId>
+		</dependency>
+		<!-- SpringAOP核心依赖 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+        <dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.json/json -->
->>>>>>> ec0b8e416632c79546dc41ac2053eb44550ba6de
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
