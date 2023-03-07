@@ -37,9 +37,9 @@ public class MyAspect {
 		System.out.println("=====before advice starts=====");
 		System.out.println("Before method execution: " + joinPoint.getSignature().getName());
 		// 如果使用者未登入，拋出 UnauthorizedException
-		if (session == null || session.getAttribute("player") == null) {
+		if (session == null || session.getAttribute("employee") == null) {
 			System.out.println("權限不足，需要登入");
-			response.sendRedirect(request.getContextPath() + "/Player/login");
+			response.sendRedirect(request.getContextPath() + "/Employee/login");
 		}
 	}
 
