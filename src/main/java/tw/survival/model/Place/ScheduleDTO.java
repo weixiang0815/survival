@@ -25,6 +25,9 @@ public class ScheduleDTO implements Serializable {
 
 	@JsonProperty("placeId")
 	private String placeId;
+	
+	@JsonProperty("url")
+	private String url;
 
 	public ScheduleDTO() {
 	}
@@ -75,6 +78,16 @@ public class ScheduleDTO implements Serializable {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+	
+	
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public ScheduleDTO(String title, String start, String end, String type, String color) {

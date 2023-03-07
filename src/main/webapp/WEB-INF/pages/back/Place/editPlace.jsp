@@ -25,7 +25,7 @@
 					<table class="table table-hover">
 						<tr>
 
-							<td colspan="2"><img src="${contextRoot}/place/id?id=${place.id}" /></td>
+							<td class="col-4"><img src="${contextRoot}/place/id?id=${place.id}" width="100%" height="50%"/></td>
 						</tr>
 						<tr>
 							<td>場地圖片:</td>

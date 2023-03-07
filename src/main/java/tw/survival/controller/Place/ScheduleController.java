@@ -85,8 +85,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String id = comp.getId().toString();
 			String color = "green";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
 			list.add(Sdto);
 		}
 
@@ -96,8 +98,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String id = comp.getId().toString();
 			String color = "blue";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
 			list.add(Sdto);
 		}
 
@@ -107,8 +111,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String id = comp.getId().toString();
 			String color = "red";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
 			list.add(Sdto);
 		}
 
@@ -127,6 +133,7 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String id = comp.getId().toString();
 			System.out.println(type);
 			String color;
 			if (type.contentEquals("已發布")) {
@@ -140,6 +147,7 @@ public class ScheduleController {
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
 			Sdto.setPlaceId(placeId.toString());
+			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
 			list.add(Sdto);
 		}
 		return list;
