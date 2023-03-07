@@ -17,37 +17,32 @@ public class PlaceOrderService {
 
 	@Autowired
 	private PlaceOrderRepository plodrDAO;
-	
-	
+
 	public PlaceOrderService() {
-	
 	}
 
-	
 	public PlaceOrderBean insertPlaceOrder(PlaceOrderBean placeOrder) {
 		return plodrDAO.save(placeOrder);
 	}
-	
+
 	public PlaceOrderBean getOnePlaceOrderById(Integer id) {
 		Optional<PlaceOrderBean> optional = plodrDAO.findById(id);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			return optional.get();
 		}
 		return null;
 	}
-	
-	public List<PlaceOrderBean> getAllPlaceOrder(){
+
+	public List<PlaceOrderBean> getAllPlaceOrder() {
 		return plodrDAO.findAll();
 	}
-	
+
 	public void deletePlaceOrderById(Integer id) {
-		 plodrDAO.deleteById(id);
+		plodrDAO.deleteById(id);
 	}
-	
-	
+
 	public PlaceOrderBean updatePlaceOrder(PlaceOrderBean placeOrder) {
 		return plodrDAO.save(placeOrder);
 	}
-	
-	
+
 }

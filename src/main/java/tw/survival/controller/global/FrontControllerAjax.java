@@ -1,6 +1,5 @@
 package tw.survival.controller.global;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;

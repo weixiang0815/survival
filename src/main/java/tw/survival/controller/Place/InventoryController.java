@@ -63,7 +63,7 @@ public class InventoryController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
-	
+
 	@GetMapping("/inventory/edit")
 	public String editInventory(@RequestParam("id") Integer id, Model model) {
 		InventoryBean inventory = inventoryService.getInventoryById(id);
@@ -74,16 +74,17 @@ public class InventoryController {
 		model.addAttribute("inventory", inventory);
 		return "back/Place/editInventory";
 	}
-	
+
 	@PutMapping("/inventory/edit")
 	public String sendEditInventory(@ModelAttribute("inventory") InventoryBean inventory) {
 		inventoryService.updateInventory(inventory);
 		return "redirect:/inventory/all";
 	}
-	
+
 	@PostMapping("/inventory/delete")
 	public String deleteInventory(@RequestParam("id") Integer id) {
 		inventoryService.deleteInventoryById(id);
 		return "redirect:/inventory/all";
 	}
+
 }

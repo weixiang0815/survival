@@ -30,86 +30,78 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Player.PlayerBean;
 
-
-
 @Entity
-@Table(name="posts")
-public class PostsBean implements Serializable{
-	
+@Table(name = "posts")
+public class PostsBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY )
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "classify")
 	private String classify;
-	
+
 	@Column(name = "essay_file_location")
 	private String essayLocation;
-	
 
 	@Transient
 	private String content;
-	
+
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@Column(name="added")
+	@Column(name = "added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date added;
-	
+
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@Column(name="final_added")
+	@Column(name = "final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date finalAdded;
-	
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<MsgsBean> msgsOfPost = new LinkedHashSet<MsgsBean>();
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
-	
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();	
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="fk_player_id")
+	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
-	
+
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_competition_id")
 	private CompetitionBean competition;
-	
+
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
-		if(added == null) {
+		if (added == null) {
 			added = new Date();
 		}
-		if(finalAdded == null) {
+		if (finalAdded == null) {
 			finalAdded = new Date();
 		}
 	}
-	
-	
-	
+
 	public PostsBean() {
 	}
-	
-	
 
 	public PostsBean(String name, String classify, String essayLocation) {
 		this.name = name;
@@ -117,165 +109,108 @@ public class PostsBean implements Serializable{
 		this.essayLocation = essayLocation;
 	}
 
-
-
 	public Integer getId() {
 		return id;
 	}
-
-
 
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-
-
 	public String getName() {
 		return name;
 	}
-
-
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-
 	public String getClassify() {
 		return classify;
 	}
-
-
 
 	public void setClassify(String classify) {
 		this.classify = classify;
 	}
 
-
-
 	public String getEssayLocation() {
 		return essayLocation;
 	}
-
-
 
 	public void setEssayLocation(String essayLocation) {
 		this.essayLocation = essayLocation;
 	}
 
-
-
 	public String getContent() {
 		return content;
 	}
-
-
 
 	public void setContent(String content) {
 		this.content = content;
 	}
 
-
-
 	public Date getAdded() {
 		return added;
 	}
-
-
 
 	public void setAdded(Date added) {
 		this.added = added;
 	}
 
-
-
 	public Date getFinalAdded() {
 		return finalAdded;
 	}
-
-
 
 	public void setFinalAdded(Date finalAdded) {
 		this.finalAdded = finalAdded;
 	}
 
-
-
 	public Set<MsgsBean> getMsgsOfPost() {
 		return msgsOfPost;
 	}
-
-
 
 	public void setMsgsOfPost(Set<MsgsBean> msgsOfPost) {
 		this.msgsOfPost = msgsOfPost;
 	}
 
-
-
 	public Set<ThumbUpBean> getThumbUpOfPost() {
 		return thumbUpOfPost;
 	}
-
-
 
 	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
 		this.thumbUpOfPost = thumbUpOfPost;
 	}
 
-
-
 	public Set<ScoreBean> getScoreOfPost() {
 		return scoreOfPost;
 	}
-
-
 
 	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
 		this.scoreOfPost = scoreOfPost;
 	}
 
-
-
 	public Set<BookmarkletBean> getBookmarkletOfPost() {
 		return bookmarkletOfPost;
 	}
-
-
 
 	public void setBookmarkletOfPost(Set<BookmarkletBean> bookmarkletOfPost) {
 		this.bookmarkletOfPost = bookmarkletOfPost;
 	}
 
-
-
 	public PlayerBean getPlayer() {
 		return player;
 	}
-
-
 
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
 	}
 
-
-
 	public CompetitionBean getCompetition() {
 		return competition;
 	}
-
-
 
 	public void setCompetition(CompetitionBean competition) {
 		this.competition = competition;
 	}
 
-
-
-	
-	
-	
 }

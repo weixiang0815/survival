@@ -30,7 +30,7 @@ import tw.survival.service.Place.ScheduleService;
 
 @Controller
 public class PlaceControllerFront {
-	
+
 	@Autowired
 	private ScheduleService scheduleService;
 
@@ -39,7 +39,7 @@ public class PlaceControllerFront {
 
 	@Autowired
 	private CompetitionToScheduleService CTSService;
-	
+
 	@Autowired
 	private CompetitionService competitionService;
 
@@ -47,30 +47,30 @@ public class PlaceControllerFront {
 	public String goIndex() {
 		return "front/Place/index";
 	}
-	
+
 	@GetMapping("/front/place/detail")
 	public String goPlaceDetail() {
 		return "front/Place/detail";
 	}
-	
+
 	@GetMapping("/front/place/all")
-	public ModelAndView getAllPlace(ModelAndView mav) {
+	public String getAllPlace(Model model) {
 		List<PlaceBean> list = placeService.getAllPlace();
-		mav.setViewName("front/Place/detail");
-		mav.getModel().put("list", list);
-		return mav;
+		model.addAttribute("placelist", list);
+
+		return "front/Place/detail";
 	}
-	
+
 	@GetMapping("/front/place/id")
 	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
-		PlaceBean place1 = placeService.getOnePlaceById(id);
-		byte[] placeFile = place1.getPlace_photo();
+		PlaceBean place2 = placeService.getOnePlaceById(id);
+		byte[] placeFile2 = place2.getPlace_photo();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.IMAGE_JPEG);
 
-		return new ResponseEntity<byte[]>(placeFile, headers, HttpStatus.OK);
+		return new ResponseEntity<byte[]>(placeFile2, headers, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("front/schedule/new")
 	public String newSchedule(Model model) {
 		model.addAttribute("schedule", new ScheduleBean());
@@ -137,7 +137,7 @@ public class PlaceControllerFront {
 
 		return list;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/front/schedule/select/{placeId}")
 	public List<ScheduleDTO> findCompByPlaceId(@PathVariable Integer placeId) {
@@ -150,16 +150,15 @@ public class PlaceControllerFront {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
-			System.out.println(type);
-			String color ;
-			if(type.contentEquals("已發布")) {
+			String color;
+			if (type.contentEquals("已發布")) {
 				color = "green";
-			}else if(type.contentEquals("未發布")) {
-				color = "red";
-			}else if(type.contentEquals("已結束")) {
+			} else if (type.contentEquals("未發布")) {
+				color = "pink";
+			} else if (type.contentEquals("已結束")) {
 				color = "blue";
-			}else {
-				color = "grey";
+			} else {
+				color = "red";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
 			Sdto.setPlaceId(placeId.toString());

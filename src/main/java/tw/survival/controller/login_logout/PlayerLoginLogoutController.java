@@ -39,7 +39,7 @@ public class PlayerLoginLogoutController {
 
 		if (player != null) {
 			m.addAttribute("player", player);
-			return "back/Player/loginSuccess";
+			return "redirect:/";
 		}
 		return "back/Player/loginSystem";
 	}

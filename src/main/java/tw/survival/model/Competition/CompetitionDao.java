@@ -57,7 +57,7 @@ public class CompetitionDao {
 		List<Integer> place = conditions.getPlace();
 		if (place != null && place.size() != 0) {
 			hql.append("and c.placeId in (");
-			for (int i = 0; i < place.size(); i ++) {
+			for (int i = 0; i < place.size(); i++) {
 				hql.append(place.get(i));
 				hql.append(i == place.size() - 1 ? "" : ", ");
 			}
@@ -67,7 +67,7 @@ public class CompetitionDao {
 		List<String> singleOrCrew = conditions.getSingleOrCrew();
 		if (singleOrCrew != null && singleOrCrew.size() != 0) {
 			hql.append("and c.singleOrCrew in (");
-			for(int i = 0; i < singleOrCrew.size(); i ++) {
+			for (int i = 0; i < singleOrCrew.size(); i++) {
 				hql.append("'" + singleOrCrew.get(i) + "'");
 				hql.append(i == singleOrCrew.size() - 1 ? "" : ", ");
 			}
@@ -77,7 +77,7 @@ public class CompetitionDao {
 		List<String> status = conditions.getStatus();
 		if (status != null && status.size() != 0) {
 			hql.append("and c.status in (");
-			for (int i = 0; i < status.size(); i ++) {
+			for (int i = 0; i < status.size(); i++) {
 				hql.append("'" + status.get(i) + "'");
 				hql.append(i == status.size() - 1 ? "" : ", ");
 			}
@@ -87,7 +87,7 @@ public class CompetitionDao {
 		List<Integer> capacity = conditions.getCapacity();
 		if (capacity != null && capacity.size() != 0) {
 			hql.append("and c.capacity in (");
-			for (int i = 0; i < capacity.size(); i ++) {
+			for (int i = 0; i < capacity.size(); i++) {
 				hql.append(capacity.get(i));
 				hql.append(i == capacity.size() - 1 ? "" : ", ");
 			}
@@ -96,7 +96,7 @@ public class CompetitionDao {
 		List<Integer> budget = conditions.getBudget();
 		if (budget != null && budget.size() != 0) {
 			hql.append("and c.budget in (");
-			for (int i = 0; i < budget.size(); i ++) {
+			for (int i = 0; i < budget.size(); i++) {
 				hql.append(budget.get(i));
 				hql.append(i == budget.size() - 1 ? "" : ", ");
 			}
@@ -106,7 +106,7 @@ public class CompetitionDao {
 		List<Integer> fee = conditions.getFee();
 		if (fee != null && fee.size() != 0) {
 			hql.append("and c.fee in (");
-			for (int i = 0; i < fee.size() - 1; i ++) {
+			for (int i = 0; i < fee.size() - 1; i++) {
 				hql.append(fee.get(i));
 				hql.append(i == fee.size() - 1 ? "" : ", ");
 			}
@@ -116,7 +116,7 @@ public class CompetitionDao {
 		List<Integer> publicOrPrivate = conditions.getPublicOrPrivate();
 		if (publicOrPrivate != null && publicOrPrivate.size() != 0) {
 			hql.append("and c.publicOrPrivate in (");
-			for (int i = 0; i < publicOrPrivate.size(); i ++) {
+			for (int i = 0; i < publicOrPrivate.size(); i++) {
 				hql.append(publicOrPrivate.get(i));
 				hql.append(i == publicOrPrivate.size() ? "" : ", ");
 			}

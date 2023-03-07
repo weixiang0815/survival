@@ -27,6 +27,8 @@
 		<br />
 		<div id='calendar'></div>
 	</div>
+	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+    <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>	
 	<script
 		src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js'></script>
 	<script>
@@ -72,7 +74,6 @@
 			calendar.render();
 		}
 	</script>
-<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
-<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>	
+
 </body>
 </html>

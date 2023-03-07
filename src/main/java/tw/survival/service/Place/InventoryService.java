@@ -14,31 +14,29 @@ import tw.survival.model.Place.InventoryRepository;
 @Service
 @Transactional
 public class InventoryService {
-	
+
 	@Autowired
 	private InventoryRepository iDAO;
-	
-	public InventoryService() {
 
+	public InventoryService() {
 	}
 
 	public InventoryBean insertInventory(InventoryBean inventory) {
 		return iDAO.save(inventory);
 	}
-	
-	
+
 	public InventoryBean getInventoryById(Integer id) {
 		Optional<InventoryBean> optional = iDAO.findById(id);
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			return optional.get();
 		}
 		return null;
 	}
 
-	public List<InventoryBean> getAllInventory(){
+	public List<InventoryBean> getAllInventory() {
 		return iDAO.findAll();
 	}
-	
+
 	public void deleteInventoryById(Integer id) {
 		InventoryBean inventory = getInventoryById(id);
 		inventory.setProduct(null);
@@ -46,13 +44,12 @@ public class InventoryService {
 		inventory.setWarehouse(null);
 		inventory.setWarehouseId(null);
 		inventory.setLogistics(null);
-		
 		iDAO.deleteById(id);
 	}
-	
+
 	public InventoryBean updateInventory(InventoryBean inventory) {
 		Optional<InventoryBean> optional = iDAO.findById(inventory.getId());
-		if(optional.isPresent()) {
+		if (optional.isPresent()) {
 			InventoryBean inventoryToUpdate = optional.get();
 			inventoryToUpdate.setInventorySellamount(inventory.getInventorySellamount());
 			inventoryToUpdate.setInventoryRentamount(inventory.getInventoryRentamount());
@@ -60,4 +57,5 @@ public class InventoryService {
 		}
 		return null;
 	}
+
 }

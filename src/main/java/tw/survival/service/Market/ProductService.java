@@ -18,7 +18,7 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productDao;
-	
+
 	@Autowired
 	private TestProductDaoText tpdt;
 
@@ -36,12 +36,12 @@ public class ProductService {
 		return null;
 	}
 
-	//找全部商品
+	// 找全部商品
 	public List<ProductBean> findAllProduct() {
 		return productDao.findAll();
 	}
 
-	//用ID找商品
+	// 用ID找商品
 	public ProductBean getProductById(Integer id) {
 		Optional<ProductBean> optional = productDao.findById(id);
 
@@ -51,7 +51,7 @@ public class ProductService {
 		return null;
 	}
 
-	//更新商品
+	// 更新商品
 	public ProductBean updateProductById(Integer id, String updateName, byte[] updateImg, String updateContext,
 			String updateClass, Integer updateRent_fee, Integer updatePrice) {
 		Optional<ProductBean> optional = productDao.findById(id);
@@ -86,12 +86,11 @@ public class ProductService {
 	public List<ProductBean> findByName(String name) {
 		return productDao.findProductLike(name);
 	}
-	
+
 //	public List<ProductBean> findProductText2(String name,String productclass,String context) {
-//		
 //		return productDao.findProductText(name,productclass,context);
 //	}
-	
+
 //	public List<ProductBean> findInClazz(String Clazz) {
 //		return productDao.findProductIn(Clazz);
 //	}
@@ -99,8 +98,5 @@ public class ProductService {
 	public List<ProductBean> findByClass(List<String> clazz) {
 		return tpdt.findByProductclassIn(clazz);
 	}
-	
-	
-	
 
 }

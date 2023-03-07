@@ -114,7 +114,7 @@ public class ScheduleController {
 
 		return list;
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/schedule/select/{placeId}")
 	public List<ScheduleDTO> findCompByPlaceId(@PathVariable Integer placeId) {
@@ -128,14 +128,14 @@ public class ScheduleController {
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
 			System.out.println(type);
-			String color ;
-			if(type.contentEquals("已發布")) {
+			String color;
+			if (type.contentEquals("已發布")) {
 				color = "green";
-			}else if(type.contentEquals("未發布")) {
+			} else if (type.contentEquals("未發布")) {
 				color = "red";
-			}else if(type.contentEquals("已結束")) {
+			} else if (type.contentEquals("已結束")) {
 				color = "blue";
-			}else {
+			} else {
 				color = "grey";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);

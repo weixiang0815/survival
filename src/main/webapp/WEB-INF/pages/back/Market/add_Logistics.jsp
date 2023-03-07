@@ -21,7 +21,9 @@
 	<br>
 	物流抵達時間:<input type="date" name="arrive_date" />
 	<br>
-	物流狀況:<input type="text" name="Logistics_status" />
+	訂單狀態：<select class="form-control" name="status">
+									<option value="新訂單">新訂單<option>
+								</select>
 	<br>   	    
 	<input id="uploadBtn" type="submit" value="上傳">
 	

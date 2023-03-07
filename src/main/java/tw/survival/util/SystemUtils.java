@@ -48,11 +48,9 @@ public class SystemUtils {
 
 	public static Clob fileToClob(String filename) {
 		Clob clob = null;
-		try (
-			FileInputStream fis = new FileInputStream(filename);
-			InputStreamReader in = new InputStreamReader(fis);
-			CharArrayWriter caw = new CharArrayWriter();
-		) {
+		try (FileInputStream fis = new FileInputStream(filename);
+				InputStreamReader in = new InputStreamReader(fis);
+				CharArrayWriter caw = new CharArrayWriter();) {
 			int len = 0;
 			char[] ca = new char[8192];
 			while ((len = in.read(ca)) != -1) {
@@ -65,15 +63,12 @@ public class SystemUtils {
 		return clob;
 	}
 
-	
 	public static Blob fileToBlob(String filename) {
 		Blob blob = null;
 		File f = new File(filename);
 		int len = (int) f.length();
 		byte[] b = new byte[len];
-		try (
-			FileInputStream fis = new FileInputStream(f);
-		) {
+		try (FileInputStream fis = new FileInputStream(f);) {
 			b = fis.readAllBytes();
 			blob = new SerialBlob(b);
 		} catch (Exception ex) {
@@ -81,37 +76,34 @@ public class SystemUtils {
 		}
 		return blob;
 	}
-	
+
 	public static void clobToFile(Clob comment, File file) {
-		try (
-		   Reader reader = comment.getCharacterStream();				
-		   FileOutputStream fos = new FileOutputStream(file);
-		   OutputStreamWriter osw = new OutputStreamWriter(fos);
-		) {
-			int len = 0 ;
+		try (Reader reader = comment.getCharacterStream();
+				FileOutputStream fos = new FileOutputStream(file);
+				OutputStreamWriter osw = new OutputStreamWriter(fos);) {
+			int len = 0;
 			char[] c = new char[8192];
-			while ((len=reader.read(c))!= -1){
+			while ((len = reader.read(c)) != -1) {
 				osw.write(c, 0, len);
 			}
-		} catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
+
 	}
+
 	public static void blobToFile(Blob picture, File file) {
-		try (
-		   InputStream is = picture.getBinaryStream();
-		   OutputStream os = new FileOutputStream(file);
-		) {
+		try (InputStream is = picture.getBinaryStream(); OutputStream os = new FileOutputStream(file);) {
 			byte[] b = new byte[81920];
-			int len = 0 ;
-			while ((len=is.read(b))!=-1){
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
 				os.write(b, 0, len);
 			}
-		} catch(Exception ex){
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+
 	// ================================================
 	// 以下方法用處不大，考慮刪除
 	// CLOB 公用程式: 將CLOB物件轉為字元陣列
@@ -129,6 +121,7 @@ public class SystemUtils {
 		}
 		return null;
 	}
+
 	public static void saveCharsToFile(char[] comment, int placeId) {
 		String folder = "D:\\_jdbc\\Java004";
 		File dir = new File(folder);
@@ -161,11 +154,9 @@ public class SystemUtils {
 	}
 
 	public static char[] fileToChars(String filename) {
-		try (
-			FileInputStream fis = new FileInputStream(filename);
-			InputStreamReader in = new InputStreamReader(fis, "BIG5");
-			CharArrayWriter caw = new CharArrayWriter();
-		) {
+		try (FileInputStream fis = new FileInputStream(filename);
+				InputStreamReader in = new InputStreamReader(fis, "BIG5");
+				CharArrayWriter caw = new CharArrayWriter();) {
 			int len = 0;
 			char[] ca = new char[8192];
 			while ((len = in.read(ca)) != -1) {
@@ -177,17 +168,17 @@ public class SystemUtils {
 		}
 		return null;
 	}
-	
+
 	public static byte[] fileToBytes(String filename) {
-	File f = new File(filename);
-	int len = (int) f.length();
-	byte[] b = new byte[len];
-	try (FileInputStream fis = new FileInputStream(f);) {
-		fis.read(b);
-	} catch (Exception ex) {
-		ex.getLocalizedMessage();
+		File f = new File(filename);
+		int len = (int) f.length();
+		byte[] b = new byte[len];
+		try (FileInputStream fis = new FileInputStream(f);) {
+			fis.read(b);
+		} catch (Exception ex) {
+			ex.getLocalizedMessage();
+		}
+		return b;
 	}
-	return b;
-}	
-	
+
 }
