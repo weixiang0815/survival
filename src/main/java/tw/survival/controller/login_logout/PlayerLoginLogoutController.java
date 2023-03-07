@@ -1,9 +1,17 @@
 package tw.survival.controller.login_logout;
 
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -11,10 +19,13 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.login_logout.login_logoutService;
+import tw.survival.validators.Playervalidator;
 
 @Controller
 @SessionAttributes({ "player" })
 public class PlayerLoginLogoutController {
+	@Autowired
+	Playervalidator validator;
 
 	@Autowired
 	public login_logoutService service;
@@ -33,10 +44,19 @@ public class PlayerLoginLogoutController {
 	}
 
 	@PostMapping("/Player/loginSystem")
-	public String checklog(@RequestParam("account") String account, @RequestParam("password") String password,
-			Model m) {
+	public String checklog(@Valid@ModelAttribute PlayerBean player1,  @RequestParam("account") String account, @RequestParam("password") String password,
+			BindingResult bindingResult	,Model m) {
 		PlayerBean player = service.login(account, password);
-
+		validator.validate(player1, bindingResult);
+        if(bindingResult.hasErrors()) {
+        	List<ObjectError> list = bindingResult.getAllErrors();
+        	m.addAttribute("alertMessage", "帳號密碼錯誤");
+        	m.addAttribute("errors",list);
+        	for(ObjectError error : list) {
+        		System.out.println("有錯誤：" + error);
+        	}
+        	return"back/Player/loginSystem";
+        }
 		if (player != null) {
 			m.addAttribute("player", player);
 			return "redirect:/";

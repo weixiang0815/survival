@@ -113,7 +113,8 @@
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="${contextRoot}/admin"> <i
 						class="bi bi-house-gear"></i>&nbsp;&nbsp;後台介面首頁
-				</a></li>
+				</a>
+				</li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link"
 					href="#submenu-competition"> <i class="bi bi-card-checklist"></i>&nbsp;&nbsp;活動系統
@@ -145,9 +146,6 @@
 						<i class="bi bi-people"></i>&nbsp;&nbsp;會員系統
 				</a>
 					<ul class="collapse" id="submenu-player">
-						<li><a href="${contextRoot}/player/add" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
 						<li><a href="${contextRoot}/player/list" class="nav-link">查詢</a></li>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
@@ -156,8 +154,6 @@
 				</a>
 					<ul class="collapse" id="submenu-employee">
 						<li><a href="${contextRoot}/Employee/add" class="nav-link">新增</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">修改</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">刪除</a></li>
 						<li><a href="${contextRoot}/Employee/list" class="nav-link">查詢</a></li>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
@@ -186,7 +182,7 @@
 						<li><a href="${contextRoot}/posts.main" class="nav-link">我的貼文(未給網址)</a></li>
 						<%-- 						<li><a href="${contextRoot}/" class="nav-link">無命題</a></li> --%>
 					</ul></li>
-			</ul>
+			</ul>			
 		</div>
 	</nav>
 	<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
