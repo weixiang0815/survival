@@ -1,4 +1,4 @@
-package tw.survival.controller.Forum;
+package tw.survival.controller.back.Forum;
 
 import java.util.Date;
 import java.util.List;

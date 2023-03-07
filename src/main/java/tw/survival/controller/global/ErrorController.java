@@ -1,4 +1,4 @@
-package tw.survival.controller.Error;
+package tw.survival.controller.global;
 
 import javax.servlet.http.HttpServletRequest;
 

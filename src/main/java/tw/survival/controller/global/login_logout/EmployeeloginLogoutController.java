@@ -1,4 +1,4 @@
-package tw.survival.controller.login_logout;
+package tw.survival.controller.global.login_logout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,4 +48,5 @@ public class EmployeeloginLogoutController {
 		status.setComplete();
 		return "redirect:/Employee/login";
 	}
+
 }
