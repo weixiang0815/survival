@@ -1,4 +1,4 @@
-package tw.survival.controller.back.Market;
+package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;

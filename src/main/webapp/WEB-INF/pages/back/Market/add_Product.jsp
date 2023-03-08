@@ -67,6 +67,8 @@
 					<option>衝鋒槍</option>
 					<option>狙擊槍</option>
 					<option>霰彈槍</option>
+					<option>配件</option>
+					<option>服裝</option>
 				</select>
 				<!-- <input type="text" style="width:253px" name="Product_class" /> -->
 			</div>

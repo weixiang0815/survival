@@ -20,7 +20,7 @@
 		<div class="card">
 			<div class="card-header">修改訊息</div>
 			<div class="card-body">
-				<form action="${contextRoot}/Market/edit" method="post"
+				<form action="${contextRoot}/Market/editProduct" method="post"
 					enctype="multipart/form-data">
 					<input type="text" name="id" value="${product.id}" hidden />
 					<table class="table table-hover">
@@ -34,17 +34,19 @@
 						</tr>
 						<tr>
 							<td>商品名稱：</td>
-							<td><input type="text" name="name" value="${product.name}" /></td>
+							<td><input type="text" name="name" value="${product.name}"/></td>
 						</tr>
 						<tr>
 							<td>商品分類：</td>
-							<td><select  type="text" name="Product_class">
-								<option>請選擇商品種類</option>
-								<option>手槍</option>
-								<option>步槍</option>
-								<option>衝鋒槍</option>
-								<option>狙擊槍</option>
-								<option>霰彈槍</option>
+							<td><select type="text" name="Product_class">
+									<option>請選擇商品種類</option>
+									<option>手槍</option>
+									<option>步槍</option>
+									<option>衝鋒槍</option>
+									<option>狙擊槍</option>
+									<option>霰彈槍</option>
+									<option>配件</option>
+									<option>服裝</option>
 							</select></td>
 							<!-- <td><input type="text" name="product_class"
 								value="${product.product_class}" /></td> -->

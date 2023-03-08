@@ -1985,9 +1985,9 @@
                                         <ul id="menu-content2" class="menu-content collapse show">
                                             <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#clothing">
-                                                <a href="#">槍枝</a>
+                                                <a class="Catagories_title" href="#">槍枝</a>
                                                 <ul class="sub-menu collapse show" id="clothing">
-                                                    <li><a href="#">全部</a></li>
+                                                    <li><a class="Catagories_title_inner_block" href="#">全部</a></li>
                                                     <li><a href="#">Bodysuits</a></li>
                                                     <li><a href="#">Dresses</a></li>
                                                     <li><a href="#">Hoodies &amp; Sweats</a></li>
@@ -2633,11 +2633,13 @@
                 });
 
                 // 左邊sidebar縮和
-                $("a.link_title").on("click", function (e) {
+                $(".Catagories_title a").on("click", function (e) {
                     e.preventDefault();
                     $(this).closest("li").toggleClass("-on");
-                    $(this).closest("li").find("div.sub-menu collapse show").slideToggle();
+                    $(this).closest("li").find(".Catagories_title_inner_block a").slideToggle();
                 });
+            
+
 
             })(jQuery);
         </script>
