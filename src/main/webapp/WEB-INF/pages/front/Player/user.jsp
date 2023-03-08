@@ -22,14 +22,17 @@
 				<tr>
 					<td>玩家名稱：</td>
 					<td><form:input type="text" path="name" /></td>
+					<td><form:errors path="name" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>帳號：</td>
 					<td><form:input type="text" path="account" /></td>
+					<td><form:errors path="account" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>密碼：</td>
 					<td><form:input type="password" path="password" /></td>
+					<td><form:errors path="password" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>暱稱：</td>
@@ -44,39 +47,48 @@
 					<td>縣市:</td>
 					<td class="twzipcode"><form:select data-role="county"
 							name="county" path="county">
-							<option data-value="county">縣市</option>
+							<option data-value="county">縣市</option>							
 						</form:select> <form:select data-role="district" name="district" path="district">
 							<option data-value="district">鄉鎮市區</option>
 						</form:select> <input type="text" data-role="zipcode" placeholder="郵遞區號"
 						name="zipcode"></td>
+						<td><form:errors path="district" cssClass="error" /></td> 
+					<td><form:errors path="county" cssClass="error" /></td>
 				</tr>
 				<tr>
 					<td>地址：</td>
 					<td><form:input type="text" path="address" /></td>
+					<td><form:errors path="address" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td>Email：</td>
-					<td><form:input type="text" path="email" /></td>
+					<td><form:input type="email" path="email" /></td>
+					<td><form:errors path="email" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td>年齡：</td>
 					<td><form:input type="text" path="age" /></td>
+					<td><form:errors path="age" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td>圖片:</td>
 					<td><form:input type="file" path="playerImage" />
+				
 				</tr>
 				<tr>
 					<td>個人身分證：</td>
 					<td><form:input type="text" path="identity_number" /></td>
+					<td><form:errors path="identity_number" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td>電話：</td>
 					<td><form:input type="text" path="phone" /></td>
+					<td><form:errors path="phone" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td>生日：</td>
 					<td><form:input type="date" path="birthday" /></td>
+					<td><form:errors path="birthday" cssClass="error" /></td> 
 				</tr>
 				<tr>
 					<td><form:input type="hidden" path="banned" /></td>
@@ -109,7 +121,7 @@
 		const phone = $("input[name='phone']");
 		const birthday = $("input[name='birthday']");
 		const register_oneclick = document.querySelector("#register-oneclick");
-		register_oneclick.addEventListener("click", function (e) {
+		register_oneclick.addEventListener("click", function(e) {
 			e.preventDefault();
 			fillForm();
 		});

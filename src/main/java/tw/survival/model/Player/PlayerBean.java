@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -48,33 +49,36 @@ public class PlayerBean {
 	@Column(name = "id")
 	private Integer id;
 
+
 	@Column(name = "name")
 	private String name;
 
+	@NotBlank()
 	@Column(name = "account")
 	private String account;
 
+	@NotBlank()
 	@Column(name = "password")
 	private String password;
-
+	
 	@Column(name = "identity_number")
 	private String identity_number;
-
+	
 	@Column(name = "nickname")
 	private String nickname;
-
+	
 	@Column(name = "email")
 	private String email;
-
+	
 	@Column(name = "age")
 	private Integer age;
-
+    
 	@Column(name = "county")
 	private String county;
 
 	@Column(name = "district")
 	private String district;
-
+	
 	@Column(name = "address")
 	private String address;
 
