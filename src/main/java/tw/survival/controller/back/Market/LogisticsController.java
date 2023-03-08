@@ -36,9 +36,9 @@ public class LogisticsController {
 
 	// 新增物流資料
 	@ResponseBody
-	@PostMapping("/Market/addLogistics")
+	@PostMapping("Market/addLogistics")
 	public String addLogistics(@RequestParam("start_date") Date start_date,
-			@RequestParam("arrive_date") Date arrive_date, @RequestParam("Logistics_status") String status)
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status)
 			throws IOException {
 
 		LogisticsBean lb = new LogisticsBean();
@@ -48,7 +48,7 @@ public class LogisticsController {
 
 		LogisticsService.insertLogistics(lb);
 
-		return "新增成功";
+		return "上傳成功 <meta http-equiv=\"refresh\" content=\"2; url=http://localhost:8080/Survival/Market/all_Logistics\">";
 	}
 
 	// 讀取全部物流
