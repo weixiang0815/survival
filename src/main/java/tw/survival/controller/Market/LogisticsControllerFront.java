@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.OrderItemBean;
@@ -20,28 +21,6 @@ public class LogisticsControllerFront {
 
 	@Autowired
 	private OrderItemService oService;
-
-//	@GetMapping("/Market/add_Logistics")
-//	private String Logistics() {
-//		return "/back/Market/add_Logistics";
-//	}
-
-	// c
-//	@ResponseBody
-//	@PostMapping("/Market/addLogistics")
-//	public String addLogistics(@RequestParam("start_date") Date start_date,
-//			@RequestParam("arrive_date") Date arrive_date, @RequestParam("Logistics_status") String status)
-//			throws IOException {
-//
-//		LogisticsBean lb = new LogisticsBean();
-//		lb.setStart_date(start_date);
-//		lb.setArrive_date(arrive_date);
-//		lb.setStatus(status);
-//
-//		LogisticsService.insertLogistics(lb);
-//
-//		return "新增成功";
-//	}
 
 	// r
 	@GetMapping("/front/Market/logistics")
