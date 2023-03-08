@@ -1,4 +1,4 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.global;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
