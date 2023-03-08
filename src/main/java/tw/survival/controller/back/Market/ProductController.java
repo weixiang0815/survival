@@ -151,13 +151,8 @@ public class ProductController {
 		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
-<<<<<<< HEAD
 	}	
 	
-=======
-	}
-
->>>>>>> 7dac1bb7ff3e3e8ec6ad34fc1e5e86765144f730
 	@ResponseBody
 	@GetMapping("Market/multicondition")
 	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,

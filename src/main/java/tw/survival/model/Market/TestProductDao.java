@@ -17,12 +17,8 @@ public class TestProductDao {
 	@PersistenceContext
 	private EntityManager em; // Hibernate的 session
 
-<<<<<<< HEAD
-	// 多條件查詢商品名、類型、介紹
-=======
 	// 多條件查詢
 	@SuppressWarnings("null")
->>>>>>> 7dac1bb7ff3e3e8ec6ad34fc1e5e86765144f730
 	public List<ProductBean> findProductText2(String name, String[] productclass, String context) {
 		StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE ");
 		boolean flag1 = name != null && !name.contentEquals("");
