@@ -17,7 +17,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
  * @Aspect 標註為一個切面程式，用來達成「橫切關注」（cross-cutting concerns）功能的其中之一。<br>
- *         例如：日誌記錄、安全性、事務管理、緩存、性能優化等。<br>
+ *         例如：日誌記錄、安全性、事務管理、快取、性能優化等。<br>
  *         這些功能與系統的主要業務邏輯通常是分離的，但是它們又必須被整個系統所使用。<br>
  *         建議與 @Controller 分開，因此以下程式用不到 @Controller 注釋。
  */

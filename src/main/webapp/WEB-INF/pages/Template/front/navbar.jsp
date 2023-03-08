@@ -31,8 +31,7 @@
 							<a href="${contextRoot}/front/competition" class="dropdown-item">活動</a>
 							<a href="${contextRoot}/front/place/index" class="dropdown-item">場地</a> <a
 								href="${contextRoot}/front/Market/index" class="dropdown-item">赫赫商城</a> <a
-								href="${contextRoot}/front/Forum/index" class="dropdown-item">論壇</a> <a
-								href="${contextRoot}/404page" class="dropdown-item">404</a>
+								href="${contextRoot}/front/Forum/index" class="dropdown-item">論壇</a>
 						</div>
 					</div>
 					<div class="nav-item dropdown">
