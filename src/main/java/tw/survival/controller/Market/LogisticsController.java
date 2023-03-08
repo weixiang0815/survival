@@ -34,7 +34,7 @@ public class LogisticsController {
 		return "/back/Market/add_Logistics";
 	}
 
-	// c
+	// 新增物流資料
 	@ResponseBody
 	@PostMapping("/Market/addLogistics")
 	public String addLogistics(@RequestParam("start_date") Date start_date,
@@ -51,7 +51,7 @@ public class LogisticsController {
 		return "新增成功";
 	}
 
-	// r
+	// 讀取全部物流
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
 		List<OrderItemBean> orderList = oService.findAllOrderItem();
