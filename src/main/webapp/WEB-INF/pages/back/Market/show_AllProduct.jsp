@@ -60,13 +60,13 @@
       <td>${show_AllProduct.rent_fee}</td>
       <td>${show_AllProduct.price}</td>
       <td>
-        <form action="${contextRoot}/Market/edit" method="get">
+        <form action="${contextRoot}/back/Market/edit" method="get">
           <input name="id" type="hidden" value="${show_AllProduct.id}" />
           <input type="submit" class="btn btn-info btn-sm" value="編輯" />
         </form>
       </td>
       <td>
-        <form action="${contextRoot}/Market/delete" method="post">
+        <form action="${contextRoot}/back/Market/delete" method="post">
           <input name="_method" type="hidden" value="delete" />
           <input name="id" type="hidden" value="${show_AllProduct.id}" />
           <input type="submit" class="btn btn-danger btn-sm" value="刪除" />

@@ -1,4 +1,4 @@
-package tw.survival.controller.back.Market;
+package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -39,7 +40,7 @@ public class ProductController {
 	private TestProductDao TestDao;
 
 	@GetMapping("/Market/add_Product")
-	private String uploadPage() {
+	private String add_Product() {
 		return "/back/Market/add_Product";
 	}
 
@@ -102,11 +103,11 @@ public class ProductController {
 	public String editProductPage(@RequestParam("id") Integer id, Model model) {
 		ProductBean p1 = productService.findById(id);
 		model.addAttribute("product", p1);
-		return "back/Market/editProduct";
+		return "/back/Market/editProduct";
 	}
 
 	// 修改商品
-	@PostMapping("/back/Market/edit")
+	@PostMapping("/Market/editProduct")
 	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
 			@RequestParam("img") MultipartFile img, @RequestParam("product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
@@ -117,7 +118,7 @@ public class ProductController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/back/Market/allProduct";
+		return "back/Market/show_AllProduct";
 	}
 
 	// 刪除商品
@@ -128,19 +129,19 @@ public class ProductController {
 	}
 
 	// 模糊搜尋商品
-	@PostMapping("/Market/productNameLike")
+	@GetMapping("/Market/productNameLike")
 	public String findProductLike(@RequestParam("Search") String name, Model model) {
 		List<ProductBean> searchResult = productService.findByName(name);
 		model.addAttribute("SearchResult", searchResult);
-		return "Market/searchResult";
+		return "front/Market/searchResult";
 	}
 
 //	 搜尋類型商品>>ProductRepository>>findProductClassLike
-	@GetMapping("/Market/productIn")
+	@GetMapping("/Market/findProductClassLike")
 	public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
 		List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
 		model.addAttribute("SearchResult2", searchResult);
-		return "Market/searchResult2";
+		return "front/Market/searchResult2";
 	}
 
 	// 測試後可行的多條件
@@ -153,6 +154,7 @@ public class ProductController {
 		return "/back/Market/searchResult2";
 	}
 
+	//多條件測試
 	@ResponseBody
 	@GetMapping("Market/multicondition")
 	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,
