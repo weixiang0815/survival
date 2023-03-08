@@ -121,7 +121,7 @@ public class ProductController {
 	}
 
 	// 刪除商品
-	@DeleteMapping("/Market/delete")
+	@DeleteMapping("back/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
 		productService.deleteById(id);
 		return "redirect:/Market/allProduct";

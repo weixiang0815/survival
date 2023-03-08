@@ -12,7 +12,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
             <meta charset="UTF-8">
-            <title>赫赫商城</title>
+            <title>戰略商城</title>
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
 
@@ -1971,7 +1971,7 @@
             <!-- Page Header Start -->
             <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
                 <div class="container text-center py-5">
-                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">赫赫商城</h1>
+                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">戰略商城</h1>
                     <nav aria-label="breadcrumb animated slideInDown">
                         <ol class="breadcrumb justify-content-center text-uppercase mb-0">
                             <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
