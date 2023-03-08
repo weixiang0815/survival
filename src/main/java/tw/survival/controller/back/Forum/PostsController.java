@@ -1,4 +1,4 @@
-package tw.survival.controller.Forum;
+package tw.survival.controller.back.Forum;
 
 import java.util.Date;
 import java.util.List;
@@ -26,7 +26,7 @@ import tw.survival.service.Player.PlayerService;
 //@RequestMapping()  統括/post 假如以下所有的Api路徑前都有"/post"字串可以寫在它裡面
 public class PostsController {
 
-	private PostsService pService;
+	private PostsService postsService;
 
 	private CompetitionService competitionService;
 
@@ -35,8 +35,14 @@ public class PostsController {
 	private PlayerService playerService;
 
 //	@Autowired //若是只有一個建構子，SpringBoot會自動加入Autowired功能。
-	public PostsController(PostsService pService) {
-		this.pService = pService;
+	public PostsController(PostsService postsService, 
+			CompetitionService competitionService,  
+			EmployeeService employeeService,
+			PlayerService playerService) {
+		this.postsService = postsService;
+		this.competitionService = competitionService;
+		this.employeeService = employeeService;
+		this.playerService = playerService;	
 	}
 
 	@ModelAttribute
@@ -60,7 +66,7 @@ public class PostsController {
 	@PostMapping("/posts/post")
 	public String insertPost(@ModelAttribute PostsBean post, Model model) {
 
-		pService.insertPost(post);
+		postsService.insertPost(post);
 
 		PostsBean newPost = new PostsBean();
 		model.addAttribute("PostsBean", newPost);
@@ -70,26 +76,26 @@ public class PostsController {
 
 	@GetMapping("/posts/getAll")
 	public String showAllPosts(Model model) {
-		List<PostsBean> postList = pService.getAllPosts1();
+		List<PostsBean> postList = postsService.getAllPosts1();
 		model.addAttribute("List", postList);
 		return "back/Forum/showPostsPage";
 	}
 
 	@DeleteMapping("/post/edit")
 	public String deletePost(@Param("id") Integer id) {
-		pService.deletePost(id);
+		postsService.deletePost(id);
 		return "redirect:/posts/getAll";
 	}
 
 	@DeleteMapping("/post/delete")
 	public String deletePost1(@Param("id") Integer id) {
-		pService.deletePost(id);
+		postsService.deletePost(id);
 		return "redirect:/posts/getAll";
 	}
 
 	@GetMapping("/post/edit")
 	public String postEditPage(@RequestParam("id") Integer id, Model model) {
-		PostsBean post = pService.findPostById(id);
+		PostsBean post = postsService.findPostById(id);
 		model.addAttribute("postsBean", post);
 		return "back/Forum/editPostPage";
 	}
@@ -100,7 +106,7 @@ public class PostsController {
 
 		editPost.setFinalAdded(new Date());
 
-		pService.updatePost(editPost);
+		postsService.updatePost(editPost);
 		return "redirect:/posts/getAll";
 	}
 

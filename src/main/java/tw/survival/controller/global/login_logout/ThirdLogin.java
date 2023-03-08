@@ -1,4 +1,4 @@
-package tw.survival.controller.login_logout;
+package tw.survival.controller.global.login_logout;
 
 import java.io.IOException;
 import java.net.URLEncoder;

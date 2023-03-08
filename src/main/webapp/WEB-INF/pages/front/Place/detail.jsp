@@ -28,7 +28,7 @@
 				<tr>
 					<td class="col-5"><img alt=""
 						src="${contextRoot}/front/place/id?id=${frontplace.id}" width="100%"></td>
-					<td>${frontplace.place_name}</td>
+					<td class="col-1">${frontplace.place_name}</td>
 					<td>${frontplace.place_address}</td>
 					<td>${frontplace.place_fee} 元</td>
 					<td>${frontplace.place_capacity} 人</td>

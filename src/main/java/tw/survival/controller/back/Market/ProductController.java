@@ -1,4 +1,4 @@
-package tw.survival.controller.Market;
+package tw.survival.controller.back.Market;
 
 import java.io.IOException;
 import java.util.Base64;
@@ -151,8 +151,8 @@ public class ProductController {
 		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
-	}
-
+	}	
+	
 	@ResponseBody
 	@GetMapping("Market/multicondition")
 	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,

@@ -1,4 +1,4 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.back.Competition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

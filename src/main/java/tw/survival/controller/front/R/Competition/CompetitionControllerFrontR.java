@@ -1,4 +1,4 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.front.R.Competition;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +14,7 @@ import tw.survival.service.Competition.CompetitionService;
 @Controller
 @RequestMapping("/front")
 @SessionAttributes({ "player", "employee" })
-public class CompetitionControllerFront {
+public class CompetitionControllerFrontR {
 
 	@Autowired
 	private CompetitionService compService;

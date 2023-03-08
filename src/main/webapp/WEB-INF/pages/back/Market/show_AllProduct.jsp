@@ -29,9 +29,13 @@
   
   <input type="checkbox" id="vehicle5" name="product_class" value="霰彈槍">
   <label for="vehicle3"> 霰彈槍</label><br>
+  
+   <input type="checkbox" id="vehicle5" name="product_class" value="霰彈槍">
+  <label for="vehicle3"> 霰彈槍</label><br>
 
   <input type="submit" value="submit">
 </form>
+
 
 <!-- 改成用直接打勾就可以搜尋，要用監聽去看打勾選項與否的動作 -->
 

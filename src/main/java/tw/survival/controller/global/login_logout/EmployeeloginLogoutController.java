@@ -1,4 +1,4 @@
-package tw.survival.controller.login_logout;
+package tw.survival.controller.global.login_logout;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class EmployeeloginLogoutController {
 		EmployeeBean emp = service.loginEmp(account, password);
 		if (emp != null) {
 			m.addAttribute("employee", emp);
-			return "redirect:/";
+			return "redirect:/admin";
 		} else {
 			err.put("msg", "帳號密碼不正確");
 			m.addAttribute("errors", err);
@@ -49,4 +49,5 @@ public class EmployeeloginLogoutController {
 		status.setComplete();
 		return "redirect:/Employee/login";
 	}
+
 }

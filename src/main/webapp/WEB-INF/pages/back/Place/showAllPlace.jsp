@@ -28,10 +28,10 @@
 				<tr>
 					<td class="col-5"><img alt=""
 						src="${contextRoot}/place/id?id=${onePlace.id}" width="100%"></td>
-					<td>${onePlace.place_name}</td>
-					<td>${onePlace.place_address}</td>
-					<td>${onePlace.place_fee} 元</td>
-					<td>${onePlace.place_capacity} 人</td>
+					<td class="col-1">${onePlace.place_name}</td>
+					<td class="col-3">${onePlace.place_address}</td>
+					<td class="col-1">${onePlace.place_fee} 元</td>
+					<td class="col-1">${onePlace.place_capacity} 人</td>
 					<td>
 						<form action="${contextRoot}/place/edit" method="get">
 							<input name="id" type="hidden" value="${onePlace.id}" /> <input
