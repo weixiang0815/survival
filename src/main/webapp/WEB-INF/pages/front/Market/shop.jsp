@@ -1988,7 +1988,7 @@
                                                 <a class="collapse" href="#">槍枝</a>
                                                 <ul class="sub-menu collapse show" id="clothing">
                                                     <li><a class="Catagories_title_inner_block" href="#">全部</a></li>
-                                                    <li><a href="#">手槍</a></li>
+                                                    <li><a href="${contextRoot}/front/Market/Text">手槍</a></li>
                                                     <li><a href="#">步槍</a></li>
                                                     <li><a href="#">衝鋒槍</a></li>
                                                     <li><a href="#">狙擊槍</a></li>
