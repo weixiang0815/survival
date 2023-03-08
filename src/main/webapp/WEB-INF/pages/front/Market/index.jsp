@@ -13,14 +13,13 @@
             <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
             <meta charset="UTF-8">
             <title>赫赫商城</title>
-
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
 
             <!-- Core Style CSS -->
             <link rel="stylesheet" href="css/core-style.css">
             <link rel="stylesheet" href="style.css">
-
+			
             <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
         </head>
 
@@ -2013,7 +2012,7 @@
                             <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
                                 style="background-image: url(${contextRoot}/img/bg-img/bg-2.jpg);">
                                 <div class="catagory-content">
-                                    <a href="#">槍枝</a>
+                                    <a href="${contextRoot}/Market/findProductClassLike?product_class=槍">槍枝</a>
                                 </div>
                             </div>
                         </div>
@@ -2022,7 +2021,7 @@
                             <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
                                 style="background-image: url(${contextRoot}/img/bg-img/bg-3.jpg);">
                                 <div class="catagory-content">
-                                    <a href="#">配件</a>
+                                    <a href="${contextRoot}/Market/findProductClassLike?product_class=配">配件</a>
                                 </div>
                             </div>
                         </div>
@@ -2031,7 +2030,7 @@
                             <div class="single_catagory_area d-flex align-items-center justify-content-center bg-img"
                                 style="background-image: url(${contextRoot}/img/bg-img/bg-4.jpg);">
                                 <div class="catagory-content">
-                                    <a href="#">服裝</a>
+                                    <a href="${contextRoot}/Market/findProductClassLike?product_class=服">服裝</a>
                                 </div>
                             </div>
                         </div>
@@ -2051,7 +2050,7 @@
                                     <div class="cta--text">
                                         <h6>-30%</h6>
                                         <h2 style="color: azure;">全球折扣</h2>
-                                        <a href="#" class="btn essence-btn" style="font-size:2em">立即購買</a>
+                                        <a href="${contextRoot}/front/Market/shop" class="btn essence-btn" style="font-size:2em">立即購買</a>
                                     </div>
                                 </div>
                             </div>

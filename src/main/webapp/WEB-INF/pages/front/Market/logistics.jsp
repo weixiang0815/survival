@@ -10,29 +10,86 @@
 <head>
 <meta charset="UTF-8">
 <title>訂單詳情</title>
+ <link rel="stylesheet" href="style.css">
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style type="text/css">
-	*{
+
+* {
 	margin: 0;
 	padding: 0;
 	List-style: none;
-	}
-	.step{
-		width: 500px;
-		margin: 100px auto;
-		out
-	}
+}
+
+.step {
+	width: 500px;
+	margin: 100px auto;
+	out
+}
+
 ul#comp-link>li {
 	list-style-type: none;
 }
-</style>
+
+ul li {
+	list-style: none;
+}
+
+.list {
+	width:100%;
+	display: flex;
+	justify-content: center;
+}
+
+.list li{
+	font-family: 'Noto Sans TC', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	width: 100px;
+	height: 100px;
+	background-image: linear-gradient(9deg,#185a9d,#43cea2);
+	border-radius: 50%;
+	position: relative;
+	font-size: 20px;
+	color: #fff;
+	box-shadow: 0px 0px 0px 4px #fff;
+}
+.list li .fa{
+	font-size: 20px;
+	margin-bottom: 6px;
+}
+.list li + li{
+	margin-Left: 100px;
+}
+
+.list li + li::before{
+	content: '';
+	position: absolute;
+	width: 100px;
+	height: 5px;
+	background-color: #43cea2;
+	z-index:-1;
+	box-shadow: 0px 0px 0px 5px #fff;
+	top: 0;
+	bottom: 0;
+	left: -100px;
+	margin: auto;
+}
+.list li.active ~ li{
+	background-image: linear-gradient(9deg,#999,#ccc);
+}
+.list li.active ~ li::before{
+	background-color: #999;
+}
+</style> 
+
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-
+ 
 	<div class="container">
 		<h1>產品物流</h1>
-
 		<table class="table table-hover table-bordered">
 			<tr>
 				<th>訂單ID</th>
@@ -48,28 +105,23 @@ ul#comp-link>li {
 					<td>${show.status}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table><br><br>
 		<table class="table table-hover table-bordered">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>起始日期</th>
-					<th>到貨日期</th>
-					<th>狀態</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<jstl:forEach items="${list}" var="Logistics">
-					<tr>
-						<td>${Logistics.id}</td>
-						<td><fmt:formatDate pattern="yyyy/MM/dd"
-								value="${Logistics.start_date}" /></td>
-						<td><fmt:formatDate pattern="yyyy/MM/dd"
-								value="${Logistics.arrive_date}" /></td>
-						<td>${Logistics.status}</td>
-					</tr>
-				</jstl:forEach>
+	
+				<ol class="list">
+				<li class="active">
+					<i class="fa fa-file-text" aria-hidden="true"></i>收到訂單
+					</li>
+				<li>	
+					<i class="fa fa-archive" aria-hidden="true"></i>處理中
+				</li>
+				<li>
+					<i class="fa fa-truck" aria-hidden="true"></i>已出貨
+				</li>
+				<li>
+					<i class="fa fa-check-circle" aria-hidden="true"></i> 已送達
+				</li>
+				</ol>
 		</table>
 	</div>
 

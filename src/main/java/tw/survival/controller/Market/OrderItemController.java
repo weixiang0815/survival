@@ -1,4 +1,4 @@
-package tw.survival.controller.back.Market;
+package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class OrderItemController {
 
 //	OrderItemRepository
 
-		return "上傳成功 <meta http-equiv=\"refresh\" content=\"2; url=http://localhost:8080/Survival/Market/all_Logistics\">";
+		return "上傳成功 <meta http-equiv=\"refresh\" content=\"0.1; url=http://localhost:8080/Survival/Market/all_Logistics\">";
 		
 	}
 
