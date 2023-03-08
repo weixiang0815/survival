@@ -10,8 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>訂單詳情</title>
+ <link rel="stylesheet" href="style.css">
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style type="text/css">
+
 * {
 	margin: 0;
 	padding: 0;
@@ -46,12 +48,17 @@ ul li {
 	text-align: center;
 	width: 100px;
 	height: 100px;
-	background-color: #fff;
+	background-image: linear-gradient(9deg,#185a9d,#43cea2);
 	border-radius: 50%;
 	position: relative;
 	font-size: 20px;
+	color: #fff;
+	box-shadow: 0px 0px 0px 4px #fff;
 }
-
+.list li .fa{
+	font-size: 20px;
+	margin-bottom: 6px;
+}
 .list li + li{
 	margin-Left: 100px;
 }
@@ -61,21 +68,28 @@ ul li {
 	position: absolute;
 	width: 100px;
 	height: 5px;
-	background-color: #fff;
+	background-color: #43cea2;
+	z-index:-1;
+	box-shadow: 0px 0px 0px 5px #fff;
 	top: 0;
 	bottom: 0;
 	left: -100px;
 	margin: auto;
 }
+.list li.active ~ li{
+	background-image: linear-gradient(9deg,#999,#ccc);
+}
+.list li.active ~ li::before{
+	background-color: #999;
+}
+</style> 
 
-</style>
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-
+ 
 	<div class="container">
 		<h1>產品物流</h1>
-
 		<table class="table table-hover table-bordered">
 			<tr>
 				<th>訂單ID</th>
@@ -91,20 +105,11 @@ ul li {
 					<td>${show.status}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table><br><br>
 		<table class="table table-hover table-bordered">
-	<!-- 		<thead>
-				<tr>
-					<th>ID</th>
-					<th>起始日期</th>
-					<th>到貨日期</th>
-					<th>狀態</th>
-				</tr>
-			</thead>
- -->
-			<tbody>
+	
 				<ol class="list">
-				<li>
+				<li class="active">
 					<i class="fa fa-file-text" aria-hidden="true"></i>收到訂單
 					</li>
 				<li>	
@@ -117,17 +122,6 @@ ul li {
 					<i class="fa fa-check-circle" aria-hidden="true"></i> 已送達
 				</li>
 				</ol>
-				<!--<jstl:forEach items="${list}" var="Logistics">
-					<tr>
-						<td>${Logistics.id}</td>
-						<td><fmt:formatDate pattern="yyyy/MM/dd"
-								value="${Logistics.start_date}" /></td>
-						<td><fmt:formatDate pattern="yyyy/MM/dd"
-								value="${Logistics.arrive_date}" /></td>
-						<td>${Logistics.status}</td>
-					</tr>
-				</jstl:forEach>
-				-->
 		</table>
 	</div>
 
