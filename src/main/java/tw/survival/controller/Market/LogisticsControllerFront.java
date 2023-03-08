@@ -1,4 +1,4 @@
-package tw.survival.controller.front.CUD.Market;
+package tw.survival.controller.Market;
 
 import java.util.List;
 

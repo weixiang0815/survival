@@ -39,7 +39,6 @@
 				<div class="carousel-item">
 					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
 						<source src="${contextRoot}/videos/war-16391.mp4" type="video/mp4">
-						Your browser does not support the video tag.
 					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">

@@ -12,19 +12,62 @@
 <title>訂單詳情</title>
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style type="text/css">
-	*{
+* {
 	margin: 0;
 	padding: 0;
 	List-style: none;
-	}
-	.step{
-		width: 500px;
-		margin: 100px auto;
-		out
-	}
+}
+
+.step {
+	width: 500px;
+	margin: 100px auto;
+	out
+}
+
 ul#comp-link>li {
 	list-style-type: none;
 }
+
+ul li {
+	list-style: none;
+}
+
+.list {
+	width:100%;
+	display: flex;
+	justify-content: center;
+}
+
+.list li{
+	font-family: 'Noto Sans TC', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	width: 100px;
+	height: 100px;
+	background-color: #fff;
+	border-radius: 50%;
+	position: relative;
+	font-size: 20px;
+}
+
+.list li + li{
+	margin-Left: 100px;
+}
+
+.list li + li::before{
+	content: '';
+	position: absolute;
+	width: 100px;
+	height: 5px;
+	background-color: #fff;
+	top: 0;
+	bottom: 0;
+	left: -100px;
+	margin: auto;
+}
+
 </style>
 </head>
 <body>
@@ -50,7 +93,7 @@ ul#comp-link>li {
 			</c:forEach>
 		</table>
 		<table class="table table-hover table-bordered">
-			<thead>
+	<!-- 		<thead>
 				<tr>
 					<th>ID</th>
 					<th>起始日期</th>
@@ -58,9 +101,23 @@ ul#comp-link>li {
 					<th>狀態</th>
 				</tr>
 			</thead>
-			
+ -->
 			<tbody>
-				<jstl:forEach items="${list}" var="Logistics">
+				<ol class="list">
+				<li>
+					<i class="fa fa-file-text" aria-hidden="true"></i>收到訂單
+					</li>
+				<li>	
+					<i class="fa fa-archive" aria-hidden="true"></i>處理中
+				</li>
+				<li>
+					<i class="fa fa-truck" aria-hidden="true"></i>已出貨
+				</li>
+				<li>
+					<i class="fa fa-check-circle" aria-hidden="true"></i> 已送達
+				</li>
+				</ol>
+				<!--<jstl:forEach items="${list}" var="Logistics">
 					<tr>
 						<td>${Logistics.id}</td>
 						<td><fmt:formatDate pattern="yyyy/MM/dd"
@@ -70,6 +127,7 @@ ul#comp-link>li {
 						<td>${Logistics.status}</td>
 					</tr>
 				</jstl:forEach>
+				-->
 		</table>
 	</div>
 

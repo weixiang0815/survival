@@ -48,7 +48,7 @@ public class LogisticsController {
 
 		LogisticsService.insertLogistics(lb);
 
-		return "上傳成功 <meta http-equiv=\"refresh\" content=\"2; url=http://localhost:8080/Survival/Market/all_Logistics\">";
+		return "上傳成功 <meta http-equiv=\"refresh\" content=\"0.1; url=http://localhost:8080/Survival/Market/all_Logistics\">";
 	}
 
 	// 讀取全部物流

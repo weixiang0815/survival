@@ -28,9 +28,9 @@
 			<jstl:forEach items="${list}" var="Logistics">
 				<tr>
 					<td>${Logistics.id}</td>
-					<td><fmt:formatDate pattern="yyyy/MM/dd"
+					<td><fmt:formatDate pattern="yyyy/MM/dd "
 							value="${Logistics.start_date}" /></td>
-					<td><fmt:formatDate pattern="yyyy/MM/dd"
+					<td><fmt:formatDate pattern="yyyy/MM/dd "
 							value="${Logistics.arrive_date}" /></td>
 					<td>${Logistics.status}</td>
 					<td><form action="${contextRoot}/Market/editLogistics"
