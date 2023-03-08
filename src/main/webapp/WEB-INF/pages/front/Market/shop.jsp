@@ -9,7 +9,7 @@
             <meta name="description" content="">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <title>歡迎蒞臨赫赫商城</title>
+            <title>歡迎蒞臨戰略商城</title>
 
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
@@ -1965,7 +1965,7 @@
             <jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 
             <div class="container text-center">
-                <h1>商品</h1>
+                <h1>戰略商城</h1>
             </div>
             <!---------------------------------------------------------------------------------------------------------->
             <!-- ##### Shop Grid Area Start ##### -->
@@ -1985,53 +1985,59 @@
                                         <ul id="menu-content2" class="menu-content collapse show">
                                             <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#clothing">
-                                                <a class="Catagories_title" href="#">槍枝</a>
+                                                <a class="collapse" href="#">槍枝</a>
                                                 <ul class="sub-menu collapse show" id="clothing">
                                                     <li><a class="Catagories_title_inner_block" href="#">全部</a></li>
-                                                    <li><a href="#">Bodysuits</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                                    <li><a href="#">Jackets &amp; Coats</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">Pants &amp; Leggings</a></li>
-                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                    <li><a href="#">手槍</a></li>
+                                                    <li><a href="#">步槍</a></li>
+                                                    <li><a href="#">衝鋒槍</a></li>
+                                                    <li><a href="#">狙擊槍</a></li>
+                                                    <li><a href="#">霰彈槍</a></li>
                                                 </ul>
                                             </li>
+
+
+                                            <li class="nav-item"><a data-bs-parent="#sidebarMenu"
+                                                    data-bs-toggle="collapse" class="nav-link"
+                                                    href="#submenu-competition"> <i
+                                                        class="bi bi-card-checklist"></i>&nbsp;&nbsp;活動系統
+                                                </a>
+                                                <ul class="collapse" id="submenu-competition">
+                                                    <li><a href="${contextRoot}/competition/new"
+                                                            class="nav-link">新增活動</a></li>
+                                                    <li><a href="${contextRoot}/competition/search/result"
+                                                            class="nav-link">查詢活動</a></li>
+                                                    <li><a href="${contextRoot}/competition/signup"
+                                                            class="nav-link">新增報名</a></li>
+                                                    <li><a href="${contextRoot}/competition/signup/search/result"
+                                                            class="nav-link">查詢報名</a></li>
+                                                </ul>
+                                            </li>
+
+
                                             <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#shoes" class="collapsed">
                                                 <a href="#" class="link_title">配件</a>
                                                 <ul class="sub-menu collapse show" id="shoes">
-                                                    <li><a href="#">All</a></li>
-                                                    <li><a href="#">Bodysuits</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                                    <li><a href="#">Jackets &amp; Coats</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">Pants &amp; Leggings</a></li>
-                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                    <li><a href="#">全部</a></li>
+                                                    <li><a href="#">倍鏡</a></li>
+                                                    <li><a href="#">彈夾</a></li>
+                                                    <li><a href="#">消音器</a></li>
+                                                    <li><a href="#">手電筒</a></li>
+                                                    <li><a href="#">雷射瞄準器</a></li>
                                                 </ul>
                                             </li>
                                             <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#accessories" class="collapsed">
                                                 <a href="#">服飾</a>
                                                 <ul class="sub-menu collapse show" id="accessories">
-                                                    <li><a href="#">All</a></li>
-                                                    <li><a href="#">Bodysuits</a></li>
-                                                    <li><a href="#">Dresses</a></li>
-                                                    <li><a href="#">Hoodies &amp; Sweats</a></li>
-                                                    <li><a href="#">Jackets &amp; Coats</a></li>
-                                                    <li><a href="#">Jeans</a></li>
-                                                    <li><a href="#">Pants &amp; Leggings</a></li>
-                                                    <li><a href="#">Rompers &amp; Jumpsuits</a></li>
-                                                    <li><a href="#">Shirts &amp; Blouses</a></li>
-                                                    <li><a href="#">Shirts</a></li>
-                                                    <li><a href="#">Sweaters &amp; Knits</a></li>
+                                                    <li><a href="#">全部</a></li>
+                                                    <li><a href="#">夏季</a></li>
+                                                    <li><a href="#">冬季</a></li>
+                                                    <li><a href="#">特種部隊</a></li>
+                                                    <li><a href="#">海軍</a></li>
+                                                    <li><a href="#">陸軍</a></li>
+                                                    <li><a href="#">空軍</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -2463,11 +2469,11 @@
 
 
             <!-- jQuery (Necessary for All JavaScript Plugins) -->
-            <script src="js/jquery/jquery-2.2.4.min.js"></script>
+            <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
             <!-- Popper js -->
             <script src="js/popper.min.js"></script>
             <!-- Bootstrap js -->
-            <script src="js/bootstrap.min.js"></script>
+            <!-- <script src="js/bootstrap.min.js"></script> -->
             <!-- Plugins js -->
             <script src="js/plugins.js"></script>
             <!-- Classy Nav js -->
@@ -2631,14 +2637,6 @@
                 $("a[href='#']").on('click', function ($) {
                     $.preventDefault();
                 });
-
-                // 左邊sidebar縮和
-                $(".Catagories_title a").on("click", function (e) {
-                    e.preventDefault();
-                    $(this).closest("li").toggleClass("-on");
-                    $(this).closest("li").find(".Catagories_title_inner_block a").slideToggle();
-                });
-            
 
 
             })(jQuery);
