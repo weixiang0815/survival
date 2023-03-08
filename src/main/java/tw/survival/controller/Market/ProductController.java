@@ -105,10 +105,11 @@ public class ProductController {
 		return "/back/Market/editProduct";
 	}
 
-	// 修改商品
+	// 修改商品 
 	@PostMapping("/Market/editProduct")
 	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
-			@RequestParam("img") MultipartFile img,@RequestParam("context") String context, @RequestParam("product_class") String product_class, @RequestParam("rent_fee") Integer rent_fee,
+			@RequestParam("img") MultipartFile img, @RequestParam("Product_class") String product_class,
+			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
 		try {
@@ -116,7 +117,7 @@ public class ProductController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "back/Market/show_AllProduct";
+		return "redirect:/Market/allProduct";
 	}
 
 	// 刪除商品
