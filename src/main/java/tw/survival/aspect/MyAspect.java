@@ -54,6 +54,13 @@ public class MyAspect {
 			response.sendRedirect(request.getContextPath() + "/Player/login");
 			return;
 		}
+		if(session ==null||session.getAttribute("employee")==null) {
+			System.out.println("權限不足，需要登入");
+			response.sendRedirect(request.getContextPath() + "/Employee/login");
+			return;
+		}else if(session!=null||session.getAttribute("employee")!=null){
+			response.sendRedirect(request.getContextPath()+"/Employee/index");
+		}
 	}
 
 }

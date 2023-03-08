@@ -32,7 +32,7 @@ public class PlayerLoginLogoutController {
 
 	@GetMapping("/Player/login")
 	public String login() {
-		return "back/Player/loginSystem";
+		return "front/Player/loginSystem";
 	}
 
 	@GetMapping("/Player/index")
@@ -44,19 +44,19 @@ public class PlayerLoginLogoutController {
 	}
 
 	@PostMapping("/Player/loginSystem")
-	public String checklog(@Valid@ModelAttribute PlayerBean player1,  @RequestParam("account") String account, @RequestParam("password") String password,
-			BindingResult bindingResult	,Model m) {
+	public String checklog(@Valid @ModelAttribute PlayerBean player1, @RequestParam("account") String account,
+			@RequestParam("password") String password, BindingResult bindingResult, Model m) {
 		PlayerBean player = service.login(account, password);
 		validator.validate(player1, bindingResult);
-        if(bindingResult.hasErrors()) {
-        	List<ObjectError> list = bindingResult.getAllErrors();
-        	m.addAttribute("alertMessage", "帳號密碼錯誤");
-        	m.addAttribute("errors",list);
-        	for(ObjectError error : list) {
-        		System.out.println("有錯誤：" + error);
-        	}
-        	return"back/Player/loginSystem";
-        }
+		if (bindingResult.hasErrors()) {
+			List<ObjectError> list = bindingResult.getAllErrors();
+			m.addAttribute("alertMessage", "帳號密碼錯誤");
+			m.addAttribute("errors", list);
+			for (ObjectError error : list) {
+				System.out.println("有錯誤：" + error);
+			}
+			return "back/Player/loginSystem";
+		}
 		if (player != null) {
 			m.addAttribute("player", player);
 			return "redirect:/";
