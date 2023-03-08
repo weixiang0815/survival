@@ -53,7 +53,7 @@ button:hover {
 					<label>玩家帳號：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="text" name="account" value="W3gdXeHw" />
+					<input type="text" name="account"  />
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -61,13 +61,14 @@ button:hover {
 					<label>玩家密碼：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="password" name="password" value="xxbytdzF" />
+					<input type="password" name="password"  />
 				</div>
 			</div>
 			<div class="row">
-				<div class="col">
+				<div class="col-6 text-end">
 					<input type="submit" value="登入" />
 				</div>
+				<div class="col-6 text-start"><button id="register-oneclick">一鍵填寫</button></div>
 			</div>
 		</form>
 		<div class="row mt-2">
@@ -78,6 +79,7 @@ button:hover {
 				<a href="${contextRoot}/player/add"><button>會員註冊</button></a>
 			</div>
 		</div>
+		
 		<div class="row mt-3 mb-3">
 			<c:forEach items="${errors}" var="error">
 				<div class="col-12 error">＊&nbsp;${error.defaultMessage}</div>
@@ -87,7 +89,17 @@ button:hover {
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 	<script>
-	const
+	const account = $("input[name='account']");
+	const password = $("input[name='password']");
+	const register_oneclick = document.querySelector("#register-oneclick");
+	register_oneclick.addEventListener("click", function(e) {
+		e.preventDefault();
+		fillForm();
+	});
+	function fillForm(){
+		account.val("W3gdXeHw");
+		password.val("xxbytdzF");
+	}
 	</script>
 </body>
 </html>
