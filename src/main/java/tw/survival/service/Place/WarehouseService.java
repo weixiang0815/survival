@@ -64,8 +64,7 @@ public class WarehouseService {
 			return wDAO.save(warehouseToUpdate);
 		}
 		return null;
-		
-		
+
 	}
 
 }

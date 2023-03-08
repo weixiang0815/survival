@@ -151,8 +151,13 @@ public class ProductController {
 		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
+<<<<<<< HEAD
 	}	
 	
+=======
+	}
+
+>>>>>>> 7dac1bb7ff3e3e8ec6ad34fc1e5e86765144f730
 	@ResponseBody
 	@GetMapping("Market/multicondition")
 	public List<ProductBean> multicondition(@RequestParam(name = "name", defaultValue = "") String name,
@@ -171,10 +176,20 @@ public class ProductController {
 			String imageData = Base64.getEncoder().encodeToString(product.getImg());
 			imageMap.put("imageData", imageData);
 		}
+
 		return imageMap;
 	}
 
-	// 多條件搜尋商品
+//	// 簡易多條件搜尋商品 未測試
+//	@GetMapping("/Market/productIn2")
+//	public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
+//			@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
+//			@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
+//		List<ProductBean> searchResult = productDao.find(name,productclass,context);
+//		model.addAttribute("SearchResult2", searchResult);
+//		return "Market/searchResult2";
+//	}
+
 //	@ResponseBody
 //	@GetMapping("/Market/productFindByproductclassIn")
 //	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {

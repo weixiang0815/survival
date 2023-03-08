@@ -31,10 +31,11 @@
 			</div>
 			<div class="col-lg-4 col-md-6">
 				<h4 class="text-uppercase mb-4">快速連結</h4>
-				<a class="btn btn-link" href="">關於我們</a> <a class="btn btn-link"
-					href="">聯絡我們</a> <a class="btn btn-link" href="">服務項目</a> <a
-					class="btn btn-link" href="">使用條款</a> <a class="btn btn-link"
-					href="">贊助項目</a>
+				<a class="btn btn-link" href="${contextRoot}/about">關於我們</a> <a
+					class="btn btn-link" href="${contextRoot}/contact">聯絡我們</a> <a
+					class="btn btn-link" href="${contextRoot}/service">服務項目</a> <a
+					class="btn btn-link" href="${contextRoot}/code-of-conduct">使用條款</a>
+				<a class="btn btn-link" href="">贊助項目</a>
 			</div>
 			<div class="col-lg-4 col-md-6">
 				<h4 class="text-uppercase mb-4">最新資訊</h4>
@@ -61,7 +62,8 @@
 		<div class="copyright">
 			<div class="row">
 				<div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-					&copy; <a class="border-bottom" href="${contextRoot}/">Survival</a> 著作權所有
+					&copy; <a class="border-bottom" href="${contextRoot}/">Survival</a>
+					版權所有
 				</div>
 				<div class="col-md-6 text-center text-md-end">
 					<!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->

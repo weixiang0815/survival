@@ -3,7 +3,6 @@ package tw.survival.controller.Market;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class PageController {
@@ -12,12 +11,10 @@ public class PageController {
 	public String goToIndex(Model model) {
 		return "back/Market/marketMain";
 	}
-	
 
-	@ResponseBody
-	@GetMapping("/test1")
-	public String testString() {
-		return "Hi there~~";
+	@GetMapping("/front/Market/shop")
+	public String shopMain() {
+		return "/front/Market/shop";
 	}
 
 	@GetMapping("/playAjax/intro1")

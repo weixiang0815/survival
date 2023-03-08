@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -40,7 +41,11 @@ public class ScheduleBean {
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_place_id")
-	private PlaceBean place;;
+	private PlaceBean place;
+
+	@Column(name = "fk_place_id")
+	@Transient
+	private Integer placeId;
 
 	public ScheduleBean() {
 	}
@@ -81,6 +86,14 @@ public class ScheduleBean {
 
 	public void setPlace(PlaceBean place) {
 		this.place = place;
+	}
+
+	public Integer getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(Integer placeId) {
+		this.placeId = placeId;
 	}
 
 }

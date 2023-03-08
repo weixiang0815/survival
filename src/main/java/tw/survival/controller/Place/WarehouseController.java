@@ -24,33 +24,34 @@ public class WarehouseController {
 
 	@Autowired
 	private WarehouseService warehouseService;
-	
+
 	@Autowired
 	private PlaceService placeService;
-	
+
 	@Autowired
 	private InventoryService inventoryService;
-	
+
 	@GetMapping("/warehouse/new")
 	public String newWarehouse(Model model) {
-		model.addAttribute("placeList",placeService.getAllPlace() );
+		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("warehouse", new WarehouseBean());
-	    return "back/Place/addWarehouse";
+		return "back/Place/addWarehouse";
 	}
-	
+
 	@PostMapping("warehouse/create")
-	public String createWarehouse(@ModelAttribute("warehouse") WarehouseBean warehouse,BindingResult result,Model model) {
-		if(result.hasErrors()) {
+	public String createWarehouse(@ModelAttribute("warehouse") WarehouseBean warehouse, BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
 			model.addAttribute("新增失敗,請重新輸入");
 			return "redirect:/warehouse/new";
 		}
-		
+
 		warehouse.setPlace(placeService.getOnePlaceById(warehouse.getPlaceId()));
 		WarehouseBean wb = warehouseService.insertWarehouse(warehouse);
-		model.addAttribute("warehouse",wb);
+		model.addAttribute("warehouse", wb);
 		return "redirect:/warehouse/all";
 	}
-	
+
 	@GetMapping("/warehouse/all")
 	public ModelAndView getAllWarehouse(ModelAndView mav) {
 		List<WarehouseBean> list = warehouseService.getAllWarehouse();
@@ -58,7 +59,7 @@ public class WarehouseController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
-	
+
 	@GetMapping("/warehouse/edit")
 	public String editWarehouse(@RequestParam("id") Integer id, Model model) {
 		WarehouseBean warehouse = warehouseService.getOneWarehouseById(id);
@@ -67,24 +68,24 @@ public class WarehouseController {
 		model.addAttribute("warehouse", warehouse);
 		return "back/Place/editWarehouse";
 	}
-	
+
 	@PutMapping("/warehouse/edit")
 	public String sendEditWarehouse(@ModelAttribute("warehouse") WarehouseBean warehouse) {
 		warehouseService.updateWarehouse(warehouse);
 		return "redirect:/warehouse/all";
 	}
-	
+
 	@PostMapping("/warehouse/delete")
 	public String deleteWarehouse(@RequestParam("id") Integer id) {
 		warehouseService.deleteWarehouseById(id);
 		return "redirect:/warehouse/all";
 	}
-	
+
 	@GetMapping("/warehouse/detail")
-	public String warehouseDetail(@RequestParam("id") Integer id,Model model) {
+	public String warehouseDetail(@RequestParam("id") Integer id, Model model) {
 		model.addAttribute("inventory", warehouseService.getOneWarehouseById(id).getInventory());
 		model.addAttribute("warehouse", warehouseService.getOneWarehouseById(id));
 		return "back/Place/warehouseDetail";
-	} 
-	
+	}
+
 }

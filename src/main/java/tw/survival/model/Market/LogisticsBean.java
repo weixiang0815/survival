@@ -34,14 +34,14 @@ public class LogisticsBean {
 	private Integer id;
 
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	@Column(name = "start_date")
 	private Date start_date;
 
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@JsonFormat(pattern = "yyyy/MM/dd", timezone = "GMT+8")
 	@Column(name = "arrive_date")
 	private Date arrive_date;
 

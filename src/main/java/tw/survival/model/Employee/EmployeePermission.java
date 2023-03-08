@@ -14,36 +14,37 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="empPermission")
+@Table(name = "empPermission")
 public class EmployeePermission {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "schedule")
 	private Character schedule;
-	
+
 	@Column(name = "player_management")
 	private Character player_management;
-	
+
 	@Column(name = "arrange_competition")
 	private Character arrange_competition;
-	
+
 	@Column(name = "human_resource")
 	private Character human_resource;
-	
+
 	@Column(name = "inventory")
 	private Character inventory;
- 
+
 	@JsonBackReference
-	@OneToMany(fetch=FetchType.LAZY,mappedBy = "employeePermission",cascade = CascadeType.ALL)
-	private Set<EmployeeBean> employees=new LinkedHashSet<EmployeeBean>();;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "employeePermission", cascade = CascadeType.ALL)
+	private Set<EmployeeBean> employees = new LinkedHashSet<EmployeeBean>();;
+
 	private EmployeePermission() {
-		
+
 	}
 
 	public Integer getId() {
@@ -101,5 +102,5 @@ public class EmployeePermission {
 	public void setEmployees(Set<EmployeeBean> employees) {
 		this.employees = employees;
 	}
-	
+
 }

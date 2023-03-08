@@ -1,16 +1,14 @@
 package tw.survival.controller.Player;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.List;
-//import java.util.Optional;
 
+import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Required;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,12 +19,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-//import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-//import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -36,6 +32,10 @@ import tw.survival.service.Player.PlayerService;
 @Controller
 public class PlayerController {
 
+	String Ladypreset = "/images/lady.jpg";
+	String Manpreset = "/images/man.jpg";
+	@Autowired
+	ServletContext context;
 	@Autowired
 	private PlayerService pService;
 
@@ -48,7 +48,7 @@ public class PlayerController {
 	@GetMapping("/player/add")
 	public String addPlayer(Model m) {
 		m.addAttribute("player", new PlayerBean());
-		return "back/Player/user";
+		return "front/Player/user";
 	}
 
 	// R
@@ -75,7 +75,11 @@ public class PlayerController {
 
 	@PutMapping("/player/update1")
 	public String updateById(@ModelAttribute PlayerBean player) {
+		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
+		if (sex == null) {
+
+		}
 		if (playerImage != null && !playerImage.isEmpty()) {
 			try {
 				byte[] img = playerImage.getBytes();
@@ -130,11 +134,37 @@ public class PlayerController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setCacheControl(CacheControl.noCache().getHeaderValue());
 		Blob blob = player.getThumbnail();
+
 		if (blob != null) {
 			photofile = blobToByteArray(blob);
+		} else {
+			String path = null;
+			if (player.getSex().equals("F")) {
+				path = Ladypreset;
+			} else if (player.getSex().equals("M")) {
+				path = Manpreset;
+			}
+			photofile = fileToByteArray(path);
 		}
+
 		re = new ResponseEntity<byte[]>(photofile, headers, HttpStatus.OK);
 		return re;
+	}
+
+	private byte[] fileToByteArray(String path) {
+		byte[] result = null;
+		try (InputStream is = context.getResourceAsStream(path);
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+			byte[] b = new byte[819200];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			result = baos.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	public byte[] blobToByteArray(Blob blob) {
@@ -150,6 +180,21 @@ public class PlayerController {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	// searchName
+	@PostMapping("/player/namelike")
+	public String findPlayerName0(@RequestParam("name") String name, Model m) {
+		List<PlayerBean> player = pService.findName(name);
+		m.addAttribute("player", player);
+		return "back/Player/SelectAllResult";
+
+	}
+	//
+
+	public String oneButtonInsert(@ModelAttribute("player") PlayerBean player) {
+
+		return "";
 	}
 
 }

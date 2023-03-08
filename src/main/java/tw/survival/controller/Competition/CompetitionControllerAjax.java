@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Competition.CompetitionBean;
@@ -30,6 +31,7 @@ import tw.survival.service.Competition.NewCompetitionFormService;
 import tw.survival.service.Place.PlaceService;
 
 @RestController
+@SessionAttributes({ "player", "employee" })
 public class CompetitionControllerAjax {
 
 	@Autowired

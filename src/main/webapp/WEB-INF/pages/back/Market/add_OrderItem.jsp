@@ -19,7 +19,9 @@
 	<br>
 	訂單時間:<input type="date" name="order_create_date" />
 	<br>
-	訂單狀況:<input type="text" name="status" />
+	訂單狀態：<select class="form-control" name="status">
+									<option value="新訂單">新訂單<option>
+								</select>
 	<br>   	    
 	<input id="uploadBtn" type="submit" value="上傳">
 	

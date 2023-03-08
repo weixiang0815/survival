@@ -18,6 +18,9 @@ img {
 	<jsp:include page="../../Template/admin.jsp" />
 	<div class="container">
 		<h3>查詢全部結果</h3>
+		<form action="${contextRoot}/player/namelike" method="post">
+			<input type="search" name="name" /> <input type="submit" value="搜尋" />
+		</form>
 		<table class="table table-hover">
 			<tr>
 				<th>大頭貼</th>
@@ -40,8 +43,8 @@ img {
 			</tr>
 			<c:forEach items="${player}" var="player">
 				<tr>
-					<td style="width: 100px;"><img alt="查無圖片"
-						src="${contextRoot}/player/photo/${player.id}" /></td>
+					<td style="width: 100px;">
+					<img src="${contextRoot}/player/photo/${player.id}" /></td>
 					<td>${player.name}</td>
 					<td>${player.account}</td>
 					<td>${player.password}</td>
@@ -79,6 +82,5 @@ img {
 		</table>
 		<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
 	</div>
-	<jsp:include page="../../Layout/footer.jsp" />
 </body>
 </html>
