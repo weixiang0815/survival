@@ -50,8 +50,8 @@ public class ProductService {
 	}
 
 	// 更新商品
-	public ProductBean updateProductById(Integer id, String updateName, byte[] updateImg, String updateContext,
-			String updateClass, Integer updateRent_fee, Integer updatePrice) {
+	public ProductBean updateProductById(Integer id, String updateName, byte[] updateImg,
+			String updateClass, String updateContext, Integer updateRent_fee, Integer updatePrice) {
 		Optional<ProductBean> optional = productDao.findById(id);
 
 		if (optional.isPresent()) {
