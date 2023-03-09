@@ -9,8 +9,14 @@
 <title>所有活動</title>
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style>
-a {
+td>a {
 	font-weight: bolder;
+}
+
+td>a:hover {
+	color: white;
+	background-color: red;
+	transition: .2s ease-in-out;
 }
 </style>
 </head>
@@ -37,7 +43,16 @@ a {
 	<div class="container text-center">
 		<div class="row">
 			<div class="col-12 text-white">
-				搜尋：<input type="text" placeholder="你想查詢的關鍵字" />
+				<form action="" method="post">
+					<div class="row d-flex justify-content-center">
+						<div class="col-2 text-end">
+							<label for="input">搜尋</label>
+						</div>
+						<div class="col-5">
+							<input id="input" class="form-control" type="text" pattern="/^[\u4e00-\u9ffff-zA-Z0-9]+$/" placeholder="請輸入查詢的關鍵字" />
+						</div>
+					</div>
+				</form>
 			</div>
 			<div class="col-12 mt-5 mb-5">
 				<table class="table table-hover table-dark table-bordered">
@@ -58,8 +73,8 @@ a {
 								<td><a
 									href="${contextRoot}/front/competition/detail/${comp.id}">${comp.mandarinName}</a></td>
 								<td>${comp.place.place_name}</td>
-								<td>${comp.startDate}</td>
-								<td>${comp.endDate}</td>
+								<td class="compDate">${comp.startDate}</td>
+								<td class="compDate">${comp.endDate}</td>
 								<c:choose>
 									<c:when test="${comp.singleOrCrew.equals(\"S\")}">
 										<td>個人戰</td>
@@ -71,7 +86,7 @@ a {
 										<td>未定</td>
 									</c:otherwise>
 								</c:choose>
-								<td>${comp.fee}</td>
+								<td>$&nbsp;${comp.fee}</td>
 								<td><a
 									href="${contextRoot}/front/competition/photo/${comp.id}">相簿</a></td>
 							</tr>
@@ -83,5 +98,6 @@ a {
 	</div>
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/Competition/front/showCompetitions.js"></script>
 </body>
 </html>
