@@ -107,21 +107,23 @@ ul li {
 			</c:forEach>
 		</table><br><br>
 		<table class="table table-hover table-bordered">
-	
+				<jstl:forEach items="${list}" var="Logistics">
 				<ol class="list">
-				<li class="active">
-					<i class="fa fa-file-text" aria-hidden="true"></i>收到訂單
-					</li>
-				<li>	
+				<li class="${Logistics.status eq '收到訂單' ? 'active' : ''}">
+					<i class="fa fa-file-text" aria-hidden="true" ></i>收到訂單
+					${Logistics.start_date}
+					</li >
+				<li class="${Logistics.status eq '處理中' ? 'active' : ''}">	
 					<i class="fa fa-archive" aria-hidden="true"></i>處理中
 				</li>
-				<li>
+				<li class="${Logistics.status eq '已出貨' ? 'active' : ''}">
 					<i class="fa fa-truck" aria-hidden="true"></i>已出貨
 				</li>
-				<li>
-					<i class="fa fa-check-circle" aria-hidden="true"></i> 已送達
-				</li>
+				<li class="${Logistics.status eq '已抵達' ? 'active' : ''}">
+					<i class="fa fa-check-circle" aria-hidden="true"></i>已抵達
+				${Logistics.arrive_date}</li>
 				</ol>
+				</jstl:forEach>
 		</table>
 	</div>
 
