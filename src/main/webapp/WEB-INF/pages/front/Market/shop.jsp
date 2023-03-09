@@ -2010,8 +2010,6 @@
                                                     style="color: #ffffff;">配件</a>
                                                 <ul class="collapse" id="submenu-accessories">
                                                     <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;"
-                                                            href="${contextRoot}/front/Market/Text">手槍</a></li>
                                                     <li><a class="nav-link" style="color: #ffffff;" href="#">倍鏡</a></li>
                                                     <li><a class="nav-link" style="color: #ffffff;" href="#">彈夾</a>
                                                     </li>
