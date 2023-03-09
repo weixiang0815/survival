@@ -47,7 +47,7 @@ public class FrontControllerAjax {
 				BufferedReader br = new BufferedReader(isr);) {
 			String line;
 			while ((line = br.readLine()) != null) {
-				content.append("<p class=\"user-select-none\">" + line + "</p>");
+				content.append("<p>" + line + "</p>");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
