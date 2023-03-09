@@ -192,5 +192,21 @@ public class PostsService {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * @定義 模糊搜尋字串參數
+	 * 
+	 * 
+	 * @param str 欲查詢的字串。
+	 * @return 回傳PostsBean的List物件
+	 * @author 鄭力豪
+	 */
+	public List<PostsBean> findPostsListByStringLike(String str) {
+		return pDao.findPostsBeanLike(str);
+	}
+	
+	
+	
+	
 
 }

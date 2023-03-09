@@ -1,9 +1,12 @@
 package tw.survival.controller.front.R.Forum;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Forum.PostsBean;
@@ -43,17 +46,31 @@ public class PostsFrontControllerNL {
 		this.playerService = playerService; 
 	}
 	/**
+	 * @定義 論壇主頁。
+	 * @author 鄭力豪
 	 * 
-	 * @param model:<br>
-	 * 		  這裡是下一行
-	 * @return
 	 */
 	@GetMapping("Forum/index")
-	public String frontMainControllerNL() {
-//		PostsBean postsBean = new PostsBean();
-//		model.addAttribute("postsBean", postsBean);
+	public String frontMainNLController() {
 		return "front/Forum/index";
 	}
+	
+	@GetMapping("posts/getAll")
+	public String search(Model model) {
+		List<PostsBean> postList = postsService.getAllPosts2();
+		model.addAttribute("postList",postList);
+		return"front/Forum/Posts/getAllPosts";
+	}
+	
+	@GetMapping("posts/search")
+	public String search2(@RequestParam("searchStr") String str, Model model) {
+		
+		List<PostsBean> postslist = postsService.findPostsListByStringLike(str);
+		model.addAttribute("postslist", postslist);
+		
+		return"";
+	}
+	
 	
 	
 }

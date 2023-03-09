@@ -10,6 +10,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,10 +23,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @SessionAttributes({ "employee", "player" })
 @Aspect
+@Component
 public class MyAspect {
 
 	/**
-	 * 設定 AOP 橫切關注的範圍（前台頁面的 Controller），但不限制未登入使用者查詢（R）資料
+	 * 設定 AOP 橫切關注的範圍（前台頁面必須登入會員的 Controller），但不限制未登入使用者查詢（R）資料
 	 */
 	@Pointcut(" execution(* tw.survival.controller.front.CUD..*(..)) ")
 	public void pointcutFront() {
