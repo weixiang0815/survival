@@ -24,6 +24,10 @@ public class CartController {
 
 	@Autowired
 	private CartService CartService;
+	
+//	https://ithelp.ithome.com.tw/articles/10256080
+//	https://www.youtube.com/watch?v=mCSm0xwWack
+	
 
 	@GetMapping("/Market/Cart/test")
 	public String addProductToCart(Model model) {
