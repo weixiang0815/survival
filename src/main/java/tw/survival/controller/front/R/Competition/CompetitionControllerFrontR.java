@@ -1,5 +1,7 @@
 package tw.survival.controller.front.R.Competition;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,6 +48,13 @@ public class CompetitionControllerFrontR {
 	@GetMapping("/competition/history")
 	public String goCompHistory() {
 		return "front/Competition/history";
+	}
+
+	@GetMapping("/competition/show")
+	public String goShow(Model model) {
+		List<CompetitionBean> comps = compService.findAll();
+		model.addAttribute("comps", comps);
+		return "front/Competition/showCompetitions";
 	}
 
 }
