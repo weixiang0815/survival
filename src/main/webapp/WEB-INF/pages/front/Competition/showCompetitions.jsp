@@ -52,26 +52,26 @@ td>a:hover {
 					<input id="name" class="form-control" type="text" pattern="/^[\u4e00-\u9ffff-zA-Z0-9]+$/" placeholder="請輸入關鍵字" />
 				</div>
 				<div class="mt-3 mb-3">
-					<label for="place" class="form-label">活動場地</label>
-					<select class="form-select" id="place">
-						<option selected>- 請選一個場地 -</option>
-						<c:forEach items="${places}" var="place">
-							<option value="${place.id}">${place.place_name}</option>
-						</c:forEach>
-					</select>
+					<label class="form-label">活動場地</label>
+					<c:forEach items="${places}" var="place">
+						<div class="form-check">
+							<input checked class="form-check-input" type="checkbox" name="place" id="place_${place.id}" value="${place.id}">
+							<lable for="notyet" class="form-check-label">${place.place_name}</lable>
+						</div>
+					</c:forEach>
 				</div>
 				<div class="mt-3 mb-3">
 					<lable class="form-label">活動時間</lable>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" name="date" id="notyet">
+						<input checked class="form-check-input" type="checkbox" value="notyet" name="date" id="notyet">
 						<lable for="notyet" class="form-check-label">尚未開始</lable>
 					</div>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" name="date" id="ing">
+						<input checked class="form-check-input" type="checkbox" value="ing" name="date" id="ing">
 						<lable for="ing" class="form-check-label">進行中</lable>
 					</div>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" name="date" id="ended">
+						<input checked class="form-check-input" type="checkbox" value="ended" name="date" id="ended">
 						<lable for="ended" class="form-check-label">已結束</lable>
 					</div>
 				</div>
@@ -104,15 +104,15 @@ td>a:hover {
 				<div class="mt-3 mb-3">
 					<lable class="form-label">活動規模</lable>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" value="0" name="fee" id="free">
+						<input checked class="form-check-input" type="checkbox" value="0" name="capacity" id="small">
 						<lable for="free" class="form-check-label">30 人以下</lable>
 					</div>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" value="1" name="fee" id="cheap">
+						<input checked class="form-check-input" type="checkbox" value="1" name="capacity" id="medium">
 						<lable for="cheap" class="form-check-label">30 到 100 人</lable>
 					</div>
 					<div class="form-check">
-						<input checked class="form-check-input" type="checkbox" value="2" name="fee" id="expensive">
+						<input checked class="form-check-input" type="checkbox" value="2" name="capacity" id="large">
 						<lable for="expensive" class="form-check-label">100 人以上</lable>
 					</div>
 				</div>
@@ -131,7 +131,7 @@ td>a:hover {
 							<th>活動規模</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<c:forEach items="${comps}" var="comp">
 							<tr>
 								<td><a

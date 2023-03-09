@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/front")
+@RequestMapping("/front/api")
 public class FrontControllerAjax {
 
-	@GetMapping("/api/getTerms/{type}")
+	@GetMapping("/getTerms/{type}")
 	public String getTerms(@PathVariable String type) {
 		String filepath = "C:/Survival/code-of-conduct/";
 		String filename;

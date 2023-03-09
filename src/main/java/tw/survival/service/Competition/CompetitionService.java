@@ -124,7 +124,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line + "\n\n");
+					content.append(line);
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
@@ -151,7 +151,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line + "\n\n");
+					content.append(line);
 				}
 				comp.setContent(content.toString());
 			}
@@ -176,7 +176,33 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line + "\n\n");
+					content.append(line);
+				}
+				comp.setContent(content.toString());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		});
+		return comps;
+	}
+	
+	/**
+	 * 針對前台的多條件查詢活動結果
+	 * 
+	 * @param conditions 查詢依據的各種條件
+	 * @return 裝著活動實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<CompetitionBean> multiconditionSearchFront(CompetitionSearchCondititonsDto conditions) {
+		List<CompetitionBean> comps = compDao.multiconditionSearchFront(conditions);
+		comps.forEach(comp -> {
+			StringBuffer content = new StringBuffer("");
+			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
+					InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+					BufferedReader br = new BufferedReader(isr);) {
+				String line = "";
+				while ((line = br.readLine()) != null) {
+					content.append(line);
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
@@ -187,14 +213,14 @@ public class CompetitionService {
 	}
 
 	/**
-	 * 多條件查詢活動結果
+	 * 針對後台的多條件查詢活動結果
 	 * 
 	 * @param conditions 查詢依據的各種條件
 	 * @return 裝著活動實體的 List 物件
 	 * @author 王威翔
 	 */
-	public List<CompetitionBean> multiconditionSearch(CompetitionSearchCondititonsDto conditions) {
-		List<CompetitionBean> comps = compDao.multiconditionSearch(conditions);
+	public List<CompetitionBean> multiconditionSearchBack(CompetitionSearchCondititonsDto conditions) {
+		List<CompetitionBean> comps = compDao.multiconditionSearchBack(conditions);
 		comps.forEach(comp -> {
 			StringBuffer content = new StringBuffer("");
 			try (FileInputStream fis = new FileInputStream(comp.getContentFileLocation());
@@ -202,7 +228,7 @@ public class CompetitionService {
 					BufferedReader br = new BufferedReader(isr);) {
 				String line = "";
 				while ((line = br.readLine()) != null) {
-					content.append(line + "\n\n");
+					content.append(line);
 				}
 				comp.setContent(content.toString());
 			} catch (Exception e) {
