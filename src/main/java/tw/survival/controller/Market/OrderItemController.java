@@ -2,6 +2,7 @@ package tw.survival.controller.Market;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,5 +69,12 @@ public class OrderItemController {
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);
 		return "redirect:/Market/all_Logistics";
+	}
+	// 搜尋
+	@GetMapping("/Market/orderItemidLike")
+	public String findOrderItemidLike(@RequestParam("Search") Integer fk_player_id, Model model) {
+		List<OrderItemBean> searchResult1 = oService.findByfk_player_id(fk_player_id);
+		model.addAttribute("SearchResult1", searchResult1);
+		return "back/Market/searchOrderResult";
 	}
 }
