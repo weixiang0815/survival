@@ -45,8 +45,8 @@ ul li {
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-	width: 100px;
-	height: 100px;
+	width: 125px;
+	height: 125px;
 	background-image: linear-gradient(9deg, #185a9d, #43cea2);
 	border-radius: 50%;
 	position: relative;

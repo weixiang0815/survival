@@ -32,13 +32,13 @@
 					<td>${search.status}</td>
 					<td>${search.fk_player_id}</td>
 					<td>
-						<form action="${contextRoot}/Market/edit" method="get">
+						<form action="${contextRoot}/Market/editOrder" method="get">
 							<input name="id" type="hidden" value="${search.id}" /> <input
 								type="submit" class="btn btn-info btn-sm" value="編輯" />
 						</form>
 					</td>
 					<td>
-						<form action="${contextRoot}/Market/delete" method="post">
+						<form action="${contextRoot}/Market/deleteOrder" method="post">
 							<input name="_method" type="hidden" value="delete" /> <input
 								name="id" type="hidden" value="${show_AllProduct.id}" /> <input
 								type="submit" class="btn btn-danger btn-sm" value="刪除" />
