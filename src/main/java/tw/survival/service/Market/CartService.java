@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.CartRepository;
+import tw.survival.model.Player.PlayerBean;
 
 @Service
 public class CartService {
@@ -92,6 +93,15 @@ public class CartService {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+//	-------------------------------------------------------------------------------
+
+	public List<CartBean> listCartItems(PlayerBean player) {
+		
+		
+		return CartDao.findByplayer(player);
+
 	}
 
 }

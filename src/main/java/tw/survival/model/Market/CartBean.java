@@ -35,7 +35,7 @@ public class CartBean {
 	private Integer id;
 
 	// 購買的商品
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_product_id")
 	private ProductBean product;
 
@@ -50,6 +50,11 @@ public class CartBean {
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "added")
 	private Date added;
+	
+	//數量
+	@Column(name="quantity")
+	private Integer quantity;
+	
 
 	@PrePersist
 	public void onCreate() {
@@ -92,5 +97,14 @@ public class CartBean {
 	public void setAdded(Date added) {
 		this.added = added;
 	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
 
 }
