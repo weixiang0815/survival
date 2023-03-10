@@ -16,6 +16,10 @@
 	.productImg {
 		cursor: pointer;
 	}
+	#signupnow:hover {
+		background-color: red;
+		transition: 0.2s ease-in-out;
+	}
 	</style>
 </head>
 <body>
@@ -60,7 +64,7 @@
 						<img class="img-fluid w-75 align-self-end" src="${contextRoot}/img/about.jpg" alt="">
 						<div class="w-50 bg-secondary p-5" style="margin-top: -25%;">
 							<h1 class="text-uppercase text-primary mb-3">$&nbsp;${comp.fee}</h1>
-							<h2 class="text-uppercase mb-0">手刀報名</h2>
+							<a href="${contextRoot}/front/signup?id=${comp.id}"><h2 id="signupnow" class="text-uppercase mb-0">手刀報名</h2></a>
 						</div>
 					</div>
 				</div>

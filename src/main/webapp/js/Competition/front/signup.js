@@ -1,5 +1,6 @@
 const codeURL = "http://localhost:8080/Survival/front/api/getTerms/signup";
 const modalBody = $(".modal-body");
+const thinkaboutit = $("#thinkaboutit");
 document.addEventListener("DOMContentLoaded", function () {
     let modal = new bootstrap.Modal(document.getElementById('exampleModal'), {
         backdrop: 'static',
@@ -26,6 +27,14 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         error: function (err) {
             console.log(err);
+        }
+    });
+    thinkaboutit.on({
+        mouseenter: () => {
+            thinkaboutit.text("顯示所有活動");
+        },
+        mouseleave: () => {
+            thinkaboutit.text("再讓我想一下");
         }
     });
 });
