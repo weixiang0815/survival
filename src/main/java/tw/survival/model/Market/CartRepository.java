@@ -1,9 +1,14 @@
 package tw.survival.model.Market;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
-@Repository
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import tw.survival.model.Player.PlayerBean;
+
+
 public interface CartRepository extends JpaRepository<CartBean, Integer> {
+	
+	public List<CartBean> findByplayer(PlayerBean player);
 
 }
