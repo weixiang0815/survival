@@ -14,15 +14,15 @@ import tw.survival.service.Competition.CompetitionService;
 
 @RestController
 @RequestMapping("/front/api/competition")
-public class CompetitionControllerFrontAJAXR {
+public class CompetitionControllerFrontRAJAX {
 
 	@Autowired
 	private CompetitionService compService;
 
-	@PostMapping("/multiCondition")
+	@PostMapping("/multi-condition")
 	public List<CompetitionBean> multiCondition(@RequestBody CompetitionSearchCondititonsDto dto) {
-//		return compService.multiconditionSearchFront(dto);
-		return compService.findAll();
+		return compService.multiconditionSearchFront(dto);
+//		return compService.findAll();
 	}
 
 }

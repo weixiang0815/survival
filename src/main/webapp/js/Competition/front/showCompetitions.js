@@ -28,6 +28,12 @@ function multiConditionSearch() {
         obj["englishName"] = name_input;
     } else {
         console.log("讀到惡意程式");
+        if (scriptRegex.test(name_input)) {
+            alert("讀到 XSS 惡意程式");
+        }
+        if (sqlRegex.test(name_input)) {
+            alert("讀到 SQL Injection 惡意程式");
+        }
     }
     for (let i = 1; i < 5; i++) {
         let checked = inputs[i].filter(":checked");
