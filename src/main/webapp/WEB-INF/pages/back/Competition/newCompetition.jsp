@@ -170,6 +170,6 @@
 	</div>
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
-	<script src="${contextRoot}/js/Competition/newCompetition.js"></script>
+	<script src="${contextRoot}/js/Competition/back/newCompetition.js"></script>
 </body>
 </html>

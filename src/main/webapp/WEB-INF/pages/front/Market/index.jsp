@@ -12,14 +12,14 @@
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
             <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
             <meta charset="UTF-8">
-            <title>赫赫商城</title>
+            <title>戰略商城</title>
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
 
             <!-- Core Style CSS -->
             <link rel="stylesheet" href="css/core-style.css">
             <link rel="stylesheet" href="style.css">
-			
+
             <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
         </head>
 
@@ -1968,23 +1968,63 @@
                 <!-- <h1>商城</h1> -->
             </div>
 
-            <!-- Page Header Start -->
-            <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-                <div class="container text-center py-5">
-                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">赫赫商城</h1>
-                    <nav aria-label="breadcrumb animated slideInDown">
-                        <ol class="breadcrumb justify-content-center text-uppercase mb-0">
-                            <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
-                            <!-- <li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li> -->
-                            <li class="breadcrumb-item text-primary active" aria-current="page">商城頁面</li>
-                        </ol>
-                    </nav>
+            <!-- Carousel Start -->
+            <div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+                <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+                                <source src="${contextRoot}/videos/kalashnikov-99910.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
+                                <div class="mx-sm-5 px-5" style="max-width: 900px;">
+                                    <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">
+                                        改個動圖加標語</h1>
+                                    <h4 class="text-white text-uppercase mb-4 animated slideInDown">
+                                        <i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
+                                    </h4>
+                                    <h4 class="text-white text-uppercase mb-4 animated slideInDown">
+                                        <i class="fa fa-phone-alt text-primary me-3"></i>（02）6631-6588
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
+                                <source src="${contextRoot}/videos/war-16391.mp4" type="video/mp4">
+                            </video>
+                            <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
+                                <div class="mx-sm-5 px-5" style="max-width: 900px;">
+                                    <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">
+                                        改個動圖加標語</h1>
+                                    <h4 class="text-white text-uppercase mb-4 animated slideInDown">
+                                        <i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
+                                    </h4>
+                                    <h4 class="text-white text-uppercase mb-4 animated slideInDown">
+                                        <i class="fa fa-phone-alt text-primary me-3"></i>（02）6631-6588
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">上一頁</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#header-carousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">下一頁</span>
+                    </button>
                 </div>
             </div>
-            <!-- Page Header End -->
+            <!-- Carousel End -->
+
 
             <!-- ##### Welcome Area Start ##### -->
-            <span>
+            <!-- <span>
                 <section class="welcome_area bg-img background-overlay"
                     style="background-image: url(${contextRoot}/img/bg-img/bg-1.jpg);">
                     <div class="container h-100">
@@ -2000,8 +2040,25 @@
                         </div>
                     </div>
                 </section>
-            </span>
+            </span> -->
             <!-- ##### Welcome Area End ##### -->
+
+
+            <!-- Page Header Start -->
+            <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="container text-center py-5">
+                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">戰略商城</h1>
+                    <nav aria-label="breadcrumb animated slideInDown">
+                        <ol class="breadcrumb justify-content-center text-uppercase mb-0">
+                            <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
+                            <!-- <li class="breadcrumb-item"><a class="text-white" href="#">頁面</a></li> -->
+                            <li class="breadcrumb-item text-primary active" aria-current="page">商城頁面</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
 
             <!-- ##### Top Catagory Area Start ##### -->
             <div class="top_catagory_area section-padding-80 clearfix">
@@ -2039,6 +2096,8 @@
             </div>
             <!-- ##### Top Catagory Area End ##### -->
 
+
+
             <!-- ##### CTA Area Start ##### -->
             <div class="cta-area">
                 <div class="container">
@@ -2050,7 +2109,8 @@
                                     <div class="cta--text">
                                         <h6>-30%</h6>
                                         <h2 style="color: azure;">全球折扣</h2>
-                                        <a href="${contextRoot}/front/Market/shop" class="btn essence-btn" style="font-size:2em">立即購買</a>
+                                        <a href="${contextRoot}/front/Market/shop" class="btn essence-btn"
+                                            style="font-size:2em">立即購買</a>
                                     </div>
                                 </div>
                             </div>
@@ -2221,15 +2281,16 @@
             </section>
             <!-- ##### New Arrivals Area End ##### -->
 
+
             <!---------------------------------------------------------------------------------------------->
 
 
             <!-- jQuery (Necessary for All JavaScript Plugins) -->
-            <script src="js/jquery/jquery-2.2.4.min.js"></script>
+            <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
             <!-- Popper js -->
             <script src="js/popper.min.js"></script>
             <!-- Bootstrap js -->
-            <script src="js/bootstrap.min.js"></script>
+            <!-- <script src="js/bootstrap.min.js"></script> -->
             <!-- Plugins js -->
             <script src="js/plugins.js"></script>
             <!-- Classy Nav js -->

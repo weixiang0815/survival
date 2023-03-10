@@ -1,4 +1,4 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.back.Competition;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -216,7 +216,7 @@ public class CompetitionControllerAjax {
 	 */
 	@PostMapping("/competition/api/search/multicondition")
 	public List<CompetitionBean> multiconditionSearch(@RequestBody CompetitionSearchCondititonsDto conditions) {
-		return compService.multiconditionSearch(conditions);
+		return compService.multiconditionSearchBack(conditions);
 	}
 
 	/**

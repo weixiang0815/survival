@@ -143,13 +143,13 @@
 		aria-labelledby="terms-title" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-scrollable">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header user-select-none">
 					<h1 style="color: black;" class="modal-title fs-5" id="terms-title">Modal
 						title</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
 				</div>
-				<div class="modal-body"></div>
+				<div class="modal-body user-select-none"></div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">關閉</button>

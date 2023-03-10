@@ -1,4 +1,6 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.front.R.Competition;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Place.PlaceService;
 
 @Controller
 @RequestMapping("/front")
 @SessionAttributes({ "player", "employee" })
-public class CompetitionControllerFront {
+public class CompetitionControllerFrontR {
 
 	@Autowired
 	private CompetitionService compService;
+	
+	@Autowired
+	private PlaceService placeService;
 
 	@GetMapping("/competition")
 	public String goIndex() {
@@ -46,6 +53,15 @@ public class CompetitionControllerFront {
 	@GetMapping("/competition/history")
 	public String goCompHistory() {
 		return "front/Competition/history";
+	}
+
+	@GetMapping("/competition/show")
+	public String goShow(Model model) {
+		List<CompetitionBean> comps = compService.findAll();
+		List<PlaceBean> places = placeService.getAllPlace();
+		model.addAttribute("comps", comps);
+		model.addAttribute("places", places);
+		return "front/Competition/showCompetitions";
 	}
 
 }

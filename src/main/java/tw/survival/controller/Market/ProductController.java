@@ -81,6 +81,14 @@ public class ProductController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
+	
+	@GetMapping("/front/Market/Text")
+	public ModelAndView getAllProduct1(ModelAndView mav) {
+		List<ProductBean> list = productService.findAllProduct();
+		mav.setViewName("/front/Market/Text");
+		mav.getModel().put("list", list);
+		return mav;
+	}
 
 	// 搜尋商品 by ID
 	@ResponseBody
@@ -121,7 +129,7 @@ public class ProductController {
 	}
 
 	// 刪除商品
-	@DeleteMapping("/Market/delete")
+	@DeleteMapping("back/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
 		productService.deleteById(id);
 		return "redirect:/Market/allProduct";

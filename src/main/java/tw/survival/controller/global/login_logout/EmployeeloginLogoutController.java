@@ -15,11 +15,12 @@ import org.springframework.web.bind.support.SessionStatus;
 import tw.survival.model.Employee.EmployeeBean;
 
 import tw.survival.service.login_logout.login_logoutService;
+import tw.survival.validators.AddPlayerValidator;
 
 @Controller
 @SessionAttributes({ "employee" })
 public class EmployeeloginLogoutController {
-
+	
 	@Autowired
 	public login_logoutService service;
 

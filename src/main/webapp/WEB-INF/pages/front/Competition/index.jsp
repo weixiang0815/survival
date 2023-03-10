@@ -12,6 +12,7 @@
 ul#comp-link>li {
 	list-style-type: none;
 }
+
 i {
 	font-size: 2rem;
 	color: red;
@@ -28,7 +29,8 @@ i {
 				class="display-3 text-white text-uppercase mb-3 animated slideInDown">活動</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
-					<li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
+					<li class="breadcrumb-item"><a class="text-white"
+						href="${contextRoot}">首頁</a></li>
 					<li class="breadcrumb-item text-primary active" aria-current="page">活動</li>
 				</ol>
 			</nav>
@@ -51,16 +53,14 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="fa-solid fa-people-group"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/haircut.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">所有活動</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>來，讓我們探究一下所有活動的奧義！</p>
+							<span class="text-uppercase text-primary">報名費 0 元起</span>
 						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square"
+							href="${contextRoot}/front/competition/show"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -70,16 +70,14 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="bi bi-camera2"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/beard-trim.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">活動相簿</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>重溫那場驚心動魄的活動，點開屬於我們的記憶之書！</p>
+							<span class="text-uppercase text-primary">影音回憶錄</span>
 						</div>
-						<a class="btn btn-square" href="${contextRoot}/front/competition/photo"><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square"
+							href="${contextRoot}/front/competition/photo"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -89,16 +87,13 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="fa-sharp fa-solid fa-location-dot"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/mans-shave.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">活動場地</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>凝視著眼前眾多場地，選擇欲探索的地方！</p>
+							<span class="text-uppercase text-primary">選好地圖，等你來征服！</span>
 						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square" href="${contextRoot}/front/place/all"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -108,16 +103,13 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="fa-sharp fa-solid fa-right-to-bracket"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/hair-dyeing.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">報名資訊</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>眾所矚目的賽事報名已然展開，趕緊來確認活動報名資訊吧！</p>
+							<span class="text-uppercase text-primary">手刀報名不遲疑</span>
 						</div>
-						<a class="btn btn-square" href="${contextRoot}/front/signup"><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square" href="${contextRoot}/front/signup"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -127,16 +119,14 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="fa-solid fa-ranking-star"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/mustache.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">競賽紀錄</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>重溫我們征戰的榮耀，回味曾經的奮鬥與血淚</p>
+							<span class="text-uppercase text-primary">將歷史重現眼前</span>
 						</div>
-						<a class="btn btn-square" href="${contextRoot}/front/competition/history"><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square"
+							href="${contextRoot}/front/competition/history"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -146,16 +136,13 @@ i {
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
 							<i class="fa-solid fa-handshake"></i>
-<%-- 							<img class="img-fluid" src="${contextRoot}/img/stacking.png" alt=""> --%>
 						</div>
 						<div class="ps-4">
 							<h3 class="text-uppercase mb-3">場地租借</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<p>觀瞻諸君！來檢視租借領域的契約條款與租金報價吧！</p>
+							<span class="text-uppercase text-primary">打造屬於自己的戰場</span>
 						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
+						<a class="btn btn-square" href=""><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 			</div>
@@ -164,5 +151,6 @@ i {
 	<!-- Service End -->
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/Competition/front/index.js"></script>
 </body>
 </html>
