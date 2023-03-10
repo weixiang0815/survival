@@ -65,10 +65,11 @@ button:hover {
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-6 text-end">
+				<div class="col">
 					<input type="submit" value="登入" />
+					<button id="register-oneclick">一鍵填寫</button>
 				</div>
-				<div class="col-6 text-start"><button id="register-oneclick">一鍵填寫</button></div>
+				
 			</div>
 		</form>
 		<div class="row mt-2">
