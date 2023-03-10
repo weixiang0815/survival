@@ -13,6 +13,9 @@
 		display: none;
 		position: absolute;
 	}
+	.productImg {
+		cursor: pointer;
+	}
 	</style>
 </head>
 <body>
@@ -57,7 +60,7 @@
 						<img class="img-fluid w-75 align-self-end" src="${contextRoot}/img/about.jpg" alt="">
 						<div class="w-50 bg-secondary p-5" style="margin-top: -25%;">
 							<h1 class="text-uppercase text-primary mb-3">$&nbsp;${comp.fee}</h1>
-							<h2 class="text-uppercase mb-0">報名費</h2>
+							<h2 class="text-uppercase mb-0">手刀報名</h2>
 						</div>
 					</div>
 				</div>
@@ -210,9 +213,9 @@
 				method: "get",
 				success: function (res) {
 					let content = res.content;
-					content.replace("<h1>", "<p>");
-					content.replace("</h1>", "</p>");
-					$("#content").html(res.content);
+					content = content.replace("<h1>", "<p>");
+					content = content.replace("</h1>", "</p>");
+					$("#content").html(content);
 				},
 				error: function (err) {
 					console.log(err);
