@@ -1,35 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>報名資訊</title>
-<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
+    <meta charset="UTF-8">
+    <title>報名資訊</title>
+    <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-<!-- Page Header Start -->
-<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
-    <div class="container text-center py-5">
-        <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">報名資訊</h1>
-        <nav aria-label="breadcrumb animated slideInDown">
-            <ol class="breadcrumb justify-content-center text-uppercase mb-0">
-                <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
-                <li class="breadcrumb-item"><a class="text-white"
-                        href="${contextRoot}/front/competition">活動</a></li>
-                <li class="breadcrumb-item text-primary active" aria-current="page">報名資訊</li>
-            </ol>
-        </nav>
+    <jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container text-center py-5">
+            <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">報名資訊</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb justify-content-center text-uppercase mb-0">
+                    <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
+                    <li class="breadcrumb-item"><a class="text-white"
+                            href="${contextRoot}/front/competition">活動</a></li>
+                    <li class="breadcrumb-item text-primary active" aria-current="page">報名資訊</li>
+                </ol>
+            </nav>
+        </div>
     </div>
-</div>
-<!-- Page Header End -->
-<div class="container text-center">
-<h1>報名資訊</h1>
-</div>
-<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
-<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+    <!-- Page Header End -->
+    <div class="modal fade user-select-none" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog dmodal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-dark" id="exampleModalLabel">活動條款</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="javascript:history.back(-1);">No</button>
+                    <button type="button" class="btn btn-primary" id="modal-yes" data-bs-dismiss="modal"
+                        disabled>Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container text-center">
+        <h1>報名資訊</h1>
+    </div>
+    <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+    <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+    <script src="${contextRoot}/js/Competition/front/signup.js"></script>
 </body>
 </html>
