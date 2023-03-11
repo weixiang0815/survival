@@ -54,6 +54,14 @@ public class PostsFrontControllerNL {
 		return "front/Forum/index";
 	}
 	
+	@GetMapping("/posts/content")
+	public String getOnePost(@RequestParam("id")Integer id, Model model){
+		PostsBean post = postsService.findPostById(id);
+		model.addAttribute("post", post);
+		return "front/Forum/Posts/ShowOne";
+	}
+	
+	
 	/**
 	 * @param model 設定model 目的為設置輸入物件
 	 * @return String 設定View

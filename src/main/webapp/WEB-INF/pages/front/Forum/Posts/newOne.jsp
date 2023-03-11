@@ -65,8 +65,9 @@ div .ct {
 				<!-- class="wow fadeInUp" 上浮顯現 -->
 				<!-- data-wow-delay="0.1s" 設定延遲時間-->
 				<!-- col-lg-4 col-md-6 Bootstrap分隔樣板 col為列分隔最大為12 lg:空間高於992px md:空間高於≥768px-->
-				<div class=" wow fadeInUp .ct" data-wow-delay="0.1s">
+				<div class=" wow fadeInUp" data-wow-delay="0.1s">
 					<div class="wow d-flex text-center .ct">
+						<!-- 用戶欄設計 -->
 						<div class="col-md-3" style="border: #FF0000 2px solid;">
 
 							<img src="${contextRoot}/player/photo/${player.id}" />
@@ -76,13 +77,17 @@ div .ct {
 							<p>位居縣市: ${player.county}</p>
 
 						</div>
+						<!-- 用戶欄設計結束 -->
+						<!-- 表單開始 -->
 						<div class="col-md-9" style="border: #FF0000 2px solid;">
 							<form:form action="${contextRoot}/front/posts/create"
 								modelAttribute="postsBean" method="post">
 <%-- 								<form:input path="player" type="hidden" value="${player.id}"/> --%>
+								<!-- 標題 -->
 								<label for="inputName">請輸入標題:</label>
 								<form:input class="form-control" id="inputName" path="name" />
 								<br />
+								<!-- 分類 -->
 								<label for="inputClassify">請輸入分類:</label>
 								<form:select class="form-control" id="inputClassify"
 									path="classify">
@@ -96,9 +101,11 @@ div .ct {
 								</form:select>
 
 								<br />
+								<!-- 內容 -->
 								<label for="inputEssay">請輸入內容:</label>
 								<form:textarea id="ckeditor" path="content" class="form-control" />
 								<br />
+								<!-- 按鈕排版 -->
 								<div class="row ">
 									<div class="col-3"></div>
 									<div class="col">
@@ -110,20 +117,21 @@ div .ct {
 									</div>
 									<div class="col-3"></div>
 								</div>
+								
 							</form:form>
 						</div>
+						<!-- 表單結束 -->
 					</div>
 				</div>
-
-
 			</div>
+			<!-- container結束 -->
 		</div>
 	</div>
 	<!-- Service End -->
-	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
-	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
 	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
 	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
+	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
+	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
 	<script>
 // 		jQuery重新導向
 		$("#toForum").on({

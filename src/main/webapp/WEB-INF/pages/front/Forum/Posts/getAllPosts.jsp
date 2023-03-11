@@ -12,7 +12,14 @@
 .a1{
 	display: flex;
 	justify-content: center;  
-	
+}
+a {
+  color: red;
+  transition: color 0.5s ease;
+}
+
+a:hover {
+  color: white;
 }
 </style>
 </head>
@@ -56,12 +63,10 @@
 							<form action="${contextRoot}/front/posts/search1" method="GET">
 								<input type="text" id="myPosts" name="searchStr"/>
 								<input type="submit" value="搜尋貼文" id="submitBtn" />
-								
 							</form>
 						</div>
 						<br/>
 						<div class="row">
-							
 							<div  class="a1">
 								<table id="list_table_json" class="table table-hover table-bordered">
 									<thead>
@@ -74,54 +79,14 @@
 										<c:forEach items="${postsList}" var="post"> 
 	
 											<tr>
-												<td>[${post.classify}] ${post.name}</td>
+												<td>[${post.classify}] <a href="${contextRoot}/front/posts/content?id=${post.id}">${post.name}</a></td>
 												<td>${post.player.name} / ${post.player.nickname}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-								
 							</div>
-						
 						</div>
-						
-<!-- 						</div> -->
-<!-- 						<div class="col-md-9" style="border: #FF0000 2px solid;"> -->
-<%-- 							<form:form action="${contextRoot}/front/posts/create" --%>
-<!-- 								modelAttribute="postsBean" method="post"> -->
-<%-- 								<form:input path="player" type="hidden" value="${player.id}"/> --%> 
-<!-- 								<label for="inputName">請輸入標題:</label> -->
-<!-- 								<form:input class="form-control" id="inputName" path="name" /> -->
-<!-- 								<br /> -->
-<!-- 								<label for="inputClassify">請輸入分類:</label> -->
-<!-- 								<form:select class="form-control" id="inputClassify" -->
-<!-- 									path="classify"> -->
-<!-- 									<form:option value="none" selected="true" disabled="true" -->
-<!-- 										hidden="true">請選擇選項</form:option> -->
-<!-- 									<form:option value="活動">活動</form:option> -->
-<!-- 									<form:option value="心得">心得</form:option> -->
-<!-- 									<form:option value="問題">問題</form:option> -->
-<!-- 									<form:option value="閒聊">閒聊</form:option> -->
-<!-- 									<form:option value="討論">討論</form:option> -->
-<!-- 								</form:select> -->
-
-<!-- 								<br /> -->
-<!-- 								<label for="inputEssay">請輸入內容:</label> -->
-<!-- 								<form:textarea id="ckeditor" path="content" class="form-control" /> -->
-<!-- 								<br /> -->
-<!-- 								<div class="row "> -->
-<!-- 									<div class="col-3"></div> -->
-<!-- 									<div class="col"> -->
-<!-- 										<button type="submit" class="btn btn-outline-primary">送出</button> -->
-<!-- 									</div> -->
-<!-- 									<div class="col"> -->
-<!-- 										<button type="button" id="toForum" -->
-<!-- 											class="btn btn-outline-primary">取消</button> -->
-<!-- 									</div> -->
-<!-- 									<div class="col-3"></div> -->
-<!-- 								</div> -->
-<!-- 							</form:form> -->
-<!-- 						</div> -->
 					</div>
 				</div>
 
@@ -130,8 +95,9 @@
 		</div>
 	</div>
 	<!-- Service End -->
+	<!-- jquery欲使用就須放在你所寫的.js前面 -->
 	<script src="${contextRoot}/js/jquery-3.6.3.min.js" type="text/javascript"></script>
-	<script src="${contextRoot}/js/ajax/posts/ajax-message.js" type="text/javascript"></script>
+	<script src="${contextRoot}/js/ajax/posts/axios-search-posts.js" type="text/javascript"></script>
 	
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
