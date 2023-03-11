@@ -1,12 +1,5 @@
 package tw.survival.validators;
 
-import java.util.Set;
-
-import javax.validation.ConstraintViolation;
-
-import javax.validation.executable.ExecutableValidator;
-import javax.validation.metadata.BeanDescriptor;
-
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -33,7 +26,6 @@ public class Playervalidator implements Validator {
 		if (!errors.hasFieldErrors("account") && player.getAccount().length() < 5) {
 			errors.rejectValue("account", "player.account.length.error", "帳號欄不能小於五個字元(預設值)");
 		}
-
 	}
 
 }

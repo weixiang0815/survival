@@ -216,7 +216,7 @@ public class CompetitionControllerAjax {
 	 */
 	@PostMapping("/competition/api/search/multicondition")
 	public List<CompetitionBean> multiconditionSearch(@RequestBody CompetitionSearchCondititonsDto conditions) {
-		return compService.multiconditionSearch(conditions);
+		return compService.multiconditionSearchBack(conditions);
 	}
 
 	/**
