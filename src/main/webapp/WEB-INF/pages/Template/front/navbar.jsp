@@ -38,17 +38,6 @@
 					<a href="${contextRoot}/front/Forum/index" class="dropdown-item">論壇</a>
 				</div>
 			</div>
-			<div class="nav-item dropdown">
-				<a href="#" class="nav-link dropdown-toggle"
-					data-bs-toggle="dropdown">頁面</a>
-				<div class="dropdown-menu m-0">
-					<a href="${contextRoot}/price" class="dropdown-item">價位</a> <a
-						href="${contextRoot}/team" class="dropdown-item">設計師</a> <a
-						href="${contextRoot}/open" class="dropdown-item">服務時段</a> <a
-						href="${contextRoot}/testimonial" class="dropdown-item">顧客評價</a> <a
-						href="${contextRoot}/404page" class="dropdown-item">404</a>
-				</div>
-			</div>
 			<c:if test="${empty sessionScope.player}">
 				<div class="nav-item dropdown">
 					<a href="#" class="nav-link dropdown-toggle"

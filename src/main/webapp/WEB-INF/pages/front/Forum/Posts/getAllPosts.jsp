@@ -58,9 +58,6 @@
 								<input type="submit" value="搜尋貼文" id="submitBtn" />
 								
 							</form>
-							<button class="my-posts-data-btn" >秀資料</button>
-							<div class="output">
-							</div>
 						</div>
 						<br/>
 						<div class="row">
