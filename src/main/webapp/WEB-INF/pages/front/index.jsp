@@ -7,10 +7,6 @@
 <head>
 <meta charset="utf-8">
 <title>Survival - 生存遊戲俱樂部</title>
-
-<!-- Favicon  -->
-<link rel="icon" href="${contextRoot}/img/market_favicon.ico">
-
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>

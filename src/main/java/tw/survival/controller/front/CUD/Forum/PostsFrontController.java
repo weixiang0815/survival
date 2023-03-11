@@ -3,6 +3,8 @@ package tw.survival.controller.front.CUD.Forum;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -31,15 +33,23 @@ public class PostsFrontController {
 		this.competitionService = competitionService;
 		this.playerService = playerService;
 	}
-	
+
 	@GetMapping("/posts/new")
 	public String newOnePost(Model model) {
 		PostsBean postsBean = new PostsBean();
-		PlayerBean player = (PlayerBean)model.getAttribute("player");
-		postsBean.setPlayer(player);
 		model.addAttribute("postsBean", postsBean);
 		model.addAttribute("player");
 		return "front/Forum/Posts/newOne";
+	}
+
+	@PostMapping("/posts/create")
+	public String create(@ModelAttribute("postsBean") PostsBean postsBean, Model model) {
+		//方法一
+		PlayerBean player =(PlayerBean) model.getAttribute("player");
+		postsBean.setPlayer(player);
+		postsService.insertPost(postsBean);
+		return "redirect:/front/posts/new";
+
 	}
 	
 	

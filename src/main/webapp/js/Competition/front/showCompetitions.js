@@ -27,7 +27,7 @@ function multiConditionSearch() {
         obj["mandarinName"] = name_input;
         obj["englishName"] = name_input;
     } else {
-        console.log("讀到惡意程式");
+        alert("讀到惡意程式");
         if (scriptRegex.test(name_input)) {
             alert("讀到 XSS 惡意程式");
         }
@@ -48,7 +48,7 @@ function multiConditionSearch() {
     console.log(obj);
     console.log(JSON.stringify(obj));
     $.ajax({
-        url: "http://localhost:8080/Survival/front/api/competition/multiCondition",
+        url: "http://localhost:8080/Survival/front/api/competition/multi-condition",
         method: "post",
         data: JSON.stringify(obj),
         contentType: "application/json;charset:UTF-8",

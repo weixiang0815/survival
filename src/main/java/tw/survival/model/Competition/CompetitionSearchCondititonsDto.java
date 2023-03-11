@@ -2,7 +2,6 @@ package tw.survival.model.Competition;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class CompetitionSearchCondititonsDto implements Serializable {

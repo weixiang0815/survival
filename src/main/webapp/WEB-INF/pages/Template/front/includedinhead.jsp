@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-<!-- Favicon -->
-<link href="${contextRoot}/img/favicon.ico" rel="icon">
+<!-- Favicon  -->
+<link rel="icon" href="${contextRoot}/img/market_favicon.ico">
 
 <!-- Google Web Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,9 +24,12 @@
 <link href="${contextRoot}/lib/animate/animate.min.css" rel="stylesheet">
 <link href="${contextRoot}/lib/owlcarousel/assets/owl.carousel.min.css"
 	rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="${contextRoot}/css/front/bootstrap.min.css" rel="stylesheet">
 
 <!-- Template Stylesheet -->
 <link href="${contextRoot}/css/front/style.css" rel="stylesheet">
+<!-- axios CDN -->
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
