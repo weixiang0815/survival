@@ -5,10 +5,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class GeneratedLinkUtils {
-	  @Value("${app.base.url}")
-	    private String appBaseUrl;
+
+	@Value("${app.base.url}")
+	private String appBaseUrl;
 
 	public String generateActivationLink(String activationCode) {
-        return appBaseUrl + "/activate?code=" + activationCode;
-    }
+		return appBaseUrl + "/activate?code=" + activationCode;
+	}
+
 }
