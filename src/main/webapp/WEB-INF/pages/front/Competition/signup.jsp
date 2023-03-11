@@ -131,8 +131,7 @@
                         </div>
                     </fieldset>
                     <div class="mt-3 mb-3 p-3">
-                        <a href="${contextRoot}/front/competition/show"><button id="thinkaboutit"
-                                class="m-3 btn btn-primary">再讓我想一下</button></a>
+                        <button id="thinkaboutit" class="m-3 btn btn-primary">再讓我想一下</button>
                         <button class="m-3 btn btn-primary" type="submit">報名</button>
                     </div>
                 </div>

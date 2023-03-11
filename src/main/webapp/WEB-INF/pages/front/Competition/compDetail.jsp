@@ -12,6 +12,7 @@
 		max-width: 300px;
 		display: none;
 		position: absolute;
+		cursor: pointer;
 	}
 	.productImg {
 		cursor: pointer;
@@ -137,7 +138,7 @@
 						<div>
 							<img id="proImg">
 						</div>
-						<table class="table table-dark table-hover table-striped table-bordered">
+						<table id="prizes" class="table table-dark table-hover table-striped table-bordered">
 							<c:if test="${prizes.firstPrize != null}">
 								<tr id="${prizes.firstPrize.id}" class="productImg">
 									<th>冠軍獎品</th>
@@ -194,9 +195,9 @@
 					</div>
 					<c:forEach items="${pictures}" var="pic">
 						<div class="col-6 p-1">
-							<a href="${contextRoot}/competition/api/photo/${pic.id}" data-bs-toggle="tooltip"
+							<a href="${contextRoot}/front/api/competition/photo/${pic.id}" data-bs-toggle="tooltip"
 								data-bs-title="Image ${pic.id}"> <img alt="Image ${pic.id}"
-									src="${contextRoot}/competition/api/photo/${pic.id}">
+									src="${contextRoot}/front/api/competition/photo/${pic.id}">
 							</a>
 						</div>
 					</c:forEach>
@@ -226,6 +227,7 @@
 				}
 			});
 			$("td").addClass("text-start");
+			$("#prizes").children().attr("title", "點擊可顯示圖片");
 			$.each(prodcutImg_pos, function(index, pic) {
 				let id = pic.getAttribute("id");
 				$(pic).on({

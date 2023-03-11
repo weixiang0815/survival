@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         mouseleave: () => {
             thinkaboutit.text("再讓我想一下");
+        },
+        click: e => {
+            e.preventDefault();
+            window.location = "http://localhost:8080/Survival/front/competition/show";
         }
     });
 });
