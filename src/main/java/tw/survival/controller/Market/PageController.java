@@ -17,10 +17,10 @@ public class PageController {
 		return "/front/Market/shop";
 	}
 
-	@GetMapping("/playAjax/intro1")
-	public String goAjaxIntro() {
-		return "ajax/ajax1-intro1";
-	}
+//	@GetMapping("/front/Market/Text")
+//	public String goText() {
+//		return "/front/Market/Text";
+//	}
 
 	@GetMapping("/playAjax/sendPage")
 	public String goAjaxSendDataPage() {

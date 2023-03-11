@@ -1,4 +1,4 @@
-package tw.survival.controller.Competition;
+package tw.survival.controller.back.Competition;
 
 import java.util.ArrayList;
 import java.util.List;

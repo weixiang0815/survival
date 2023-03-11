@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.sql.rowset.serial.SerialBlob;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
@@ -15,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,9 +31,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.Player.PlayerService;
+import tw.survival.validators.AddPlayerValidator;
 
 @Controller
 public class PlayerController {
+	@Autowired
+	public AddPlayerValidator validator;
 
 	String Ladypreset = "/images/lady.jpg";
 	String Manpreset = "/images/man.jpg";
@@ -108,7 +114,18 @@ public class PlayerController {
 	}
 
 	@PostMapping("/player/addpost")
-	public String postPlayer(@ModelAttribute PlayerBean player, Model model) {
+	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,
+			BindingResult bindingResult) {
+		validator.validate(player, bindingResult);
+		if (bindingResult.hasErrors()) {
+			List<ObjectError> list = bindingResult.getAllErrors();
+			model.addAttribute("error", list);
+			for (ObjectError error : list) {
+				System.out.println("有錯誤：" + error);
+			}
+			System.out.println("======================");
+			return "front/Player/user";
+		}
 		MultipartFile playerImage = player.getPlayerImage();
 		if (playerImage != null && !playerImage.isEmpty()) {
 			try {
@@ -120,8 +137,8 @@ public class PlayerController {
 			}
 		}
 		pService.addplayer(player);
-		System.out.print("註冊成功");
-		return "redirect:/player/list";
+		System.out.println("註冊成功");
+		return "front/Player/loginSystem";
 	}
 
 	// GetPhoto

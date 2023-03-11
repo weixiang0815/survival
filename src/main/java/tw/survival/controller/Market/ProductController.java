@@ -39,7 +39,7 @@ public class ProductController {
 	private TestProductDao TestDao;
 
 	@GetMapping("/Market/add_Product")
-	private String uploadPage() {
+	private String add_Product() {
 		return "/back/Market/add_Product";
 	}
 
@@ -81,6 +81,14 @@ public class ProductController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
+	
+	@GetMapping("/front/Market/Text")
+	public ModelAndView getAllProduct1(ModelAndView mav) {
+		List<ProductBean> list = productService.findAllProduct();
+		mav.setViewName("/front/Market/Text");
+		mav.getModel().put("list", list);
+		return mav;
+	}
 
 	// 搜尋商品 by ID
 	@ResponseBody
@@ -102,45 +110,45 @@ public class ProductController {
 	public String editProductPage(@RequestParam("id") Integer id, Model model) {
 		ProductBean p1 = productService.findById(id);
 		model.addAttribute("product", p1);
-		return "back/Market/editProduct";
+		return "/back/Market/editProduct";
 	}
 
-	// 修改商品
-	@PostMapping("/back/Market/edit")
+	// 修改商品 
+	@PostMapping("/Market/editProduct")
 	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
-			@RequestParam("img") MultipartFile img, @RequestParam("product_class") String product_class,
+			@RequestParam("img") MultipartFile img, @RequestParam("Product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
 		try {
-			productService.updateProductById(id, name, img.getBytes(), product_class, context, rent_fee, price);
+			productService.updateProductById(id, name, img.getBytes(),context,product_class, rent_fee, price);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return "redirect:/back/Market/allProduct";
+		return "redirect:/Market/allProduct";
 	}
 
 	// 刪除商品
-	@DeleteMapping("/Market/delete")
+	@DeleteMapping("back/Market/delete")
 	public String deleteProdduct(@RequestParam("id") Integer id) {
 		productService.deleteById(id);
 		return "redirect:/Market/allProduct";
 	}
 
 	// 模糊搜尋商品
-	@PostMapping("/Market/productNameLike")
+	@GetMapping("/Market/productNameLike")
 	public String findProductLike(@RequestParam("Search") String name, Model model) {
 		List<ProductBean> searchResult = productService.findByName(name);
 		model.addAttribute("SearchResult", searchResult);
-		return "Market/searchResult";
+		return "front/Market/searchResult";
 	}
 
 //	 搜尋類型商品>>ProductRepository>>findProductClassLike
-	@GetMapping("/Market/productIn")
+	@GetMapping("/Market/findProductClassLike")
 	public String findProductClassLike(@RequestParam("product_class") String clazz, Model model) {
 		List<ProductBean> searchResult = productDao.findProductClassLike(clazz);
 		model.addAttribute("SearchResult2", searchResult);
-		return "Market/searchResult2";
+		return "front/Market/searchResult2";
 	}
 
 	// 測試後可行的多條件
@@ -151,7 +159,8 @@ public class ProductController {
 		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
-	}
+	}	
+	//多條件
 
 	@ResponseBody
 	@GetMapping("Market/multicondition")

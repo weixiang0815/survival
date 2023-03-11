@@ -7,6 +7,10 @@
 <head>
 <meta charset="utf-8">
 <title>Survival - 生存遊戲俱樂部</title>
+
+<!-- Favicon  -->
+<link rel="icon" href="${contextRoot}/img/market_favicon.ico">
+
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>
@@ -39,7 +43,6 @@
 				<div class="carousel-item">
 					<video class="w-100" preload="auto" autoplay loop="loop" muted="muted">
 						<source src="${contextRoot}/videos/war-16391.mp4" type="video/mp4">
-						Your browser does not support the video tag.
 					</video>
 					<div
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
