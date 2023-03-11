@@ -43,31 +43,31 @@ public class TestProductDao {
 		List<ProductBean> resultList = query.getResultList();
 		return resultList;
 	}
-	
+
 	// 多條件查詢金額
-		public List<ProductBean> findProductText3(String name, String[] productclass, String price) {
-			StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE ");
-			boolean flag1 = name != null && !name.contentEquals("");
-			sql.append(flag1 ? "name LIKE '%" + name + "%' " : "");
-			boolean flag2 = productclass != null && productclass.length != 0;
-			if (flag2) {
-				sql.append(flag1 ? "AND " : "");
-				sql.append("class IN ( ");
-				for (int i = 0; i < productclass.length; i++) {
-					sql.append("'" + productclass[i] + "'");
-					sql.append(i != productclass.length - 1 ? ", " : " ) ");
-				}
+	public List<ProductBean> findProductText3(String name, String[] productclass, String price) {
+		StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE ");
+		boolean flag1 = name != null && !name.contentEquals("");
+		sql.append(flag1 ? "name LIKE '%" + name + "%' " : "");
+		boolean flag2 = productclass != null && productclass.length != 0;
+		if (flag2) {
+			sql.append(flag1 ? "AND " : "");
+			sql.append("class IN ( ");
+			for (int i = 0; i < productclass.length; i++) {
+				sql.append("'" + productclass[i] + "'");
+				sql.append(i != productclass.length - 1 ? ", " : " ) ");
 			}
-			boolean flag3 = price != null && !price.contentEquals("");
-			if (flag3) {
-				sql.append(flag1 || flag2 ? "AND " : "");
-				sql.append("price LIKE '%" + price + "%'");
-			}
-			sql.append(";");
-			Query query = em.createNativeQuery(sql.toString(), ProductBean.class);
-			@SuppressWarnings("unchecked")
-			List<ProductBean> resultList = query.getResultList();
-			return resultList;
 		}
+		boolean flag3 = price != null && !price.contentEquals("");
+		if (flag3) {
+			sql.append(flag1 || flag2 ? "AND " : "");
+			sql.append("price LIKE '%" + price + "%'");
+		}
+		sql.append(";");
+		Query query = em.createNativeQuery(sql.toString(), ProductBean.class);
+		@SuppressWarnings("unchecked")
+		List<ProductBean> resultList = query.getResultList();
+		return resultList;
+	}
 
 }

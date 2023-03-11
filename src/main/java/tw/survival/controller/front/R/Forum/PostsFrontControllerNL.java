@@ -1,12 +1,8 @@
 package tw.survival.controller.front.R.Forum;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
-
-import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Employee.EmployeeService;
 import tw.survival.service.Forum.PostsService;
