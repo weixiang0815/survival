@@ -4,15 +4,13 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Forum.PostsBean;
-=======
->>>>>>> 297283d41fc53130466715c516b1a71666e241ee
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Employee.EmployeeService;
 import tw.survival.service.Forum.PostsService;
