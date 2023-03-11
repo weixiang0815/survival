@@ -1,10 +1,14 @@
 package tw.survival.controller.front.R.Forum;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Competition.CompetitionService;
@@ -41,16 +45,72 @@ public class PostsFrontControllerNL {
 	}
 
 	/**
-	 * 
-	 * @param model:<br>
-	 *                   這裡是下一行
-	 * @return
+	 * @author 鄭力豪
+	 * @apiNote 論壇主頁。
 	 */
-	@GetMapping("Forum/index")
-	public String frontMainControllerNL() {
-//		PostsBean postsBean = new PostsBean();
-//		model.addAttribute("postsBean", postsBean);
+	@GetMapping("/Forum/index")
+	public String frontMainNLController() {
 		return "front/Forum/index";
 	}
-
+	
+	/**
+	 * @param model 設定model 目的為設置輸入物件
+	 * @return String 設定View
+	 * @author 鄭力豪
+	 * @apiNote 成列所有前十筆文章(作用為預設第一頁)
+	 */
+	@GetMapping("/posts/getAll")
+	public String searchMain(Model model) {
+		Page<PostsBean> page = postsService.getPostsWithNameContainingByPage(1, "");
+		List<PostsBean> postsList = page.getContent();
+		model.addAttribute("postsList",postsList);
+		return"front/Forum/Posts/getAllPosts";
+	}
+	
+	
+	/**
+	 * @param name 欲輸入的模糊搜尋名稱
+	 * @return page物件
+	 * @author 鄭力豪
+	 * @apiNote 把模糊搜尋的前十筆資料丟出來
+	 */
+	@ResponseBody
+	@GetMapping("/posts/ajax/postpage")
+	public Page<PostsBean> addOneAndReturnLatesTen(@RequestParam(name = "SearchStr", defaultValue = "") String name){
+		
+		Page<PostsBean> page = postsService.getPostsWithNameContainingByPage(1, name);
+		
+		return page;
+	}
+	
+	/**
+	 * @param pageNumber 欲輸入的頁碼
+	 * @param name 欲輸入的模糊搜尋名稱
+	 * @return page物件
+	 * @author 鄭力豪
+	 * @apiNote 把模糊搜尋的資料依照十筆為一頁丟出某頁
+	 */
+	@ResponseBody
+	@GetMapping("/posts/ajax/page")
+	public Page<PostsBean> showPostsByPageAjax(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, @RequestParam(name = "SearchStr") String name) {
+		
+		Page<PostsBean> page = postsService.getPostsWithNameContainingByPage(pageNumber, name);
+		
+		return page;
+	}
+	
+//	/**
+//	 * @return page物件
+//	 * @author 鄭力豪
+//	 * @apiNote 測試資料。
+//	 */
+//	@ResponseBody
+//	@PostMapping("/posts/ajax/text")
+//	public Page<PostsBean> text(){
+//		Page<PostsBean> page = postsService.getAllPostsByPage(1);
+//		return page;
+//	}
+	
+	
 }
+

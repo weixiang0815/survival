@@ -135,14 +135,14 @@ i {
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<i class="fa-solid fa-handshake"></i>
+							<i class="fa-solid fa-calendar-days"></i>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">場地租借</h3>
-							<p>觀瞻諸君！來檢視租借領域的契約條款與租金報價吧！</p>
-							<span class="text-uppercase text-primary">打造屬於自己的戰場</span>
+							<h3 class="text-uppercase mb-3">活動排程</h3>
+							<p>觀看這張卷時間軸，體驗屬於你的時空之旅！</p>
+							<span class="text-uppercase text-primary">時間軸，命運交織之地！</span>
 						</div>
-						<a class="btn btn-square" href=""><i class="bi bi-eye"></i></a>
+						<a class="btn btn-square" href="${contextRoot}/front/schedule/new"><i class="bi bi-eye"></i></a>
 					</div>
 				</div>
 			</div>

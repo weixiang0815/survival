@@ -91,7 +91,7 @@
 							<p>這裡是龐大的貼文搜尋庫。上從專業文章、提問；下至閒聊八卦這裡應有盡有!</p>
 							<span class="text-uppercase text-primary">From $15</span>
 						</div>
-						<a class="btn btn-square" href=""><i
+						<a class="btn btn-square" href="${contextRoot}/front/posts/getAll"><i
 							class="fa fa-plus text-primary"></i></a>
 					</div>
 				</div>

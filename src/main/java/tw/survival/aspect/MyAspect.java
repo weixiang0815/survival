@@ -27,7 +27,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 public class MyAspect {
 
 	/**
-	 * 設定 AOP 橫切關注的範圍（前台頁面的 Controller），但不限制未登入使用者查詢（R）資料
+	 * 設定 AOP 橫切關注的範圍（前台頁面必須登入會員的 Controller），但不限制未登入使用者查詢（R）資料
 	 */
 	@Pointcut(" execution(* tw.survival.controller.front.CUD..*(..)) ")
 	public void pointcutFront() {
@@ -72,13 +72,13 @@ public class MyAspect {
 			response.sendRedirect(request.getContextPath() + "/Player/login");
 			return;
 		}
-		if(session ==null||session.getAttribute("employee")==null) {
-			System.out.println("權限不足，需要登入");
-			response.sendRedirect(request.getContextPath() + "/Employee/login");
-			return;
-		}else if(session!=null||session.getAttribute("employee")!=null){
-			response.sendRedirect(request.getContextPath()+"/Employee/index");
-		}
+//		if(session ==null||session.getAttribute("employee")==null) {
+//			System.out.println("權限不足，需要登入");
+//			response.sendRedirect(request.getContextPath() + "/Employee/login");
+//			return;
+//		}else if(session!=null||session.getAttribute("employee")!=null){
+//			response.sendRedirect(request.getContextPath()+"/Employee/index");
+//		}
 	}
 
 	/**

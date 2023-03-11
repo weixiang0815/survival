@@ -41,15 +41,15 @@ public class CompetitionDao {
 	 * @author 王威翔
 	 */
 	public List<CompetitionBean> multiconditionSearchBack(CompetitionSearchCondititonsDto conditions) {
-		TypedQuery<CompetitionBean> query = em.createQuery(hqlBack(conditions), CompetitionBean.class);
+		TypedQuery<CompetitionBean> query = em.createQuery(sqlBack(conditions), CompetitionBean.class);
 		return query.getResultList();
 	}
 
 	/**
-	 * 將針對前台傳入的各種條件動態轉換為 HQL 語句
+	 * 將針對前台傳入的各種條件動態轉換為 SQL 語句
 	 * 
 	 * @param condititons 查詢依據的各種條件
-	 * @return 轉換好的 HQL 語句字串
+	 * @return 轉換好的 SQL 語句字串
 	 * @author 王威翔
 	 */
 	@SuppressWarnings("null")
@@ -167,109 +167,109 @@ public class CompetitionDao {
 	}
 
 	/**
-	 * 將針對後台傳入的各種條件動態轉換為 HQL 語句
+	 * 將針對後台傳入的各種條件動態轉換為 SQL 語句
 	 * 
 	 * @param condititons 查詢依據的各種條件
-	 * @return 轉換好的 HQL 語句字串
+	 * @return 轉換好的 SQL 語句字串
 	 * @author 王威翔
 	 * @throws ParseException
 	 */
-	public String hqlBack(CompetitionSearchCondititonsDto conditions) {
-		StringBuilder hql = new StringBuilder("select * from CompetitionBean as c ");
-		hql.append("where 1=1 ");
+	public String sqlBack(CompetitionSearchCondititonsDto conditions) {
+		StringBuilder SQL = new StringBuilder("select * from CompetitionBean as c ");
+		SQL.append("where 1=1 ");
 		String mandarinName = conditions.getMandarinName();
 		if (mandarinName != null && !mandarinName.trim().contentEquals("")) {
-			hql.append("and c.mandarinName like '%");
-			hql.append(mandarinName);
-			hql.append("%' ");
+			SQL.append("and c.mandarinName like '%");
+			SQL.append(mandarinName);
+			SQL.append("%' ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		String englishName = conditions.getEnglishName();
 		if (englishName != null && !englishName.trim().contentEquals("")) {
-			hql.append("and c.englishName like '%");
-			hql.append(englishName);
-			hql.append("%' ");
+			SQL.append("and c.englishName like '%");
+			SQL.append(englishName);
+			SQL.append("%' ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<Integer> place = conditions.getPlace();
 		if (place != null && place.size() != 0) {
-			hql.append("and c.placeId in (");
+			SQL.append("and c.placeId in (");
 			for (int i = 0; i < place.size(); i++) {
-				hql.append(place.get(i));
-				hql.append(i == place.size() - 1 ? "" : ", ");
+				SQL.append(place.get(i));
+				SQL.append(i == place.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<String> singleOrCrew = conditions.getSingleOrCrew();
 		if (singleOrCrew != null && singleOrCrew.size() != 0) {
-			hql.append("and c.singleOrCrew in (");
+			SQL.append("and c.singleOrCrew in (");
 			for (int i = 0; i < singleOrCrew.size(); i++) {
-				hql.append("'" + singleOrCrew.get(i) + "'");
-				hql.append(i == singleOrCrew.size() - 1 ? "" : ", ");
+				SQL.append("'" + singleOrCrew.get(i) + "'");
+				SQL.append(i == singleOrCrew.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<String> status = conditions.getStatus();
 		if (status != null && status.size() != 0) {
-			hql.append("and c.status in (");
+			SQL.append("and c.status in (");
 			for (int i = 0; i < status.size(); i++) {
-				hql.append("'" + status.get(i) + "'");
-				hql.append(i == status.size() - 1 ? "" : ", ");
+				SQL.append("'" + status.get(i) + "'");
+				SQL.append(i == status.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<Integer> capacity = conditions.getCapacity();
 		if (capacity != null && capacity.size() != 0) {
-			hql.append("and c.capacity in (");
+			SQL.append("and c.capacity in (");
 			for (int i = 0; i < capacity.size(); i++) {
-				hql.append(capacity.get(i));
-				hql.append(i == capacity.size() - 1 ? "" : ", ");
+				SQL.append(capacity.get(i));
+				SQL.append(i == capacity.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
 		List<Integer> budget = conditions.getBudget();
 		if (budget != null && budget.size() != 0) {
-			hql.append("and c.budget in (");
+			SQL.append("and c.budget in (");
 			for (int i = 0; i < budget.size(); i++) {
-				hql.append(budget.get(i));
-				hql.append(i == budget.size() - 1 ? "" : ", ");
+				SQL.append(budget.get(i));
+				SQL.append(i == budget.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<Integer> fee = conditions.getFee();
 		if (fee != null && fee.size() != 0) {
-			hql.append("and c.fee in (");
+			SQL.append("and c.fee in (");
 			for (int i = 0; i < fee.size() - 1; i++) {
-				hql.append(fee.get(i));
-				hql.append(i == fee.size() - 1 ? "" : ", ");
+				SQL.append(fee.get(i));
+				SQL.append(i == fee.size() - 1 ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<Integer> publicOrPrivate = conditions.getPublicOrPrivate();
 		if (publicOrPrivate != null && publicOrPrivate.size() != 0) {
-			hql.append("and c.publicOrPrivate in (");
+			SQL.append("and c.publicOrPrivate in (");
 			for (int i = 0; i < publicOrPrivate.size(); i++) {
-				hql.append(publicOrPrivate.get(i));
-				hql.append(i == publicOrPrivate.size() ? "" : ", ");
+				SQL.append(publicOrPrivate.get(i));
+				SQL.append(i == publicOrPrivate.size() ? "" : ", ");
 			}
-			hql.append(") ");
+			SQL.append(") ");
 		}
-		System.out.println(hql.toString());
+		System.out.println(SQL.toString());
 		List<String> date = conditions.getDate();
 		if (date != null) {
-			hql.append("and c.startDate <= '");
-			hql.append(date);
-			hql.append("' and c.endDate >= '");
-			hql.append(date);
-			hql.append("' ");
+			SQL.append("and c.startDate <= '");
+			SQL.append(date);
+			SQL.append("' and c.endDate >= '");
+			SQL.append(date);
+			SQL.append("' ");
 		}
-		System.out.println(hql.toString());
-		return hql.toString();
+		System.out.println(SQL.toString());
+		return SQL.toString();
 	}
 
 }
