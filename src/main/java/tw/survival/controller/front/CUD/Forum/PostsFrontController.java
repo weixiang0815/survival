@@ -44,11 +44,17 @@ public class PostsFrontController {
 
 	@PostMapping("/posts/create")
 	public String create(@ModelAttribute("postsBean") PostsBean postsBean, Model model) {
+		//方法一
 		PlayerBean player =(PlayerBean) model.getAttribute("player");
 		postsBean.setPlayer(player);
 		postsService.insertPost(postsBean);
 		return "redirect:/front/posts/new";
 
 	}
+	
+	
+	
+	
+	
 
 }

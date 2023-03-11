@@ -11,7 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.PostsRepository;
@@ -205,8 +210,34 @@ public class PostsService {
 		return pDao.findPostsBeanLike(str);
 	}
 	
+	/**
+	 * @param pageNumber 分頁頁數。
+	 * @return 回傳Page物件，Page內容為多個PostsBean物件
+	 * @author 鄭力豪
+	 * @用途 將全部文章分頁
+	 */
+	public Page<PostsBean> getAllPostsByPage(Integer pageNumber){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10,Sort.Direction.DESC, "added");
+		
+		Page<PostsBean> page = pDao.findAll(pgb);
+		
+		return page;
+	}
 	
-	
-	
+	/**
+	 * @param pageNumber 分頁頁數。
+	 * @param name 模糊搜尋的名稱。
+	 * @return 回傳Page物件，Page內容為多個PostsBean物件
+	 * @author 鄭力豪
+	 * @用途 將模糊搜尋的文章分頁
+	 */
+	public Page<PostsBean> getPostsWithNameContainingByPage(Integer pageNumber, String name){
+		//定義分頁規則
+		Pageable pgb = PageRequest.of(pageNumber-1, 10);
+		//將HQL排序完成的物件依照分頁規則實作
+		Page<PostsBean> page = pDao.findByNameContainingOrderByAddedDesc(name, pgb);
+		
+		return page;
+	}
 
 }

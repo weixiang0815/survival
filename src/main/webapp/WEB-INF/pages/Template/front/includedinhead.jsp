@@ -30,3 +30,5 @@
 
 <!-- Template Stylesheet -->
 <link href="${contextRoot}/css/front/style.css" rel="stylesheet">
+<!-- axios CDN -->
+<script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>

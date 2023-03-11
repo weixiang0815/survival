@@ -8,6 +8,13 @@
 <meta charset="UTF-8">
 <title>貼文查詢</title>
 <jsp:include page="../../../Template/front/includedinhead.jsp"></jsp:include>
+<style>
+.a1{
+	display: flex;
+	justify-content: center;  
+	
+}
+</style>
 </head>
 <body>
 <jsp:include page="../../../Template/front/navbar.jsp"></jsp:include>
@@ -16,7 +23,7 @@
 		data-wow-delay="0.1s">
 		<div class="container text-center py-5">
 			<h1
-				class="display-3 text-white text-uppercase mb-3 animated slideInDown">貼文發佈</h1>
+				class="display-3 text-white text-uppercase mb-3 animated slideInDown">貼文查詢</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
 					<li class="breadcrumb-item"><a class="text-white"
@@ -42,19 +49,50 @@
 				<!-- class="wow fadeInUp" 上浮顯現 -->
 				<!-- data-wow-delay="0.1s" 設定延遲時間-->
 				<!-- col-lg-4 col-md-6 Bootstrap分隔樣板 col為列分隔最大為12 lg:空間高於992px md:空間高於≥768px-->
-				<div class=" wow fadeInUp .ct" data-wow-delay="0.1s">
-					<div class="wow d-flex text-center ">
+				<div class=" wow fadeInUp" data-wow-delay="0.1s">
+					<div class=" text-center ">
 <!-- 						<div class="col-md-3" style="border: #FF0000 2px solid;"> -->
-						<form action="/" method="POST">
-							<input type="text" id="search" name="searchStr"/>
+						<div>
+							<form action="${contextRoot}/front/posts/search1" method="GET">
+								<input type="text" id="myPosts" name="searchStr"/>
+								<input type="submit" value="搜尋貼文" id="submitBtn" />
+								
+							</form>
+							<button class="my-posts-data-btn" >秀資料</button>
+							<div class="output">
+							</div>
+						</div>
+						<br/>
+						<div class="row">
+							
+							<div  class="a1">
+								<table id="list_table_json" class="table table-hover table-bordered">
+									<thead>
+										<tr>
+											<th>貼文名稱</th>
+											<th>作者/小名</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach items="${postsList}" var="post"> 
+	
+											<tr>
+												<td>[${post.classify}] ${post.name}</td>
+												<td>${post.player.name} / ${post.player.nickname}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
+								
+							</div>
 						
-						</form>
+						</div>
 						
 <!-- 						</div> -->
 <!-- 						<div class="col-md-9" style="border: #FF0000 2px solid;"> -->
 <%-- 							<form:form action="${contextRoot}/front/posts/create" --%>
 <!-- 								modelAttribute="postsBean" method="post"> -->
-<%-- <%-- 								<form:input path="player" type="hidden" value="${player.id}"/> --%> --%>
+<%-- 								<form:input path="player" type="hidden" value="${player.id}"/> --%> 
 <!-- 								<label for="inputName">請輸入標題:</label> -->
 <!-- 								<form:input class="form-control" id="inputName" path="name" /> -->
 <!-- 								<br /> -->
@@ -95,7 +133,10 @@
 		</div>
 	</div>
 	<!-- Service End -->
-<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
-<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/jquery-3.6.3.min.js" type="text/javascript"></script>
+	<script src="${contextRoot}/js/ajax/posts/ajax-message.js" type="text/javascript"></script>
+	
+	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
+	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>
