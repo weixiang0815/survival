@@ -4,8 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.validation.Valid;
 
@@ -30,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
+import tw.survival.model.email.sendmail;
 import tw.survival.service.Player.PlayerService;
+import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;
 
 @Controller
@@ -44,6 +48,9 @@ public class PlayerController {
 	ServletContext context;
 	@Autowired
 	private PlayerService pService;
+	
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("/player.main")
 	public String main() {
@@ -114,7 +121,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/player/addpost")
-	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,
+	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,HttpSession http,
 			BindingResult bindingResult) {
 		validator.validate(player, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -136,6 +143,11 @@ public class PlayerController {
 				e.printStackTrace();
 			}
 		}
+		player.setStatus("F");
+		player.setCode(UUID.randomUUID().toString());
+		http.setAttribute("player", player);
+		emailService.sendHtmlMail(player);
+		
 		pService.addplayer(player);
 		System.out.println("註冊成功");
 		return "front/Player/loginSystem";
@@ -207,11 +219,10 @@ public class PlayerController {
 		return "back/Player/SelectAllResult";
 
 	}
-	//
-
-	public String oneButtonInsert(@ModelAttribute("player") PlayerBean player) {
-
-		return "";
+	
+	@GetMapping("/toregist")
+	public String toemail() {
+		return"regist";
 	}
 
 }

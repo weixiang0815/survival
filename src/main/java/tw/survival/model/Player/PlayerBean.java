@@ -53,11 +53,11 @@ public class PlayerBean {
 	@Column(name = "name")
 	private String name;
 
-	@NotBlank()
+	
 	@Column(name = "account")
 	private String account;
 
-	@NotBlank()
+	
 	@Column(name = "password")
 	private String password;
 	
@@ -84,6 +84,9 @@ public class PlayerBean {
 
 	@Column(name = "info")
 	private String info;
+	
+	@Column(name="code")
+	private String code;
 
 	@JsonIgnore
 	@Column(name = "thumbnail")
@@ -115,7 +118,10 @@ public class PlayerBean {
 
 	@Column(name = "banned_reason")
 	private String banned_reason;
-
+	
+	@Column(name = "status")
+	private String status;
+	
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_id")
@@ -171,6 +177,7 @@ public class PlayerBean {
 		}
 	}
 
+	
 	public PlayerBean() {
 	}
 
@@ -397,6 +404,24 @@ public class PlayerBean {
 
 	public void setInfo(String info) {
 		this.info = info;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getCode() {
+		return code;
+	}
+
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 }

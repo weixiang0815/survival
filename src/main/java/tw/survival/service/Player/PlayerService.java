@@ -52,5 +52,13 @@ public class PlayerService {
 	public List<PlayerBean> findName(String name) {
 		return pDAO.searchByNameLike(name);
 	}
+	public void  UpdateStatus(Integer id,Integer status) {			
+		 pDAO.updateStatusById(id, status);
+	}
+	
+	public PlayerBean findbyemail(String email) {
+		return pDAO.findByemail(email);
+		
+	}
 
 }
