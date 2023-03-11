@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.SignUpBean;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Competition.SignUpService;
+import tw.survival.service.email.EmailService;
 
 @Controller
 @RequestMapping("/front")
@@ -23,6 +26,12 @@ public class CompetitionControllerFrontCUD {
 
 	@Autowired
 	private CompetitionService compService;
+
+	@Autowired
+	private SignUpService signupService;
+
+	@Autowired
+	private EmailService emailService;
 
 	@GetMapping("/signup")
 	public String goSignUp(@RequestParam(value = "id", required = false) Integer id, Model model) {
@@ -76,6 +85,15 @@ public class CompetitionControllerFrontCUD {
 		model.addAttribute("compList", comps);
 		model.addAttribute("signup", new SignUpBean());
 		return "front/Competition/signup";
+	}
+
+	@GetMapping("/signup/new")
+	public String newSignUp(@ModelAttribute("signup") SignUpBean signup, Model model) {
+		signup = signupService.insert(signup);
+		if (signup.getStatus().contentEquals("已繳費")) {
+			signupService.payup(signup.getId());
+		}
+		return "redirect:front/competition/show";
 	}
 
 }

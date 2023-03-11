@@ -36,14 +36,22 @@ public class SignUpService {
 	/**
 	 * 繳交報名費
 	 * 
-	 * @param signup 欲繳費的報名紀錄實體
+	 * @param id 欲繳費的報名紀錄實體 id
 	 * @return 繳費成功回傳該報名紀錄實體，失敗回傳 null
 	 * @author 王威翔
 	 */
-	public SignUpBean payup(SignUpBean signup) {
+	public SignUpBean payup(Integer id) {
 		try {
-			return signupRepo.save(signup);
+			Optional<SignUpBean> optional = signupRepo.findById(id);
+			if (optional.isPresent()) {
+				SignUpBean oldSignup = optional.get();
+				oldSignup.setStatus("已繳費");
+				//	此處塞一個金流與寄送電子發票的功能
+				return signupRepo.save(oldSignup);
+			}
+			return null;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
