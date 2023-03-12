@@ -198,10 +198,10 @@ public class NewCompetitionFormService {
 			File file = new File(filepath);
 			file.delete();
 			mainForm.setThirdPart(null);
-			part1Dao.delete(firstPart);
-			part2Dao.delete(secondPart);
-			part3Dao.delete(thirdPart);
 			mainDao.deleteById(id);
+			part1Dao.deleteById(firstPart.getId());
+			part2Dao.deleteById(secondPart.getId());
+			part3Dao.deleteById(thirdPart.getId());
 			return true;
 		} catch (Exception e) {
 			return false;
@@ -226,10 +226,10 @@ public class NewCompetitionFormService {
 			File file = new File(filepath);
 			file.delete();
 			mainForm.setThirdPart(null);
-			part1Dao.delete(firstPart);
-			part2Dao.delete(secondPart);
-			part3Dao.delete(thirdPart);
-			mainDao.delete(mainForm);
+			mainDao.deleteById(mainForm.getId());
+			part1Dao.deleteById(firstPart.getId());
+			part2Dao.deleteById(secondPart.getId());
+			part3Dao.deleteById(thirdPart.getId());
 			return true;
 		} catch (Exception e) {
 			return false;

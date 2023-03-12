@@ -13,10 +13,13 @@ import org.springframework.web.multipart.MultipartFile;
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Competition.CompetitionPictureBean;
 import tw.survival.model.Competition.CompetitionPrizeBean;
+import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionPictureService;
 import tw.survival.service.Competition.CompetitionPrizeService;
 import tw.survival.service.Competition.CompetitionService;
+import tw.survival.service.Competition.NewCompetitionFormService;
+import tw.survival.service.Employee.EmployeeService;
 import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Player.PlayerService;
@@ -32,6 +35,9 @@ public class CompetitionController {
 	private PlayerService playerService;
 
 	@Autowired
+	private EmployeeService empService;
+
+	@Autowired
 	private PlaceService placeService;
 
 	@Autowired
@@ -42,6 +48,9 @@ public class CompetitionController {
 
 	@Autowired
 	private ProductService productService;
+
+	@Autowired
+	private NewCompetitionFormService newFormService;
 
 	/**
 	 * 跳轉至活動系統首頁
@@ -74,8 +83,8 @@ public class CompetitionController {
 	@PostMapping("/competition/create")
 	public String createCompetition(@ModelAttribute("competition") CompetitionBean comp, Model model) {
 		comp.setPlace(placeService.getOnePlaceById(comp.getPlaceId()));
-		comp.setFounderEmployee(null);
-		comp.setFounderPlayer(playerService.findByBean(1));
+		EmployeeBean emp = (EmployeeBean) model.getAttribute("employee");
+		comp.setFounderEmployee(emp);
 		comp = compService.create(comp);
 		if (comp.getStatus().contentEquals("已發布")) {
 			compService.publishById(comp.getId());

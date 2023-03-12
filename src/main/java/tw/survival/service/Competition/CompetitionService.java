@@ -185,7 +185,7 @@ public class CompetitionService {
 		});
 		return comps;
 	}
-	
+
 	/**
 	 * 針對前台的多條件查詢活動結果
 	 * 

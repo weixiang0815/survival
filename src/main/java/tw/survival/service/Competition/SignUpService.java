@@ -46,7 +46,7 @@ public class SignUpService {
 			if (optional.isPresent()) {
 				SignUpBean oldSignup = optional.get();
 				oldSignup.setStatus("已繳費");
-				//	此處塞一個金流與寄送電子發票的功能
+				// 此處塞一個金流與寄送電子發票的功能
 				return signupRepo.save(oldSignup);
 			}
 			return null;
@@ -66,6 +66,23 @@ public class SignUpService {
 	public SignUpBean findById(Integer id) {
 		Optional<SignUpBean> optional = signupRepo.findById(id);
 		return optional.isPresent() ? optional.get() : null;
+	}
+
+	/**
+	 * 透過會員 id 與 活動 id 查詢報名紀錄
+	 * 
+	 * @param playerId 欲查詢報名紀錄的會員 id
+	 * @param compId   欲查詢報名紀錄的活動 id
+	 * @return 查詢成功回傳該報名紀錄實體，查無資料或出錯則回傳 null
+	 * @author 王威翔
+	 */
+	public SignUpBean findByPlayerIdAndCompId(Integer playerId, Integer compId) {
+		try {
+			return signupRepo.findByPlayerIdAndCompId(playerId, compId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	/**

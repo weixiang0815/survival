@@ -50,8 +50,8 @@ public class SignUpBean {
 	private PlayerBean player;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy/MM/dd aa HH:mm:ss EEEE")
+	@JsonFormat(pattern = "yyyy/MM/dd aa HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "signup_date")
 	private Date signUpDate;
 
