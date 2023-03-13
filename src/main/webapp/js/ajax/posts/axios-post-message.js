@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     let dtoObject = {
       "edit-Text":textValue,
-      "post-id":4,
+      "post-id":1,
       "player-id":1
     }
 
@@ -19,7 +19,7 @@ $(document).ready(function() {
     axios.post(url, dtoObject)
       .then(res=> {
         console.log(res.data);
-        htmlMaker(res.data);
+        // htmlMaker(res.data);
       })
       .catch(err=> {
         console.log(err);

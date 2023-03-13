@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
-@Table(name = "bookmarklet")
-public class BookmarkletBean implements Serializable {
+@Table(name = "PlayerToMsgs")
+public class PlayerToMsgsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -40,13 +40,16 @@ public class BookmarkletBean implements Serializable {
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_posts_id")
-	private PostsBean posts;
+	@JoinColumn(name = "fk_player_id")
+	private PlayerBean player;
 
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_player_id")
-	private PlayerBean player;
+	@JoinColumn(name = "fk_msgs_id")
+	private MsgsBean msgs;
+	
+	public PlayerToMsgsBean() {
+	}
 
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
@@ -54,24 +57,13 @@ public class BookmarkletBean implements Serializable {
 			added = new Date();
 		}
 	}
-
-	public BookmarkletBean() {
-	}
-
+	
 	public Integer getId() {
 		return id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public PostsBean getPosts() {
-		return posts;
-	}
-
-	public void setPosts(PostsBean posts) {
-		this.posts = posts;
 	}
 
 	public PlayerBean getPlayer() {
@@ -82,4 +74,14 @@ public class BookmarkletBean implements Serializable {
 		this.player = player;
 	}
 
+	public MsgsBean getMsgs() {
+		return msgs;
+	}
+
+	public void setMsgs(MsgsBean msgs) {
+		this.msgs = msgs;
+	}
+	
+	
+	
 }
