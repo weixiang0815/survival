@@ -23,5 +23,6 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Integer> {
 	@Modifying
 	@Query("UPDATE PlayerBean p SET p.status = :newStatus WHERE p.id = :id")
 	void updateStatusById(@Param("id") Integer id, @Param("newStatus") Integer newStatus);
-		
+	
+	
 }

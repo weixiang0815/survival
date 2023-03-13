@@ -14,7 +14,7 @@
 	<jsp:include page="../../Template/admin.jsp" />
 	<h3>新增職員</h3>
 	<form:form action="${contextRoot}/Employee/addEmployee"
-		enctype="multipart/form-data" modelAttribute="employee">
+		enctype="multipart/form-data" modelAttribute="Employee">
 		<table>
 			<tr>
 				<td>使用者名稱：</td>

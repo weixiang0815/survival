@@ -2,6 +2,7 @@ package tw.survival.model.Player;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
@@ -170,6 +172,8 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
 //	private List<CartBean> cart = new ArrayList<>();
 
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private Set<SignUpBean> signUps = new HashSet<>();
 	@PrePersist
 	public void autoCreate() {
 		if (join_date == null) {
@@ -423,5 +427,16 @@ public class PlayerBean {
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+
+	public Set<SignUpBean> getSignUps() {
+		return signUps;
+	}
+
+
+	public void setSignUps(Set<SignUpBean> signUps) {
+		this.signUps = signUps;
+	}
+	
 
 }
