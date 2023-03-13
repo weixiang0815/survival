@@ -120,7 +120,7 @@ public class PlayerBean {
 	private String banned_reason;
 	
 	@Column(name = "status")
-	private String status;
+	private Integer status;
 	
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -406,11 +406,11 @@ public class PlayerBean {
 		this.info = info;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 

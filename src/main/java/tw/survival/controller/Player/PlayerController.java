@@ -143,12 +143,12 @@ public class PlayerController {
 				e.printStackTrace();
 			}
 		}
-		player.setStatus("F");
+		player.setStatus(0);
 		player.setCode(UUID.randomUUID().toString());
 		http.setAttribute("player", player);
-		emailService.sendHtmlMail(player);
+		PlayerBean player2 = pService.addplayer(player);
+		emailService.sendHtmlMail(player2);
 		
-		pService.addplayer(player);
 		System.out.println("註冊成功");
 		return "front/Player/loginSystem";
 	}
@@ -220,9 +220,10 @@ public class PlayerController {
 
 	}
 	
-	@GetMapping("/toregist")
-	public String toemail() {
-		return"regist";
+	@GetMapping("/active/{id}")
+	public String toemail(@PathVariable("id") Integer id) {
+		pService.UpdateStatus(id, 1);
+		return "front/Player/loginSystem";
 	}
 
 }

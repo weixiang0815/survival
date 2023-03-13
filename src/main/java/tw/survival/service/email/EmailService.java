@@ -33,12 +33,13 @@ public class EmailService {
 
 			MimeMessage mimeMailMessage = javaMailSender.createMimeMessage();
 			// true表示需要創建一個multipart message
-			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
+			MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true, "UTF-8");
 			mimeMessageHelper.setFrom("travelmateeeit157@gmail.com");
 			mimeMessageHelper.setTo(player.getEmail());
 			mimeMessageHelper.setSubject("這是一封激活郵件");
-			mimeMessageHelper.setText("<a target='_Blank' href='${contextRoot}'>+player.name</a>", true);
+			mimeMessageHelper.setText("<a target='_Blank' href='http://localhost:8080/Survival/active/"+player.getId()+"' >"+player.getName()+"這是一個激活連結"+"</a>", true);
 			javaMailSender.send(mimeMailMessage);
+			System.out.println("<a target='_Blank' href='http://localhost:8080/Survival/active/"+player.getId()+"' >"+player.getName()+"</a>");
 			System.out.println("html郵件發送成功");
 		} catch (MessagingException e) {
 			System.out.println("發送html郵件時發生異常！" + e);

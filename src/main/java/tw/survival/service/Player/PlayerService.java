@@ -18,8 +18,8 @@ public class PlayerService {
 	private PlayerRepository pDAO;
 
 	// C
-	public void addplayer(PlayerBean pBean) {
-		pDAO.save(pBean);
+	public PlayerBean addplayer(PlayerBean pBean) {
+		return pDAO.save(pBean);
 	}
 
 	// R
