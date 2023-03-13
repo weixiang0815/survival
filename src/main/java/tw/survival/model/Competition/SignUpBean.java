@@ -45,6 +45,7 @@ public class SignUpBean {
 	@Transient
 	private Integer playerId;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;

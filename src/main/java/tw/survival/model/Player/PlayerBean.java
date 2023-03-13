@@ -174,6 +174,7 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
 //	private List<CartBean> cart = new ArrayList<>();
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
 	private Set<SignUpBean> signUps = new LinkedHashSet<>();
 
