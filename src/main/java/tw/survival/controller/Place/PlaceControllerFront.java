@@ -108,7 +108,9 @@ public class PlaceControllerFront {
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
 			String color = "green";
+			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -119,7 +121,9 @@ public class PlaceControllerFront {
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
 			String color = "blue";
+			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -130,7 +134,9 @@ public class PlaceControllerFront {
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
 			String color = "red";
+			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -149,6 +155,7 @@ public class PlaceControllerFront {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String id = comp.getId().toString();
 			String color;
 			if (type.contentEquals("已發布")) {
 				color = "green";
@@ -160,6 +167,7 @@ public class PlaceControllerFront {
 				color = "red";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			Sdto.setPlaceId(placeId.toString());
 			list.add(Sdto);
 		}
