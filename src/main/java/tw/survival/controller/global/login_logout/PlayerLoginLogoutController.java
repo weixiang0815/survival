@@ -57,11 +57,11 @@ public class PlayerLoginLogoutController {
 			}
 			return "back/Player/loginSystem";
 		}
-		if (player != null) {
+		if (player != null && player.getStatus() ==1) {
 			m.addAttribute("player", player);
 			return "redirect:/";
-		}
-		return "back/Player/loginSystem";
+		}	
+		return "front/Player/loginSystem";
 	}
 
 	@GetMapping("/logout")

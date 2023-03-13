@@ -51,6 +51,8 @@ public class PlayerController {
 	
 	@Autowired
 	private EmailService emailService;
+	
+	
 
 	@GetMapping("/player.main")
 	public String main() {
@@ -109,7 +111,10 @@ public class PlayerController {
 	// D
 	@DeleteMapping("/player/delete")
 	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {
+		
+		
 		try {
+			
 			ra.addFlashAttribute("DeleteMessage", "刪除成功: 編號=" + id);
 			pService.delete(id);
 
@@ -150,7 +155,7 @@ public class PlayerController {
 		emailService.sendHtmlMail(player2);
 		
 		System.out.println("註冊成功");
-		return "front/Player/loginSystem";
+		return "redirect:/front/Player/loginSystem";
 	}
 
 	// GetPhoto
@@ -223,7 +228,7 @@ public class PlayerController {
 	@GetMapping("/active/{id}")
 	public String toemail(@PathVariable("id") Integer id) {
 		pService.UpdateStatus(id, 1);
-		return "front/Player/loginSystem";
+		return "redirect:front/Player/loginSystem";
 	}
 
 }

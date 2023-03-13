@@ -53,7 +53,7 @@ button:hover {
 					<label>玩家帳號：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="text" name="account"  />
+					<input type="text" name="account" />
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -61,7 +61,7 @@ button:hover {
 					<label>玩家密碼：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="password" name="password"  />
+					<input type="password" name="password" />
 				</div>
 			</div>
 			<div class="row">
@@ -71,7 +71,10 @@ button:hover {
 				<div class="col text-start">
 					<button id="register-oneclick">一鍵填寫</button>
 				</div>
-				
+				<fb:login-button scope="public_profile,email"
+					onlogin="checkLoginState();">
+				</fb:login-button>
+				<div id="status"></div>
 			</div>
 		</form>
 		<div class="row mt-2">
@@ -82,7 +85,7 @@ button:hover {
 				<a href="${contextRoot}/player/add"><button>會員註冊</button></a>
 			</div>
 		</div>
-		
+
 		<div class="row mt-3 mb-3">
 			<c:forEach items="${errors}" var="error">
 				<div class="col-12 error">＊&nbsp;${error.defaultMessage}</div>
@@ -91,18 +94,61 @@ button:hover {
 	</div>
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+	<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 	<script>
-	const account = $("input[name='account']");
-	const password = $("input[name='password']");
-	const register_oneclick = document.querySelector("#register-oneclick");
-	register_oneclick.addEventListener("click", function(e) {
-		e.preventDefault();
-		fillForm();
-	});
-	function fillForm(){
-		account.val("W3gdXeHw");
-		password.val("xxbytdzF");
-	}
+		const account = $("input[name='account']");
+		const password = $("input[name='password']");
+		const register_oneclick = document.querySelector("#register-oneclick");
+		register_oneclick.addEventListener("click", function(e) {
+			e.preventDefault();
+			fillForm();
+		});
+		function fillForm() {
+			account.val("W3gdXeHw");
+			password.val("xxbytdzF");
+		}
+		//fb第三方登入
+		function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+		    console.log('statusChangeCallback');
+		    console.log(response);                   // The current login status of the person.
+		    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+		      testAPI();  
+		    } else {                                 // Not logged into your webpage or we are unable to tell.
+		      document.getElementById('status').innerHTML = 'Please log ' +
+		        'into this webpage.';
+		    }
+		  }
+
+
+		  function checkLoginState() {               // Called when a person is finished with the Login Button.
+		    FB.getLoginStatus(function(response) {   // See the onlogin handler
+		      statusChangeCallback(response);
+		    });
+		  }
+
+
+		  window.fbAsyncInit = function() {
+		    FB.init({
+		      appId      : '{app-id}',
+		      cookie     : true,                     // Enable cookies to allow the server to access the session.
+		      xfbml      : true,                     // Parse social plugins on this webpage.
+		      version    : '{api-version}'           // Use this Graph API version for this call.
+		    });
+
+
+		    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
+		      statusChangeCallback(response);        // Returns the login status.
+		    });
+		  };
+		 
+		  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+		    console.log('Welcome!  Fetching your information.... ');
+		    FB.api('/me', function(response) {
+		      console.log('Successful login for: ' + response.name);
+		      document.getElementById('status').innerHTML =
+		        'Thanks for logging in, ' + response.name + '!';
+		    });
+		  }
 	</script>
 </body>
 </html>
