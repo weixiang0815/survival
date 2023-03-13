@@ -2,7 +2,9 @@ package tw.survival.controller.front.R.Competition;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Competition.CompetitionPictureBean;
+import tw.survival.model.Competition.CompetitionPictureDto;
 import tw.survival.model.Place.PlaceBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Place.PlaceService;
@@ -86,10 +90,23 @@ public class CompetitionControllerFrontR {
 		return "front/Competition/compDetail";
 	}
 
-	@GetMapping("/competition/photo/{id}")
-	public String goCompPhoto(@PathVariable Integer id, Model model) {
-		CompetitionBean comp = compService.findById(id);
-		model.addAttribute("comp", comp);
+	@GetMapping("/competition/photo")
+	public String goCompPhoto(Model model) {
+		List<CompetitionBean> comps = compService.findAll();
+		List<CompetitionPictureDto> pictures = new ArrayList<>();
+		comps.forEach(comp -> {
+			Set<CompetitionPictureBean> pic = comp.getPictures();
+			if (pic != null && pic.size() != 0) {
+				CompetitionPictureDto dto = new CompetitionPictureDto();
+				dto.setCompId(comp.getId());
+				dto.setCompName(comp.getMandarinName());
+				dto.setPicSet(pic);
+				pictures.add(dto);
+			}
+		});
+		List<PlaceBean> places = placeService.getAllPlace();
+		model.addAttribute("pictures", pictures);
+		model.addAttribute("places", places);
 		return "front/Competition/photo";
 	}
 

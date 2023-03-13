@@ -3,8 +3,6 @@ package tw.survival.controller.global.login_logout;
 import java.util.List;
 
 import javax.validation.Valid;
-import javax.validation.Validator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +22,7 @@ import tw.survival.validators.Playervalidator;
 @Controller
 @SessionAttributes({ "player" })
 public class PlayerLoginLogoutController {
+
 	@Autowired
 	Playervalidator validator;
 
@@ -57,11 +56,11 @@ public class PlayerLoginLogoutController {
 			}
 			return "back/Player/loginSystem";
 		}
-		if (player != null) {
+		if (player != null && player.getStatus() ==1) {
 			m.addAttribute("player", player);
 			return "redirect:/";
-		}
-		return "back/Player/loginSystem";
+		}	
+		return "front/Player/loginSystem";
 	}
 
 	@GetMapping("/logout")

@@ -39,7 +39,7 @@ public class EmployeeController {
 //C
 	@GetMapping("/Employee/add")
 	public String addemployee(Model m) {
-		m.addAttribute("employee", new EmployeeBean());
+		m.addAttribute("Employee", new EmployeeBean());
 		return "back/Employee/addemployees";
 	}
 

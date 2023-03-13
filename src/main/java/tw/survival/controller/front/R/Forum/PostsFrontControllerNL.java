@@ -1,7 +1,6 @@
 package tw.survival.controller.front.R.Forum;
 
 import java.util.List;
-import java.util.Set;
 
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Employee.EmployeeService;
 import tw.survival.service.Forum.MsgsService;
 import tw.survival.service.Forum.PostsService;
 import tw.survival.service.Player.PlayerService;

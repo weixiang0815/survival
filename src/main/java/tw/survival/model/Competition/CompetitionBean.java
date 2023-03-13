@@ -129,12 +129,12 @@ public class CompetitionBean {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "competition", cascade = CascadeType.ALL)
 	private Set<CompetitionPictureBean> pictures = new LinkedHashSet<>();
 
-	@JsonIgnore
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "Participation", inverseJoinColumns = {
-			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
-					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
-	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
+//	@JsonIgnore
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	@JoinTable(name = "Participation", inverseJoinColumns = {
+//			@JoinColumn(name = "fk_player_id", referencedColumnName = "id") }, joinColumns = {
+//					@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") })
+//	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -337,9 +337,9 @@ public class CompetitionBean {
 		this.signUps = signUps;
 	}
 
-	public Set<PlayerBean> getParticipantPlayers() {
-		return participantPlayers;
-	}
+//	public Set<PlayerBean> getParticipantPlayers() {
+//		return participantPlayers;
+//	}
 
 	public Set<CompetitionPictureBean> getPictures() {
 		return pictures;
@@ -349,9 +349,9 @@ public class CompetitionBean {
 		this.pictures = pictures;
 	}
 
-	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
-		this.participantPlayers = participantPlayers;
-	}
+//	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
+//		this.participantPlayers = participantPlayers;
+//	}
 
 	public Set<CrewBean> getParticipantCrews() {
 		return participantCrews;

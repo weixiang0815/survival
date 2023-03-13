@@ -60,7 +60,7 @@ button {
 			<div class="col-12">預計報名人數：${comp.capacity} 人</div>
 			<div class="col-12">預算：${comp.budget} 元</div>
 			<div class="col-12">報名費：${comp.fee} 元</div>
-			<div class="col-12">內容：${comp.content}</div>
+			<div id="content" class="col-12"></div>
 			<div class="col-12">
 				<c:choose>
 					<c:when test="${prizes == null}">
@@ -110,6 +110,23 @@ button {
 			</div>
 		</div>
 	</div>
-	<%-- <jsp:include page="../Layout/footer.jsp"/> --%>
+	<script>
+		const content = $("#content");
+		$("document").ready(function () {
+			$.ajax({
+				url: "${contextRoot}/front/api/competition/get-comp/${comp.id}",
+				method: "get",
+				success: function(res) {
+					let str = res.content;
+					str = str.replace("<h1>", "<p>");
+					str = str.replace("</h1>", "</p>");
+					content.html("內容：" + str);
+				},
+				error: function(err) {
+					console.log(err);
+				}
+			});
+		});
+	</script>
 </body>
 </html>
