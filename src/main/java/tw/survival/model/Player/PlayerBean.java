@@ -13,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -28,6 +30,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -135,14 +138,16 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/2/21
+	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/3/13
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
+	@JsonBackReference
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "PlayerToMsgs", inverseJoinColumns = {
+            @JoinColumn(name = "fk_msgs_id", referencedColumnName = "id") }, joinColumns = {
+                    @JoinColumn(name = "fk_player_id", referencedColumnName = "id") })
 	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
 
 	@JsonIgnore
@@ -158,7 +163,7 @@ public class PlayerBean {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/3/13
 
 //	@JsonIgnore
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
