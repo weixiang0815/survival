@@ -88,7 +88,7 @@ public class ScheduleController {
 			String id = comp.getId().toString();
 			String color = "green";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
 			list.add(Sdto);
 		}
 
@@ -101,7 +101,7 @@ public class ScheduleController {
 			String id = comp.getId().toString();
 			String color = "blue";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
 			list.add(Sdto);
 		}
 
@@ -114,7 +114,7 @@ public class ScheduleController {
 			String id = comp.getId().toString();
 			String color = "red";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
 			list.add(Sdto);
 		}
 
@@ -147,7 +147,7 @@ public class ScheduleController {
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
 			Sdto.setPlaceId(placeId.toString());
-			Sdto.setUrl("http://localhost:8080/Survival/competition/detail?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
 			list.add(Sdto);
 		}
 		return list;
