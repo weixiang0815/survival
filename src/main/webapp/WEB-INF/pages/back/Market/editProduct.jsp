@@ -20,7 +20,7 @@
 		<div class="card">
 			<div class="card-header">修改訊息</div>
 			<div class="card-body">
-				<form action="${contextRoot}/Market/editProduct" method="post"
+				<form action="${contextRoot}/back/Market/editProduct" method="post"
 					enctype="multipart/form-data">
 					<input type="text" name="id" value="${product.id}" hidden />
 					<table class="table table-hover">

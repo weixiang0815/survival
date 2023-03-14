@@ -24,10 +24,6 @@ public class CartController {
 
 	@Autowired
 	private CartService CartService;
-	
-//	https://ithelp.ithome.com.tw/articles/10256080
-//	https://www.youtube.com/watch?v=rFSxmKen6aQ&ab_channel=CodeJava
-	
 
 	@GetMapping("/Market/Cart/test")
 	public String addProductToCart(Model model) {
@@ -38,17 +34,17 @@ public class CartController {
 		return "back/Market/addToCart";
 	}
 
+	//新增至購物車
 	@GetMapping("/Market/Cart/add")
 	public String addCart(@RequestParam("productId") Integer productId, @RequestParam("playerId") Integer playerId,
-			@RequestParam("quantity") Integer quantity,
-			Model model) {
+			@RequestParam("quantity") Integer quantity, Model model) {
 		CartBean cart = new CartBean();
 		cart.setPlayer(playerService.findByBean(playerId));
 		cart.setProduct(productService.findById(productId));
 		cart.setQuantity(quantity);
 		cart = CartService.insertCart(cart);
 		model.addAttribute("Cart_List", cart);
-		return "/Market/Cart/showCart";
+		return "front/Market/cart";
 //		return CartService.listCartItems(playerId);
 	}
 
@@ -62,7 +58,7 @@ public class CartController {
 			return "back/Competition/index";
 		}
 	}
-	
+
 //	@GetMapping("/Market/Cart/showCart")
 //	public String showCart(@RequestParam("playerId") Integer playerId,Model model) {
 //		model.addAttribute("player", playerService.findByBean(1));
@@ -70,10 +66,6 @@ public class CartController {
 //		return "front/Market/cart";
 //	}
 //	
-//	----------------------------------------------------------
-	
-	
-	
-	
 
+	
 }
