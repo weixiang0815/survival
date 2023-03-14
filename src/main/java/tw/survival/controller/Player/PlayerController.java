@@ -32,7 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
-import tw.survival.model.email.sendmail;
 import tw.survival.service.Player.PlayerService;
 import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;

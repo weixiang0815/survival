@@ -2,7 +2,6 @@ package tw.survival.model.Player;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -28,6 +29,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -36,7 +38,6 @@ import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PlayerToMsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
