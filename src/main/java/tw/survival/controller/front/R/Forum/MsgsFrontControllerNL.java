@@ -49,19 +49,6 @@ public class MsgsFrontControllerNL {
 		return page;
 	}
 	
-//	@ResponseBody
-//	@PostMapping("/msgs/axios/post")
-//	public List<MsgsBean> addOneAndReturnLateTen(@RequestBody MsgDTO msgDTO){
-//		
-//		MsgsBean msgsBean = new MsgsBean();
-//		msgsBean.setEssay(msgDTO.getContent());
-//		msgsBean.setPlayer(playerService.findByBean(msgDTO.getPlayerId()));
-//		msgsBean.setPost(postsService.findPostById(msgDTO.getPostId()));
-//		msgsService.insertMsgs(msgsBean);
-//		Page<MsgsBean> allMsgsOfPost = msgsService.getAllMsgsOfPost(1, msgDTO.getPostId());
-//		List<MsgsBean> content = allMsgsOfPost.getContent();
-//		
-//		return content;
-//		
-//	}
+	
+	
 }
