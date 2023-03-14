@@ -26,6 +26,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Player.PlayerBean;
@@ -65,22 +67,29 @@ public class PostsBean implements Serializable {
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date finalAdded;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
+//定義table之間的關連，並附上JSON主從關係。
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<MsgsBean> msgsOfPost = new LinkedHashSet<MsgsBean>();
+	private Set<MsgsBean> messages = new LinkedHashSet<MsgsBean>();
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ThumbUpBean> thumbUpOfPost = new LinkedHashSet<ThumbUpBean>();
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<ScoreBean> scoreOfPost = new LinkedHashSet<ScoreBean>();
 
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "posts", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
@@ -165,12 +174,12 @@ public class PostsBean implements Serializable {
 		this.finalAdded = finalAdded;
 	}
 
-	public Set<MsgsBean> getMsgsOfPost() {
-		return msgsOfPost;
+	public Set<MsgsBean> getMessages() {
+		return messages;
 	}
 
-	public void setMsgsOfPost(Set<MsgsBean> msgsOfPost) {
-		this.msgsOfPost = msgsOfPost;
+	public void setMessages(Set<MsgsBean> messages) {
+		this.messages = messages;
 	}
 
 	public Set<ThumbUpBean> getThumbUpOfPost() {

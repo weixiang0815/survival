@@ -37,8 +37,8 @@
         </style>
 
 
-<!-- Loading Effects for Grid Items Demo6 Demo3 -->
-<!-- https://codepen.io/pinkymini/pen/oNwEBzJ -->
+        <!-- Loading Effects for Grid Items Demo6 Demo3 -->
+        <!-- https://codepen.io/pinkymini/pen/oNwEBzJ -->
 
         <head>
             <meta charset="UTF-8">
@@ -47,27 +47,27 @@
         </head>
 
         <body>
+
+
             <jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-            <div class="container text-center">
+
+            <div class="text-center mx-auto mb-5 wow fadeInUp">
                 <h1>測試</h1>
-            </div>
+                <div>
 
-            <tbody>
-            <div id="photos__container">
-                <div class="photo">
-                    <img src="${contextRoot}/img/product-img/product-2.jpg" alt="photo">
+                    <div id="photos__container">
+                        <div class="photo">
+                            <img src="${contextRoot}/img/product-img/product-2.jpg" alt="photo">
+                        </div>
+
+
+                        <c:forEach items="${list}" var="show_Product" varStatus="Status">
+                            <div class="photo">
+                                <img src="${contextRoot}/Market/id?id=${show_Product.id}" alt="photo">
+                            </div><br><br>
+                        </c:forEach>
+                    </div>
                 </div>
-
-
-                <c:forEach items="${list}" var="show_AllProduct" varStatus="Status">
-                    <div class="photo"><br><br>
-                        <img src="${contextRoot}/Market/id?id=${show_AllProduct.id}" alt="photo">
-                    </div><br><br>
-
-                </c:forEach>
-            </tbody>
-
-
                 <!-- --------------------------------------------------------------------------------------------------------------------- -->
 
                 <script>

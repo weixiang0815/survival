@@ -4,8 +4,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 import javax.validation.Valid;
 
@@ -30,7 +32,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
+import tw.survival.model.email.sendmail;
 import tw.survival.service.Player.PlayerService;
+import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;
 
 @Controller
@@ -44,6 +48,11 @@ public class PlayerController {
 	ServletContext context;
 	@Autowired
 	private PlayerService pService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	
 
 	@GetMapping("/player.main")
 	public String main() {
@@ -102,7 +111,10 @@ public class PlayerController {
 	// D
 	@DeleteMapping("/player/delete")
 	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {
+		
+		
 		try {
+			
 			ra.addFlashAttribute("DeleteMessage", "刪除成功: 編號=" + id);
 			pService.delete(id);
 
@@ -114,7 +126,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/player/addpost")
-	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,
+	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,HttpSession http,
 			BindingResult bindingResult) {
 		validator.validate(player, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -136,9 +148,14 @@ public class PlayerController {
 				e.printStackTrace();
 			}
 		}
-		pService.addplayer(player);
+		player.setStatus(0);
+		player.setCode(UUID.randomUUID().toString());
+		http.setAttribute("player", player);
+		PlayerBean player2 = pService.addplayer(player);
+		emailService.sendHtmlMail(player2);
+		
 		System.out.println("註冊成功");
-		return "front/Player/loginSystem";
+		return "redirect:/front/Player/loginSystem";
 	}
 
 	// GetPhoto
@@ -207,11 +224,11 @@ public class PlayerController {
 		return "back/Player/SelectAllResult";
 
 	}
-	//
-
-	public String oneButtonInsert(@ModelAttribute("player") PlayerBean player) {
-
-		return "";
+	
+	@GetMapping("/active/{id}")
+	public String toemail(@PathVariable("id") Integer id) {
+		pService.UpdateStatus(id, 1);
+		return "redirect:front/Player/loginSystem";
 	}
 
 }

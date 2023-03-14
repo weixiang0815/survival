@@ -1983,63 +1983,64 @@
                                     <!--  Catagories  -->
                                     <div class="catagories-menu">
                                         <ul id="menu-content2" class="menu-content collapse show">
-                                            <!-- Single Item -->
-                                            <li data-toggle="collapse" data-target="#clothing">
-                                                <a class="collapse" href="#">槍枝</a>
-                                                <ul class="sub-menu collapse show" id="clothing">
-                                                    <li><a class="Catagories_title_inner_block" href="#">全部</a></li>
-                                                    <li><a href="${contextRoot}/front/Market/Text">手槍</a></li>
-                                                    <li><a href="#">步槍</a></li>
-                                                    <li><a href="#">衝鋒槍</a></li>
-                                                    <li><a href="#">狙擊槍</a></li>
-                                                    <li><a href="#">霰彈槍</a></li>
-                                                </ul>
-                                            </li>
-
-
-                                            <li class="nav-item"><a data-bs-parent="#sidebarMenu"
-                                                    data-bs-toggle="collapse" class="nav-link"
-                                                    href="#submenu-competition"> <i
-                                                        class="bi bi-card-checklist"></i>&nbsp;&nbsp;活動系統
-                                                </a>
-                                                <ul class="collapse" id="submenu-competition">
-                                                    <li><a href="${contextRoot}/competition/new"
-                                                            class="nav-link">新增活動</a></li>
-                                                    <li><a href="${contextRoot}/competition/search/result"
-                                                            class="nav-link">查詢活動</a></li>
-                                                    <li><a href="${contextRoot}/competition/signup"
-                                                            class="nav-link">新增報名</a></li>
-                                                    <li><a href="${contextRoot}/competition/signup/search/result"
-                                                            class="nav-link">查詢報名</a></li>
-                                                </ul>
-                                            </li>
-
 
                                             <!-- Single Item -->
-                                            <li data-toggle="collapse" data-target="#shoes" class="collapsed">
-                                                <a href="#" class="link_title">配件</a>
-                                                <ul class="sub-menu collapse show" id="shoes">
-                                                    <li><a href="#">全部</a></li>
-                                                    <li><a href="#">倍鏡</a></li>
-                                                    <li><a href="#">彈夾</a></li>
-                                                    <li><a href="#">消音器</a></li>
-                                                    <li><a href="#">手電筒</a></li>
-                                                    <li><a href="#">雷射瞄準器</a></li>
+                                            <li data-toggle="collapse" data-target="#guns" class="nav-item">
+                                                <a href="#submenu-guns" data-bs-toggle="collapse"
+                                                    data-bs-parent="#sidebarMenu" class="nav-link"
+                                                    style="color: #ffffff;">槍枝</a>
+                                                <ul class="collapse" id="submenu-guns">
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;"
+                                                            href="${contextRoot}/front/Market/Text">手槍</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">步槍</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">衝鋒槍</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">狙擊槍</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">霰彈槍</a>
+                                                    </li>
                                                 </ul>
                                             </li>
+
                                             <!-- Single Item -->
-                                            <li data-toggle="collapse" data-target="#accessories" class="collapsed">
-                                                <a href="#">服飾</a>
-                                                <ul class="sub-menu collapse show" id="accessories">
-                                                    <li><a href="#">全部</a></li>
-                                                    <li><a href="#">夏季</a></li>
-                                                    <li><a href="#">冬季</a></li>
-                                                    <li><a href="#">特種部隊</a></li>
-                                                    <li><a href="#">海軍</a></li>
-                                                    <li><a href="#">陸軍</a></li>
-                                                    <li><a href="#">空軍</a></li>
+                                            <li data-toggle="collapse" data-target="#accessories" class="nav-item">
+                                                <a href="#submenu-accessories" data-bs-toggle="collapse"
+                                                    data-bs-parent="#sidebarMenu" class="nav-link"
+                                                    style="color: #ffffff;">配件</a>
+                                                <ul class="collapse" id="submenu-accessories">
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">倍鏡</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">彈夾</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">消音器</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">手電筒</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">雷射瞄準器</a>
+                                                    </li>
                                                 </ul>
                                             </li>
+
+                                            <!-- Single Item -->
+                                            <li data-toggle="collapse" data-target="#clothing" class="nav-item">
+                                                <a href="#submenu-clothing" data-bs-toggle="collapse"
+                                                    data-bs-parent="#sidebarMenu" class="nav-link"
+                                                    style="color: #ffffff;">服飾</a>
+                                                <ul class="collapse" id="submenu-clothing">
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;"
+                                                            href="${contextRoot}/front/Market/Text">夏季</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">冬季</a></li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">海軍</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">陸軍</a>
+                                                    </li>
+                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">空軍</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
                                         </ul>
                                     </div>
                                 </div>
@@ -2048,13 +2049,13 @@
 
 
                                 <!-- ##### Single Widget ##### -->
-                                <div class="widget price mb-50">
-                                    <!-- Widget Title -->
-                                    <h6 class="widget-title mb-30">Filter by</h6>
-                                    <!-- Widget Title 2 -->
-                                    <p class="widget-title2 mb-30" style="color: #ffffff;">Price</p>
+                                <!-- <div class="widget price mb-50"> -->
+                                <!-- Widget Title -->
+                                <!-- <h6 class="widget-title mb-30">Filter by</h6> -->
+                                <!-- Widget Title 2 -->
+                                <!-- <p class="widget-title2 mb-30" style="color: #ffffff;">Price</p> -->
 
-                                    <div class="widget-desc">
+                                <!-- <div class="widget-desc">
                                         <div class="slider-range">
                                             <div data-min="49" data-max="360" data-unit="$"
                                                 class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
@@ -2068,12 +2069,12 @@
                                             <div class="range-price">Range: $49.00 - $360.00</div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
                                 <!-- ##### Single Widget ##### -->
-                                <div class="widget brands mb-50">
-                                    <!-- Widget Title 2 -->
-                                    <p class="widget-title2 mb-30" style="color: #ffffff;">Brands</p>
+                                <!-- <div class="widget brands mb-50"> -->
+                                <!-- Widget Title 2 -->
+                                <!-- <p class="widget-title2 mb-30" style="color: #ffffff;">Brands</p>
                                     <div class="widget-desc">
                                         <ul>
                                             <li><a href="#">Asos</a></li>
@@ -2083,7 +2084,7 @@
                                             <li><a href="#">Zara</a></li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
 
@@ -2095,7 +2096,7 @@
 
                                             <!-- Total Products -->
                                             <div class="total-products">
-                                                <p><span>186</span> products found</p>
+                                                <p><span>21</span> products found</p>
                                             </div>
 
                                             <!-- Sorting -->
@@ -2123,9 +2124,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-1.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-1.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-2.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-1.jpg" alt="">
 
                                                 <!-- Product Badge -->
                                                 <div class="product-badge offer-badge">
@@ -2139,18 +2141,18 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>熱賣</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>黑衣部隊套裝</h6>
                                                 </a>
-                                                <p class="product-price"><span class="old-price">$75.00</span> $55.00
+                                                <p class="product-price"><span class="old-price">$2500</span> $55.00
                                                 </p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2162,9 +2164,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-2.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-2.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-3.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-2.jpg" alt="">
 
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
@@ -2174,17 +2177,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>熱賣</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>簡易特種部隊套裝</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$2500</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2196,13 +2199,14 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-3.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-3.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-4.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-3.jpg" alt="">
 
                                                 <!-- Product Badge -->
                                                 <div class="product-badge new-badge">
-                                                    <span>New</span>
+                                                    <span>新品</span>
                                                 </div>
 
                                                 <!-- Favourite -->
@@ -2213,17 +2217,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>熱賣</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>VFC-M40A5</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$10000</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2235,9 +2239,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-4.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-4.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-5.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-4.jpg" alt="">
 
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
@@ -2247,17 +2252,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>熱賣</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>Kar 98K</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$8700</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2269,9 +2274,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-5.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-5.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-6.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-5.jpg" alt="">
 
                                                 <!-- Product Badge -->
                                                 <div class="product-badge offer-badge">
@@ -2286,18 +2292,18 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>熱賣</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>FN SCAR</h6>
                                                 </a>
-                                                <p class="product-price"><span class="old-price">$75.00</span> $55.00
+                                                <p class="product-price"><span class="old-price">$8800</span> $55.00
                                                 </p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2309,9 +2315,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-6.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-6.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-7.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-6.jpg" alt="">
 
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
@@ -2321,17 +2328,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>新品</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>8吋左輪手槍</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$4750</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2343,13 +2350,14 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-7.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-7.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-8.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-7.jpg" alt="">
 
                                                 <!-- Product Badge -->
                                                 <div class="product-badge new-badge">
-                                                    <span>New</span>
+                                                    <span>非賣品</span>
                                                 </div>
 
                                                 <!-- Favourite -->
@@ -2360,17 +2368,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>非賣品</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>金色沙漠之鷹</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$999999999</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2382,9 +2390,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-8.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-8.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-9.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-8.jpg" alt="">
 
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
@@ -2394,17 +2403,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>新品</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>uzi烏茲機關槍</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$4800</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2416,9 +2425,10 @@
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
                                             <div class="product-img">
-                                                <img src="img/product-img/product-9.jpg" alt="">
+                                                <img src="${contextRoot}/img/product-img/product-9.jpg" alt="">
                                                 <!-- Hover Thumb -->
-                                                <img class="hover-img" src="img/product-img/product-1.jpg" alt="">
+                                                <img class="hover-img"
+                                                    src="${contextRoot}/img/product-img/product-9.jpg" alt="">
 
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
@@ -2428,17 +2438,17 @@
 
                                             <!-- Product Description -->
                                             <div class="product-description">
-                                                <span>topshop</span>
+                                                <span>新品</span>
                                                 <a href="single-product-details.html">
-                                                    <h6>Knot Front Mini Dress</h6>
+                                                    <h6>WE M4</h6>
                                                 </a>
-                                                <p class="product-price">$80.00</p>
+                                                <p class="product-price">$8000</p>
 
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
                                                     <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">Add to Cart</a>
+                                                        <a href="#" class="btn essence-btn">加入購物車</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -2447,6 +2457,7 @@
 
                                 </div>
                             </div>
+
                             <!-- Pagination -->
                             <nav aria-label="navigation">
                                 <ul class="pagination mt-50 mb-70">

@@ -26,7 +26,7 @@ public class CompetitionSearchCondititonsDto implements Serializable {
 
 	private List<Integer> publicOrPrivate = new ArrayList<>();
 
-	private String date;
+	private List<String> date = new ArrayList<>();
 
 	public CompetitionSearchCondititonsDto() {
 	}
@@ -103,11 +103,11 @@ public class CompetitionSearchCondititonsDto implements Serializable {
 		this.publicOrPrivate = publicOrPrivate;
 	}
 
-	public String getDate() {
+	public List<String> getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(List<String> date) {
 		this.date = date;
 	}
 

@@ -45,13 +45,14 @@ public class SignUpBean {
 	@Transient
 	private Integer playerId;
 
+	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
+	@DateTimeFormat(pattern = "yyyy/MM/dd aa HH:mm:ss EEEE")
+	@JsonFormat(pattern = "yyyy/MM/dd aa HH:mm:ss EEEE", timezone = "GMT+8")
 	@Column(name = "signup_date")
 	private Date signUpDate;
 

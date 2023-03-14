@@ -2,7 +2,10 @@ package tw.survival.model.Forum;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,13 +13,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import tw.survival.model.Player.PlayerBean;
 
@@ -25,7 +35,9 @@ import tw.survival.model.Player.PlayerBean;
 public class MsgsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	//建立內容
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -43,15 +55,18 @@ public class MsgsBean implements Serializable {
 	@Column(name = "final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date finalAdded;
+	
+	//建立關聯
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_posts_id")
-	private PostsBean posts;
-
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_player_id")
-	private PlayerBean player;
-
+	private PostsBean post;
+	
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msgs", cascade = CascadeType.ALL)
+	private Set<PlayerToMsgsBean> forMsgs = new LinkedHashSet<PlayerToMsgsBean>();
+	
 	public MsgsBean() {
 	}
 
@@ -97,20 +112,20 @@ public class MsgsBean implements Serializable {
 		this.finalAdded = finalAdded;
 	}
 
-	public PlayerBean getPlayer() {
-		return player;
+	public Set<PlayerToMsgsBean> getForMsgs() {
+		return forMsgs;
 	}
 
-	public void setPlayer(PlayerBean player) {
-		this.player = player;
+	public void setForMsgs(Set<PlayerToMsgsBean> forMsgs) {
+		this.forMsgs = forMsgs;
 	}
 
-	public PostsBean getPosts() {
-		return posts;
+	public PostsBean getPost() {
+		return post;
 	}
 
-	public void setPosts(PostsBean posts) {
-		this.posts = posts;
+	public void setPost(PostsBean post) {
+		this.post = post;
 	}
 
 }

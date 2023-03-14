@@ -337,9 +337,9 @@ public class CompetitionBean {
 		this.signUps = signUps;
 	}
 
-	public Set<PlayerBean> getParticipantPlayers() {
-		return participantPlayers;
-	}
+//	public Set<PlayerBean> getParticipantPlayers() {
+//		return participantPlayers;
+//	}
 
 	public Set<CompetitionPictureBean> getPictures() {
 		return pictures;
@@ -349,9 +349,9 @@ public class CompetitionBean {
 		this.pictures = pictures;
 	}
 
-	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
-		this.participantPlayers = participantPlayers;
-	}
+//	public void setParticipantPlayers(Set<PlayerBean> participantPlayers) {
+//		this.participantPlayers = participantPlayers;
+//	}
 
 	public Set<CrewBean> getParticipantCrews() {
 		return participantCrews;
