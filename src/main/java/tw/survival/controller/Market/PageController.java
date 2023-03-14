@@ -12,10 +12,6 @@ public class PageController {
 		return "back/Market/marketMain";
 	}
 
-	@GetMapping("/front/Market/shop")
-	public String shopMain() {
-		return "/front/Market/shop";
-	}
 
 //	@GetMapping("/front/Market/Text")
 //	public String goText() {
