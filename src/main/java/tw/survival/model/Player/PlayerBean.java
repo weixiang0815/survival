@@ -1,6 +1,7 @@
 package tw.survival.model.Player;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
@@ -41,6 +42,7 @@ import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
+import tw.survival.model.Market.CartBean;
 
 @Entity
 @Table(name = "Player")
@@ -168,9 +170,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
 
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
-//	private List<CartBean> cart = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+	private Set<CartBean> cart = new LinkedHashSet<CartBean>();
 
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
     private Set<SignUpBean> signUps = new HashSet<>();
