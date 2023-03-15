@@ -7,12 +7,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
+import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.service.Competition.CompetitionService;
-import tw.survival.service.Employee.EmployeeService;
+import tw.survival.service.Forum.MsgsService;
 import tw.survival.service.Forum.PostsService;
 import tw.survival.service.Player.PlayerService;
 
@@ -27,6 +30,7 @@ import tw.survival.service.Player.PlayerService;
  *
  */
 @Controller
+@SessionAttributes("player")
 @RequestMapping("/front")
 public class PostsFrontControllerNL {
 
@@ -35,13 +39,16 @@ public class PostsFrontControllerNL {
 	private CompetitionService competitionService;
 
 	private PlayerService playerService;
+	
+	private MsgsService msgsService;
 
 //	@Autowired //若是只有一個建構子，SpringBoot會自動加入Autowired功能。
 	public PostsFrontControllerNL(PostsService postsService, CompetitionService competitionService,
-			EmployeeService employeeService, PlayerService playerService) {
+			MsgsService msgsService, PlayerService playerService) {
 		this.postsService = postsService;
 		this.competitionService = competitionService;
 		this.playerService = playerService;
+		this.msgsService = msgsService;
 	}
 
 	/**
@@ -53,6 +60,17 @@ public class PostsFrontControllerNL {
 		return "front/Forum/index";
 	}
 	
+	@GetMapping("/posts/content")
+	public String getOnePost(@RequestParam("id")Integer id, Model model){
+		PostsBean post = postsService.findPostById(id);
+		Page<MsgsBean> allMsgsOfPost = msgsService.getAllMsgsOfPost(1,id);
+		model.addAttribute("post", post);
+		model.addAttribute("messages", allMsgsOfPost);
+		model.getAttribute("player");
+		return "front/Forum/Posts/ShowOne";
+	}
+	
+	
 	/**
 	 * @param model 設定model 目的為設置輸入物件
 	 * @return String 設定View
@@ -63,6 +81,7 @@ public class PostsFrontControllerNL {
 	public String searchMain(Model model) {
 		Page<PostsBean> page = postsService.getPostsWithNameContainingByPage(1, "");
 		List<PostsBean> postsList = page.getContent();
+		model.addAttribute("page",page);
 		model.addAttribute("postsList",postsList);
 		return"front/Forum/Posts/getAllPosts";
 	}

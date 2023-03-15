@@ -28,5 +28,7 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	
 	//name屬性模糊搜尋，並已分頁顯示。
 	public Page<PostsBean> findByNameContainingOrderByAddedDesc(String name, Pageable pageable);
+	
+
 
 }

@@ -38,7 +38,7 @@ public class CompetitionControllerFrontRAJAX {
 	public List<CompetitionBean> multiCondition(@RequestBody CompetitionSearchCondititonsDto dto) {
 		return compService.multiconditionSearchFront(dto);
 	}
-	
+
 	@PostMapping("/photo/multi-condition")
 	public List<CompetitionPictureDto> multiConditionForPhoto(@RequestBody CompetitionSearchCondititonsDto dto) {
 		List<CompetitionBean> comps = compService.multiconditionSearchFront(dto);
