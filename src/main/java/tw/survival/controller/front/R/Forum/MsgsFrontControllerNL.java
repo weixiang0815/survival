@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import tw.survival.model.Forum.MsgDTO;
 import tw.survival.model.Forum.MsgsBean;
 import tw.survival.service.Competition.CompetitionService;
 import tw.survival.service.Forum.MsgsService;
@@ -41,7 +40,7 @@ public class MsgsFrontControllerNL {
 	}
 	
 	@ResponseBody
-	@GetMapping("/msgs/ajax/msgspage")
+	@GetMapping("/msgs/axios/get")
 	public Page<MsgsBean> addOneAndReturnLatesTen(@RequestParam(name = "p",defaultValue = "1") Integer pageNumber, @RequestParam(name = "postId", defaultValue = "1") Integer postId){
 		
 		Page<MsgsBean> page = msgsService.getAllMsgsOfPost(pageNumber, postId);

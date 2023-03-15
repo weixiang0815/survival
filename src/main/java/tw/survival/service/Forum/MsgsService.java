@@ -103,6 +103,10 @@ public class MsgsService {
 	}
 	
 	
+	public List<MsgsBean> getMsgListOfPost(Integer postId){
+		List<MsgsBean> list = mDao.findMsgsListByPostId(postId);
+		return list;
+	}
 	
 	
 	

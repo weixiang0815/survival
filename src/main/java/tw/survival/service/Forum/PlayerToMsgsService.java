@@ -25,8 +25,19 @@ public class PlayerToMsgsService {
 		if(!optional.isEmpty()) {
 			return optional.get();
 		}
+		System.out.println("沒有找到該物件，id:" + id);
 		return null;
 	}
+	public PlayerToMsgsBean findPtmbByMsgsId(Integer id) {
+		PlayerToMsgsBean ptmbByMsgsId = pDao.getPtmbByMsgsId(id);
+		if(ptmbByMsgsId != null) {
+			return ptmbByMsgsId;
+		}
+		System.out.println("沒有找到該物件，id:" + id);
+		return null;
+	}
+	
+	
 	//D
 	public void deletePtmb(Integer id){
 		Optional<PlayerToMsgsBean> optional = pDao.findById(id);

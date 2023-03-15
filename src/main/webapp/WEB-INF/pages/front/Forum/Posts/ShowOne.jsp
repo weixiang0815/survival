@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="tw.survival.model.Forum.PostsBean" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -324,10 +325,24 @@
 		</div>
 	</div>
 
+
 	<!-- Service End -->
+<script type="text/javascript">
+   var playerId = ${sessionScope.player.id}
+   var postId = ${requestScope.post.id}
+</script>
 <script src="${contextRoot}/js/jquery-3.6.3.min.js" type="text/javascript"></script>
 <script src="${contextRoot}/js/ajax/posts/axios-post-message.js" type="text/javascript"></script>
 <jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 <jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+<script>
+// 		jQuery重新導向
+	$("#toForum").on({
+		click : function(e) {
+			e.preventDefault();
+			window.location.href = '${contextRoot}/front/Forum/index';
+		}
+	});
+</script>
 </body>
 </html>
