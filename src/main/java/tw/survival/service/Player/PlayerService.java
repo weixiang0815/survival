@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Competition.SignUpBean;
+import tw.survival.model.Market.CartBean;
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.model.Player.PlayerRepository;
 import tw.survival.service.Competition.SignUpService;
+import tw.survival.service.Market.CartService;
 
 @Service
 @Transactional
@@ -22,6 +24,8 @@ public class PlayerService {
 
 	@Autowired
 	private SignUpService signupService;
+	
+	
 
 	// C
 	public PlayerBean addplayer(PlayerBean pBean) {
@@ -73,5 +77,4 @@ public class PlayerService {
 		return pDAO.findByemail(email);
 
 	}
-
 }

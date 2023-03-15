@@ -66,9 +66,9 @@ public class MsgsBean implements Serializable {
 	@JoinColumn(name = "fk_posts_id")
 	private PostsBean post;
 	
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msgs", cascade = CascadeType.ALL)
-	private Set<PlayerToMsgsBean> forMsgs = new LinkedHashSet<PlayerToMsgsBean>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msgs", cascade = CascadeType.ALL)
+//	private Set<PlayerToMsgsBean> forMsgs = new LinkedHashSet<PlayerToMsgsBean>();
 	
 	public MsgsBean() {
 	}
@@ -115,13 +115,13 @@ public class MsgsBean implements Serializable {
 		this.finalAdded = finalAdded;
 	}
 
-	public Set<PlayerToMsgsBean> getForMsgs() {
-		return forMsgs;
-	}
-
-	public void setForMsgs(Set<PlayerToMsgsBean> forMsgs) {
-		this.forMsgs = forMsgs;
-	}
+//	public Set<PlayerToMsgsBean> getForMsgs() {
+//		return forMsgs;
+//	}
+//
+//	public void setForMsgs(Set<PlayerToMsgsBean> forMsgs) {
+//		this.forMsgs = forMsgs;
+//	}
 
 	public PostsBean getPost() {
 		return post;

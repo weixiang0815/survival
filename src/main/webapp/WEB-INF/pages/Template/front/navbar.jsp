@@ -48,6 +48,7 @@
 				</div>
 			</c:if>
 			<a href="${contextRoot}/contact" class="nav-item nav-link">聯絡我們</a>
+		    <a href="${contextRoot}/player/${player.id}" class="nav-item nav-link">個人資料</a>
 		</div>
 		<%-- 				<a href="${contextRoot}/front/signup" class="btn btn-primary rounded-0 py-2 px-lg-4 d-none d-lg-block"> --%>
 		<!-- 					立即報名<i class="fa fa-arrow-right ms-3"></i> -->

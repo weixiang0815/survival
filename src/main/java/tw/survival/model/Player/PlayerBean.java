@@ -1,6 +1,7 @@
 package tw.survival.model.Player;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -38,10 +39,11 @@ import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.PlayerToMsgsBean;
+
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
+import tw.survival.model.Market.CartBean;
 
 @Entity
 @Table(name = "Player")
@@ -146,9 +148,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/3/13
 
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	private Set<PlayerToMsgsBean> forPlayer = new LinkedHashSet<PlayerToMsgsBean>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	private Set<PlayerToMsgsBean> forPlayer = new LinkedHashSet<PlayerToMsgsBean>();
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
@@ -165,9 +167,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/3/13
 
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
-//	private List<CartBean> cart = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+	private Set<CartBean> cart = new LinkedHashSet<CartBean>();
 
 	@JsonBackReference
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
@@ -353,14 +355,14 @@ public class PlayerBean {
 
 
 
-	public Set<PlayerToMsgsBean> getForPlayer() {
-		return forPlayer;
-	}
-
-
-	public void setForPlayer(Set<PlayerToMsgsBean> forPlayer) {
-		this.forPlayer = forPlayer;
-	}
+//	public Set<PlayerToMsgsBean> getForPlayer() {
+//		return forPlayer;
+//	}
+//
+//
+//	public void setForPlayer(Set<PlayerToMsgsBean> forPlayer) {
+//		this.forPlayer = forPlayer;
+//	}
 
 
 	public Set<ThumbUpBean> getThumbUpOfPost() {
