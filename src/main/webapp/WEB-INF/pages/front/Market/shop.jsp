@@ -1971,36 +1971,36 @@
                                                     <form action="${contextRoot}/Market/productIn2" method="get">
                                                         <li>
                                                             <div class="nav-link" style="color: #ffffff;">
-                                                                <input type="checkbox" id="vehicle1"
-                                                                    name="product_class" value="手槍">
+                                                                <input type="checkbox" id="vehicle1" name="clazz"
+                                                                    value="手槍">
                                                                 手槍
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="nav-link" style="color: #ffffff;">
-                                                                <input type="checkbox" id="vehicle2"
-                                                                    name="product_class" value="步槍">
+                                                                <input type="checkbox" id="vehicle2" name="clazz"
+                                                                    value="步槍">
                                                                 步槍
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="nav-link" style="color: #ffffff;">
-                                                                <input type="checkbox" id="vehicle3"
-                                                                    name="product_class" value="衝鋒槍">
+                                                                <input type="checkbox" id="vehicle3" name="clazz"
+                                                                    value="衝鋒槍">
                                                                 衝鋒槍
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="nav-link" style="color: #ffffff;">
-                                                                <input type="checkbox" id="vehicle4"
-                                                                    name="product_class" value="狙擊槍">
+                                                                <input type="checkbox" id="vehicle4" name="clazz"
+                                                                    value="狙擊槍">
                                                                 狙擊槍
                                                             </div>
                                                         </li>
                                                         <li>
                                                             <div class="nav-link" style="color: #ffffff;">
-                                                                <input type="checkbox" id="vehicle5"
-                                                                    name="product_class" value="霰彈槍">
+                                                                <input type="checkbox" id="vehicle5" name="clazz"
+                                                                    value="霰彈槍">
                                                                 霰彈槍
                                                             </div>
                                                         </li>
@@ -2106,7 +2106,7 @@
                                     </div>
                                 </div>
 
-    
+
                             </div>
                         </div>
 
@@ -2146,88 +2146,90 @@
                                     <div class="col-12 col-sm-6 col-lg-4">
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
-        
+
                                             <div class="product-img">
                                                 <img alt="" height="50"
-                                                src="${contextRoot}/Market/id?id=${show_AllProduct.id}">
+                                                    src="${contextRoot}/Market/id?id=${show_AllProduct.id}">
                                                 <img class="hover-img" height="50"
                                                     src="${contextRoot}/Market/id?id=${show_AllProduct.id}" alt="">
-    
+
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
                                                     <a href="#" class="favme fa fa-heart"></a>
                                                 </div>
                                             </div>
-    
+
                                             <!-- Product Description
                                             <div class="product-description">
                                                 <span>熱賣</span> -->
-                                                <a href="single-product-details.html">
-                                                    <h6>${show_AllProduct.name}</h6>
-                                                </a>
-                                                <p class="product-price"><span class="old-price">${show_AllProduct.price}</span>
-                                                </p>
-    
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
+                                            <a href="single-product-details.html">
+                                                <h6>${show_AllProduct.name}</h6>
+                                            </a>
+                                            <p class="product-price"><span
+                                                    class="old-price">${show_AllProduct.price}</span>
+                                            </p>
+
+                                            <!-- Hover Content -->
+                                            <div class="hover-content">
+                                                <!-- Add to Cart -->
+                                                <div class="add-to-cart-btn">
+                                                    <a href="#" class="btn essence-btn">加入購物車</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </c:forEach>
+                            </div>
+                            </c:forEach>
 
 
-                                
+
 
                             <table class="table">
                                 <thead>
-                                  <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">商品名稱</th>
-                                    <th scope="col">商品圖片</th>
-                                    <th scope="col">商品種類</th>
-                                    <th scope="col">商品介紹</th>
-                                    <th scope="col">租賃價格</th>
-                                    <th scope="col">販賣價格</th>
-                                    <th scope="col">修改商品</th>
-                                    <th scope="col">刪除商品</th>
-                                  </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">商品名稱</th>
+                                        <th scope="col">商品圖片</th>
+                                        <th scope="col">商品種類</th>
+                                        <th scope="col">商品介紹</th>
+                                        <th scope="col">租賃價格</th>
+                                        <th scope="col">販賣價格</th>
+                                        <th scope="col">修改商品</th>
+                                        <th scope="col">刪除商品</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <c:forEach items="${list}" var="show_AllProduct" varStatus="Status">
-                                  <tr>
-                                    <th scope="row">${Status.index+1}</th>
-                                    <td>${show_AllProduct.name}</td>
-                                    <td><img alt="" height="100" width="160" src="${contextRoot}/Market/id?id=${show_AllProduct.id}"></td>
-                                    <td>${show_AllProduct.product_class}</td>
-                                    <td>${show_AllProduct.context}</td>
-                                    <td>${show_AllProduct.rent_fee}</td>
-                                    <td>${show_AllProduct.price}</td>
-                                    <td>
-                                      <form action="${contextRoot}/" method="get">
-                                        <input name="id" type="hidden" value="${show_AllProduct.id}" />
-                                        <input type="submit" class="btn btn-info btn-sm" value="加入購物車" />
-                                      </form>
-                                    </td>
-                                    <!-- <td>
+                                    <c:forEach items="${list}" var="show_AllProduct" varStatus="Status">
+                                        <tr>
+                                            <th scope="row">${Status.index+1}</th>
+                                            <td>${show_AllProduct.name}</td>
+                                            <td><img alt="" height="100" width="160"
+                                                    src="${contextRoot}/Market/id?id=${show_AllProduct.id}"></td>
+                                            <td>${show_AllProduct.product_class}</td>
+                                            <td>${show_AllProduct.context}</td>
+                                            <td>${show_AllProduct.rent_fee}</td>
+                                            <td>${show_AllProduct.price}</td>
+                                            <td>
+                                                <form action="${contextRoot}/" method="get">
+                                                    <input name="id" type="hidden" value="${show_AllProduct.id}" />
+                                                    <input type="submit" class="btn btn-info btn-sm" value="加入購物車" />
+                                                </form>
+                                            </td>
+                                            <!-- <td>
                                       <form action="${contextRoot}/back/Market/delete" method="post">
                                         <input name="_method" type="hidden" value="delete" />
                                         <input name="id" type="hidden" value="${show_AllProduct.id}" />
                                         <input type="submit" class="btn btn-danger btn-sm" value="刪除" />
                                     </form>
                                     </td> -->
-                                  </tr>
-                                
-                                </c:forEach>
-                              </tbody>
-                              </table>
+                                        </tr>
+
+                                    </c:forEach>
+                                </tbody>
+                            </table>
 
 
-                        
+
                             <!-- Pagination -->
                             <nav aria-label="navigation">
                                 <ul class="pagination mt-50 mb-70">
@@ -2246,7 +2248,7 @@
                     </div>
                 </div>
             </section>
-            
+
 
             <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
             <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>

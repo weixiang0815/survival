@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Market.ProductSearchDto;
 import tw.survival.model.Market.TestProductDao;
 import tw.survival.service.Market.ProductService;
 
@@ -37,6 +43,9 @@ public class ProductController {
 
 	@Autowired
 	private TestProductDao TestDao;
+	
+	@PersistenceContext
+	private EntityManager em; // Hibernate的 session
 
 	@GetMapping("/Market/add_Product")
 	private String add_Product() {
@@ -47,7 +56,6 @@ public class ProductController {
 	private String showAllProfuct() {
 		return "/back/Market/show_AllProduct";
 	}
-	
 
 	// 新增商品
 	@ResponseBody
@@ -92,13 +100,13 @@ public class ProductController {
 		return mav;
 	}
 
-//	@GetMapping("/front/Market/Text")
-//	public ModelAndView getAllProduct1(ModelAndView mav) {
-//		List<ProductBean> list = productService.findAllProduct();
-//		mav.setViewName("/front/Market/Text");
-//		mav.getModel().put("list", list);
-//		return mav;
-//	}
+	@GetMapping("/front/Market/Text")
+	public ModelAndView getAllProduct1(ModelAndView mav) {
+		List<ProductBean> list = productService.findAllProduct();
+		mav.setViewName("/front/Market/Text");
+		mav.getModel().put("list", list);
+		return mav;
+	}
 
 	// 用ID找商品
 	@GetMapping("/front/Market/productId")
@@ -201,15 +209,77 @@ public class ProductController {
 		return imageMap;
 	}
 
-//	// 簡易多條件搜尋商品 未測試
-//	@GetMapping("/Market/productIn2")
-//	public String findProductIn(@RequestParam(name="name", required=false, defaultValue="") String name,
-//			@RequestParam(name="product_class", required=false, defaultValue="") String productclass,
-//			@RequestParam(name="context", required=false, defaultValue="") String context, Model model) {
-//		List<ProductBean> searchResult = productDao.find(name,productclass,context);
-//		model.addAttribute("SearchResult2", searchResult);
-//		return "Market/searchResult2";
-//	}
+	// 多選 多條件搜尋
+	@ResponseBody
+	@PostMapping("/Market/multisearch2") // 多條件搜尋
+	public List<ProductBean> findProductByMultiSearch2(@RequestBody ProductSearchDto dto) {
+		String[] clazz = dto.getClazz();
+		String[] context = dto.getContext();
+		String[] priceRange = dto.getPriceRange();
+
+		StringBuilder sql = new StringBuilder("SELECT * FROM Product WHERE ");
+		boolean flag1 = clazz != null && clazz.length != 0;
+		if (flag1) {
+			for (String gen : clazz) {
+				System.out.println(gen);
+			}
+			sql.append("class IN (");
+			for (int i = 0; i < clazz.length; i++) {
+				sql.append("'" + clazz[i] + "'");
+				sql.append(i != clazz.length - 1 ? " , " : " ) ");
+			}
+		}
+		boolean flag2 = context != null && context.length != 0;
+		if (flag2) {
+			for (String cla : context) {
+				System.out.println(cla);
+			}
+			sql.append(flag1 ? "AND (" : "(");
+			for (int i = 0; i < context.length; i++) {
+				sql.append("context LIKE N'%" + context[i] + "%'");
+				sql.append(i != context.length - 1 ? " OR " : " ) ");
+			}
+		}
+		boolean flag3 = priceRange != null && priceRange.length != 0;
+		if (flag3) {
+			for (String pr : priceRange) {
+				System.out.println(pr);
+			}
+			sql.append(flag1 || flag2 ? "AND (" : "(");
+			boolean flag = false;
+			for (int i = 0; i < priceRange.length; i++) {
+				if (flag) {
+					sql.append("or");
+				}
+				//小於5000
+				if (priceRange[i].equals("low")) {
+					sql.append(" price BETWEEN 0 AND 5000 ");
+					flag = true;
+				}
+				//5000到9000
+				if (priceRange[i].equals("mid")) {
+					sql.append(" price BETWEEN 5000 AND 9000 ");
+					flag = true;
+				}
+				//9000以上
+				if (priceRange[i].equals("high")) {
+					sql.append(" price BETWEEN 9000 AND 99999999999 ");
+					flag = true;
+				}
+				sql.append(i != priceRange.length - 1 ? "" : " ) ");
+			}
+		}
+		if (flag1 || flag2 || flag3) {
+			sql.append(";");
+		} else {
+			sql.append("1=2");
+		}
+		System.out.println(sql);
+		Query query = em.createNativeQuery(sql.toString(), ProductBean.class);
+		@SuppressWarnings("unchecked")
+		List<ProductBean> resultList = query.getResultList();
+		return resultList;
+	}
 
 //	@ResponseBody
 //	@GetMapping("/Market/productFindByproductclassIn")
