@@ -14,9 +14,6 @@
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
 
-            <!-- Core Style CSS -->
-            <link rel="stylesheet" href="css/core-style.css">
-            <link rel="stylesheet" href="style.css">
 
 
             <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
@@ -28,30 +25,11 @@
                 padding: 0;
             }
 
-            /* body {
-                font-family: "Poppins", sans-serif;
-                font-size: 14px;
-                background-color: #ffffff;
-                margin-top: 85px;
-            } */
-
             @media only screen and (max-width: 767px) {
                 body {
                     margin-top: 80px;
                 }
             }
-
-            /* h1,
-            h2,
-            h3,
-            h4,
-            h5,
-            h6 {
-                color: #000000;
-                line-height: 1.3;
-                font-weight: 700;
-                font-family: "Ubuntu", sans-serif;
-            } */
 
             p {
                 color: #787878;
@@ -1990,16 +1968,44 @@
                                                     data-bs-parent="#sidebarMenu" class="nav-link"
                                                     style="color: #ffffff;">槍枝</a>
                                                 <ul class="collapse" id="submenu-guns">
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;"
-                                                            href="${contextRoot}/front/Market/Text">手槍</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">步槍</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">衝鋒槍</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">狙擊槍</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">霰彈槍</a>
-                                                    </li>
+                                                    <form action="${contextRoot}/Market/productIn2" method="get">
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle1"
+                                                                    name="product_class" value="手槍">
+                                                                手槍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle2"
+                                                                    name="product_class" value="步槍">
+                                                                步槍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle3"
+                                                                    name="product_class" value="衝鋒槍">
+                                                                衝鋒槍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle4"
+                                                                    name="product_class" value="狙擊槍">
+                                                                狙擊槍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle5"
+                                                                    name="product_class" value="霰彈槍">
+                                                                霰彈槍
+                                                            </div>
+                                                        </li>
+                                                        <input type="submit" value="submit">
+                                                    </form>
                                                 </ul>
                                             </li>
 
@@ -2009,82 +2015,98 @@
                                                     data-bs-parent="#sidebarMenu" class="nav-link"
                                                     style="color: #ffffff;">配件</a>
                                                 <ul class="collapse" id="submenu-accessories">
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">倍鏡</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">彈夾</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">消音器</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">手電筒</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">雷射瞄準器</a>
-                                                    </li>
+                                                    <form action="${contextRoot}/Market/productIn2" method="get">
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle1"
+                                                                    name="product_class" value="倍鏡">
+                                                                倍鏡
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle2"
+                                                                    name="product_class" value="彈夾">
+                                                                彈夾
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle3"
+                                                                    name="product_class" value="消音器">
+                                                                消音器
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle4"
+                                                                    name="product_class" value="雷射瞄準器">
+                                                                雷射瞄準器
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle5"
+                                                                    name="product_class" value="手電筒">
+                                                                手電筒
+                                                            </div>
+                                                        </li>
+                                                        <input type="submit" value="submit">
+                                                    </form>
                                                 </ul>
-                                            </li>
 
-                                            <!-- Single Item -->
+
+                                                <!-- Single Item -->
                                             <li data-toggle="collapse" data-target="#clothing" class="nav-item">
                                                 <a href="#submenu-clothing" data-bs-toggle="collapse"
                                                     data-bs-parent="#sidebarMenu" class="nav-link"
                                                     style="color: #ffffff;">服飾</a>
-                                                <ul class="collapse" id="submenu-clothing">
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">全部</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;"
-                                                            href="${contextRoot}/front/Market/Text">夏季</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">冬季</a></li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">海軍</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">陸軍</a>
-                                                    </li>
-                                                    <li><a class="nav-link" style="color: #ffffff;" href="#">空軍</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
 
-                                        </ul>
+                                                <ul class="collapse" id="submenu-clothing">
+                                                    <form action="${contextRoot}/Market/productIn2" method="get">
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle1"
+                                                                    name="product_class" value="夏季">
+                                                                夏季
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle2"
+                                                                    name="product_class" value="冬季">
+                                                                冬季
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle3"
+                                                                    name="product_class" value="海軍">
+                                                                海軍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle4"
+                                                                    name="product_class" value="陸軍">
+                                                                陸軍
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="nav-link" style="color: #ffffff;">
+                                                                <input type="checkbox" id="vehicle5"
+                                                                    name="product_class" value="空軍">
+                                                                空軍
+                                                            </div>
+                                                        </li>
+                                                        <input type="submit" value="submit">
+                                                    </form>
+
+                                                </ul>
                                     </div>
                                 </div>
 
-                                <!---------------------------------------------------------------------------------------------------------->
-
-
-                                <!-- ##### Single Widget ##### -->
-                                <!-- <div class="widget price mb-50"> -->
-                                <!-- Widget Title -->
-                                <!-- <h6 class="widget-title mb-30">Filter by</h6> -->
-                                <!-- Widget Title 2 -->
-                                <!-- <p class="widget-title2 mb-30" style="color: #ffffff;">Price</p> -->
-
-                                <!-- <div class="widget-desc">
-                                        <div class="slider-range">
-                                            <div data-min="49" data-max="360" data-unit="$"
-                                                class="slider-range-price ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                                                data-value-min="49" data-value-max="360" data-label-result="Range:">
-                                                <div class="ui-slider-range ui-widget-header ui-corner-all"></div>
-                                                <span class="ui-slider-handle ui-state-default ui-corner-all"
-                                                    tabindex="0"></span>
-                                                <span class="ui-slider-handle ui-state-default ui-corner-all"
-                                                    tabindex="0"></span>
-                                            </div>
-                                            <div class="range-price">Range: $49.00 - $360.00</div>
-                                        </div>
-                                    </div>
-                                </div> -->
-
-                                <!-- ##### Single Widget ##### -->
-                                <!-- <div class="widget brands mb-50"> -->
-                                <!-- Widget Title 2 -->
-                                <!-- <p class="widget-title2 mb-30" style="color: #ffffff;">Brands</p>
-                                    <div class="widget-desc">
-                                        <ul>
-                                            <li><a href="#">Asos</a></li>
-                                            <li><a href="#">Mango</a></li>
-                                            <li><a href="#">River Island</a></li>
-                                            <li><a href="#">Topshop</a></li>
-                                            <li><a href="#">Zara</a></li>
-                                        </ul>
-                                    </div>
-                                </div> -->
+    
                             </div>
                         </div>
 
@@ -2117,37 +2139,35 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
 
+
+                                <c:forEach items="${list}" var="show_AllProduct" varStatus="Status">
                                     <!-- Single Product -->
                                     <div class="col-12 col-sm-6 col-lg-4">
                                         <div class="single-product-wrapper">
                                             <!-- Product Image -->
+        
                                             <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-1.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-1.jpg" alt="">
-
-                                                <!-- Product Badge -->
-                                                <div class="product-badge offer-badge">
-                                                    <span>-30%</span>
-                                                </div>
+                                                <img alt="" height="50"
+                                                src="${contextRoot}/Market/id?id=${show_AllProduct.id}">
+                                                <img class="hover-img" height="50"
+                                                    src="${contextRoot}/Market/id?id=${show_AllProduct.id}" alt="">
+    
                                                 <!-- Favourite -->
                                                 <div class="product-favourite">
                                                     <a href="#" class="favme fa fa-heart"></a>
                                                 </div>
                                             </div>
-
-                                            <!-- Product Description -->
+    
+                                            <!-- Product Description
                                             <div class="product-description">
-                                                <span>熱賣</span>
+                                                <span>熱賣</span> -->
                                                 <a href="single-product-details.html">
-                                                    <h6>黑衣部隊套裝</h6>
+                                                    <h6>${show_AllProduct.name}</h6>
                                                 </a>
-                                                <p class="product-price"><span class="old-price">$2500</span> $55.00
+                                                <p class="product-price"><span class="old-price">${show_AllProduct.price}</span>
                                                 </p>
-
+    
                                                 <!-- Hover Content -->
                                                 <div class="hover-content">
                                                     <!-- Add to Cart -->
@@ -2158,306 +2178,56 @@
                                             </div>
                                         </div>
                                     </div>
+                                </c:forEach>
 
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-2.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-2.jpg" alt="">
 
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
+                                
 
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>熱賣</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>簡易特種部隊套裝</h6>
-                                                </a>
-                                                <p class="product-price">$2500</p>
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">商品名稱</th>
+                                    <th scope="col">商品圖片</th>
+                                    <th scope="col">商品種類</th>
+                                    <th scope="col">商品介紹</th>
+                                    <th scope="col">租賃價格</th>
+                                    <th scope="col">販賣價格</th>
+                                    <th scope="col">修改商品</th>
+                                    <th scope="col">刪除商品</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <c:forEach items="${list}" var="show_AllProduct" varStatus="Status">
+                                  <tr>
+                                    <th scope="row">${Status.index+1}</th>
+                                    <td>${show_AllProduct.name}</td>
+                                    <td><img alt="" height="100" width="160" src="${contextRoot}/Market/id?id=${show_AllProduct.id}"></td>
+                                    <td>${show_AllProduct.product_class}</td>
+                                    <td>${show_AllProduct.context}</td>
+                                    <td>${show_AllProduct.rent_fee}</td>
+                                    <td>${show_AllProduct.price}</td>
+                                    <td>
+                                      <form action="${contextRoot}/" method="get">
+                                        <input name="id" type="hidden" value="${show_AllProduct.id}" />
+                                        <input type="submit" class="btn btn-info btn-sm" value="加入購物車" />
+                                      </form>
+                                    </td>
+                                    <!-- <td>
+                                      <form action="${contextRoot}/back/Market/delete" method="post">
+                                        <input name="_method" type="hidden" value="delete" />
+                                        <input name="id" type="hidden" value="${show_AllProduct.id}" />
+                                        <input type="submit" class="btn btn-danger btn-sm" value="刪除" />
+                                    </form>
+                                    </td> -->
+                                  </tr>
+                                
+                                </c:forEach>
+                              </tbody>
+                              </table>
 
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-3.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-3.jpg" alt="">
-
-                                                <!-- Product Badge -->
-                                                <div class="product-badge new-badge">
-                                                    <span>新品</span>
-                                                </div>
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>熱賣</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>VFC-M40A5</h6>
-                                                </a>
-                                                <p class="product-price">$10000</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-4.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-4.jpg" alt="">
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>熱賣</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>Kar 98K</h6>
-                                                </a>
-                                                <p class="product-price">$8700</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-5.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-5.jpg" alt="">
-
-                                                <!-- Product Badge -->
-                                                <div class="product-badge offer-badge">
-                                                    <span>-30%</span>
-                                                </div>
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>熱賣</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>FN SCAR</h6>
-                                                </a>
-                                                <p class="product-price"><span class="old-price">$8800</span> $55.00
-                                                </p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-6.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-6.jpg" alt="">
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>新品</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>8吋左輪手槍</h6>
-                                                </a>
-                                                <p class="product-price">$4750</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-7.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-7.jpg" alt="">
-
-                                                <!-- Product Badge -->
-                                                <div class="product-badge new-badge">
-                                                    <span>非賣品</span>
-                                                </div>
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>非賣品</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>金色沙漠之鷹</h6>
-                                                </a>
-                                                <p class="product-price">$999999999</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-8.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-8.jpg" alt="">
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>新品</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>uzi烏茲機關槍</h6>
-                                                </a>
-                                                <p class="product-price">$4800</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Single Product -->
-                                    <div class="col-12 col-sm-6 col-lg-4">
-                                        <div class="single-product-wrapper">
-                                            <!-- Product Image -->
-                                            <div class="product-img">
-                                                <img src="${contextRoot}/img/product-img/product-9.jpg" alt="">
-                                                <!-- Hover Thumb -->
-                                                <img class="hover-img"
-                                                    src="${contextRoot}/img/product-img/product-9.jpg" alt="">
-
-                                                <!-- Favourite -->
-                                                <div class="product-favourite">
-                                                    <a href="#" class="favme fa fa-heart"></a>
-                                                </div>
-                                            </div>
-
-                                            <!-- Product Description -->
-                                            <div class="product-description">
-                                                <span>新品</span>
-                                                <a href="single-product-details.html">
-                                                    <h6>WE M4</h6>
-                                                </a>
-                                                <p class="product-price">$8000</p>
-
-                                                <!-- Hover Content -->
-                                                <div class="hover-content">
-                                                    <!-- Add to Cart -->
-                                                    <div class="add-to-cart-btn">
-                                                        <a href="#" class="btn essence-btn">加入購物車</a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
+                        
                             <!-- Pagination -->
                             <nav aria-label="navigation">
                                 <ul class="pagination mt-50 mb-70">
@@ -2476,22 +2246,7 @@
                     </div>
                 </div>
             </section>
-            <!-- ##### Shop Grid Area End ##### -->
-
-
-            <!-- jQuery (Necessary for All JavaScript Plugins) -->
-            <!-- <script src="js/jquery/jquery-2.2.4.min.js"></script> -->
-            <!-- Popper js -->
-            <script src="js/popper.min.js"></script>
-            <!-- Bootstrap js -->
-            <!-- <script src="js/bootstrap.min.js"></script> -->
-            <!-- Plugins js -->
-            <script src="js/plugins.js"></script>
-            <!-- Classy Nav js -->
-            <script src="js/classy-nav.min.js"></script>
-            <!-- Active js -->
-            <script src="js/active.js"></script>
-
+            
 
             <jsp:include page="../../Template/front/footer.jsp"></jsp:include>
             <jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>

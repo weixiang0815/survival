@@ -47,6 +47,7 @@ public class ProductController {
 	private String showAllProfuct() {
 		return "/back/Market/show_AllProduct";
 	}
+	
 
 	// 新增商品
 	@ResponseBody
@@ -81,16 +82,33 @@ public class ProductController {
 		mav.getModel().put("list", list);
 		return mav;
 	}
-	
-	@GetMapping("/front/Market/Text")
-	public ModelAndView getAllProduct1(ModelAndView mav) {
+
+	// 搜尋前臺全部商品
+	@GetMapping("/front/Market/getAllProductFront")
+	public ModelAndView getAllProductFront(ModelAndView mav) {
 		List<ProductBean> list = productService.findAllProduct();
-		mav.setViewName("/front/Market/Text");
+		mav.setViewName("/front/Market/shop");
 		mav.getModel().put("list", list);
 		return mav;
 	}
 
-	// 搜尋商品 by ID
+//	@GetMapping("/front/Market/Text")
+//	public ModelAndView getAllProduct1(ModelAndView mav) {
+//		List<ProductBean> list = productService.findAllProduct();
+//		mav.setViewName("/front/Market/Text");
+//		mav.getModel().put("list", list);
+//		return mav;
+//	}
+
+	// 用ID找商品
+	@GetMapping("/front/Market/productId")
+	public String getAllProduct1(@RequestParam("id") Integer id, Model model) {
+		ProductBean product = productService.getProductById(id);
+		model.addAttribute("product", product);
+		return "/front/Market/productDetail";
+	}
+
+	// 搜尋商品 by ID 的圖片
 	@ResponseBody
 	@GetMapping("/Market/id")
 	public ResponseEntity<byte[]> getProductById(@RequestParam("id") Integer id) {
@@ -102,7 +120,6 @@ public class ProductController {
 		headers.setContentType(MediaType.IMAGE_JPEG);
 		// ResponseEntity 內建 @ResponseBody // 資料, headers, 回應的 http status
 		return new ResponseEntity<byte[]>(photoFile, headers, HttpStatus.OK);
-
 	}
 
 	// 修改商品
@@ -113,15 +130,15 @@ public class ProductController {
 		return "/back/Market/editProduct";
 	}
 
-	// 修改商品 
-	@PostMapping("/Market/editProduct")
+	// 修改商品
+	@PostMapping("/back/Market/editProduct")
 	public String sendEditedProduct(@RequestParam("id") Integer id, @RequestParam("name") String name,
 			@RequestParam("img") MultipartFile img, @RequestParam("Product_class") String product_class,
 			@RequestParam("context") String context, @RequestParam("rent_fee") Integer rent_fee,
 			@RequestParam("price") Integer price) {
 
 		try {
-			productService.updateProductById(id, name, img.getBytes(),context,product_class, rent_fee, price);
+			productService.updateProductById(id, name, img.getBytes(), context, product_class, rent_fee, price);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -159,8 +176,8 @@ public class ProductController {
 		List<ProductBean> searchResult = TestDao.findProductText2(name, productclass, context);
 		model.addAttribute("searchResult2", searchResult);
 		return "/back/Market/searchResult2";
-	}	
-	//多條件
+	}
+	// 多條件
 
 	@ResponseBody
 	@GetMapping("Market/multicondition")

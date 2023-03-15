@@ -12,6 +12,11 @@ public class PageControllerFront {
 		return "front/Market/index";
 	}
 
+	@GetMapping("/front/Market/shop")
+	public String shopMain() {
+		return "/front/Market/shop";
+	}
+	
 	@GetMapping("front/Market/index.html")
 	public String goToFrontIndexHtml(Model model) {
 		return "front/Market/index.html";

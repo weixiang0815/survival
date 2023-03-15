@@ -3,7 +3,6 @@ package tw.survival.model.Player;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -26,7 +25,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -41,7 +39,7 @@ import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.MsgsBean;
+
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
@@ -150,12 +148,9 @@ public class PlayerBean {
 	@OrderBy("added desc")
 	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/3/13
 
-	@JsonBackReference
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "PlayerToMsgs", inverseJoinColumns = {
-            @JoinColumn(name = "fk_msgs_id", referencedColumnName = "id") }, joinColumns = {
-                    @JoinColumn(name = "fk_player_id", referencedColumnName = "id") })
-	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	private Set<PlayerToMsgsBean> forPlayer = new LinkedHashSet<PlayerToMsgsBean>();
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
@@ -357,31 +352,35 @@ public class PlayerBean {
 		this.postsOfPlayer = postsOfPlayer;
 	}
 
-//
-//	public Set<MsgsBean> getMsgsOfPlayer() {
-//		return msgsOfPlayer;
+
+
+
+//	public Set<PlayerToMsgsBean> getForPlayer() {
+//		return forPlayer;
 //	}
 //
-//	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
-//		this.msgsOfPlayer = msgsOfPlayer;
-//	}
 //
-//	public Set<ThumbUpBean> getThumbUpOfPost() {
-//		return thumbUpOfPost;
+//	public void setForPlayer(Set<PlayerToMsgsBean> forPlayer) {
+//		this.forPlayer = forPlayer;
 //	}
-//
-//	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
-//		this.thumbUpOfPost = thumbUpOfPost;
-//	}
-//
-//	public Set<ScoreBean> getScoreOfPost() {
-//		return scoreOfPost;
-//	}
-//
-//	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
-//		this.scoreOfPost = scoreOfPost;
-//	}
-//
+
+
+	public Set<ThumbUpBean> getThumbUpOfPost() {
+		return thumbUpOfPost;
+	}
+
+	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
+		this.thumbUpOfPost = thumbUpOfPost;
+	}
+
+	public Set<ScoreBean> getScoreOfPost() {
+		return scoreOfPost;
+	}
+
+	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
+		this.scoreOfPost = scoreOfPost;
+	}
+
 	public Set<BookmarkletBean> getBookmarkletOfPost() {
 		return bookmarkletOfPost;
 	}

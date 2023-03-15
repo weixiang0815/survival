@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
@@ -31,15 +33,17 @@ public class ThumbUpBean implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_posts_id")
-	private PostsBean posts;
-
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name = "added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date added;
 
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_posts_id")
+	private PostsBean posts;
+
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
