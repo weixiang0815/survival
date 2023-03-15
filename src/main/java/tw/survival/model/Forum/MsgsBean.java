@@ -13,8 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -26,10 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "msgs")
@@ -66,9 +61,9 @@ public class MsgsBean implements Serializable {
 	@JoinColumn(name = "fk_posts_id")
 	private PostsBean post;
 	
-//	@JsonManagedReference
-//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msgs", cascade = CascadeType.ALL)
-//	private Set<PlayerToMsgsBean> forMsgs = new LinkedHashSet<PlayerToMsgsBean>();
+	@JsonManagedReference
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "msgs", cascade = CascadeType.ALL)
+	private Set<PlayerToMsgsBean> forMsgs = new LinkedHashSet<PlayerToMsgsBean>();
 	
 	public MsgsBean() {
 	}
@@ -115,13 +110,13 @@ public class MsgsBean implements Serializable {
 		this.finalAdded = finalAdded;
 	}
 
-//	public Set<PlayerToMsgsBean> getForMsgs() {
-//		return forMsgs;
-//	}
-//
-//	public void setForMsgs(Set<PlayerToMsgsBean> forMsgs) {
-//		this.forMsgs = forMsgs;
-//	}
+	public Set<PlayerToMsgsBean> getForMsgs() {
+		return forMsgs;
+	}
+
+	public void setForMsgs(Set<PlayerToMsgsBean> forMsgs) {
+		this.forMsgs = forMsgs;
+	}
 
 	public PostsBean getPost() {
 		return post;

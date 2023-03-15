@@ -1,7 +1,6 @@
 package tw.survival.model.Player;
 
 import java.sql.Blob;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
