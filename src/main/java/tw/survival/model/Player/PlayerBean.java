@@ -2,7 +2,6 @@ package tw.survival.model.Player;
 
 import java.sql.Blob;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -14,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -28,6 +29,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -36,7 +38,6 @@ import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PlayerToMsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
@@ -51,43 +52,40 @@ public class PlayerBean {
 	@Column(name = "id")
 	private Integer id;
 
-
 	@Column(name = "name")
 	private String name;
 
-	
 	@Column(name = "account")
 	private String account;
 
-	
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "identity_number")
 	private String identity_number;
-	
+
 	@Column(name = "nickname")
 	private String nickname;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "age")
 	private Integer age;
-    
+
 	@Column(name = "county")
 	private String county;
 
 	@Column(name = "district")
 	private String district;
-	
+
 	@Column(name = "address")
 	private String address;
 
 	@Column(name = "info")
 	private String info;
-	
-	@Column(name="code")
+
+	@Column(name = "code")
 	private String code;
 
 	@JsonIgnore
@@ -120,10 +118,10 @@ public class PlayerBean {
 
 	@Column(name = "banned_reason")
 	private String banned_reason;
-	
+
 	@Column(name = "status")
 	private Integer status;
-	
+
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_id")
@@ -171,8 +169,17 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
 //	private List<CartBean> cart = new ArrayList<>();
 
+	@JsonBackReference
 	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
-    private Set<SignUpBean> signUps = new HashSet<>();
+	private Set<SignUpBean> signUps = new LinkedHashSet<>();
+
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Participation", inverseJoinColumns = {
+			@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_playercompetition_id", referencedColumnName = "id") })
+	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
+
 	@PrePersist
 	public void autoCreate() {
 		if (join_date == null) {
@@ -180,7 +187,6 @@ public class PlayerBean {
 		}
 	}
 
-	
 	public PlayerBean() {
 	}
 
@@ -421,25 +427,20 @@ public class PlayerBean {
 		this.status = status;
 	}
 
-
 	public String getCode() {
 		return code;
 	}
-
 
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-
 	public Set<SignUpBean> getSignUps() {
 		return signUps;
 	}
 
-
 	public void setSignUps(Set<SignUpBean> signUps) {
 		this.signUps = signUps;
 	}
-	
 
 }

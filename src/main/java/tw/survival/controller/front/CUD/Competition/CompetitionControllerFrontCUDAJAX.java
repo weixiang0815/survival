@@ -1,10 +1,10 @@
 package tw.survival.controller.front.CUD.Competition;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -24,6 +24,16 @@ public class CompetitionControllerFrontCUDAJAX {
 	public boolean checkSignedUp(@PathVariable("playerId") Integer playerId, @PathVariable("compId") Integer compId) {
 		SignUpBean signup = signupService.findByPlayerIdAndCompId(playerId, compId);
 		return signup != null;
+	}
+
+	@GetMapping("signup/{id}")
+	public SignUpBean findById(@PathVariable("id") Integer id) {
+		return signupService.findById(id);
+	}
+
+	@GetMapping("signup/all")
+	public List<SignUpBean> findAll() {
+		return signupService.findAll();
 	}
 
 }
