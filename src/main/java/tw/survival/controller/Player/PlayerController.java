@@ -4,7 +4,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -55,12 +54,9 @@ public class PlayerController {
 	
 	@Autowired
 	private EmailService emailService;
-	
-	
-
 	@GetMapping("/player.main")
 	public String main() {
-		return "back/Player/index";
+		return "front/Player/disclaimer";
 	}
 	
 //	@ResponseBody
@@ -70,6 +66,7 @@ public class PlayerController {
 //		model.addAttribute("player",list);
 //		return"";
 //	}
+
 
 //	C
 	@GetMapping("/player/add")

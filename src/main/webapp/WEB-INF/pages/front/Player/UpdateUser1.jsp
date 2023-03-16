@@ -18,7 +18,7 @@ img {
 </head>
 
 <body>
-<jsp:include page="../../Template/admin.jsp"/>
+<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 	<div class="container">
 		<h3>使用者修改資料</h3>
 		<form:form action="${contextRoot}/player/update1" method="put"

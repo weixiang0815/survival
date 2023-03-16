@@ -86,7 +86,7 @@
 							<a href="${contextRoot}/Employee/login"><button>職員登入</button></a>
 						</div>
 						<div class="col text-start">
-							<a href="${contextRoot}/player/add"><button>會員註冊</button></a>
+							<a href="${contextRoot}/player.main"><button>會員註冊</button></a>
 						</div>
 					</div>
 

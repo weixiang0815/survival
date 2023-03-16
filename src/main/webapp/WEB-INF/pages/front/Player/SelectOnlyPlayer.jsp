@@ -20,55 +20,82 @@ img {
 		<h3>個人資料</h3>
 		<table class="table table-hover">
 			<tr>
-				<td>><label>大頭貼></label>
-				<td><label>名稱</label>
-				<td><label>帳號</label>
-				<td><label>密碼</label>
-				<td><label>生日</label>
-				<td><label>暱稱</label>
-				<td><label>性別</label>
-				<td><label>個人身分證</label>
-				<td><label>縣市</label>
-				<td><label>鄉鎮</label>
-				<td><label>地址</label>
-				<td><label>Email</label>
-				<td><label>年齡</label>
-				<td><label>電話</label>
+				<td>${player.id}
 			</tr>
-			<c:forEach items="${player}" var="player">
-				<tr>
-				    <td>${player.id}</td>
-					<td style="width: 100px;">
-					<img src="${contextRoot}/player/photo/${player.id}" /></td>
-					<td>${player.name}</td>
-					<td>${player.account}</td>
-					<td>${player.password}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${player.birthday}" /></td>
-					<td><c:choose>
-							<c:when test="${player.nickname == null}">無</c:when>
-							<c:otherwise>${player.nickname}</c:otherwise>
-						</c:choose></td>
-					<td><c:choose>
-							<c:when test="${player.sex == \"M\"}">男</c:when>
-							<c:otherwise>女</c:otherwise>
-						</c:choose></td>
-					<td>${player.identity_number}</td>
-					<td>${player.county}</td>
-					<td>${player.district}</td>
-					<td>${player.address}</td>
-					<td>${player.email}</td>
-					<td>${player.age}</td>
-					<td>${player.phone}</td>
-					<td><form
-							action="${contextRoot}/player/frontupdate/?id=${player.id}">
-							<input name="id" type="hidden" value="${player.id}" /> <input
-								type="submit" class="btn btn-info" value="編輯">
-						</form>
-				</tr>
-			</c:forEach>
+			<tr>
+				<td><label>大頭貼</label>
+				<td colspan="2" style="width: 100px;"><img
+					src="${contextRoot}/player/photo/${player.id}" /></td>
+			</tr>
+			<tr>
+				<td><label>名稱</label>
+				<td>${player.name}</td>
+			</tr>
+			<tr>
+				<td><label>帳號</label>
+				<td>${player.account}</td>
+			</tr>
+			<tr>
+				<td><label>密碼</label>
+				<td>${player.password}</td>
+			</tr>
+			<tr>
+				<td><label>生日</label>
+				<td><fmt:formatDate pattern="yyyy-MM-dd"
+						value="${player.birthday}" /></td>
+			</tr>
+			<tr>
+				<td><label>暱稱</label>
+				<td><c:choose>
+						<c:when test="${player.nickname == null}">無</c:when>
+						<c:otherwise>${player.nickname}</c:otherwise>
+					</c:choose></td>
+			</tr>
+			<tr>
+				<td><label>性別</label>
+				<td><c:choose>
+						<c:when test="${player.sex == \"M\"}">男</c:when>
+						<c:otherwise>女</c:otherwise>
+					</c:choose></td>
+			</tr>
+			<tr>
+				<td><label>個人身分證</label>
+				<td>${player.identity_number}</td>
+			</tr>
+			<tr>
+				<td><label>縣市</label>
+				<td>${player.county}</td>
+			</tr>
+			<tr>
+				<td><label>鄉鎮</label>
+				<td>${player.district}</td>
+			</tr>
+			<tr>
+				<td><label>地址</label>
+				<td>${player.address}</td>
+			</tr>
+			<tr>
+				<td><label>Email</label>
+				<td>${player.email}</td>
+			</tr>
+			<tr>
+				<td><label>年齡</label>
+				<td>${player.age}</td>
+			</tr>
+			<tr>
+				<td><label>電話</label>
+				<td>${player.phone}</td>
+			</tr>
+			<tr>
+				<td>
+					<form action="${contextRoot}/player/frontupdate/?id=${player.id}">
+						<input name="id" type="hidden" value="${player.id}" /> <input
+							type="submit" class="btn btn-info" value="編輯">
+					</form>
+			</tr>
 		</table>
-		<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
+		<a href="${contextRoot}/"><button class="btn btn-primary">回到搜尋頁</button></a>
 	</div>
+	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>
