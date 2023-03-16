@@ -48,6 +48,7 @@ public class MyAspect {
 	 * @author 王威翔
 	 * @author 鄭力豪
 	 */
+	@SuppressWarnings("null")
 	@Before("pointcutFront()")
 	public void beforeFront(JoinPoint joinPoint) throws IOException {
 
@@ -91,6 +92,7 @@ public class MyAspect {
 	 * @author 王威翔
 	 * @author 鄭力豪
 	 */
+	@SuppressWarnings("null")
 	@Before("pointcutBack()")
 	public void beforeBack(JoinPoint joinPoint) throws IOException {
 

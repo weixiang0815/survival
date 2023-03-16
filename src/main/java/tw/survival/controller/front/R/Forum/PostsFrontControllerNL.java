@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Forum.MsgBlockDao;
 import tw.survival.model.Forum.MsgBlockDto;
+import tw.survival.model.Competition.CompetitionBean;
 import tw.survival.model.Forum.MsgsBean;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Player.PlayerBean;
@@ -43,7 +45,7 @@ public class PostsFrontControllerNL {
 	private CompetitionService competitionService;
 
 	private PlayerService playerService;
-	
+
 	private MsgsService msgsService;
 	
 	private PlayerToMsgsService playerToMsgsService;
@@ -66,12 +68,18 @@ public class PostsFrontControllerNL {
 	public String frontMainNLController() {
 		return "front/Forum/index";
 	}
-	
+
 	@GetMapping("/posts/content")
-	public String getOnePost(
-			@RequestParam("id")Integer id, Model model){
+	public String getOnePost(@RequestParam("id") Integer id, Model model) {
 		PostsBean post = postsService.findPostById(id);
-		
+		Page<MsgsBean> allMsgsOfPost = msgsService.getAllMsgsOfPost(1, id);
+
+		CompetitionBean competition = post.getCompetition();
+		if (competition != null) {
+			model.addAttribute("competition", competition);
+			model.addAttribute("employee", competition.getFounderEmployee());
+		}
+
 		model.addAttribute("post", post);
 		
 		
@@ -111,8 +119,7 @@ public class PostsFrontControllerNL {
 		model.getAttribute("player");
 		return "front/Forum/Posts/showOne";
 	}
-	
-	
+
 	/**
 	 * @param model 設定model 目的為設置輸入物件
 	 * @return String 設定View
@@ -128,8 +135,7 @@ public class PostsFrontControllerNL {
 		model.addAttribute("postsList",postsList);
 		return"front/Forum/Posts/getAllPosts";
 	}
-	
-	
+
 	/**
 	 * @param name 欲輸入的模糊搜尋名稱
 	 * @return page物件
@@ -138,18 +144,20 @@ public class PostsFrontControllerNL {
 	 */
 	@ResponseBody
 	@GetMapping("/posts/ajax/postpage")
+
 	public Page<PostsBean> addOneAndReturnLatesTen(
 			@RequestParam(name = "SearchStr", defaultValue = "") String SearchStr){
 		
 		Page<PostsBean> page = postsService
 				.getPostsWithNameContainingByPage(1, SearchStr);
 		
+
 		return page;
 	}
-	
+
 	/**
 	 * @param pageNumber 欲輸入的頁碼
-	 * @param name 欲輸入的模糊搜尋名稱
+	 * @param name       欲輸入的模糊搜尋名稱
 	 * @return page物件
 	 * @author 鄭力豪
 	 * @apiNote 把模糊搜尋的資料依照十筆為一頁丟出某頁
@@ -163,9 +171,10 @@ public class PostsFrontControllerNL {
 		Page<PostsBean> page = postsService
 				.getPostsWithNameContainingByPage(pageNumber, name);
 		
+
 		return page;
 	}
-	
+
 //	/**
 //	 * @return page物件
 //	 * @author 鄭力豪
@@ -177,7 +186,5 @@ public class PostsFrontControllerNL {
 //		Page<PostsBean> page = postsService.getAllPostsByPage(1);
 //		return page;
 //	}
-	
-	
-}
 
+}

@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import tw.survival.model.Player.PlayerBean;
+import tw.survival.service.Market.CartService;
 import tw.survival.service.Player.PlayerService;
 import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;
@@ -47,16 +48,24 @@ public class PlayerController {
 	ServletContext context;
 	@Autowired
 	private PlayerService pService;
+	@Autowired
+	private CartService cartService;
 	
 	@Autowired
 	private EmailService emailService;
-	
-	
-
 	@GetMapping("/player.main")
 	public String main() {
-		return "back/Player/index";
+		return "front/Player/disclaimer";
 	}
+	
+//	@ResponseBody
+//	@GetMapping("/player/cartlist/{id}")
+//	public String cartPlayer(@PathVariable("id") Integer id,Model model) {
+//		List<CartBean>list=cartService.listCartItems(id.);
+//		model.addAttribute("player",list);
+//		return"";
+//	}
+
 
 //	C
 	@GetMapping("/player/add")
@@ -72,14 +81,48 @@ public class PlayerController {
 		m.addAttribute("player", list);
 		return "back/Player/SelectAllResult";
 	}
+	
 
 	@ResponseBody
 	@GetMapping("/player/get/{id}")
 	public PlayerBean getPlayerById(@PathVariable Integer id) {
 		return pService.findByBean(id);
 	}
+	//onlyR
+	@GetMapping("/player/{id}")
+	public String OnlygetPlayerById(@PathVariable Integer id,Model m) {
+		PlayerBean player= pService.findByBean(id);
+		m.addAttribute("player",player);			
+		 return"front/Player/SelectOnlyPlayer";
+	}
+	//FU
+	@GetMapping("/player/frontupdate")
+	public String frontupdatePlayer(@RequestParam("id") Integer id, Model model) {
+		PlayerBean player = pService.findByBean(id);
+		model.addAttribute("player", player);
+		return "front/Player/UpdateUser1";
+	}
+	@PutMapping("/player/update2")
+	public String fontupdateById(@ModelAttribute PlayerBean player) {
+		String sex = player.getSex();
+		MultipartFile playerImage = player.getPlayerImage();
+		if (sex == null) {
 
-//U
+		}
+		if (playerImage != null && !playerImage.isEmpty()) {
+			try {
+				byte[] img = playerImage.getBytes();
+				Blob blob = new SerialBlob(img);
+				player.setThumbnail(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		pService.update(player);
+		return "redirect:/front/player/SelectOnlyPlayer";
+	}
+
+//bU
 	@GetMapping("/player/update")
 	public String updatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
@@ -109,9 +152,7 @@ public class PlayerController {
 
 	// D
 	@DeleteMapping("/player/delete")
-	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {
-		
-		
+	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {	
 		try {
 			
 			ra.addFlashAttribute("DeleteMessage", "刪除成功: 編號=" + id);

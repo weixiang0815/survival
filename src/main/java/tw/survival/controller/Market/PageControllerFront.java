@@ -21,5 +21,6 @@ public class PageControllerFront {
 	public String goToFrontIndexHtml(Model model) {
 		return "front/Market/index.html";
 	}
+	
 
 }

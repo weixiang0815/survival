@@ -30,12 +30,7 @@
 					padding: 0;
 				}
 
-				/* body {
-		font-family: "Poppins", sans-serif;
-		font-size: 14px;
-		background-color: #ffffff;
-		margin-top: 85px;
-	} */
+			
 
 				@media only screen and (max-width: 767px) {
 					body {
@@ -43,17 +38,6 @@
 					}
 				}
 
-				/* h1,
-	h2,
-	h3,
-	h4,
-	h5,
-	h6 {
-		color: #000000;
-		line-height: 1.3;
-		font-weight: 700;
-		font-family: "Ubuntu", sans-serif;
-	} */
 
 				p {
 					color: #787878;

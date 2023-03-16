@@ -2,7 +2,6 @@ package tw.survival.model.Player;
 
 import java.util.List;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
