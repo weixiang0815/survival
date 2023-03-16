@@ -94,7 +94,7 @@
 						<c:forEach items="${errors}" var="error">
 							<div class="col-12 error">＊&nbsp;${error.defaultMessage}</div>
 						</c:forEach>
-					</div>
+					</div>					
 				</div>
 				<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 				<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>

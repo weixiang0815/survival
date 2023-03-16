@@ -20,11 +20,11 @@ public class Playervalidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		PlayerBean player = (PlayerBean) target;
 
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account", "player.account.not.empty", "帳號欄不能空白");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "player.password.not.empty", "密碼欄不能空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account", "PlayerBean.account.not.empty", "帳號欄不能空白");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "PlayerBean.password.not.empty", "密碼欄不能空白");
 
 		if (!errors.hasFieldErrors("account") && player.getAccount().length() < 5) {
-			errors.rejectValue("account", "player.account.length.error", "帳號欄不能小於五個字元(預設值)");
+			errors.rejectValue("account", "PlayerBean.account.length.error", "帳號欄不能小於五個字元(預設值)");
 		}
 	}
 
