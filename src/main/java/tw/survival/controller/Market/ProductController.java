@@ -43,7 +43,7 @@ public class ProductController {
 
 	@Autowired
 	private TestProductDao TestDao;
-	
+
 	@PersistenceContext
 	private EntityManager em; // Hibernate的 session
 
@@ -236,7 +236,7 @@ public class ProductController {
 			}
 			sql.append(flag1 ? "AND (" : "(");
 			for (int i = 0; i < context.length; i++) {
-				sql.append("context LIKE N'%" + context[i] + "%'");
+				sql.append("context LIKE '%" + context[i] + "%'");
 				sql.append(i != context.length - 1 ? " OR " : " ) ");
 			}
 		}
@@ -246,33 +246,26 @@ public class ProductController {
 				System.out.println(pr);
 			}
 			sql.append(flag1 || flag2 ? "AND (" : "(");
-			boolean flag = false;
 			for (int i = 0; i < priceRange.length; i++) {
-				if (flag) {
-					sql.append("or");
+				switch (priceRange[i]) {
+				case "low":
+					// 小於5000
+					sql.append(" ( price BETWEEN 0 AND 5000 ) ");
+					break;
+				case "mid":
+					// 5000到9000
+					sql.append(" ( price BETWEEN 5000 AND 9000 ) ");
+					break;
+				case "high":
+					// 9000以上
+					sql.append(" ( price BETWEEN 9000 AND 100000 ) ");
+					break;
 				}
-				//小於5000
-				if (priceRange[i].equals("low")) {
-					sql.append(" price BETWEEN 0 AND 5000 ");
-					flag = true;
-				}
-				//5000到9000
-				if (priceRange[i].equals("mid")) {
-					sql.append(" price BETWEEN 5000 AND 9000 ");
-					flag = true;
-				}
-				//9000以上
-				if (priceRange[i].equals("high")) {
-					sql.append(" price BETWEEN 9000 AND 99999999999 ");
-					flag = true;
-				}
-				sql.append(i != priceRange.length - 1 ? "" : " ) ");
+				sql.append(i != priceRange.length - 1 ? "or " : " ) ");
 			}
 		}
-		if (flag1 || flag2 || flag3) {
-			sql.append(";");
-		} else {
-			sql.append("1=2");
+		if (!flag1 && !flag2 && !flag3) {
+			sql.append("1=1");
 		}
 		System.out.println(sql);
 		Query query = em.createNativeQuery(sql.toString(), ProductBean.class);
