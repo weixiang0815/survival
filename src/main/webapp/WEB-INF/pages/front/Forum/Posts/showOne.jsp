@@ -171,9 +171,33 @@
 		</c:if>
 		<!-- 留言開始 -->
 		<div class="wow fadeInUp" data-wow-delay="0.6s">
+			<div class="row"  style="border: #FF0000 2px solid;">
+				<h3>留言區</h3>
+				<button class="msg-nonlogin-btn btn btn-primary">顯示更多留言</button>
+			</div>
+		</div>
+		<div class="wow fadeInUp" data-wow-delay="0.6s">
 			<div class="row" id="msg-block" style="border: #FF0000 2px solid;">
-<%-- 			<c:forEach items="${postsList}" var="post"> --%>
-<%-- 			</c:forEach> --%>
+			
+			<c:forEach items="${msgBlocks.content}" var="msgBlock">
+			
+			<div class="col-3 player-block" style="background-color: black; border: #FF0000 2px solid;">
+   				<img src="${contextRoot}/player/photo/${msgBlock.playerId}" />
+    			<p>作者: ${msgBlock.playerName}</p>
+    			<p>暱稱: ${msgBlock.playerNickname}</p>
+    			<p>位居縣市: ${msgBlock.playerCounty}</p>
+			</div>
+ 			<div class="col-9 card" style="background-color: black; border: #FF0000 2px solid;">
+				<div class="card-header">
+					<span>發文時間:${msgBlock.msgAdded}</span>
+				</div>
+			   	<div class="card-body">
+			   		<p>${msgBlock.msgEssay}</p>
+	   			</div>
+	   		</div>
+			
+			</c:forEach>
+
 				<br/><br/>
 			</div>
 		</div>
@@ -328,21 +352,12 @@
 
 	<!-- Service End -->
 <script type="text/javascript">
-   var playerId = ${sessionScope.player.id}
-   var postId = ${requestScope.post.id}
+	const playerId = ${sessionScope.player != null ? sessionScope.player.id : 1};
+	const postId = ${requestScope.post.id}
 </script>
-<script src="${contextRoot}/js/jquery-3.6.3.min.js" type="text/javascript"></script>
-<script src="${contextRoot}/js/ajax/posts/axios-post-message.js" type="text/javascript"></script>
+
 <jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 <jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
-<script>
-// 		jQuery重新導向
-	$("#toForum").on({
-		click : function(e) {
-			e.preventDefault();
-			window.location.href = '${contextRoot}/front/Forum/index';
-		}
-	});
-</script>
+
 </body>
 </html>
