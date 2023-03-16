@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 public class PostDto implements Serializable {
-	
+
 //	DTO Data Transfer Object
 //
 //	傳遞資料的物件
@@ -17,21 +17,24 @@ public class PostDto implements Serializable {
 //	- 不只 restful api 可以做，spring form 也可以做
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private List<String> classify = new ArrayList<String>();
-	
+
 	private String name;
-	
+
 	private List<Integer> date = new ArrayList<Integer>();
 
-	public PostDto() {}
-	
-	public PostDto(List<String> classify, String name, List<Integer> date) {
+	private Integer playerId;
+
+	public PostDto() {
+	}
+
+	public PostDto(List<String> classify, String name, List<Integer> date, Integer playerId) {
 		super();
 		this.classify = classify;
 		this.name = name;
 		this.date = date;
+		this.playerId = playerId;
 	}
 
 	public List<String> getClassify() {
@@ -58,7 +61,15 @@ public class PostDto implements Serializable {
 		this.date = date;
 	}
 
-	//String Builder  確認Dto本身有沒有建置
+	public Integer getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(Integer playerId) {
+		this.playerId = playerId;
+	}
+
+	// String Builder 確認Dto本身有沒有建置
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -68,8 +79,10 @@ public class PostDto implements Serializable {
 		builder.append(name);
 		builder.append(", date=");
 		builder.append(date);
+		builder.append(", playerId=");
+		builder.append(playerId);
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 }

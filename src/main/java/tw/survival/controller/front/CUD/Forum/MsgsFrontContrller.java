@@ -163,47 +163,11 @@ public class MsgsFrontContrller {
 		//引用自訂義Dao,有設定分頁機制沒有排序功能
 		MsgBlockDao msgBlockDao = new MsgBlockDao();
 		Page<MsgBlockDto> msgBlockByPage = msgBlockDao.getMsgBlockByPage(1, 10, msgBlockList);
-		
-		
 		return msgBlockByPage;
 		
 	}
 	
 	
-//	@ResponseBody
-//	@GetMapping("/msgBlock/axios/get")
-//	public Page<MsgBlockDto> addMsgAndReturnLateTen(@RequestParam(name="post_id", defaultValue = "1") Integer postId, @RequestParam(name = "p",defaultValue = "1") Integer pageNumber, Model model){
-//		
-//		//依照SQL語法輸出的List物件
-//		List<MsgsBean> msgsList = msgsService.getMsgListOfPost(postId);
-//		
-//		//新增容器
-//		List<MsgBlockDto> msgBlockList = new ArrayList<MsgBlockDto>();
-//		
-//		//依照留言表每個留言來找到使用者並把他們的資料包到MsgBlockDto物件裡(順序依照留言表)。
-//		for(MsgsBean msgs : msgsList) {
-//			
-//			MsgBlockDto msgBlockDto = new MsgBlockDto();
-//			PlayerBean playerBean = playerToMsgsService.findPtmbByMsgsId(msgs.getId()).getPlayer();
-//			
-//			msgBlockDto.setPlayerId(playerBean.getId());
-//			msgBlockDto.setPlayerCounty(playerBean.getCounty());
-//			msgBlockDto.setPlayerName(playerBean.getName());
-//			msgBlockDto.setPlayerNickname(playerBean.getNickname());
-//			msgBlockDto.setMsgId(msgs.getId());
-//			msgBlockDto.setMsgEssay(msgs.getEssay());
-//			msgBlockDto.setMsgAdded(msgs.getAdded());
-//			
-//			
-//			msgBlockList.add(msgBlockDto);
-//		}
-//		//引用自訂義Dao,有設定分頁機制沒有排序功能
-//		MsgBlockDao msgBlockDao = new MsgBlockDao();
-//		Page<MsgBlockDto> msgBlockByPage = msgBlockDao.getMsgBlockByPage(pageNumber, 10, msgBlockList);
-//		
-//		
-//		return msgBlockByPage;
-//		
-//	}
+
 	
 }

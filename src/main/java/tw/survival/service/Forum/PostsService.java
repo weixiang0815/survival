@@ -17,7 +17,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
+import tw.survival.model.Forum.PostDao;
+import tw.survival.model.Forum.PostDto;
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.PostsRepository;
 
@@ -25,7 +26,10 @@ import tw.survival.model.Forum.PostsRepository;
 public class PostsService {
 
 	@Autowired
-	private PostsRepository pDao;
+	private PostsRepository pRepo;
+
+	@Autowired
+	private PostDao pDao;
 
 	/**
 	 * @apiNote 新建一筆貼文資料
@@ -37,7 +41,7 @@ public class PostsService {
 	public PostsBean insertPost(PostsBean post) {
 		try {
 			String content = post.getContent();
-			PostsBean postSave = pDao.save(post);
+			PostsBean postSave = pRepo.save(post);
 			String location = "C:/Survival/Posts/content/";
 			File folder = new File(location);
 			if (!folder.exists()) {
@@ -55,7 +59,7 @@ public class PostsService {
 			}
 			postSave.setEssayLocation(location);
 
-			return pDao.save(postSave);
+			return pRepo.save(postSave);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
@@ -70,8 +74,8 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public PostsBean findPostById(Integer id) {
-		if (pDao.existsById(id)) {
-			PostsBean post = pDao.findById(id).get();
+		if (pRepo.existsById(id)) {
+			PostsBean post = pRepo.findById(id).get();
 			String location = post.getEssayLocation();
 
 			StringBuilder content = new StringBuilder("");
@@ -103,9 +107,9 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public boolean deletePost(Integer id) {
-		if (pDao.existsById(id)) {
+		if (pRepo.existsById(id)) {
 			try {
-				String filepath = pDao.findById(id).get().getEssayLocation();
+				String filepath = pRepo.findById(id).get().getEssayLocation();
 				File file = new File(filepath);
 				file.delete();
 			} catch (Exception e) {
@@ -113,7 +117,7 @@ public class PostsService {
 				return false;
 			}
 
-			pDao.deleteById(id);
+			pRepo.deleteById(id);
 			System.out.println("刪除成功。");
 			return true;
 		}
@@ -129,7 +133,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public PostsBean updatePost(PostsBean post) {
-		Optional<PostsBean> optional = pDao.findById(post.getId());
+		Optional<PostsBean> optional = pRepo.findById(post.getId());
 		if (optional.isPresent()) {
 			PostsBean oldPost = optional.get();
 			oldPost.setFinalAdded(post.getFinalAdded());
@@ -145,7 +149,7 @@ public class PostsService {
 				e.printStackTrace();
 				return null;
 			}
-			return pDao.save(oldPost);
+			return pRepo.save(oldPost);
 		}
 		return null;
 	}
@@ -158,7 +162,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> getAllPosts1() {
-		return pDao.findPostsBeanByOrderByAddedDesc();
+		return pRepo.findPostsBeanByOrderByAddedDesc();
 	}
 
 	/**
@@ -169,7 +173,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> getAllPosts2() {
-		return pDao.findPostsBeanByOrderByFinalAddedDesc();
+		return pRepo.findPostsBeanByOrderByFinalAddedDesc();
 	}
 
 	/**
@@ -180,7 +184,7 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> getPostsByCpttId(Integer id) {
-		return pDao.findPostsByCompetitionId(id);
+		return pRepo.findPostsByCompetitionId(id);
 	}
 
 	/**
@@ -192,12 +196,12 @@ public class PostsService {
 	 */
 	public void deletePostsByCpttId(Integer id) {
 		try {
-			pDao.deletePostsByCompetitionId(id);
+			pRepo.deletePostsByCompetitionId(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * @apiNote 模糊搜尋字串參數
 	 * 
@@ -207,51 +211,51 @@ public class PostsService {
 	 * @author 鄭力豪
 	 */
 	public List<PostsBean> findPostsListByStringLike(String str) {
-		return pDao.findPostsBeanLike(str);
+		return pRepo.findPostsBeanLike(str);
 	}
-	
+
 	/**
 	 * @param pageNumber 分頁頁數。
 	 * @return 回傳Page物件，Page內容為多個PostsBean物件
 	 * @author 鄭力豪
 	 * @apiNote 將全部文章分頁
 	 */
-	public Page<PostsBean> getAllPostsByPage(Integer pageNumber){
-		Pageable pgb = PageRequest.of(pageNumber-1, 10,Sort.Direction.DESC, "added");
-		
-		Page<PostsBean> page = pDao.findAll(pgb);
-		
+	public Page<PostsBean> getAllPostsByPage(Integer pageNumber) {
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10, Sort.Direction.DESC, "added");
+
+		Page<PostsBean> page = pRepo.findAll(pgb);
+
 		return page;
 	}
-	
+
 	/**
 	 * @param pageNumber 分頁頁數。
-	 * @param name 模糊搜尋的名稱。
+	 * @param name       模糊搜尋的名稱。
 	 * @return 回傳Page物件，Page內容為多個PostsBean物件
 	 * @author 鄭力豪
 	 * @apiNote 將模糊搜尋的文章分頁
 	 */
-	public Page<PostsBean> getPostsWithNameContainingByPage(Integer pageNumber, String name){
-		//定義分頁規則
-		Pageable pgb = PageRequest.of(pageNumber-1, 10);
-		//將HQL排序完成的物件依照分頁規則實作
-		Page<PostsBean> page = pDao.findByNameContainingOrderByAddedDesc(name, pgb);
-		
+	public Page<PostsBean> getPostsWithNameContainingByPage(Integer pageNumber, String name) {
+		// 定義分頁規則
+		Pageable pgb = PageRequest.of(pageNumber - 1, 10);
+		// 將HQL排序完成的物件依照分頁規則實作
+		Page<PostsBean> page = pRepo.findByNameContainingOrderByAddedDesc(name, pgb);
+
 		return page;
 	}
 
 	/**
 	 * 
-	 * @param pageNumber
-	 * @param id
-	 * @apiNote 搜尋玩家擁有的貼文
+	 * @param pageNumber 頁碼
+	 * @param pageSize   頁容量
+	 * @param postDto    傳送自訂物件
+	 * @apiNote 搜尋玩家多條件搜尋的貼文
 	 * @return 回傳Page物件，Page內容為多個PostsBean物件
 	 * @author 鄭力豪
 	 */
-	public Page<PostsBean> getPostByPlayerIdByPage(Integer pageNumber, Integer id){
-		Pageable pgb = PageRequest.of(pageNumber-1, 10);
-		
-		return pDao.findPostByPlayerId(id,pgb);
+	public Page<PostsBean> getPostByPlayerIdByPage(Integer pageNumber, Integer pageSize, PostDto postDto) {
+		Page<PostsBean> msgBlockByPage = pDao.getPostByPage(pageNumber, pageSize, postDto);
+		return msgBlockByPage;
 	}
-	
+
 }
