@@ -2,6 +2,8 @@ package tw.survival.model.Forum;
 
 
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +18,11 @@ public interface MsgsRepository extends JpaRepository<MsgsBean, Integer> {
 		       nativeQuery=true,
 		       countProjection = "msgs")
 	public Page<MsgsBean> findMsgsByPostId(@Param("id")Integer postId, Pageable pageable);
+	//得到該貼文的所有留言，並依照留言生成時間排序
+	@Query(value="select * from [Survival].[dbo].[Msgs] where fk_posts_id = :id order BY added DESC",
+		       nativeQuery=true,
+		       countProjection = "msgs")
+	public List<MsgsBean> findMsgsListByPostId(@Param("id")Integer postId);
 	
 	//刪除某玩家所有留言
 	@Modifying
