@@ -58,8 +58,8 @@ public class OrderItemService {
 		return;
 	}
 	//ID搜尋
-	public List<OrderItemBean> findByfk_player_id(Integer fk_player_id) {
-		return orderItemDao.findOrderItemidLike(fk_player_id);
+	public List<OrderItemBean> findByfk_player_id(String fk_player_id) {
+	    return orderItemDao.findOrderItemidLike(fk_player_id);
 	}
 
 }

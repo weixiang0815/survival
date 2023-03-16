@@ -13,6 +13,7 @@
 <title>所有物流</title>
 </head>
 <body>
+
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<h1>所有物流</h1>
 	<table class="table table-hover table-bordered">
@@ -49,7 +50,13 @@
 				</tr>
 			</jstl:forEach>
 		</tbody></table>
+		
 		<h1>所有訂單</h1>
+		<form method="get" action="/Market/orderItemidLike">
+  <label for="search">Search:</label>
+  <input type="text" id="search" name="Search">
+  <button type="submit">Submit</button>
+</form>
 		<table class="table table-hover table-bordered">
 			<thead>
 				<tr>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Market.OrderItemBean;
+import tw.survival.model.Market.OrderItemRepository;
 import tw.survival.service.Market.OrderItemService;
 
 @Controller
@@ -23,6 +24,7 @@ public class OrderItemController {
 
 	@Autowired
 	private OrderItemService oService;
+	
 
 	@GetMapping("/Market/add_OrderItem")
 	private String addOrder() {
@@ -71,10 +73,10 @@ public class OrderItemController {
 		return "redirect:/Market/all_Logistics";
 	}
 	// 搜尋
-	@GetMapping("/Market/orderItemidLike")
-	public String findOrderItemidLike(@RequestParam("Search") Integer fk_player_id, Model model) {
-		List<OrderItemBean> searchResult1 = oService.findByfk_player_id(fk_player_id);
-		model.addAttribute("SearchResult1", searchResult1);
-		return "back/Market/searchOrderResult";
+	@PostMapping("/Market/orderItemidLike")
+	public String findOrderItemidLike(@RequestParam("id") String fk_player_id, Model model) {
+	    List<OrderItemBean> searchResult1 = oService.findByfk_player_id(fk_player_id);
+	    model.addAttribute("SearchResult1", searchResult1);
+	    return "back/Market/all_Logistics";
 	}
 }

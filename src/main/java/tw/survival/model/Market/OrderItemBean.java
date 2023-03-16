@@ -45,6 +45,8 @@ public class OrderItemBean {
 	@JoinColumn(name = "fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -77,5 +79,7 @@ public class OrderItemBean {
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
 	}
-
+	public String getPlayerName() {
+	    return player.getName(); 
+	}
 }

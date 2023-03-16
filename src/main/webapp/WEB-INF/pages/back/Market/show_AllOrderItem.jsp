@@ -10,6 +10,11 @@
 <title>所有訂單</title>
 </head>
 <body>
+<form method="get" action="/Market/orderItemidLike">
+  <label for="search">Search:</label>
+  <input type="text" id="search" name="Search">
+  <button type="submit">Submit</button>
+</form>
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
 		<h1>所有訂單</h1>
