@@ -86,7 +86,6 @@ public class PostsService {
 				e.printStackTrace();
 				return null;
 			}
-
 			post.setContent(content.toString());
 			return post;
 

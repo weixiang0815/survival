@@ -17,7 +17,7 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	public void deletePostsByCompetitionId(@Param("id") Integer id);
 	
 	//由id尋找單個貼文
-	@Query(value = "form posts where fk_competition_id = :id", countProjection = "posts", nativeQuery = true)
+	@Query(value = "from posts where fk_competition_id = :id", countProjection = "posts", nativeQuery = true)
 	public List<PostsBean> findPostsByCompetitionId(@Param("id") Integer id);
 
 	//依照貼文更新時間排序
@@ -29,6 +29,4 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	//name屬性模糊搜尋，並已分頁顯示。
 	public Page<PostsBean> findByNameContainingOrderByAddedDesc(String name, Pageable pageable);
 	
-
-
 }
