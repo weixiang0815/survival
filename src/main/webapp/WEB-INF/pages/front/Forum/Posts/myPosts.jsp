@@ -37,7 +37,7 @@ a:hover {
 						href="${contextRoot}">首頁</a></li>
 					<li class="breadcrumb-item"><a class="text-white"
 						href="${contextRoot}/front/Forum/index">論壇</a></li>
-					<li class="breadcrumb-item text-primary active" aria-current="page">貼文查詢</li>
+					<li class="breadcrumb-item text-primary active" aria-current="page">個人貼文</li>
 				</ol>
 			</nav>
 		</div>
@@ -48,8 +48,8 @@ a:hover {
 		<div class="container">
 			<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s">
-				<p class="d-inline-block bg-secondary text-primary py-1 px-4">貼文查詢</p>
-				<h1 class="text-uppercase">貼文查詢</h1>
+				<p class="d-inline-block bg-secondary text-primary py-1 px-4">個人貼文</p>
+				<h1 class="text-uppercase">個人貼文</h1>
 			</div>
 			<!-- class="row" 橫向排列-->
 			<div class="text-center mx-auto mb-5 wow fadeInUp">

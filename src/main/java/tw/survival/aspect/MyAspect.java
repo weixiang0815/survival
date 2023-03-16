@@ -65,10 +65,12 @@ public class MyAspect {
 
 		// joinPoint.getSignature().getName() 可以知道程式正在使用的 API 是哪一個
 		System.out.println("Before method execution: " + joinPoint.getSignature().getName());
-
+		System.out.println(session);
+		System.out.println(session.getAttribute("player"));
 		// 如果使用者未登入，重導至登入頁面。
 		if (session == null || session.getAttribute("player") == null) {
 			System.out.println("權限不足，需要登入");
+			System.out.println("player.nonLogin");
 			response.sendRedirect(request.getContextPath() + "/Player/login");
 			return;
 		}
@@ -110,6 +112,7 @@ public class MyAspect {
 		// 如果員工未登入，重導至登入頁面。
 		if (session == null || session.getAttribute("employee") == null) {
 			System.out.println("權限不足，需要登入");
+			System.out.println("employee.nonLogin");
 			response.sendRedirect(request.getContextPath() + "/Employee/login");
 			return;
 		}

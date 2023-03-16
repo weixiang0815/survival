@@ -1,11 +1,15 @@
 package tw.survival.controller.front.CUD.Forum;
 
+import java.util.List;
+
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import tw.survival.model.Forum.PostsBean;
@@ -25,13 +29,17 @@ public class PostsFrontController {
 	private CompetitionService competitionService;
 
 	private PlayerService playerService;
-
+	
+	private EmployeeService employeeService;
 //	@Autowired //若是只有一個建構子，SpringBoot會自動加入Autowired功能。
-	public PostsFrontController(PostsService postsService, CompetitionService competitionService,
-			EmployeeService employeeService, PlayerService playerService) {
+	public PostsFrontController(PostsService postsService, 
+			CompetitionService competitionService,
+			EmployeeService employeeService, 
+			PlayerService playerService) {
 		this.postsService = postsService;
 		this.competitionService = competitionService;
 		this.playerService = playerService;
+		this.employeeService = employeeService;
 	}
 	/**
 	 * @param model 為了新增postsBean,player兩物件
@@ -54,7 +62,8 @@ public class PostsFrontController {
 	 * @author 鄭力豪
 	 */
 	@PostMapping("/posts/create")
-	public String create(@ModelAttribute("postsBean") PostsBean postsBean, Model model) {
+	public String create(
+			@ModelAttribute("postsBean") PostsBean postsBean, Model model) {
 		PlayerBean player =(PlayerBean) model.getAttribute("player");
 		//連結
 		postsBean.setPlayer(player);
@@ -68,5 +77,37 @@ public class PostsFrontController {
 	
 	
 	
+	
+	/**
+	 * 
+	 * @param model
+	 * @return
+	 * @apiNote 跳到個人貼文專頁
+	 */
+	@GetMapping("/posts/myPosts")
+	public String toMyPosts(Model model) {
+		return"front/Forum/Posts/myPosts";
+	}
+	
+	/**
+	 * 
+	 * @param pageNumber
+	 * @param model
+	 * @return
+	 */
+	@GetMapping("/posts/myPosts/getTenPosts")
+	public String getPostByPlayerId(
+			@RequestParam(name = "p",defaultValue = "1") Integer pageNumber,
+			@RequestParam(name = "name",defaultValue = "1") Integer name,
+			Model model) {
 
+		PlayerBean player = (PlayerBean)model.getAttribute("player");
+		Page<PostsBean> postsPage = postsService
+				.getPostByPlayerIdByPage(pageNumber, player.getId());
+		
+		model.addAttribute("postsPage",postsPage);
+		
+		return"front/Forum/Posts/myPosts";
+		
+	}
 }

@@ -16,6 +16,13 @@ public interface PostsRepository extends JpaRepository<PostsBean, Integer> {
 	@Query(value = "delete from posts where fk_competition_id = :id", countProjection = "posts", nativeQuery = true)
 	public void deletePostsByCompetitionId(@Param("id") Integer id);
 	
+	//搜尋玩家編輯的所有貼文
+	@Query(value="select * from [Survival].[dbo].[Posts] where fk_player_id = :id "
+			+ " and classify = :classify order by added desc",
+		       nativeQuery=true,
+		       countProjection = "posts")
+	public Page<PostsBean> findPostByPlayerId(@Param("id")Integer id, @Param("classify")String classify, Pageable pgb);
+	
 	//由id尋找單個貼文
 	@Query(value = "form posts where fk_competition_id = :id", countProjection = "posts", nativeQuery = true)
 	public List<PostsBean> findPostsByCompetitionId(@Param("id") Integer id);

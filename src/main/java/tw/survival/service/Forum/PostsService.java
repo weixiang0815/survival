@@ -28,7 +28,7 @@ public class PostsService {
 	private PostsRepository pDao;
 
 	/**
-	 * 新建一筆貼文資料
+	 * @apiNote 新建一筆貼文資料
 	 * 
 	 * @param post 欲新建資訊的貼文實體，尚未連結活動內容
 	 * @return 新建成功回傳貼文實體，失敗回傳 null
@@ -63,7 +63,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 找到一筆該id紀錄的那筆貼文資料
+	 * @apiNote 找到一筆該id紀錄的那筆貼文資料
 	 * 
 	 * @param id 欲查詢的貼文id
 	 * @return 成功回傳PostsBean，失敗回傳Null
@@ -96,7 +96,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 刪除一筆該id紀錄的那筆貼文資料
+	 * @apiNote 刪除一筆該id紀錄的那筆貼文資料
 	 * 
 	 * @param id 欲刪除的貼文id
 	 * @return 成功回傳True，失敗回傳False
@@ -122,7 +122,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 修改一筆貼文
+	 * @apiNote 修改一筆貼文
 	 * 
 	 * @param post 欲新建資訊的貼文實體
 	 * @return 修改成功回傳貼文實體，失敗回傳 null
@@ -151,7 +151,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 得到所有貼文資料，依照貼文新增的初始時間排序
+	 * @apiNote 得到所有貼文資料，依照貼文新增的初始時間排序
 	 * 
 	 * 
 	 * @return 一個PostsBean型別的List集合物件，或者null
@@ -162,7 +162,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 得到所有貼文資料，依照貼文最近一次的更新時間排序
+	 * @apiNote 得到所有貼文資料，依照貼文最近一次的更新時間排序
 	 * 
 	 * 
 	 * @return 一個PostsBean型別的List集合物件，或者null
@@ -173,7 +173,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 得到所有該活動相關的貼文資料，依照貼文最近一次的更新時間排序
+	 * @apiNote 得到所有該活動相關的貼文資料，依照貼文最近一次的更新時間排序
 	 * 
 	 * 
 	 * @return 一個PostsBean型別的List集合物件，或者null
@@ -184,7 +184,7 @@ public class PostsService {
 	}
 
 	/**
-	 * 刪除所有該活動相關的貼文資料
+	 * @apiNote 刪除所有該活動相關的貼文資料
 	 * 
 	 * 
 	 * @return
@@ -199,7 +199,7 @@ public class PostsService {
 	}
 	
 	/**
-	 * @定義 模糊搜尋字串參數
+	 * @apiNote 模糊搜尋字串參數
 	 * 
 	 * 
 	 * @param str 欲查詢的字串。
@@ -214,7 +214,7 @@ public class PostsService {
 	 * @param pageNumber 分頁頁數。
 	 * @return 回傳Page物件，Page內容為多個PostsBean物件
 	 * @author 鄭力豪
-	 * @用途 將全部文章分頁
+	 * @apiNote 將全部文章分頁
 	 */
 	public Page<PostsBean> getAllPostsByPage(Integer pageNumber){
 		Pageable pgb = PageRequest.of(pageNumber-1, 10,Sort.Direction.DESC, "added");
@@ -229,7 +229,7 @@ public class PostsService {
 	 * @param name 模糊搜尋的名稱。
 	 * @return 回傳Page物件，Page內容為多個PostsBean物件
 	 * @author 鄭力豪
-	 * @用途 將模糊搜尋的文章分頁
+	 * @apiNote 將模糊搜尋的文章分頁
 	 */
 	public Page<PostsBean> getPostsWithNameContainingByPage(Integer pageNumber, String name){
 		//定義分頁規則
@@ -240,4 +240,18 @@ public class PostsService {
 		return page;
 	}
 
+	/**
+	 * 
+	 * @param pageNumber
+	 * @param id
+	 * @apiNote 搜尋玩家擁有的貼文
+	 * @return 回傳Page物件，Page內容為多個PostsBean物件
+	 * @author 鄭力豪
+	 */
+	public Page<PostsBean> getPostByPlayerIdByPage(Integer pageNumber, Integer id){
+		Pageable pgb = PageRequest.of(pageNumber-1, 10);
+		
+		return pDao.findPostByPlayerId(id,pgb);
+	}
+	
 }
