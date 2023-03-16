@@ -110,7 +110,7 @@ public class ProductController {
 
 	// 用ID找商品
 	@GetMapping("/front/Market/productId")
-	public String getAllProduct1(@RequestParam("id") Integer id, Model model) {
+	public String getProductId(@RequestParam("id") Integer id, Model model) {
 		ProductBean product = productService.getProductById(id);
 		model.addAttribute("product", product);
 		return "/front/Market/productDetail";
@@ -155,7 +155,7 @@ public class ProductController {
 
 	// 刪除商品
 	@DeleteMapping("back/Market/delete")
-	public String deleteProdduct(@RequestParam("id") Integer id) {
+	public String deleteProduct(@RequestParam("id") Integer id) {
 		productService.deleteById(id);
 		return "redirect:/Market/allProduct";
 	}

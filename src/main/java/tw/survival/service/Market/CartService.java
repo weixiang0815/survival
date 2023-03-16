@@ -3,12 +3,15 @@ package tw.survival.service.Market;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.CartRepository;
 import tw.survival.model.Market.ProductRepository;
+import tw.survival.model.Player.PlayerBean;
 
 @Service
 public class CartService {
@@ -37,20 +40,39 @@ public class CartService {
 		System.out.println("沒找到id 為" + cartId + "的資料");
 		return null;
 	}
+	
+	public CartBean fingByPlayerId(Integer playerId) {
+		Optional<CartBean> optional = cartDao.findByplayer(playerId);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+		System.out.println("沒找到id 為" + playerId + "的資料");
+		return null;
+	}
 
 	public List<CartBean> findAll() {
 		return cartDao.findAll();
 	}
 
-	public boolean deleteById(Integer id) {
-		try {
-			cartDao.deleteById(id);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+	
+//	public boolean deleteById(Integer id) {
+//		try {
+//			cartDao.deleteById(id);
+//			return true;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			return false;
+//		}
+//	}
+	
+	
+	@Transactional
+    public void deleteCartItem(Integer cartId) {
+        cartDao.deleteById(cartId);
+    }
+	
+	
 
 	public boolean deleteByEntity(CartBean cart) {
 		try {
