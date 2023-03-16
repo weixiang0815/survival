@@ -21,7 +21,7 @@ img {
 <jsp:include page="../../Template/admin.jsp"/>
 	<div class="container">
 		<h3>使用者修改資料</h3>
-		<form:form action="${contextRoot}/player/update2" method="put"
+		<form:form action="${contextRoot}/player/update1" method="put"
 			modelAttribute="player" enctype="multipart/form-data">
 			<table class="table table-hover">
 				<tr>

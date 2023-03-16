@@ -22,6 +22,8 @@ public class PlayerService {
 
 	@Autowired
 	private SignUpService signupService;
+	
+	
 
 	// C
 	public PlayerBean addplayer(PlayerBean pBean) {
@@ -73,5 +75,4 @@ public class PlayerService {
 		return pDAO.findByemail(email);
 
 	}
-
 }

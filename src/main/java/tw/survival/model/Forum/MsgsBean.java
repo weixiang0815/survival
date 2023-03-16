@@ -13,8 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
@@ -25,10 +23,8 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import tw.survival.model.Player.PlayerBean;
 
 @Entity
 @Table(name = "msgs")
@@ -49,11 +45,13 @@ public class MsgsBean implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name = "added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date added;
 
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@Column(name = "final_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
 	private Date finalAdded;
 	
 	//建立關聯

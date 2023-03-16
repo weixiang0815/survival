@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.login_logout.login_logoutService;
 import tw.survival.validators.Playervalidator;
@@ -68,5 +67,12 @@ public class PlayerLoginLogoutController {
 		status.setComplete();
 		return "redirect:/Player/login";
 	}
+//	@GetMapping("/login")
+//	public ModelAndView loginfb() {
+//		String accessToken=null;
+//		DefaultFacebookClient facebookClient = new DefaultFacebookClient(accessToken);
+//	    String loginDialogUrl = facebookClient.getLoginDialogUrl("YOUR_REDIRECT_URL", "YOUR_PERMISSIONS");
+//	    return new ModelAndView("redirect:" + loginDialogUrl);
+//	}
 
 }

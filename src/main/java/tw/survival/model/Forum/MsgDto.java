@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MsgDTO implements Serializable {
+public class MsgDto implements Serializable {
 	
 //	DTO Data Transfer Object
 //
@@ -30,7 +30,7 @@ public class MsgDTO implements Serializable {
 	@JsonProperty("player-id")
     private Integer playerId;
 	
-	public MsgDTO() {
+	public MsgDto() {
 	}
 
 	public Integer getId() {
