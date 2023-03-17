@@ -75,9 +75,11 @@
                         </td>
                       <tr>
                         <td>
-                          <form action="${contextRoot}" method="post">
-                            <input name="_method" type="hidden" value="delete" />
-                            <input name="id" type="hidden" value="${product.id}" />
+                          <form action="${contextRoot}/Market/Cart/add" method="post">
+                            <input name="_method" type="hidden" value="post" />
+                            <input name="productId" type="hidden" value="${product.id}" />
+                            <input name="playerId" type="hidden" value="1" />
+                            <input name="quantity" type="hidden" value="1" />
                             <input type="submit" class=" btn-danger btn-sm" value="加入購物車" />
                         </td>
                       </tr>

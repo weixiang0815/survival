@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="tw.survival.model.Market.*"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 		<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 		<!DOCTYPE html>
@@ -31,26 +32,27 @@
 					</tr>
 				</thead>
 				<tbody>
-					<jstl:forEach items="${Cart_List}" var="Cart_List" varStatus="Status">
+					<c:forEach items="${Cart_List}" var="Cart_List" varStatus="Status">
 						<tr>
 							<th scope="row">${Status.index+1}</th>
-							<td>${product.name}</td>
-							<td><img alt="" height="100" width="160" src="${contextRoot}/Market/id?id=${product.id}">
+							<td>${Cart_List.product.name}</td>
+							<td><img alt="" height="100" width="160" src="${contextRoot}/Market/id?id=${Cart_List.product.id}">
 							</td>
-							<td>${product.product_class}</td>
-							<td>${product.context}</td>
-							<td>${product.rent_fee}</td>
-							<td>${product.price}</td>
+							<td>${Cart_List.product.product_class}</td>
+							<td>${Cart_List.product.context}</td>
+							<td>${Cart_List.product.rent_fee}</td>
+							<td>${Cart_List.product.price}</td>
 							<td>
-								<form action="${contextRoot}/back/Market/delete" method="post">
-									<input name="_method" type="hidden" value="delete" /> <input name="id" type="hidden"
-										value="${Cart_List.id}" /> <input type="submit" class="btn btn-danger btn-sm"
+								<form action="${contextRoot}/Market/Cart/delete" method="post">
+									<input name="_method" type="hidden" value="delete" /> 
+									<input name="id" type="hidden" value="${Cart_List.id}" /> 
+									<input type="submit" class="btn btn-danger btn-sm"
 										value="刪除" />
 								</form>
 							</td>
 						</tr>
 
-					</jstl:forEach>
+					</c:forEach>
 				</tbody>
 			</table>
 
