@@ -123,7 +123,7 @@
 							<p>這裡可編輯你的貼文，方便使用者控管自己的文章。</p>
 							<span class="text-uppercase text-primary">點右下按鈕↘</span>
 						</div>
-						<a class="btn btn-square" href="">
+						<a class="btn btn-square" href="${contextRoot}/front/posts/myPosts">
 							<div class="i_item">
 								<i class="fa fa-plus text-primary"></i>
 							</div>						

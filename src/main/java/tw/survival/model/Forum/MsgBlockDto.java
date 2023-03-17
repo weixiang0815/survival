@@ -41,13 +41,13 @@ public class MsgBlockDto implements Serializable {
 	private Integer msgId;
 	
 	@JsonProperty("msg_essay")
-    private String essay;
+    private String msgEssay;
 	
 	@Temporal(TemporalType.TIMESTAMP) // 如果用 sql.Date, 這行不用寫
 	@JsonProperty("msg_added")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss EEEE", timezone = "GMT+8")
-	private Date added;
+	private Date msgAdded;
 
 	public String getPlayerName() {
 		return playerName;
@@ -89,22 +89,21 @@ public class MsgBlockDto implements Serializable {
 		this.msgId = msgId;
 	}
 
-	public String getEssay() {
-		return essay;
+	public String getMsgEssay() {
+		return msgEssay;
 	}
 
-	public void setEssay(String essay) {
-		this.essay = essay;
+	public void setMsgEssay(String msgEssay) {
+		this.msgEssay = msgEssay;
 	}
 
-	public Date getAdded() {
-		return added;
+	public Date getMsgAdded() {
+		return msgAdded;
 	}
 
-	public void setAdded(Date added) {
-		this.added = added;
+	public void setMsgAdded(Date msgAdded) {
+		this.msgAdded = msgAdded;
 	}
-	
-	
+
 	
 }

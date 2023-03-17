@@ -72,11 +72,10 @@ a:hover {
 									<thead>
 										<tr>
 											<th>貼文名稱</th>
-											<th>作者/小名</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${postsList}" var="post"> 
+										<c:forEach items="${postsPage.content}" var="post"> 
 	
 											<tr>
 												<td>[${post.classify}] <a href="${contextRoot}/front/posts/content?id=${post.id}">${post.name}</a></td>
