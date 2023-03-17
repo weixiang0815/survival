@@ -39,33 +39,24 @@
 						<img class="img-fluid w-75 align-self-end" src="${contextRoot}/img/about.jpg"
 							alt="">
 						<div class="w-50 bg-secondary p-5" style="margin-top: -25%;">
-							<h1 class="text-uppercase text-primary mb-3">25 Years</h1>
-							<h2 class="text-uppercase mb-0">Experience</h2>
+							<h1 class="text-uppercase text-primary mb-3">SURVIVAL</h1>
+							<h2 class="text-uppercase mb-0">加入我們</h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-					<p class="d-inline-block bg-secondary text-primary py-1 px-4">About
-						Us</p>
-					<h1 class="text-uppercase mb-4">More Than Just A Haircut.
-						Learn More About Us!</h1>
-					<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-						Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
-						stet lorem sit clita duo justo magna dolore erat amet</p>
-					<p class="mb-4">Stet no et lorem dolor et diam, amet duo ut
-						dolore vero eos. No stet est diam rebum amet diam ipsum. Clita
-						clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor
-						eos.</p>
+					<p class="d-inline-block bg-secondary text-primary py-1 px-4">關於我們</p>
+					<h1 class="text-uppercase mb-4">提供專業生存遊戲場地,享受獵殺的快感</h1>
+					<p>全台各地都有場地,隨時隨地享受生存帶來的緊張刺激感</p>
+					<p class="mb-4">多種專業商品,讓你一次滿足</p>
 					<div class="row g-4">
 						<div class="col-md-6">
-							<h3 class="text-uppercase mb-3">Since 1990</h3>
-							<p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor
-								diam ipsum sit. Aliqu diam amet diam et eos.</p>
+							<h3 class="text-uppercase mb-3">Since 2023</h3>
+							<p class="mb-0">全台最大生存遊戲租借場地</p>
 						</div>
 						<div class="col-md-6">
 							<h3 class="text-uppercase mb-3">1000+ clients</h3>
-							<p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor
-								diam ipsum sit. Aliqu diam amet diam et eos.</p>
+							<p class="mb-0">隨時組對開黑</p>
 						</div>
 					</div>
 				</div>
@@ -80,9 +71,8 @@
 		<div class="container">
 			<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s" style="max-width: 600px;">
-				<p class="d-inline-block bg-secondary text-primary py-1 px-4">Our
-					Barber</p>
-				<h1 class="text-uppercase">Meet Our Barber</h1>
+				<p class="d-inline-block bg-secondary text-primary py-1 px-4">生存冠軍</p>
+				<h1 class="text-uppercase">戰到最後的辣個男人</h1>
 			</div>
 			<div class="row g-4">
 				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -97,8 +87,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase">李奧納多皮卡丘</h5>
+							<span class="text-primary">猛男</span>
 						</div>
 					</div>
 				</div>
@@ -114,8 +104,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase">白鬍子</h5>
+							<span class="text-primary">大叔</span>
 						</div>
 					</div>
 				</div>
@@ -131,8 +121,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase">阿里巴巴</h5>
+							<span class="text-primary">鬍子哥</span>
 						</div>
 					</div>
 				</div>
@@ -148,8 +138,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase">李洨龍</h5>
+							<span class="text-primary">渣男</span>
 						</div>
 					</div>
 				</div>

@@ -7,6 +7,12 @@
 <head>
 <meta charset="utf-8">
 <title>Survival - 生存遊戲俱樂部</title>
+<style>
+.i_item{
+	color: red;
+	font-size: 2em;
+}
+</style>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>
@@ -26,7 +32,7 @@
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我想一個超帥的標語吧</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">biu biu biu</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
 								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
@@ -44,7 +50,7 @@
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我再想一個超帥的標語吧</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">小心手榴彈</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
 								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
@@ -128,14 +134,14 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/haircut.png"
-								alt="">
+							<div class="i_item">
+							<i class="fas fa-meteor"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Haircut</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">活動</h3>
+							<p>活動資訊速速了解</p>
+							<span class="text-uppercase text-primary">多人對戰</span>
 						</div>
 						<a class="btn btn-square" href=""><i
 							class="fa fa-plus text-primary"></i></a>
@@ -147,14 +153,14 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/beard-trim.png"
-								alt="">
+							<div class="i_item">
+							<i class="fa-brands fa-shopify"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Beard Trim</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">商城</h3>
+							<p>各式槍枝服裝一次滿足</p>
+							<span class="text-uppercase text-primary">手刀購買</span>
 						</div>
 						<a class="btn btn-square" href=""><i
 							class="fa fa-plus text-primary"></i></a>
@@ -166,76 +172,21 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mans-shave.png"
-								alt="">
+							<div class="i_item">
+							<i class="fa-solid fa-comments"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Mans Shave</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">論壇</h3>
+							<p>隨時掌握最新資訊</p>
+							<span class="text-uppercase text-primary">新聞速報</span>
 						</div>
 						<a class="btn btn-square" href=""><i
 							class="fa fa-plus text-primary"></i></a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/hair-dyeing.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Hair Dyeing</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mustache.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Mustache</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/stacking.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Stacking</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
+				
+				
 			</div>
 		</div>
 	</div>
