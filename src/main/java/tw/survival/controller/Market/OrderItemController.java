@@ -73,7 +73,7 @@ public class OrderItemController {
 	}
 	// 搜尋
 	@PostMapping("/Market/orderItemidLike")
-	public String findOrderItemidLike(@RequestParam("id") String fk_player_id, Model model) {
+	public String findOrderItemidLike(@RequestParam("id") Integer fk_player_id, Model model) {
 	    List<OrderItemBean> searchResult1 = oService.findByfk_player_id(fk_player_id);
 	    model.addAttribute("SearchResult1", searchResult1);
 	    return "back/Market/all_Logistics";

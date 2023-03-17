@@ -1,7 +1,9 @@
 package tw.survival.model.Market;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -11,6 +13,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -60,6 +65,12 @@ public class ProductBean {
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product", cascade = CascadeType.ALL)
 	private Set<InventoryBean> inventory = new LinkedHashSet<>();
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "OrderItemDetail", inverseJoinColumns = {
+			@JoinColumn(name = "fk_orderitem_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_product_id", referencedColumnName = "id") })
+	private List<OrderItemBean> orders = new ArrayList<>();
 
 	public ProductBean() {
 	}
@@ -128,25 +139,20 @@ public class ProductBean {
 		this.inventory = inventory;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("ProductBean [id=");
-		builder.append(id);
-		builder.append(", img=");
-		builder.append(Arrays.toString(img));
-		builder.append(", name=");
-		builder.append(name);
-		builder.append(", context=");
-		builder.append(context);
-		builder.append(", productclass=");
-		builder.append(productclass);
-		builder.append(", rent_fee=");
-		builder.append(rent_fee);
-		builder.append(", price=");
-		builder.append(price);
-		builder.append("]");
-		return builder.toString();
+	public String getProductclass() {
+		return productclass;
+	}
+
+	public void setProductclass(String productclass) {
+		this.productclass = productclass;
+	}
+
+	public List<OrderItemBean> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<OrderItemBean> orders) {
+		this.orders = orders;
 	}
 
 }

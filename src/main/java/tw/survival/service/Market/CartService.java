@@ -58,7 +58,7 @@ public class CartService {
 
 	
 //	//用ID刪除
-	public void deleteCarById(Integer id) {
+	public void deleteCartById(Integer id) {
 		CartBean cb = fingByCartId(id);
 		cb.setPlayer(null);
 		cb.setProduct(null);

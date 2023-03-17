@@ -8,5 +8,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface OrderItemRepository extends JpaRepository<OrderItemBean, Integer> {
 	@Query(value = "from OrderItemBean where fk_player_id like %:fk_player_id%")
-	public List<OrderItemBean> findOrderItemidLike(@Param("fk_player_id") String fk_player_id);
+	public List<OrderItemBean> findOrderItemidLike(@Param("fk_player_id") Integer fk_player_id);
 }

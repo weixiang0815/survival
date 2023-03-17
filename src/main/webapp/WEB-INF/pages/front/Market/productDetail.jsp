@@ -34,6 +34,7 @@
               <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
                   <div class="ps-4 ">
+                    <h3 class="text-uppercase mb-3">商品名稱:${product.name}</h3>
                     <img alt="" height="270" width="350" src="${contextRoot}/Market/id?id=${product.id}">
                   </div>
                   <div class="i_item">
@@ -81,9 +82,8 @@
                             <input name="playerId" type="hidden" value="1" />
                             <input name="quantity" type="hidden" value="1" />
                             <input type="submit" class=" btn-danger btn-sm" value="加入購物車" />
+                          </form>
                         </td>
-                      </tr>
-                      </form>
                       </tr>
                     </table>
                   </div>

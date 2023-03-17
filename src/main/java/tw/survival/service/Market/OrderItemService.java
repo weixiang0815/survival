@@ -1,5 +1,7 @@
 package tw.survival.service.Market;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.OrderItemBean;
 import tw.survival.model.Market.OrderItemRepository;
 
@@ -17,8 +20,28 @@ public class OrderItemService {
 	@Autowired
 	private OrderItemRepository orderItemDao;
 
-	public void insertOrder(OrderItemBean op) {
-		orderItemDao.save(op);
+	@Autowired
+	private LogisticsService logisticsService;
+
+	public OrderItemBean insertOrder(OrderItemBean op) {
+		try {
+			op = orderItemDao.save(op);
+			LogisticsBean logistics = new LogisticsBean();
+			logistics.setOrderItem(op);
+			logistics.setPlayer(op.getPlayer());
+			Date today = new Date();
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(today);
+			calendar.add(Calendar.DATE, 3);
+			Date arriveDate = calendar.getTime();
+			logistics.setStart_date(arriveDate);
+			logistics.setArrive_date(arriveDate);
+			logistics.setStatus("處理中");
+			logisticsService.insertLogistics(logistics);
+			return op;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public OrderItemBean findById(Integer id) {
@@ -57,9 +80,10 @@ public class OrderItemService {
 		orderItemDao.deleteById(id);
 		return;
 	}
-	//ID搜尋
-	public List<OrderItemBean> findByfk_player_id(String fk_player_id) {
-	    return orderItemDao.findOrderItemidLike(fk_player_id);
+
+	// ID搜尋
+	public List<OrderItemBean> findByfk_player_id(Integer fk_player_id) {
+		return orderItemDao.findOrderItemidLike(fk_player_id);
 	}
 
 }
