@@ -30,10 +30,10 @@ public class LogisticsControllerFront {
 		return "/front/Market/logistics";
 	}
 	//已取消
-		@GetMapping("/front/Market/cancel")
-		public String getLogistics(Model model) {
-			List<LogisticsBean> list1 = LogisticsService.findAllLogistics();
-			model.addAttribute("list", list1);
-			return "/front/Market/cancel";
-		}
+//		@GetMapping("/front/Market/cancel")
+//		public String getLogistics(Model model) {
+//			List<LogisticsBean> list1 = LogisticsService.findAllLogistics();
+//			model.addAttribute("list", list1);
+//			return "/front/Market/cancel";
+//		}
 }

@@ -29,17 +29,17 @@ public class OrderItemService {
 			LogisticsBean logistics = new LogisticsBean();
 			logistics.setOrderItem(op);
 			logistics.setPlayer(op.getPlayer());
-			Date today = new Date();
 			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(today);
+			calendar.setTime(new Date());
+			calendar.add(Calendar.DATE, 1);
+			logistics.setStart_date(calendar.getTime());
 			calendar.add(Calendar.DATE, 3);
-			Date arriveDate = calendar.getTime();
-			logistics.setStart_date(arriveDate);
-			logistics.setArrive_date(arriveDate);
+			logistics.setArrive_date(calendar.getTime());
 			logistics.setStatus("處理中");
 			logisticsService.insertLogistics(logistics);
 			return op;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
@@ -68,13 +68,20 @@ public class OrderItemService {
 	}
 
 	public OrderItemBean update(OrderItemBean oBean) {
-		orderItemDao.save(oBean);
+		Optional<OrderItemBean> optional = orderItemDao.findById(oBean.getId());
+		if (optional.isPresent()) {
+			OrderItemBean order = optional.get();
+			order.setOrder_create_date(oBean.getOrder_create_date());
+			order.setPlayer(oBean.getPlayer());
+			order.setProducts(oBean.getProducts());
+			order.setStatus(oBean.getStatus());
+			return orderItemDao.save(order);
+		}
 		return null;
 	}
 
 	// d
 	public void deleteById(Integer id) {
-
 		OrderItemBean ob = findById(id);
 		ob.setPlayer(null);
 		orderItemDao.deleteById(id);
