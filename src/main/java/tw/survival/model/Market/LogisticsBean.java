@@ -48,11 +48,6 @@ public class LogisticsBean {
 	@Column(name = "status")
 	private String status;
 
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_inventory_id")
-	private InventoryBean inventory;
-
 //	接收者(player_id)
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
@@ -63,6 +58,9 @@ public class LogisticsBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_orderitem_id")
 	private OrderItemBean OrderItem;
+
+	public LogisticsBean() {
+	}
 
 	public Integer getId() {
 		return id;
@@ -94,14 +92,6 @@ public class LogisticsBean {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public InventoryBean getInventory() {
-		return inventory;
-	}
-
-	public void setInventory(InventoryBean inventory) {
-		this.inventory = inventory;
 	}
 
 	public PlayerBean getPlayer() {

@@ -12,12 +12,6 @@ public class PageController {
 		return "back/Market/marketMain";
 	}
 
-
-//	@GetMapping("/front/Market/Text")
-//	public String goText() {
-//		return "/front/Market/Text";
-//	}
-
 	@GetMapping("/playAjax/sendPage")
 	public String goAjaxSendDataPage() {
 		return "ajax/ajax2-send";
