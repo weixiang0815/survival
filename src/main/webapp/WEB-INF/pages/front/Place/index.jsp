@@ -22,6 +22,7 @@ ul#comp-link>li {
 			<li><a href="${contextRoot}/front/place/all">場地詳情</a></li>
 			<li><a href="${contextRoot}/front/schedule/new">活動排程</a></li>
 			<li><a href="${contextRoot}/front/Market/logistics">借用(物流)</a></li>
+			<li><a href="${contextRoot}/front/Market/cancel">借用(物流 取消畫面)</a></li>
 		</ul>
 	</div>
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>

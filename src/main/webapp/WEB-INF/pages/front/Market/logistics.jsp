@@ -96,7 +96,7 @@ ul li {
 
 	<div class="container">
 		<h1>產品物流</h1>
-		<table class="table table-hover table-bordered">
+		<!--  <table class="table table-hover table-bordered">
 			<tr>
 				<th>訂單ID</th>
 				<th>建立日期</th>
@@ -111,7 +111,9 @@ ul li {
 					<td>${show.status}</td>
 				</tr>
 			</c:forEach>
-		</table>
+		</table>-->
+		<br>
+		<br>
 		<br>
 		<br>
 		<table class="table table-hover table-bordered">
@@ -127,7 +129,10 @@ ul li {
 					<li class="${Logistics.status eq '已抵達' ? 'active' : ''}"><i
 						class="fa fa-check-circle" aria-hidden="true"></i>已抵達 <fmt:formatDate
 							pattern="yyyy/MM/dd " value="${Logistics.arrive_date}" /></li>
+					
 				</ol>
+					<button class="btn btn-danger btn-sm">棄單</button>
+				
 			</jstl:forEach>
 		</table>
 	</div>

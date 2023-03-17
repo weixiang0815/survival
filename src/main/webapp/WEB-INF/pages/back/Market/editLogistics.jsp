@@ -23,9 +23,8 @@
 					modelAttribute="logistics">
 					<form:input type="hidden" path="id" />
 					<table class="table table-hover">
-						<tr>
-							<td><form:label class="form-label" path="start_date">起始日期:</form:label></td>
-							<td><form:input type="text" path="start_date"
+					 <tr>
+							<td><form:input type="hidden" path="start_date"
 									placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 						<tr>
@@ -37,11 +36,11 @@
 						<tr>
 							<td>訂單狀態：</td>
 							<td><form:select class="form-control" path="status">
-									<form:option value="收到訂單">收到訂單</form:option>
+							<!--   <form:option value="收到訂單">收到訂單</form:option>
 									<form:option value="處理中">處理中</form:option>
-									<form:option value="已出貨">已出貨</form:option>
 									<form:option value="已抵達">已抵達</form:option>
-									<form:option value="已取消">已取消</form:option>
+									<form:option value="已取消">已取消</form:option>-->
+									<form:option value="已出貨">已出貨</form:option>	
 								</form:select></td>
 						</tr>
 					</table>
