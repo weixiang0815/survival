@@ -51,11 +51,11 @@
 					<p class="mb-4">多種專業商品,讓你一次滿足</p>
 					<div class="row g-4">
 						<div class="col-md-6">
-							<h3 class="text-uppercase mb-3">Since 2023</h3>
+							<h3 class="text-uppercase mb-3">起自 2023 年</h3>
 							<p class="mb-0">全台最大生存遊戲租借場地</p>
 						</div>
 						<div class="col-md-6">
-							<h3 class="text-uppercase mb-3">1000+ clients</h3>
+							<h3 class="text-uppercase mb-3">超過 1000+ 客戶 </h3>
 							<p class="mb-0">隨時組對開黑</p>
 						</div>
 					</div>
@@ -87,8 +87,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">李奧納多皮卡丘</h5>
-							<span class="text-primary">猛男</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">李奧納多皮卡丘</span>
 						</div>
 					</div>
 				</div>
@@ -104,8 +104,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">白鬍子</h5>
-							<span class="text-primary">大叔</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">傑森包爾</span>
 						</div>
 					</div>
 				</div>
@@ -121,8 +121,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">阿里巴巴</h5>
-							<span class="text-primary">鬍子哥</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">比利庫柏</span>
 						</div>
 					</div>
 				</div>
@@ -138,8 +138,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">李洨龍</h5>
-							<span class="text-primary">渣男</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">傑森史塔生</span>
 						</div>
 					</div>
 				</div>
