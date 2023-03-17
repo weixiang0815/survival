@@ -7,6 +7,12 @@
 <head>
 <meta charset="utf-8">
 <title>Survival - 生存遊戲俱樂部</title>
+<style>
+.i_item{
+	color: red;
+	font-size: 2em;
+}
+</style>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <jsp:include page="../Template/front/includedinhead.jsp"></jsp:include>
 </head>
@@ -26,7 +32,7 @@
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我想一個超帥的標語吧</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">biu biu biu</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
 								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
@@ -44,7 +50,7 @@
 						class="carousel-caption d-flex align-items-center justify-content-center text-start">
 						<div class="mx-sm-5 px-5" style="max-width: 900px;">
 							<h1
-								class="display-2 text-white text-uppercase mb-4 animated slideInDown">幫我再想一個超帥的標語吧</h1>
+								class="display-2 text-white text-uppercase mb-4 animated slideInDown">小心手榴彈</h1>
 							<h4 class="text-white text-uppercase mb-4 animated slideInDown">
 								<i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
 							</h4>
@@ -79,31 +85,24 @@
 						<img class="img-fluid w-75 align-self-end"
 							src="${contextRoot}/img/about.jpg" alt="">
 						<div class="w-50 bg-secondary p-5" style="margin-top: -25%;">
-							<h1 class="text-uppercase text-primary mb-3">25 年</h1>
-							<h2 class="text-uppercase mb-0">團隊經驗</h2>
+							<h1 class="text-uppercase text-primary mb-3">SURVIVAL</h1>
+							<h2 class="text-uppercase mb-0">加入我們</h2>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
 					<p class="d-inline-block bg-secondary text-primary py-1 px-4">關於我們</p>
 					<h1 class="text-uppercase mb-4">不只是打生存！</h1>
-					<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit.
-						Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed
-						stet lorem sit clita duo justo magna dolore erat amet</p>
-					<p class="mb-4">Stet no et lorem dolor et diam, amet duo ut
-						dolore vero eos. No stet est diam rebum amet diam ipsum. Clita
-						clita labore, dolor duo nonumy clita sit at, sed sit sanctus dolor
-						eos.</p>
+					<p>屌炸天</p>
+					<p class="mb-4"></p>
 					<div class="row g-4">
 						<div class="col-md-6">
-							<h3 class="text-uppercase mb-3">起自 1990 年</h3>
-							<p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor
-								diam ipsum sit. Aliqu diam amet diam et eos.</p>
+							<h3 class="text-uppercase mb-3">起自 2023 年</h3>
+							<p class="mb-0">全台最大生存遊戲場地租借</p>
 						</div>
 						<div class="col-md-6">
-							<h3 class="text-uppercase mb-3">超過 1000 客戶</h3>
-							<p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor
-								diam ipsum sit. Aliqu diam amet diam et eos.</p>
+							<h3 class="text-uppercase mb-3">超過 1000+ 客戶</h3>
+							<p class="mb-0">來過都說讚</p>
 						</div>
 					</div>
 				</div>
@@ -128,16 +127,16 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/haircut.png"
-								alt="">
+							<div class="i_item">
+							<i class="fas fa-meteor"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Haircut</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">活動</h3>
+							<p>活動資訊速速了解</p>
+							<span class="text-uppercase text-primary">多人對戰</span>
 						</div>
-						<a class="btn btn-square" href=""><i
+						<a class="btn btn-square" href="${contextRoot}/front/competition"><i
 							class="fa fa-plus text-primary"></i></a>
 					</div>
 				</div>
@@ -147,16 +146,16 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/beard-trim.png"
-								alt="">
+							<div class="i_item">
+							<i class="fa-brands fa-shopify"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Beard Trim</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">商城</h3>
+							<p>各式槍枝服裝一次滿足</p>
+							<span class="text-uppercase text-primary">手刀購買</span>
 						</div>
-						<a class="btn btn-square" href=""><i
+						<a class="btn btn-square" href="${contextRoot}/front/Market/index"><i
 							class="fa fa-plus text-primary"></i></a>
 					</div>
 				</div>
@@ -166,131 +165,27 @@
 						<div
 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
 							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mans-shave.png"
-								alt="">
+							<div class="i_item">
+							<i class="fa-solid fa-comments"></i>
+							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Mans Shave</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
+							<h3 class="text-uppercase mb-3">論壇</h3>
+							<p>隨時掌握最新資訊</p>
+							<span class="text-uppercase text-primary">新聞速報</span>
 						</div>
-						<a class="btn btn-square" href=""><i
+						<a class="btn btn-square" href="${contextRoot}/front/Forum/index"><i
 							class="fa fa-plus text-primary"></i></a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/hair-dyeing.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Hair Dyeing</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/mustache.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Mustache</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<img class="img-fluid" src="${contextRoot}/img/stacking.png"
-								alt="">
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">Stacking</h3>
-							<p>Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-								sit. Aliqu diam amet diam.</p>
-							<span class="text-uppercase text-primary">From $15</span>
-						</div>
-						<a class="btn btn-square" href=""><i
-							class="fa fa-plus text-primary"></i></a>
-					</div>
-				</div>
+				
+				
 			</div>
 		</div>
 	</div>
 	<!-- Service End -->
 
 
-	<!-- Price Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-					<div
-						class="bg-secondary h-100 d-flex flex-column justify-content-center p-5">
-						<p class="d-inline-flex bg-dark text-primary py-1 px-4 me-auto">Price
-							& Plan</p>
-						<h1 class="text-uppercase mb-4">Check Out Our Barber Services
-							And Prices</h1>
-						<div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Haircut</h6>
-								<span class="text-uppercase text-primary">$29.00</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Beard Trim</h6>
-								<span class="text-uppercase text-primary">$35.00</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Mans Shave</h6>
-								<span class="text-uppercase text-primary">$23.00</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Hair Dyeing</h6>
-								<span class="text-uppercase text-primary">$19.00</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Mustache</h6>
-								<span class="text-uppercase text-primary">$15.00</span>
-							</div>
-							<div class="d-flex justify-content-between py-2">
-								<h6 class="text-uppercase mb-0">Stacking</h6>
-								<span class="text-uppercase text-primary">$39.00</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-					<div class="h-100">
-						<img class="img-fluid h-100" src="${contextRoot}/img/price.jpg"
-							alt="">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Price End -->
 
 
 	<!-- Team Start -->
@@ -298,9 +193,8 @@
 		<div class="container">
 			<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s" style="max-width: 600px;">
-				<p class="d-inline-block bg-secondary text-primary py-1 px-4">Our
-					Barber</p>
-				<h1 class="text-uppercase">Meet Our Barber</h1>
+				<p class="d-inline-block bg-secondary text-primary py-1 px-4">生存冠軍</p>
+				<h1 class="text-uppercase">戰到最後的辣個男人</h1>
 			</div>
 			<div class="row g-4">
 				<div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -315,8 +209,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">李奧納多皮卡丘</span>
 						</div>
 					</div>
 				</div>
@@ -332,8 +226,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">傑森包爾</span>
 						</div>
 					</div>
 				</div>
@@ -349,8 +243,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">比利庫柏</span>
 						</div>
 					</div>
 				</div>
@@ -366,8 +260,8 @@
 							</div>
 						</div>
 						<div class="bg-secondary text-center p-4">
-							<h5 class="text-uppercase">Barber Name</h5>
-							<span class="text-primary">Designation</span>
+							<h5 class="text-uppercase"></h5>
+							<span class="text-primary">傑森史塔生</span>
 						</div>
 					</div>
 				</div>
@@ -376,98 +270,6 @@
 	</div>
 	<!-- Team End -->
 
-
-	<!-- Working Hours Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="row g-0">
-				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
-					<div class="h-100">
-						<img class="img-fluid h-100" src="${contextRoot}/img/open.jpg"
-							alt="">
-					</div>
-				</div>
-				<div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
-					<div
-						class="bg-secondary h-100 d-flex flex-column justify-content-center p-5">
-						<p class="d-inline-flex bg-dark text-primary py-1 px-4 me-auto">Working
-							Hours</p>
-						<h1 class="text-uppercase mb-4">Professional Barbers Are
-							Waiting For You</h1>
-						<div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Monday</h6>
-								<span class="text-uppercase">09 AM - 09 PM</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Tuesday</h6>
-								<span class="text-uppercase">09 AM - 09 PM</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Wednesday</h6>
-								<span class="text-uppercase">09 AM - 09 PM</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Thursday</h6>
-								<span class="text-uppercase">09 AM - 09 PM</span>
-							</div>
-							<div class="d-flex justify-content-between border-bottom py-2">
-								<h6 class="text-uppercase mb-0">Friday</h6>
-								<span class="text-uppercase">09 AM - 09 PM</span>
-							</div>
-							<div class="d-flex justify-content-between py-2">
-								<h6 class="text-uppercase mb-0">Sat / Sun</h6>
-								<span class="text-uppercase text-primary">Closed</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- Working Hours End -->
-
-
-	<!-- Testimonial Start -->
-	<div class="container-xxl py-5">
-		<div class="container">
-			<div class="text-center mx-auto mb-5 wow fadeInUp"
-				data-wow-delay="0.1s" style="max-width: 600px;">
-				<p class="d-inline-block bg-secondary text-primary py-1 px-4">Testimonial</p>
-				<h1 class="text-uppercase">What Our Clients Say!</h1>
-			</div>
-			<div class="owl-carousel testimonial-carousel wow fadeInUp"
-				data-wow-delay="0.1s">
-				<div class="testimonial-item text-center"
-					data-dot="<img class='img-fluid' src='${contextRoot}/img/testimonial-1.jpg' alt=''>">
-					<h4 class="text-uppercase">Client Name</h4>
-					<p class="text-primary">Profession</p>
-					<span class="fs-5">Clita clita tempor justo dolor ipsum amet
-						kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et
-						amet stet eos sed clita erat magna elitr erat sit sit erat at
-						rebum justo sea clita.</span>
-				</div>
-				<div class="testimonial-item text-center"
-					data-dot="<img class='img-fluid' src='${contextRoot}/img/testimonial-2.jpg' alt=''>">
-					<h4 class="text-uppercase">Client Name</h4>
-					<p class="text-primary">Profession</p>
-					<span class="fs-5">Clita clita tempor justo dolor ipsum amet
-						kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et
-						amet stet eos sed clita erat magna elitr erat sit sit erat at
-						rebum justo sea clita.</span>
-				</div>
-				<div class="testimonial-item text-center"
-					data-dot="<img class='img-fluid' src='${contextRoot}/img/testimonial-3.jpg' alt=''>">
-					<h4 class="text-uppercase">Client Name</h4>
-					<p class="text-primary">Profession</p>
-					<span class="fs-5">Clita clita tempor justo dolor ipsum amet
-						kasd amet duo justo duo duo labore sed sed. Magna ut diam sit et
-						amet stet eos sed clita erat magna elitr erat sit sit erat at
-						rebum justo sea clita.</span>
-				</div>
-			</div>
-		</div>
-	</div>
 	<!-- Testimonial End -->
 	<jsp:include page="../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../Template/front/includedinbody.jsp"></jsp:include>
