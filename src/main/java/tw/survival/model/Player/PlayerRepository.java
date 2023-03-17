@@ -2,7 +2,6 @@ package tw.survival.model.Player;
 
 import java.util.List;
 
-import org.apache.catalina.mapper.Mapper;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -23,5 +22,6 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Integer> {
 	@Modifying
 	@Query("UPDATE PlayerBean p SET p.status = :newStatus WHERE p.id = :id")
 	void updateStatusById(@Param("id") Integer id, @Param("newStatus") Integer newStatus);
-		
+	
+	
 }

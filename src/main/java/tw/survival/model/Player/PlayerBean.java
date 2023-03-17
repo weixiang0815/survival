@@ -13,7 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
@@ -22,23 +24,25 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import tw.survival.model.Competition.SignUpBean;
 import tw.survival.model.Crew.CrewBean;
 import tw.survival.model.Crew.CrewPermission;
 import tw.survival.model.Forum.BookmarkletBean;
-import tw.survival.model.Forum.MsgsBean;
+
 import tw.survival.model.Forum.PostsBean;
 import tw.survival.model.Forum.ScoreBean;
 import tw.survival.model.Forum.ThumbUpBean;
+import tw.survival.model.Market.CartBean;
 
 @Entity
 @Table(name = "Player")
@@ -49,43 +53,40 @@ public class PlayerBean {
 	@Column(name = "id")
 	private Integer id;
 
-
 	@Column(name = "name")
 	private String name;
 
-	
 	@Column(name = "account")
 	private String account;
 
-	
 	@Column(name = "password")
 	private String password;
-	
+
 	@Column(name = "identity_number")
 	private String identity_number;
-	
+
 	@Column(name = "nickname")
 	private String nickname;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "age")
 	private Integer age;
-    
+
 	@Column(name = "county")
 	private String county;
 
 	@Column(name = "district")
 	private String district;
-	
+
 	@Column(name = "address")
 	private String address;
 
 	@Column(name = "info")
 	private String info;
-	
-	@Column(name="code")
+
+	@Column(name = "code")
 	private String code;
 
 	@JsonIgnore
@@ -118,10 +119,10 @@ public class PlayerBean {
 
 	@Column(name = "banned_reason")
 	private String banned_reason;
-	
+
 	@Column(name = "status")
-	private String status;
-	
+	private Integer status;
+
 	@JsonManagedReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_crew_id")
@@ -141,15 +142,14 @@ public class PlayerBean {
 //	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 //	private Set<OrderItemBean> OrderItem = new LinkedHashSet<>();
 
-	@JsonIgnore
+	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/2/21
+	private Set<PostsBean> postsOfPlayer = new LinkedHashSet<PostsBean>();// RZ 2023/3/13
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
-	@OrderBy("added desc")
-	private Set<MsgsBean> msgsOfPlayer = new LinkedHashSet<MsgsBean>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
+//	private Set<PlayerToMsgsBean> forPlayer = new LinkedHashSet<PlayerToMsgsBean>();
 
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
@@ -164,11 +164,22 @@ public class PlayerBean {
 	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "player", cascade = CascadeType.ALL)
 	@OrderBy("added desc")
-	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/2/21
+	private Set<BookmarkletBean> bookmarkletOfPost = new LinkedHashSet<BookmarkletBean>();// RZ 2023/3/13
 
-//	@JsonIgnore
-//	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
-//	private List<CartBean> cart = new ArrayList<>();
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "player")
+	private Set<CartBean> cart = new LinkedHashSet<CartBean>();
+
+	@JsonBackReference
+	@OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+	private Set<SignUpBean> signUps = new LinkedHashSet<>();
+
+	@JsonIgnore
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "Participation", inverseJoinColumns = {
+			@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_playercompetition_id", referencedColumnName = "id") })
+	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
 	@PrePersist
 	public void autoCreate() {
@@ -177,7 +188,6 @@ public class PlayerBean {
 		}
 	}
 
-	
 	public PlayerBean() {
 	}
 
@@ -341,31 +351,35 @@ public class PlayerBean {
 		this.postsOfPlayer = postsOfPlayer;
 	}
 
-//
-//	public Set<MsgsBean> getMsgsOfPlayer() {
-//		return msgsOfPlayer;
+
+
+
+//	public Set<PlayerToMsgsBean> getForPlayer() {
+//		return forPlayer;
 //	}
 //
-//	public void setMsgsOfPlayer(Set<MsgsBean> msgsOfPlayer) {
-//		this.msgsOfPlayer = msgsOfPlayer;
-//	}
 //
-//	public Set<ThumbUpBean> getThumbUpOfPost() {
-//		return thumbUpOfPost;
+//	public void setForPlayer(Set<PlayerToMsgsBean> forPlayer) {
+//		this.forPlayer = forPlayer;
 //	}
-//
-//	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
-//		this.thumbUpOfPost = thumbUpOfPost;
-//	}
-//
-//	public Set<ScoreBean> getScoreOfPost() {
-//		return scoreOfPost;
-//	}
-//
-//	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
-//		this.scoreOfPost = scoreOfPost;
-//	}
-//
+
+
+	public Set<ThumbUpBean> getThumbUpOfPost() {
+		return thumbUpOfPost;
+	}
+
+	public void setThumbUpOfPost(Set<ThumbUpBean> thumbUpOfPost) {
+		this.thumbUpOfPost = thumbUpOfPost;
+	}
+
+	public Set<ScoreBean> getScoreOfPost() {
+		return scoreOfPost;
+	}
+
+	public void setScoreOfPost(Set<ScoreBean> scoreOfPost) {
+		this.scoreOfPost = scoreOfPost;
+	}
+
 	public Set<BookmarkletBean> getBookmarkletOfPost() {
 		return bookmarkletOfPost;
 	}
@@ -406,22 +420,28 @@ public class PlayerBean {
 		this.info = info;
 	}
 
-	public String getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
 
 	public String getCode() {
 		return code;
 	}
 
-
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Set<SignUpBean> getSignUps() {
+		return signUps;
+	}
+
+	public void setSignUps(Set<SignUpBean> signUps) {
+		this.signUps = signUps;
 	}
 
 }

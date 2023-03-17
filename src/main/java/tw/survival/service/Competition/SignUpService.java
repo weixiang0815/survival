@@ -69,6 +69,17 @@ public class SignUpService {
 	}
 
 	/**
+	 * 透過會員 id 查詢報名紀錄
+	 * 
+	 * @param id 欲查詢報名紀錄的會員 id
+	 * @return 回傳裝著報名紀錄實體的 List 物件
+	 * @author 王威翔
+	 */
+	public List<SignUpBean> findByPlayerId(Integer id) {
+		return signupRepo.findByPlayerId(id);
+	}
+
+	/**
 	 * 透過會員 id 與 活動 id 查詢報名紀錄
 	 * 
 	 * @param playerId 欲查詢報名紀錄的會員 id

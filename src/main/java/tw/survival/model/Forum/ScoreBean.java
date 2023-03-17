@@ -18,6 +18,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import tw.survival.model.Player.PlayerBean;
 
 @Entity
@@ -31,10 +33,6 @@ public class ScoreBean implements Serializable {
 	@Column(name = "id")
 	private Integer id;
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_posts_id")
-	private PostsBean posts;
-
 	@Column(name = "how_much_stars")
 	private Integer howMuchStars;
 
@@ -43,10 +41,16 @@ public class ScoreBean implements Serializable {
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")
 	private Date added;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_id")
 	private PlayerBean player;
 
+	@JsonBackReference
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_posts_id")
+	private PostsBean posts;
+	
 	@PrePersist // 當物件轉換成 Persistent 狀態，先做這件事
 	public void onCreate() {
 		if (added == null) {
