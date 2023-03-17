@@ -12,7 +12,7 @@
 <title>使用者修改資料</title>
 <style type="text/css">
 img {
-	max-width: 100%;
+	max-width: 200px;
 }
 </style>
 </head>
@@ -21,7 +21,7 @@ img {
 <jsp:include page="../../Template/admin.jsp"/>
 	<div class="container">
 		<h3>使用者修改資料</h3>
-		<form:form action="${contextRoot}/player/update2" method="put"
+		<form:form action="${contextRoot}/player/update1" method="put"
 			modelAttribute="player" enctype="multipart/form-data">
 			<table class="table table-hover">
 				<tr>
@@ -32,10 +32,10 @@ img {
 					<td><form:input class="form-control" type="file"
 							path="playerImage" />
 				</tr>
-				<tr>
-					<td>ID：</td>
-					<td><form:input class="form-control" path="id" /></td>
-				</tr>
+				<tr >
+				<td>ID：</td>
+					<td><form:input readonly="readonly" class="form-control" path="id" /></td>
+				</tr>		
 				<tr>
 					<td>名稱：</td>
 					<td><form:input class="form-control" path="name" /></td>
@@ -96,10 +96,6 @@ img {
 					<td>個人身分證：</td>
 					<td><form:input class="form-control" path="identity_number" />
 					</td>
-				</tr>
-				<tr>
-					<td>個人介紹：</td>
-					<td><input type="hidden" name="info" /></td>
 				</tr>
 			</table>
 			<input class="btn btn-outline-primary" type="submit" value="更新" />

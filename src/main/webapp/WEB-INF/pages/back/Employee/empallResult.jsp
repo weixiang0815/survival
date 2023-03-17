@@ -20,17 +20,11 @@ img {
 	<table class="table table-hover">
 		<tr>
 			<th>職員頭像</th>
-			<th>職員ID：</th>
 			<th>職員名稱:</th>
-			<th>職員帳號:</th>
-			<th>職員密碼:</th>
 			<th>職員年齡:</th>
 			<th>職員身分證</th>
 			<th>職員地址:</th>
 			<th>職員性別:</th>
-			<th>職員生日:</th>
-			<th>職員薪水:</th>
-			<th>職員狀態:</th>
 			<th>職員信箱:</th>
 			<th>職員職稱：</th>
 			<th>職員入職日期：</th>
@@ -38,11 +32,8 @@ img {
 		<c:forEach items="${Employee}" var="employee">
 			<tr>
 				<td style="width: 100px;"><img alt="查無圖片"
-					src="${contextRoot}/Employee/photo/${employee.id}" /></td>
-				<td>${employee.id}</td>
+					src="${contextRoot}/Employee/photo/${employee.id}" /></td>			
 				<td>${employee.name}</td>
-				<td>${employee.account}</td>
-				<td>${employee.password}</td>
 				<td>${employee.age}</td>
 				<td>${employee.identity_number}</td>
 				<td><label>${employee.county}</label><label>${employee.district}</label><label>${employee.address}</label></td>
@@ -52,9 +43,6 @@ img {
 					</c:choose></td>
 				<td><span><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${employee.birthday}" /></span></td>
-
-				<td>${employee.salary}</td>
-				<td>${employee.status}</td>
 				<td>${employee.email}</td>
 				<td>${employee.title}</td>
 				<td><fmt:formatDate pattern="yyyy-MM-dd"

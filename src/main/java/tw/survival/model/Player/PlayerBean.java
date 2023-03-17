@@ -133,7 +133,7 @@ public class PlayerBean {
 	@JoinColumn(name = "fk_crew_permission")
 	private CrewPermission crewPermission;
 
-	@JsonManagedReference
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_player_permission")
 	private playerPermission playerPermission;
@@ -178,7 +178,7 @@ public class PlayerBean {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "Participation", inverseJoinColumns = {
 			@JoinColumn(name = "fk_competition_id", referencedColumnName = "id") }, joinColumns = {
-					@JoinColumn(name = "fk_playercompetition_id", referencedColumnName = "id") })
+					@JoinColumn(name = "fk_player_id", referencedColumnName = "id") })
 	private Set<PlayerBean> participantPlayers = new LinkedHashSet<PlayerBean>();
 
 	@PrePersist

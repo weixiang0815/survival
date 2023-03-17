@@ -12,20 +12,21 @@
 <title>使用者修改資料</title>
 <style type="text/css">
 img {
-	max-width: 100%;
+	max-width: 100px;
 }
 </style>
 </head>
 
 <body>
-<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
+	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 	<div class="container">
 		<h3>使用者修改資料</h3>
-		<form:form action="${contextRoot}/player/update1" method="put"
+		<form:form action="${contextRoot}/player/update2" method="put"
 			modelAttribute="player" enctype="multipart/form-data">
 			<table class="table table-hover">
 				<tr>
-					<td colspan="2"><img src="${contextRoot}/player/photo/${player.id}"></td>
+					<td colspan="2"><img
+						src="${contextRoot}/player/photo/${player.id}"></td>
 				</tr>
 				<tr>
 					<td>大頭貼:</td>
@@ -35,7 +36,7 @@ img {
 				<tr>
 					<td>ID：</td>
 					<td><form:input class="form-control" path="id" /></td>
-				</tr>
+				</tr>				
 				<tr>
 					<td>名稱：</td>
 					<td><form:input class="form-control" path="name" /></td>
@@ -48,7 +49,6 @@ img {
 					<td>密碼：</td>
 					<td><form:input class="form-control" type="password"
 							path="password" /></td>
-				</tr>
 				<tr>
 					<td>暱稱：</td>
 					<td><form:input class="form-control" path="nickname" /></td>
@@ -66,23 +66,17 @@ img {
 				</tr>
 				<tr>
 					<td>縣市:</td>
-					<td class="twzipcode">
-						<form:select data-role="county" path="county">
-							<option data-value="county" >縣市</option>
-						</form:select> 
-						<form:select data-role="district"  path="district">
+					<td class="twzipcode"><form:select data-role="county"
+							path="county">
+							<option data-value="county">縣市</option>
+						</form:select> <form:select data-role="district" path="district">
 							<option data-value="district">鄉鎮市區</option>
-						</form:select> 
-						<input type="text" data-role="zipcode" placeholder="郵遞區號" name="zipcode"/>
-					</td>
+						</form:select> <input type="text" data-role="zipcode" placeholder="郵遞區號"
+						name="zipcode" /></td>
 				</tr>
 				<tr>
 					<td>地址：</td>
 					<td><form:input class="form-control" path="address" /></td>
-				</tr>
-				<tr>
-					<td>電話：</td>
-					<td><form:input class="form-control" path="phone" /></td>
 				</tr>
 				<tr>
 					<td>Email：</td>
@@ -97,10 +91,6 @@ img {
 					<td><form:input class="form-control" path="identity_number" />
 					</td>
 				</tr>
-				<tr>
-					<td>個人介紹：</td>
-					<td><input type="hidden" name="info" /></td>
-				</tr>
 			</table>
 			<input class="btn btn-outline-primary" type="submit" value="更新" />
 		</form:form>
@@ -112,18 +102,18 @@ img {
 		const twzipcode = new TWzipcode();
 		$(document).ready(function() {
 			$.ajax({
-				url: "${contextRoot}/player/get/${player.id}",
-				method: "GET",
-				success: function(res) {
+				url : "${contextRoot}/player/get/${player.id}",
+				method : "GET",
+				success : function(res) {
 					console.log(res);
 					let county = res.county;
 					let district = res.district;
 					twzipcode.set({
-						"county": county,
-						"district": district,
+						"county" : county,
+						"district" : district,
 					});
 				},
-				error: function(err) {
+				error : function(err) {
 					console.log(err);
 				}
 			});
