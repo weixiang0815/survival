@@ -10,7 +10,7 @@
 <title>查詢全部結果</title>
 <style type="text/css">
 img {
-	max-width: 100%;
+	max-width: 100px;
 }
 </style>
 </head>
@@ -18,10 +18,8 @@ img {
 	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 	<div class="container">
 		<h3>個人資料</h3>
-		<table class="table table-hover">
-			<tr>
-				<td>${player.id}
-			</tr>
+		<table class="table table-hover" style="color:white">
+			
 			<tr>
 				<td><label>大頭貼</label>
 				<td colspan="2" style="width: 100px;"><img
@@ -96,6 +94,7 @@ img {
 		</table>
 		<a href="${contextRoot}/"><button class="btn btn-primary">回到搜尋頁</button></a>
 	</div>
+	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>	
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>

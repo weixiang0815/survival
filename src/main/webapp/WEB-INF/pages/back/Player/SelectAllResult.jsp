@@ -10,13 +10,19 @@
 <title>查詢全部結果</title>
 <style type="text/css">
 img {
-	max-width: 100%;
+	max-width: 50px;
+}
+#text{
+border:"1px soild #000";
+width:"500px";
+height:"120px";
+overflow:auto;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="../../Template/admin.jsp" />
-	<div class="container">
+	<div class="container" id="text">
 		<h3>查詢全部結果</h3>
 		<form action="${contextRoot}/player/namelike" method="post">
 			<input type="search" name="name" /> <input type="submit" value="搜尋" />
@@ -25,48 +31,27 @@ img {
 			<tr>
 				<th>大頭貼</th>
 				<th>名稱</th>
-				<th>帳號</th>
-				<th>密碼</th>
 				<th>生日</th>
-				<th>暱稱</th>
 				<th>性別</th>
-				<th>個人身分證</th>
 				<th>縣市</th>
-				<th>鄉鎮</th>
 				<th>地址</th>
 				<th>Email</th>
-				<th>年齡</th>
-				<th>電話</th>
-				<!-- <th>個人介紹</th> -->
-				<!-- <th>戰隊</th> -->
 				<th colspan="2"></th>
 			</tr>
 			<c:forEach items="${player}" var="player">
 				<tr>
-					<td style="width: 100px;">
+					<td >
 					<img src="${contextRoot}/player/photo/${player.id}" /></td>
 					<td>${player.name}</td>
-					<td>${player.account}</td>
-					<td>${player.password}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${player.birthday}" /></td>
-					<td><c:choose>
-							<c:when test="${player.nickname == null}">無</c:when>
-							<c:otherwise>${player.nickname}</c:otherwise>
-						</c:choose></td>
 					<td><c:choose>
 							<c:when test="${player.sex == \"M\"}">男</c:when>
 							<c:otherwise>女</c:otherwise>
 						</c:choose></td>
-					<td>${player.identity_number}</td>
 					<td>${player.county}</td>
-					<td>${player.district}</td>
 					<td>${player.address}</td>
 					<td>${player.email}</td>
-					<td>${player.age}</td>
-					<td>${player.phone}</td>
-					<!-- <td>${player.info}</td> -->
-					<!-- <tf>${player.crew}</tf> -->
 					<td><form
 							action="${contextRoot}/player/update/?id=${player.id}">
 							<input name="id" type="hidden" value="${player.id}" /> <input

@@ -100,10 +100,10 @@ public class PlayerController {
 	public String frontupdatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
 		model.addAttribute("player", player);
-		return "front/Player/UpdateUser1";
+		return "front/Player/UpdateUser";
 	}
 	@PutMapping("/player/update2")
-	public String fontupdateById(@ModelAttribute PlayerBean player) {
+	public String frontupdateById(@ModelAttribute PlayerBean player) {
 		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
 		if (sex == null) {

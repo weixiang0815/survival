@@ -10,14 +10,21 @@
 <meta charset="UTF-8">
 <title>玩家加入</title>
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
+<style type="text/css">
+tr{
+align="center";
+valign="center";
+}
+
+</style>
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-	<div class="container text-center">
+	<div class="container text-center" style="color:white ">
 		<h1>玩家加入</h1>
 		<form:form action="${contextRoot}/player/addpost"
 			enctype="multipart/form-data" modelAttribute="player" id="form">
-			<table>
+			<table  >
 				<tr>
 				<tr>
 					<td>玩家名稱：</td>
