@@ -47,7 +47,7 @@
 									<input name="_method" type="hidden" value="delete" /> 
 									<input name="id" type="hidden" value="${Cart_List.id}" /> 
 									<input type="submit" class="btn btn-danger btn-sm"
-										value="刪除" />
+										value="取消" />
 								</form>
 							</td>
 						</tr>
@@ -57,11 +57,11 @@
 			</table>
 
 
-			<%-- <c:if test="${Cart_List.isEmpty()}">
+			 <c:if test="${Cart_List.isEmpty()}">
 				<div>
 					<h3>目前購物車裡沒有商品</h3>
 				</div>
-				</c:if>--%>
+				</c:if>
 
 				<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 				<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
