@@ -11,7 +11,7 @@
 <body>
 <jsp:include page="../../Template/admin.jsp"/>
 	<h3>查詢結果</h3>
-		<table>
+		<table class="table table-hover">
 				<tr><td><label>使用者ID：</label>${user.id}
 				<tr><td><label>使用者名稱：</label>${user.name}
 				<tr><td><label>使用者帳號：</label>${user.account}

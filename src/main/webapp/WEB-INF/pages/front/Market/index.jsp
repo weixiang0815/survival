@@ -2109,7 +2109,7 @@
                                     <div class="cta--text">
                                         <h6>-30%</h6>
                                         <h2 style="color: azure;">全球折扣</h2>
-                                        <a href="${contextRoot}/front/Market/shop" class="btn essence-btn"
+                                        <a href="${contextRoot}/front/Market/getAllProductFront" class="btn essence-btn"
                                             style="font-size:2em">立即購買</a>
                                     </div>
                                 </div>

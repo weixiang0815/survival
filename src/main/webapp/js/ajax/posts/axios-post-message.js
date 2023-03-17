@@ -28,7 +28,28 @@ $(document).ready(function() {
       
     // 在這裡添加其他處理程式碼
   });
+  
+  $(".msg-nonlogin-btn").click(function() {
+    // event.preventDefault(); // 阻止表單提交
 
+    axios({
+      url:'http://localhost:8080/Survival/front/msgBlockNL/axios/firstPage',
+      method:'get',
+      params:{
+        "post_id":postId
+      }
+    })
+    .then(res=>{
+      console.log(res)
+      htmlMaker(res.data)
+    })
+    .catch(err=>{
+      console.log('err:' + err)
+    })
+    
+      
+    // 在這裡添加其他處理程式碼
+  });
   
 });
 
@@ -74,7 +95,8 @@ function htmlMaker(data){
 
    let buttonsArray = document.getElementsByClassName('pageBtn');
    
-   for( i=0; i<=buttonsArray.length; i++){
+   for( i=0; i<buttonsArray.length; i++){
+    console.log(buttonsArray[i])
     buttonsArray[i].addEventListener('click', function(e){
       console.log("Button clicked!");
       let pageNumber = this.getAttribute('data-page');
@@ -88,7 +110,7 @@ function loadThatPage(pageNumber,id){
   console.log(pageNumber)
   console.log(id)
   axios({
-    url:'http://localhost:8080/Survival/front/msgBlock/axios/get',
+    url:'http://localhost:8080/Survival/front/msgBlockNL/axios/get',
     method:'get',
     params:{
       p:pageNumber,

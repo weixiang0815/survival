@@ -4,7 +4,8 @@ submitBtn.addEventListener('click', e =>{
     e.preventDefault();  // 如果是用 form 表單，要把表單送出的功能取消
 
     let inputText = document.getElementById('myPosts').value;
-    
+    console.log(inputText)
+    console.log(typeof inputText)
     let URL = 'http://localhost:8080/Survival/front/posts/ajax/postpage'
 
     axios({
@@ -16,21 +17,19 @@ submitBtn.addEventListener('click', e =>{
     })
     .then(res=>{
       console.log(res)
-      htmlMaker(res.data)
+      htmlMaker(res.data,inputText)
     })
     .catch(err=>{
       console.log('err:' + err)
     })
 })
 
-function htmlMaker(data){
-   let Name = document.getElementById('myPosts').value;
+function htmlMaker(data,name){
+  console.log(name)
    msg_data = '<tbody>'
    data.content.forEach( el =>{
     msg_data += '<tr>'
-    msg_data += `<td>[${el.classify}] ${el.name}</td>`
-    // msg_data += '<tr>' + el.text + '</td>'
-    msg_data += `<td>${el.player.name} / ${el.player.nickname}</td>`
+    msg_data += `<td>[${el.classify}]<a href="http://localhost:8080/Survival/front/posts/content?id=${el.id}">${el.name}</a></td>`
     msg_data += '</tr>'
    })
    
@@ -53,10 +52,11 @@ function htmlMaker(data){
 
    let buttonsArray = document.getElementsByClassName('pageBtn');
 
-   for(i=0; i<=buttonsArray.length; i++){
+   for(i=0; i<buttonsArray.length; i++){
     buttonsArray[i].addEventListener('click', function(e){
       let pageNumber = this.getAttribute('data-page');
-      loadThatPage(pageNumber,Name)
+      
+      loadThatPage(pageNumber,name)
     })
    }
 

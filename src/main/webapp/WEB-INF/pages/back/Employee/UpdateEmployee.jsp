@@ -10,7 +10,7 @@
 <title>使用者修改資料</title>
 <style type="text/css">
 img {
-	max-width: 100%;
+	max-width: 200px;
 }
 </style>
 </head>

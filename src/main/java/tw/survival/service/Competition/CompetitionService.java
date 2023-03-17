@@ -95,10 +95,10 @@ public class CompetitionService {
 			comp.setStatus("已發布");
 			PostsBean newPost = new PostsBean();
 			newPost.setName(comp.getMandarinName());
-			newPost.setClassify("competition");
+			newPost.setClassify("活動");
 			newPost.setContent(comp.getContent());
 			newPost.setCompetition(comp);
-			newPost.setPlayer(comp.getFounderPlayer());
+			newPost.setPlayer(null);
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;
