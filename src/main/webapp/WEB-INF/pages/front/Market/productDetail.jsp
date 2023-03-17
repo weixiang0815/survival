@@ -82,9 +82,8 @@
                             <input name="playerId" type="hidden" value="1" />
                             <input name="quantity" type="hidden" value="1" />
                             <input type="submit" class=" btn-danger btn-sm" value="加入購物車" />
+                          </form>
                         </td>
-                      </tr>
-                      </form>
                       </tr>
                     </table>
                   </div>

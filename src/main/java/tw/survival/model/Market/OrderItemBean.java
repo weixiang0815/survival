@@ -1,7 +1,10 @@
 package tw.survival.model.Market;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -46,6 +51,15 @@ public class OrderItemBean {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "OrderItemDetail", inverseJoinColumns = {
+			@JoinColumn(name = "fk_product_id", referencedColumnName = "id") }, joinColumns = {
+					@JoinColumn(name = "fk_orderitem_id", referencedColumnName = "id") })
+	private List<ProductBean> products = new ArrayList<>();
+
+	public OrderItemBean() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -76,6 +90,14 @@ public class OrderItemBean {
 
 	public void setPlayer(PlayerBean player) {
 		this.player = player;
+	}
+
+	public List<ProductBean> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<ProductBean> products) {
+		this.products = products;
 	}
 
 }
