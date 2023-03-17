@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Market.OrderItemBean;
-import tw.survival.model.Market.OrderItemRepository;
 import tw.survival.service.Market.OrderItemService;
 
 @Controller
@@ -47,12 +46,12 @@ public class OrderItemController {
 		
 	}
 
-//	@GetMapping("/Market/all_OrderItem")
-//	public String getAllOrderItem(Model model) {
-//	    List<OrderItemBean> orderList = oService.findAllOrderItem();
-//	    model.addAttribute("orderList", orderList);
-//	    return "/back/Market/show_AllLogistics";
-//	}
+	@GetMapping("/Market/all_OrderItem")
+	public String getAllOrderItem(Model model) {
+	    List<OrderItemBean> orderList = oService.findAllOrderItem();
+	    model.addAttribute("orderList", orderList);
+	    return "/back/Market/show_AllOrderItem";
+	}
 //u
 	@GetMapping("/Market/editOrder")
 	public String editOrder(@RequestParam("id") Integer id, Model model) {

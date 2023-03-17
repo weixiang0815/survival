@@ -54,8 +54,6 @@ public class LogisticsController {
 	// 讀取全部物流
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
-		List<OrderItemBean> orderList = oService.findAllOrderItem();
-		model.addAttribute("orderList", orderList);
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
 		return "/back/Market/show_AllLogistics";

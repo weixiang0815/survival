@@ -23,7 +23,7 @@ public class AioCheckOutOneTime {
 	 * MerchantTradeDate
 	 * 合作特店交易時間
 	 */
-	private String MerchantTradeDate = "";
+	private String MerchantTradeDate = "yyyy/MM/dd HH:mm:ss";
 	
 	/**
 	 * PaymentType
@@ -35,7 +35,7 @@ public class AioCheckOutOneTime {
 	 * TotalAmount
 	 * 交易金額
 	 */
-	private String TotalAmount = "";
+	private String TotalAmount = "";  //帶入購物車值
 	
 	/**
 	 * TradeDesc
@@ -53,7 +53,7 @@ public class AioCheckOutOneTime {
 	 * ReturnURL
 	 * 付款完成通知回傳網址
 	 */
-	private String ReturnURL = "";
+	private String ReturnURL = "http://localhost:8080/Survival/";   
 	
 	/**
 	 * ChoosePayment
@@ -65,7 +65,7 @@ public class AioCheckOutOneTime {
 	 * ClientBackURL
 	 * Client端返回合作特店系統的按鈕連結
 	 */
-	private String ClientBackURL = "";
+	private String ClientBackURL = "";   //取消返回購物車結帳頁面網址
 	
 	/**
 	 * ItemURL
