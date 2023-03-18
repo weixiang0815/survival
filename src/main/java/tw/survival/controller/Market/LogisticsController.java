@@ -38,8 +38,7 @@ public class LogisticsController {
 	@ResponseBody
 	@PostMapping("Market/addLogistics")
 	public String addLogistics(@RequestParam("start_date") Date start_date,
-			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status)
-			throws IOException {
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status) throws IOException {
 
 		LogisticsBean lb = new LogisticsBean();
 		lb.setStart_date(start_date);
@@ -54,8 +53,6 @@ public class LogisticsController {
 	// 讀取全部物流
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
-		List<OrderItemBean> orderList = oService.findAllOrderItem();
-		model.addAttribute("orderList", orderList);
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
 		return "/back/Market/show_AllLogistics";
@@ -80,6 +77,42 @@ public class LogisticsController {
 	public String deleteLogistics(@RequestParam("id") Integer id) {
 		LogisticsService.deleteById(id);
 		return "redirect:/Market/all_Logistics";
+	}
+
+	// 從物流棄單
+	@GetMapping("/Market/drop-order-from-logistics")
+	public String dropOrderFromLogistics(@RequestParam("logisticsId") Integer logisticsId, Model model) {
+		LogisticsBean logistics = LogisticsService.findById(logisticsId);
+		OrderItemBean order = logistics.getOrderItem();
+		logistics.setStatus("棄單");
+		LogisticsService.update(logistics);
+		order.setStatus("棄單");
+		oService.update(order);
+		return "/front/Market/cancel";
+	}
+	
+	//	從物流出貨
+	@GetMapping("/Market/sendout")
+	public String sendout(@RequestParam("logisticsId") Integer logisticsId, Model model) {
+		LogisticsBean logistics = LogisticsService.findById(logisticsId);
+		OrderItemBean order = logistics.getOrderItem();
+		logistics.setStatus("已出貨");
+		LogisticsService.update(logistics);
+		order.setStatus("已出貨");
+		oService.update(order);
+		return "";
+	}
+	
+	//	從物流出貨
+	@GetMapping("/Market/arrive")
+	public String arrive(@RequestParam("logisticsId") Integer logisticsId, Model model) {
+		LogisticsBean logistics = LogisticsService.findById(logisticsId);
+		OrderItemBean order = logistics.getOrderItem();
+		logistics.setStatus("已到貨");
+		LogisticsService.update(logistics);
+		order.setStatus("已到貨");
+		oService.update(order);
+		return "";
 	}
 
 }

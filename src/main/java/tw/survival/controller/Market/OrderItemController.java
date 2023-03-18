@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.OrderItemBean;
+import tw.survival.service.Market.LogisticsService;
 import tw.survival.service.Market.OrderItemService;
 
 @Controller
@@ -23,6 +25,9 @@ public class OrderItemController {
 
 	@Autowired
 	private OrderItemService oService;
+
+	@Autowired
+	private LogisticsService logisticsService;
 
 	@GetMapping("/Market/add_OrderItem")
 	private String addOrder() {
@@ -42,15 +47,16 @@ public class OrderItemController {
 //	OrderItemRepository
 
 		return "上傳成功 <meta http-equiv=\"refresh\" content=\"0.1; url=http://localhost:8080/Survival/Market/all_Logistics\">";
-		
+
 	}
 
-//	@GetMapping("/Market/all_OrderItem")
-//	public String getAllOrderItem(Model model) {
-//	    List<OrderItemBean> orderList = oService.findAllOrderItem();
-//	    model.addAttribute("orderList", orderList);
-//	    return "/back/Market/show_AllLogistics";
-//	}
+	@GetMapping("/Market/all_OrderItem")
+	public String getAllOrderItem(Model model) {
+		List<OrderItemBean> orderList = oService.findAllOrderItem();
+		model.addAttribute("orderList", orderList);
+		return "/back/Market/show_AllOrderItem";
+	}
+
 //u
 	@GetMapping("/Market/editOrder")
 	public String editOrder(@RequestParam("id") Integer id, Model model) {
@@ -64,17 +70,44 @@ public class OrderItemController {
 		oService.update(order);
 		return "redirect:/Market/all_Logistics";
 	}
+
 //d
 	@DeleteMapping("/Market/deleteOrder")
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);
 		return "redirect:/Market/all_Logistics";
 	}
+
 	// 搜尋
-	@GetMapping("/Market/orderItemidLike")
-	public String findOrderItemidLike(@RequestParam("Search") Integer fk_player_id, Model model) {
+	@PostMapping("/Market/orderItemidLike")
+	public String findOrderItemidLike(@RequestParam("id") Integer fk_player_id, Model model) {
 		List<OrderItemBean> searchResult1 = oService.findByfk_player_id(fk_player_id);
 		model.addAttribute("SearchResult1", searchResult1);
-		return "back/Market/searchOrderResult";
+		return "back/Market/all_Logistics";
 	}
+
+	// 從訂單棄單
+	@GetMapping("/Market/drop-order-from-order")
+	public String dropOrderFromOrder(@RequestParam("orderId") Integer orderId, Model model) {
+		OrderItemBean order = oService.findById(orderId);
+		order.setStatus("棄單");
+		oService.update(order);
+		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
+		logistics.setStatus("棄單");
+		logisticsService.update(logistics);
+		return "";
+	}
+
+	//	從物流出貨
+	@GetMapping("/Market/receive")
+	public String receive(@RequestParam("orderId") Integer orderId, Model model) {
+		OrderItemBean order = oService.findById(orderId);
+		order.setStatus("已取貨");
+		oService.update(order);
+		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
+		logistics.setStatus("已取貨");
+		logisticsService.update(logistics);
+		return "";
+	}
+	
 }

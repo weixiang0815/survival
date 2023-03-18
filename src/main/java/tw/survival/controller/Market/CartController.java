@@ -110,7 +110,7 @@ public class CartController {
 			cartService.deleteCartById(cartId);
 		}
 		model.addAttribute("orderItem", orderItem);
-		return "front/Market/checkout";
+		return null;
 	}
 
 }
