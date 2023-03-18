@@ -7,30 +7,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>查詢訂單</title>
+<title>查詢商品</title>
 </head>
 <body>
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
-	<h1>查詢訂單</h1>
+	<h1>查詢商品</h1>
 	<table class="table">
 		<thead>
 			<tr>
-				<th scope="col">id</th>
-				<th scope="col">新建日期</th>
+				<th scope="col">訂單ID</th>
+				<th scope="col">建立日期</th>
 				<th scope="col">狀態</th>
 				<th scope="col">會員ID</th>
+				<th scope="col">會員名稱</th>
 			</tr>
 		</thead>
 		<tbody>
-			<jstl:forEach items="${SearchResult1}" var="search" varStatus="Status">
+			<jstl:forEach items="${SearchResult1}" var="search" varStatus="status">
 				<tr>
-					<th scope="row">${Status.index+1}</th>
-					<td>${search.name}</td>
+					<th scope="row">${status.index+1}</th>
+					<td>${search.id}</td>
 					<td><img alt="" height="100" width="160"
-						src="${contextRoot}/Market/id?id=${search.id}"></td>
+						src="${contextRoot}/Market/orderid?id=${search.id}"></td>
+					<td>${search.id}</td>
 					<td>${search.order_create_date}</td>
 					<td>${search.status}</td>
 					<td>${search.fk_player_id}</td>
+					<td>${search.playerName}</td>
 					<td>
 						<form action="${contextRoot}/Market/edit" method="get">
 							<input name="id" type="hidden" value="${search.id}" /> <input

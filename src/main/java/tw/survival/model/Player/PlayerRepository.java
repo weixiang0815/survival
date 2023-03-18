@@ -9,9 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface PlayerRepository extends JpaRepository<PlayerBean, Integer> {
 
-	@Query(value = "Select * from Player Where account=:account and password=:password", nativeQuery = true)
-	public PlayerBean findByAccount(@Param(value = "account") String account,
-			@Param(value = "password") String password);
+	@Query(value = "Select * from Player Where account=?1 and password=?2", nativeQuery = true)
+	public PlayerBean findByAccount(String account, String password);
 
 	@Query(value = "from PlayerBean where name like %:name%")
 	public List<PlayerBean> searchByNameLike(@Param("name") String name);
@@ -21,7 +20,7 @@ public interface PlayerRepository extends JpaRepository<PlayerBean, Integer> {
 	
 	@Modifying
 	@Query("UPDATE PlayerBean p SET p.status = :newStatus WHERE p.id = :id")
-	void updateStatusById(@Param("id") Integer id, @Param("newStatus") Integer newStatus);
+	public void updateStatusById(@Param("id") Integer id, @Param("newStatus") Integer newStatus);
 	
 	
 }

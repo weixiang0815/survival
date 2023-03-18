@@ -59,9 +59,9 @@ public class InventoryBean {
 	@Transient
 	private Integer productId;
 
-	@JsonManagedReference
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory", cascade = CascadeType.ALL)
-	private Set<LogisticsBean> logistics = new LinkedHashSet<>();
+//	@JsonManagedReference
+//	@OneToMany(fetch = FetchType.LAZY, mappedBy = "inventory", cascade = CascadeType.ALL)
+//	private Set<LogisticsBean> logistics = new LinkedHashSet<>();
 
 	public InventoryBean() {
 	}
@@ -122,12 +122,12 @@ public class InventoryBean {
 		this.productId = productId;
 	}
 
-	public Set<LogisticsBean> getLogistics() {
-		return logistics;
-	}
-
-	public void setLogistics(Set<LogisticsBean> logistics) {
-		this.logistics = logistics;
-	}
+//	public Set<LogisticsBean> getLogistics() {
+//		return logistics;
+//	}
+//
+//	public void setLogistics(Set<LogisticsBean> logistics) {
+//		this.logistics = logistics;
+//	}
 
 }

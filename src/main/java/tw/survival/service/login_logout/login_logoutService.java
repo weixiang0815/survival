@@ -22,9 +22,6 @@ public class login_logoutService {
 
 	public PlayerBean login(String account, String password) {
 		PlayerBean player = pRepository.findByAccount(account, password);
-		if (player == null) {
-			return null;
-		}
 		return player;
 	}
 

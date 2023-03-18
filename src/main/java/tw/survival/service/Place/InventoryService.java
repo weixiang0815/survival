@@ -43,7 +43,7 @@ public class InventoryService {
 		inventory.setProductId(null);
 		inventory.setWarehouse(null);
 		inventory.setWarehouseId(null);
-		inventory.setLogistics(null);
+//		inventory.setLogistics(null);
 		iDAO.deleteById(id);
 	}
 
