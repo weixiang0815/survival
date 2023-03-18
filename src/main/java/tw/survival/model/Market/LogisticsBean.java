@@ -53,12 +53,12 @@ public class LogisticsBean {
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_receiver_id")
-	private PlayerBean Player;
+	private PlayerBean player;
 
 	@JsonBackReference
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_orderitem_id")
-	private OrderItemBean OrderItem;
+	private OrderItemBean orderItem;
 
 	public LogisticsBean() {
 	}
@@ -96,19 +96,19 @@ public class LogisticsBean {
 	}
 
 	public PlayerBean getPlayer() {
-		return Player;
+		return player;
 	}
 
 	public void setPlayer(PlayerBean player) {
-		Player = player;
+		this.player = player;
 	}
 
 	public OrderItemBean getOrderItem() {
-		return OrderItem;
+		return orderItem;
 	}
 
 	public void setOrderItem(OrderItemBean orderItem) {
-		OrderItem = orderItem;
+		this.orderItem = orderItem;
 	}
 
 }

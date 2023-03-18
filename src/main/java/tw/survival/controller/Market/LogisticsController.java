@@ -81,8 +81,8 @@ public class LogisticsController {
 	}
 
 	@ResponseBody
-	@PostMapping("/Market/processing")
-	public Integer processing(@RequestBody Integer logisticsId) {
+	@GetMapping("/Market/processing")
+	public Integer processing(@RequestParam("id") Integer logisticsId) {
 		try {
 			LogisticsBean logistics = LogisticsService.findById(logisticsId);
 			OrderItemBean order = logistics.getOrderItem();
@@ -98,8 +98,8 @@ public class LogisticsController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/Market/sentout")
-	public Integer sentout(@RequestBody Integer logisticsId) {
+	@GetMapping("/Market/sentout")
+	public Integer sentout(@RequestParam("id") Integer logisticsId) {
 		try {
 			LogisticsBean logistics = LogisticsService.findById(logisticsId);
 			OrderItemBean order = logistics.getOrderItem();
@@ -115,8 +115,8 @@ public class LogisticsController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/Market/arrived")
-	public Integer arrived(@RequestBody Integer logisticsId) {
+	@GetMapping("/Market/arrived")
+	public Integer arrived(@RequestParam("id") Integer logisticsId) {
 		try {
 			LogisticsBean logistics = LogisticsService.findById(logisticsId);
 			OrderItemBean order = logistics.getOrderItem();
@@ -132,8 +132,8 @@ public class LogisticsController {
 	}
 	
 	@ResponseBody
-	@PostMapping("/Market/dropped")
-	public Integer dropped(@RequestBody Integer logisticsId) {
+	@GetMapping("/Market/dropped")
+	public Integer dropped(@RequestParam("id") Integer logisticsId) {
 		try {
 			LogisticsBean logistics = LogisticsService.findById(logisticsId);
 			OrderItemBean order = logistics.getOrderItem();

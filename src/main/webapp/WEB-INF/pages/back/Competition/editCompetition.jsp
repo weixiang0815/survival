@@ -28,6 +28,7 @@
 				</c:choose>
 				<form:form action="${contextRoot}/competition/edit/send"
 					modelAttribute="competition">
+					<form:input type="hidden" path="contentFileLocation" value="${competition.contentFileLocation}" />
 					<div class="input-group">
 						<form:input hidden="true" path="id" value="${competition.id}" />
 						<fieldset class="row mt-3 mb-3 p-3">
@@ -95,7 +96,7 @@
 							<div class="col-6"></div>
 							<div class="col-12">
 								<form:label path="place" class="form-label">活動場地</form:label>
-								<form:select title="選擇一個場地" class="form-select" path="placeId"
+								<form:select title="選擇一個場地" class="form-select" path="place"
 									id="placeId">
 									<c:forEach items="${placeList}" var="place">
 										<c:choose>

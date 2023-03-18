@@ -56,7 +56,7 @@
 	    				</c:otherwise>
 	    			</c:choose>
 	    		</td>
-	    		<td>台北場</td>
+	    		<td>${comp.place.place_name}</td>
 	    		<td>${comp.startDate}</td>
 	    		<td>${comp.endDate}</td>
 	    		<td>${comp.capacity}</td>
