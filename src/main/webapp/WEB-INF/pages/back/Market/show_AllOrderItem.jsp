@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="tw.survival.model.Market.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -22,6 +23,7 @@
 			<thead>
 				<tr>
 					<th>訂單 ID</th>
+					<th>收件人</th>
 					<th>建立日期</th>
 					<th>狀態</th>
 					<td colspan="2"></td>
@@ -31,6 +33,7 @@
 				<jstl:forEach items="${orderList}" var="show">
 					<tr>
 						<td>${show.id}</td>
+						<td>${show.player.name}</td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"
 								value="${show.order_create_date}" /></td>
 						<td>${show.status}</td>

@@ -87,26 +87,110 @@ public class OrderItemController {
 	}
 
 	// 從訂單棄單
-	@GetMapping("/Market/drop-order-from-order")
-	public String dropOrderFromOrder(@RequestParam("orderId") Integer orderId, Model model) {
-		OrderItemBean order = oService.findById(orderId);
-		order.setStatus("棄單");
-		oService.update(order);
-		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
-		logistics.setStatus("棄單");
-		logisticsService.update(logistics);
-		return "";
+//	@GetMapping("/Market/drop-order-from-order")
+//	public String dropOrderFromOrder(@RequestParam("orderId") Integer orderId, Model model) {
+//		OrderItemBean order = oService.findById(orderId);
+//		order.setStatus("棄單");
+//		oService.update(order);
+//		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
+//		logistics.setStatus("棄單");
+//		logisticsService.update(logistics);
+//		return "";
+//	}
+//
+//	//	從物流出貨
+//	@GetMapping("/Market/receive")
+//	public String receive(@RequestParam("orderId") Integer orderId, Model model) {
+//		OrderItemBean order = oService.findById(orderId);
+//		order.setStatus("已取貨");
+//		oService.update(order);
+//		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
+//		logistics.setStatus("已取貨");
+//		logisticsService.update(logistics);
+//		return "/back/Market/editOrderItem";
+//	}
+	@ResponseBody
+	@GetMapping("/Market/processing2")
+	public Integer processing(@RequestParam("id") Integer orderid) {
+		try {
+			OrderItemBean order = oService.findById(orderid);
+			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			logistics.setStatus("處理中");
+			logisticsService.update(logistics);
+			order.setStatus("處理中");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
-
-	//	從物流出貨
-	@GetMapping("/Market/receive")
-	public String receive(@RequestParam("orderId") Integer orderId, Model model) {
-		OrderItemBean order = oService.findById(orderId);
-		order.setStatus("已取貨");
-		oService.update(order);
-		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
-		logistics.setStatus("已取貨");
-		logisticsService.update(logistics);
-		return "/back/Market/editOrderItem";
+	
+	@ResponseBody
+	@GetMapping("/Market/sentout2")
+	public Integer sentout(@RequestParam("id") Integer orderid) {
+		try {
+			OrderItemBean order = oService.findById(orderid);
+			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			logistics.setStatus("已出貨");
+			logisticsService.update(logistics);
+			order.setStatus("已出貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@GetMapping("/Market/arrived2")
+	public Integer arrived(@RequestParam("id") Integer orderid) {
+		try {
+			OrderItemBean order = oService.findById(orderid);
+			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			logistics.setStatus("已到貨");
+			logisticsService.update(logistics);
+			order.setStatus("已到貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	@ResponseBody
+	@GetMapping("/Market/pickedup")
+	public Integer pickedup(@RequestParam("id") Integer orderid) {
+		try {
+			OrderItemBean order = oService.findById(orderid);
+			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			logistics.setStatus("已取貨");
+			logisticsService.update(logistics);
+			order.setStatus("已取貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+		
+	}
+	@ResponseBody
+	@GetMapping("/Market/dropped2")
+	public Integer dropped(@RequestParam("id") Integer orderid) {
+		try {
+			OrderItemBean order = oService.findById(orderid);
+			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			logistics.setStatus("棄單");
+			logisticsService.update(logistics);
+			order.setStatus("棄單");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 }
