@@ -143,7 +143,7 @@ td>a:hover {
 								<td class="compDate">${comp.endDate}</td>
 								<c:choose>
 									<c:when test="${comp.singleOrCrew.equals(\"S\")}">
-										<td>個人戰</td>
+										<td>單人戰</td>
 									</c:when>
 									<c:when test="${comp.singleOrCrew.equals(\"C\")}">
 										<td>團體戰</td>
