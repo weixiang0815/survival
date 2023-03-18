@@ -11,11 +11,6 @@
 <title>所有訂單</title>
 </head>
 <body>
-	<!--  <form method="get" action="/Market/orderItemidLike">
-  <label for="search">Search:</label>
-  <input type="text" id="search" name="Search">
-  <button type="submit">Submit</button>
-</form>-->
 	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 	<div class="container">
 		<h1>所有訂單</h1>
@@ -26,7 +21,7 @@
 					<th>收件人</th>
 					<th>建立日期</th>
 					<th>狀態</th>
-					<td colspan="2"></td>
+					<td colspan="2.5"></td>
 				</tr>
 			</thead>
 			<tbody>

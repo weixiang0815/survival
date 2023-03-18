@@ -85,7 +85,8 @@ ul li {
 .list li.active ~ li::before {
 	background-color: #999;
 }
-.list fmt{
+
+.list fmt {
 	font-size: 5px;
 }
 </style>
@@ -96,26 +97,7 @@ ul li {
 
 	<div class="container">
 		<h1>產品物流</h1>
-		<table class="table table-hover table-bordered">
-			<tr>
-				<th>訂單ID</th>
-				<th>建立日期</th>
-				<th>狀態</th>
-
-			</tr>
-			<c:forEach items="${orderList}" var="show">
-				<tr>
-					<td>${show.id}</td>
-					<td><fmt:formatDate pattern="yyyy-MM-dd"
-							value="${show.order_create_date}" /></td>
-					<td>${show.status}</td>
-				</tr>
-			</c:forEach>
-		</table>
-		<br>
-		<br>
-		<br>
-		<br>
+		<br> <br> <br> 
 		<table class="table table-hover table-bordered">
 			<jstl:forEach items="${list}" var="Logistics">
 				<ol class="list">
@@ -129,10 +111,7 @@ ul li {
 					<li class="${Logistics.status eq '已到貨' ? 'active' : ''}"><i
 						class="fa fa-check-circle" aria-hidden="true"></i>已到貨 <fmt:formatDate
 							pattern="yyyy/MM/dd " value="${Logistics.arrive_date}" /></li>
-					
 				</ol>
-					<button class="btn btn-danger btn-sm">棄單</button>
-				
 			</jstl:forEach>
 		</table>
 	</div>
