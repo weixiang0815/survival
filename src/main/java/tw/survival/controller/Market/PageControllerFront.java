@@ -27,6 +27,11 @@ public class PageControllerFront {
 		return "/Market/Cart/add";
 	}
 	
+	@GetMapping("/front/Market/checkout")
+	private String checkOut() {
+		return "/front/Market/checkout";
+	}
+	
 	@GetMapping("front/Market/index.html")
 	public String goToFrontIndexHtml(Model model) {
 		return "front/Market/index.html";
