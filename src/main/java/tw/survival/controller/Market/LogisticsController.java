@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -79,40 +80,72 @@ public class LogisticsController {
 		return "redirect:/Market/all_Logistics";
 	}
 
-	// 從物流棄單
-	@GetMapping("/Market/drop-order-from-logistics")
-	public String dropOrderFromLogistics(@RequestParam("logisticsId") Integer logisticsId, Model model) {
-		LogisticsBean logistics = LogisticsService.findById(logisticsId);
-		OrderItemBean order = logistics.getOrderItem();
-		logistics.setStatus("棄單");
-		LogisticsService.update(logistics);
-		order.setStatus("棄單");
-		oService.update(order);
-		return "/front/Market/cancel";
+	@ResponseBody
+	@PostMapping("/Market/processing")
+	public Integer processing(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("處理中");
+			LogisticsService.update(logistics);
+			order.setStatus("處理中");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
-	//	從物流出貨
-	@GetMapping("/Market/sendout")
-	public String sendout(@RequestParam("logisticsId") Integer logisticsId, Model model) {
-		LogisticsBean logistics = LogisticsService.findById(logisticsId);
-		OrderItemBean order = logistics.getOrderItem();
-		logistics.setStatus("已出貨");
-		LogisticsService.update(logistics);
-		order.setStatus("已出貨");
-		oService.update(order);
-		return "";
+	@ResponseBody
+	@PostMapping("/Market/sentout")
+	public Integer sentout(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("已出貨");
+			LogisticsService.update(logistics);
+			order.setStatus("已出貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
-	//	從物流出貨
-	@GetMapping("/Market/arrive")
-	public String arrive(@RequestParam("logisticsId") Integer logisticsId, Model model) {
-		LogisticsBean logistics = LogisticsService.findById(logisticsId);
-		OrderItemBean order = logistics.getOrderItem();
-		logistics.setStatus("已到貨");
-		LogisticsService.update(logistics);
-		order.setStatus("已到貨");
-		oService.update(order);
-		return "";
+	@ResponseBody
+	@PostMapping("/Market/arrived")
+	public Integer arrived(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("已到貨");
+			LogisticsService.update(logistics);
+			order.setStatus("已到貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/Market/dropped")
+	public Integer dropped(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("棄單");
+			LogisticsService.update(logistics);
+			order.setStatus("棄單");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 }

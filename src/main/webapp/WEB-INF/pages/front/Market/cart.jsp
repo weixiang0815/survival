@@ -98,14 +98,25 @@
 					let cartId = this.value;
 					if(this.checked) {
 						let str = `<input type="checkbox" name="cartIds"
-							value="` + cartId + `" id="` + cartId + `" checked hidden>`;
+							value="${cartId} + `" id="{cartId}" checked hidden>`;
 						checkout.prepend(str);
 					} else {
 						document.getElementById(cartId).remove();
 					}
-					console.log(checkout.html());;
+					console.log(checkout.html());
 				}
 			});
+			checkout.submit(function(event) {
+				event.preventDefault();
+				const playerId = $("#playerId").val();
+				const cartIdsChecked = $("input[name='cartIds']:checked")
+					.map(function(){return $(this).val();}).get();
+				const data = {playerId: playerId, cartIds: cartIdsChecked};
+				$.ajax({
+					type: "POST",
+					url: "${contextRoot}/Market/Cart/changeToOrder",
+					data: data,
+					dataType: "json",
 		});
 	</script>
 </body>

@@ -107,7 +107,6 @@ public class OrderItemController {
 		LogisticsBean logistics = logisticsService.findByOrderId(orderId);
 		logistics.setStatus("已取貨");
 		logisticsService.update(logistics);
-		return "";
+		return "/back/Market/editOrderItem";
 	}
-	
 }

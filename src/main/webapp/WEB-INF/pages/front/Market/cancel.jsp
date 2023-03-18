@@ -14,11 +14,10 @@
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
-<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-<h1>訂單物流</h1>
+	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
+	<h1>訂單物流</h1>
 
-
-<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
+	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
 </body>
 </html>
