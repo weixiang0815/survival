@@ -1,24 +1,25 @@
-package tw.survival.controller.Place;
+package tw.survival.controller.front.R.Place;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tw.survival.model.Competition.CompetitionBean;
+import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.ScheduleBean;
 import tw.survival.model.Place.ScheduleDTO;
 import tw.survival.service.Competition.CompetitionService;
@@ -27,7 +28,7 @@ import tw.survival.service.Place.PlaceService;
 import tw.survival.service.Place.ScheduleService;
 
 @Controller
-public class ScheduleController {
+public class PlaceControllerFront {
 
 	@Autowired
 	private ScheduleService scheduleService;
@@ -41,35 +42,56 @@ public class ScheduleController {
 	@Autowired
 	private CompetitionService competitionService;
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-		dateFormat.setLenient(false);
-		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	@GetMapping("/front/place/index")
+	public String goIndex() {
+		return "front/Place/index";
 	}
 
-	@GetMapping("/schedule/new")
+	@GetMapping("/front/place/detail")
+	public String goPlaceDetail() {
+		return "front/Place/detail";
+	}
+
+	@GetMapping("/front/place/all")
+	public String getAllPlace(Model model) {
+		List<PlaceBean> list = placeService.getAllPlace();
+		model.addAttribute("placelist", list);
+
+		return "front/Place/detail";
+	}
+
+	@GetMapping("/front/place/id")
+	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
+		PlaceBean place2 = placeService.getOnePlaceById(id);
+		byte[] placeFile2 = place2.getPlace_photo();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(placeFile2, headers, HttpStatus.OK);
+	}
+
+	@GetMapping("front/schedule/new")
 	public String newSchedule(Model model) {
 		model.addAttribute("schedule", new ScheduleBean());
 		model.addAttribute("placeList", placeService.getAllPlace());
 		model.addAttribute("ctsList", CTSService.findAll());
-		return "back/Place/addSchedule";
+		return "front/Place/schedule";
 	}
 
-	@PostMapping("/schedule/create")
+	@PostMapping("/front/schedule/create")
 	public String createSchedule(@ModelAttribute("schedule") ScheduleBean schedule, BindingResult result, Model model) {
 		if (result.hasErrors()) {
 			model.addAttribute("失敗");
-			return "redirect:/schedule/new";
+			return "redirect:/front/schedule/new";
 		}
 		schedule.setPlace(placeService.getOnePlaceById(schedule.getPlaceId()));
 		ScheduleBean sb = scheduleService.insertSchedule(schedule);
 		model.addAttribute("schedule", sb);
-		return "redirect:/schedule/new";
+		return "redirect:/front/schedule/new";
 	}
 
 	@ResponseBody
-	@GetMapping("/schedule/all")
+	@GetMapping("/front/schedule/all")
 	public List<ScheduleDTO> getAllSchedule() {
 		List<CompetitionBean> publishedComps = competitionService.findByStatus("已發布");
 		List<CompetitionBean> endedComps = competitionService.findByStatus("已結束");
@@ -85,10 +107,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
-			String id = comp.getId().toString();
 			String color = "green";
+			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -98,10 +120,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
-			String id = comp.getId().toString();
 			String color = "blue";
+			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -111,10 +133,10 @@ public class ScheduleController {
 			String start = comp.getStartDate() + "T" + startStr[comp.getStartTimespan() - 1];
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
+			String color = "brown";
 			String id = comp.getId().toString();
-			String color = "red";
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			list.add(Sdto);
 		}
 
@@ -122,7 +144,7 @@ public class ScheduleController {
 	}
 
 	@ResponseBody
-	@GetMapping("/schedule/select/{placeId}")
+	@GetMapping("/front/schedule/select/{placeId}")
 	public List<ScheduleDTO> findCompByPlaceId(@PathVariable Integer placeId) {
 		List<CompetitionBean> compList = competitionService.findByPlaceId(placeId);
 		String startStr[] = { "06:00:00", "12:00:00", "18:00:00", "00:00:00" };
@@ -134,20 +156,19 @@ public class ScheduleController {
 			String end = comp.getEndDate() + "T" + endStr[comp.getEndTimespan() - 1];
 			String type = comp.getStatus();
 			String id = comp.getId().toString();
-			System.out.println(type);
 			String color;
 			if (type.contentEquals("已發布")) {
 				color = "green";
 			} else if (type.contentEquals("未發布")) {
-				color = "red";
+				color = "pink";
 			} else if (type.contentEquals("已結束")) {
 				color = "blue";
 			} else {
-				color = "grey";
+				color = "yellow";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
 			Sdto.setPlaceId(placeId.toString());
-			Sdto.setUrl("http://localhost:8080/Survival/competition/edit?id="+id);
 			list.add(Sdto);
 		}
 		return list;

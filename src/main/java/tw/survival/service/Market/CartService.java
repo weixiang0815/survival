@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.CartRepository;
+import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
 import tw.survival.model.Player.PlayerBean;
 
@@ -56,24 +57,20 @@ public class CartService {
 	}
 
 	
-//	public boolean deleteById(Integer id) {
-//		try {
-//			cartDao.deleteById(id);
-//			return true;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			return false;
-//		}
-//	}
-	
-	
-	@Transactional
-    public void deleteCartItem(Integer cartId) {
-        cartDao.deleteById(cartId);
-    }
-	
-	
+//	//用ID刪除
+	public void deleteCartById(Integer id) {
+		CartBean cb = fingByCartId(id);
+		cb.setPlayer(null);
+		cb.setProduct(null);
+		cartDao.deleteById(id);
+		return;
+	}
 
+	// 找全部購物車
+		public List<CartBean> findAllCart() {
+			return cartDao.findAll();
+		}
+	
 	public boolean deleteByEntity(CartBean cart) {
 		try {
 			cartDao.delete(cart);

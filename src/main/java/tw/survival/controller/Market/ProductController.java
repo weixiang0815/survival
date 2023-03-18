@@ -274,12 +274,4 @@ public class ProductController {
 		return resultList;
 	}
 
-//	@ResponseBody
-//	@GetMapping("/Market/productFindByproductclassIn")
-//	public String findByproductclassIn(@RequestParam("product_class") List<String> clazz, Model model) {
-//		List<ProductBean> searchResult = productService.findByClass(clazz);
-//		model.addAttribute("SearchResult2", searchResult);
-//		return "Market/serchResult";
-//	}
-
 }

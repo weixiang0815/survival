@@ -51,13 +51,11 @@ public class LogisticsService {
 
 	// d
 	public void deleteById(Integer id) {
-
 		LogisticsBean lb = findById(id);
-		lb.setInventory(null);
+//		lb.setInventory(null);
 		lb.setOrderItem(null);
 		lb.setPlayer(null);
 		LogisticsDao.deleteById(id);
-
 	}
 
 	public LogisticsBean update(LogisticsBean logistics) {
