@@ -65,13 +65,13 @@ public class PostDao {
 			if (flag1) {
 				SQL.append("and ");
 			}
-			SQL.append("( name like '%" + name + "%') ) ");
+			SQL.append("( name like '%" + name + "%' ) ");
 		}
 		if (flag3) {
 			if (flag1 || flag2) {
 				SQL.append(" and ");
 			}
-			SQL.append("( ");
+			SQL.append(" ( ");
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			String today = formatter.format(new Date());
 			for (int i = 0; i < date.size(); i++) {
@@ -80,7 +80,7 @@ public class PostDao {
 					SQL.append("( added < '" + today + "' ) ");
 					break;
 				case 1:
-					SQL.append("( added = '" + today + "' ) ");
+					SQL.append("( added > '" + today + "' ) ");
 					break;
 				}
 				SQL.append(i == date.size() - 1 ? ") " : "or ");

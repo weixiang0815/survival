@@ -15,6 +15,10 @@
 	font-size: 2em;
 }
 
+img {
+  max-width: 70%;
+}
+
 .divcontainer {
   position: relative; /* 將父元素設置為相對定位，以便子元素可以使用絕對定位 */
 }
@@ -108,6 +112,7 @@
 				<div class="col-9" style="border: #FF0000 2px solid;" >
 					<h1>貼文類型：${post.classify}</h1>
 					<hr />
+					<h1>${post.name}</h1>
 					<!-- 這個內容為HTML可以直接輸入即可 -->
 					${post.content}
 					
@@ -348,16 +353,15 @@
 			</div>
 		</div>
 	</div>
-
-
 	<!-- Service End -->
-<script type="text/javascript">
-	const playerId = ${sessionScope.player != null ? sessionScope.player.id : 1};
-	const postId = ${requestScope.post.id}
-</script>
-
-<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
-<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
-
+	
+	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
+	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/ajax/posts/axios-post-message.js"></script>
+	<script type="text/javascript">
+		const playerId = ${sessionScope.player != null ? sessionScope.player.id : 1};
+		const postId = ${requestScope.post.id}
+	</script>
+	
 </body>
 </html>

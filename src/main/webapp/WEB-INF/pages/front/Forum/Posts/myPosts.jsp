@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>貼文查詢</title>
+<title>個人貼文</title>
 <jsp:include page="../../../Template/front/includedinhead.jsp"></jsp:include>
 <style>
 .a1 {
@@ -78,18 +78,19 @@ td {
 									</thead>
 									<tbody>
 										<tr>
-											<td><label><input 
+											<td>
+												<label><input 
 													type="checkbox" class="classify" name="classify" 
-													value="心得">心得</label> 
+													value="心得"/>心得</label> 
 												<label><input
 													type="checkbox" class="classify" name="classify"
-													value="問題">問題</label> 
+													value="問題"/>問題</label> 
 												<label><input
 													type="checkbox" class="classify" name="classify"
-													value="閒聊">閒聊</label> 
+													value="閒聊"/>閒聊</label> 
 												<label><input
 													type="checkbox" class="classify" name="classify"
-													value="討論">討論</label></td>
+													value="討論"/>討論</label></td>
 											<td><input type="text" id="name" name="name" />
 											</td>
 											<td><label><input type="checkbox" class="date"
@@ -106,25 +107,29 @@ td {
 						</div>
 						<br />
 						<div class="row">
-							<div class="a1">
-								<table id="list_table_json"
-									class="table table-hover table-bordered">
-									<thead>
-										<tr>
-											<th>貼文名稱</th>
-										</tr>
-									</thead>
-									<tbody id="myTbody">
-										<c:forEach items="${postsPage.content}" var="post">
-
+							<div class="a1 row">
+								<div class="col-3"></div>
+								<div class="col-6">
+									<table class="table table-hover table-bordered">
+										<thead>
 											<tr>
-												<td>[${post.classify}] <a
-													href="${contextRoot}/front/posts/content?id=${post.id}">${post.name}</a></td>
-												<td>${post.player.name}/ ${post.player.nickname}</td>
+												<th colspan="2">貼文名稱</th>
+												
 											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
+										</thead>
+										<tbody id="myTbody">
+											<c:forEach items="${postsPage.content}" var="post">
+
+												<tr>
+													<td>[${post.classify}] <a
+														href="${contextRoot}/front/posts/content?id=${post.id}">${post.name}</a></td>
+													<td>${post.player.name}/ ${post.player.nickname}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+								</div>
+								<div class="col-3"></div>
 							</div>
 						</div>
 					</div>

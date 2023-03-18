@@ -127,12 +127,10 @@ div .ct {
 		</div>
 	</div>
 	<!-- Service End -->
-	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
-	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
 	<script>
-// 		jQuery重新導向
+// 		jQuery重新導向 取消按鈕
 		$("#toForum").on({
 			click : function(e) {
 				e.preventDefault();

@@ -64,6 +64,8 @@ public class MsgsFrontContrller {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
     }
 	
+	
+	//C
 	@ResponseBody
 	@PostMapping("/msgs/axios/post")
 	public Page<MsgsBean> addOneAndReturnLateTen(@RequestBody MsgDto msgDTO, Model model){
@@ -96,14 +98,11 @@ public class MsgsFrontContrller {
 		
 	}
 	
-	@ResponseBody
-	@GetMapping("/msgs/axios/getOwner")
-	public PlayerBean getMsgOwner(@RequestParam("ptm") Integer Id, Model model){
-		
-		PlayerToMsgsBean ptmb = playerToMsgsService.findPtmbById(Id);
-		PlayerBean player = ptmb.getPlayer();
-		return player;
-	}
+	
+	
+
+	
+	
 	/**
 	 * 
 	 * @param msgDTO 傳入物件

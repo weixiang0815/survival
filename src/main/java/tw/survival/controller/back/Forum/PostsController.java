@@ -96,14 +96,15 @@ public class PostsController {
 	@GetMapping("/post/edit")
 	public String postEditPage(@RequestParam("id") Integer id, Model model) {
 		PostsBean post = postsService.findPostById(id);
-		model.addAttribute("postsBean", post);
+		model.addAttribute("editPost", post);
 		return "back/Forum/editPostPage";
 	}
 
 	@PutMapping("/post/edit")
 //	@InitBinder
 	public String postUpdate(@ModelAttribute(name = "editPost") PostsBean editPost, Model model) {
-
+		System.out.println(editPost.getId());
+		System.out.println(editPost.getName());
 		editPost.setFinalAdded(new Date());
 
 		postsService.updatePost(editPost);

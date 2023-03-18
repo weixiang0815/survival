@@ -72,6 +72,7 @@ a:hover {
 									<thead>
 										<tr>
 											<th>貼文名稱</th>
+							
 										</tr>
 									</thead>
 									<tbody>
@@ -79,7 +80,6 @@ a:hover {
 	
 											<tr>
 												<td>[${post.classify}] <a href="${contextRoot}/front/posts/content?id=${post.id}">${post.name}</a></td>
-												<td>${post.player.name} / ${post.player.nickname}</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -95,10 +95,9 @@ a:hover {
 	</div>
 	<!-- Service End -->
 	<!-- jquery欲使用就須放在你所寫的.js前面 -->
-	<script src="${contextRoot}/js/jquery-3.6.3.min.js" type="text/javascript"></script>
-	<script src="${contextRoot}/js/ajax/posts/axios-search-posts.js" type="text/javascript"></script>
 	
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	
 </body>
 </html>

@@ -16,9 +16,9 @@
 <jsp:include page="../../Template/admin.jsp"/>
 	<div class="container">
 		<div class="col-10">
-			<form:form modelAttribute="postsBean" method="POST">
+			<form:form action="${contextRoot}/post/edit" modelAttribute="editPost" method="POST">
 				<input type="hidden" name="_method"  id='putOrDelete'   value="" >
-
+				<input type="hidden" name="id" value="${editPost.id}" />
 
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>
@@ -26,10 +26,6 @@
 			    <label for="inputClassify">請輸入分類:</label>
 			    <form:select class="form-control" id="inputClassify" path="classify">
 			    	<form:option value="活動">活動</form:option>
-			    	<form:option value="心得">心得</form:option>
-			    	<form:option value="問題">問題</form:option>
-			    	<form:option value="閒聊">閒聊</form:option>
-			    	<form:option value="討論">討論</form:option>
 			    </form:select>
 	
 			    <br/>
@@ -38,8 +34,8 @@
 			    <br/>
 			    
 <!-- 			    <button type="submit" >送出</button> -->
-			    <input type='submit' class='btn btn-outline-primary' value='修改' name='updateBtn' onclick="return confirmUpdate('${postsBean.id}');">&nbsp; 	
-				<input type='submit' class='btn btn-outline-danger' value='刪除' name='deleteBtn' onclick="return confirmDelete('${postsBean.id}');" >
+			    <input type='submit' class='btn btn-outline-primary' value='修改' name='updateBtn' onclick="return confirmUpdate('${editPost.id}');">&nbsp; 	
+				<input type='submit' class='btn btn-outline-danger' value='刪除' name='deleteBtn' onclick="return confirmDelete('${editPost.id}');" >
 						
 			</form:form>
 		</div>
