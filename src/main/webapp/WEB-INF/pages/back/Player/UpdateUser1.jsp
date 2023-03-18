@@ -94,11 +94,13 @@ img {
 				</tr>
 				<tr>
 					<td>個人身分證：</td>
-					<td><form:input class="form-control" path="identity_number" />
-					</td>
+					<td><form:input class="form-control" path="identity_number" />					
 				</tr>
+				<tr>
+				<td><form:input class="form-control" path="status" type="hidden"/>
+				</tr>				
 			</table>
-			<input class="btn btn-outline-primary" type="submit" value="更新" />
+			<input class="btn btn-outline-primary" type="submit" value="更新" onclick="return confirmUpdate('${player.id}');"/>
 		</form:form>
 	</div>
 	<script
@@ -125,10 +127,11 @@ img {
 			});
 		});
 		function confirmUpdate(id) {
-			let result = confirm("確定送出此筆記錄(帳號:" + id.trim() + ")?");
+			let result = confirm("確定送出此筆記錄(帳號:" +id.trim() + ")?");
 			if (result) {
 				document.forms[0].putOrDelete.name = "_method";
 				document.forms[0].putOrDelete.value = "PUT";
+				document.forms[0].action[0]="<c:url value='${contextRoot}/player/update1' />";
 				return true;
 			}
 			return false;

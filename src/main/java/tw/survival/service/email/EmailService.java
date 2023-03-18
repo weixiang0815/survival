@@ -37,7 +37,7 @@ public class EmailService {
 			mimeMessageHelper.setFrom("travelmateeeit157@gmail.com");
 			mimeMessageHelper.setTo(player.getEmail());
 			mimeMessageHelper.setSubject("這是一封激活郵件");
-			mimeMessageHelper.setText("<a target='_Blank' href='http://localhost:8080/Survival/active/"+player.getId()+"' >"+player.getName()+"這是一個激活連結"+"</a>", true);
+			mimeMessageHelper.setText("<h1><a target='_Blank' href='http://localhost:8080/Survival/active/"+player.getId()+"' >"+player.getName()+"這是一個激活連結"+"</a></h1>", true);
 			javaMailSender.send(mimeMailMessage);
 			System.out.println("<a target='_Blank' href='http://localhost:8080/Survival/active/"+player.getId()+"' >"+player.getName()+"</a>");
 			System.out.println("html郵件發送成功");
