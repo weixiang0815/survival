@@ -113,7 +113,7 @@ public class CartController {
 			cartService.deleteCartById(cartId);
 		}
 		model.addAttribute("orderItem", orderItem);
-		return "front/Market/checkout";
+		return null;
 	}
 //	@PostMapping("/Market/Cart/pay")
 //	public String pay(@RequestParam("orderId") String orderId, @RequestParam("totalAmount") String totalAmount, Model model) {

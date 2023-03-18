@@ -52,7 +52,8 @@
 					<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown">個人資料</a>
 						<div class="dropdown-menu m-0">						
-						<a href="${contextRoot}/player/${player.id}"class="dropdown-item">玩家資料</a>						
+						<a href="${contextRoot}/player/${player.id}"class="dropdown-item">玩家資料</a>
+						<a href="${contextRoot}/" class="dropdown-item">玩家訂單</a>						
 						</div>
 						</div>
 					</c:otherwise>				
