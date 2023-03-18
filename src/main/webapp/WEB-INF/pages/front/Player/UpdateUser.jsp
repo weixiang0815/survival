@@ -10,6 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>使用者修改資料</title>
+	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style type="text/css">
 img {
 	max-width: 100px;
@@ -18,10 +19,10 @@ img {
 </head>
 
 <body>
-	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
+<%-- 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include> --%>
 	<div class="container">
 		<h3>使用者修改資料</h3>
-		<form:form action="${contextRoot}/player/update2" method="put"
+		<form:form action="${contextRoot}/player/update2" method="post"
 			modelAttribute="player" enctype="multipart/form-data">
 			<table class="table table-hover">
 				<tr>
@@ -90,6 +91,7 @@ img {
 					<td>個人身分證：</td>
 					<td><form:input class="form-control" path="identity_number" />
 					</td>
+					<td><form:input class="form-control" path="status" type="hidden" />
 				</tr>
 			</table>
 			<input class="btn btn-outline-primary" type="submit" value="更新" />
@@ -99,10 +101,12 @@ img {
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="${contextRoot}/js/twzipcode.js"></script>
 	<script type="text/javascript">
+		const playerId = ${sessionScope.player.id};
+		const playerName = "${sessionScope.player.name}";
 		const twzipcode = new TWzipcode();
 		$(document).ready(function() {
 			$.ajax({
-				url : "${contextRoot}/player/get/${player.id}",
+				url : "${contextRoot}/player/get/" + playerId,
 				method : "GET",
 				success : function(res) {
 					console.log(res);
@@ -117,12 +121,18 @@ img {
 					console.log(err);
 				}
 			});
+			$("input[type='submit']").click(function(e){
+				if(!confirm("確定送出此筆記錄（名字：" + playerName + "）？")){
+					e.preventDefault();
+				}
+			});
 		});
 		function confirmUpdate(id) {
-			let result = confirm("確定送出此筆記錄(帳號:" + id.trim() + ")?");
+			let result = confirm("確定送出此筆記錄（名字：" + playerName + "）？");
 			if (result) {
 				document.forms[0].putOrDelete.name = "_method";
 				document.forms[0].putOrDelete.value = "PUT";
+				document.forms[0].action[0]="<c:url value='${contextRoot}/player/" + id + "' />";
 				return true;
 			}
 			return false;
