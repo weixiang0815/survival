@@ -54,6 +54,7 @@
 						<div class="dropdown-menu m-0">						
 						<a href="${contextRoot}/player/${player.id}"class="dropdown-item">玩家資料</a>
 						<a href="${contextRoot}/" class="dropdown-item">玩家訂單</a>						
+						<a href="${contextRoot}/" class="dropdown-item">物流狀態</a>						
 						</div>
 						</div>
 					</c:otherwise>				
