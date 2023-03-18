@@ -45,8 +45,8 @@ ul li {
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-	width: 100px;
-	height: 100px;
+	width: 125px;
+	height: 125px;
 	background-image: linear-gradient(9deg, #185a9d, #43cea2);
 	border-radius: 50%;
 	position: relative;
@@ -114,6 +114,8 @@ ul li {
 		</table>
 		<br>
 		<br>
+		<br>
+		<br>
 		<table class="table table-hover table-bordered">
 			<jstl:forEach items="${list}" var="Logistics">
 				<ol class="list">
@@ -124,10 +126,13 @@ ul li {
 						class="fa fa-archive" aria-hidden="true"></i>處理中</li>
 					<li class="${Logistics.status eq '已出貨' ? 'active' : ''}"><i
 						class="fa fa-truck" aria-hidden="true"></i>已出貨</li>
-					<li class="${Logistics.status eq '已抵達' ? 'active' : ''}"><i
-						class="fa fa-check-circle" aria-hidden="true"></i>已抵達 <fmt:formatDate
+					<li class="${Logistics.status eq '已到貨' ? 'active' : ''}"><i
+						class="fa fa-check-circle" aria-hidden="true"></i>已到貨 <fmt:formatDate
 							pattern="yyyy/MM/dd " value="${Logistics.arrive_date}" /></li>
+					
 				</ol>
+					<button class="btn btn-danger btn-sm">棄單</button>
+				
 			</jstl:forEach>
 		</table>
 	</div>

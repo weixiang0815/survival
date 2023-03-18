@@ -29,7 +29,6 @@ public class LogisticsService {
 	// r
 	public LogisticsBean findById(Integer id) {
 		Optional<LogisticsBean> optional = LogisticsDao.findById(id);
-
 		if (optional.isPresent()) {
 			return optional.get();
 		}
@@ -43,6 +42,15 @@ public class LogisticsService {
 			return optional.get();
 		}
 		return null;
+	}
+
+	public LogisticsBean findByOrderId(Integer orderId) {
+		try {
+			return LogisticsDao.findByOrderItemId(orderId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 
 	public List<LogisticsBean> findAllLogistics() {
@@ -59,7 +67,16 @@ public class LogisticsService {
 	}
 
 	public LogisticsBean update(LogisticsBean logistics) {
-		LogisticsDao.save(logistics);
+		Optional<LogisticsBean> optional = LogisticsDao.findById(logistics.getId());
+		if (optional.isPresent()) {
+			LogisticsBean oldLogistics = optional.get();
+			oldLogistics.setArrive_date(logistics.getArrive_date());
+			oldLogistics.setStart_date(logistics.getStart_date());
+			oldLogistics.setOrderItem(logistics.getOrderItem());
+			oldLogistics.setPlayer(logistics.getPlayer());
+			oldLogistics.setStatus(logistics.getStatus());
+			return LogisticsDao.save(oldLogistics);
+		}
 		return null;
 	}
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,8 +39,7 @@ public class LogisticsController {
 	@ResponseBody
 	@PostMapping("Market/addLogistics")
 	public String addLogistics(@RequestParam("start_date") Date start_date,
-			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status)
-			throws IOException {
+			@RequestParam("arrive_date") Date arrive_date, @RequestParam("status") String status) throws IOException {
 
 		LogisticsBean lb = new LogisticsBean();
 		lb.setStart_date(start_date);
@@ -54,8 +54,6 @@ public class LogisticsController {
 	// 讀取全部物流
 	@GetMapping("/Market/all_Logistics")
 	public String getAllLogistics(Model model) {
-		List<OrderItemBean> orderList = oService.findAllOrderItem();
-		model.addAttribute("orderList", orderList);
 		List<LogisticsBean> list = LogisticsService.findAllLogistics();
 		model.addAttribute("list", list);
 		return "/back/Market/show_AllLogistics";
@@ -80,6 +78,74 @@ public class LogisticsController {
 	public String deleteLogistics(@RequestParam("id") Integer id) {
 		LogisticsService.deleteById(id);
 		return "redirect:/Market/all_Logistics";
+	}
+
+	@ResponseBody
+	@PostMapping("/Market/processing")
+	public Integer processing(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("處理中");
+			LogisticsService.update(logistics);
+			order.setStatus("處理中");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/Market/sentout")
+	public Integer sentout(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("已出貨");
+			LogisticsService.update(logistics);
+			order.setStatus("已出貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/Market/arrived")
+	public Integer arrived(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("已到貨");
+			LogisticsService.update(logistics);
+			order.setStatus("已到貨");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+	
+	@ResponseBody
+	@PostMapping("/Market/dropped")
+	public Integer dropped(@RequestBody Integer logisticsId) {
+		try {
+			LogisticsBean logistics = LogisticsService.findById(logisticsId);
+			OrderItemBean order = logistics.getOrderItem();
+			logistics.setStatus("棄單");
+			LogisticsService.update(logistics);
+			order.setStatus("棄單");
+			oService.update(order);
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+		}
 	}
 
 }

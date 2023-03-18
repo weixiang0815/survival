@@ -135,11 +135,12 @@
 				</a>
 					<ul class="collapse" id="submenu-market">
 						<li><a href="${contextRoot}/Market/add_Product" class="nav-link">新增商品</a></li>
-						<li><a href="${contextRoot}/Market/add_Logistics" class="nav-link">暫時新增物流</a></li>
-						<li><a href="${contextRoot}/Market/add_OrderItem" class="nav-link">暫時新增訂單</a></li>
+<%-- 						<li><a href="${contextRoot}/Market/add_Logistics" class="nav-link">暫時新增物流</a></li> --%>
+<%-- 						<li><a href="${contextRoot}/Market/add_OrderItem" class="nav-link">暫時新增訂單</a></li> --%>
 						<li><a href="${contextRoot}/Market/allProduct" class="nav-link">管理商品</a></li>
 						<li><a href="${contextRoot}/Market/all_Logistics" class="nav-link">管理物流</a></li>
-						<li><a href="${contextRoot}/" class="nav-link">訂單管理</a></li>
+						<li><a href="${contextRoot}/Market/all_OrderItem" class="nav-link">管理訂單</a></li>
+<%-- 						<li><a href="${contextRoot}/" class="nav-link">測試</a></li> --%>
 					</ul></li>
 				<li class="nav-item"><a data-bs-parent="#sidebarMenu"
 					data-bs-toggle="collapse" class="nav-link" href="#submenu-player">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="tw.survival.model.Market.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
@@ -22,19 +23,21 @@
 				<form:form action="${contextRoot}/Market/editOrder" method="put"
 					modelAttribute="order">
 					<form:input type="hidden" path="id" />
+					<form:input type="hidden" path="player" />
 					<table class="table table-hover">
 						<tr>
 							<td><form:label class="form-label" path="order_create_date">訂單時間:</form:label></td>
-							<td><form:input type="text" path="order_create_date" placeholder="yyyy/mm/dd" required="true" /></td>
+							<td><form:input type="text" path="order_create_date"
+									placeholder="yyyy/mm/dd" required="true" /></td>
 						</tr>
 
 						<tr>
 							<td>訂單狀態：</td>
 							<td><form:select class="form-control" path="status">
-									<form:option value="新訂單">新訂單</form:option>
 									<form:option value="處理中">處理中</form:option>
-									<form:option value="已完成">已完成</form:option>
-									<form:option value="已取消">已取消</form:option>
+									<form:option value="已出貨">已出貨</form:option>
+									<form:option value="已取貨">已取貨</form:option>
+									<form:option value="棄單">棄單</form:option>
 								</form:select></td>
 						</tr>
 					</table>
