@@ -33,7 +33,6 @@
 					data-bs-toggle="dropdown">服務</a>
 				<div class="dropdown-menu m-0">
 					<a href="${contextRoot}/front/competition" class="dropdown-item">活動</a>
-					<a href="${contextRoot}/front/place/index" class="dropdown-item">場地</a>
 					<a href="${contextRoot}/front/Market/index" class="dropdown-item">戰略商城</a>
 					<a href="${contextRoot}/front/Forum/index" class="dropdown-item">論壇</a>
 				</div>

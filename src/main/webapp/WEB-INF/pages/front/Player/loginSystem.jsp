@@ -5,7 +5,6 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html lang="zh-hant-tw">
-
 <head>
 <meta charset="UTF-8">
 <title>登入</title>
@@ -44,7 +43,6 @@ button:hover {
 	color: white;
 }
 </style>
-
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 	<div class="container-login mt-5 mb-5 pt-5 pb-3 text-center biggerfont">
@@ -55,7 +53,7 @@ button:hover {
 					<label>玩家帳號：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="text" name="account" />
+					<input type="text" name="account" required/>
 				</div>
 			</div>
 			<div class="row mb-5">
@@ -63,22 +61,20 @@ button:hover {
 					<label>玩家密碼：</label>
 				</div>
 				<div class="col-7 text-start">
-					<input type="password" name="password" />
+					<input type="password" name="password" required/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col text-end">
-					<input type="submit" value="登入" />
+					<input type="submit" value="登入" onclick="" />
 				</div>
 				<div class="col text-start">
 					<button id="register-oneclick">一鍵填寫</button>
 				</div>
-
 				<fb:login-button scope="public_profile,email"
 					onlogin="checkLoginState();">
 				</fb:login-button>
 				<!-- facebook 按鈕 -->
-
 				<div id="status"></div>
 			</div>
 		</form>
@@ -102,69 +98,103 @@ button:hover {
 	<script async defer crossorigin="anonymous"
 		src="https://connect.facebook.net/en_US/sdk.js"></script>
 	<script>
-					const account = $("input[name='account']");
-					const password = $("input[name='password']");
-					const register_oneclick = document.querySelector("#register-oneclick");
-					register_oneclick.addEventListener("click", function (e) {
-						e.preventDefault();
-						fillForm();
-					});
-					function fillForm() {
-						account.val("W3gdXeHw");
-						password.val("xxbytdzF");
+		const form = document.querySelector('form');
+		const account = $("input[name='account']");
+		const password = $("input[name='password']");
+		const register_oneclick = document.querySelector("#register-oneclick");
+		register_oneclick.addEventListener("click", function (e) {
+			e.preventDefault();
+			fillForm();
+		});
+
+		function fillForm() {
+			account.val("W3gdXeHw");
+			password.val("xxbytdzF");
+		}
+
+		//status 狀態檢查
+		form.addEventListener('submit', (event) => {
+			// 防止表單提交預設行為
+			event.preventDefault();
+
+			$.ajax({
+				url: '${contextRoot}/player/status',
+				method: 'post',
+				data: {
+					account: account.val(),
+					password: password.val(),
+				},
+				// 取得帳號和密碼欄位的值
+				success: function (res) {
+					console.log("帳號狀態：", res);
+					switch (res) {
+						case 0:
+							alert("此帳號不存在喔！");
+							break;
+						case 1:
+							alert("此帳號未啟動喔！");
+							break;
+						case 2:
+							form.submit();
 					}
-					//fb第三方登入
-					function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-						console.log('statusChangeCallback');
-						console.log(response);                   // The current login status of the person.
-						if (response.status === 'connected') {   // Logged into your webpage and Facebook.		    	
-							testAPI()
-						}
-						else {                                 // Not logged into your webpage or we are unable to tell.
-							document.getElementById('status').innerHTML = 'Please log ' +
-								'into this webpage.';
-						}
-					}
+				},
+				error: function (err) {
+					console.log(err);
+				}
+			});
+		});
+
+		//fb第三方登入
+		function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
+			console.log('statusChangeCallback');
+			console.log(response);                   // The current login status of the person.
+			if (response.status === 'connected') {   // Logged into your webpage and Facebook.		    	
+				testAPI()
+			}
+			else {                                 // Not logged into your webpage or we are unable to tell.
+				document.getElementById('status').innerHTML = 'Please log ' +
+					'into this webpage.';
+			}
+		}
 
 
-					function checkLoginState() {               // Called when a person is finished with the Login Button.
-						FB.getLoginStatus(function (response) {   // See the onlogin handler
-							statusChangeCallback(response);
-						});
-					}
+		function checkLoginState() {               // Called when a person is finished with the Login Button.
+			FB.getLoginStatus(function (response) {   // See the onlogin handler
+				statusChangeCallback(response);
+			});
+		}
 
 
-					window.fbAsyncInit = function () {
-						FB.init({
-							appId: '1204179997131932',
-							cookie: true,                     // Enable cookies to allow the server to access the session.
-							xfbml: true,                     // Parse social plugins on this webpage.
-							version: 'v2.7'           // Use this Graph API version for this call.
-						});
+		window.fbAsyncInit = function () {
+			FB.init({
+				appId: '1204179997131932',
+				cookie: true,                     // Enable cookies to allow the server to access the session.
+				xfbml: true,                     // Parse social plugins on this webpage.
+				version: 'v2.7'           // Use this Graph API version for this call.
+			});
 
-						FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
-							statusChangeCallback(response);        // Returns the login status.
-						});
-					};
-					// Load the SDK asynchronously
-					(function (d, s, id) {
-						var js, fjs = d.getElementsByTagName(s)[0];
-						if (d.getElementById(id)) return;
-						js = d.createElement(s); js.id = id;
-						js.src = "https://connect.facebook.net/en_US/sdk.js";
-						fjs.parentNode.insertBefore(js, fjs);
-					}(document, 'script', 'facebook-jssdk'));
+			FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
+				statusChangeCallback(response);        // Returns the login status.
+			});
+		};
+		// Load the SDK asynchronously
+		(function (d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 
-					function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-						console.log('Welcome!  Fetching your information.... ');
-						FB.api('/me',{'fields': 'id,name,email'}, function (response) {
-							
-							console.log('Successful login for: ' + response.name);
-							document.getElementById('status').innerHTML =
-								'Thanks for logging in, ' + response.name + '!';
-						});
-					}
-				</script>
+		function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+			console.log('Welcome!  Fetching your information.... ');
+			FB.api('/me', { 'fields': 'id,name,email' }, function (response) {
+
+				console.log('Successful login for: ' + response.name);
+				document.getElementById('status').innerHTML =
+					'Thanks for logging in, ' + response.name + '!';
+			});
+		}
+	</script>
 </body>
-
 </html>

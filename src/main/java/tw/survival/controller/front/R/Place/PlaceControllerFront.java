@@ -48,7 +48,8 @@ public class PlaceControllerFront {
 	}
 
 	@GetMapping("/front/place/detail")
-	public String goPlaceDetail() {
+	public String goPlaceDetail(@RequestParam("id") Integer id,Model model) {
+		model.addAttribute("placeDetail", placeService.getOnePlaceById(id));
 		return "front/Place/detail";
 	}
 
@@ -57,7 +58,7 @@ public class PlaceControllerFront {
 		List<PlaceBean> list = placeService.getAllPlace();
 		model.addAttribute("placelist", list);
 
-		return "front/Place/detail";
+		return "front/Place/allPlace";
 	}
 
 	@GetMapping("/front/place/id")
