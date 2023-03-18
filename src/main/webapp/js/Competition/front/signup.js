@@ -49,6 +49,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 submitBtn.attr("disabled", res);
                 if (res) {
                     checkResult.text("您已報名過此活動，請改選其它活動喔！");
+                } else {
+                    checkResult.text("您還沒報名過此活動喔～");
                 }
             },
             error: function (err) {
@@ -78,6 +80,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     submitBtn.attr("disabled", res);
                     if (res) {
                         checkResult.text("您已報名過此活動，請改選其它活動喔！");
+                    } else {
+                        checkResult.text("您還沒報名過此活動喔～");
                     }
                 },
                 error: function (err) {
