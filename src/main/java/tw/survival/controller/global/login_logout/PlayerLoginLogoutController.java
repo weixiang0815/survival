@@ -3,6 +3,7 @@ package tw.survival.controller.global.login_logout;
 import java.util.List;
 
 import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,12 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+
 import tw.survival.model.Player.PlayerBean;
 import tw.survival.service.login_logout.login_logoutService;
 import tw.survival.validators.Playervalidator;
@@ -53,12 +57,12 @@ public class PlayerLoginLogoutController {
 			for (ObjectError error : list) {
 				System.out.println("有錯誤：" + error);
 			}
-			return "back/Player/loginSystem";
+			return "front/Player/loginSystem";
 		}
-		if (player != null && player.getStatus() ==1) {
+		if (player != null && player.getStatus() == 1) {
 			m.addAttribute("player", player);
 			return "redirect:/";
-		}	
+		}
 		return "front/Player/loginSystem";
 	}
 
@@ -67,6 +71,7 @@ public class PlayerLoginLogoutController {
 		status.setComplete();
 		return "redirect:/Player/login";
 	}
+
 //	@GetMapping("/login")
 //	public ModelAndView loginfb() {
 //		String accessToken=null;
@@ -74,5 +79,25 @@ public class PlayerLoginLogoutController {
 //	    String loginDialogUrl = facebookClient.getLoginDialogUrl("YOUR_REDIRECT_URL", "YOUR_PERMISSIONS");
 //	    return new ModelAndView("redirect:" + loginDialogUrl);
 //	}
+
+	/**
+	 * 檢查帳號是否存在與已啟動的 AJAX Controller
+	 * 
+	 * @param account  欲檢查的帳號
+	 * @param password 欲檢查的密碼
+	 * @return 如果帳號不存在則回傳 0，如果存在但尚未啟動則回傳 1，如果已啟動則回傳 2
+	 * @author 夏梓喻
+	 * @author 王威翔
+	 */
+	@ResponseBody
+	@PostMapping("/player/status")
+	public Integer checkstatus(@RequestParam String account, @RequestParam String password) {
+		PlayerBean player = service.login(account, password);
+		if (player == null) {
+			return 0;
+		} else {
+			return player.getStatus() == 0 ? 1 : 2;
+		}
+	}
 
 }

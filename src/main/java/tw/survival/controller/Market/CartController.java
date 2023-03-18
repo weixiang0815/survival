@@ -3,6 +3,9 @@ package tw.survival.controller.Market;
 import java.util.ArrayList;
 import java.util.List;
 
+//import ecpay.payment.integration.AllInOne;
+//import ecpay.payment.integration.domain.AioCheckOutALL;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -112,5 +115,12 @@ public class CartController {
 		model.addAttribute("orderItem", orderItem);
 		return null;
 	}
-
+//	@PostMapping("/Market/Cart/pay")
+//	public String pay(@RequestParam("orderId") String orderId, @RequestParam("totalAmount") String totalAmount, Model model) {
+//	    // 建立綠界的支付表單
+//	    String form = ecpayService.createECPayForm(orderId, totalAmount);
+//	    model.addAttribute("form", form);
+//	    // 返回支付頁面
+//	    return "front/Market/payment";
+//	}
 }

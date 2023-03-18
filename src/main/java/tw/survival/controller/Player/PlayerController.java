@@ -50,14 +50,15 @@ public class PlayerController {
 	private PlayerService pService;
 	@Autowired
 	private CartService cartService;
-	
+
 	@Autowired
 	private EmailService emailService;
+
 	@GetMapping("/player.main")
 	public String main() {
 		return "front/Player/disclaimer";
 	}
-	
+
 //	@ResponseBody
 //	@GetMapping("/player/cartlist/{id}")
 //	public String cartPlayer(@PathVariable("id") Integer id,Model model) {
@@ -65,7 +66,6 @@ public class PlayerController {
 //		model.addAttribute("player",list);
 //		return"";
 //	}
-
 
 //	C
 	@GetMapping("/player/add")
@@ -81,28 +81,30 @@ public class PlayerController {
 		m.addAttribute("player", list);
 		return "back/Player/SelectAllResult";
 	}
-	
 
 	@ResponseBody
 	@GetMapping("/player/get/{id}")
 	public PlayerBean getPlayerById(@PathVariable Integer id) {
 		return pService.findByBean(id);
 	}
-	//onlyR
+
+	// onlyR
 	@GetMapping("/player/{id}")
-	public String OnlygetPlayerById(@PathVariable Integer id,Model m) {
-		PlayerBean player= pService.findByBean(id);
-		m.addAttribute("player",player);			
-		 return"front/Player/SelectOnlyPlayer";
+	public String OnlygetPlayerById(@PathVariable Integer id, Model m) {
+		PlayerBean player = pService.findByBean(id);
+		m.addAttribute("player", player);
+		return "front/Player/SelectOnlyPlayer";
 	}
-	//FU
+
+	// FU
 	@GetMapping("/player/frontupdate")
 	public String frontupdatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
 		model.addAttribute("player", player);
 		return "front/Player/UpdateUser";
 	}
-	@PutMapping("/player/update2")
+
+	@PostMapping("/player/update2")
 	public String frontupdateById(@ModelAttribute PlayerBean player) {
 		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
@@ -119,7 +121,7 @@ public class PlayerController {
 			}
 		}
 		pService.update(player);
-		return "redirect:/front/player/SelectOnlyPlayer";
+		return "front/Player/SelectOnlyPlayer";
 	}
 
 //bU
@@ -152,9 +154,9 @@ public class PlayerController {
 
 	// D
 	@DeleteMapping("/player/delete")
-	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {	
+	public String deletePlayer(@RequestParam("id") Integer id, RedirectAttributes ra) {
 		try {
-			
+
 			ra.addFlashAttribute("DeleteMessage", "刪除成功: 編號=" + id);
 			pService.delete(id);
 
@@ -166,7 +168,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/player/addpost")
-	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model,HttpSession http,
+	public String postPlayer(@Valid @ModelAttribute("player") PlayerBean player, Model model, HttpSession session,
 			BindingResult bindingResult) {
 		validator.validate(player, bindingResult);
 		if (bindingResult.hasErrors()) {
@@ -190,12 +192,12 @@ public class PlayerController {
 		}
 		player.setStatus(0);
 		player.setCode(UUID.randomUUID().toString());
-		http.setAttribute("player", player);
+//		session.setAttribute("player", player);
 		PlayerBean player2 = pService.addplayer(player);
 		emailService.sendHtmlMail(player2);
-		
+
 		System.out.println("註冊成功");
-		return "redirect:/front/Player/loginSystem";
+		return "redirect:/Player/login";
 	}
 
 	// GetPhoto
@@ -264,11 +266,10 @@ public class PlayerController {
 		return "back/Player/SelectAllResult";
 
 	}
-	
+
 	@GetMapping("/active/{id}")
 	public String toemail(@PathVariable("id") Integer id) {
 		pService.UpdateStatus(id, 1);
-		return "redirect:front/Player/loginSystem";
-	}
-
+		return "redirect:front/Player/login";
+	}	
 }
