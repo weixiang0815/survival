@@ -102,12 +102,12 @@ public class PostsFrontController {
 	@PostMapping("/posts/edit")
 	public String editPost(@ModelAttribute(name="postEdit")PostsBean post) {
 		
-		PostsBean postEdit = postsService.findPostById(post.getId());
-		postEdit.setFinalAdded(new Date());
-		postEdit.setClassify(post.getClassify());
-		postEdit.setName(post.getName());
-		postsService.updatePost(postEdit);
-		
+//		PostsBean postEdit = postsService.findPostById(post.getId());
+		post.setFinalAdded(new Date());
+//		postEdit.setClassify(post.getClassify());
+//		postEdit.setName(post.getName());
+		post = postsService.updatePost(post);
+		System.out.println(post);
 		return "redirect:/front/posts/myPosts";
 	}
 	
