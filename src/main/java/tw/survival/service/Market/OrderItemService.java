@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.survival.model.Market.LogisticsBean;
 import tw.survival.model.Market.OrderItemBean;
+import tw.survival.model.Market.OrderItemDao;
 import tw.survival.model.Market.OrderItemRepository;
 
 @Service
@@ -18,14 +19,17 @@ import tw.survival.model.Market.OrderItemRepository;
 public class OrderItemService {
 
 	@Autowired
-	private OrderItemRepository orderItemDao;
+	private OrderItemRepository orderItemRepo;
+
+	@Autowired
+	private OrderItemDao orderItemDao;
 
 	@Autowired
 	private LogisticsService logisticsService;
 
 	public OrderItemBean insertOrder(OrderItemBean op) {
 		try {
-			op = orderItemDao.save(op);
+			op = orderItemRepo.save(op);
 			LogisticsBean logistics = new LogisticsBean();
 			logistics.setOrderItem(op);
 			logistics.setPlayer(op.getPlayer());
@@ -45,7 +49,7 @@ public class OrderItemService {
 	}
 
 	public OrderItemBean findById(Integer id) {
-		Optional<OrderItemBean> optional = orderItemDao.findById(id);
+		Optional<OrderItemBean> optional = orderItemRepo.findById(id);
 
 		if (optional.isPresent()) {
 			return optional.get();
@@ -54,12 +58,16 @@ public class OrderItemService {
 		return null;
 	}
 
+	public List<OrderItemBean> multiSearch(String[] conditions) {
+		return orderItemDao.multiSearch(conditions);
+	}
+
 	public List<OrderItemBean> findAllOrderItem() {
-		return orderItemDao.findAll();
+		return orderItemRepo.findAll();
 	}
 
 	public OrderItemBean getProductById(Integer id) {
-		Optional<OrderItemBean> optional = orderItemDao.findById(id);
+		Optional<OrderItemBean> optional = orderItemRepo.findById(id);
 
 		if (optional.isPresent()) { // 判斷optional有東西
 			return optional.get();
@@ -68,14 +76,14 @@ public class OrderItemService {
 	}
 
 	public OrderItemBean update(OrderItemBean oBean) {
-		Optional<OrderItemBean> optional = orderItemDao.findById(oBean.getId());
+		Optional<OrderItemBean> optional = orderItemRepo.findById(oBean.getId());
 		if (optional.isPresent()) {
 			OrderItemBean order = optional.get();
 			order.setOrder_create_date(oBean.getOrder_create_date());
 			order.setPlayer(oBean.getPlayer());
 			order.setProducts(oBean.getProducts());
 			order.setStatus(oBean.getStatus());
-			return orderItemDao.save(order);
+			return orderItemRepo.save(order);
 		}
 		return null;
 	}
@@ -84,16 +92,16 @@ public class OrderItemService {
 	public void deleteById(Integer id) {
 		OrderItemBean ob = findById(id);
 		ob.setPlayer(null);
-		orderItemDao.deleteById(id);
+		orderItemRepo.deleteById(id);
 		return;
 	}
 
 	// ID搜尋
 	public List<OrderItemBean> findByfk_player_id(Integer fk_player_id) {
-		return orderItemDao.findOrderItemidLike(fk_player_id);
+		return orderItemRepo.findOrderItemidLike(fk_player_id);
 	}
 
-	 OrderItemBean getOrderById(Long orderId) {
+	OrderItemBean getOrderById(Long orderId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

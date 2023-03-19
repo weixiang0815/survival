@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -114,7 +115,7 @@ public class OrderItemController {
 	public Integer processing(@RequestParam("id") Integer orderid) {
 		try {
 			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			LogisticsBean logistics = logisticsService.findByOrderId(orderid);
 			logistics.setStatus("處理中");
 			logisticsService.update(logistics);
 			order.setStatus("處理中");
@@ -125,13 +126,13 @@ public class OrderItemController {
 			return 0;
 		}
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/Market/sentout2")
 	public Integer sentout(@RequestParam("id") Integer orderid) {
 		try {
 			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			LogisticsBean logistics = logisticsService.findByOrderId(orderid);
 			logistics.setStatus("已出貨");
 			logisticsService.update(logistics);
 			order.setStatus("已出貨");
@@ -142,13 +143,13 @@ public class OrderItemController {
 			return 0;
 		}
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/Market/arrived2")
 	public Integer arrived(@RequestParam("id") Integer orderid) {
 		try {
 			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			LogisticsBean logistics = logisticsService.findByOrderId(orderid);
 			logistics.setStatus("已到貨");
 			logisticsService.update(logistics);
 			order.setStatus("已到貨");
@@ -158,14 +159,15 @@ public class OrderItemController {
 			e.printStackTrace();
 			return 0;
 		}
-		
+
 	}
+
 	@ResponseBody
 	@GetMapping("/Market/pickedup")
 	public Integer pickedup(@RequestParam("id") Integer orderid) {
 		try {
 			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			LogisticsBean logistics = logisticsService.findByOrderId(orderid);
 			logistics.setStatus("已取貨");
 			logisticsService.update(logistics);
 			order.setStatus("已取貨");
@@ -175,14 +177,15 @@ public class OrderItemController {
 			e.printStackTrace();
 			return 0;
 		}
-		
+
 	}
+
 	@ResponseBody
 	@GetMapping("/Market/dropped2")
 	public Integer dropped(@RequestParam("id") Integer orderid) {
 		try {
 			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  logisticsService.findByOrderId(orderid);
+			LogisticsBean logistics = logisticsService.findByOrderId(orderid);
 			logistics.setStatus("棄單");
 			logisticsService.update(logistics);
 			order.setStatus("棄單");
@@ -193,5 +196,11 @@ public class OrderItemController {
 			return 0;
 		}
 	}
-	
+
+	@ResponseBody
+	@PostMapping("/Market/order/multi-search")
+	public List<OrderItemBean> multiSearch(@RequestBody String[] conditions) {
+		return oService.multiSearch(conditions);
+	}
+
 }
