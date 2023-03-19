@@ -22,7 +22,7 @@ public class LogisticsDao {
 	}
 
 	private String sql(String[] conditions) {
-		StringBuilder sql = new StringBuilder(" select * from OrderItem where ");
+		StringBuilder sql = new StringBuilder(" select * from Logistics where ");
 		if (conditions != null && conditions.length != 0) {
 			sql.append("status in (");
 			for (int i = 0; i < conditions.length; i++) {
