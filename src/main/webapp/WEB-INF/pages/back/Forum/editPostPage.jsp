@@ -18,8 +18,12 @@
 		<div class="col-10">
 			<form:form action="${contextRoot}/post/edit" modelAttribute="editPost" method="POST">
 				<input type="hidden" name="_method"  id='putOrDelete'   value="" >
-				<input type="hidden" name="id" value="${editPost.id}" />
-
+				<form:input type="hidden" path="id" value="${editPost.id}" />
+				<form:input type="hidden" path="essayLocation" value="${editPost.essayLocation}" />
+				<jstl:if test="${editPost.competition != null}">
+					<form:input type="hidden" path="competition" value="${editPost.competition.id}" />
+				</jstl:if>
+				
 				<label for="inputName">請輸入標題:</label>
 			    <form:input class="form-control" id="inputName" path="name"/>
 			    <br/>
