@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -38,6 +40,7 @@ import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;
 
 @Controller
+@SessionAttributes({ "player" })
 public class PlayerController {
 	@Autowired
 	public AddPlayerValidator validator;
@@ -88,15 +91,47 @@ public class PlayerController {
 		return pService.findByBean(id);
 	}
 
-	// onlyR
+	
+	/**
+	 * 
+	 * @param id  player id 
+	 * @param m 乘載我要輸入給下一頁的物件 (玩家)
+	 * @return 跳轉頁面路徑(玩家資訊單人)
+	 * @apiNote 按鈕:前台，使用者欲查詢個人資料，點擊跳頁。
+	 * @author 夏梓喻
+	 */
 	@GetMapping("/player/{id}")
 	public String OnlygetPlayerById(@PathVariable Integer id, Model m) {
 		PlayerBean player = pService.findByBean(id);
 		m.addAttribute("player", player);
 		return "front/Player/SelectOnlyPlayer";
 	}
+	
+	@ResponseBody
+	@PostMapping("/player/AjaxUpdate")
+	public String AjaxIpdate(@RequestBody PlayerBean player) {
+		MultipartFile playerImage = player.getPlayerImage();
+		if (playerImage != null && !playerImage.isEmpty()) {
+			try {
+				byte[] img = playerImage.getBytes();
+				Blob blob = new SerialBlob(img);
+				player.setThumbnail(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		pService.update(player);
+		return "front/Player/SelectOnlyPlayer";
+		
+	}
 
-	// FU
+	/**
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 * @apiNote 跳到更新頁面
+	 */
 	@GetMapping("/player/frontupdate")
 	public String frontupdatePlayer(@RequestParam("id") Integer id, Model model) {
 		PlayerBean player = pService.findByBean(id);
@@ -105,7 +140,7 @@ public class PlayerController {
 	}
 
 	@PostMapping("/player/update2")
-	public String frontupdateById(@ModelAttribute PlayerBean player) {
+	public String frontupdateById(@ModelAttribute PlayerBean player,Model model) {
 		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
 		if (sex == null) {
@@ -121,6 +156,7 @@ public class PlayerController {
 			}
 		}
 		pService.update(player);
+		model.addAttribute("player", player);
 		return "front/Player/SelectOnlyPlayer";
 	}
 
@@ -270,6 +306,6 @@ public class PlayerController {
 	@GetMapping("/active/{id}")
 	public String toemail(@PathVariable("id") Integer id) {
 		pService.UpdateStatus(id, 1);
-		return "redirect:front/Player/login";
+		return "redirect:/Player/login";
 	}	
 }

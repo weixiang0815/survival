@@ -18,8 +18,7 @@ img {
 	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 	<div class="container">
 		<h3>個人資料</h3>
-		<table class="table table-hover" style="color:white">
-			
+		<table class="table table-hover" style="color:white">			
 			<tr>
 				<td><label>大頭貼</label>
 				<td colspan="2" style="width: 100px;"><img
@@ -28,14 +27,6 @@ img {
 			<tr>
 				<td><label>名稱</label>
 				<td>${player.name}</td>
-			</tr>
-			<tr>
-				<td><label>帳號</label>
-				<td>${player.account}</td>
-			</tr>
-			<tr>
-				<td><label>密碼</label>
-				<td>${player.password}</td>
 			</tr>
 			<tr>
 				<td><label>生日</label>
