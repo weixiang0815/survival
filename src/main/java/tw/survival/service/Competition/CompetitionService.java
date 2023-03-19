@@ -28,6 +28,7 @@ import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.ScheduleBean;
 import tw.survival.service.Forum.PostsService;
 import tw.survival.service.Place.PlaceService;
+import tw.survival.service.Player.PlayerService;
 
 @Service
 @Transactional
@@ -50,6 +51,9 @@ public class CompetitionService {
 
 	@Autowired
 	private SignUpService signupService;
+	
+	@Autowired
+	private PlayerService playerService;
 
 	/**
 	 * 新建一筆活動資訊，但尚未公布與發新貼文
@@ -98,7 +102,7 @@ public class CompetitionService {
 			newPost.setClassify("活動");
 			newPost.setContent(comp.getContent());
 			newPost.setCompetition(comp);
-			newPost.setPlayer(null);
+			newPost.setPlayer(playerService.findByBean(25));
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;

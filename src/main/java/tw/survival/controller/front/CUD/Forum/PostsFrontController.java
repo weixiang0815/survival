@@ -2,6 +2,7 @@ package tw.survival.controller.front.CUD.Forum;
 
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,23 +27,20 @@ import tw.survival.service.Player.PlayerService;
 @SessionAttributes({ "player" })
 @RequestMapping("/front")
 public class PostsFrontController {
-
+	
+	@Autowired
 	private PostsService postsService;
-
+	
+	@Autowired
 	private CompetitionService competitionService;
-
+	
+	@Autowired
 	private PlayerService playerService;
-
+	
+	@Autowired
 	private EmployeeService employeeService;
 
-//	@Autowired //若是只有一個建構子，SpringBoot會自動加入Autowired功能。
-	public PostsFrontController(PostsService postsService, CompetitionService competitionService,
-			EmployeeService employeeService, PlayerService playerService) {
-		this.postsService = postsService;
-		this.competitionService = competitionService;
-		this.playerService = playerService;
-		this.employeeService = employeeService;
-	}
+
 	
 	
 	/**

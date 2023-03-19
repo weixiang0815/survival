@@ -55,9 +55,12 @@ public class MsgsService {
 	 * @apiNote 刪除一筆該id紀錄的那筆留言資料
 	 */
 	public boolean deleteMsgsById(Integer id) {
-		if (mDao.existsById(id)) {
+		Optional<MsgsBean> findById = mDao.findById(id);
+		if (!findById.isEmpty()) {
+			
 			mDao.deleteById(id);
 			return true;
+			
 		}
 		return false;
 	}
@@ -72,6 +75,25 @@ public class MsgsService {
 	public MsgsBean updateMsgs(MsgsBean msgs) {
 		Optional<MsgsBean> optional = mDao.findById(msgs.getId());
 		if (optional.isPresent()) {
+			msgs.setFinalAdded(new Date());
+			return mDao.save(msgs);
+		}
+		return null;
+	}
+	
+	/**
+	 * 修改一筆留言
+	 * 
+	 * @param id 留言ID
+	 * @param msgText 欲修改字串
+	 * @return 修改成功回傳留言實體，失敗回傳 null
+	 * @author 鄭力豪
+	 */
+	public MsgsBean updateMsgs(Integer id, String msgText) {
+		Optional<MsgsBean> optional = mDao.findById(id);
+		if (optional.isPresent()) {
+			MsgsBean msgs = optional.get();
+			msgs.setEssay(msgText);
 			msgs.setFinalAdded(new Date());
 			return mDao.save(msgs);
 		}

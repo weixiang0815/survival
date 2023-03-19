@@ -270,6 +270,6 @@ public class PlayerController {
 	@GetMapping("/active/{id}")
 	public String toemail(@PathVariable("id") Integer id) {
 		pService.UpdateStatus(id, 1);
-		return "redirect:front/Player/login";
+		return "redirect:/Player/login";
 	}	
 }
