@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,16 +19,16 @@ import tw.survival.service.Market.OrderItemService;
 public class LogisticsControllerFront {
 
 	@Autowired
-	private LogisticsService LogisticsService;
+	private LogisticsService logisticsService;
 
 	@Autowired
 	private OrderItemService oService;
 
 	// r
-	@GetMapping("/front/Market/logistics")
-	public String getAllLogistics(Model model) {
-		List<LogisticsBean> list1 = LogisticsService.findAllLogistics();
-		model.addAttribute("list", list1);
+	@GetMapping("/front/Market/logistics/{id}")
+	public String getAllLogistics(@PathVariable Integer id, Model model) {
+		LogisticsBean logistics = logisticsService.findById(id);
+		model.addAttribute("logistics", logistics);
 		return "/front/Market/logistics";
 	}
 
@@ -44,9 +45,9 @@ public class LogisticsControllerFront {
 	public Integer updateOrderBtn(@RequestParam("id") Integer orderId) {
 	    try {
 	        OrderItemBean order = oService.findById(orderId);
-	        LogisticsBean logistics = LogisticsService.findByOrderId(orderId);
+	        LogisticsBean logistics = logisticsService.findByOrderId(orderId);
 	        logistics.setStatus("已棄單");
-	        LogisticsService.update(logistics);
+	        logisticsService.update(logistics);
 	        order.setStatus("已棄單");
 	        oService.update(order);
 	        return 1;

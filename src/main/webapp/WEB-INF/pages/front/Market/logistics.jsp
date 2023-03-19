@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>訂單詳情</title>
+<title>物流詳情</title>
 <link rel="stylesheet" href="style.css">
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 <style type="text/css">
@@ -22,7 +22,6 @@
 .step {
 	width: 500px;
 	margin: 100px auto;
-	out
 }
 
 ul#comp-link>li {
@@ -94,25 +93,40 @@ ul li {
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-
+	<!-- Page Header Start -->
+	<div class="container-fluid page-header py-5 mb-5 wow fadeIn"
+		data-wow-delay="0.1s">
+		<div class="container text-center py-5">
+			<h1
+				class="display-3 text-white text-uppercase mb-3 animated slideInDown">物流詳情</h1>
+			<nav aria-label="breadcrumb animated slideInDown">
+				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
+					<li class="breadcrumb-item"><a class="text-white"
+						href="${contextRoot}">首頁</a></li>
+					<li class="breadcrumb-item"><a class="text-white"
+						href="${contextRoot}/player/${sessionScope.player.id}">個人資料</a></li>
+					<li class="breadcrumb-item text-primary active" aria-current="page">物流詳情</li>
+				</ol>
+			</nav>
+		</div>
+	</div>
+	<!-- Page Header End -->
 	<div class="container">
-		<h1>產品物流</h1>
+		<h1>物流詳情</h1>
 		<br> <br> <br> 
 		<table class="table table-hover table-bordered">
-			<jstl:forEach items="${list}" var="Logistics">
-				<ol class="list">
-					<li class="${Logistics.status eq '收到訂單' ? 'active' : ''}"><i
-						class="fa fa-file-text" aria-hidden="true"></i>收到訂單 <fmt:formatDate
-							pattern="yyyy/MM/dd " value="${Logistics.start_date}" /></li>
-					<li class="${Logistics.status eq '處理中' ? 'active' : ''}"><i
-						class="fa fa-archive" aria-hidden="true"></i>處理中</li>
-					<li class="${Logistics.status eq '已出貨' ? 'active' : ''}"><i
-						class="fa fa-truck" aria-hidden="true"></i>已出貨</li>
-					<li class="${Logistics.status eq '已到貨' ? 'active' : ''}"><i
-						class="fa fa-check-circle" aria-hidden="true"></i>已到貨 <fmt:formatDate
-							pattern="yyyy/MM/dd " value="${Logistics.arrive_date}" /></li>
-				</ol>
-			</jstl:forEach>
+			<ol class="list">
+				<li class="${logistics.status eq '收到訂單' ? 'active' : ''}"><i
+					class="fa fa-file-text" aria-hidden="true"></i>收到訂單 <fmt:formatDate
+						pattern="yyyy/MM/dd " value="${logistics.start_date}" /></li>
+				<li class="${logistics.status eq '處理中' ? 'active' : ''}"><i
+					class="fa fa-archive" aria-hidden="true"></i>處理中</li>
+				<li class="${logistics.status eq '已出貨' ? 'active' : ''}"><i
+					class="fa fa-truck" aria-hidden="true"></i>已出貨</li>
+				<li class="${logistics.status eq '已到貨' ? 'active' : ''}"><i
+					class="fa fa-check-circle" aria-hidden="true"></i>已到貨 <fmt:formatDate
+						pattern="yyyy/MM/dd " value="${logistics.arrive_date}" /></li>
+			</ol>
 		</table>
 	</div>
 
