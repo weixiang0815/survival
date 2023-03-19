@@ -40,20 +40,20 @@ public class LogisticsControllerFront {
 	}
 
 	@ResponseBody
-	@GetMapping("/order/dropped3")
-	public Integer dropped(@RequestParam("id") Integer orderid) {
-		try {
-			OrderItemBean order = oService.findById(orderid);
-			LogisticsBean logistics =  LogisticsService.findByOrderId(orderid);
-			logistics.setStatus("棄單");
-			LogisticsService.update(logistics);
-			order.setStatus("棄單");
-			oService.update(order);
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return 0;
-		}
+	@GetMapping("/order/cancelled")
+	public Integer updateOrderBtn(@RequestParam("id") Integer orderId) {
+	    try {
+	        OrderItemBean order = oService.findById(orderId);
+	        LogisticsBean logistics =  LogisticsService.findByOrderId(orderId);
+	        logistics.setStatus("已棄單");
+	        LogisticsService.update(logistics);
+	        order.setStatus("已棄單");
+	        oService.update(order);
+	        return 1;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        return 0;
+	    }
 	}
 }
 // 已取消

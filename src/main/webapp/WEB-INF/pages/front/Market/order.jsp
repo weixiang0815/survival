@@ -26,14 +26,14 @@
 				<th>狀態</th>
 				<td colspan="2.5"></td>
 			</tr>
-			
+
 			<c:forEach items="${orderList}" var="show">
 				<tr>
 					<td>${show.id}</td>
 					<td>${show.player.name}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${show.order_create_date}" /></td>
-					<td >${show.status}</td>
+					<td>${show.status}</td>
 					<td><button onclick="toggleStatus(this)"
 							class="formBtn btn btn-danger btn-sm">棄單</button></td>
 				</tr>
@@ -47,35 +47,19 @@
 						button.classList.remove("btn-danger");
 						button.classList.add("btn-secondary");
 						button.disabled = true;
-					} else {
-						button.innerHTML = "棄單";
-						button.classList.remove("btn-secondary");
-						button.classList.add("btn-danger");
+						
+						let orderid = button.closest("tr").querySelector("td:first-child").textContent;
+						let xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function() {
+							if (this.readyState === 4 && this.status === 200) {
+								location.reload();
+							}
+						}
+						xhr.open("GET", "${contextRoot}/front/Market/order/dropped3?id=" + orderid, true);
+						xhr.send();
 					}
 				}
-			}const buttons = document.querySelectorAll(".formBtn");
-			const actionURL = "${contextRoot}/front/Market/order";
-			const orderid = document.getElementById("id").value;
-			const resultPlace = document.getElementById("result");
-			const statusPlace = document.getElementById("status");
-
-			$(document).ready(function () {
-				for (let i = 0; i < buttons.length; i++) {
-					buttons[i].addEventListener("click", function (e) {
-						e.preventDefault();
-						let action = this.id;
-						let status = this.innerText;
-						let url = actionURL + action + "?id=" + parseInt(orderid);
-						axios.get(url)
-						.then(res => {
-							let result = res.data;
-							console.log(result);
-						}).catch(err => {
-							console.log(err);
-						});
-					})
-				}
-			});
+			}
 		</script>
 	</div>
 
