@@ -10,12 +10,10 @@
 <head>
 <meta charset="UTF-8">
 <title>訂單詳情</title>
-<link rel="stylesheet" href="style.css">
 <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
-
 	<div class="container">
 		<h1>產品物流</h1>
 		<table class="table table-hover table-bordered">
@@ -24,46 +22,51 @@
 				<th>收件人</th>
 				<th>建立日期</th>
 				<th>狀態</th>
-				<td colspan="2.5"></td>
+				<td colspan="2"></td>
 			</tr>
-
 			<c:forEach items="${orderList}" var="show">
 				<tr>
 					<td>${show.id}</td>
 					<td>${show.player.name}</td>
 					<td><fmt:formatDate pattern="yyyy-MM-dd"
 							value="${show.order_create_date}" /></td>
-					<td>${show.status}</td>
-					<td><button onclick="toggleStatus(this)"
-							class="formBtn btn btn-danger btn-sm">棄單</button></td>
+					<td id="status_${show.id}">${show.status}</td>
+					<td><button class="formBtn btn btn-danger btn-sm">棄單</button></td>
 				</tr>
 			</c:forEach>
 		</table>
-		<script>
-			function toggleStatus(button) {
-				if (confirm("您確定要棄單嗎？")) {
-					if (button.innerHTML == "棄單") {
-						button.innerHTML = "已棄單";
-						button.classList.remove("btn-danger");
-						button.classList.add("btn-secondary");
-						button.disabled = true;
-						
-						let orderid = button.closest("tr").querySelector("td:first-child").textContent;
-						let xhr = new XMLHttpRequest();
-						xhr.onreadystatechange = function() {
-							if (this.readyState === 4 && this.status === 200) {
-								location.reload();
-							}
-						}
-						xhr.open("GET", "${contextRoot}/front/Market/order/dropped3?id=" + orderid, true);
-						xhr.send();
-					}
-				}
-			}
-		</script>
 	</div>
-
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>
+	<script>
+		const formBtn = document.getElementsByClassName("formBtn");
+
+		$(document).ready(function() {
+			for (let i = 0; i < formBtn.length; i++) {
+				let btn = formBtn[i];
+				btn.addEventListener("click", function() {
+					if (confirm("您確定要棄單嗎？")) {
+						let orderid = btn.closest("tr").querySelector("td:first-child").textContent;
+						$.ajax({
+							url: "${contextRoot}/front/Market/order/dropped3?id=" + orderid,
+							method: "get",
+							success: function(res){
+								if (res == 1) {
+									btn.innerHTML = "已棄單";
+									btn.classList.remove("btn-danger");
+									btn.classList.add("btn-secondary");
+									btn.disabled = true;
+									document.getElementById("status_" + orderid).innerText = "已棄單";
+								}
+							},
+							error: function(err) {
+								console.log(err);
+							}
+						});
+					}
+				});
+			}
+		});
+	</script>
 </body>
 </html>

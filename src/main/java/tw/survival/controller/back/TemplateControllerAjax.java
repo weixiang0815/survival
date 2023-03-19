@@ -1,4 +1,4 @@
-package tw.survival.controller.global;
+package tw.survival.controller.back;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;

@@ -37,7 +37,6 @@ public class TestProductDao {
 			sql.append(flag1 || flag2 ? "AND " : "");
 			sql.append("context LIKE '%" + context + "%'");
 		}
-		sql.append(";");
 		Query query = em.createNativeQuery(sql.toString(), ProductBean.class);
 		@SuppressWarnings("unchecked")
 		List<ProductBean> resultList = query.getResultList();

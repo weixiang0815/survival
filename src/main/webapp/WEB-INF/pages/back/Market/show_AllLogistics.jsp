@@ -36,7 +36,7 @@
 					<td><fmt:formatDate pattern="yyyy/MM/dd "
 							value="${logistics.arrive_date}" /></td>
 					<td>${logistics.status}</td>
-					<td><form action="${contextRoot}/Market/editlogistics"
+					<td><form action="${contextRoot}/Market/editLogistics"
 							method="get">
 							<input name="id" type="hidden" value="${logistics.id}" /> <input
 								type="submit" class="btn btn-info btn-sm" value="編輯" />

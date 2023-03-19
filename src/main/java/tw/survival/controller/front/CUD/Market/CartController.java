@@ -1,4 +1,4 @@
-package tw.survival.controller.Market;
+package tw.survival.controller.front.CUD.Market;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,15 +40,6 @@ public class CartController {
 	@Autowired
 	private OrderItemService orderService;
 
-	@GetMapping("/Market/Cart/test")
-	public String addProductToCart(Model model) {
-		model.addAttribute("product", productService.findById(1));
-		model.addAttribute("player", playerService.findByBean(1));
-		model.addAttribute("quantity", cartService.fingByCartId(1));
-		model.addAttribute("cart", new CartBean());
-		return "back/Market/addToCart";
-	}
-
 	// 找會員ID
 	@ResponseBody
 	@GetMapping("/Market/Cart/playerId")
@@ -59,11 +50,10 @@ public class CartController {
 
 	// 找全部購物車
 	@GetMapping("/Market/allCart")
-	public ModelAndView getAllCart(ModelAndView mav) {
+	public String getAllCart(Model model) {
 		List<CartBean> list = cartService.findAllCart();
-		mav.setViewName("/front/Market/cart");
-		mav.getModel().put("Cart_List", list);
-		return mav;
+		model.addAttribute("Cart_List", list);
+		return "/front/Market/cart";
 	}
 
 	// 新增至購物車
@@ -115,6 +105,7 @@ public class CartController {
 		model.addAttribute("orderItem", orderItem);
 		return null;
 	}
+
 //	@PostMapping("/Market/Cart/pay")
 //	public String pay(@RequestParam("orderId") String orderId, @RequestParam("totalAmount") String totalAmount, Model model) {
 //	    // 建立綠界的支付表單
@@ -123,4 +114,5 @@ public class CartController {
 //	    // 返回支付頁面
 //	    return "front/Market/payment";
 //	}
+
 }

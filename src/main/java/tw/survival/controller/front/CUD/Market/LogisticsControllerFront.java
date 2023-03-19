@@ -1,4 +1,4 @@
-package tw.survival.controller.Market;
+package tw.survival.controller.front.CUD.Market;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,12 +38,13 @@ public class LogisticsControllerFront {
 		return "/front/Market/order";
 	}
 
+	
 	@ResponseBody
-	@GetMapping("/order/cancelled")
+	@GetMapping("/front/Market/order/dropped3")
 	public Integer updateOrderBtn(@RequestParam("id") Integer orderId) {
 	    try {
 	        OrderItemBean order = oService.findById(orderId);
-	        LogisticsBean logistics =  LogisticsService.findByOrderId(orderId);
+	        LogisticsBean logistics = LogisticsService.findByOrderId(orderId);
 	        logistics.setStatus("已棄單");
 	        LogisticsService.update(logistics);
 	        order.setStatus("已棄單");
@@ -55,6 +55,7 @@ public class LogisticsControllerFront {
 	        return 0;
 	    }
 	}
+
 }
 // 已取消
 //		@GetMapping("/front/Market/cancel")
