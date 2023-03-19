@@ -68,7 +68,6 @@
 	<script>
 			const checkboxes = $("input[name='condition']")
 			const tbody = $("#tbody")
-			
 			$(document).ready(function(){
 				console.log(checkboxes);
 				checkboxes.attr("checked", false);
@@ -86,15 +85,60 @@
 									conditions.attr("checked", false);
 									$.each(conditions, (index, el) =>{
 										el.checked = false;
-									}):
+									});
 								}
 							}
+							let status = checkboxes.not("#all").filter(":checked");
+							let status_str = new Array();
+							$.each(status, (index, el) =>{
+								let id = el.id;
+								let str = $("label[for='" + id + "']").text();
+								status_str.push(str);
+							});
 							
-							}
-							}
-			})
-		
-		
+							$ajax({
+								url: "${contextRoot}/Market/logistics/multi-search",
+								method: "post",
+								data: JSON.stringify(status_str),
+								contentType: "application/Json",
+								success: function(res){
+									console.log(res);
+									htmlMaker(res);
+								},
+								error: function(err){
+									console.log(err);
+								}
+							})
+						}
+					});
+			});
+			function htmlMaker(list){
+				let str = ``;
+				if (list.length != 0){
+					$.each(list,(index, logistics) =>{
+						str += `
+							<tr>
+								<td>` + logistics.id + `</td>
+								<td>` + logistics.player.name + `</td>
+								<td class="date">` + logistics.start_date + `</td>
+								<td class="date">` + logistics.arrive_date + `</td>
+								<td>` + logistics.status + `</td>
+								<td><form action="${contextRoot}/Market/editLogistics"
+										method="get">
+										<input name="id" type="hidden" value="` + logistics.id `" /><input
+											type="submit" class="btn btn-info btn-sm" value="編輯" />
+									</form></td>
+								<td><form action="${contextRoot}/Market/deletelogistics" method="post">
+										<input name="_method" type="hidden" value="delete" /> <input
+											name="id" type="hidden" value="` + logistics.id + `" /> <input
+											type="submit" class="btn btn-danger btn-sm" value="刪除" />
+									</form></td>
+							</tr>`;
+					});
+				}else{
+					str += `<tr><td class="text-center" colspan=6>查無資料</td></tr>`;
+				}
+				tbody.html(str);
 		</script>
 </body>
 </html>

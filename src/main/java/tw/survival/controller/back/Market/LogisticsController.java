@@ -96,7 +96,7 @@ public class LogisticsController {
 			return 0;
 		}
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/Market/sentout")
 	public Integer sentout(@RequestParam("id") Integer logisticsId) {
@@ -113,7 +113,7 @@ public class LogisticsController {
 			return 0;
 		}
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/Market/arrived")
 	public Integer arrived(@RequestParam("id") Integer logisticsId) {
@@ -130,7 +130,7 @@ public class LogisticsController {
 			return 0;
 		}
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/Market/dropped")
 	public Integer dropped(@RequestParam("id") Integer logisticsId) {
@@ -148,4 +148,9 @@ public class LogisticsController {
 		}
 	}
 
+	@ResponseBody
+	@PostMapping("/Market/logistics/multi-search")
+	public List<LogisticsBean> multiSearch(@RequestBody String[] conditions){
+		return LogisticsService.multiSearch(conditions);
+	}
 }
