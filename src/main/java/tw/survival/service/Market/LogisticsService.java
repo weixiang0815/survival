@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.LogisticsBean;
+import tw.survival.model.Market.LogisticsDao;
 import tw.survival.model.Market.LogisticsRepository;
 
 @Service
 @Transactional
 public class LogisticsService {
+	
+	@Autowired
+	private LogisticsDao logisticsDao;
 
 	@Autowired
 	private LogisticsRepository LogisticsDao;
@@ -78,6 +82,10 @@ public class LogisticsService {
 			return LogisticsDao.save(oldLogistics);
 		}
 		return null;
+	}
+
+	public List<LogisticsBean> multiSearch(String[] conditions) {
+		return logisticsDao.multiSearch(conditions);
 	}
 
 }
