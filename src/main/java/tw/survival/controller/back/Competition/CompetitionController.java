@@ -274,7 +274,8 @@ public class CompetitionController {
 	 */
 	@PostMapping("/competition/edit/send")
 	public String editCompetitionById(@ModelAttribute("competition") CompetitionBean comp, Model model) {
-		compService.updateByEntity(comp);
+		comp = compService.updateByEntity(comp);
+		System.out.println(comp);
 		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 

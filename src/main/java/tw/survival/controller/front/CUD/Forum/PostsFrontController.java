@@ -1,5 +1,7 @@
 package tw.survival.controller.front.CUD.Forum;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,7 +43,8 @@ public class PostsFrontController {
 		this.playerService = playerService;
 		this.employeeService = employeeService;
 	}
-
+	
+	
 	/**
 	 * @param model 為了新增postsBean,player兩物件
 	 * @return 將定義的model轉到newOne.jsp
@@ -83,6 +86,36 @@ public class PostsFrontController {
 	@GetMapping("/posts/myPosts")
 	public String toMyPosts(Model model) {
 		return "front/Forum/Posts/myPosts";
+	}
+	
+	/**
+	 * @author 鄭力豪
+	 * @apiNote 傳至更改貼文頁面。
+	 */
+	@GetMapping("/posts/editPage")
+	public String toEditPage(@RequestParam(name="id")Integer postId,Model model) {
+		PostsBean post = postsService.findPostById(postId);
+		model.addAttribute("postEdit", post);
+		return "front/Forum/Posts/editPost";
+	}
+	
+	@PostMapping("/posts/edit")
+	public String editPost(@ModelAttribute(name="postEdit")PostsBean post) {
+		
+//		PostsBean postEdit = postsService.findPostById(post.getId());
+		post.setFinalAdded(new Date());
+//		postEdit.setClassify(post.getClassify());
+//		postEdit.setName(post.getName());
+		post = postsService.updatePost(post);
+		System.out.println(post);
+		return "redirect:/front/posts/myPosts";
+	}
+	
+	
+	@GetMapping("/posts/delete")
+	public String deletePost(@RequestParam(name="id")Integer postId) {
+		postsService.deletePost(postId);
+		return "redirect:/front/posts/myPosts";
 	}
 
 	/**

@@ -135,11 +135,7 @@ public class PostsService {
 		Optional<PostsBean> optional = pRepo.findById(post.getId());
 		if (optional.isPresent()) {
 			PostsBean oldPost = optional.get();
-			oldPost.setFinalAdded(post.getFinalAdded());
-			oldPost.setClassify(post.getClassify());
-			oldPost.setName(post.getName());
-			oldPost.setContent(post.getContent());
-			System.out.println(oldPost.getEssayLocation());
+			post.setAdded(oldPost.getAdded());
 			try (FileOutputStream fos = new FileOutputStream(oldPost.getEssayLocation());
 					OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
 					PrintWriter pw = new PrintWriter(osw);) {
@@ -148,7 +144,7 @@ public class PostsService {
 				e.printStackTrace();
 				return null;
 			}
-			return pRepo.save(oldPost);
+			return pRepo.save(post);
 		}
 		return null;
 	}

@@ -7,8 +7,13 @@ const scriptRegex = /(<script\b[^>]*>)([\s\S]*?)(<\/script>)/gi;
 const sqlRegex = /(select|insert|update|delete|union|into|load_file)/gi;
 const url = "http://localhost:8080/Survival/front/posts/myPosts/getTenPosts"
 $(document).ready(() => {
-    $("#submitBtn").click(function () {
-        let dto = {};
+    doing();
+    $("#submitBtn").click(doing)
+
+});
+
+function doing(){
+    let dto = {};
 
         let classifyArr = new Array();
         let classifyChecked = classify.filter(":checked");
@@ -37,10 +42,37 @@ $(document).ready(() => {
         }).catch(err => {
             console.log(err);
         });
-    })
+}
 
-});
+function htmlMaker(postsData) {
+    let htmlText = ''
 
-function htmlMaker(posts) {
+    htmlText+=''
+    postsData.content.forEach(el => {
+        console.log(`${el}`)
+        //留言
+        
+        htmlText += `<tr>`
+        htmlText += `<td>[${el.classify}] <a href="http://localhost:8080/Survival/front/posts/content?id=${el.id}">${el.name}</a></td>`
+        htmlText += `<td><button  class=" btn btn-primary btn-edit" data-value="${el.id}">編輯</button> `
+        htmlText += `<button  class="btn btn-danger btn-delete " data-value="${el.id}">刪除</button></td>`
+        htmlText += `</tr>`
+       
+      })
+    $('#myTbody').html(htmlText)
+
+    $('.btn-edit').click(function() {
+        var value = $(this).data('value');
+        var intValue = parseInt(value);
+        window.location.href = `http://localhost:8080/Survival/front/posts/editPage?id=${intValue}`;
+        
+    });
+    
+    $('.btn-delete').click(function() {
+        var value = $(this).data('value');
+        var intValue = parseInt(value);
+        window.location.href = `http://localhost:8080/Survival/front/posts/delete?id=${intValue}`;
+        
+    });
 
 }

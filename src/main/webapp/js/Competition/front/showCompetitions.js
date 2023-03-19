@@ -35,7 +35,7 @@ function multiConditionSearch() {
             alert("讀到 SQL Injection 惡意程式");
         }
     }
-    for (let i = 1; i < 5; i++) {
+    for (let i = 1; i < 6; i++) {
         let checked = inputs[i].filter(":checked");
         let arr = new Array();
         let key = inputs[i].attr("name");

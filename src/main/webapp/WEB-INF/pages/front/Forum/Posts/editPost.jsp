@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>新增貼文</title>
+<title>貼文修改</title>
 <jsp:include page="../../../Template/front/includedinhead.jsp"></jsp:include>
 <style>
 ul#comp-link>li {
@@ -46,6 +46,8 @@ div .ct {
 						href="${contextRoot}">首頁</a></li>
 					<li class="breadcrumb-item"><a class="text-white"
 						href="${contextRoot}/front/Forum/index">論壇</a></li>
+					<li class="breadcrumb-item"><a class="text-white"
+						href="${contextRoot}/front/posts/myPosts">我的貼文</a></li>
 					<li class="breadcrumb-item text-primary active" aria-current="page">貼文修改</li>
 				</ol>
 			</nav>
@@ -81,8 +83,10 @@ div .ct {
 						<!-- 表單開始 -->
 						<div class="col-md-9" style="border: #FF0000 2px solid;">
 							<form:form action="${contextRoot}/front/posts/edit"
-								modelAttribute="postsBean" method="post">
-<%-- 								<form:input path="player" type="hidden" value="${player.id}"/> --%>
+								modelAttribute="postEdit" method="post">
+								<form:input type="hidden" path="id" value="${postEdit.id}" />
+								<form:input type="hidden" path="player" value="${player.id}"/>
+								<form:input type="hidden" path="essayLocation" value="${postEdit.essayLocation}" />
 								<!-- 標題 -->
 								<label for="inputName">請輸入標題:</label>
 								<form:input class="form-control" id="inputName" path="name" />
@@ -129,12 +133,14 @@ div .ct {
 	<!-- Service End -->
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
+	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
 // 		jQuery重新導向 取消按鈕
 		$("#toForum").on({
 			click : function(e) {
 				e.preventDefault();
-				window.location.href = '${contextRoot}/front/Forum/index';
+				window.location.href = '${contextRoot}/front/posts/myPosts';
 			}
 		});
 	</script>

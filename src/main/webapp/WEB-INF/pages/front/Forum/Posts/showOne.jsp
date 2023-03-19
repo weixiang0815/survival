@@ -9,10 +9,16 @@
 <meta charset="UTF-8">
 <title>論壇</title>
 <style>
-
+p{
+	color: #AAAAAA;
+}
 .i_item{
 	color: red;
 	font-size: 2em;
+}
+
+img {
+  max-width: 70%;
 }
 
 .divcontainer {
@@ -87,7 +93,7 @@
 		</div>
 	</div>
 	<!-- Page Header End -->
-	<div class="container text-center">
+	<div class="container text-center ">
 	
 		<div class="text-center mx-auto mb-5 wow fadeInUp"
 				data-wow-delay="0.1s" style="max-width: 600px;">
@@ -95,19 +101,30 @@
 				<p class="d-inline-block bg-secondary text-primary py-1 px-4">貼文</p>
 		</div>
 		<div class="wow fadeInUp" data-wow-delay="0.1s">
-			<div class="row" style="border: #FF0000 2px solid;">
+			<div class="row user-select-none" style="border: #FF0000 2px solid;">
 				<div class="col-3" style="border: #FF0000 2px solid;" >
+					<c:choose>
+					<c:when test="${post.player.id == null}">
+					    <img src="${contextRoot}/player/photo/${post.player.id}" />
 	
-					<img src="${contextRoot}/player/photo/${post.player.id}" />
+						<p>作者: ${post.competition.founderEmployee.name}</p>
+						<p>位居縣市: ${post.competition.founderEmployee.county}</p>
+					  </c:when>
+					  <c:otherwise>
+					    <img src="${contextRoot}/player/photo/${post.player.id}" />
 	
-					<p>作者: ${post.player.name}</p>
-					<p>暱稱: ${post.player.nickname}</p>
-					<p>位居縣市: ${post.player.county}</p>
+						<p>作者: ${post.player.name}</p>
+						<p>暱稱: ${post.player.nickname}</p>
+						<p>位居縣市: ${post.player.county}</p>
+					  </c:otherwise>
+					</c:choose>	
+					
 	
 				</div>
-				<div class="col-9" style="border: #FF0000 2px solid;" >
-					<h1>貼文類型：${post.classify}</h1>
+				<div class="col-9 text-start" style="border: #FF0000 2px solid;" >
+					<h1 class="text-center">貼文類型：${post.classify}</h1>
 					<hr />
+					<h1>${post.name}</h1>
 					<!-- 這個內容為HTML可以直接輸入即可 -->
 					${post.content}
 					
@@ -348,16 +365,15 @@
 			</div>
 		</div>
 	</div>
-
-
 	<!-- Service End -->
-<script type="text/javascript">
-	const playerId = ${sessionScope.player != null ? sessionScope.player.id : 1};
-	const postId = ${requestScope.post.id}
-</script>
-
-<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
-<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
-
+	
+	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
+	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/ajax/posts/axios-post-message.js"></script>
+	<script type="text/javascript">
+		const playerId = ${sessionScope.player != null ? sessionScope.player.id : 1};
+		const postId = ${requestScope.post.id}
+	</script>
+	
 </body>
 </html>
