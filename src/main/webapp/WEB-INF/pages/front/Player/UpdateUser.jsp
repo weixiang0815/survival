@@ -24,7 +24,7 @@ img {
 		<h3>使用者修改資料</h3>
 		<form:form action="${contextRoot}/player/update2" method="post"
 			modelAttribute="player" enctype="multipart/form-data">
-			<table class="table table-hover">
+			<table class="table table-hover" style="color:white">
 				<tr>
 					<td colspan="2"><img
 						src="${contextRoot}/player/photo/${player.id}"></td>
@@ -33,11 +33,8 @@ img {
 					<td>大頭貼:</td>
 					<td><form:input class="form-control" type="file"
 							path="playerImage" />
-				</tr>
-				<tr>
-					<td>ID：</td>
-					<td><form:input class="form-control" path="id" /></td>
 				</tr>				
+					<form:input type="hidden" class="form-control" path="id" />							
 				<tr>
 					<td>名稱：</td>
 					<td><form:input class="form-control" path="name" /></td>
@@ -94,7 +91,10 @@ img {
 					<td><form:input class="form-control" path="status" type="hidden" />
 				</tr>
 			</table>
+			<center>
 			<input class="btn btn-outline-primary" type="submit" value="更新" />
+			<input type ="button" class="btn btn-primary" onclick="history.back()" value="回到上一頁"/>
+		   </center>
 		</form:form>
 	</div>
 	<script

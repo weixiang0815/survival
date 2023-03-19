@@ -52,7 +52,6 @@ public class PlayerLoginLogoutController {
 		validator.validate(player1, bindingResult);
 		if (bindingResult.hasErrors()) {
 			List<ObjectError> list = bindingResult.getAllErrors();
-			m.addAttribute("alertMessage", "帳號密碼錯誤");
 			m.addAttribute("errors", list);
 			for (ObjectError error : list) {
 				System.out.println("有錯誤：" + error);
@@ -98,6 +97,7 @@ public class PlayerLoginLogoutController {
 		} else {
 			return player.getStatus() == 0 ? 1 : 2;
 		}
+	
 	}
 
 }
