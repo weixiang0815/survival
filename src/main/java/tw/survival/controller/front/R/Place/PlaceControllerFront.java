@@ -48,7 +48,7 @@ public class PlaceControllerFront {
 	}
 
 	@GetMapping("/front/place/detail")
-	public String goPlaceDetail(@RequestParam("id") Integer id,Model model) {
+	public String goPlaceDetail(@RequestParam("id") Integer id, Model model) {
 		model.addAttribute("placeDetail", placeService.getOnePlaceById(id));
 		return "front/Place/detail";
 	}
@@ -111,7 +111,7 @@ public class PlaceControllerFront {
 			String color = "green";
 			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/" + id);
 			list.add(Sdto);
 		}
 
@@ -124,7 +124,7 @@ public class PlaceControllerFront {
 			String color = "blue";
 			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/" + id);
 			list.add(Sdto);
 		}
 
@@ -137,7 +137,7 @@ public class PlaceControllerFront {
 			String color = "brown";
 			String id = comp.getId().toString();
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/" + id);
 			list.add(Sdto);
 		}
 
@@ -168,7 +168,7 @@ public class PlaceControllerFront {
 				color = "yellow";
 			}
 			ScheduleDTO Sdto = new ScheduleDTO(title, start, end, type, color);
-			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/"+id);
+			Sdto.setUrl("http://localhost:8080/Survival/front/competition/detail/" + id);
 			Sdto.setPlaceId(placeId.toString());
 			list.add(Sdto);
 		}
