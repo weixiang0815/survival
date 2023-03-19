@@ -110,10 +110,10 @@ public class CompetitionControllerFrontR {
 		return "front/Competition/photo";
 	}
 
-	@GetMapping("/competition/history")
-	public String goCompHistory() {
-		return "front/Competition/history";
-	}
+//	@GetMapping("/competition/history")
+//	public String goCompHistory() {
+//		return "front/Competition/history";
+//	}
 
 	@GetMapping("/competition/show")
 	public String goShow(Model model) {
