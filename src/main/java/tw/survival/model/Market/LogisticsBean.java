@@ -50,7 +50,7 @@ public class LogisticsBean {
 	private String status;
 
 //	接收者(player_id)
-	@JsonBackReference
+//	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_receiver_id")
 	private PlayerBean player;

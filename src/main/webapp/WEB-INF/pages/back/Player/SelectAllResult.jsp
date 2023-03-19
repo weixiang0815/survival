@@ -57,15 +57,27 @@ overflow:auto;
 							<input name="id" type="hidden" value="${player.id}" /> <input
 								type="submit" class="btn btn-info" value="編輯">
 						</form>
-						<form action="${contextRoot}/player/delete" method="post">
-							<input name="_method" type="hidden" value="delete" /> <input
-								name="id" type="hidden" value="${player.id}" /> <input
-								type="submit" class="btn btn-danger" value="刪除" />
+						<td>
+						<form action="${contextRoot}/player/delete" method="post" id="delete-form">
+						<input name="_method" type="hidden" value="delete" />
+					    <input name="id" type="hidden" value="${player.id}" />
+						<button type="submit" id="delete" class="btn btn-danger" >刪除</button>								
 						</form>
 				</tr>
 			</c:forEach>
 		</table>
 		<a href="searchmain.controller"><button class="btn btn-primary">回到搜尋頁</button></a>
 	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script>
+		$(document).ready(function() {
+	        $("button[type='submit']").click(function(e) {
+	            if (!confirm("確定要刪除這個玩家嗎？")) {
+	                e.preventDefault();
+	            }
+	        });
+	    });
+		</script>
 </body>
 </html>

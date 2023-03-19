@@ -71,11 +71,11 @@ button:hover {
 				<div class="col text-start">
 					<button id="register-oneclick">一鍵填寫</button>
 				</div>
-				<fb:login-button scope="public_profile,email"
+				<!-- <fb:login-button scope="public_profile,email"
 					onlogin="checkLoginState();">
-				</fb:login-button>
+				*</fb:login-button> -->
 				<!-- facebook 按鈕 -->
-				<div id="status"></div>
+					<!--<div id="status"></div>-->
 			</div>
 		</form>
 		<div class="row mt-2">
@@ -129,7 +129,7 @@ button:hover {
 					console.log("帳號狀態：", res);
 					switch (res) {
 						case 0:
-							alert("此帳號不存在喔！");
+							alert("此帳號或密碼不存在喔！");
 							break;
 						case 1:
 							alert("此帳號未啟動喔！");

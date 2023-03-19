@@ -17,7 +17,7 @@
 		<h1>修改物流訊息</h1>
 		<div class="card">
 			<div class="card-header">
-				修改物流訊息</span>
+				<span>修改物流訊息</span>
 			</div>
 			<div class="card-body">
 				<form:form action="${contextRoot}/Market/editLogistics" method="put"

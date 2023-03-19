@@ -24,6 +24,16 @@
 	background-color: red;
 	transition: 0.2s ease-in-out;
 }
+
+a#placeDetail {
+	font-weight: bolder;
+}
+
+a#placeDetail:hover {
+	background-color: red;
+	color: white;
+	transition: .2s ease-in-out;
+}
 </style>
 </head>
 <body>
@@ -53,14 +63,14 @@
 				<div class="col-lg-12 wow fadeIn text-center" data-wow-delay="0.1s">
 					<p class="d-inline-block bg-secondary text-primary py-1 px-4">
 						<c:choose>
-							<c:when test="${comp.singleOrCrew == \" C\"}">
-								團體戰
+							<c:when test="${comp.singleOrCrew.equals(\"S\")}">
+								<td>單人戰</td>
 							</c:when>
-							<c:when test="${comp.singleOrCrew.equals(\" S\")}">
-								單人戰
+							<c:when test="${comp.singleOrCrew.equals(\"C\")}">
+								<td>團體戰</td>
 							</c:when>
 							<c:otherwise>
-								未定
+								<td>未定</td>
 							</c:otherwise>
 						</c:choose>
 					</p>
@@ -123,7 +133,8 @@
 					</tr>
 					<tr>
 						<th>活動場地</th>
-						<td>${place.place_name}</td>
+						<td><a id="placeDetail"
+							href="${contextRoot}/front/place/detail?id=${place.id}">${place.place_name}</a></td>
 					</tr>
 					<tr>
 						<th>預計人數</th>

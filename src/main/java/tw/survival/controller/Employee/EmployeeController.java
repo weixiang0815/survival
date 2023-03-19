@@ -25,12 +25,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import tw.survival.model.Employee.EmployeeBean;
 import tw.survival.service.Employee.EmployeeService;
 
 @Controller
+@SessionAttributes({ "employee" })
 public class EmployeeController {
 
 	@Autowired

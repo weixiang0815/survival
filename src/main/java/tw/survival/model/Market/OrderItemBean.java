@@ -46,7 +46,7 @@ public class OrderItemBean {
 	@Column(name = "status")
 	private String status;
 
-	@JsonBackReference
+//	@JsonBackReference
 	@JoinColumn(name = "fk_player_id")
 	@ManyToOne(fetch = FetchType.EAGER)
 	private PlayerBean player;

@@ -138,7 +138,7 @@ td>a:hover {
 									href="${contextRoot}/front/competition/detail/${comp.id}">${comp.mandarinName}</a></td>
 								<td><a
 									href="${contextRoot}/front/competition/detail/${comp.id}">${comp.englishName}</a></td>
-								<td>${comp.place.place_name}</td>
+								<td><a href="${contextRoot}/front/place/detail?id=${comp.place.id}">${comp.place.place_name}</a></td>
 								<td class="compDate">${comp.startDate}</td>
 								<td class="compDate">${comp.endDate}</td>
 								<c:choose>
