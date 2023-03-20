@@ -63,6 +63,29 @@ public class PlaceController {
 			return "失敗";
 		}
 	}
+	
+	@ResponseBody
+	@PostMapping("/place/post/auto")
+	public String autoPost(@RequestParam(name="place_name", defaultValue = "歡樂場" ) String placeName,
+			@RequestParam(name="place_address",defaultValue = "芝麻街77號") String placeAdress, @RequestParam(name="place_capacity",defaultValue = "666") Integer placeCapacity,
+			@RequestParam(name="place_fee",defaultValue = "7777") Integer placeFee, @RequestParam(name="place_photo") MultipartFile file) {
+
+		try {
+			PlaceBean pb = new PlaceBean();
+			pb.setPlace_name(placeName);
+			pb.setPlace_address(placeAdress);
+			pb.setPlace_capacity(placeCapacity);
+			pb.setPlace_fee(placeFee);
+			pb.setPlace_photo(file.getBytes());
+
+			placeService.insertPlace(pb);
+			return "上傳成功";
+		} catch (IOException e) {
+			e.printStackTrace();
+
+			return "失敗";
+		}
+	}
 
 	@GetMapping("/place/all")
 	public ModelAndView getAllPlace(ModelAndView mav) {
