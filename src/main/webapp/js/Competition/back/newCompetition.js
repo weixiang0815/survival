@@ -18,6 +18,7 @@ const formInputs = [
     $("#fee"),
 ]
 const resetBtn = $("button[type='reset']");
+const oneclickBtn = $("button.oneclick");
 const singleCheck = document.getElementById("single");
 const crewCheck = document.getElementById("crew");
 const publishCheck = document.getElementById("publish");
@@ -28,26 +29,27 @@ let newFormId;
 let firstPartId;
 let secondPartId;
 let thirdPartId;
-$(document).ready(function() {
+
+$(document).ready(function () {
     $("#startDate").datepicker({
-        dateFormat : "yy-mm-dd",
-        onSelect : function(date) {
+        dateFormat: "yy-mm-dd",
+        onSelect: function (date) {
             $("#endDate").datepicker("option", "minDate", date);
             updateFormData();
         }
     });
     $("#endDate").datepicker({
-        dateFormat : "yy-mm-dd",
-        onSelect : function(date) {
+        dateFormat: "yy-mm-dd",
+        onSelect: function (date) {
             $("#startDate").datepicker("option", "maxDate", date);
             updateFormData();
         }
     });
     console.log(formInputs);
-    let obj = {"creatorId": creatorId.text(), "creatorType": creatorType.text()};
+    let obj = { "creatorId": creatorId.text(), "creatorType": creatorType.text() };
     let objString = JSON.stringify(obj);
     axios.post(retrieveFromURL, objString, {
-        headers: {'Content-Type': 'application/json'}
+        headers: { 'Content-Type': 'application/json' }
     }).then(res => {
         console.log(res.data);
         insertValues(res.data);
@@ -63,6 +65,36 @@ $(document).ready(function() {
         });
     });
     content.model.document.on('change', function () {
+        updateFormData();
+    });
+    oneclickBtn.on('click', function (e) {
+        e.preventDefault();
+        $("#mandarinName").val('奪寶冒險：尋找失落的寶藏');
+        $("#englishName").val('Hunt Adventure: Lost Treasure');
+        $("#startDate").val('2023-03-22');
+        $("#startTimespan").val(1);
+        $("#endDate").val('2023-03-31');
+        $("#endTimespan").val(1);
+        publishCheck.checked = true;
+        notPublishCheck.checked = false;
+        singleCheck.checked = true;
+        crewCheck.checked = false;
+        $("#placeId").val(6);
+        $("#capacity").val(100)
+        $("#budget").val(50000);
+        $("#fee").val(6000);
+
+        let str = `<h1>你是否曾經夢想過成為一名尋寶者，踏上冒險之旅，尋找傳說中失落已久的寶藏呢？</h1>
+        
+        <p>現在，這個夢想可以實現了！我們公司即將舉辦一場「奪寶冒險：尋找失落的寶藏」活動，帶您穿越叢林、荒漠、山洞等各種挑戰，展開一場驚險刺激的尋寶之旅！</p>
+
+        <p>這次的尋寶活動不僅考驗您的勇氣、智慧與反應能力，同時也讓您體驗到探險家的冒險精神。在活動中，您需要使用探測器、地圖、指南針等工具，找尋尋寶的線索和寶藏所在地。在尋寶的過程中，您將克服各種障礙，如沼澤、陡峭的山嶺、岩洞和神秘的密室等等。當您終於找到寶藏所在地時，還需要解開陷阱和謎題，才能成功奪取寶藏！</p>
+        
+        <p>不僅如此，我們還特別設計了多個關卡，如射箭、攀岩、水上競技等，讓您在尋寶的過程中挑戰自我，激發潛力。此外，我們還為所有參加者準備了豐富的獎勵，包括寶藏、金幣、寶石等，讓您感受到探險家的成就感和豐厚的報酬。</p>
+        
+        <p>「奪寶冒險：尋找失落的寶藏」活動，是您展現勇氣、智慧和探險精神的絕佳機會。快來報名參加吧，開啟一場刺激的尋寶之旅！</p>`;
+
+        content.setData(str);
         updateFormData();
     });
     resetBtn.on('click', function () {
@@ -93,7 +125,7 @@ $(document).ready(function() {
 });
 
 // 一進畫面就填入上次的紀錄
-function insertValues(values){
+function insertValues(values) {
     newFormId = values["id"];
     let firstPart = values.firstPart;
     firstPartId = firstPart.id;
@@ -164,7 +196,7 @@ function updateFormData() {
     console.log(formData);
     let jsonObj = JSON.stringify(formData);
     axios.put(updateFormURL, jsonObj, {
-        headers: {"Content-Type": "application/json"}
+        headers: { "Content-Type": "application/json" }
     }).then(res => {
         let lastEditedTime = "上次儲存：" + res.data;
         lastEdited.text(lastEditedTime);

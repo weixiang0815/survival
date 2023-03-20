@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.OrderItemBean;
 import tw.survival.model.Market.ProductBean;
@@ -103,7 +101,7 @@ public class CartController {
 			cartService.deleteCartById(cartId);
 		}
 		model.addAttribute("orderItem", orderItem);
-		return null;
+		return "front/Market/checkout";
 	}
 
 //	@PostMapping("/Market/Cart/pay")

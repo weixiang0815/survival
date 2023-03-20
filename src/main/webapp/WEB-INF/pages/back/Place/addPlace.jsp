@@ -40,6 +40,7 @@
 			
 			<tr>
 				<td><input type="submit" value="新增" id="uploadBtn"/></td>
+				<td><input type="submit" value="一鍵新增" id="autoBtn"/></td>
 			</tr>
 		</table>
 	</form>
@@ -81,6 +82,39 @@
 
 				}
 
+
+				const autoBtn = document.getElementById('autoBtn')
+
+				autoBtn.addEventListener('click', e => {
+					e.preventDefault(); // 取消原本 form 表單 submit 送出的功能 , 因為要用 js 送
+
+					let ajaxForm = document.getElementById('ajaxForm');
+
+					let formData = new FormData(ajaxForm);
+
+					sendPostRequestAuto(formData)
+				})
+
+
+				function sendPostRequestAuto(formData) {
+					axios({
+						url: 'http://localhost:8080/Survival/place/post/auto',
+						method: 'post',
+						data: formData,
+						headers: { 'Content-Type': 'multipart/form-data' }
+					})
+					.then(res => {
+							console.log(res)
+							let resultDiv = document.getElementById('upload_result');
+							resultDiv.innerHTML = res.data
+
+					})
+					.catch(err => {
+							console.log(err)
+
+					})
+
+				}
 
 
 			</script>	

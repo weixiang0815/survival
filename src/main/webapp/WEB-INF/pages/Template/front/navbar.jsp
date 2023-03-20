@@ -38,7 +38,18 @@
 				</div>
 			</div>
 			<c:choose>
-				<c:when test="${empty sessionScope.player}">
+				<c:when test="${not empty sessionScope.player && sessionScope.player != null}">
+					<div class="nav-item dropdown">
+						<a href="#" class="nav-link dropdown-toggle"
+							data-bs-toggle="dropdown">個人資料</a>
+						<div class="dropdown-menu m-0">
+							<a href="${contextRoot}/player/${sessionScope.player.id}"
+								class="dropdown-item">玩家資料</a> <a
+								href="${contextRoot}/front/Market/order" class="dropdown-item">玩家訂單</a>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
 					<div class="nav-item dropdown">
 						<a href="#" class="nav-link dropdown-toggle"
 							data-bs-toggle="dropdown">加入我們</a>
@@ -46,17 +57,7 @@
 							<a href="${contextRoot}/Player/login" class="dropdown-item">使用者登入</a>
 						</div>
 					</div>
-					</c:when>
-					<c:otherwise>
-					<div class="nav-item dropdown">
-					<a href="#" class="nav-link dropdown-toggle"
-							data-bs-toggle="dropdown">個人資料</a>
-						<div class="dropdown-menu m-0">						
-						<a href="${contextRoot}/player/${player.id}"class="dropdown-item">玩家資料</a>
-						<a href="${contextRoot}/front/Market/order" class="dropdown-item">玩家訂單</a>					
-						</div>
-						</div>
-					</c:otherwise>				
+				</c:otherwise>
 			</c:choose>
 			<a href="${contextRoot}/contact" class="nav-item nav-link">聯絡我們</a>
 		</div>
