@@ -15,7 +15,7 @@
 	<div class="container">
 		<h1>所有場地</h1>
 
-		<table class="table table-hover table-bordered">
+		<table class="table table-hover table-bordered text-center">
 			<tr>
 				<th>照片</th>
 				<th>名稱</th>
