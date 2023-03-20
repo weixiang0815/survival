@@ -12,7 +12,7 @@ import tw.survival.model.Player.PlayerBean;
 @Component
 public class AddPlayerValidator implements Validator {
 
-	private static final Pattern PHONE_REGEX = Pattern.compile("^[1][3,4,5,7,8][0-9]{9}$");
+	private static final Pattern PHONE_REGEX = Pattern.compile("/^(\\+?886\\-?|0)?9\\d{8}$/");
 	private static final Pattern EMAIL_REGEX = Pattern.compile("^[\\w\\d._-]+@[\\w\\d.-]+\\.[\\w\\d]{2,6}$");
 
 	@Override
@@ -47,6 +47,10 @@ public class AddPlayerValidator implements Validator {
 		if (player.getPassword() != null && player.getPassword().length() > 0
 				&& (player.getPassword().length() < 5 || player.getPassword().length() > 30)) {
 			errors.rejectValue("password", "player.password.size", "密碼欄至少要有五個字元，最多不得超過30個字元");
+		}
+		if (player.getIdentity_number() != null && player.getIdentity_number().length() > 10
+				&& (player.getIdentity_number().length() < 10 || player.getIdentity_number().length() > 10)) {
+			errors.rejectValue("identity_number", "player.identity_number.size", "身分證格式不對");
 		}
 		if (player.getEmail() != null && player.getEmail().length() > 0
 				&& !EMAIL_REGEX.matcher(player.getEmail()).matches()) {

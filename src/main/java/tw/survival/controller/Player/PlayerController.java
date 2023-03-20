@@ -40,7 +40,6 @@ import tw.survival.service.email.EmailService;
 import tw.survival.validators.AddPlayerValidator;
 
 @Controller
-@SessionAttributes({ "player" })
 public class PlayerController {
 	@Autowired
 	public AddPlayerValidator validator;
