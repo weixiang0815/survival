@@ -84,11 +84,11 @@
 				<td><form:input type="date" path="hired_date" /></td>
 			</tr>
 			<tr>
-				<td>個人狀況：</td>
-				<td><form:input type="text" path="status" /></td>
+				<td><form:input  type="hidden" path="status" /></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="註冊" /></td>
+				<td><button id="register-oneclick">一鍵註冊</button></td>
 			</tr>
 		</table>
 
@@ -101,8 +101,42 @@
 		const twzipcode = new TWzipcode();
 		const county = $("select[data-role='county']");
 		const district = $("select[data-role='district']");
-		const zipcode = $("input[data-role='zipcode']");
-		county.val();
+		const zipcode = $("input[data-role='zipcode']");				
+		const name = $("input[name='name']");
+		const account = $("input[name='account']");
+		const password = $("input[name='password']");
+		const male = document.querySelector("#sex1");
+		const address = $("input[name='address']");
+		const email = $("input[name='email']");
+		const age = $("input[name='age']");
+		const identity_number = $("input[name='identity_number']");
+		const phone = $("input[name='phone']");
+		const birthday = $("input[name='birthday']");
+		const salary=$("input[name='salary']");
+		const title=$("input[name='title']");
+		const hired_date=$("input[name='hired_date']");
+		const register_oneclick = document.querySelector("#register-oneclick");
+		register_oneclick.addEventListener("click", function(e) {
+			e.preventDefault();
+			fillForm();
+		});
+		function fillForm() {
+			name.val("夏天雷");
+			account.val("123456789");
+			password.val("123456");
+			salary.val("150000");
+			title.val("老闆")
+			male.checked = true;
+			twzipcode.set("110");
+			address.val("復興南路二段171巷");
+			email.val("zzz963852789@gmail.com");
+			age.val("30");
+			identity_number.val("A168544839");
+			phone.val("0228519348");
+			birthday.val("1993-01-01");
+			hired_date.val("2023-03-20");
+		}
+		
 	</script>
 
 </body>
