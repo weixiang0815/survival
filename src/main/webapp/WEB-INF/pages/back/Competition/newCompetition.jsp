@@ -164,6 +164,7 @@
 					</div>
 					<button class="col auto m-3 btn btn-primary" type="submit">送出</button>
 					<button class="col auto m-3 btn btn-danger" type="reset">清除</button>
+					<button class="col auto m-3 btn btn-info oneclick">一鍵新增</button>
 				</form:form>
 			</div>
 		</div>
