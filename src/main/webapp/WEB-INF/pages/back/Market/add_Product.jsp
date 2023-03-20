@@ -46,7 +46,7 @@
 				<div class="text-center">
 					<h1>新增商品</h1>
 				</div>
-				<form action="${contextRoot}/Market/add_Product" method="post"
+				<form action="${contextRoot}/Market/addproduct" method="post"
 					enctype="multipart/form-data">
 
 					<div class="st1">
