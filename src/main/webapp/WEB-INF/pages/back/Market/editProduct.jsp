@@ -39,7 +39,7 @@
 						<tr>
 							<td>商品分類：</td>
 							<td><select type="text" name="Product_class">
-									<option>請選擇商品種類</option>
+									<option>${product.product_class}</option>
 									<option>手槍</option>
 									<option>步槍</option>
 									<option>衝鋒槍</option>

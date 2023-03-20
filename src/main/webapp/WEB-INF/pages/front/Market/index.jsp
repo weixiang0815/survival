@@ -34,7 +34,7 @@
                             <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
                                 <div class="mx-sm-5 px-5" style="max-width: 900px;">
                                     <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">
-                                        改個動圖加標語</h1>
+                                       生存最重要，裝備最關鍵</h1>
                                     <h4 class="text-white text-uppercase mb-4 animated slideInDown">
                                         <i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
                                     </h4>
@@ -51,7 +51,7 @@
                             <div class="carousel-caption d-flex align-items-center justify-content-center text-start">
                                 <div class="mx-sm-5 px-5" style="max-width: 900px;">
                                     <h1 class="display-2 text-white text-uppercase mb-4 animated slideInDown">
-                                        改個動圖加標語</h1>
+                                       只有最強者才能生存下去</h1>
                                     <h4 class="text-white text-uppercase mb-4 animated slideInDown">
                                         <i class="fa fa-map-marker-alt text-primary me-3"></i>台北市復興南路一段390號2樓
                                     </h4>
@@ -79,7 +79,7 @@
             <!-- Page Header Start -->
             <div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
                 <div class="container text-center py-5">
-                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">戰略商城</h1>
+                    <h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">商城</h1>
                     <nav aria-label="breadcrumb animated slideInDown">
                         <ol class="breadcrumb justify-content-center text-uppercase mb-0">
                             <li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>

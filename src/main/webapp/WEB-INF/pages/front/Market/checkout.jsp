@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ page import="tw.survival.model.Market.*"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
@@ -31,7 +32,7 @@
 	<!-- Page Header End -->
 	<div class="container">
 		<div class="container text-center">
-			<h1>確認您想購買的商品</h1>
+			<h1>確認您購買的商品</h1>
 		</div>
 		<table class="table">
 			<thead>
@@ -46,31 +47,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${Cart_List}" var="Cart_List" varStatus="Status">
+				<c:forEach items="${orderItem.products}" var="product"
+					varStatus="Status">
 					<tr>
 						<th scope="row">${Status.index+1}</th>
-						<td>${Cart_List.product.name}</td>
+						<td>${product.name}</td>
 						<td><img alt="" height="100" width="160"
-							src="${contextRoot}/Market/id?id=${Cart_List.product.id}"></td>
-						<td>${Cart_List.product.product_class}</td>
-						<td>${Cart_List.product.context}</td>
-						<td>${Cart_List.product.rent_fee}</td>
-						<td>${Cart_List.product.price}</td>
+							src="${contextRoot}/Market/id?id=${product.id}"></td>
+						<td>${product.product_class}</td>
+						<td>${product.context}</td>
+						<td>${product.rent_fee}</td>
+						<td>${product.price}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
-		<div style="text-align: center;">
-			<form id="checkout" action="${contextRoot}/front/Market/getAllProductFront" method="get">
-				<input type="text" name="playerId" id="playerId" value="1" hidden>
-				<input type="submit" class="btn btn-primary btn-sm" value="確認" />
-			</form>
+		<div class="container text-center">
+			<a href="${contextRoot}/front/Market/getAllProductFront"
+				class="nav-item nav-link active">返回商品頁</a>
 		</div>
-		<c:if test="${Cart_List.isEmpty()}">
-			<div>
-				<h3>您尚未選擇任何商品</h3>
-			</div>
-		</c:if>
 	</div>
 	<jsp:include page="../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../Template/front/includedinbody.jsp"></jsp:include>

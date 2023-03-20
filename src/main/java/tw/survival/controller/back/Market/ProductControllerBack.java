@@ -41,7 +41,7 @@ public class ProductControllerBack {
 	}
 
 	@GetMapping("/Market/show_AllProduct")
-	private String showAllProfuct() {
+	private String showAllProduct() {
 		return "/back/Market/show_AllProduct";
 	}
 
