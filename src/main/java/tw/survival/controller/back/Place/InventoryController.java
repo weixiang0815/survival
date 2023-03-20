@@ -3,6 +3,10 @@ package tw.survival.controller.back.Place;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,6 +66,16 @@ public class InventoryController {
 		mav.setViewName("back/Place/showAllInventory");
 		mav.getModel().put("list", list);
 		return mav;
+	}
+	
+	@GetMapping("/inventory/id")
+	public ResponseEntity<byte[]> getPhotoById(@RequestParam Integer id) {
+		ProductBean product1 = productService.findById(id);
+		byte[] productFile = product1.getImg();
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(MediaType.IMAGE_JPEG);
+
+		return new ResponseEntity<byte[]>(productFile, headers, HttpStatus.OK);
 	}
 
 	@GetMapping("/inventory/edit")

@@ -69,14 +69,14 @@ public class OrderItemController {
 	@PutMapping("/Market/editOrder")
 	public String updateOrder(@ModelAttribute("order") OrderItemBean order) {
 		oService.update(order);
-		return "redirect:/Market/all_Logistics";
+		return "redirect:/Market/all_OrderItem";
 	}
 
 //d
 	@DeleteMapping("/Market/deleteOrder")
 	public String deleteOrderItem(@RequestParam("id") Integer id) {
 		oService.deleteById(id);
-		return "redirect:/Market/all_Logistics";
+		return "redirect:/Market/all_OrderItem";
 	}
 
 	// 搜尋

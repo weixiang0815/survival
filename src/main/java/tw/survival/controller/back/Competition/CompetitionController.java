@@ -274,8 +274,21 @@ public class CompetitionController {
 	 */
 	@PostMapping("/competition/edit/send")
 	public String editCompetitionById(@ModelAttribute("competition") CompetitionBean comp, Model model) {
+		CompetitionBean oldComp = compService.findById(comp.getId());
+		comp.setAnnouncedDatetime(oldComp.getAnnouncedDatetime());
+		String oldStatus = oldComp.getStatus();
+		String newStatus = comp.getStatus();
+		boolean flag = oldStatus.contentEquals(newStatus);
 		comp = compService.updateByEntity(comp);
-		System.out.println(comp);
+		if (!flag) {
+			switch (newStatus) {
+			case "已發布":
+				compService.publishById(comp.getId());
+				break;
+			case "未發布":
+				compService.takedownById(comp.getId());
+			}
+		}
 		return "redirect:/competition/detail?id=" + comp.getId();
 	}
 

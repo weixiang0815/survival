@@ -72,7 +72,7 @@ function htmlMaker(comps) {
             str += `<tr>`;
             str += `<td><a href="http://localhost:8080/Survival/front/competition/detail/${comp.id}">${comp.mandarinName}</a></td>`;
             str += `<td><a href="http://localhost:8080/Survival/front/competition/detail/${comp.id}">${comp.englishName}</a></td>`;
-            str += `<td>${comp.place.place_name}</td>`;
+            str += `<td><a href="http://localhost:8080/Survival/front/place/detail?id=${comp.place.id}">${comp.place.place_name}</a></td>`;
             str += `<td class="compDate">${comp.startDate}</td>`;
             str += `<td class="compDate">${comp.endDate}</td>`;
             if (comp.singleOrCrew == "S") {

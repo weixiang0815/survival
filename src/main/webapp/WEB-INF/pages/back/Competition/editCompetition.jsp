@@ -31,6 +31,7 @@
 					<form:input type="hidden" path="contentFileLocation" value="${competition.contentFileLocation}" />
 					<div class="input-group">
 						<form:input hidden="true" path="id" value="${competition.id}" />
+						<form:input hidden="true" path="founderEmployee" value="${competition.founderEmployee.id}" />
 						<fieldset class="row mt-3 mb-3 p-3">
 							<legend>基本資料</legend>
 							<div class="col-6">
