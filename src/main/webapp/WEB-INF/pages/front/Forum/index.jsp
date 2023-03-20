@@ -42,28 +42,28 @@
 				<p class="d-inline-block bg-secondary text-primary py-1 px-4">服務</p>
 			</div>
 			<div class="row g-4">
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<div class="i_item">
-								<i class="fa-solid fa-trophy"></i>
-							</div>
-						</div>
-						<div class="ps-4 ">
-							<h3 class="text-uppercase mb-3">精選好評</h3>
-							<p>這裡有各種好評如潮的專業生存玩家相關知識，會員用戶人人推薦，趕快點進來看看吧。</p>
-							<span class="text-uppercase text-primary">點右下按鈕↘</span>
-						</div>
-						<a class="btn btn-square " href="">
-							<div class="i_item">
-								<i class="fa fa-plus text-primary"></i>
-							</div>
-						</a>
-					</div>
-				</div>
+<!-- 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s"> -->
+<!-- 					<div -->
+<!-- 						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0"> -->
+<!-- 						<div -->
+<!-- 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center" -->
+<!-- 							style="width: 60px; height: 60px;"> -->
+<!-- 							<div class="i_item"> -->
+<!-- 								<i class="fa-solid fa-trophy"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="ps-4 "> -->
+<!-- 							<h3 class="text-uppercase mb-3">精選好評</h3> -->
+<!-- 							<p>這裡有各種好評如潮的專業生存玩家相關知識，會員用戶人人推薦，趕快點進來看看吧。</p> -->
+<!-- 							<span class="text-uppercase text-primary">點右下按鈕↘</span> -->
+<!-- 						</div> -->
+<!-- 						<a class="btn btn-square " href=""> -->
+<!-- 							<div class="i_item"> -->
+<!-- 								<i class="fa fa-plus text-primary"></i> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
 					<div
 						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
@@ -119,7 +119,7 @@
 							</div>
 						</div>
 						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">我的貼文</h3>
+							<h3 class="text-uppercase mb-3">個人貼文管理</h3>
 							<p>這裡可編輯你的貼文，方便使用者控管自己的文章。</p>
 							<span class="text-uppercase text-primary">點右下按鈕↘</span>
 						</div>
@@ -130,50 +130,50 @@
 						</a>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<div class="i_item">
-								<i class="fa-solid fa-heart"></i>
-							</div>
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">我的關注</h3>
-							<p>可以把你喜歡的貼文留下來，以防下次找不到。</p>
-							<span class="text-uppercase text-primary">點右下按鈕↘</span>
-						</div>
-						<a class="btn btn-square" href="">
-							<div class="i_item">
-								<i class="fa fa-plus text-primary"></i>
-							</div>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-					<div
-						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0">
-						<div
-							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center"
-							style="width: 60px; height: 60px;">
-							<div class="i_item">
-							<i class="fa-solid fa-star"></i>
-							</div>
-						</div>
-						<div class="ps-4">
-							<h3 class="text-uppercase mb-3">評價紀錄</h3>
-							<p>這裡可以看到妳曾經評價過的貼文，也可以修改貼文評價?我怎麼感覺有點多餘??</p>
-							<span class="text-uppercase text-primary">點右下按鈕↘</span>
-						</div>
-						<a class="btn btn-square" href="">
-							<div class="i_item">
-								<i class="fa fa-plus text-primary"></i>
-							</div>
-						</a>
-					</div>
-				</div>
+<!-- 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s"> -->
+<!-- 					<div -->
+<!-- 						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0"> -->
+<!-- 						<div -->
+<!-- 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center" -->
+<!-- 							style="width: 60px; height: 60px;"> -->
+<!-- 							<div class="i_item"> -->
+<!-- 								<i class="fa-solid fa-heart"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="ps-4"> -->
+<!-- 							<h3 class="text-uppercase mb-3">我的關注</h3> -->
+<!-- 							<p>可以把你喜歡的貼文留下來，以防下次找不到。</p> -->
+<!-- 							<span class="text-uppercase text-primary">點右下按鈕↘</span> -->
+<!-- 						</div> -->
+<!-- 						<a class="btn btn-square" href=""> -->
+<!-- 							<div class="i_item"> -->
+<!-- 								<i class="fa fa-plus text-primary"></i> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s"> -->
+<!-- 					<div -->
+<!-- 						class="service-item position-relative overflow-hidden bg-secondary d-flex h-100 p-5 ps-0"> -->
+<!-- 						<div -->
+<!-- 							class="bg-dark d-flex flex-shrink-0 align-items-center justify-content-center" -->
+<!-- 							style="width: 60px; height: 60px;"> -->
+<!-- 							<div class="i_item"> -->
+<!-- 							<i class="fa-solid fa-star"></i> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 						<div class="ps-4"> -->
+<!-- 							<h3 class="text-uppercase mb-3">評價紀錄</h3> -->
+<!-- 							<p>這裡可以看到妳曾經評價過的貼文，也可以修改貼文評價?我怎麼感覺有點多餘??</p> -->
+<!-- 							<span class="text-uppercase text-primary">點右下按鈕↘</span> -->
+<!-- 						</div> -->
+<!-- 						<a class="btn btn-square" href=""> -->
+<!-- 							<div class="i_item"> -->
+<!-- 								<i class="fa fa-plus text-primary"></i> -->
+<!-- 							</div> -->
+<!-- 						</a> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 	</div>

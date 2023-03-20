@@ -198,7 +198,6 @@ function editMessage(text, mId, pId) {
 
 ///////////////////刪除紐 按下後送出/////////////////////
 function deleteMessage(mId, pId) {
-
   console.log(mId)
   console.log(pId)
   axios({

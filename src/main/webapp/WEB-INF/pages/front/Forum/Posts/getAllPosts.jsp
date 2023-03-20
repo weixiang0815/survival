@@ -67,7 +67,8 @@ a:hover {
 						</div>
 						<br/>
 						<div class="row">
-							<div  class="a1">
+							<div  class="col-3"></div>
+							<div  class="col-6 a1">
 								<table id="list_table_json" class="table table-hover table-bordered">
 									<thead>
 										<tr>
@@ -85,6 +86,7 @@ a:hover {
 									</tbody>
 								</table>
 							</div>
+							<div  class="col-3"></div>
 						</div>
 					</div>
 				</div>
@@ -98,6 +100,6 @@ a:hover {
 	
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
-	
+	<script src="${contextRoot}/js/ajax/posts/axios-search-posts.js"></script>
 </body>
 </html>
