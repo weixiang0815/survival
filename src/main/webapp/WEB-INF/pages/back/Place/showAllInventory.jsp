@@ -17,26 +17,29 @@
 
 		<table class="table table-hover table-bordered">
 			<tr>
-				<th>倉庫</th>
-				<th>商品</th>
-				<th>販賣數量</th>
-				<th>租借數量</th>
+				<th class="text-center">倉庫</th>
+				<th class="text-center">商品</th>
+				<th class="text-center">販賣數量</th>
+				<th class="text-center">租借數量</th>
+				<th class="text-center">商品圖片</th>
 				<th colspan="2"></th>
 			</tr>
 			<jstl:forEach items="${list}" var="inventory">
 				<tr>
-					<td>${inventory.warehouse.warehouseName}</td>
-					<td>${inventory.product.name}</td>
-					<td>${inventory.inventorySellamount}</td>
-					<td>${inventory.inventoryRentamount}</td>
+					<td class="text-center col-1">${inventory.warehouse.warehouseName}</td>
+					<td class="text-center col-2">${inventory.product.name}</td>
+					<td class="text-center col-1">${inventory.inventorySellamount}</td>
+					<td class="text-center col-1">${inventory.inventoryRentamount}</td>
+					<td class="col-4"><img alt="" src="${contextRoot}/inventory/id?id=${inventory.product.id}"
+								width="100%"></td>
 					
-					<td>
+					<td class="text-center col-1">
 						<form action="${contextRoot}/inventory/edit" method="get">
 							<input name="id" type="hidden" value="${inventory.id}" /> 
 							<input type="submit" class="btn btn-info btn-sm" value="修改" />
 						</form>
 					</td>
-					<td>
+					<td class="text-center col-1">
 						<form action="${contextRoot}/inventory/delete" method="post"> <input
 								name="id" type="hidden" value="${inventory.id}" /> <input
 								type="submit" class="btn btn-danger btn-sm" value="刪除" />
