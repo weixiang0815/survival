@@ -46,7 +46,7 @@
 				<div class="text-center">
 					<h1>新增商品</h1>
 				</div>
-				<form action="${contextRoot}/Market/addproduct" method="post"
+				<form action="${contextRoot}/Market/add_Product" method="post"
 					enctype="multipart/form-data">
 
 					<div class="st1">
@@ -95,22 +95,27 @@
 						<input id="uploadBtn" type="submit" value="新增商品">
 						<button id="register-oneclick">一鍵註冊</button>
 					</div>
-
 				</form>
 			</div>
 		</div>
 
 		<script>
-              ProductFileInput.onchange = evt => {
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<script src="${contextRoot}/js/twzipcode.js"></script>
+		<script> ProductFileInput.onchange = evt => {
                   const [file] = ProductFileInput.files
                   if (file) {
                     blah.src = URL.createObjectURL(file)
                   }
-                }
-		const ProductName = $("select[data-role='ProductName']");
-		const ProductContext = $("select[data-role='ProductContext']");
-		const Price = $("input[data-role='Price']");
+                }</script>
+		<script>
+		const ProductName = $("input[name='ProductName']");
+		const ProductContext = $("textarea[name='ProductContext']");
+		const Product_class = $("option[name='Product_class']");
+		const Price = $("input[name='Price']");
 		const setRent_fee = $("input[name='setRent_fee']");
+		const ProductFile = $("input[name='ProductFile']");
+		const register_oneclick = document.querySelector("#register-oneclick");
 		register_oneclick.addEventListener("click", function(e) {
 			e.preventDefault();
 			fillForm();
@@ -121,7 +126,7 @@
 			Price.val("58000");
 			setRent_fee.val("28000");
 		}
-              </script>
+    </script>
 	</div>
 </body>
 
