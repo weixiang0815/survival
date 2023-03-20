@@ -33,7 +33,7 @@
 					data-bs-toggle="dropdown">服務</a>
 				<div class="dropdown-menu m-0">
 					<a href="${contextRoot}/front/competition" class="dropdown-item">活動</a>
-					<a href="${contextRoot}/front/Market/index" class="dropdown-item">戰略商城</a>
+					<a href="${contextRoot}/front/Market/index" class="dropdown-item">商城</a>
 					<a href="${contextRoot}/front/Forum/index" class="dropdown-item">論壇</a>
 				</div>
 			</div>
@@ -53,7 +53,9 @@
 							data-bs-toggle="dropdown">個人資料</a>
 						<div class="dropdown-menu m-0">						
 						<a href="${contextRoot}/player/${player.id}"class="dropdown-item">玩家資料</a>
-						<a href="${contextRoot}/front/Market/order" class="dropdown-item">玩家訂單</a>					
+						<a href="${contextRoot}/front/Market/order" class="dropdown-item">玩家訂單</a>
+						<a href="${contextRoot}/Market/allCart" class="dropdown-item">玩家購物車</a>
+										
 						</div>
 						</div>
 					</c:otherwise>				

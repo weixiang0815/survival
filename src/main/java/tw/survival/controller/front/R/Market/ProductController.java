@@ -64,14 +64,6 @@ public class ProductController {
 		return "/front/Market/Text";
 	}
 
-	// 用ID找商品
-	@GetMapping("/front/Market/productId")
-	public String getProductId(@RequestParam("id") Integer id, Model model) {
-		ProductBean product = productService.getProductById(id);
-		model.addAttribute("product", product);
-		return "/front/Market/productDetail";
-	}
-
 	// 搜尋商品 by ID 的圖片
 	@ResponseBody
 	@GetMapping("/Market/id")
