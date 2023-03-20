@@ -23,8 +23,25 @@
 			</tr>
 			<tr>
 				<td><input type="submit" value="登入" /></td>
-			</tr>
+				<td><input id="register_oneclick" type="button" value="一鍵填寫"/></td>			
+			</tr>			
 		</table>
+	 <!-- <button id="register_oneclick">一鍵填寫</button> -->
 	</form>
+	<script>
+	const password = $("input[name='password']");
+	const account = $("input[name='account']");
+	const register_oneclick = document.querySelector("#register_oneclick");
+
+	register_oneclick.addEventListener("click", function (e) {
+	    e.preventDefault();
+	    fillForm();
+	});
+
+	function fillForm() {
+	    account.val("123");
+	    password.val("123");
+	}
+	</script>
 </body>
 </html>
