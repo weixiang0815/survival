@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Place.InventoryBean;
-import tw.survival.model.Place.PlaceBean;
 import tw.survival.model.Place.WarehouseBean;
 import tw.survival.service.Market.ProductService;
 import tw.survival.service.Place.InventoryService;

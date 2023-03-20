@@ -3,16 +3,12 @@ package tw.survival.service.Market;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.CartRepository;
-import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
-import tw.survival.model.Player.PlayerBean;
 
 @Service
 public class CartService {
