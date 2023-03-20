@@ -75,8 +75,10 @@ $(document).ready(function () {
         $("#startTimespan").val(1);
         $("#endDate").val('2023-03-31');
         $("#endTimespan").val(1);
-        $("[name='status']").filter("#publish").attr('checked', true);
-        $("[name='singleOrCrew']").filter('#single').attr('checked', true);
+        publishCheck.checked = true;
+        notPublishCheck.checked = false;
+        singleCheck.checked = true;
+        crewCheck.checked = false;
         $("#placeId").val(6);
         $("#capacity").val(100)
         $("#budget").val(50000);
@@ -105,11 +107,11 @@ $(document).ready(function () {
                     formInputs[i].val(1);
                     break;
                 case 6:
-                    publishCheck.checked = true;
+                    publishCheck.checked = false;
                     notPublishCheck.checked = false;
                     break;
                 case 7:
-                    singleCheck.checked = true;
+                    singleCheck.checked = false;
                     crewCheck.checked = false;
                     break;
                 default:
