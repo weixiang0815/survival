@@ -93,6 +93,7 @@
 
 					<div class="sub">
 						<input id="uploadBtn" type="submit" value="新增商品">
+						<button id="register-oneclick">一鍵註冊</button>
 					</div>
 
 				</form>
@@ -106,6 +107,20 @@
                     blah.src = URL.createObjectURL(file)
                   }
                 }
+		const ProductName = $("select[data-role='ProductName']");
+		const ProductContext = $("select[data-role='ProductContext']");
+		const Price = $("input[data-role='Price']");
+		const setRent_fee = $("input[name='setRent_fee']");
+		register_oneclick.addEventListener("click", function(e) {
+			e.preventDefault();
+			fillForm();
+		});
+		function fillForm() {
+			ProductName.val("絕世好槍");
+			ProductContext.val("嚴正提醒！BB槍請使用塑膠BB彈禁止使用金屬彈(鋼珠/銅珠/鋁珠)使用金屬彈是【違法行為】商品屬合法【低動能遊戲用槍】本店完全合法販售！買家購買後個人行為！概與本店無關！本店也只販售塑膠BB彈！金屬彈絕無販售！");
+			Price.val("58000");
+			setRent_fee.val("28000");
+		}
               </script>
 	</div>
 </body>

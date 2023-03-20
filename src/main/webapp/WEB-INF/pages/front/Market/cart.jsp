@@ -1,31 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="tw.survival.model.Market.*"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="tw.survival.model.Market.*" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>購物車</title>
-<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
+	<meta charset="UTF-8">
+	<title>購物車</title>
+	<jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>
 </head>
 
 <body>
 	<jsp:include page="../../Template/front/navbar.jsp"></jsp:include>
 	<!-- Page Header Start -->
-	<div class="container-fluid page-header py-5 mb-5 wow fadeIn"
-		data-wow-delay="0.1s">
+	<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
 		<div class="container text-center py-5">
-			<h1
-				class="display-3 text-white text-uppercase mb-3 animated slideInDown">購物車</h1>
+			<h1 class="display-3 text-white text-uppercase mb-3 animated slideInDown">購物車</h1>
 			<nav aria-label="breadcrumb animated slideInDown">
 				<ol class="breadcrumb justify-content-center text-uppercase mb-0">
+					<li class="breadcrumb-item"><a class="text-white" href="${contextRoot}">首頁</a></li>
 					<li class="breadcrumb-item"><a class="text-white"
-						href="${contextRoot}">首頁</a></li>
-					<li class="breadcrumb-item"><a class="text-white"
-						href="${contextRoot}/front/Market/shop">戰略商城</a></li>
+							href="${contextRoot}/front/Market/shop">戰略商城</a></li>
 					<li class="breadcrumb-item text-primary active" aria-current="page">購物車</li>
 				</ol>
 			</nav>
@@ -53,21 +49,20 @@
 			<tbody>
 				<c:forEach items="${Cart_List}" var="Cart_List" varStatus="Status">
 					<tr>
-						<td><input type="checkbox" name="checkproduct"
-							value="${Cart_List.id}"></td>
+						<td><input type="checkbox" name="checkproduct" value="${Cart_List.id}"></td>
 						<th scope="row">${Status.index+1}</th>
 						<td>${Cart_List.product.name}</td>
 						<td><img alt="" height="100" width="160"
-							src="${contextRoot}/Market/id?id=${Cart_List.product.id}"></td>
+								src="${contextRoot}/Market/id?id=${Cart_List.product.id}"></td>
 						<td>${Cart_List.product.product_class}</td>
 						<td>${Cart_List.product.context}</td>
 						<td>${Cart_List.product.rent_fee}</td>
 						<td>${Cart_List.product.price}</td>
 						<td>
 							<form action="${contextRoot}/Market/Cart/delete" method="post">
-								<input name="_method" type="hidden" value="delete" /> <input
-									name="id" type="hidden" value="${Cart_List.id}" /> <input
-									type="submit" class="btn btn-danger btn-sm" value="取消" />
+								<input name="_method" type="hidden" value="delete" /> <input name="id"
+									type="hidden" value="${Cart_List.id}" /> <input type="submit"
+									class="btn btn-danger btn-sm" value="取消" />
 							</form>
 						</td>
 					</tr>
@@ -92,31 +87,21 @@
 		const checkout = $("#checkout");
 		const cartIds = $("input[name='checkproduct']");
 
-		$("document").ready(function() {
+		$("document").ready(function () {
 			cartIds.on({
-				change : function() {
+				change: function () {
 					let cartId = this.value;
-					if(this.checked) {
+					if (this.checked) {
 						let str = `<input type="checkbox" name="cartIds"
-							value="${cartId} + `" id="{cartId}" checked hidden>`;
+									value="` + cartId + `" id="` + cartId + `" checked hidden>`;
 						checkout.prepend(str);
 					} else {
-						document.getElementById(cartId).remove();
+						document.getElementById(cartId)
+							.remove();
 					}
 					console.log(checkout.html());
 				}
 			});
-			checkout.submit(function(event) {
-				event.preventDefault();
-				const playerId = $("#playerId").val();
-				const cartIdsChecked = $("input[name='cartIds']:checked")
-					.map(function(){return $(this).val();}).get();
-				const data = {playerId: playerId, cartIds: cartIdsChecked};
-				$.ajax({
-					type: "POST",
-					url: "${contextRoot}/Market/Cart/changeToOrder",
-					data: data,
-					dataType: "json",
 		});
 	</script>
 </body>
