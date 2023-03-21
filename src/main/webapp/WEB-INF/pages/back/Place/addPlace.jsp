@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="jstl"%>
 
-<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />    
+<jstl:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,45 +10,45 @@
 <title>場地表</title>
 </head>
 <body>
-<jsp:include page="../../Template/admin.jsp"></jsp:include>
+	<jsp:include page="../../Template/admin.jsp"></jsp:include>
 
-<div class="container">
-<h1>新增場地</h1>
-<form action="" id="ajaxForm">
-		<table>
-			<tr>
-				<td>場地名稱：</td>
-				<td><input type="text" name="place_name" /></td>
-			</tr>
-			<tr>
-				<td>場地地址：</td>
-				<td><input type="text" name="place_address" /></td>
-			</tr>
-			<tr>
-				<td>容納人口數：</td>
-				<td><input type="text" name="place_capacity" /></td>
-			</tr>
-			<tr>
-				<td>費用/時段：</td>
-				<td><input type="text" name="place_fee" /></td>
-			</tr>
-						
-			<tr>
-				<td>場地圖片:</td>
-				<td><input type="file" name="place_photo" value="上傳圖片" />
-			</tr>
-			
-			<tr>
-				<td><input type="submit" value="新增" id="uploadBtn"/></td>
-				<td><input type="submit" value="一鍵新增" id="autoBtn"/></td>
-			</tr>
-		</table>
-	</form>
-	
-	<div id="upload_result"></div>
-</div>
+	<div class="container">
+		<h1>新增場地</h1>
+		<form action="" id="ajaxForm">
+			<table>
+				<tr>
+					<td>場地名稱：</td>
+					<td><input type="text" name="place_name" /></td>
+				</tr>
+				<tr>
+					<td>場地地址：</td>
+					<td><input type="text" name="place_address" /></td>
+				</tr>
+				<tr>
+					<td>容納人口數：</td>
+					<td><input type="text" name="place_capacity" /></td>
+				</tr>
+				<tr>
+					<td>費用/時段：</td>
+					<td><input type="text" name="place_fee" /></td>
+				</tr>
 
-        <script>
+				<tr>
+					<td>場地圖片:</td>
+					<td><input type="file" name="place_photo" value="上傳圖片" />
+				</tr>
+
+				<tr>
+					<td><input type="submit" value="新增" id="uploadBtn" /></td>
+					<td><input type="submit" value="一鍵新增" id="autoBtn" /></td>
+				</tr>
+			</table>
+		</form>
+
+		<div id="upload_result"></div>
+	</div>
+
+	<script>
 				const uploadBtn = document.getElementById('uploadBtn')
 
 				uploadBtn.addEventListener('click', e => {
@@ -117,6 +117,6 @@
 				}
 
 
-			</script>	
+			</script>
 </body>
 </html>
