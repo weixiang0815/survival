@@ -126,18 +126,18 @@ img {
 		<!-- 如果sessionScope中有'player'物件，執行以下內容 -->
 		<c:if test="${not empty sessionScope.player}">
 		<!-- 一鍵三連設計 -->
-			<div class="wow fadeInUp" data-wow-delay="0.2s" >
-				<div class="row" style="border: #FF0000 2px solid;">
-					<div class="divcontainer" >
+<!-- 			<div class="wow fadeInUp" data-wow-delay="0.2s" > -->
+<!-- 				<div class="row" style="border: #FF0000 2px solid;"> -->
+<!-- 					<div class="divcontainer" > -->
 						
-						<a class="col-2 divitem1 acontainer" href="">
-							<i class="fa-solid fa-heart"></i>
-							<span class="aitem" style="font-size: 20px;">收藏</span>
-						</a>
-						<a class="col-2 divitem2 acontainer" href="">
-							<i class="fa-solid fa-thumbs-up"></i>
-							<span class="aitem" style="font-size: 20px;">按讚</span>
-						</a>
+<!-- 						<a class="col-2 divitem1 acontainer" href=""> -->
+<!-- 							<i class="fa-solid fa-heart"></i> -->
+<!-- 							<span class="aitem" style="font-size: 20px;">收藏</span> -->
+<!-- 						</a> -->
+<!-- 						<a class="col-2 divitem2 acontainer" href=""> -->
+<!-- 							<i class="fa-solid fa-thumbs-up"></i> -->
+<!-- 							<span class="aitem" style="font-size: 20px;">按讚</span> -->
+<!-- 						</a> -->
 						<!-- 用c:forEach內部屬性varStatus的count來計算總數 -->
 		<%-- 						<c:forEach items="${myList}" var="item" varStatus="loop"> --%>
 		<%-- 						  <p>${item}</p> --%>
@@ -145,16 +145,16 @@ img {
 		<%-- 						    <p>Total count: ${loop.count}</p> --%>
 		<%-- 						  </c:if> --%>
 		<%-- 						</c:forEach> --%>
-						<a class="col-2 divitem3 acontainer" href="">
-							<i class="fa-solid fa-star"></i>
-							<span class="aitem" style="font-size: 20px;">評分</span>
-						</a>
-						<!-- 預排版 -->
-						<br/><br/><br/>
-						<!-- 目的:浮動目標是沒辦法排定空間。 -->
-					</div>
-				</div>
-			</div>
+<!-- 						<a class="col-2 divitem3 acontainer" href=""> -->
+<!-- 							<i class="fa-solid fa-star"></i> -->
+<!-- 							<span class="aitem" style="font-size: 20px;">評分</span> -->
+<!-- 						</a> -->
+<!-- 						預排版 -->
+<!-- 						<br/><br/><br/> -->
+<!-- 						目的:浮動目標是沒辦法排定空間。 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 	 		<!-- 輸入留言區塊 -->
 			<div class="wow fadeInUp" data-wow-delay="0.4s">
 				<div class="row" style="border: #FF0000 2px solid;">
