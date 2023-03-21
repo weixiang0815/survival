@@ -169,11 +169,7 @@ public class PlayerController {
 
 	@PutMapping("/player/update1")
 	public String updateById(@ModelAttribute PlayerBean player) {
-		String sex = player.getSex();
 		MultipartFile playerImage = player.getPlayerImage();
-		if (sex == null) {
-
-		}
 		if (playerImage != null && !playerImage.isEmpty()) {
 			try {
 				byte[] img = playerImage.getBytes();
