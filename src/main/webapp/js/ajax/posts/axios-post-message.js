@@ -50,7 +50,7 @@ function htmlMaker(data) {
   data.content.forEach(el => {
     console.log(`${el.msg_id}`)
     //留言
-    msg_data += `<div class="col-3 player-block" >`
+    msg_data += `<div class="col-3 player-block border: #FF0000 2px solid;">`
     msg_data += `<img src="http://localhost:8080/Survival/player/photo/${el.player_id}" />`
     msg_data += `<p>作者: ${el.player_name}</p>`
     msg_data += `<p>暱稱: ${el.player_nickname}</p>`
