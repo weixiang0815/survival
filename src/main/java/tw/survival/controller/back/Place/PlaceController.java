@@ -1,6 +1,11 @@
 package tw.survival.controller.back.Place;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,21 +68,26 @@ public class PlaceController {
 			return "失敗";
 		}
 	}
-	
+
 	@ResponseBody
 	@PostMapping("/place/post/auto")
-	public String autoPost(@RequestParam(name="place_name", defaultValue = "歡樂場" ) String placeName,
-			@RequestParam(name="place_address",defaultValue = "芝麻街77號") String placeAdress, @RequestParam(name="place_capacity",defaultValue = "666") Integer placeCapacity,
-			@RequestParam(name="place_fee",defaultValue = "7777") Integer placeFee, @RequestParam(name="place_photo") MultipartFile file) {
-
+	public String autoPost(@RequestParam(name = "place_name", defaultValue = "歡樂場") String placeName,
+			@RequestParam(name = "place_address", defaultValue = "芝麻街77號") String placeAdress,
+			@RequestParam(name = "place_capacity", defaultValue = "666") Integer placeCapacity,
+			@RequestParam(name = "place_fee", defaultValue = "7777") Integer placeFee,
+			@RequestParam(name = "place_photo") MultipartFile file) {
+		String picPath = "C://Survival/Survival Place Picture/台東-鹿野高台-2.jpg";
+		File pic = new File(picPath);
 		try {
 			PlaceBean pb = new PlaceBean();
 			pb.setPlace_name(placeName);
 			pb.setPlace_address(placeAdress);
 			pb.setPlace_capacity(placeCapacity);
 			pb.setPlace_fee(placeFee);
-			pb.setPlace_photo(file.getBytes());
-
+			try (FileInputStream fis = new FileInputStream(pic);
+					BufferedInputStream bis = new BufferedInputStream(fis);) {
+				pb.setPlace_photo(bis.readAllBytes());
+			}
 			placeService.insertPlace(pb);
 			return "上傳成功";
 		} catch (IOException e) {
