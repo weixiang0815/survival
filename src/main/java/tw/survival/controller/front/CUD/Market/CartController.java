@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import tw.survival.model.Market.CartBean;
 import tw.survival.model.Market.OrderItemBean;
 import tw.survival.model.Market.ProductBean;
@@ -39,6 +38,14 @@ public class CartController {
 
 	@Autowired
 	private OrderItemService orderService;
+
+	// 用ID找商品
+	@GetMapping("/front/Market/productId")
+	public String getProductId(@RequestParam("id") Integer id, Model model) {
+		ProductBean product = productService.getProductById(id);
+		model.addAttribute("product", product);
+		return "/front/Market/productDetail";
+	}
 
 	// 找會員ID
 	@ResponseBody
@@ -74,16 +81,16 @@ public class CartController {
 		return "redirect:/Market/allCart";
 	}
 
-	@PostMapping("/Market/Cart/add1")
-	public String addCart(@ModelAttribute("cart") CartBean cart, Model model) {
-		cart = cartService.insertCart(cart);
-		if (cart != null) {
-			model.addAttribute("Cart_List", cart);
-			return "back/Market/marketMain";
-		} else {
-			return "back/Competition/index";
-		}
-	}
+//	@PostMapping("/Market/Cart/add1")
+//	public String addCart(@ModelAttribute("cart") CartBean cart, Model model) {
+//		cart = cartService.insertCart(cart);
+//		if (cart != null) {
+//			model.addAttribute("Cart_List", cart);
+//			return "back/Market/marketMain";
+//		} else {
+//			return "back/Competition/index";
+//		}
+//	}
 
 	@PostMapping("/Market/Cart/changeToOrder")
 	public String cartToOrder(@RequestParam("cartIds") Integer[] cartIds, @RequestParam("playerId") Integer playerId,

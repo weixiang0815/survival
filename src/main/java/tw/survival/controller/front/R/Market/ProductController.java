@@ -21,8 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-
 import tw.survival.model.Market.ProductBean;
 import tw.survival.model.Market.ProductRepository;
 import tw.survival.model.Market.ProductSearchDto;
@@ -62,14 +60,6 @@ public class ProductController {
 		List<ProductBean> list = productService.findAllProduct();
 		model.addAttribute("list", list);
 		return "/front/Market/Text";
-	}
-
-	// 用ID找商品
-	@GetMapping("/front/Market/productId")
-	public String getProductId(@RequestParam("id") Integer id, Model model) {
-		ProductBean product = productService.getProductById(id);
-		model.addAttribute("product", product);
-		return "/front/Market/productDetail";
 	}
 
 	// 搜尋商品 by ID 的圖片

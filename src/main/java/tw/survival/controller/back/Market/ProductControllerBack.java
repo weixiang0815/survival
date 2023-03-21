@@ -43,12 +43,11 @@ public class ProductControllerBack {
 	}
 
 	@GetMapping("/Market/show_AllProduct")
-	private String showAllProfuct() {
+	private String showAllProduct() {
 		return "/back/Market/show_AllProduct";
 	}
 
 	// 新增商品
-	@ResponseBody
 	@PostMapping("/Market/addproduct")
 	public String insertProduct(@RequestParam("ProductName") String fileName,
 			@RequestParam("ProductContext") String Context, @RequestParam("Product_class") String Product_class,
@@ -65,7 +64,7 @@ public class ProductControllerBack {
 
 			productService.insertProduct(pb);
 
-			return "上傳成功";
+			return "redirect:/Market/allProduct";
 		} catch (IOException e) {
 			e.printStackTrace();
 			return "上傳失敗";

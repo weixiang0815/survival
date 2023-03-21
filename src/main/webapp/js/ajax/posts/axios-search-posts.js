@@ -73,7 +73,7 @@ function loadThatPage(pageNumber,name){
   })
   .then(res=>{
     console.log(res)
-    htmlMaker(res.data)
+    htmlMaker(res.data,name)
   })
   .catch(err=>{
     console.log('err:' + err)

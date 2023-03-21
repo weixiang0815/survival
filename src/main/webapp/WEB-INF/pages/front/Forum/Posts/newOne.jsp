@@ -109,6 +109,7 @@ div .ct {
 									<div class="col-3"></div>
 									<div class="col">
 										<button type="submit" class="btn btn-outline-primary">送出</button>
+										<button class="btn btn-outline-primary btn-auto">一次填寫</button>
 									</div>
 									<div class="col">
 										<button type="button" id="toForum"
@@ -129,6 +130,8 @@ div .ct {
 	<!-- Service End -->
 	<jsp:include page="../../../Template/front/footer.jsp"></jsp:include>
 	<jsp:include page="../../../Template/front/includedinbody.jsp"></jsp:include>
+	<script src="${contextRoot}/js/CKEditor5/ckeditor.js"></script>
+	<script src="${contextRoot}/js/CKEditor5/script.js"></script>
 	<script>
 // 		jQuery重新導向 取消按鈕
 		$("#toForum").on({
@@ -138,5 +141,6 @@ div .ct {
 			}
 		});
 	</script>
+	<script src="${contextRoot}/js/ajax/posts/auto-post.js"></script>
 </body>
 </html>

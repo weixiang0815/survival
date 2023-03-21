@@ -9,7 +9,7 @@
             <meta name="description" content="">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <title>歡迎蒞臨戰略商城</title>
+            <title>歡迎蒞臨商城</title>
             <!-- Favicon  -->
             <link rel="icon" href="${contextRoot}/img/market_favicon.ico">
             <jsp:include page="../../Template/front/includedinhead.jsp"></jsp:include>

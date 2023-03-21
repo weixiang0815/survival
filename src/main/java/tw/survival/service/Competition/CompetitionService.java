@@ -102,7 +102,7 @@ public class CompetitionService {
 			newPost.setClassify("活動");
 			newPost.setContent(comp.getContent());
 			newPost.setCompetition(comp);
-			newPost.setPlayer(playerService.findByBean(25));
+			newPost.setPlayer(playerService.findByBean(2));
 			postsService.insertPost(newPost);
 			compRepo.save(comp);
 			return comp;

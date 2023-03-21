@@ -56,7 +56,7 @@
 					</td>
 
 					<td>
-						<form action="${contextRoot}/Market/deletelogistics" method="post">
+						<form action="${contextRoot}/Market/deleteLogistics" method="post">
 							<input name="_method" type="hidden" value="delete" /> <input name="id"
 								type="hidden" value="${logistics.id}" /> <input type="submit"
 								class="btn btn-danger btn-sm" value="刪除" />
