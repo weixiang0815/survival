@@ -120,11 +120,11 @@ a#placeDetail:hover {
 					<tr>
 						<th>競賽模式</th>
 						<td><c:choose>
-								<c:when test="${comp.singleOrCrew.equals(\" C\")}">
-									團體戰
-								</c:when>
-								<c:when test="${comp.singleOrCrew.equals(\" S\")}">
+								<c:when test="${comp.singleOrCrew.equals(\"S\")}">
 									單人戰
+								</c:when>
+								<c:when test="${comp.singleOrCrew.equals(\"C\")}">
+									團體戰
 								</c:when>
 								<c:otherwise>
 									未定
